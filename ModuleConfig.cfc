@@ -1,10 +1,10 @@
 component {
 
 	// Module Properties
-	this.title = "Aggregator";
+	this.title = "RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
-	this.description = "RSS Feed Aggregator";
+	this.description = "RSS feed aggregator for ContentBox";
 	this.version = "1.0.0";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup = true;
@@ -15,7 +15,27 @@ component {
 
 	function configure() {
 
-		settings = {};
+		settings = {
+
+			// General settings
+			"general_disable_portal" = false,
+			"general_portal_entrypoint" = "news",
+
+			// Display settings
+			"display_link_title" = true,
+			"display_show_excerpts" = true,
+			"display_excerpt_ending" = "...",
+			"display_show_read_more" = true,
+			"display_read_more_text" = "Read more...",
+			"display_show_source" = true,
+			"display_link_source" = true,
+
+			// RSS feed settings
+			"rss_enable_feed" = true,
+			"rss_feed_entrypoint" = "rss",
+			"rss_feed_title" = "RSS Aggregator Feed"
+
+		};
 
 		// SES Routes
 		routes = [
@@ -32,8 +52,7 @@ component {
 
 		// Interceptors
 		interceptors = [
-			//{ class="#moduleMapping#.interceptors.includes", name="includes@FullCalendar" },
-			//{ class="#moduleMapping#.interceptors.request", properties={ entryPoint="cbadmin" }, name="request@fullCalendar" }
+			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
 	}
 
@@ -42,27 +61,15 @@ component {
 	*/
 	function onLoad() {
 
-		var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
-		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
+		var settingService = controller.getWireBox().getInstance("settingService@cb");
 
 		registerAggregatorNameSpace();
 
 		menuService.addTopMenu(
 			name="aggregator",
-			label="<i class='fa fa-rss'></i> Aggregator"
+			label="<i class='fa fa-rss'></i> RSS Aggregator"
 		);
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="feeds",
-			label="Feeds",
-			href="#menuService.buildModuleLink('aggregator','feeds')#"
-		);
-		/*menuService.addSubMenu(
-			topMenu="aggregator",
-			name="items",
-			label="Items",
-			href="#menuService.buildModuleLink('aggregator','items')#"
-		);*/
 		menuService.addSubMenu(
 			topMenu="aggregator",
 			name="settings",
