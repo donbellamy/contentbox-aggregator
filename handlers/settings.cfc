@@ -8,8 +8,6 @@ component extends="baseHandler" {
 
 	function save( event, rc, prc ) {
 
-		event.paramValue( "general_disable_portal", false );
-		
 		//announceInterception( "aggregator_preSettingsSave",{ oldSettings = prc.aggregatorSettings, newSettings = rc } );
 
 		for ( var key IN rc ) {

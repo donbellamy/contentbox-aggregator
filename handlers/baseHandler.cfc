@@ -11,12 +11,8 @@ component extends="coldbox.system.EventHandler" {
 		prc.aggregatorSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		prc.aggregatorEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
-
 		prc.xehAggregatorSettings = "#prc.aggregatorEntryPoint#.settings";
 		prc.xehAggregatorSaveSettings = "#prc.aggregatorEntryPoint#.settings.save";
-
-		//writedump(prc.aggregatorSettings);
-		//abort;
 
 	}
 

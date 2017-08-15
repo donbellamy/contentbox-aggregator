@@ -1,16 +1,12 @@
 component {
 
-	// Module Properties
 	this.title = "RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
 	this.description = "RSS feed aggregator for ContentBox";
 	this.version = "1.0.0";
-	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
 	this.viewParentLookup = true;
-	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = true;
-	// Module Entry Point
 	this.entryPoint	= "aggregator";
 
 	function configure() {
@@ -18,28 +14,57 @@ component {
 		settings = {
 
 			// General settings
+			"general_limit_items_by_age" = 0, // Numeric - limit feed items by age
+			"general_limit_items_by_age_unit" = "days", // days, weeks, months, years
+			"general_limit_items_imported" = 0, // Numeric
+			"general_import_interval" = "hourly", // 15 mins, 30 mins, Hourly, 2 hours, 12 hours, daily
+			"general_import_user_agent" = "", // Default = ?
+			"general_import_log_level" = "Error", // What are the correct values?
+
+			// Portal settings
 			"general_disable_portal" = false,
+			"general_portal_title" = "RSS Aggregator News", // Come up with a better title
 			"general_portal_entrypoint" = "news",
 
 			// Display settings
 			"display_link_title" = true,
+			"display_show_authors" = true,
+			"display_show_source" = true,
+			"display_link_source" = true,
+			"display_link_new_window" = true,
+			"display_link_as_nofollow" = true,
+
+			// Excerpt settings
 			"display_show_excerpts" = true,
 			"display_excerpt_ending" = "...",
 			"display_show_read_more" = true,
 			"display_read_more_text" = "Read more...",
-			"display_show_source" = true,
-			"display_link_source" = true,
+
+			// Thumbnail settings
+			"display_show_thumbnails" = true,
+			"display_thumbnail_width" = 150,
+			"display_thumbnail_height" = 150,
+
+			// Pagination settings
+			"display_pagination_limit" = 10,
+			"display_pagination_type" = "paging", // older/newer vs pages
 
 			// RSS feed settings
-			"rss_enable_feed" = true,
+			"rss_disable_feed" = false,
 			"rss_feed_entrypoint" = "rss",
-			"rss_feed_title" = "RSS Aggregator Feed"
+			"rss_feed_title" = "RSS Aggregator Feed",
+			"rss_feed_generator" = "RSS Aggregator by Perfect Code",
+			"rss_feed_copyright" = "Perfect Code, LCC (perfectcode.com)",
+			"rss_feed_description" = "RSS Aggregator Feed",
+			"rss_feed_webmaster" = "",
+			"rss_feed_max_items" = 10
+
+			// Caching?
 
 		};
 
-		// SES Routes
 		routes = [
-			// TODO: Find out why routes do not work here? - Any plans to fix????
+			// TODO: Why do routes not work here? - Any plans to fix????
 			{ pattern="/:handler/:action?" }
 		];
 
@@ -50,7 +75,6 @@ component {
 			{ pattern="/", handler="news", action="index", namespace="aggregator" }
 		];
 
-		// Interceptors
 		interceptors = [
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
@@ -77,7 +101,6 @@ component {
 			href="#menuService.buildModuleLink('aggregator','settings')#"
 		);
 
-		// Flush the settings cache so our new settings are reflected
 		settingService.flushSettingsCache();
 
 	}
@@ -87,27 +110,21 @@ component {
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
 
-		//var blogEntryPoint = settingService.findWhere( {name="cb_site_blog_entrypoint"} );
-		//if( !isNull( blogEntryPoint ) ){
-		//	ses.addNamespace(pattern="#this.entryPoint#/#blogEntryPoint.getValue()#", namespace="blog", append=false);
-		//}
-		//else{
-		//	ses.addNamespace(pattern="#this.entryPoint#/blog", namespace="blog", append=false);
-		//}
+		//TODO: Any better way to get this value? Interceptor? Wirebox? SettingsService?
+		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint; 
+		var agEntryPoint = settings.general_portal_entrypoint;
 
-		var cbEntryPoint = ""; // TODO: need to look this up, cb could be installed in a sub dir
-		var aggregatorEntryPoint = "news"; // TODO: Needs to be a setting that we look up
+		if ( len( cbEntryPoint ) ) {
+			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
+		} else {
+			ses.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
+		}
 
-		ses.addNamespace( pattern="#cbEntryPoint#/#aggregatorEntryPoint#", namespace="aggregator", append=false );
-
-		// Register namespace routes
 		for( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
 			var args = duplicate( aggregatorRoutes[ x ] );
-			// Check if handler defined
-			if( structKeyExists( args, "handler" ) ){
+			if ( structKeyExists( args, "handler" ) ) {
 				args.handler = "contentbox-aggregator:#args.handler#";
 			}
-			// Add the namespace routes
 			ses.addRoute(argumentCollection=args);
 		}
 
@@ -116,20 +133,16 @@ component {
 	/**
 	* Fired when the module is activated by ContentBox
 	*/
-	function onActivate(){
+	function onActivate() {
 
 		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
-		// Store default settings
-		var findArgs = { name="aggregator" };
-		var setting = settingService.findWhere( criteria=findArgs );
 		if ( isNull( setting ) ) {
-			var args = { name="aggregator", value=serializeJSON( settings ) };
-			var agSettings = settingService.new(properties=args);
-			settingService.save(agSettings);
+			var settings = settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } );
+			settingService.save( settings );
 		}
 
-		// Flush the settings cache so our new settings are reflected
 		settingService.flushSettingsCache();
 	}
 
@@ -137,11 +150,11 @@ component {
 	* Fired when the module is unregistered and unloaded
 	*/
 	function onUnload() {
-		
-		//var settingService = controller.getWireBox().getInstance("SettingService@cb");
-		var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
 
+		var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
+		
 		menuService.removeTopMenu("aggregator");
+
 	}
 
 	/**
@@ -150,15 +163,16 @@ component {
 	function onDeactivate() {
 
 		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
-		var args = {name="aggregator"};
-		var setting = settingService.findWhere(criteria=args);
-		if(!isNull(setting)){
-			settingService.delete(setting);
+		if( !isNull( setting ) ){
+			settingService.delete( setting );
 		}
 
-		// Flush the settings cache so our new settings are reflected
+		// TODO: unregister namespace
+
 		settingService.flushSettingsCache();
+
 	}
 
 }
