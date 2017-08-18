@@ -8,11 +8,11 @@ component extends="coldbox.system.EventHandler" {
 
 		prc.cb = CBHelper;
 
-		prc.aggregatorSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		prc.agAdminEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
 
-		prc.aggregatorEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
-		prc.xehAggregatorSettings = "#prc.aggregatorEntryPoint#.settings";
-		prc.xehAggregatorSaveSettings = "#prc.aggregatorEntryPoint#.settings.save";
+		prc.xehAgSettings = "#prc.agAdminEntryPoint#.settings";
+		prc.xehAgSaveSettings = "#prc.agAdminEntryPoint#.settings.save";
 
 	}
 

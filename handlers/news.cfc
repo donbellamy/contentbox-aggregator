@@ -8,9 +8,9 @@ component extends="coldbox.system.EventHandler" {
 
 		CBHelper.prepareUIRequest(); // TODO: Move to interceptor
 
-		prc.aggregatorSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
-		if( prc.aggregatorSettings.general_disable_portal ){
+		if ( !prc.agSettings.ag_portal_enable ) {
 			event.overrideEvent( "contentbox-aggregator:news.disabled" );
 		}
 
@@ -25,7 +25,7 @@ component extends="coldbox.system.EventHandler" {
 
 		// TODO: Page Title - 404 etc...
 
-		event.setHTTPHeader( "404","Page not found" );
+		event.setHTTPHeader( "404", "Page not found" );
 
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" ).setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
 

@@ -13,6 +13,38 @@ component {
 
 		settings = {
 
+			"ag_portal_enable" = true,
+			"ag_portal_title" = "RSS Aggregator News",
+			"ag_portal_entrypoint" = "news",
+
+			"ag_rss_enable" = true,
+			"ag_rss_title" = "RSS Aggregator Feed",
+			"ag_rss_generator" = "RSS Aggregator by Perfect Code",
+			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
+			"ag_rss_description" = "RSS Aggregator Feed",
+			"ag_rss_webmaster" = "",
+			"ag_rss_max_items" = 10,
+			"ag_rss_cache_enable" = true,
+			"ag_rss_cache_name" = "Template",
+			"ag_rss_cache_timeout" = 60,
+			"ag_rss_cache_timeout_idle" = 15
+
+/*
+		"cb_rss_maxEntries" 					= "10",
+		"cb_rss_maxComments" 					= "10",
+		"cb_rss_caching" 						= "true",
+		"cb_rss_cachingTimeout" 				= "60",
+		"cb_rss_cachingTimeoutIdle" 			= "15",
+		"cb_rss_cacheName" 						= "Template",
+		"cb_rss_title" 							= "RSS Feed by ContentBox",
+		"cb_rss_generator" 						= "ContentBox by Ortus Solutions",
+		"cb_rss_copyright" 						= "Ortus Solutions, Corp (www.ortussolutions.com)",
+		"cb_rss_description" 					= "ContentBox RSS Feed",
+		"cb_rss_webmaster" 						= "",
+*/
+
+			/*
+
 			// General settings
 			"general_limit_items_by_age" = 0, // Numeric - limit feed items by age
 			"general_limit_items_by_age_unit" = "days", // days, weeks, months, years
@@ -25,6 +57,8 @@ component {
 			"general_disable_portal" = false,
 			"general_portal_title" = "RSS Aggregator News", // Come up with a better title
 			"general_portal_entrypoint" = "news",
+			// Track hits? = true
+			// Layout to use for portal = "pages"
 
 			// Display settings
 			"display_link_title" = true,
@@ -60,6 +94,8 @@ component {
 			"rss_feed_max_items" = 10
 
 			// Caching?
+
+			*/
 
 		};
 
@@ -109,10 +145,8 @@ component {
 
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
-
-		//TODO: Any better way to get this value? Interceptor? Wirebox? SettingsService?
-		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint; 
-		var agEntryPoint = settings.general_portal_entrypoint;
+		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint; // TODO: Better way? 
+		var agEntryPoint = settings.ag_portal_entrypoint; //TODO: Need to check existing settings first?
 
 		if ( len( cbEntryPoint ) ) {
 			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
@@ -135,7 +169,7 @@ component {
 	*/
 	function onActivate() {
 
-		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
 		if ( isNull( setting ) ) {

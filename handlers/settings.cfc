@@ -2,22 +2,24 @@ component extends="baseHandler" {
 
 	function index( event, rc, prc ) {
 
+		prc.cacheNames = cachebox.getCacheNames();
+
 		event.setView( "settings/index" );
 
 	}
 
 	function save( event, rc, prc ) {
 
-		//announceInterception( "aggregator_preSettingsSave",{ oldSettings = prc.aggregatorSettings, newSettings = rc } );
+		//announceInterception( "aggregator_preSettingsSave",{ oldSettings = prc.agSettings, newSettings = rc } );
 
 		for ( var key IN rc ) {
-			if ( structKeyExists( prc.aggregatorSettings, key ) ) {
-				prc.aggregatorSettings[ key ] = rc[ key ];
+			if ( structKeyExists( prc.agSettings, key ) ) {
+				prc.agSettings[ key ] = rc[ key ];
 			}
 		}
 
 		var setting = settingService.findWhere( { name="aggregator" } );
-		setting.setValue( serializeJSON( prc.aggregatorSettings ) );
+		setting.setValue( serializeJSON( prc.agSettings ) );
 		settingService.save( setting );
 
 		settingService.flushSettingsCache();
@@ -26,7 +28,7 @@ component extends="baseHandler" {
 		var routes = ses.getRoutes();
 		for( var key IN routes ) {
 			if( key.namespaceRouting eq "aggregator" ){
-				key.pattern = key.regexpattern = replace(  rc[ "general_portal_entrypoint" ] , "/", "-", "all" ) & "/";
+				key.pattern = key.regexpattern = replace(  rc[ "ag_portal_entrypoint" ] , "/", "-", "all" ) & "/";
 			}
 		}
 		ses.setRoutes( routes );
@@ -34,7 +36,7 @@ component extends="baseHandler" {
 		//announceInterception( "aggregator_postSettingsSave" );
 
 		cbMessagebox.info( "Settings Updated!" );
-		setNextEvent( prc.xehAggregatorSettings );
+		setNextEvent( prc.xehAgSettings );
 
 	}
 
