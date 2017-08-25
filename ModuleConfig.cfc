@@ -13,89 +13,59 @@ component {
 
 		settings = {
 
+			"ag_general_interval" = "60",
+			"ag_general_limit_by_age" = "",
+			"ag_general_limit_by_number" = "",
+			"ag_general_filter_any" = "",
+			"ag_general_filter_all" = "",
+			"ag_general_filter_none" = "",
+			"ag_general_log_level" = "ERROR",
+			// TODO: Log file name? - add in logbox logging to test
+			// TODO: User Agent?
+
+			"ag_display_title_link" = true,
+			"ag_display_author_show" = true,
+			"ag_display_source_show" = true,
+			"ag_display_source_link" = true,
+			"ag_display_link_new_window" = true,
+			"ag_display_link_as_nofollow" = true,
+
+			"ag_display_excerpt_show" = true,
+			"ag_display_excerpt_ending" = "...",
+			"ag_display_read_more_show" = true,
+			"ag_display_read_more_text" = "Read more...",
+
+			"ag_display_thumbnail_enable" = true,
+			"ag_display_thumbnail_link" = true,
+			"ag_display_thumbnail_width" = 150,
+			"ag_display_thumbnail_height" = 150,
+
+			"ag_display_paging_max_rows" = 10,
+			"ag_display_paging_type" = "paging", 
+
 			"ag_portal_enable" = true,
 			"ag_portal_title" = "RSS Aggregator News",
 			"ag_portal_entrypoint" = "news",
+			"ag_portal_layout" = "pages",
+			"ag_portal_hits_track" = true,
+			"ag_portal_hits_ignore_bots" = false,
+			"ag_portal_hits_bot_regex" = "Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby", // Get setting from cb?
+			"ag_portal_cache_enable" = true,
+			"ag_portal_cache_name" = "Template",
+			"ag_portal_cache_timeout" = 60,
+			"ag_portal_cache_timeout_idle" = 15,
 
 			"ag_rss_enable" = true,
 			"ag_rss_title" = "RSS Aggregator Feed",
+			"ag_rss_description" = "RSS Aggregator Feed",
 			"ag_rss_generator" = "RSS Aggregator by Perfect Code",
 			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
-			"ag_rss_description" = "RSS Aggregator Feed",
 			"ag_rss_webmaster" = "",
 			"ag_rss_max_items" = 10,
 			"ag_rss_cache_enable" = true,
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = 60,
 			"ag_rss_cache_timeout_idle" = 15
-
-/*
-		"cb_rss_maxEntries" 					= "10",
-		"cb_rss_maxComments" 					= "10",
-		"cb_rss_caching" 						= "true",
-		"cb_rss_cachingTimeout" 				= "60",
-		"cb_rss_cachingTimeoutIdle" 			= "15",
-		"cb_rss_cacheName" 						= "Template",
-		"cb_rss_title" 							= "RSS Feed by ContentBox",
-		"cb_rss_generator" 						= "ContentBox by Ortus Solutions",
-		"cb_rss_copyright" 						= "Ortus Solutions, Corp (www.ortussolutions.com)",
-		"cb_rss_description" 					= "ContentBox RSS Feed",
-		"cb_rss_webmaster" 						= "",
-*/
-
-			/*
-
-			// General settings
-			"general_limit_items_by_age" = 0, // Numeric - limit feed items by age
-			"general_limit_items_by_age_unit" = "days", // days, weeks, months, years
-			"general_limit_items_imported" = 0, // Numeric
-			"general_import_interval" = "hourly", // 15 mins, 30 mins, Hourly, 2 hours, 12 hours, daily
-			"general_import_user_agent" = "", // Default = ?
-			"general_import_log_level" = "Error", // What are the correct values?
-
-			// Portal settings
-			"general_disable_portal" = false,
-			"general_portal_title" = "RSS Aggregator News", // Come up with a better title
-			"general_portal_entrypoint" = "news",
-			// Track hits? = true
-			// Layout to use for portal = "pages"
-
-			// Display settings
-			"display_link_title" = true,
-			"display_show_authors" = true,
-			"display_show_source" = true,
-			"display_link_source" = true,
-			"display_link_new_window" = true,
-			"display_link_as_nofollow" = true,
-
-			// Excerpt settings
-			"display_show_excerpts" = true,
-			"display_excerpt_ending" = "...",
-			"display_show_read_more" = true,
-			"display_read_more_text" = "Read more...",
-
-			// Thumbnail settings
-			"display_show_thumbnails" = true,
-			"display_thumbnail_width" = 150,
-			"display_thumbnail_height" = 150,
-
-			// Pagination settings
-			"display_pagination_limit" = 10,
-			"display_pagination_type" = "paging", // older/newer vs pages
-
-			// RSS feed settings
-			"rss_disable_feed" = false,
-			"rss_feed_entrypoint" = "rss",
-			"rss_feed_title" = "RSS Aggregator Feed",
-			"rss_feed_generator" = "RSS Aggregator by Perfect Code",
-			"rss_feed_copyright" = "Perfect Code, LCC (perfectcode.com)",
-			"rss_feed_description" = "RSS Aggregator Feed",
-			"rss_feed_webmaster" = "",
-			"rss_feed_max_items" = 10
-
-			// Caching?
-
-			*/
 
 		};
 
@@ -105,10 +75,10 @@ component {
 		];
 
 		aggregatorRoutes = [
-			{ pattern="/feeds/:slug", handler="news", action="feed", namespace="aggregator" },
-			{ pattern="/feeds", handler="news", action="feeds", namespace="aggregator" },
-			{ pattern="/:slug", handler="news", action="item", namespace="aggregator" },
-			{ pattern="/", handler="news", action="index", namespace="aggregator" }
+			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
+			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
+			{ pattern="/:slug", handler="portal", action="item", namespace="aggregator" },
+			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
 
 		interceptors = [
@@ -129,6 +99,30 @@ component {
 		menuService.addTopMenu(
 			name="aggregator",
 			label="<i class='fa fa-rss'></i> RSS Aggregator"
+		);
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="feeds",
+			label="Feeds",
+			href="#menuService.buildModuleLink('aggregator','feeds')#"
+		);
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="items",
+			label="Feed Items",
+			href="#menuService.buildModuleLink('aggregator','items')#"
+		);
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="import-export",
+			label="Import & Export",
+			href="#menuService.buildModuleLink('aggregator','import-export')#"
+		);
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="debugging",
+			label="Debugging",
+			href="#menuService.buildModuleLink('aggregator','debugging')#"
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",

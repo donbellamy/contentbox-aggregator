@@ -1,6 +1,6 @@
 component persistent="true" 
-	entityname="cbFeed" 
-	table="cb_feed" 
+	entityname="cbFeed" //agFeed
+	table="cb_feed" // ag_feed
 	batchsize="25" 
 	extends="contentbox.models.content.BaseContent" 
 	cachename="cbFeed" 

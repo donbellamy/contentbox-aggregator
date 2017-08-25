@@ -14,6 +14,8 @@ component extends="coldbox.system.EventHandler" {
 			event.overrideEvent( "contentbox-aggregator:news.disabled" );
 		}
 
+		// TODO Site maintenance check
+
 		// TODO Portal Page Title
 
 	}
