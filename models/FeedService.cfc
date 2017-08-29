@@ -8,4 +8,27 @@ component extends="contentbox.models.content.ContentService" singleton{
 		
 	}	
 
+	struct function search(
+		string search="",
+		string isPublished="any"
+	) {
+
+		var results = {};
+		var c = newCriteria();
+
+		if ( len( arguments.search ) ) {
+			if( arguments.searchActiveContent ) {
+				c.or( c.restrictions.like( "title", "%#arguments.search#%" ),
+					  c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
+			} else {
+				c.like( "title", "%#arguments.search#%" );
+			}
+		}
+
+		if ( arguments.isPublished NEQ "any" ) {
+			c.eq( "isPublished", javaCast( "boolean", arguments.isPublished ) );
+		}
+
+	}
+
 }

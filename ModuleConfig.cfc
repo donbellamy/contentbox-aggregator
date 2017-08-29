@@ -81,9 +81,14 @@ component {
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
 
+		// TODO: Fix interceptors
 		interceptors = [
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
+
+		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
+		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
+
 	}
 
 	/**
@@ -95,6 +100,8 @@ component {
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 
 		registerAggregatorNameSpace();
+
+		// TODO: Add/Check permissions? - they can be passed in the menus below
 
 		menuService.addTopMenu(
 			name="aggregator",
@@ -114,13 +121,13 @@ component {
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",
-			name="import-export",
+			name="import",
 			label="Import & Export",
 			href="#menuService.buildModuleLink('aggregator','import-export')#"
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",
-			name="debugging",
+			name="debug",
 			label="Debugging",
 			href="#menuService.buildModuleLink('aggregator','debugging')#"
 		);
@@ -179,7 +186,7 @@ component {
 	*/
 	function onUnload() {
 
-		var menuService = controller.getWireBox().getInstance("AdminMenuService@cb");
+		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
 		
 		menuService.removeTopMenu("aggregator");
 
@@ -190,7 +197,7 @@ component {
 	*/
 	function onDeactivate() {
 
-		var settingService = controller.getWireBox().getInstance("SettingService@cb");
+		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
 		if( !isNull( setting ) ){

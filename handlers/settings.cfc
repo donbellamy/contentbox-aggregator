@@ -41,6 +41,8 @@ component extends="baseHandler" {
 		setting.setValue( serializeJSON( prc.agSettings ) );
 		settingService.save( setting );
 
+		//TODO: Set scheduled task or some other way to schedule imports?
+
 		settingService.flushSettingsCache();
 
 		var ses = getInterceptor("SES");
@@ -55,7 +57,7 @@ component extends="baseHandler" {
 		//announceInterception( "agadmin_postSettingsSave" );
 
 		cbMessagebox.info( "Settings Updated!" );
-		setNextEvent( prc.xehAgSettings );
+		setNextEvent( prc.xehSettings );
 
 	}
 
