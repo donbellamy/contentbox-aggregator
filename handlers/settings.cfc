@@ -12,10 +12,11 @@ component extends="baseHandler" {
 			{ name="Every Twelve Hours", value="720" },
 			{ name="Once Daily", value="1440" }
 		]; 
+		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.logLevels = [ "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG" ];
 		prc.pagingTypes = [
-			{ name="Paging links", value="paging" },
-			{ name="Older/Newer links", value="oldnew" }
+			{ name='Page numbers with "Next" and "Previous" page links', value="paging" },
+			{ name='"Older posts" and "Newer posts" links', value="oldnew" }
 		];
 		prc.cacheNames = cachebox.getCacheNames();
 		prc.activeTheme = themeService.getActiveTheme();

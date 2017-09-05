@@ -8,6 +8,14 @@ component extends="contentbox.models.content.ContentService" singleton{
 		
 	}	
 
+	FeedService function saveFeed( required any feed ) {
+
+		save( argumentCollection=arguments );
+
+		return this;
+
+	}
+
 	struct function search(
 		string search="",
 		string isPublished="any"

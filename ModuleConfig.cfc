@@ -15,6 +15,7 @@ component {
 
 			"ag_general_interval" = "60",
 			"ag_general_limit_by_age" = "",
+			"ag_general_limit_by_age_unit" = "days",
 			"ag_general_limit_by_number" = "",
 			"ag_general_filter_any" = "",
 			"ag_general_filter_all" = "",
@@ -29,8 +30,10 @@ component {
 			"ag_display_source_link" = true,
 			"ag_display_link_new_window" = true,
 			"ag_display_link_as_nofollow" = true,
+			"ag_display_video_link" = true,
 
 			"ag_display_excerpt_show" = true,
+			"ag_display_excerpt_word_limit" = "",
 			"ag_display_excerpt_ending" = "...",
 			"ag_display_read_more_show" = true,
 			"ag_display_read_more_text" = "Read more...",

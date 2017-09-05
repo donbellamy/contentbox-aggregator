@@ -16,8 +16,11 @@ component extends="coldbox.system.EventHandler" {
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedEditor = "#prc.agAdminEntryPoint#.feeds.editor";
 		prc.xehFeedSave = "#prc.agAdminEntryPoint#.feeds.save";
+
 		prc.xehFeedItems = "#prc.agAdminEntryPoint#.items";
+
 		prc.xehImportExport = "#prc.agAdminEntryPoint#.import-export";
+		
 		prc.xehSettings = "#prc.agAdminEntryPoint#.settings";
 		prc.xehSettingsSave = "#prc.agAdminEntryPoint#.settings.save";
 

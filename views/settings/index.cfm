@@ -56,40 +56,72 @@
 												class="form-control"
 											)#
 										</div>
+										<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
+										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
+										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
+										</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_general_limit_by_age",
-											content="Item age limit:"
+											content="Limit items by age:"
 										)#
-										<div class="controls">
-											#html.inputField(
-												name="ag_general_limit_by_age",
-												type="number",
-												value=prc.agSettings.ag_general_limit_by_age,
-												class="form-control",
-												placeholder="No limit"
-											)#
+										<div class="controls row">
+											<div class="col-sm-6">
+												#html.inputField(
+													name="ag_general_limit_by_age",
+													type="number",
+													value=prc.agSettings.ag_general_limit_by_age,
+													class="form-control counter",
+													placeholder="No limit",
+													min="0"
+												)#
+											</div>
+											<div class="col-sm-6">
+												#html.select(
+													name="ag_general_limit_by_age_unit",
+													options=prc.limitUnits,
+													selectedValue=prc.agSettings.ag_general_limit_by_age_unit,
+													class="form-control"
+												)#
+											</div>
 										</div>
+										<!--- 
+										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-by-age">
+										<p>The maximum age allowed for feed items.</p>
+										<hr>
+										<p>Items already imported will be deleted if they eventually exceed this age limit.</p>
+										<p>Also, items in the RSS feed that are already older than this age will not be imported at all.</p>
+										<hr>
+										<p><em>Leave empty for no limit.</em></p>
+										</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_general_limit_by_number",
-											content="Item number limit:"
+											content="Limit items by number:"
 										)#
 										<div class="controls">
 											#html.inputField(
 												name="ag_general_limit_by_number",
 												type="number",
 												value=prc.agSettings.ag_general_limit_by_number,
-												class="form-control",
-												placeholder="No limit"
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
 											)#
 										</div>
 									</div>
-
+									<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-imported">
+									<p>The maximum number of imported items to keep stored, for feed sources that do not have their own limit.</p>
+									<hr>
+									<p>When new items are imported and the limit for a feed source is exceeded, the oldest feed items for that feed source will be deleted to make room for the new ones.</p>
+									<p>If you already have items imported from this feed source, setting this option now may delete some of your items, in order to comply with the limit.</p>
+									<hr>
+									<p><em>Use 0 or leave empty for no limit.</em></p>
+									</div>--->
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
@@ -178,6 +210,9 @@
 												value = prc.agSettings.ag_display_title_link 
 											)#
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-link-enable">
+<p>Check this box to make the feed item titles link to the original article.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -196,6 +231,9 @@
 												value = prc.agSettings.ag_display_author_show 
 											)#
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-authors-enable">
+<p>Check this box to show the author for each feed item, if it is available.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -215,6 +253,9 @@
 											)#
 										</div>
 									</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-source-enable">
+<p>Enable this option to show the feed source name for each feed item.</p>
+</div>--->
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -232,6 +273,9 @@
 												value = prc.agSettings.ag_display_source_link 
 											)#
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-source-link">
+<p>Enable this option to link the feed source name to the RSS feed's source site.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -250,6 +294,9 @@
 												value = prc.agSettings.ag_display_link_new_window 
 											)#
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-open-dd"> - options lightbox/new window/self
+<p>Choose how you want links to be opened. This applies to the feed item title and the source link.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -268,6 +315,34 @@
 												value = prc.agSettings.ag_display_link_as_nofollow 
 											)#
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-follow-dd">
+<p>Enable this option to set all links displayed as "NoFollow".</p>
+<hr>
+<p>"Nofollow" provides a way to tell search engines to <em>not</em> follow certain links, such as links to feed items in this case.</p>
+</div>--->
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_video_link",
+											content="Link videos:"
+										)#
+										<div class="controls">
+											#html.checkbox(
+												name = "ag_display_video_link_toggle",
+												data = { toggle: 'toggle', match: 'ag_display_video_link' },
+												checked	= prc.agSettings.ag_display_video_link
+											)#
+											#html.hiddenField( 
+												name = "ag_display_video_link", 
+												value = prc.agSettings.ag_display_video_link 
+											)#
+										</div>
+<!---<select id="video-links" name="wprss_settings_general[video_link]">
+<option value="false" selected="selected">Original page link</option><option value="true">Embedded video player link</option>		</select>
+<div class="wprss-tooltip-content" id="wprss-tooltip-setting-video-links">
+<p>For feed items from YouTube, Vimeo or Dailymotion, you can choose whether you want to have the items link to the original page link, or a link to the embedded video player only.</p>
+</div>--->
 									</div>
 								</fieldset>
 								<fieldset>
@@ -289,6 +364,25 @@
 												value = prc.agSettings.ag_display_excerpt_show 
 											)#
 										</div>
+										<!---Check this box to enable excerpt functionality--->
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_excerpt_word_limit",
+											content="Word limit:"
+										)#
+										<div class="controls">
+											#html.inputField(
+												type="number",
+												min="0",
+												placeholder="No Limit",
+												name="ag_display_excerpt_word_limit",
+												value=prc.agSettings.ag_display_excerpt_word_limit,
+												class="form-control counter"
+											)#
+										</div>
+										<!---The number of words used in the excerpt displayed--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -303,6 +397,7 @@
 												class = "form-control"
 											)#
 										</div>
+										<!--- Characters appearing at end of excerpt --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -321,6 +416,7 @@
 												value = prc.agSettings.ag_display_read_more_show 
 											)#
 										</div>
+										<!--- Check this box to enable 'Read more' link functionality--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -356,6 +452,7 @@
 												value = prc.agSettings.ag_display_thumbnail_enable 
 											)#
 										</div>
+										<!--- Check this box to enable thumbnail functionality --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -374,6 +471,7 @@
 												value = prc.agSettings.ag_display_thumbnail_link 
 											)#
 										</div>
+										<!--- Check this box to link the thumbnail to the feed item's permalink --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -382,12 +480,16 @@
 											content="Thumbnail width:"
 										)#
 										<div class="controls">
-											#html.textField(
-												name = "ag_display_thumbnail_width",
-												value = prc.agSettings.ag_display_thumbnail_width,
-												class = "form-control"
+											#html.inputField(
+												type="number",
+												min="50",
+												max="300",
+												name="ag_display_thumbnail_width",
+												value=prc.agSettings.ag_display_thumbnail_width,
+												class="form-control"
 											)#
 										</div>
+										<!--- The thumbnail width in pixels --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -396,12 +498,16 @@
 											content="Thumbnail height:"
 										)#
 										<div class="controls">
-											#html.textField(
-												name = "ag_display_thumbnail_height",
-												value = prc.agSettings.ag_display_thumbnail_height,
-												class = "form-control"
+											#html.inputField(
+												type="number",
+												min="50",
+												max="300",
+												name="ag_display_thumbnail_height",
+												value=prc.agSettings.ag_display_thumbnail_height,
+												class="form-control"
 											)#
 										</div>
+										<!--- The thumbnail height in pixels --->
 									</div>
 								</fieldset>
 								<fieldset>
@@ -425,6 +531,10 @@
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
 										</div>
+<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-setting-feed-limit">
+<p>The maximum number of feed items to display when using the shortcode.</p>
+<p>This enables pagination if set to a number smaller than the number of items to be displayed.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -443,6 +553,14 @@
 											)#
 										</div>
 									</div>
+<!---<select id="pagination" name="wprss_settings_general[pagination]">
+<option value="default" selected="selected">"Older posts" and "Newer posts" links</option>
+<option value="numbered">Page numbers with "Next" and "Previous" page links</option></select>--->
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-pagination">
+<p>The type of pagination to use when showing feed items on multiple pages.</p>
+<p>The first shows two links, "Older" and "Newer", which allow you to navigate through the pages.</p>
+<p>The second shows links for all the pages, together with links for the next and previous pages.</p>
+</div>--->
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="portal_options">
@@ -598,7 +716,7 @@
 												name="ag_portal_cache_name",
 												options=prc.cacheNames,
 												selectedValue=prc.agSettings.ag_portal_cache_name,
-												class="input-sm"
+												class="form-control"
 											)#
 										</div>
 									</div>
@@ -684,6 +802,11 @@
 												class = "form-control"
 											)#
 										</div>
+<!---Latest imported feed items on WP RSS Aggregator Simple Demo Dashboard
+<div class="wprss-tooltip-content" id="wprss-tooltip-setting-custom-feed-title">
+<p>The title of the custom feed.</p>
+<p>This title will be included in the RSS source of the custom feed, in a <code>&lt;title&gt;</code> tag.</p>
+</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -768,6 +891,9 @@
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
 										</div>
+<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-custom-feed-limit">
+<p>The maximum number of feed items in the custom feed.</p>
+</div>--->
 									</div>
 								</fieldset>
 								<fieldset>
@@ -802,7 +928,7 @@
 												name="ag_rss_cache_name",
 												options=prc.cacheNames,
 												selectedValue=prc.agSettings.ag_rss_cache_name,
-												class="input-sm"
+												class="form-control"
 											)#
 										</div>
 									</div>

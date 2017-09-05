@@ -90,30 +90,86 @@
 							</div>
 						</div>
 					</div>
-					#html.textfield(
-						label="URL:",
-						name="url",
-						bind=prc.feed,
-						maxlength="100",
-						required="required",
-						title="The url for this feed",
-						class="form-control",
-						wrapper="div class=controls",
-						labelClass="control-label",
-						groupWrapper="div class=form-group"
-					)#
 					<div class="form-group">
+						<label for="url" class="control-label">
+							URL:
+						</label>
+						<div class="controls">
+							<div class="input-group">
+								#html.inputfield(
+									type="url",
+									name="url",
+									bind=prc.feed,
+									maxlength="100",
+									required="required",
+									title="The url for this feed",
+									class="form-control"
+								)#
+								<!--- TODO: Point to http://validator.w3.org/feed/check.cgi?url=url --->
+								<a title="Validate Feed URL" class="input-group-addon" href="javascript:alert('TODO: Add feed validator');" data-original-title="Validate Feed URL" data-container="body">
+									<i id="validateUrl" class="fa fa-rss"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<!--- TODO remove preview if portal is off --->
+						<!--- TODO: Write own tag if run into issues here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
+							label="Description:",
 							name="content", 
 							value=htmlEditFormat( prc.feed.getContent() ), 
 							rows="25", 
 							class="form-control"
 						)#
 					</div>
+					<div class="form-group">
+						<!--- TODO: Setting to turn on/off excerpts? --->
+						<!---<cfif prc.cbSettings.cb_page_excerpts >--->
+						<!--- TODO: htmleditformat() ?  See above --->
+						#html.textarea(
+							label="Excerpt:",
+							name="excerpt", 
+							bind=prc.feed, 
+							rows="10",
+							class="form-control"
+						)#
+						<!---</cfif>--->
+					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="seo">
+					<div class="form-group">
+						#html.textfield(
+							name="htmlTitle",
+							label="Title: (Leave blank to use the feed title)", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="255"
+						)#
+					</div>
+					<div class="form-group">
+						#html.textArea(
+							name="htmlKeywords",
+							label="Keywords: (<span id='html_keywords_count'>0</span>/160 characters left)", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="160",
+							rows="5"
+						)#
+					</div>
+					<div class="form-group">
+						#html.textArea(
+							name="htmlDescription",
+							label="Description: (<span id='html_description_count'>0</span>/160 characters left)", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="160",
+							rows="5"
+						)#
+					</div>
 				</div>
+				<!--- TODO: History? --->
 			</div>
 		</div>
 	</div>
@@ -121,6 +177,118 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-info-circle"></i> Feed Details</h3>
+			</div>
+			<div class="panel-body">
+				<!--- TODO: Write own tag if run into issues here? --->
+				#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/publishing", args={ content=prc.feed } )#
+				<div id="accordion" class="panel-group accordion" data-stateful="page-sidebar"><!--- TODO: page-sidebar ? --->
+					<cfif prc.feed.isLoaded() >
+						<!--- Info --->
+						<!--- TODO: Write own tag here - dont need comments, will want last ran, # of items, etc... --->
+						#renderView(
+							view="/contentbox/modules/contentbox-admin/views/_tags/content/infotable",
+							args={ content=prc.feed }
+						)#
+						<!--- Feed preview --->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##preview">
+										<i class="fa fa-rss fa-lg"></i> Feed Preview
+									</a>
+								</h4>
+							</div>
+							<div id="preview" class="panel-collapse collapse">
+							</div>
+						</div>
+					</cfif>
+					<!--- Feed processing --->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##processing">
+									<i class="fa fa-cogs fa-lg"></i> Feed Processing
+								</a>
+							</h4>
+						</div>
+						<div id="processing" class="panel-collapse collapse">
+						</div>
+					</div>
+					<!--- TODO: Permission? --->
+					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_CATEGORIES" ) >--->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##categories">
+									<i class="fa fa-tags fa-lg"></i> Categories
+								</a>
+							</h4>
+						</div>
+						<div id="categories" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div id="categoriesChecks">
+									<cfloop from="1" to="#arrayLen( prc.categories )#" index="x">
+										<div class="checkbox">
+											<label>
+												#html.checkbox(
+													name="category_#x#",
+													value="#prc.categories[ x ].getCategoryID()#",
+													checked=prc.feed.hasCategories( prc.categories[ x ] )
+												)#
+												#prc.categories[ x ].getCategory()#
+											</label>
+										</div>
+									</cfloop>
+								</div>
+								#html.textField(
+									name="newCategories",
+									label="New Categories",
+									size="30",
+									title="Comma delimited list of new categories to create",
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</div>
+					<!---</cfif>--->
+					<!--- TODO: Permission here? --->
+					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_FEATURED_IMAGE" )>  --->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##featuredImagePanel">
+									<i class="fa fa-picture-o fa-lg"></i> Featured Image
+								</a>
+							</h4>
+						</div>
+						<div id="featuredImagePanel" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="form-group text-center">
+									<a class="btn btn-primary" href="javascript:loadAssetChooser( 'featuredImageCallback' )">Select Image</a>
+									<div class="<cfif !len( prc.feed.getFeaturedImageURL() ) >hide</cfif> form-group" id="featuredImageControls">
+										<a class="btn btn-danger" href="javascript:cancelFeaturedImage()">Clear Image</a>
+										#html.hiddenField(
+											name="featuredImage",
+											bind=prc.feed
+										)#
+										#html.hiddenField(
+											name="featuredImageURL",
+											bind=prc.feed
+										)#
+										<div class="margin10">
+											<cfif len( prc.feed.getFeaturedImageURL() ) >
+												<img id="featuredImagePreview" src="#prc.feed.getFeaturedImageURL()#" class="img-thumbnail" height="75">
+											<cfelse>
+												<img id="featuredImagePreview" class="img-thumbnail" height="75">
+											</cfif>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!---</cfif>--->
+				</div>
 			</div>
 		</div>
 	</div>
