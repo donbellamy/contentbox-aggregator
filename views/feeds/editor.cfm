@@ -38,6 +38,11 @@
 							<i class="fa fa-edit"></i> Editor
 						</a>
 					</li>
+					<li role="presentation">
+						<a href="##filters" aria-controls="filters" role="tab" data-toggle="tab">
+							<i class="fa fa-filter"></i> Keyword Filtering
+						</a>
+					</li>
 					<!--- TODO: Custom fields? --->
 					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_HTML_ATTRIBUTES" )>--->
 					<li role="presentation">
@@ -84,7 +89,7 @@
 									title="The URL permalink for this feed", 
 									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
 								)#
-								<a title="" class="input-group-addon" href="javascript:void(0)" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
+								<a title="Lock/Unlock Permalink" class="input-group-addon" href="javascript:void(0);" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
 									<i id="togglePermalink" class="fa fa-#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'lock' : 'unlock'#"></i>
 								</a>
 							</div>
@@ -105,11 +110,14 @@
 									title="The url for this feed",
 									class="form-control"
 								)#
-								<!--- TODO: Point to http://validator.w3.org/feed/check.cgi?url=url --->
-								<a title="Validate Feed URL" class="input-group-addon" href="javascript:alert('TODO: Add feed validator');" data-original-title="Validate Feed URL" data-container="body">
-									<i id="validateUrl" class="fa fa-rss"></i>
+								<a id="validateFeed" title="Validate Feed URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Validate Feed URL" data-container="body">
+									<i class="fa fa-rss"></i>
 								</a>
 							</div>
+<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_url">
+<p>The URL of the feed source. In most cases, the URL of the site will also work, but for best results we recommend trying to find the URL of the RSS feed.</p>
+<p>Also include the <code>http://</code> prefix in the URL.</p>
+</div> --->
 						</div>
 					</div>
 					<div class="form-group">
@@ -117,7 +125,6 @@
 						<!--- TODO: Write own tag if run into issues here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
-							label="Description:",
 							name="content", 
 							value=htmlEditFormat( prc.feed.getContent() ), 
 							rows="25", 
@@ -136,6 +143,41 @@
 							class="form-control"
 						)#
 						<!---</cfif>--->
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="filters">
+					<div class="form-group">
+						#html.textArea(
+							name="filterByAny",
+							label="Contains any of these words/phrases:", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="255",
+							rows="5",
+							placeholder="Comma delimited list of words or phrases"
+						)#
+					</div>
+					<div class="form-group">
+						#html.textArea(
+							name="filterByAll",
+							label="Contains all of these words/phrases:", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="255",
+							rows="5",
+							placeholder="Comma delimited list of words or phrases"
+						)#
+					</div>
+					<div class="form-group">
+						#html.textArea(
+							name="filterByNone",
+							label="Contains none of these words/phrases:", 
+							bind=prc.feed,
+							class="form-control",
+							maxlength="255",
+							rows="5",
+							placeholder="Comma delimited list of words or phrases"
+						)#
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="seo">
@@ -212,6 +254,77 @@
 							</h4>
 						</div>
 						<div id="processing" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="form-group">
+									#html.label(
+										class="control-label",
+										field="isActive",
+										content="Feed State:"
+									)#
+								</div>
+								<div class="form-group">
+									#html.label(
+										class="control-label",
+										field="startDate",
+										content="Start Date:"
+									)#
+									<div class="controls row">
+										<div class="col-md-6">
+											<div class="input-group">
+												#html.inputField(
+													size="9", 
+													name="startDate",
+													value=prc.feed.getStartDate(), 
+													class="form-control datepicker",
+													placeholder="Immediately"
+												)#
+												<span class="input-group-addon">
+													<span class="fa fa-calendar"></span>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+												<input type="text" class="form-control inline" value="" name="startTime">
+												<span class="input-group-addon">
+													<span class="fa fa-clock-o"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									#html.label(
+										class="control-label",
+										field="stopDate",
+										content="Stop Date:"
+									)#
+									<div class="controls row">
+										<div class="col-md-6">
+											<div class="input-group">
+												#html.inputField(
+													size="9", 
+													name="stopDate",
+													value=prc.feed.getStopDate(), 
+													class="form-control datepicker",
+													placeholder="Never"
+												)#
+												<span class="input-group-addon">
+													<span class="fa fa-calendar"></span>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+												<input type="text" class="form-control inline" value="" name="stopTime">
+												<span class="input-group-addon">
+													<span class="fa fa-clock-o"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<!--- TODO: Permission? --->

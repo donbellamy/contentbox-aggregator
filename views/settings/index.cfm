@@ -128,45 +128,48 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_any",
-											content="Contains any of these words:"
+											field="ag_general_filter_by_any",
+											content="Contains any of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_any", 
-												value=prc.agSettings.ag_general_filter_any,
+												name="ag_general_filter_by_any", 
+												value=prc.agSettings.ag_general_filter_by_any,
 												rows="4",
-												class="form-control"
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases"
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_all",
-											content="Contains all of these words:"
+											field="ag_general_filter_by_all",
+											content="Contains all of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_all", 
-												value=prc.agSettings.ag_general_filter_all,
+												name="ag_general_filter_by_all", 
+												value=prc.agSettings.ag_general_filter_by_all,
 												rows="4",
-												class="form-control"
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases"
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_none",
-											content="Contains none of these words:"
+											field="ag_general_filter_by_none",
+											content="Contains none of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_none", 
-												value=prc.agSettings.ag_general_filter_none, 
+												name="ag_general_filter_by_none", 
+												value=prc.agSettings.ag_general_filter_by_none, 
 												rows="4",
-												class="form-control"
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases"
 											)#
 										</div>
 									</div>
@@ -201,13 +204,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_title_link_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_title_link' },
+												name="ag_display_title_link_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_title_link' },
 												checked	= prc.agSettings.ag_display_title_link
 											)#
 											#html.hiddenField( 
-												name = "ag_display_title_link", 
-												value = prc.agSettings.ag_display_title_link 
+												name="ag_display_title_link", 
+												value=prc.agSettings.ag_display_title_link 
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-link-enable">
@@ -222,13 +225,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_author_show_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_author_show' },
-												checked	= prc.agSettings.ag_display_author_show
+												name="ag_display_author_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_author_show' },
+												checked=prc.agSettings.ag_display_author_show
 											)#
 											#html.hiddenField( 
-												name = "ag_display_author_show", 
-												value = prc.agSettings.ag_display_author_show 
+												name="ag_display_author_show", 
+												value=prc.agSettings.ag_display_author_show 
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-authors-enable">
@@ -243,13 +246,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_source_show_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_source_show' },
-												checked	= prc.agSettings.ag_display_source_show
+												name="ag_display_source_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_source_show' },
+												checked=prc.agSettings.ag_display_source_show
 											)#
 											#html.hiddenField( 
-												name = "ag_display_source_show", 
-												value = prc.agSettings.ag_display_source_show 
+												name="ag_display_source_show", 
+												value=prc.agSettings.ag_display_source_show 
 											)#
 										</div>
 									</div>
@@ -264,13 +267,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_source_link_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_source_link' },
-												checked	= prc.agSettings.ag_display_source_link
+												name="ag_display_source_link_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_source_link' },
+												checked=prc.agSettings.ag_display_source_link
 											)#
 											#html.hiddenField( 
-												name = "ag_display_source_link", 
-												value = prc.agSettings.ag_display_source_link 
+												name="ag_display_source_link", 
+												value=prc.agSettings.ag_display_source_link 
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-source-link">
@@ -285,13 +288,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_link_new_window_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_link_new_window' },
-												checked	= prc.agSettings.ag_display_link_new_window
+												name="ag_display_link_new_window_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_link_new_window' },
+												checked=prc.agSettings.ag_display_link_new_window
 											)#
 											#html.hiddenField( 
-												name = "ag_display_link_new_window", 
-												value = prc.agSettings.ag_display_link_new_window 
+												name="ag_display_link_new_window", 
+												value=prc.agSettings.ag_display_link_new_window 
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-open-dd"> - options lightbox/new window/self
@@ -306,13 +309,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_link_as_nofollow_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_link_as_nofollow' },
-												checked	= prc.agSettings.ag_display_link_as_nofollow
+												name="ag_display_link_as_nofollow_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_link_as_nofollow' },
+												checked=prc.agSettings.ag_display_link_as_nofollow
 											)#
 											#html.hiddenField( 
-												name = "ag_display_link_as_nofollow", 
-												value = prc.agSettings.ag_display_link_as_nofollow 
+												name="ag_display_link_as_nofollow", 
+												value=prc.agSettings.ag_display_link_as_nofollow 
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-follow-dd">
@@ -329,13 +332,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_video_link_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_video_link' },
-												checked	= prc.agSettings.ag_display_video_link
+												name="ag_display_video_link_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_video_link' },
+												checked=prc.agSettings.ag_display_video_link
 											)#
 											#html.hiddenField( 
-												name = "ag_display_video_link", 
-												value = prc.agSettings.ag_display_video_link 
+												name="ag_display_video_link", 
+												value=prc.agSettings.ag_display_video_link 
 											)#
 										</div>
 <!---<select id="video-links" name="wprss_settings_general[video_link]">
@@ -355,13 +358,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_excerpt_show_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_excerpt_show' },
-												checked	= prc.agSettings.ag_display_excerpt_show
+												name="ag_display_excerpt_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_excerpt_show' },
+												checked=prc.agSettings.ag_display_excerpt_show
 											)#
 											#html.hiddenField( 
-												name = "ag_display_excerpt_show", 
-												value = prc.agSettings.ag_display_excerpt_show 
+												name="ag_display_excerpt_show", 
+												value=prc.agSettings.ag_display_excerpt_show 
 											)#
 										</div>
 										<!---Check this box to enable excerpt functionality--->
@@ -392,9 +395,9 @@
 										)#
 										<div class="controls">
 											#html.textField(
-												name = "ag_display_excerpt_ending",
-												value = prc.agSettings.ag_display_excerpt_ending,
-												class = "form-control"
+												name="ag_display_excerpt_ending",
+												value=prc.agSettings.ag_display_excerpt_ending,
+												class="form-control"
 											)#
 										</div>
 										<!--- Characters appearing at end of excerpt --->
@@ -407,13 +410,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_read_more_show_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_read_more_show' },
-												checked	= prc.agSettings.ag_display_read_more_show
+												name="ag_display_read_more_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_read_more_show' },
+												checked=prc.agSettings.ag_display_read_more_show
 											)#
 											#html.hiddenField( 
-												name = "ag_display_read_more_show", 
-												value = prc.agSettings.ag_display_read_more_show 
+												name="ag_display_read_more_show", 
+												value=prc.agSettings.ag_display_read_more_show 
 											)#
 										</div>
 										<!--- Check this box to enable 'Read more' link functionality--->
@@ -426,9 +429,9 @@
 										)#
 										<div class="controls">
 											#html.textField(
-												name = "ag_display_read_more_text",
-												value = prc.agSettings.ag_display_read_more_text,
-												class = "form-control"
+												name="ag_display_read_more_text",
+												value=prc.agSettings.ag_display_read_more_text,
+												class="form-control"
 											)#
 										</div>
 									</div>
@@ -443,13 +446,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_thumbnail_enable_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_thumbnail_enable' },
-												checked	= prc.agSettings.ag_display_thumbnail_enable
+												name="ag_display_thumbnail_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_thumbnail_enable' },
+												checked=prc.agSettings.ag_display_thumbnail_enable
 											)#
 											#html.hiddenField( 
-												name = "ag_display_thumbnail_enable", 
-												value = prc.agSettings.ag_display_thumbnail_enable 
+												name="ag_display_thumbnail_enable", 
+												value=prc.agSettings.ag_display_thumbnail_enable 
 											)#
 										</div>
 										<!--- Check this box to enable thumbnail functionality --->
@@ -462,13 +465,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_display_thumbnail_link_toggle",
-												data = { toggle: 'toggle', match: 'ag_display_thumbnail_link' },
-												checked	= prc.agSettings.ag_display_thumbnail_link
+												name="ag_display_thumbnail_link_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_thumbnail_link' },
+												checked=prc.agSettings.ag_display_thumbnail_link
 											)#
 											#html.hiddenField( 
-												name = "ag_display_thumbnail_link", 
-												value = prc.agSettings.ag_display_thumbnail_link 
+												name="ag_display_thumbnail_link", 
+												value=prc.agSettings.ag_display_thumbnail_link 
 											)#
 										</div>
 										<!--- Check this box to link the thumbnail to the feed item's permalink --->
@@ -574,13 +577,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_portal_enable_toggle",
-												data = { toggle: 'toggle', match: 'ag_portal_enable' },
-												checked	= prc.agSettings.ag_portal_enable
+												name="ag_portal_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_enable' },
+												checked=prc.agSettings.ag_portal_enable
 											)#
 											#html.hiddenField( 
-												name = "ag_portal_enable", 
-												value = prc.agSettings.ag_portal_enable 
+												name="ag_portal_enable", 
+												value=prc.agSettings.ag_portal_enable 
 											)#
 										</div>
 									</div>
@@ -592,9 +595,9 @@
 										)#
 										<div class="controls">
 											#html.textField(
-												name = "ag_portal_title",
-												value = prc.agSettings.ag_portal_title,
-												class = "form-control"
+												name="ag_portal_title",
+												value=prc.agSettings.ag_portal_title,
+												class="form-control"
 											)#
 										</div>
 									</div>
@@ -640,13 +643,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_portal_hits_track_toggle",
-												data = { toggle: 'toggle', match: 'ag_portal_hits_track' },
-												checked	= prc.agSettings.ag_portal_hits_track
+												name="ag_portal_hits_track_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_hits_track' },
+												checked=prc.agSettings.ag_portal_hits_track
 											)#
 											#html.hiddenField( 
-												name = "ag_portal_hits_track", 
-												value = prc.agSettings.ag_portal_hits_track 
+												name="ag_portal_hits_track", 
+												value=prc.agSettings.ag_portal_hits_track 
 											)#
 										</div>
 									</div>
@@ -658,13 +661,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_portal_hits_ignore_bots_toggle",
-												data = { toggle: 'toggle', match: 'ag_portal_hits_ignore_bots' },
-												checked	= prc.agSettings.ag_portal_hits_ignore_bots
+												name="ag_portal_hits_ignore_bots_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_hits_ignore_bots' },
+												checked=prc.agSettings.ag_portal_hits_ignore_bots
 											)#
 											#html.hiddenField( 
-												name = "ag_portal_hits_ignore_bots", 
-												value = prc.agSettings.ag_portal_hits_ignore_bots 
+												name="ag_portal_hits_ignore_bots", 
+												value=prc.agSettings.ag_portal_hits_ignore_bots 
 											)#
 										</div>
 									</div>
@@ -694,13 +697,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_portal_cache_enable_toggle",
-												data = { toggle: 'toggle', match: 'ag_portal_cache_enable' },
-												checked	= prc.agSettings.ag_portal_cache_enable
+												name="ag_portal_cache_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_cache_enable' },
+												checked=prc.agSettings.ag_portal_cache_enable
 											)#
 											#html.hiddenField(
-												name = "ag_portal_cache_enable",
-												value = prc.agSettings.ag_portal_cache_enable
+												name="ag_portal_cache_enable",
+												value=prc.agSettings.ag_portal_cache_enable
 											)#
 										</div>
 									</div>
@@ -777,13 +780,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_rss_enable_toggle",
-												data = { toggle: 'toggle', match: 'ag_rss_enable' },
-												checked	= prc.agSettings.ag_rss_enable
+												name="ag_rss_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_rss_enable' },
+												checked=prc.agSettings.ag_rss_enable
 											)#
 											#html.hiddenField( 
-												name = "ag_rss_enable", 
-												value = prc.agSettings.ag_rss_enable 
+												name="ag_rss_enable", 
+												value=prc.agSettings.ag_rss_enable 
 											)#
 										</div>
 									</div>
@@ -796,10 +799,10 @@
 										<div class="controls">
 											<small>The title of the rss feed</small><br/>
 											#html.textField(
-												name = "ag_rss_title",
+												name="ag_rss_title",
 												required="required",
-												value = prc.agSettings.ag_rss_title,
-												class = "form-control"
+												value=prc.agSettings.ag_rss_title,
+												class="form-control"
 											)#
 										</div>
 <!---Latest imported feed items on WP RSS Aggregator Simple Demo Dashboard
@@ -906,13 +909,13 @@
 										)#
 										<div class="controls">
 											#html.checkbox(
-												name = "ag_rss_cache_enable_toggle",
-												data = { toggle: 'toggle', match: 'ag_rss_cache_enable' },
-												checked	= prc.agSettings.ag_rss_cache_enable
+												name="ag_rss_cache_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_rss_cache_enable' },
+												checked=prc.agSettings.ag_rss_cache_enable
 											)#
 											#html.hiddenField(
-												name = "ag_rss_cache_enable",
-												value = prc.agSettings.ag_rss_cache_enable
+												name="ag_rss_cache_enable",
+												value=prc.agSettings.ag_rss_cache_enable
 											)#
 										</div>
 									</div>

@@ -12,22 +12,35 @@ component persistent="true"
 		notnull="true"
 		length="255";
 
-<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_url">
-<p>The URL of the feed source. In most cases, the URL of the site will also work, but for best results we recommend trying to find the URL of the RSS feed.</p>
-<p>Also include the <code>http://</code> prefix in the URL.</p>
-</div> --->
-
 	property name="excerpt"
 		notnull="false"
 		ormtype="text"
-		default=""
 		length="8000";
+
+	property name="filterByAny"
+		notnull="false";
+
+	property name="filterByAll"
+		notnull="false";
+
+	property name="filterByNone"
+		notnull="false";
 
 	property name="isActive"
 		notnull="true"  
 		ormtype="boolean" 
 		default="true" 
 		index="idx_isActive";
+
+	property name="startDate"
+		notnull="false"
+		ormtype="timestamp"
+		index="idx_startDate";
+	
+	property name="stopDate"
+		notnull="false"
+		ormtype="timestamp" 
+		index="idx_stopDate";
 
 <!---
 Limit
@@ -82,7 +95,12 @@ Delete old feed items number - unit
 </div>
 --->
 
-	this.constraints["url"] = { required = true, type="url", size = "1..255" };
+	this.constraints["url"] = { required=true, type="url", size="1..255" };
+	this.constraints["filterByAny"] = { required=false, size="1..255" };
+	this.constraints["filterByAll"] = { required=false, size="1..255" };
+	this.constraints["filterByNone"] = { required=false, size="1..255" };
+	this.constraints["startDate"] = { required=false, type="date" };
+	this.constraints["stopDate"] = { required=true, type="date" };
 
 	function init() {
 		super.init();
