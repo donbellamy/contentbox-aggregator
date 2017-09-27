@@ -84,6 +84,10 @@ component {
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
 
+		interceptorSettings = {
+			customInterceptionPoints = arrayToList( [ "agadmin_preFeedSave","agadmin_postFeedSave" ] )
+		};
+
 		// TODO: Fix interceptors
 		interceptors = [
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }

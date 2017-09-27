@@ -42,6 +42,20 @@ component persistent="true"
 		ormtype="timestamp" 
 		index="idx_stopDate";
 
+	// TODO: Private feed properties that we get from the feed itself.  Possible put into json as meta data?
+	<!--- Stuff such as:
+		Title - Usually title of the web site
+		Description 
+		Link - Usually to the home page of the website
+		Copyright
+		pubDate
+		lastBuildDate
+		Categories
+		managingEditor
+		webMaster
+		image
+	--->
+
 <!---
 Limit
 <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_limit">
@@ -100,7 +114,7 @@ Delete old feed items number - unit
 	this.constraints["filterByAll"] = { required=false, size="1..255" };
 	this.constraints["filterByNone"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
-	this.constraints["stopDate"] = { required=true, type="date" };
+	this.constraints["stopDate"] = { required=false, type="date" };
 
 	function init() {
 		super.init();
@@ -108,6 +122,58 @@ Delete old feed items number - unit
 		createdDate = now();
 		contentType = "Feed";
 		return this;
+	}
+
+	function addStartTime( required string hour, required string minute ) {
+		if ( isDate( getStartDate() ) ) { 
+			if ( !len( arguments.hour ) ) arguments.hour = "0";
+			if ( !len( arguments.minute ) ) arguments.minute = "00";
+			var time = timeformat( "#arguments.hour#:#arguments.minute#", "hh:mm tt" );
+			setStartDate( getStartDate() & " " & time );
+		}
+		return this;
+	}
+
+	function addJoinedStartTime( required string timeString ) {
+		var splitTime = listToArray( arguments.timeString, ":" );
+		if( arrayLen( splitTime ) == 2 ) {
+			return addStartTime( splitTime[ 1 ], splitTime[ 2 ] );
+		} else {
+			return this;
+		}
+	}
+
+	function addStopTime( required string hour, required string minute ) {
+		if ( isDate( getStopDate() ) ) { 
+			if ( !len( arguments.hour ) ) arguments.hour = "0";
+			if ( !len( arguments.minute ) ) arguments.minute = "00";
+			var time = timeformat( "#arguments.hour#:#arguments.minute#", "hh:mm tt" );
+			setStopDate( getStopDate() & " " & time );
+		}
+		return this;
+	}
+
+	function addJoinedStopTime( required string timeString ) {
+		var splitTime = listToArray( arguments.timeString, ":" );
+		if( arrayLen( splitTime ) == 2 ) {
+			return addStopTime( splitTime[ 1 ], splitTime[ 2 ] );
+		} else {
+			return this;
+		}
+	}
+
+	array function validate() {
+
+		var errors = [];
+
+		// TODO: Add in properties to validate that the form cant capture
+
+		return errors;
+
+	}
+
+	boolean function isActive() {
+		return getIsActive();
 	}
 
 }

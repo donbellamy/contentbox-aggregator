@@ -36,6 +36,7 @@
 										<!--- TODO: Use builtin or add new permissions? --->
 										<!--- FEEDS_ADMIN --->
 										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
+										<!--- TODO: fix these javascript functions --->
 										<li>
 											<a href="javascript:bulkRemove()" 
 												class="confirmIt" 
@@ -68,6 +69,55 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-filter"></i> Filters</h3>
+			</div>
+			<div class="panel-body">
+				<div id="filterBox">
+					#html.startForm( name="feedFilterForm", action=prc.xehFeedSearch, class="form-vertical", role="form" )#
+					    <div class="form-group">
+							<label for="fCreators" class="control-label">Creators:</label>
+							<select name="fCreators" id="fCreators" class="form-control input-sm" title="Filter on feed creator">
+								<option value="all" selected="selected">All Creators</option>
+								<cfloop array="#prc.authors#" index="author">
+									<option value="#author.getAuthorID()#">#author.getName()#</option>
+								</cfloop>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="fCategories" class="control-label">Categories:</label>
+							<div class="controls">
+								<select name="fCategories" id="fCategories" class="form-control input-sm valid">
+									<option value="all">All Categories</option>
+									<option value="none">Uncategorized</option>
+									<cfloop array="#prc.categories#" index="category">
+										<option value="#category.getCategoryID()#">#category.getCategory()#</option>
+									</cfloop>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="fStatus" class="control-label">Status:</label>
+							<div class="controls">
+								<select name="fStatus" id="fStatus" class="form-control input-sm valid">
+									<option value="any">Any Status</option>
+									<option value="true">Published</option>
+									<option value="false">Draft</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="fState" class="control-label">Import State:</label>
+							<div class="controls">
+								<select name="fState" id="fState" class="form-control input-sm valid">
+									<option value="any">Any State</option>
+									<option value="true">Active</option>
+									<option value="false">Paused</option>
+								</select>
+							</div>
+						</div>
+						<a class="btn btn-info btn-sm" href="javascript:contentFilter()">Apply Filters</a>
+						<a class="btn btn-sm btn-default" href="javascript:resetFilter( true )">Reset</a>
+					#html.endForm()#
+				</div>
 			</div>
 		</div>
 	</div>

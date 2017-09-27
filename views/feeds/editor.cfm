@@ -126,7 +126,7 @@
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
 							name="content", 
-							value=htmlEditFormat( prc.feed.getContent() ), 
+							bind=prc.feed, 
 							rows="25", 
 							class="form-control"
 						)#
@@ -259,14 +259,24 @@
 									#html.label(
 										class="control-label",
 										field="isActive",
-										content="Feed State:"
+										content="Import State"
 									)#
+									<div class="controls">
+										#html.select(
+											name="isActive",
+											options=[{name="Active",value="true"},{name="Paused",value="false"}],
+											column="value",
+											nameColumn="name",
+											selectedValue=prc.feed.getIsActive(),
+											class="form-control input-sm"
+										)#
+									</div>
 								</div>
 								<div class="form-group">
 									#html.label(
 										class="control-label",
 										field="startDate",
-										content="Start Date:"
+										content="Start Date"
 									)#
 									<div class="controls row">
 										<div class="col-md-6">
@@ -283,9 +293,10 @@
 												</span>
 											</div>
 										</div>
+										<!--- TODO: Set starttime if startDate defined --->
 										<div class="col-md-6">
 											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-												<input type="text" class="form-control inline" value="" name="startTime">
+												<input type="text" class="form-control inline" value="" name="startTime" />
 												<span class="input-group-addon">
 													<span class="fa fa-clock-o"></span>
 												</span>
@@ -297,7 +308,7 @@
 									#html.label(
 										class="control-label",
 										field="stopDate",
-										content="Stop Date:"
+										content="Stop Date"
 									)#
 									<div class="controls row">
 										<div class="col-md-6">
@@ -314,6 +325,7 @@
 												</span>
 											</div>
 										</div>
+										<!--- TODO: Set stoptime if stopDate defined --->
 										<div class="col-md-6">
 											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
 												<input type="text" class="form-control inline" value="" name="stopTime">
