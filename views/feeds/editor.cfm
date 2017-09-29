@@ -222,6 +222,7 @@
 			</div>
 			<div class="panel-body">
 				<!--- TODO: Write own tag if run into issues here? --->
+				<!--- TODO: Save button does not work --->
 				#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/publishing", args={ content=prc.feed } )#
 				<div id="accordion" class="panel-group accordion" data-stateful="page-sidebar"><!--- TODO: page-sidebar ? --->
 					<cfif prc.feed.isLoaded() >

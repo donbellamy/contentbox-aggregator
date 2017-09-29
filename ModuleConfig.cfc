@@ -85,7 +85,12 @@ component {
 		];
 
 		interceptorSettings = {
-			customInterceptionPoints = arrayToList( [ "agadmin_preFeedSave","agadmin_postFeedSave" ] )
+			customInterceptionPoints = arrayToList([ 
+				"agadmin_preFeedSave",
+				"agadmin_postFeedSave",
+				"agadmin_preFeedRemove",
+				"agadmin_postFeedRemove"
+			])
 		};
 
 		// TODO: Fix interceptors

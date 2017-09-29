@@ -1,22 +1,17 @@
 <cfoutput>
-<!---#renderView(view="_tags/contentListViewer", prePostExempt=true)#--->
 <script>
 
 function setupFeedView( settings ) {
 
-	$tableContainer = settings.tableContainer;
-	$tableURL = settings.tableURL;
-	$searchField = settings.searchField;
-	$searchName = settings.searchName;
-	$contentForm = settings.contentForm;
-	$bulkStatusURL = settings.bulkStatusURL;
+	$contentForm = $("##feedForm");
+	$tableContainer = $("##feedsTableContainer");
+	$tableURL = "#event.buildLink( prc.xehFeedTable )#";
+	$bulkStatusURL = "#event.buildlink( prc.xehFeedBulkStatus )#";
 
-	$searchField.keyup( 
-		_.debounce( 
+	$("##search").keyup( 
+		_.debounce(
 			function() {
 				var $this = $( this );
-				// ? var clearIt = ( $this.val().length > 0 ? false : true );
-				// ajax search
 				contentLoad( { search : $this.val() } );
 			}, 
 			300 
@@ -27,60 +22,139 @@ function setupFeedView( settings ) {
 
 function contentLoad( criteria ) {
 
-	// default checks
-	if( criteria == undefined ){ criteria = {}; }
-	// default criteria matches
-	if( !( "search" in criteria) ){ criteria.search = ""; }
-	if( !( "page" in criteria) ){ criteria.page = 1; }
-	//if( !( "parent" in criteria) ){ criteria.parent = ""; }
-	//if( !( "fAuthors" in criteria) ){ criteria.fAuthors = "all"; }
-	if( !( "fCreators" in criteria) ){ criteria.fCreators = "all"; }
-	if( !( "fCategories" in criteria) ){ criteria.fCategories = "all"; }
-	if( !( "fStatus" in criteria) ){ criteria.fStatus = "any"; }
-	if( !( "fState" in criteria) ){ criteria.fState = "any"; }
-	if( !( "showAll" in criteria) ){ criteria.showAll = false; }
+	if( criteria == undefined ) { criteria = {}; }
+	if( !( "page" in criteria) ) { criteria.page = 1; }
+	if( !( "search" in criteria) ) { criteria.search = ""; }
+	if( !( "creator" in criteria) ) { criteria.creator = "all"; }
+	if( !( "category" in criteria) ) { criteria.category = "all"; }
+	if( !( "status" in criteria) ) { criteria.status = "any"; }
+	if( !( "state" in criteria) ) { criteria.state = "any"; }
+	if( !( "showAll" in criteria) ) { criteria.showAll = false; }
 	
-	// loading effect
-	$tableContainer.css( 'opacity', .60 );
+	$tableContainer.css( "opacity", .60 );
 
 	var args = {  
-		page : criteria.page, 
-		//parent : criteria.parent,
-		//fAuthors : criteria.fAuthors,
-		fCreators : criteria.fCreators,
-		fCategories : criteria.fCategories,
-		fStatus : criteria.fStatus,
-		fState : criteria.fState,
+		page : criteria.page,
+		search : criteria.search,
+		creator : criteria.creator,
+		category : criteria.category,
+		status : criteria.status,
+		state : criteria.state,
 		showAll : criteria.showAll
 	};
 
-	// Add dynamic search key name
-	args[ $searchName ] = criteria.search;
-
-	// load content
 	$tableContainer.load( $tableURL, args, function() {
-		$tableContainer.css( 'opacity', 1 );
-		$( this ).fadeIn( 'fast' );
+		$tableContainer.css( "opacity", 1 );
+		$(this).fadeIn("fast");
 	});
 
 }
 
-$(document).ready(function() {
-
-	setupFeedView({ 
-		tableContainer : $("##feedsTableContainer"), 
-		tableURL : "#event.buildLink( prc.xehFeedTable )#",
-		searchField : $("##feedSearch"),
-		searchName : "searchFeeds",
-		contentForm : $("##feedForm"),
-		bulkStatusURL : "#event.buildlink( prc.xehFeedBulkStatus )#"
+function contentFilter() {
+	if ( $("##creator").val() != "all" || 
+		$("##category").val() != "all" || 
+		$("##status").val() != "any" || 
+		$("##state").val() != "any" ) {
+		$("##filterBox").addClass("selected");
+	} else {
+		$("##filterBox").removeClass("selected");
+	}
+	contentLoad({
+		search : $("##search").val(),
+		creator : $("##creator").val(),
+		category : $("##category").val(),
+		status : $("##status").val(),
+		state : $("##state").val()
 	});
-	
-	// load content on startup, using default parents if passed.
+}
+
+function contentShowAll() {
+	resetFilter();
+	contentLoad( { showAll: true } );
+}
+
+function resetFilter( reload ){
+	if ( reload ) {
+		contentLoad();
+	}
+	$("##search").val("");
+	$("##creator").val("all");
+	$("##category").val("all");
+	$("##status").val("any");
+	$("##state").val("any");
+	$("##filterBox").removeClass("selected");
+}
+
+function activateInfoPanels() {
+	$(".popovers").popover({
+		html : true,
+		content : function() {
+			return getInfoPanelContent( $(this).attr("data-contentID")  );
+		},
+		trigger : "hover",
+		placement : "left",
+		title : '<i class="fa fa-info-circle"></i> Quick Info',
+		delay : { show: 200, hide: 500 }
+	});
+}
+
+function getInfoPanelContent( contentID ) {
+	return $( "##infoPanel_" + contentID ).html();
+}
+
+function remove( contentID, id ) {
+	id = typeof id !== "undefined" ? id : "contentID";
+	checkAll( false, id );
+	if ( contentID != null ) {
+		$( "##delete_" + contentID ).removeClass("fa fa-minus-circle").addClass("fa fa-spinner fa-spin");
+		checkByValue( id, contentID );
+	}
+	$contentForm.submit();
+}
+
+function bulkRemove() {
+	$contentForm.submit();
+}
+
+function bulkChangeStatus( status, contentID ) {
+	$contentForm.attr( "action", $bulkStatusURL );
+	$contentForm.find("##contentStatus").val( status );
+	if( contentID != null ) {
+		$( "##status_"+ recordID ).removeClass("fa fa-minus-circle").addClass("fa fa-spinner fa-spin");
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
+function resetHits( contentID ) {
+	if( !contentID.length ){ return; }
+	$.post( 
+		"#event.buildLink( prc.xehResetHits )#",
+		{ contentID: contentID }
+	).done( function( data ) {
+		if ( data.error ) {
+			window.alert( "Error Reseting Hits: " + data.messages.join( ',' ) );
+		} else {
+			adminNotifier( "info", data.messages.join( "<br/>" ), 3000 );
+			contentFilter();
+		}
+	});
+}
+
+function resetBulkHits() {
+	var selected = [];
+	$("##contentID:checked").each( function() {
+		selected.push( $( this ).val() );
+	});
+	if( selected.length ) { 
+		resetHits( selected.join( "," ) ); 
+	}
+}
+
+$(document).ready( function() {
+	setupFeedView();
 	contentLoad();
-	
 });
 
 </script>
-
 </cfoutput>

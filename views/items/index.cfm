@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<h1 class="h1">
 			<i class="fa fa-rss fa-lg"></i>
-			Feed Items
+			RSS Aggregator - Feed Items
 		</h1>
 	</div>
 </div>

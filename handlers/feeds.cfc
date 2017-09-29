@@ -2,7 +2,6 @@ component extends="baseHandler" {
 
 	property name="feedService" inject="feedService@aggregator";
 	property name="authorService" inject="authorService@cb";
-	//property name="themeService" inject="themeService@cb";
 	property name="categoryService" inject="categoryService@cb";
 	property name="editorService" inject="editorService@cb";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
@@ -12,8 +11,8 @@ component extends="baseHandler" {
 		
 		super.preHandler( argumentCollection=arguments );
 
-		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify"; // TODO: slugify
-		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeds.slugUnique"; // TODO: slugunique
+		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
+		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeds.slugUnique";
 
 	}
 
@@ -28,13 +27,34 @@ component extends="baseHandler" {
 
 	function table( event, rc, prc ) {
 
-		prc.feeds = feedService.getAll( sortOrder="title" ); //TODO: replace with filtered list
+		event.paramValue( "page", 1 );
+		event.paramValue( "search", "" );
+		event.paramValue( "creator", "all" );
+		event.paramValue( "category", "all" );
+		event.paramValue( "status", "any" );
+		event.paramValue( "state", "any" );
+		event.paramValue( "showAll", false );
+
+		prc.oPaging = getModel( "Paging@cb" );
+		prc.paging = prc.oPaging.getBoundaries();
+		prc.pagingLink = "javascript:contentPaginate(@page@)";
+
+		var results = feedService.search(
+			search=rc.search,
+			creator=rc.creator,
+			category=rc.category,
+			status=rc.status,
+			state=rc.state,
+			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
+			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
+			sortOrder="title ASC"
+		);
+		prc.feeds = results.feeds;
+		prc.feedsCount = results.count;
 
 		event.setView( view="feeds/table", layout="ajax" );
 
 	}
-
-	function bulkStatus( event, rc, prc ) {}
 
 	function editor( event, rc, prc ) {
 
@@ -117,7 +137,7 @@ component extends="baseHandler" {
 		}
 
 		// TODO: Add validation to Feed.cfc
-		if( arrayLen( errors ) ) {
+		if ( arrayLen( errors ) ) {
 			cbMessageBox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
@@ -159,14 +179,84 @@ component extends="baseHandler" {
 			originalSlug=originalSlug
 		});
 
-		// TODO: Ajax?
-
 		cbMessageBox.info( "Feed Saved!" );
 		setNextEvent( prc.xehFeeds );
 
 	}
 
-	// TODO: SlugUnique - look in content.cfc handler or use it like cbadmin does?
+	function remove( event, rc, prc ) {
+		
+		event.paramValue( "contentID", "" );
+
+		if ( !len( rc.contentID ) ) {
+			cbMessageBox.warn( "No feeds selected!" );
+			setNextEvent( event=prc.xehFeeds );
+		}
+
+		rc.contentID = listToArray( rc.contentID );
+
+		var messages = [];
+
+		for ( var contentID in rc.contentID ) {
+
+			var feed = feedService.get( contentID );
+
+			if ( isNull( feed ) ) {
+				arrayAppend( messages, "Invalid feed selected: #thisContentID#, so skipped removal." );
+			} else {
+				
+				var title = feed.getTitle();
+				
+				announceInterception( "agadmin_preFeedRemove", { feed=feed } );
+
+				feedService.deleteContent( feed );
+
+				announceInterception( "agadmin_postFeedRemove", { contentID=contentID } );
+
+				arrayAppend( messages, "Feed '#title#' deleted." );
+
+			}
+		}
+
+		cbMessageBox.info( messageArray=messages );
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function bulkStatus( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+		event.paramValue( "contentStatus", "draft" );
+
+		if ( len( rc.contentID ) ) {
+			//entryService.bulkPublishStatus(contentID=rc.contentID,status=rc.contentStatus); TODO: bulk sttus
+			//announceInterception( "cbadmin_onEntryStatusUpdate",{contentID=rc.contentID,status=rc.contentStatus} );  TODO: interception
+			cbMessageBox.info( "#listLen(rc.contentID)# feeds were set to '#rc.contentStatus#'." );
+		} else {
+			cbMessageBox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function slugify( event, rc, prc ) {
+		event.renderData( data=trim( HTMLHelper.slugify( rc.slug ) ), type="plain" );
+	}
+
+	function slugUnique( event, rc, prc ) {
+
+		event.paramValue( "slug", "" );
+		event.paramValue( "contentID", "" );
+
+		var data = { "UNIQUE" = false };
+		
+		if ( len( rc.slug ) ) {
+			data[ "UNIQUE" ] = feedService.isSlugUnique( trim( rc.slug ), trim( rc.contentID ) );
+		}
+		
+		event.renderData( data=data, type="json" );
+	}
 
 	private function getUserDefaultEditor( required author ) {
 

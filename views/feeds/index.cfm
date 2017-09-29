@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<h1 class="h1">
 			<i class="fa fa-rss fa-lg"></i>
-			Feeds
+			RSS Aggregator - Feeds
 		</h1>
 	</div>
 </div>
@@ -12,15 +12,16 @@
 <div class="row">
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
-		<!--- TODO: Form action --->
-		#html.startForm( name="feedForm", action="" )#
+		#html.startForm( name="feedForm", action=prc.xehFeedRemove )#
+			#html.hiddenField (name="contentStatus", value="" )#
+			#html.hiddenField( name="contentID", value="" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group form-inline no-margin">
-								#html.textField( 
-									name="feedSearch",
+								#html.textField(
+									name="search",
 									class="form-control",
 									placeholder="Quick Search"
 								)#
@@ -74,8 +75,8 @@
 				<div id="filterBox">
 					#html.startForm( name="feedFilterForm", action=prc.xehFeedSearch, class="form-vertical", role="form" )#
 					    <div class="form-group">
-							<label for="fCreators" class="control-label">Creators:</label>
-							<select name="fCreators" id="fCreators" class="form-control input-sm" title="Filter on feed creator">
+							<label for="creator" class="control-label">Creators:</label>
+							<select name="creator" id="creator" class="form-control input-sm" title="Filter on feed creator">
 								<option value="all" selected="selected">All Creators</option>
 								<cfloop array="#prc.authors#" index="author">
 									<option value="#author.getAuthorID()#">#author.getName()#</option>
@@ -83,9 +84,9 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="fCategories" class="control-label">Categories:</label>
+							<label for="category" class="control-label">Categories:</label>
 							<div class="controls">
-								<select name="fCategories" id="fCategories" class="form-control input-sm valid">
+								<select name="category" id="category" class="form-control input-sm valid">
 									<option value="all">All Categories</option>
 									<option value="none">Uncategorized</option>
 									<cfloop array="#prc.categories#" index="category">
@@ -95,9 +96,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="fStatus" class="control-label">Status:</label>
+							<label for="status" class="control-label">Status:</label>
 							<div class="controls">
-								<select name="fStatus" id="fStatus" class="form-control input-sm valid">
+								<select name="status" id="status" class="form-control input-sm valid">
 									<option value="any">Any Status</option>
 									<option value="true">Published</option>
 									<option value="false">Draft</option>
@@ -105,9 +106,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="fState" class="control-label">Import State:</label>
+							<label for="state" class="control-label">Import State:</label>
 							<div class="controls">
-								<select name="fState" id="fState" class="form-control input-sm valid">
+								<select name="state" id="state" class="form-control input-sm valid">
 									<option value="any">Any State</option>
 									<option value="true">Active</option>
 									<option value="false">Paused</option>

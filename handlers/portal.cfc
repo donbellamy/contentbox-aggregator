@@ -34,19 +34,19 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	function index( event, rc, prc ) {
-		event.setView( "news/index" );
+		event.setView( "portal/index" );
 	}
 
 	function item( event, rc, prc ) {
-		event.setView( "news/item" );
+		event.setView( "portal/item" );
 	}
 
 	function feeds( event, rc, prc ) {
-		event.setView( "news/feeds" );
+		event.setView( "portal/feeds" );
 	}
 
 	function feed( event, rc, prc ) {
-		event.setView( "news/feed" );
+		event.setView( "portal/feed" );
 	}
 
 }
