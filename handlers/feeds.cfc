@@ -123,6 +123,7 @@ component extends="baseHandler" {
 
 		prc.feed = feedService.get( rc.contentID );
 		var originalSlug = prc.feed.getSlug();
+		var wasPaused = !prc.feed.isActive();
 
 		populateModel( prc.feed )
 			.addJoinedPublishedtime( rc.publishedTime )
@@ -136,7 +137,6 @@ component extends="baseHandler" {
 			arrayAppend( errors, "Please enter a description." );
 		}
 
-		// TODO: Add validation to Feed.cfc
 		if ( arrayLen( errors ) ) {
 			cbMessageBox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
@@ -147,8 +147,6 @@ component extends="baseHandler" {
 		if ( isNew ) {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
-
-		// TODO: Author?
 
 		prc.feed.addNewContentVersion( 
 			content=rc.content, 
@@ -171,7 +169,12 @@ component extends="baseHandler" {
 
 		feedService.save( prc.feed );
 
-		// TODO: Fetch items
+		// TODO: Fetch items (only if new and active or was paused and now is active)
+		/*
+		if ( isNew && prc.feed.isActive() || wasPaused && prc.feed.isActive() ) {
+			feedService.fetchItems( prc.feed );
+		}
+		*/
 
 		announceInterception( "agadmin_postFeedSave", {
 			feed=prc.feed,
@@ -179,8 +182,13 @@ component extends="baseHandler" {
 			originalSlug=originalSlug
 		});
 
-		cbMessageBox.info( "Feed Saved!" );
-		setNextEvent( prc.xehFeeds );
+		if ( event.isAjax() ) {
+			var rData = { "CONTENTID" = prc.feed.getContentID() };
+			event.renderData( type="json", data=rData );
+		} else {
+			cbMessageBox.info( "Feed Saved!" );
+			setNextEvent( prc.xehFeeds );
+		}
 
 	}
 
@@ -204,17 +212,11 @@ component extends="baseHandler" {
 			if ( isNull( feed ) ) {
 				arrayAppend( messages, "Invalid feed selected: #thisContentID#, so skipped removal." );
 			} else {
-				
 				var title = feed.getTitle();
-				
 				announceInterception( "agadmin_preFeedRemove", { feed=feed } );
-
 				feedService.deleteContent( feed );
-
 				announceInterception( "agadmin_postFeedRemove", { contentID=contentID } );
-
 				arrayAppend( messages, "Feed '#title#' deleted." );
-
 			}
 		}
 
@@ -229,9 +231,26 @@ component extends="baseHandler" {
 		event.paramValue( "contentStatus", "draft" );
 
 		if ( len( rc.contentID ) ) {
-			//entryService.bulkPublishStatus(contentID=rc.contentID,status=rc.contentStatus); TODO: bulk sttus
-			//announceInterception( "cbadmin_onEntryStatusUpdate",{contentID=rc.contentID,status=rc.contentStatus} );  TODO: interception
-			cbMessageBox.info( "#listLen(rc.contentID)# feeds were set to '#rc.contentStatus#'." );
+			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
+			announceInterception( "agadmin_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
+			cbMessageBox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentStatus#'." );
+		} else {
+			cbMessageBox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function bulkState( event, rc, prc ) {
+		
+		event.paramValue( "contentID", "" );
+		event.paramValue( "contentState", "pause" );
+
+		if ( len( rc.contentID ) ) {
+			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
+			announceInterception( "cbadmin_onEntryStatusUpdate", { contentID=rc.contentID, state=rc.contentState } );
+			cbMessageBox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
 		} else {
 			cbMessageBox.warn( "No feeds selected!" );
 		}

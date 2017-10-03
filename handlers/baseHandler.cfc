@@ -17,6 +17,7 @@ component extends="coldbox.system.EventHandler" {
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedTable = "#prc.agAdminEntryPoint#.feeds.table";
 		prc.xehFeedBulkStatus = "#prc.agAdminEntryPoint#.feeds.bulkstatus";
+		prc.xehFeedBulkState = "#prc.agAdminEntryPoint#.feeds.bulkstate";
 		prc.xehFeedEditor = "#prc.agAdminEntryPoint#.feeds.editor";
 		prc.xehFeedSave = "#prc.agAdminEntryPoint#.feeds.save";
 		prc.xehFeedRemove = "#prc.agAdminEntryPoint#.feeds.remove";

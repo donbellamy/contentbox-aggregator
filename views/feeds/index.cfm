@@ -13,7 +13,8 @@
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
 		#html.startForm( name="feedForm", action=prc.xehFeedRemove )#
-			#html.hiddenField (name="contentStatus", value="" )#
+			#html.hiddenField(name="contentStatus", value="" )#
+			#html.hiddenField(name="contentState", value="" )#
 			#html.hiddenField( name="contentID", value="" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -37,7 +38,6 @@
 										<!--- TODO: Use builtin or add new permissions? --->
 										<!--- FEEDS_ADMIN --->
 										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
-										<!--- TODO: fix these javascript functions --->
 										<li>
 											<a href="javascript:bulkRemove()" 
 												class="confirmIt" 
@@ -49,6 +49,8 @@
 										<li><a href="javascript:bulkChangeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
 										<li><a href="javascript:bulkChangeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
 										<!---</cfif>--->
+										<li><a href="javascript:bulkChangeState('active')"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
+										<li><a href="javascript:bulkChangeState('pause')"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
 										<li><a href="javascript:resetBulkHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
 										<li><a href="javascript:contentShowAll()"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>

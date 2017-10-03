@@ -1,4 +1,7 @@
-component extends="BaseService" singleton{
+component extends="BaseService" singleton {
+
+	property name="feedReader" inject="feedReader@cbfeeds";
+	property name="itemService" inject="itemService@aggregator";
 
 	FeedService function init() {
 
@@ -69,6 +72,48 @@ component extends="BaseService" singleton{
 		);
 
 		return results;
+
+	}
+
+	FeedService function bulkActiveState( required any contentID, required string status ) {
+
+		var active = false;
+
+		if( arguments.status EQ "active" ) {
+			active = true;
+		}
+
+		var feeds = getAll( id=arguments.contentID );
+
+		for ( var x=1; x LTE arrayLen( feeds ); x++ ){
+			feeds[ x ].setisActive( active );
+		}
+
+		saveAll( feeds );
+
+		return this;
+
+	}
+
+	// Working out the logic, placing here for now
+	FeedService function fetchItems( required Feed feed ) {
+
+		try {
+
+			//if ( isValid( arguments.feed.getUrl(), "url" ) ) {
+
+				writedump( feedReader.retrieveFeed( arguments.feed.getUrl() ) );
+				abort;
+
+			//}
+
+		} catch ( any e ) {
+
+			writedump(e);
+
+		}
+
+		return this;
 
 	}
 

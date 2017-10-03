@@ -13,7 +13,6 @@
 	</thead>
 	<tbody>
 		<cfloop array="#prc.feeds#" index="feed">
-			<!--- TODO: Do we really need these classes with the feeds? --->
 			<tr data-contentID="#feed.getContentID()#" 
 				<cfif feed.isExpired() >
 					class="danger"
@@ -42,25 +41,25 @@
 				</td>
 				<td class="text-center">
 					<cfif feed.isExpired() >
-						<i class="fa fa-clock-o fa-lg textRed" title="Feed expired on (#feed.getDisplayExpireDate()#)"></i>
+						<i id="status_#feed.getContentID()#" class="fa fa-clock-o fa-lg textRed" title="Feed expired on (#feed.getDisplayExpireDate()#)"></i>
 						<span class="hidden">expired</span>
 					<cfelseif feed.isPublishedInFuture() >
-						<i class="fa fa-fighter-jet fa-lg textBlue" title="Feed will be published on (#feed.getDisplayPublishedDate()#)"></i>
+						<i id="status_#feed.getContentID()#" class="fa fa-fighter-jet fa-lg textBlue" title="Feed will be published on (#feed.getDisplayPublishedDate()#)"></i>
 						<span class="hidden">published in future</span>
 					<cfelseif feed.isContentPublished() >
-						<i class="fa fa-circle-o fa-lg textGreen" title="Feed Published!"></i>
+						<i id="status_#feed.getContentID()#" class="fa fa-circle-o fa-lg textGreen" title="Feed Published!"></i>
 						<span class="hidden">published</span>
 					<cfelse>
-						<i class="fa fa-circle-o fa-lg textRed" title="Feed Draft!"></i>
+						<i id="status_#feed.getContentID()#" class="fa fa-circle-o fa-lg textRed" title="Feed Draft!"></i>
 						<span class="hidden">draft</span>
 					</cfif>
 				</td>
 				<td class="text-center">
-					<cfif feed.isActive() >
-						<i class="fa fa-play-circle-o fa-lg textGreen" title="Feed Active!"></i>
+					<cfif feed.getIsActive() >
+						<i id="state_#feed.getContentID()#" class="fa fa-play-circle-o fa-lg textGreen" title="Feed Active!"></i>
 						<span class="hidden">active</span>
 					<cfelse>
-						<i class="fa fa-pause-circle-o fa-lg textRed" title="Feed Paused!"></i>
+						<i id="state_#feed.getContentID()#" class="fa fa-pause-circle-o fa-lg textRed" title="Feed Paused!"></i>
 						<span class="hidden">paused</span>
 					</cfif>
 				</td>

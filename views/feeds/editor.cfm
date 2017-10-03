@@ -1,5 +1,4 @@
 <cfoutput>
-
 <div class="btn-group btn-group-xs">
 	<button class="btn btn-sm btn-info" onclick="window.location.href='#event.buildLink( prc.xehFeeds )#';return false;">
 		<i class="fa fa-reply"></i> Back
@@ -11,20 +10,18 @@
 		<li><a href="javascript:quickPublish( false )"><i class="fa fa-globe"></i> Publish</a></li>
 		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
-		<!--- TODO: Will have to check portal setting first, and create a helper to create url
-		<cfif prc.feed.isLoaded() >
-			<li><a href="#prc.cbHelper.linkPage( prc.page )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
-		</cfif>--->
+		<cfif prc.agSettings.ag_portal_enable && prc.feed.isLoaded() >
+			<!---<li><a href="#prc.cbHelper.linkPage( prc.page )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>--->
+			<li><a href="javascript:alert('TODO: Implement open in site');" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+		</cfif>
 	</ul>
 </div>
-
 #html.startForm( 
 	action=prc.xehFeedSave, 
 	name="feedForm", 
-	novalidate="novalidate", // TODO: what does novalidate do?
+	novalidate="novalidate",
 	class="form-vertical" 
 )#
-
 <div class="row">
 	<div class="col-md-8" id="main-content-slot">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
@@ -221,17 +218,76 @@
 				<h3 class="panel-title"><i class="fa fa-info-circle"></i> Feed Details</h3>
 			</div>
 			<div class="panel-body">
-				<!--- TODO: Write own tag if run into issues here? --->
-				<!--- TODO: Save button does not work --->
 				#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/publishing", args={ content=prc.feed } )#
-				<div id="accordion" class="panel-group accordion" data-stateful="page-sidebar"><!--- TODO: page-sidebar ? --->
+				<div id="accordion" class="panel-group accordion" data-stateful="feed-sidebar">
 					<cfif prc.feed.isLoaded() >
 						<!--- Info --->
-						<!--- TODO: Write own tag here - dont need comments, will want last ran, # of items, etc... --->
-						#renderView(
-							view="/contentbox/modules/contentbox-admin/views/_tags/content/infotable",
-							args={ content=prc.feed }
-						)#
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="##accordion" href="##feedinfo">
+										<i class="fa fa-info-circle fa-lg"></i> Info
+									</a>
+								</h4>
+							</div>
+							<div id="feedinfo" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<table class="table table-hover table-condensed table-striped size12">
+										<tr>
+											<th class="col-md-4">Created By:</th>
+											<td class="col-md-8">
+												<a href="mailto:#prc.feed.getCreatorEmail()#">#prc.feed.getCreatorName()#</a>
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Created On:</th>
+											<td class="col-md-8">
+												#prc.feed.getDisplayCreatedDate()#
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Published On:</th>
+											<td class="col-md-8">
+												#prc.feed.getDisplayPublishedDate()#
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Version:</th>
+											<td class="col-md-8">
+												#prc.feed.getActiveContent().getVersion()#
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Last Edit By:</th>
+											<td class="col-md-8">
+												<a href="mailto:#prc.feed.getAuthorEmail()#">#prc.feed.getAuthorName()#</a>
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Last Edit On:</th>
+											<td class="col-md-8">
+												#prc.feed.getActiveContent().getDisplayCreatedDate()#
+											</td>
+										</tr>
+										<cfif prc.feed.hasChild() >
+											<tr>
+												<th class="col-md-4">Items:</th>
+												<td class="col-md-8">
+													#prc.feed.getNumberOfChildren()#
+												</td>
+											</tr>
+										</cfif>
+										<tr>
+											<th class="col-md-4">Views:</th>
+											<td class="col-md-8">
+												#prc.feed.getNumberOfHits()#
+											</td>
+										</tr>
+										<!--- TODO: Last Import --->
+									</table>
+								</div>
+							</div>
+						</div>
 						<!--- Feed preview --->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -242,6 +298,12 @@
 								</h4>
 							</div>
 							<div id="preview" class="panel-collapse collapse">
+								<div class="panel-body">
+									<!---<cfif prc.feed.hasItems() >
+									<cfelse>
+									</cfif>--->
+									TODO: Finish after adding items and import routine.
+								</div>
 							</div>
 						</div>
 					</cfif>
@@ -285,7 +347,7 @@
 												#html.inputField(
 													size="9", 
 													name="startDate",
-													value=prc.feed.getStartDate(), 
+													value=prc.feed.getStartDateForEditor(), 
 													class="form-control datepicker",
 													placeholder="Immediately"
 												)#
@@ -294,10 +356,17 @@
 												</span>
 											</div>
 										</div>
-										<!--- TODO: Set starttime if startDate defined --->
+										<cfscript>
+											theTime = "";
+											hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
+											minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
+											if ( len( hour ) && len( minute ) ) {
+												theTime = hour & ":" & minute;
+											}
+										</cfscript>
 										<div class="col-md-6">
 											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-												<input type="text" class="form-control inline" value="" name="startTime" />
+												<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
 												<span class="input-group-addon">
 													<span class="fa fa-clock-o"></span>
 												</span>
@@ -317,7 +386,7 @@
 												#html.inputField(
 													size="9", 
 													name="stopDate",
-													value=prc.feed.getStopDate(), 
+													value=prc.feed.getStopDateForEditor(), 
 													class="form-control datepicker",
 													placeholder="Never"
 												)#
@@ -326,10 +395,17 @@
 												</span>
 											</div>
 										</div>
-										<!--- TODO: Set stoptime if stopDate defined --->
+										<cfscript>
+											theTime = "";
+											hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
+											minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
+											if ( len( hour ) && len( minute ) ) {
+												theTime = hour & ":" & minute;
+											}
+										</cfscript>
 										<div class="col-md-6">
 											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-												<input type="text" class="form-control inline" value="" name="stopTime">
+												<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
 												<span class="input-group-addon">
 													<span class="fa fa-clock-o"></span>
 												</span>
@@ -419,7 +495,5 @@
 		</div>
 	</div>
 </div>
-
 #html.endForm()#
-
 </cfoutput>

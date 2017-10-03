@@ -7,6 +7,7 @@ function setupFeedView( settings ) {
 	$tableContainer = $("##feedsTableContainer");
 	$tableURL = "#event.buildLink( prc.xehFeedTable )#";
 	$bulkStatusURL = "#event.buildlink( prc.xehFeedBulkStatus )#";
+	$bulkStateURL = "#event.buildlink( prc.xehFeedBulkState )#";
 
 	$("##search").keyup( 
 		_.debounce(
@@ -120,7 +121,15 @@ function bulkChangeStatus( status, contentID ) {
 	$contentForm.attr( "action", $bulkStatusURL );
 	$contentForm.find("##contentStatus").val( status );
 	if( contentID != null ) {
-		$( "##status_"+ recordID ).removeClass("fa fa-minus-circle").addClass("fa fa-spinner fa-spin");
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
+function bulkChangeState( state, contentID ) {
+	$contentForm.attr( "action", $bulkStateURL );
+	$contentForm.find("##contentState").val( state );
+	if( contentID != null ) {
 		checkByValue( "contentID", contentID );
 	}
 	$contentForm.submit();

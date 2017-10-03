@@ -1,10 +1,10 @@
 component persistent="true"
-	entityname="cbFeed" //agFeed
-	table="cb_feed" // ag_feed
+	entityname="cbFeed"
+	table="cb_feed"
 	batchsize="25"
-	extends="contentbox.models.content.BaseContent"
 	cachename="cbFeed"
 	cacheuse="read-write"
+	extends="contentbox.models.content.BaseContent"
 	joincolumn="contentID"
 	discriminatorValue="Feed" {
 
@@ -18,31 +18,47 @@ component persistent="true"
 		length="8000";
 
 	property name="filterByAny"
-		notnull="false";
+		notnull="false"
+		length="255";
 
 	property name="filterByAll"
-		notnull="false";
+		notnull="false"
+		length="255";
 
 	property name="filterByNone"
-		notnull="false";
+		notnull="false"
+		length="255";
 
 	property name="isActive"
-		notnull="true"  
-		ormtype="boolean" 
-		default="true" 
+		notnull="true"
+		ormtype="boolean"
+		default="true"
 		index="idx_isActive";
 
 	property name="startDate"
 		notnull="false"
 		ormtype="timestamp"
 		index="idx_startDate";
-	
+
 	property name="stopDate"
 		notnull="false"
 		ormtype="timestamp" 
 		index="idx_stopDate";
 
-	// TODO: Private feed properties that we get from the feed itself.  Possible put into json as meta data?
+	property name="importedDate"
+		notnull="false"
+		ormtype="timestamp" 
+		index="idx_importedDate";
+
+	property name="metaData"
+		notnull="false"
+		ormtype="text";
+
+	// TODO:: Autoapprove items?  - Also a master setting?
+
+	// TODO: Overwrite properties?  From feed? - Same as import feeds
+
+	// TODO: Private feed properties that we get from the feed itself.  Possible put into json as meta data?, as bulk import use in main fields?
 	<!--- Stuff such as:
 		Title - Usually title of the web site
 		Description 
@@ -108,15 +124,15 @@ Delete old feed items number - unit
 <p>Leaving empty to use the <em>Limit feed items by age</em> option in the general settings.</p>
 </div>
 --->
-
+/*
 	this.constraints["url"] = { required=true, type="url", size="1..255" };
 	this.constraints["filterByAny"] = { required=false, size="1..255" };
 	this.constraints["filterByAll"] = { required=false, size="1..255" };
 	this.constraints["filterByNone"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
-
-	function init() {
+*/
+	Feed function init() {
 		super.init();
 		categories = [];
 		createdDate = now();
@@ -124,7 +140,15 @@ Delete old feed items number - unit
 		return this;
 	}
 
-	function addStartTime( required string hour, required string minute ) {
+	array function getItems() {
+		return getChildren();
+	}
+
+	boolean function isActive() {
+		return getIsActive() && ( !isDate( getStartDate() ) || getStartDate() LTE now() ) && ( !isDate( getStopDate() ) || getStopDate() GTE now() );
+	}
+
+	Feed function addStartTime( required string hour, required string minute ) {
 		if ( isDate( getStartDate() ) ) { 
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
 			if ( !len( arguments.minute ) ) arguments.minute = "00";
@@ -134,7 +158,7 @@ Delete old feed items number - unit
 		return this;
 	}
 
-	function addJoinedStartTime( required string timeString ) {
+	Feed function addJoinedStartTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
 		if( arrayLen( splitTime ) == 2 ) {
 			return addStartTime( splitTime[ 1 ], splitTime[ 2 ] );
@@ -143,7 +167,17 @@ Delete old feed items number - unit
 		}
 	}
 
-	function addStopTime( required string hour, required string minute ) {
+	string function getStartDateForEditor( boolean showTime=false ) {
+		var sDate = getStartDate();
+		if ( isNull( sDate ) ) { sDate = ""; }
+		var fDate = dateFormat( sDate, "yyyy-mm-dd" );
+		if ( arguments.showTime ) {
+			fDate &= " " & timeFormat( sDate, "hh:mm tt" );
+		}
+		return fDate;
+	}
+
+	Feed function addStopTime( required string hour, required string minute ) {
 		if ( isDate( getStopDate() ) ) { 
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
 			if ( !len( arguments.minute ) ) arguments.minute = "00";
@@ -153,7 +187,7 @@ Delete old feed items number - unit
 		return this;
 	}
 
-	function addJoinedStopTime( required string timeString ) {
+	Feed function addJoinedStopTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
 		if( arrayLen( splitTime ) == 2 ) {
 			return addStopTime( splitTime[ 1 ], splitTime[ 2 ] );
@@ -162,18 +196,36 @@ Delete old feed items number - unit
 		}
 	}
 
+	string function getStopDateForEditor( boolean showTime=false ) {
+		var sDate = getStopDate();
+		if ( isNull( sDate ) ) { sDate = ""; }
+		var fDate = dateFormat( sDate, "yyyy-mm-dd" );
+		if ( arguments.showTime ) {
+			fDate &= " " & timeFormat( sDate, "hh:mm tt" );
+		}
+		return fDate;
+	}
+
 	array function validate() {
 
 		var errors = [];
 
-		// TODO: Add in properties to validate that the form cant capture
+		HTMLKeyWords = left( HTMLKeywords, 160 );
+		HTMLDescription = left( HTMLDescription, 160 );
+		title = left( title, 200 );
+		slug = left( slug, 200 );
+
+		filterByAny = left( filterByAny, 255 );
+		filterByAll = left( filterByAll, 255 );
+		filterByNone = left( filterByNone, 255 );
+
+		//TODO: Validate dates?
+
+		if( !len( trim( title ) ) ) { arrayAppend( errors, "Title is required" ); }
+		if( !len( trim( slug ) ) ) { arrayAppend( errors, "Slug is required" ); }
 
 		return errors;
 
-	}
-
-	boolean function isActive() {
-		return getIsActive();
 	}
 
 }
