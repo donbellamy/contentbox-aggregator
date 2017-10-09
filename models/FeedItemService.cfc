@@ -1,6 +1,6 @@
 component extends="BaseService" singleton{
 
-	ItemService function init() {
+	FeedItemService function init() {
 
 		super.init( entityName="cbFeedItem", useQueryCaching=true );
 

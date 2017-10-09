@@ -35,6 +35,11 @@ component persistent="true"
 		default="true"
 		index="idx_isActive";
 
+	property name="publishItems"
+		notnull="true"
+		ormtype="boolean"
+		default="true";
+
 	property name="startDate"
 		notnull="false"
 		ormtype="timestamp"
@@ -45,16 +50,13 @@ component persistent="true"
 		ormtype="timestamp" 
 		index="idx_stopDate";
 
-	property name="importedDate"
+	property name="lastImportDate"
 		notnull="false"
-		ormtype="timestamp" 
-		index="idx_importedDate";
+		ormtype="timestamp";
 
 	property name="metaData"
 		notnull="false"
 		ormtype="text";
-
-	// TODO:: Autoapprove items?  - Also a master setting?
 
 	// TODO: Overwrite properties?  From feed? - Same as import feeds
 
@@ -124,14 +126,14 @@ Delete old feed items number - unit
 <p>Leaving empty to use the <em>Limit feed items by age</em> option in the general settings.</p>
 </div>
 --->
-/*
+
 	this.constraints["url"] = { required=true, type="url", size="1..255" };
 	this.constraints["filterByAny"] = { required=false, size="1..255" };
 	this.constraints["filterByAll"] = { required=false, size="1..255" };
 	this.constraints["filterByNone"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
-*/
+
 	Feed function init() {
 		super.init();
 		categories = [];

@@ -39,19 +39,21 @@
 										<!--- FEEDS_ADMIN --->
 										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
 										<li>
-											<a href="javascript:bulkRemove()" 
-												class="confirmIt" 
-												data-title="Delete Selected Feeds?" 
+											<a href="javascript:remove()"
+												class="confirmIt"
+												data-title="Delete Selected Feeds?"
 												data-message="This will delete the feeds and all imported items, are you sure?">
 												<i class="fa fa-trash-o"></i> Delete Selected
 											</a>
 										</li>
-										<li><a href="javascript:bulkChangeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
-										<li><a href="javascript:bulkChangeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
+										<li><a href="javascript:changeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
+										<li><a href="javascript:changeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
 										<!---</cfif>--->
-										<li><a href="javascript:bulkChangeState('active')"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
-										<li><a href="javascript:bulkChangeState('pause')"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
-										<li><a href="javascript:resetBulkHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+										<li><a href="javascript:changeState('pause')"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
+										<li><a href="javascript:changeState('active')"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
+										<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Import Selected</a></li>
+										<!--- TODO: Hits enabled only when portal is enabled? --->
+										<li><a href="javascript:resetHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
 										<li><a href="javascript:contentShowAll()"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>

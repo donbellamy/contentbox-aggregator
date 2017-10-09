@@ -102,7 +102,7 @@ component {
 
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
-		binder.map("itemService@aggregator").to("#moduleMapping#.models.ItemService");
+		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 
 	}
 

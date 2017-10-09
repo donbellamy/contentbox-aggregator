@@ -1,7 +1,8 @@
 component extends="BaseService" singleton {
 
 	property name="feedReader" inject="feedReader@cbfeeds";
-	property name="itemService" inject="itemService@aggregator";
+	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="htmlHelper" inject="HTMLHelper@coldbox";
 
 	FeedService function init() {
 
@@ -84,32 +85,100 @@ component extends="BaseService" singleton {
 		}
 
 		var feeds = getAll( id=arguments.contentID );
-
-		for ( var x=1; x LTE arrayLen( feeds ); x++ ){
-			feeds[ x ].setisActive( active );
+		
+		if ( arrayLen( feeds ) ) {
+			for ( var x=1; x LTE arrayLen( feeds ); x++ ) {
+				feeds[ x ].setisActive( active );
+			}
+			saveAll( feeds );
 		}
-
-		saveAll( feeds );
 
 		return this;
 
 	}
 
 	// Working out the logic, placing here for now
-	FeedService function fetchItems( required Feed feed ) {
+	FeedService function import( required Feed feed, required Author author ) {
 
 		try {
 
 			//if ( isValid( arguments.feed.getUrl(), "url" ) ) {
 
-				writedump( feedReader.retrieveFeed( arguments.feed.getUrl() ) );
-				abort;
+				var feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
+
+				// TODO: Filters
+
+				if ( arrayLen( feed.items ) ) {
+
+					for ( var item IN feed.items ) {
+
+						// TODO: Make sure it doesnt already exist
+
+						// Validate title, url and body
+						if ( len( trim( item.title ) ) &&
+							len( trim( item.url ) ) &&
+							len( trim( item.body ) ) ) {
+
+							var feedItem = feedItemService.new();
+
+							feedItem.setTitle( item.title );
+							feedItem.setSlug( htmlHelper.slugify( item.title ) ); //Gets uniqued on save
+							feedItem.setCreator( arguments.author );
+							feedItem.addNewContentVersion( 
+								content=item.body,
+								changelog="Item imported.",
+								author=arguments.author
+							);
+
+							feedItem.setUrl( item.url );
+
+							if ( len( trim( item.id ) ) ) {
+								feedItem.setId( item.id );
+							} else {
+								feedItem.setId( item.url );
+							}
+
+							if ( len( trim( item.author ) ) ) {
+								feedItem.setAuthor( item.author );
+							}
+
+							var now = now();
+							if ( isDate( item.datePublished ) ) { 
+								feedItem.setDatePublished( item.datePublished );
+							} else {
+								feedItem.setDatePublished( now );
+							}
+							if ( isDate( item.dateUpdated ) ) { 
+								feedItem.setDateUpdated( item.dateUpdated );
+							} else {
+								feedItem.setDateUpdated( now );
+							}
+
+							feedItem.setMetaData( serializeJSON( item ) );
+
+							feedItem.setParent( arguments.feed ); //TODO: we need to add to parent? feed.addChild() ?
+
+							// Log here
+
+						} else {
+							// Log here
+						}
+
+						writedump( item );
+						writedump( feedItem );
+						abort;
+
+					}
+
+				}
 
 			//}
 
 		} catch ( any e ) {
 
+			// TODO: log.();
 			writedump(e);
+			abort;
 
 		}
 
