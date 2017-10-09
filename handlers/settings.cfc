@@ -11,7 +11,8 @@ component extends="baseHandler" {
 			{ name="Every Two Hours", value="120" },
 			{ name="Every Twelve Hours", value="720" },
 			{ name="Once Daily", value="1440" }
-		]; 
+		];
+		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.logLevels = [ "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG" ];
 		prc.pagingTypes = [

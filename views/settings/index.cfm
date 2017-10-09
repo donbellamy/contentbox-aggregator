@@ -122,6 +122,25 @@
 									<hr>
 									<p><em>Use 0 or leave empty for no limit.</em></p>
 									</div>--->
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_default_creator",
+											content="Default creator:"
+										)#
+										<div class="controls">
+											<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
+												<cfloop array="#prc.authors#" index="author">
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+												</cfloop>
+											</select>
+										</div>
+										<!--- Selecte default creator used when importing items
+										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
+										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
+										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
+										</div>--->
+									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>

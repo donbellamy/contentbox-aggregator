@@ -1,7 +1,6 @@
 component extends="baseHandler" {
 
 	property name="feedService" inject="feedService@aggregator";
-	property name="authorService" inject="authorService@cb";
 	property name="categoryService" inject="categoryService@cb";
 	property name="editorService" inject="editorService@cb";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
@@ -172,7 +171,7 @@ component extends="baseHandler" {
 		// TODO: Fetch items (only if new and active or was paused and now is active)
 		/*
 		if ( isNew && prc.feed.isActive() || wasPaused && prc.feed.isActive() ) {
-			feedService.fetchItems( prc.feed );
+			feedService.import( prc.feed );
 		}
 		*/
 
@@ -196,36 +195,31 @@ component extends="baseHandler" {
 		
 		event.paramValue( "contentID", "" );
 
-		if ( !len( rc.contentID ) ) {
-			cbMessageBox.warn( "No feeds selected!" );
-			setNextEvent( event=prc.xehFeeds );
-		}
-
-		rc.contentID = listToArray( rc.contentID );
-
-		var messages = [];
-
-		for ( var contentID in rc.contentID ) {
-
-			var feed = feedService.get( contentID );
-
-			if ( isNull( feed ) ) {
-				arrayAppend( messages, "Invalid feed selected: #thisContentID#, so skipped removal." );
-			} else {
-				var title = feed.getTitle();
-				announceInterception( "agadmin_preFeedRemove", { feed=feed } );
-				feedService.deleteContent( feed );
-				announceInterception( "agadmin_postFeedRemove", { contentID=contentID } );
-				arrayAppend( messages, "Feed '#title#' deleted." );
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feed = feedService.get( contentID );
+				if ( isNull( feed ) ) {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+				} else {
+					var title = feed.getTitle();
+					announceInterception( "agadmin_preFeedRemove", { feed=feed } );
+					feedService.deleteContent( feed );
+					announceInterception( "agadmin_postFeedRemove", { contentID=contentID } );
+					arrayAppend( messages, "Feed '#title#' deleted." );
+				}
 			}
+			cbMessageBox.info( messageArray=messages );
+		} else {
+			cbMessageBox.warn( "No feeds selected!" );
 		}
 
-		cbMessageBox.info( messageArray=messages );
 		setNextEvent( prc.xehFeeds );
 
 	}
 
-	function bulkStatus( event, rc, prc ) {
+	function status( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentStatus", "draft" );
@@ -242,7 +236,7 @@ component extends="baseHandler" {
 
 	}
 
-	function bulkState( event, rc, prc ) {
+	function state( event, rc, prc ) {
 		
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentState", "pause" );
@@ -251,6 +245,60 @@ component extends="baseHandler" {
 			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
 			announceInterception( "cbadmin_onEntryStatusUpdate", { contentID=rc.contentID, state=rc.contentState } );
 			cbMessageBox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
+		} else {
+			cbMessageBox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function import( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feed = feedService.get( contentID );
+				if ( isNull( feed ) ) {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+				} else {
+					// TODO: Thread here?
+					feedService.import( feed, prc.oCurrentAuthor );
+					arrayAppend( messages, "Items imported for '#feed.getTitle()#'." );
+				}
+			}
+			cbMessageBox.info( messageArray=messages );
+		} else {
+			cbMessageBox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function resetHits( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+		
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feed = feedService.get( contentID );
+				if ( isNull( feed ) ) {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+				} else {
+					if ( feed.hasStats() ) {
+						feed.getStats().setHits( 0 );
+						feedService.save( feed );
+					}
+					arrayAppend( messages, "Hits reset for '#feed.getTitle()#'." );
+				}
+			}
+			cbMessageBox.info( messageArray=messages );
 		} else {
 			cbMessageBox.warn( "No feeds selected!" );
 		}
@@ -275,6 +323,7 @@ component extends="baseHandler" {
 		}
 		
 		event.renderData( data=data, type="json" );
+
 	}
 
 	private function getUserDefaultEditor( required author ) {

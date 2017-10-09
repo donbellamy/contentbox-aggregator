@@ -17,6 +17,7 @@ component {
 			"ag_general_limit_by_age" = "",
 			"ag_general_limit_by_age_unit" = "days",
 			"ag_general_limit_by_number" = "",
+			"ag_general_default_creator" = "",
 			"ag_general_filter_by_any" = "",
 			"ag_general_filter_by_all" = "",
 			"ag_general_filter_by_none" = "",
@@ -102,7 +103,7 @@ component {
 
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
-		binder.map("itemService@aggregator").to("#moduleMapping#.models.ItemService");
+		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 
 	}
 

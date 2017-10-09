@@ -5,9 +5,6 @@ function setupFeedView( settings ) {
 
 	$contentForm = $("##feedForm");
 	$tableContainer = $("##feedsTableContainer");
-	$tableURL = "#event.buildLink( prc.xehFeedTable )#";
-	$bulkStatusURL = "#event.buildlink( prc.xehFeedBulkStatus )#";
-	$bulkStateURL = "#event.buildlink( prc.xehFeedBulkState )#";
 
 	$("##search").keyup( 
 		_.debounce(
@@ -44,7 +41,7 @@ function contentLoad( criteria ) {
 		showAll : criteria.showAll
 	};
 
-	$tableContainer.load( $tableURL, args, function() {
+	$tableContainer.load( "#event.buildLink( prc.xehFeedTable )#", args, function() {
 		$tableContainer.css( "opacity", 1 );
 		$(this).fadeIn("fast");
 	});
@@ -103,61 +100,45 @@ function getInfoPanelContent( contentID ) {
 	return $( "##infoPanel_" + contentID ).html();
 }
 
-function remove( contentID, id ) {
-	id = typeof id !== "undefined" ? id : "contentID";
-	checkAll( false, id );
+function remove( contentID ) {
 	if ( contentID != null ) {
-		$( "##delete_" + contentID ).removeClass("fa fa-minus-circle").addClass("fa fa-spinner fa-spin");
-		checkByValue( id, contentID );
-	}
-	$contentForm.submit();
-}
-
-function bulkRemove() {
-	$contentForm.submit();
-}
-
-function bulkChangeStatus( status, contentID ) {
-	$contentForm.attr( "action", $bulkStatusURL );
-	$contentForm.find("##contentStatus").val( status );
-	if( contentID != null ) {
 		checkByValue( "contentID", contentID );
 	}
 	$contentForm.submit();
 }
 
-function bulkChangeState( state, contentID ) {
-	$contentForm.attr( "action", $bulkStateURL );
+function changeStatus( status, contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedStatus )#" );
+	$contentForm.find("##contentStatus").val( status );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
+function changeState( state, contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedState )#" );
 	$contentForm.find("##contentState").val( state );
-	if( contentID != null ) {
+	if ( contentID != null ) {
 		checkByValue( "contentID", contentID );
 	}
 	$contentForm.submit();
 }
 
 function resetHits( contentID ) {
-	if( !contentID.length ){ return; }
-	$.post( 
-		"#event.buildLink( prc.xehResetHits )#",
-		{ contentID: contentID }
-	).done( function( data ) {
-		if ( data.error ) {
-			window.alert( "Error Reseting Hits: " + data.messages.join( ',' ) );
-		} else {
-			adminNotifier( "info", data.messages.join( "<br/>" ), 3000 );
-			contentFilter();
-		}
-	});
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedResetHits )#" );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
 }
 
-function resetBulkHits() {
-	var selected = [];
-	$("##contentID:checked").each( function() {
-		selected.push( $( this ).val() );
-	});
-	if( selected.length ) { 
-		resetHits( selected.join( "," ) ); 
+function importFeed( contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedImport )#" );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
 	}
+	$contentForm.submit();
 }
 
 $(document).ready( function() {

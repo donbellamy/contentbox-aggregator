@@ -4,6 +4,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="cbMessageBox" inject="messagebox@cbmessagebox";
 	property name="cbHelper" inject="cbHelper@cb";
 	property name="agHelper" inject="helper@aggregator";
+	property name="authorService" inject="authorService@cb";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
@@ -16,13 +17,13 @@ component extends="coldbox.system.EventHandler" {
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedTable = "#prc.agAdminEntryPoint#.feeds.table";
-		prc.xehFeedBulkStatus = "#prc.agAdminEntryPoint#.feeds.bulkstatus";
-		prc.xehFeedBulkState = "#prc.agAdminEntryPoint#.feeds.bulkstate";
+		prc.xehFeedStatus = "#prc.agAdminEntryPoint#.feeds.status";
+		prc.xehFeedState = "#prc.agAdminEntryPoint#.feeds.state";
 		prc.xehFeedEditor = "#prc.agAdminEntryPoint#.feeds.editor";
 		prc.xehFeedSave = "#prc.agAdminEntryPoint#.feeds.save";
 		prc.xehFeedRemove = "#prc.agAdminEntryPoint#.feeds.remove";
-
-		prc.xehResetHits = "#prc.cbAdminEntryPoint#.content.resetHits";
+		prc.xehFeedImport = "#prc.agAdminEntryPoint#.feeds.import";
+		prc.xehFeedResetHits = "#prc.agAdminEntryPoint#.feeds.resetHits";
 
 		prc.xehFeedItems = "#prc.agAdminEntryPoint#.items";
 
