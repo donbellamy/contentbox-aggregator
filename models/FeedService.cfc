@@ -189,7 +189,11 @@ component extends="BaseService" singleton {
 									feedItem.setDateUpdated( now );
 								}
 
-								feedItem.setpublishedDate( now );
+								if ( feedItem.getDatePublished() GT now ) {
+									feedItem.setpublishedDate( feedItem.getDatePublished() );
+								} else {
+									feedItem.setpublishedDate( now );
+								}
 								if ( arguments.feed.getPublishItems() ) {
 									feedItem.setisPublished( true );
 								} else {
@@ -219,7 +223,9 @@ component extends="BaseService" singleton {
 				// TODO: Log here - Feed empty
 			}
 
-			// TODO: Set feed metadata/overwrite properties?
+			// TODO: Set feed metadata/overwrite properties? a new setting?
+			// TODO: Remove outdated items - limit by age setting
+			// TODO: Remove based on number limit - limit items by number setting
 
 		} catch ( any e ) {
 
