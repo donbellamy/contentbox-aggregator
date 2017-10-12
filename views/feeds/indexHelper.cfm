@@ -49,10 +49,7 @@ function contentLoad( criteria ) {
 }
 
 function contentFilter() {
-	if ( $("##creator").val() != "all" || 
-		$("##category").val() != "all" || 
-		$("##status").val() != "any" || 
-		$("##state").val() != "any" ) {
+	if ( $("##creator").val() != "all" || $("##category").val() != "all" || $("##status").val() != "any" || $("##state").val() != "any" ) {
 		$("##filterBox").addClass("selected");
 	} else {
 		$("##filterBox").removeClass("selected");
@@ -139,6 +136,17 @@ function importFeed( contentID ) {
 		checkByValue( "contentID", contentID );
 	}
 	$contentForm.submit();
+}
+
+function contentPaginate( page ) {
+	contentLoad( {
+		search : $("##search").val(),
+		page : page,
+		creator : $("##creator").val(),
+		category : $("##category").val(),
+		status : $("##status").val(),
+		state : $("##state").val()
+	} );
 }
 
 $(document).ready( function() {

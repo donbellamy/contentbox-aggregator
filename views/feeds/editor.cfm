@@ -271,9 +271,9 @@
 										</tr>
 										<cfif prc.feed.hasChild() >
 											<tr>
-												<th class="col-md-4">Items:</th>
+												<th class="col-md-4">Feed Items:</th>
 												<td class="col-md-8">
-													#prc.feed.getNumberOfChildren()#
+													#prc.feed.getNumberOfChildren()# <!--- TODO: Link to the page (using agHelpe? )--->
 												</td>
 											</tr>
 										</cfif>
@@ -331,6 +331,23 @@
 											column="value",
 											nameColumn="name",
 											selectedValue=prc.feed.getIsActive(),
+											class="form-control input-sm"
+										)#
+									</div>
+								</div>
+								<div class="form-group">
+									#html.label(
+										class="control-label",
+										field="autoPublishItems",
+										content="Publish Feed Items"
+									)#
+									<div class="controls">
+										#html.select(
+											name="autoPublishItems",
+											options=[{name="Yes",value="true"},{name="No",value="false"}],
+											column="value",
+											nameColumn="name",
+											selectedValue=prc.feed.getAutoPublishItems(),
 											class="form-control input-sm"
 										)#
 									</div>

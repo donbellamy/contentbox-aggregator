@@ -3,6 +3,7 @@ component extends="BaseService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
+	property name="log" inject="logbox:logger:{this}";
 
 	FeedService function init() {
 
@@ -97,18 +98,24 @@ component extends="BaseService" singleton {
 
 	}
 
-	// Working out the logic, placing here for now
 	FeedService function import( required Feed feed, required Author author ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		try {
 
-			var feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
+			var threadName = "retrieve_feed_#hash( arguments.feed.getContentID() & now() )#";
+			thread action="run" name="#threadName#" url="#arguments.feed.getUrl()#" {
+				variables.feed = feedReader.retrieveFeed( attributes.url );
+			}
 
-			if ( arrayLen( feed.items ) ) {
+			thread action="join" name="#threadName#" timeout="6000";
 
-				for ( var item IN feed.items ) {
+			//variables.feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
+
+			if ( arrayLen( variables.feed.items ) ) {
+
+				for ( var item IN variables.feed.items ) {
 
 					// Validate title, url and body
 					if ( len( item.title ) && len( item.url ) && len( item.body ) ) {
@@ -165,8 +172,13 @@ component extends="BaseService" singleton {
 								feedItem.setTitle( item.title );
 								feedItem.setSlug( htmlHelper.slugify( item.title ) );
 								feedItem.setCreator( arguments.author );
+
+								// TODO: Rip out image
+								// TODO: Clean html
+								// TODO: Validate feedItem, so add contentversion as last step after validating the body
+
 								feedItem.addNewContentVersion( 
-									content=item.body,
+									content=left( item.body, 8000 ), //TODO: Move this to validate()
 									changelog="Item imported.",
 									author=arguments.author
 								);
@@ -194,19 +206,26 @@ component extends="BaseService" singleton {
 								} else {
 									feedItem.setpublishedDate( now );
 								}
-								if ( arguments.feed.getPublishItems() ) {
+								if ( arguments.feed.getAutoPublishItems() ) {
 									feedItem.setisPublished( true );
 								} else {
 									feedItem.setisPublished( false );
 								}
 
-								feedItem.setMetaData( serializeJSON( item ) );
-
+								feedItem.setMetaInfo( serializeJSON( item ) );
 								feedItem.setParent( arguments.feed );
+
+								try{ 
 
 								feedItemService.save( feedItem );
 
-								// TODO: Log here - successful import
+								} catch( any e ) {
+									log.error("Error saving feed item #arguments.feed.getTitle()# - #feedItem.getTitle()#");
+									//writedump(item);
+									//abort;
+								}
+								
+								// TODO: Log here - item saved
 
 							} else {
 								// TODO: Log here - item already exists
@@ -219,20 +238,23 @@ component extends="BaseService" singleton {
 					}
 				}
 				// TODO: Log here - Feed imported (x items imported for feed)
+				log.info("Feed #arguments.feed.getTitle()# (#arguments.feed.getContentID()#) imported.");
 			} else {
 				// TODO: Log here - Feed empty
 			}
 
-			// TODO: Set feed metadata/overwrite properties? a new setting?
 			// TODO: Remove outdated items - limit by age setting
 			// TODO: Remove based on number limit - limit items by number setting
 
+			// Set metadata, last import date and save
+			structDelete( variables.feed, "items" );
+			arguments.feed.setMetaInfo( serializeJSON( variables.feed ) );
+			arguments.feed.setLastImportedDate( now() );
+			save( arguments.feed );
+
 		} catch ( any e ) {
-
 			// TODO: Log here - Error retrieving feed
-			writedump(e);
-			abort;
-
+			rethrow;
 		}
 
 		return this;

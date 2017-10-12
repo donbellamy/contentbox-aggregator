@@ -29,7 +29,7 @@ component persistent="true"
 		notnull="true"
 		ormtype="timestamp";
 
-	property name="metaData"
+	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
 

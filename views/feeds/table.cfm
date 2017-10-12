@@ -63,7 +63,7 @@
 						<span class="hidden">paused</span>
 					</cfif>
 				</td>
-				<td class="text-center"><span class="badge badge-info">0</span></td><!--- TODO: Number of items --->
+				<td class="text-center"><span class="badge badge-info">#feed.getNumberOfChildren()#</span></td>
 				<td class="text-center"><span class="badge badge-info">#feed.getNumberOfHits()#</span></td>
 				<td class="text-center">
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feed.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
@@ -110,7 +110,6 @@
 </table>
 <cfif prc.feedsCount >
 	<cfif !rc.showAll && prc.feedsCount GT prc.cbSettings.cb_paging_maxrows >
-		<!--- TODO: Test paging --->
 		#prc.oPaging.renderit( foundRows=prc.feedsCount, link=prc.pagingLink, asList=true )#
 	<cfelse>
 		<span class="label label-info">Total Feeds: #prc.feedsCount#</span>

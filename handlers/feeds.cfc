@@ -168,12 +168,9 @@ component extends="baseHandler" {
 
 		feedService.save( prc.feed );
 
-		// TODO: Fetch items (only if new and active or was paused and now is active)
-		/*
 		if ( isNew && prc.feed.isActive() || wasPaused && prc.feed.isActive() ) {
-			feedService.import( prc.feed );
+			importFeed( prc.feed, prc.oCurrentAuthor );
 		}
-		*/
 
 		announceInterception( "agadmin_postFeedSave", {
 			feed=prc.feed,
@@ -265,8 +262,7 @@ component extends="baseHandler" {
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
-					// TODO: Thread here?
-					feedService.import( feed, prc.oCurrentAuthor );
+					importFeed( feed, prc.oCurrentAuthor );
 					arrayAppend( messages, "Items imported for '#feed.getTitle()#'." );
 				}
 			}
@@ -323,6 +319,18 @@ component extends="baseHandler" {
 		}
 		
 		event.renderData( data=data, type="json" );
+
+	}
+
+	private function importFeed( required feed, required author ) {
+
+		// TODO: Fix this so feed imports execute in their own thread
+
+		//var threadName = "import_feed_#hash( arguments.feed.getContentID() & now() )#";
+
+		//thread name="#threadName#" feed="#arguments.feed#" author="#arguments.author#" {
+			feedService.import( arguments.feed, arguments.author );
+		//}
 
 	}
 

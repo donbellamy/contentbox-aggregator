@@ -35,7 +35,7 @@ component persistent="true"
 		default="true"
 		index="idx_isActive";
 
-	property name="publishItems"
+	property name="autoPublishItems"
 		notnull="true"
 		ormtype="boolean"
 		default="true";
@@ -50,11 +50,11 @@ component persistent="true"
 		ormtype="timestamp" 
 		index="idx_stopDate";
 
-	property name="lastImportDate"
+	property name="lastImportedDate"
 		notnull="false"
 		ormtype="timestamp";
 
-	property name="metaData"
+	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
 
