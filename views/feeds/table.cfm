@@ -68,7 +68,6 @@
 				<td class="text-center">
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feed.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feed.getContentID()#" class="hide">
-						<!--- TODO: What to display here? creator, last ran, ? --->
 						<i class="fa fa-user"></i>
 						Created by <a href="mailto:#feed.getCreatorEmail()#">#feed.getCreatorName()#</a> on 
 						#feed.getDisplayCreatedDate()#
@@ -76,6 +75,13 @@
 						<i class="fa fa-calendar"></i> 
 						Last edit by <a href="mailto:#feed.getAuthorEmail()#">#feed.getAuthorName()#</a> on 
 						#feed.getActiveContent().getDisplayCreatedDate()#
+						<br/>
+						<i class="fa fa-rss"></i>
+						<cfif isDate( feed.getLastImportedDate() ) >
+							Last imported on #feed.getDisplayLastImportedDate()#
+						<cfelse>
+							Never imported
+						</cfif>
 					</div>
 					<div class="btn-group btn-group-sm">
 						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="##" title="Feed Actions"><i class="fa fa-cogs fa-lg"></i></a>

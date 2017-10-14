@@ -3,7 +3,6 @@ component extends="BaseService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
-	property name="log" inject="logbox:logger:{this}";
 
 	FeedService function init() {
 
@@ -21,9 +20,7 @@ component extends="BaseService" singleton {
 		string state="any",
 		numeric max=0,
 		numeric offset=0,
-		string sortOrder="",
-		boolean searchActiveContent=true,
-		boolean showInSearch=false
+		string sortOrder=""
 	) {
 
 		var results = {};
@@ -34,11 +31,7 @@ component extends="BaseService" singleton {
 		}
 
 		if ( len( trim( arguments.search ) ) ) {
-			if( arguments.searchActiveContent ) {
-				c.or( c.restrictions.like( "title", "%#arguments.search#%" ), c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
-			} else {
-				c.like( "title", "%#arguments.search#%" );
-			}
+			c.or( c.restrictions.like( "title", "%#arguments.search#%" ), c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
 		}
 
 		if ( arguments.creator NEQ "all" ) {
@@ -111,8 +104,6 @@ component extends="BaseService" singleton {
 
 			thread action="join" name="#threadName#" timeout="6000";
 
-			//variables.feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
-
 			if ( arrayLen( variables.feed.items ) ) {
 
 				for ( var item IN variables.feed.items ) {
@@ -166,63 +157,61 @@ component extends="BaseService" singleton {
 
 							if ( !itemExists ) {
 
-								var feedItem = feedItemService.new();
+								try {
 
-								feedItem.setId( itemId );
-								feedItem.setTitle( item.title );
-								feedItem.setSlug( htmlHelper.slugify( item.title ) );
-								feedItem.setCreator( arguments.author );
+									var feedItem = feedItemService.new();
 
-								// TODO: Rip out image
-								// TODO: Clean html
-								// TODO: Validate feedItem, so add contentversion as last step after validating the body
+									feedItem.setId( itemId );
+									feedItem.setTitle( item.title );
+									feedItem.setSlug( htmlHelper.slugify( item.title ) );
+									feedItem.setCreator( arguments.author );
 
-								feedItem.addNewContentVersion( 
-									content=left( item.body, 8000 ), //TODO: Move this to validate()
-									changelog="Item imported.",
-									author=arguments.author
-								);
+									// TODO: Rip out image
+									// TODO: Clean html
+									// TODO: Validate feedItem, so add contentversion as last step after validating the body
 
-								feedItem.setUrl( item.url );
+									feedItem.addNewContentVersion( 
+										content=left( item.body, 8000 ), //TODO: Move this to validate()
+										changelog="Item imported.",
+										author=arguments.author
+									);
 
-								if ( len( trim( item.author ) ) ) {
-									feedItem.setAuthor( item.author );
-								}
+									feedItem.setUrl( item.url );
 
-								var now = now();
-								if ( isDate( item.datePublished ) ) {
-									feedItem.setDatePublished( item.datePublished );
-								} else {
-									feedItem.setDatePublished( now );
-								}
-								if ( isDate( item.dateUpdated ) ) {
-									feedItem.setDateUpdated( item.dateUpdated );
-								} else {
-									feedItem.setDateUpdated( now );
-								}
+									if ( len( trim( item.author ) ) ) {
+										feedItem.setAuthor( item.author );
+									}
 
-								if ( feedItem.getDatePublished() GT now ) {
-									feedItem.setpublishedDate( feedItem.getDatePublished() );
-								} else {
-									feedItem.setpublishedDate( now );
-								}
-								if ( arguments.feed.getAutoPublishItems() ) {
-									feedItem.setisPublished( true );
-								} else {
-									feedItem.setisPublished( false );
-								}
+									var now = now();
+									if ( isDate( item.datePublished ) ) {
+										feedItem.setDatePublished( item.datePublished );
+									} else {
+										feedItem.setDatePublished( now );
+									}
+									if ( isDate( item.dateUpdated ) ) {
+										feedItem.setDateUpdated( item.dateUpdated );
+									} else {
+										feedItem.setDateUpdated( now );
+									}
 
-								feedItem.setMetaInfo( serializeJSON( item ) );
-								feedItem.setParent( arguments.feed );
+									if ( feedItem.getDatePublished() GT now ) {
+										feedItem.setpublishedDate( feedItem.getDatePublished() );
+									} else {
+										feedItem.setpublishedDate( now );
+									}
+									if ( arguments.feed.getAutoPublishItems() ) {
+										feedItem.setisPublished( true );
+									} else {
+										feedItem.setisPublished( false );
+									}
 
-								try{ 
+									feedItem.setMetaInfo( serializeJSON( item ) );
+									feedItem.setParent( arguments.feed );
 
-								feedItemService.save( feedItem );
+									feedItemService.save( feedItem );
 
 								} catch( any e ) {
-									log.error("Error saving feed item #arguments.feed.getTitle()# - #feedItem.getTitle()#");
-									//writedump(item);
-									//abort;
+									log.error( "Error saving feed item #arguments.feed.getTitle()# - #item.title# - #itemId#", e );
 								}
 								
 								// TODO: Log here - item saved
@@ -253,8 +242,7 @@ component extends="BaseService" singleton {
 			save( arguments.feed );
 
 		} catch ( any e ) {
-			// TODO: Log here - Error retrieving feed
-			rethrow;
+			log.error( "Error importing feed #arguments.feed.getTitle()#.", e );
 		}
 
 		return this;

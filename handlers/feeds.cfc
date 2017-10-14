@@ -324,7 +324,7 @@ component extends="baseHandler" {
 
 	private function importFeed( required feed, required author ) {
 
-		// TODO: Fix this so feed imports execute in their own thread
+		// TODO: Fix this so feed imports execute in their own thread, can probably remove thread stuff in feedservice
 
 		//var threadName = "import_feed_#hash( arguments.feed.getContentID() & now() )#";
 

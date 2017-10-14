@@ -208,6 +208,11 @@ Delete old feed items number - unit
 		return fDate;
 	}
 
+	string function getDisplayLastImportedDate() {
+		var lastImportedDate = getLastImportedDate();
+		return dateFormat( lastImportedDate, "dd mmm yyyy" ) & " " & timeFormat( lastImportedDate, "hh:mm tt" );
+	}
+
 	array function validate() {
 
 		var errors = [];

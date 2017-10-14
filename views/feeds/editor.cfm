@@ -269,6 +269,17 @@
 												#prc.feed.getActiveContent().getDisplayCreatedDate()#
 											</td>
 										</tr>
+										<tr>
+										<tr>
+											<th class="col-md-4">Last Imported On:</th>
+											<td class="col-md-8">
+												<cfif isDate( prc.feed.getLastImportedDate() ) >
+													#prc.feed.getDisplayLastImportedDate()#
+												<cfelse>
+													Never imported
+												</cfif>
+											</td>
+										</tr>
 										<cfif prc.feed.hasChild() >
 											<tr>
 												<th class="col-md-4">Feed Items:</th>
@@ -283,7 +294,6 @@
 												#prc.feed.getNumberOfHits()#
 											</td>
 										</tr>
-										<!--- TODO: Last Import --->
 									</table>
 								</div>
 							</div>

@@ -1,5 +1,4 @@
 <cfoutput>
-<!--- TODO: Write own tag if run into issues here? --->
 #renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
 </cfoutput>
 <script>
