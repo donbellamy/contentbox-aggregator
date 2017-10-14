@@ -78,14 +78,15 @@
 			<div class="panel-body">
 				<div id="filterBox">
 					#html.startForm( name="feedFilterForm", action=prc.xehFeedSearch, class="form-vertical", role="form" )#
-					    <div class="form-group">
-							<label for="creator" class="control-label">Creators:</label>
-							<select name="creator" id="creator" class="form-control input-sm" title="Filter on feed creator">
-								<option value="all" selected="selected">All Creators</option>
-								<cfloop array="#prc.authors#" index="author">
-									<option value="#author.getAuthorID()#">#author.getName()#</option>
-								</cfloop>
-							</select>
+						<div class="form-group">
+							<label for="state" class="control-label">Import State:</label>
+							<div class="controls">
+								<select name="state" id="state" class="form-control input-sm valid">
+									<option value="any">Any State</option>
+									<option value="true">Active</option>
+									<option value="false">Paused</option>
+								</select>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="category" class="control-label">Categories:</label>
@@ -106,16 +107,6 @@
 									<option value="any">Any Status</option>
 									<option value="true">Published</option>
 									<option value="false">Draft</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="state" class="control-label">Import State:</label>
-							<div class="controls">
-								<select name="state" id="state" class="form-control input-sm valid">
-									<option value="any">Any State</option>
-									<option value="true">Active</option>
-									<option value="false">Paused</option>
 								</select>
 							</div>
 						</div>

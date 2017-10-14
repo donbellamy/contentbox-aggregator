@@ -17,7 +17,6 @@ component extends="baseHandler" {
 
 	function index( event, rc, prc ) {
 
-		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
 		event.setView( "feeds/index" );
@@ -28,10 +27,9 @@ component extends="baseHandler" {
 
 		event.paramValue( "page", 1 );
 		event.paramValue( "search", "" );
-		event.paramValue( "creator", "all" );
+		event.paramValue( "state", "any" );
 		event.paramValue( "category", "all" );
 		event.paramValue( "status", "any" );
-		event.paramValue( "state", "any" );
 		event.paramValue( "showAll", false );
 
 		prc.oPaging = getModel( "Paging@cb" );
@@ -40,10 +38,9 @@ component extends="baseHandler" {
 
 		var results = feedService.search(
 			search=rc.search,
-			creator=rc.creator,
+			state=rc.state,
 			category=rc.category,
 			status=rc.status,
-			state=rc.state,
 			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			sortOrder="title ASC"

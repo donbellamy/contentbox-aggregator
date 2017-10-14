@@ -14,10 +14,9 @@ component extends="BaseService" singleton {
 
 	struct function search( 
 		string search="",
-		string creator="all",
+		string state="any",
 		string category="all",
 		string status="any",
-		string state="any",
 		numeric max=0,
 		numeric offset=0,
 		string sortOrder=""
@@ -34,8 +33,8 @@ component extends="BaseService" singleton {
 			c.or( c.restrictions.like( "title", "%#arguments.search#%" ), c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
 		}
 
-		if ( arguments.creator NEQ "all" ) {
-			c.isEq( "creator.authorID", javaCast( "int", arguments.creator ) );
+		if ( arguments.state NEQ "any" ) {
+			c.eq( "isActive", javaCast( "boolean", arguments.state ) );
 		}
 
 		if ( arguments.category NEQ "all" ) {
@@ -48,10 +47,6 @@ component extends="BaseService" singleton {
 
 		if ( arguments.status NEQ "any" ) {
 			c.eq( "isPublished", javaCast( "boolean", arguments.status ) );
-		}
-
-		if ( arguments.state NEQ "any" ) {
-			c.eq( "isActive", javaCast( "boolean", arguments.state ) );
 		}
 
 		if ( !len( arguments.sortOrder ) ) {

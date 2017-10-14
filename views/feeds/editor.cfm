@@ -10,6 +10,9 @@
 		<li><a href="javascript:quickPublish( false )"><i class="fa fa-globe"></i> Publish</a></li>
 		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
+		<cfif prc.feed.isLoaded() >
+			<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Quick Import</a></li>
+		</cfif>
 		<cfif prc.agSettings.ag_portal_enable && prc.feed.isLoaded() >
 			<!---<li><a href="#prc.cbHelper.linkPage( prc.page )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>--->
 			<li><a href="javascript:alert('TODO: Implement open in site');" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>

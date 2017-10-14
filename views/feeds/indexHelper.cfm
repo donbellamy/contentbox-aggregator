@@ -20,24 +20,22 @@ function setupFeedView( settings ) {
 
 function contentLoad( criteria ) {
 
-	if( criteria == undefined ) { criteria = {}; }
-	if( !( "page" in criteria) ) { criteria.page = 1; }
-	if( !( "search" in criteria) ) { criteria.search = ""; }
-	if( !( "creator" in criteria) ) { criteria.creator = "all"; }
-	if( !( "category" in criteria) ) { criteria.category = "all"; }
-	if( !( "status" in criteria) ) { criteria.status = "any"; }
-	if( !( "state" in criteria) ) { criteria.state = "any"; }
-	if( !( "showAll" in criteria) ) { criteria.showAll = false; }
+	if ( criteria == undefined ) { criteria = {}; }
+	if ( !( "page" in criteria) ) { criteria.page = 1; }
+	if ( !( "search" in criteria) ) { criteria.search = ""; }
+	if ( !( "state" in criteria) ) { criteria.state = "any"; }
+	if ( !( "category" in criteria) ) { criteria.category = "all"; }
+	if ( !( "status" in criteria) ) { criteria.status = "any"; }
+	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
 	
 	$tableContainer.css( "opacity", .60 );
 
 	var args = {  
 		page : criteria.page,
 		search : criteria.search,
-		creator : criteria.creator,
+		state : criteria.state,
 		category : criteria.category,
 		status : criteria.status,
-		state : criteria.state,
 		showAll : criteria.showAll
 	};
 
@@ -49,17 +47,16 @@ function contentLoad( criteria ) {
 }
 
 function contentFilter() {
-	if ( $("##creator").val() != "all" || $("##category").val() != "all" || $("##status").val() != "any" || $("##state").val() != "any" ) {
+	if ( $("##state").val() != "any" || $("##category").val() != "all" || $("##status").val() != "any" ) {
 		$("##filterBox").addClass("selected");
 	} else {
 		$("##filterBox").removeClass("selected");
 	}
 	contentLoad({
 		search : $("##search").val(),
-		creator : $("##creator").val(),
+		state : $("##state").val(),
 		category : $("##category").val(),
-		status : $("##status").val(),
-		state : $("##state").val()
+		status : $("##status").val()
 	});
 }
 
@@ -73,10 +70,9 @@ function resetFilter( reload ){
 		contentLoad();
 	}
 	$("##search").val("");
-	$("##creator").val("all");
+	$("##state").val("any");
 	$("##category").val("all");
 	$("##status").val("any");
-	$("##state").val("any");
 	$("##filterBox").removeClass("selected");
 }
 
@@ -142,10 +138,9 @@ function contentPaginate( page ) {
 	contentLoad( {
 		search : $("##search").val(),
 		page : page,
-		creator : $("##creator").val(),
+		state : $("##state").val(),
 		category : $("##category").val(),
-		status : $("##status").val(),
-		state : $("##state").val()
+		status : $("##status").val()
 	} );
 }
 
