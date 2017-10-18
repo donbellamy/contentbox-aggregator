@@ -2,7 +2,9 @@
 <table name="feeds" id="feeds" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'contentID')"/></th>
+			<th id="checkboxHolder" class="{sorter:false} text-center" width="15">
+				<input type="checkbox" onClick="checkAll(this.checked,'contentID')"/>
+			</th>
 			<th>Name</th>
 			<th width="40" class="text-center"><i class="fa fa-globe fa-lg" title="Published Status"></i></th>
 			<th width="40" class="text-center"><i class="fa fa-play-circle fa-lg" title="Import State"></i></th>
@@ -20,7 +22,7 @@
 					class="success"
 				<cfelseif !feed.isContentPublished() >
 					class="warning"
-				<cfelseif feed.getNumberOfActiveVersions() eq 0 >
+				<cfelseif !feed.getNumberOfActiveVersions() >
 					class="danger" title="No active content versions found, please publish one."
 				</cfif>
 			>

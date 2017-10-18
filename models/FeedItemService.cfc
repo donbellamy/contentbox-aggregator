@@ -45,16 +45,12 @@ component extends="BaseService" singleton{
 			c.eq( "isPublished", javaCast( "boolean", arguments.status ) );
 		}
 
-		if ( arguments.state NEQ "any" ) {
-			c.eq( "isActive", javaCast( "boolean", arguments.state ) );
-		}
-
 		if ( !len( arguments.sortOrder ) ) {
 			arguments.sortOrder = "title ASC";
 		}
 
 		results.count = c.count( "contentID" );
-		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
+		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
 			offset=arguments.offset, 
 			max=arguments.max, 
 			sortOrder=arguments.sortOrder, 

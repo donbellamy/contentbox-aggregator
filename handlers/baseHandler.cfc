@@ -25,9 +25,14 @@ component extends="coldbox.system.EventHandler" {
 		prc.xehFeedImport = "#prc.agAdminEntryPoint#.feeds.import";
 		prc.xehFeedResetHits = "#prc.agAdminEntryPoint#.feeds.resetHits";
 
-		prc.xehFeedItems = "#prc.agAdminEntryPoint#.items";
-		prc.xehFeedItemSearch = "#prc.agAdminEntryPoint#.items";
-		prc.xehFeedItemEditor = "#prc.agAdminEntryPoint#.items.editor";
+		prc.xehFeedItems = "#prc.agAdminEntryPoint#.feeditems";
+		prc.xehFeedItemSearch = "#prc.agAdminEntryPoint#.feeditems";
+		prc.xehFeedItemTable = "#prc.agAdminEntryPoint#.feeditems.table";
+		prc.xehFeedItemStatus = "#prc.agAdminEntryPoint#.feeditems.status";
+		prc.xehFeedItemEditor = "#prc.agAdminEntryPoint#.feeditems.editor";
+		prc.xehFeedItemSave = "#prc.agAdminEntryPoint#.feeditems.save";
+		prc.xehFeedItemRemove = "#prc.agAdminEntryPoint#.feeditems.remove";
+		prc.xehFeedItemResetHits = "#prc.agAdminEntryPoint#.feeditems.resetHits";
 
 		prc.xehImportExport = "#prc.agAdminEntryPoint#.importexport";
 

@@ -228,6 +228,7 @@ component extends="BaseService" singleton {
 			}
 
 			// TODO: Remove outdated items - limit by age setting
+			
 			// TODO: Remove based on number limit - limit items by number setting
 
 			// Set metadata, last import date and save

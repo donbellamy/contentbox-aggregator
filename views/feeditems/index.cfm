@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
-		#html.startForm( name="feedForm", action=prc.xehFeedRemove )#
+		#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
 			#html.hiddenField(name="contentStatus", value="" )#
 			#html.hiddenField( name="contentID", value="" )#
 			<div class="panel panel-default">
@@ -34,6 +34,22 @@
 										Bulk Actions <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
+										<!--- TODO: Use builtin or add new permissions? --->
+										<!--- FEEDS_ADMIN --->
+										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
+										<li>
+											<a href="javascript:remove()"
+												class="confirmIt"
+												data-title="Delete Selected Feeds?"
+												data-message="This will delete the feed items, are you sure?">
+												<i class="fa fa-trash-o"></i> Delete Selected
+											</a>
+										</li>
+										<li><a href="javascript:changeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
+										<li><a href="javascript:changeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
+										<!---</cfif>--->
+										<li><a href="javascript:resetHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+										<li><a href="javascript:contentShowAll()"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>
 							</div>
@@ -41,7 +57,7 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<div id="itemsTableContainer">
+					<div id="feedItemsTableContainer">
 						<p class="text-center"><i id="feedLoader" class="fa fa-spinner fa-spin fa-lg icon-4x"></i></p>
 					</div>
 				</div>
@@ -55,7 +71,7 @@
 			</div>
 			<div class="panel-body">
 				<div id="filterBox">
-					#html.startForm( name="itemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
+					#html.startForm( name="feedItemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
 					    <div class="form-group">
 							<label for="creator" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">

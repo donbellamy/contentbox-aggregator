@@ -51,6 +51,11 @@ component persistent="true"
 		return getParent();
 	}
 
+	string function getDisplayDatePublished() {
+		var datePublished = getDatePublished();
+		return dateFormat( datePublished, "dd mmm yyyy" ) & " " & timeFormat( datePublished, "hh:mm tt" );
+	}
+
 	array function validate() {
 
 		var errors = [];

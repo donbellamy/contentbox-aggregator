@@ -131,9 +131,9 @@ component {
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",
-			name="items",
+			name="feeditems",
 			label="Feed Items",
-			href="#menuService.buildModuleLink('aggregator','items')#"
+			href="#menuService.buildModuleLink('aggregator','feeditems')#"
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",

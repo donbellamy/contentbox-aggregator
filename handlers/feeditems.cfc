@@ -18,7 +18,7 @@ component extends="baseHandler" {
 		prc.feeds = feedService.getAll( sortOrder="title" );
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
-		event.setView( "items/index" );
+		event.setView( "feeditems/index" );
 
 	}
 
@@ -42,12 +42,12 @@ component extends="baseHandler" {
 			status=rc.status,
 			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			sortOrder="title ASC"
+			sortOrder="datePublished DESC"
 		);
-		prc.feedItems = results.feeds;
+		prc.feedItems = results.feedItems;
 		prc.feedItemsCount = results.count;
 
-		event.setView( view="items/table", layout="ajax" );
+		event.setView( view="feeditems/table", layout="ajax" );
 
 	}
 
@@ -59,7 +59,7 @@ component extends="baseHandler" {
 			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
 		}
 
-		event.setView( "feeds/editor" );
+		event.setView( "feeditems/editor" );
 
 	}
 
