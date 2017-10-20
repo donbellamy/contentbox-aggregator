@@ -4,7 +4,6 @@ component extends="coldbox.system.EventHandler" {
 	property name="cbMessageBox" inject="messagebox@cbmessagebox";
 	property name="cbHelper" inject="cbHelper@cb";
 	property name="agHelper" inject="helper@aggregator";
-	property name="authorService" inject="authorService@cb";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 

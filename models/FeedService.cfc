@@ -143,12 +143,12 @@ component extends="BaseService" singleton {
 
 						if ( passedFilters ) {
 
-							var itemId = item.id;
-							if ( !len( itemId ) ) {
-								itemId = item.url;
+							var uniqueId = item.id;
+							if ( !len( uniqueId ) ) {
+								uniqueId = item.url;
 							}
 
-							var itemExists = feedItemService.newCriteria().isEq( "id", itemId ).count();
+							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
 
 							if ( !itemExists ) {
 
@@ -156,27 +156,12 @@ component extends="BaseService" singleton {
 
 									var feedItem = feedItemService.new();
 
-									feedItem.setId( itemId );
-									feedItem.setTitle( item.title );
-									feedItem.setSlug( htmlHelper.slugify( item.title ) );
-									feedItem.setCreator( arguments.author );
-
-									// TODO: Rip out image
-									// TODO: Clean html
-									// TODO: Validate feedItem, so add contentversion as last step after validating the body
-
-									feedItem.addNewContentVersion( 
-										content=left( item.body, 8000 ), //TODO: Move this to validate()
-										changelog="Item imported.",
-										author=arguments.author
-									);
-
+									// FeedItem properties
 									feedItem.setUrl( item.url );
-
+									feedItem.setUniqueId( uniqueId );
 									if ( len( trim( item.author ) ) ) {
 										feedItem.setAuthor( item.author );
 									}
-
 									var now = now();
 									if ( isDate( item.datePublished ) ) {
 										feedItem.setDatePublished( item.datePublished );
@@ -188,7 +173,21 @@ component extends="BaseService" singleton {
 									} else {
 										feedItem.setDateUpdated( now );
 									}
+									feedItem.setMetaInfo( serializeJSON( item ) );
+									feedItem.setParent( arguments.feed );
 
+									// BaseContent properties
+									feedItem.setTitle( item.title );
+									feedItem.setSlug( htmlHelper.slugify( item.title ) );
+									feedItem.setCreator( arguments.author );
+									// TODO: Rip out image
+									// TODO: Clean html
+									// TODO: Validate feedItem, so add contentversion as last step after validating the body
+									feedItem.addNewContentVersion( 
+										content=left( item.body, 8000 ), //TODO: Move this to validate()
+										changelog="Item imported.",
+										author=arguments.author
+									);
 									if ( feedItem.getDatePublished() GT now ) {
 										feedItem.setpublishedDate( feedItem.getDatePublished() );
 									} else {
@@ -200,13 +199,11 @@ component extends="BaseService" singleton {
 										feedItem.setisPublished( false );
 									}
 
-									feedItem.setMetaInfo( serializeJSON( item ) );
-									feedItem.setParent( arguments.feed );
-
+									// Save 
 									feedItemService.save( feedItem );
 
 								} catch( any e ) {
-									log.error( "Error saving feed item #arguments.feed.getTitle()# - #item.title# - #itemId#", e );
+									log.error( "Error saving feed item #arguments.feed.getTitle()# - #item.title# - #uniqueId#", e );
 								}
 								
 								// TODO: Log here - item saved

@@ -12,9 +12,10 @@ component persistent="true"
 		notnull="true"
 		length="255";
 
-	property name="id"
+	property name="uniqueId"
 		notnull="true"
-		length="255";
+		length="255"
+		index="idx_uniqueId";
 
 	property name="author"
 		notnull="false"
@@ -34,7 +35,7 @@ component persistent="true"
 		ormtype="text";
 
 	this.constraints["url"] = { required=true, type="url", size="1..255" };
-	this.constraints["id"] = { required=true, size="1..255" };
+	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["author"] = { required=false, size="1..255" };
 	this.constraints["datePublished"] = { required=true, type="date" };
 	this.constraints["dateUpdated"] = { required=false, type="date" };

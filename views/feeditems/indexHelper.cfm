@@ -76,6 +76,47 @@ function resetFilter( reload ){
 	$("##filterBox").removeClass("selected");
 }
 
+function activateInfoPanels() {
+	$(".popovers").popover({
+		html : true,
+		content : function() {
+			return getInfoPanelContent( $(this).attr("data-contentID")  );
+		},
+		trigger : "hover",
+		placement : "left",
+		title : '<i class="fa fa-info-circle"></i> Quick Info',
+		delay : { show: 200, hide: 500 }
+	});
+}
+
+function getInfoPanelContent( contentID ) {
+	return $( "##infoPanel_" + contentID ).html();
+}
+
+function remove( contentID ) {
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
+function changeStatus( status, contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemStatus )#" );
+	$contentForm.find("##contentStatus").val( status );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
+function resetHits( contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemResetHits )#" );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
 function contentPaginate( page ) {
 	contentLoad( {
 		search : $("##search").val(),

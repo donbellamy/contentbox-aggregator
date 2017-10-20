@@ -92,7 +92,9 @@ component {
 				"agadmin_preFeedRemove",
 				"agadmin_postFeedRemove",
 				"agadmin_onFeedStatusUpdate",
-				"agadmin_onFeedStateUpdate"
+				"agadmin_onFeedStateUpdate",
+				"agadmin_preFeedItemRemove",
+				"agadmin_postFeedItemRemove"
 			])
 		};
 
