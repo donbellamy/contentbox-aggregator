@@ -5,14 +5,19 @@ component extends="coldbox.system.EventHandler" {
 	property name="cbHelper" inject="cbHelper@cb";
 	property name="agHelper" inject="helper@aggregator";
 
+	// TODO: rename to baseAdminHandler ?  That way we can move a lot of common things here that wont be used on public side of things
+	// TODO: baseContentHandler ?  Move stuff like slugunique, slugify, defaulteditor, etc... to it
+
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		prc.cbHelper = cbHelper;
 		prc.agHelper = agHelper;
 
+		// TODO: Move to interceptor?
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		prc.agAdminEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
 
+		// TODO: Move to interceptor like cbadmin?  a reason to do so?
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedTable = "#prc.agAdminEntryPoint#.feeds.table";

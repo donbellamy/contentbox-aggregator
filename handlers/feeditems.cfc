@@ -12,8 +12,9 @@ component extends="baseHandler" {
 
 		super.preHandler( argumentCollection=arguments );
 
-		//prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
-		//prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeds.slugUnique";
+		// TODO: Change to use content handler?
+		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
+		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeditems.slugUnique";
 
 	}
 
@@ -59,9 +60,19 @@ component extends="baseHandler" {
 
 		prc.ckHelper = ckHelper;
 
+		prc.markups = editorService.getRegisteredMarkups();
+		prc.editors = editorService.getRegisteredEditorsMap();
+		prc.defaultMarkup = prc.oCurrentAuthor.getPreference( "markup", editorService.getDefaultMarkup() );
+		prc.defaultEditor = getUserDefaultEditor( prc.oCurrentAuthor );
+		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
+
+		prc.categories = categoryService.getAll( sortOrder="category" );
+
 		if ( !structKeyExists( prc, "feedItem" ) ) {
 			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
 		}
+
+		// TODO: since we dont support creating feed items, if null go back to item list
 
 		event.setView( "feeditems/editor" );
 
@@ -71,8 +82,85 @@ component extends="baseHandler" {
 
 		// Editor
 		event.paramValue( "contentID", 0 );
+		event.paramValue( "contentType", "Feed" );
+		event.paramValue( "title", "" );
+		event.paramValue( "slug", "" );
+		event.paramValue( "content", "" );
+		event.paramValue( "excerpt", "" );
+		// Publishing
+		event.paramValue( "isPublished", true );
+		event.paramValue( "publishedDate", now() );
+		event.paramValue( "publishedTime", timeFormat( rc.publishedDate, "HH" ) & ":" & timeFormat( rc.publishedDate, "mm" ) );
+		event.paramValue( "expireDate", "" );
+		event.paramValue( "expireTime", "" );
+		event.paramValue( "changelog", "" );
+		// Categories
+		event.paramValue( "newCategories", "" );
+
+		if ( NOT len( rc.publishedDate ) ) {
+			rc.publishedDate = dateFormat( now() );
+		}
+
+		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
+
+		// TODO: Publishing permissions
+		// FEEDS_ADMIN ?
+		/*if( !prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" ) ){
+			rc.isPublished 	= "false";
+		}*/
 
 		prc.feedItem = feedItemService.get( rc.contentID );
+		var originalSlug = prc.feedItem.getSlug();
+
+		populateModel( prc.feedItem )
+			.addJoinedPublishedtime( rc.publishedTime )
+			.addJoinedExpiredTime( rc.expireTime );
+
+		var errors = prc.feedItem.validate();
+
+		if ( !len( trim( rc.content ) ) ) {
+			arrayAppend( errors, "Please enter some content." );
+		}
+
+		if ( arrayLen( errors ) ) {
+			cbMessageBox.warn( messageArray=errors );
+			return editor( argumentCollection=arguments );
+		}
+
+		// TODO: strip out, not needed?
+		var isNew = ( NOT prc.feedItem.isLoaded() );
+
+		if ( isNew ) {
+			prc.feed.setCreator( prc.oCurrentAuthor );
+		}
+
+		// TODO: Do we care about this?  We will be using excerpt mainly, content is the full content on import
+		prc.feedItem.addNewContentVersion( 
+			content=rc.content, 
+			changelog=rc.changelog, 
+			author=prc.oCurrentAuthor
+		);
+
+		var categories = [];
+		if( len( trim( rc.newCategories ) ) ){
+			categories = categoryService.createCategories( trim( rc.newCategories ) );
+		}
+		categories.addAll( categoryService.inflateCategories( rc ) );
+		prc.feedItem.removeAllCategories().setCategories( categories );
+
+		announceInterception( "agadmin_preFeedItemSave", { // TODO: Add to moduleconfig, also to import routine
+			feedItem=prc.feedItem,
+			isNew=isNew,
+			originalSlug=originalSlug
+		});
+
+		feedItemService.save( prc.feedItem );
+
+		announceInterception( "agadmin_postFeedItemSave", {
+			feedItem=prc.feedItem,
+			isNew=isNew,
+			originalSlug=originalSlug
+		});
 
 		if ( event.isAjax() ) {
 			var rData = { "CONTENTID" = prc.feedItem.getContentID() };
@@ -154,6 +242,22 @@ component extends="baseHandler" {
 		}
 
 		setNextEvent( prc.xehFeedItems );
+
+	}
+
+	// TODO: Move to baseAdminHandler ?  Or use cbadmins?
+	private function getUserDefaultEditor( required author ) {
+
+		var userEditor = arguments.author.getPreference( "editor", editorService.getDefaultEditor() );
+
+		if ( editorService.hasEditor( userEditor ) ) {
+			return userEditor;
+		}
+
+		arguments.author.setPreference( "editor", editorService.getDefaultEditor() );
+		authorService.save( arguments.author );
+
+		return editorService.getDefaultEditor();
 
 	}
 

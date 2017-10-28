@@ -227,6 +227,7 @@ Delete old feed items number - unit
 		filterByNone = left( filterByNone, 255 );
 
 		//TODO: Validate dates?
+		// TODO: excerpt
 
 		if( !len( trim( title ) ) ) { arrayAppend( errors, "Title is required" ); }
 		if( !len( trim( slug ) ) ) { arrayAppend( errors, "Slug is required" ); }

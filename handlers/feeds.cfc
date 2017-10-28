@@ -11,8 +11,12 @@ component extends="baseHandler" {
 		
 		super.preHandler( argumentCollection=arguments );
 
+		// TODO: Change to use content handler?
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
 		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeds.slugUnique";
+
+		//prc.xehSlugify			= "#prc.cbAdminEntryPoint#.entries.slugify";
+		//prc.xehSlugCheck		= "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
 
@@ -74,6 +78,9 @@ component extends="baseHandler" {
 	}
 
 	function save( event, rc, prc ) {
+
+		// TODO: WHAT IS THIS?  its in page and entries
+		// prc.xehAuthorEditorSave = "#prc.cbAdminEntryPoint#.authors.changeEditor";
 
 		// Editor
 		event.paramValue( "contentID", 0 );
@@ -332,6 +339,7 @@ component extends="baseHandler" {
 
 	}
 
+	// TODO: Move to baseAdminHandler ?  Or use cbadmins?
 	private function getUserDefaultEditor( required author ) {
 
 		var userEditor = arguments.author.getPreference( "editor", editorService.getDefaultEditor() );

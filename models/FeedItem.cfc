@@ -8,6 +8,11 @@ component persistent="true"
 	joincolumn="contentID"
 	discriminatorValue="FeedItem" {
 
+	property name="excerpt"
+		notnull="false"
+		ormtype="text"
+		length="8000";
+
 	property name="url"
 		notnull="true"
 		length="255";

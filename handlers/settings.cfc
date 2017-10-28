@@ -1,5 +1,6 @@
 component extends="baseHandler" {
 
+	property name="authorService" inject="authorService@cb";
 	property name="themeService" inject="themeService@cb";
 
 	function index( event, rc, prc ) {

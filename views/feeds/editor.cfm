@@ -60,7 +60,7 @@
 						label="Title:",
 						name="title",
 						bind=prc.feed,
-						maxlength="100",
+						maxlength="100", <!--- TODO: IS this right?  100 chars? --->
 						required="required",
 						title="The title for this feed",
 						class="form-control",
@@ -76,7 +76,8 @@
 							<!--- TODO: Create a helper for agHelper, like getPortalLink() getFeedLink() etc... --->
 							<!--- TODO: fix javascript slug functions --->
 							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/</small>
+							<!--- TODO: Figure out correct url for feeds /news/feeds/slug ? --->
+							<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/</small>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>
@@ -84,7 +85,7 @@
 								#html.textfield(
 									name="slug", 
 									bind=prc.feed, 
-									maxlength="100", 
+									maxlength="100",  <!--- TODO: IS this right?  100 chars? --->
 									class="form-control", 
 									title="The URL permalink for this feed", 
 									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
@@ -228,12 +229,12 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="##accordion" href="##feedinfo">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="##accordion" href="##feedInfo">
 										<i class="fa fa-info-circle fa-lg"></i> Info
 									</a>
 								</h4>
 							</div>
-							<div id="feedinfo" class="panel-collapse collapse in">
+							<div id="feedInfo" class="panel-collapse collapse in">
 								<div class="panel-body">
 									<table class="table table-hover table-condensed table-striped size12">
 										<tr>
@@ -272,7 +273,6 @@
 												#prc.feed.getActiveContent().getDisplayCreatedDate()#
 											</td>
 										</tr>
-										<tr>
 										<tr>
 											<th class="col-md-4">Last Imported On:</th>
 											<td class="col-md-8">
