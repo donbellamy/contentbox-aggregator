@@ -73,8 +73,14 @@ component {
 
 		};
 
+		permissions = [ 
+			{ permission="FEEDS_ADMIN", description="Ability to manage feeds" },
+			{ permission="FEEDITEMS_ADMIN", description="Ability to manage feed items" },
+			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them" },
+			{ permission="FEEDITEMS_EDITOR", description="Ability to manage feed items but not publish them" }
+		];
+
 		routes = [
-			// TODO: Why do routes not work here? - Any plans to fix????
 			{ pattern="/:handler/:action?" }
 		];
 
@@ -110,13 +116,14 @@ component {
 	}
 
 	/**
-	* Fired when the module is registered and activated.
+	* Fired when the module is registered and loaded.
 	*/
 	function onLoad() {
 
 		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 
+		// Register portal namespace
 		registerAggregatorNameSpace();
 
 		// TODO: Add/Check permissions? - they can be passed in the menus below
@@ -156,16 +163,26 @@ component {
 			href="#menuService.buildModuleLink('aggregator','settings')#"
 		);
 
+		// TODO: Why flush cache here?
 		settingService.flushSettingsCache();
 
 	}
 
+	/**
+	* Registers the public namespace
+	*/
 	function registerAggregatorNameSpace() {
 
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
-		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint; // TODO: Better way? 
-		var agEntryPoint = settings.ag_portal_entrypoint; //TODO: Need to check existing settings first?
+		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
+		var agEntryPoint = settings.ag_portal_entrypoint;
+
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		if ( !isNull( setting ) ) {
+			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			agEntryPoint = agSettings.ag_portal_entrypoint;
+		}
 
 		if ( len( cbEntryPoint ) ) {
 			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
@@ -184,6 +201,19 @@ component {
 	}
 
 	/**
+	* Fired when the module is unregistered and unloaded
+	*/
+	function onUnload() {
+
+		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
+		
+		menuService.removeTopMenu("aggregator");
+
+		// TODO: unregister namespace
+
+	}
+
+	/**
 	* Fired when the module is activated by ContentBox
 	*/
 	function onActivate() {
@@ -197,16 +227,29 @@ component {
 		}
 
 		settingService.flushSettingsCache();
-	}
 
-	/**
-	* Fired when the module is unregistered and unloaded
-	*/
-	function onUnload() {
+		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
+		var roleService= controller.getWireBox().getInstance("roleService@cb");
+		var adminRole = roleService.findWhere( criteria = { role="Administrator" } );
+		var editorRole = roleService.findWhere( criteria = { role="Editor" } );
 
-		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
-		
-		menuService.removeTopMenu("aggregator");
+		for ( var item IN permissions ) {
+			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
+			if ( isNull( permission ) ) {
+				permission = permissionService.new();
+				permission.setPermission( item["permission"] );
+				permission.setDescription( item["description"] );
+				permissionService.save( permission );
+				if ( !isNull( editorRole ) && right( item["permission"], 6 ) EQ "EDITOR" ) {
+					editorRole.addPermission( permission );
+					roleService.save( editorRole );
+				}
+				if ( !isNull( adminRole ) ) {
+					adminRole.addPermission( permission );
+					roleService.save( adminRole );
+				}
+			}
+		}
 
 	}
 
@@ -222,9 +265,16 @@ component {
 			settingService.delete( setting );
 		}
 
-		// TODO: unregister namespace
-
 		settingService.flushSettingsCache();
+
+		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
+		
+		for ( var item IN permissions ) {
+			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
+			if ( !isNull( permission ) ) {
+				permissionService.deletePermission( permission.getPermissionID() );
+			}
+		}
 
 	}
 

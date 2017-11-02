@@ -142,8 +142,12 @@ Delete old feed items number - unit
 		return this;
 	}
 
-	array function getItems() {
+	array function getFeedItems() {
 		return getChildren();
+	}
+
+	boolean function hasFeedItem() {
+		return hasChild();
 	}
 
 	boolean function isActive() {

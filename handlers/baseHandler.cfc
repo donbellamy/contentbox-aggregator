@@ -18,6 +18,8 @@ component extends="coldbox.system.EventHandler" {
 		prc.agAdminEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
 
 		// TODO: Move to interceptor like cbadmin?  a reason to do so?
+
+		// Feeds
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedTable = "#prc.agAdminEntryPoint#.feeds.table";
@@ -29,6 +31,7 @@ component extends="coldbox.system.EventHandler" {
 		prc.xehFeedImport = "#prc.agAdminEntryPoint#.feeds.import";
 		prc.xehFeedResetHits = "#prc.agAdminEntryPoint#.feeds.resetHits";
 
+		// Feeditems
 		prc.xehFeedItems = "#prc.agAdminEntryPoint#.feeditems";
 		prc.xehFeedItemSearch = "#prc.agAdminEntryPoint#.feeditems";
 		prc.xehFeedItemTable = "#prc.agAdminEntryPoint#.feeditems.table";

@@ -61,4 +61,14 @@ component extends="BaseService" singleton{
 
 	}
 
+	array function getLatest( required Feed feed, numeric max=5 ) {
+
+		var c = newCriteria()
+			.eq( "parent.contentID", arguments.feed.getContentID() )
+			.list( max=arguments.max, sortOrder="createdDate DESC", asQuery=false );
+
+		return c;
+
+	}
+
 }

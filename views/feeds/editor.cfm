@@ -98,7 +98,7 @@
 					</div>
 					<div class="form-group">
 						<label for="url" class="control-label">
-							URL:
+							Feed URL:
 						</label>
 						<div class="controls">
 							<div class="input-group">
@@ -312,10 +312,38 @@
 							</div>
 							<div id="preview" class="panel-collapse collapse">
 								<div class="panel-body">
-									<!---<cfif prc.feed.hasItems() >
+									<cfif prc.feed.hasFeedItem() >
+										<table class="table table-condensed table-hover table-striped" width="100%">
+											<thead>
+												<tr>
+													<th>Title</th>
+													<th width="100" class="text-center">Date</th>
+												</tr>
+											</thead>
+											<tbody>
+												<cfloop array="#prc.feedItems#" index="feedItem">
+													<tr
+														<cfif feedItem.isExpired() >
+															class="danger"
+														<cfelseif feedItem.isPublishedInFuture() >
+															class="success"
+														<cfelseif !feedItem.isContentPublished() >
+															class="warning"
+														<cfelseif !feedItem.getNumberOfActiveVersions() >
+															class="danger" title="No active content versions found, please publish one."
+														</cfif>
+													>
+														<td>
+															<a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#">#feedItem.getTitle()#</a>
+														</td>
+														<td class="text-center">#feedItem.getDisplayCreatedDate()#</td>
+													</tr>
+												</cfloop>
+											</tbody>
+										</table>
 									<cfelse>
-									</cfif>--->
-									TODO: Finish after adding items and import routine.
+										<p>No items imported.</p>
+									</cfif>
 								</div>
 							</div>
 						</div>

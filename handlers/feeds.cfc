@@ -1,6 +1,7 @@
 component extends="baseHandler" {
 
 	property name="feedService" inject="feedService@aggregator";
+	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="categoryService" inject="categoryService@cb";
 	property name="authorService" inject="authorService@cb";
 	property name="editorService" inject="editorService@cb";
@@ -11,12 +12,8 @@ component extends="baseHandler" {
 		
 		super.preHandler( argumentCollection=arguments );
 
-		// TODO: Change to use content handler?
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
-		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeds.slugUnique";
-
-		//prc.xehSlugify			= "#prc.cbAdminEntryPoint#.entries.slugify";
-		//prc.xehSlugCheck		= "#prc.cbAdminEntryPoint#.content.slugUnique";
+		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
 
@@ -73,14 +70,15 @@ component extends="baseHandler" {
 			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
 		}
 
+		if ( prc.feed.isLoaded() ) {
+			prc.feedItems = feedItemService.getLatest( prc.feed );
+		}
+
 		event.setView( "feeds/editor" );
 
 	}
 
 	function save( event, rc, prc ) {
-
-		// TODO: WHAT IS THIS?  its in page and entries
-		// prc.xehAuthorEditorSave = "#prc.cbAdminEntryPoint#.authors.changeEditor";
 
 		// Editor
 		event.paramValue( "contentID", 0 );
@@ -119,11 +117,9 @@ component extends="baseHandler" {
 
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
-		// TODO: Publishing permissions
-		// FEEDS_ADMIN ?
-		/*if( !prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" ) ){
+		if( !prc.oCurrentAuthor.checkPermission("FEEDS_ADMIN") ) {
 			rc.isPublished 	= "false";
-		}*/
+		}
 
 		prc.feed = feedService.get( rc.contentID );
 		var originalSlug = prc.feed.getSlug();
@@ -310,21 +306,6 @@ component extends="baseHandler" {
 
 	function slugify( event, rc, prc ) {
 		event.renderData( data=trim( HTMLHelper.slugify( rc.slug ) ), type="plain" );
-	}
-
-	function slugUnique( event, rc, prc ) {
-
-		event.paramValue( "slug", "" );
-		event.paramValue( "contentID", "" );
-
-		var data = { "UNIQUE" = false };
-		
-		if ( len( rc.slug ) ) {
-			data[ "UNIQUE" ] = feedService.isSlugUnique( trim( rc.slug ), trim( rc.contentID ) );
-		}
-		
-		event.renderData( data=data, type="json" );
-
 	}
 
 	private function importFeed( required feed, required author ) {

@@ -29,10 +29,19 @@
 							<i class="fa fa-edit"></i> Editor
 						</a>
 					</li>
+					<!--- TODO: History? --->
 				</ul>
 			</div>
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
+					<div class="form-group">
+						<label class="control-label">
+							Feed:
+						</label>
+						<div class="controls">
+							<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#prc.feedItem.getFeed().getContentID()#">#prc.feedItem.getFeed().getTitle()#</a>
+						</div>
+					</div>
 					#html.textfield(
 						label="Title:",
 						name="title",
@@ -84,6 +93,8 @@
 							class="form-control"
 						)#
 					</div>
+					<p>TODO: Copy image to featured image??</p>
+					<p>TODO: Copy from above</p>
 					<div class="form-group">
 						<!--- TODO: Setting to turn on/off excerpts? --->
 						<!---<cfif prc.cbSettings.cb_page_excerpts >--->
@@ -125,6 +136,8 @@
 							<div id="feedItemInfo" class="panel-collapse collapse in">
 								<div class="panel-body">
 									<table class="table table-hover table-condensed table-striped size12">
+										<!--- TODO: What here?  Feed again?--->
+										<!--- DatePublished, author --->
 										<tr>
 											<th class="col-md-4">Created By:</th>
 											<td class="col-md-8">

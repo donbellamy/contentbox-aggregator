@@ -11,10 +11,9 @@ component extends="baseHandler" {
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
-
-		// TODO: Change to use content handler?
+		
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
-		prc.xehSlugCheck = "#prc.agAdminEntryPoint#.feeditems.slugUnique";
+		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
 
@@ -72,9 +71,12 @@ component extends="baseHandler" {
 			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
 		}
 
-		// TODO: since we dont support creating feed items, if null go back to item list
-
-		event.setView( "feeditems/editor" );
+		// We dont support creating feed items
+		if ( !prc.feedItem.isLoaded() ) {
+			setNextEvent( prc.xehFeedItems );
+		} else {
+			event.setView( "feeditems/editor" );
+		}
 
 	}
 
