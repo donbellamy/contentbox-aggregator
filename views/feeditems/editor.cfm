@@ -46,7 +46,7 @@
 						label="Title:",
 						name="title",
 						bind=prc.feedItem,
-						maxlength="100", <!--- TODO: IS this right?  100 chars? --->
+						maxlength="200",
 						required="required",
 						title="The title for this feed item",
 						class="form-control",
@@ -71,7 +71,7 @@
 								#html.textfield(
 									name="slug", 
 									bind=prc.feedItem, 
-									maxlength="100",  <!--- TODO: IS this right?  100 chars? --->
+									maxlength="200",
 									class="form-control", 
 									title="The URL permalink for this feed item", 
 									disabled="#prc.feedItem.isLoaded() && prc.feedItem.getIsPublished() ? 'true' : 'false'#"
@@ -96,6 +96,7 @@
 					<p>TODO: Copy image to featured image??</p>
 					<p>TODO: Copy from above</p>
 					<div class="form-group">
+						<!--- TODO: rename Body and use content for excerpt --->
 						<!--- TODO: Setting to turn on/off excerpts? --->
 						<!---<cfif prc.cbSettings.cb_page_excerpts >--->
 						<!--- TODO: htmleditformat() ?  See above --->
@@ -124,7 +125,6 @@
 						Do we want to support creating feeed items?  
 						Any reason to do so? --->
 					<cfif prc.feedItem.isLoaded() >
-						<!--- Info --->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -185,8 +185,6 @@
 							</div>
 						</div>
 					</cfif>
-					<!--- TODO: Permission? --->
-					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_CATEGORIES" ) >--->
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -221,9 +219,6 @@
 							</div>
 						</div>
 					</div>
-					<!---</cfif>--->
-					<!--- TODO: Permission here? --->
-					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_FEATURED_IMAGE" )>  --->
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -258,7 +253,6 @@
 							</div>
 						</div>
 					</div>
-					<!---</cfif>--->
 				</div>
 			</div>
 		</div>

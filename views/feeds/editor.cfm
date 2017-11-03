@@ -7,10 +7,12 @@
 		<span class="fa fa-cog"></span>
 	</button>
 	<ul class="dropdown-menu">
-		<li><a href="javascript:quickPublish( false )"><i class="fa fa-globe"></i> Publish</a></li>
+		<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+			<li><a href="javascript:quickPublish( false )"><i class="fa fa-globe"></i> Publish</a></li>
+		</cfif>
 		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
-		<cfif prc.feed.isLoaded() >
+		<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) && prc.feed.isLoaded() >
 			<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Quick Import</a></li>
 		</cfif>
 		<cfif prc.agSettings.ag_portal_enable && prc.feed.isLoaded() >
@@ -43,15 +45,18 @@
 							<i class="fa fa-filter"></i> Keyword Filtering
 						</a>
 					</li>
-					<!--- TODO: Custom fields? --->
-					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_HTML_ATTRIBUTES" )>--->
 					<li role="presentation">
 						<a href="##seo" aria-controls="seo" role="tab" data-toggle="tab">
 							<i class="fa fa-cloud"></i> SEO
 						</a>
 					</li>
-					<!---</cfif>--->
-					<!--- TODO: History? --->
+					<cfif prc.feed.isLoaded() >
+						<li role="presentation">
+							<a href="##history" aria-controls="history" role="tab" data-toggle="tab">
+								<i class="fa fa-history"></i> History
+							</a>
+						</li>
+					</cfif>
 				</ul>
 			</div>
 			<div class="panel-body tab-content">
@@ -60,7 +65,7 @@
 						label="Title:",
 						name="title",
 						bind=prc.feed,
-						maxlength="100", <!--- TODO: IS this right?  100 chars? --->
+						maxlength="200",
 						required="required",
 						title="The title for this feed",
 						class="form-control",
@@ -71,13 +76,10 @@
 					<div class="form-group">
 						<label for="slug" class="control-label">
 							Permalink:
-							<!--- TODO: Only show if portal is enabled --->
-							<!--- prc.agHelper.isPortalEnabled() --->
-							<!--- TODO: Create a helper for agHelper, like getPortalLink() getFeedLink() etc... --->
-							<!--- TODO: fix javascript slug functions --->
-							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<!--- TODO: Figure out correct url for feeds /news/feeds/slug ? --->
-							<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/</small>
+							<cfif prc.agSettings.ag_portal_enable >
+								<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
+								<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/</small>
+							</cfif>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>
@@ -85,7 +87,7 @@
 								#html.textfield(
 									name="slug", 
 									bind=prc.feed, 
-									maxlength="100",  <!--- TODO: IS this right?  100 chars? --->
+									maxlength="200",
 									class="form-control", 
 									title="The URL permalink for this feed", 
 									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
@@ -106,7 +108,7 @@
 									type="url",
 									name="url",
 									bind=prc.feed,
-									maxlength="100",
+									maxlength="255",
 									required="required",
 									title="The url for this feed",
 									class="form-control"
@@ -122,8 +124,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<!--- TODO remove preview if portal is off --->
-						<!--- TODO: Write own tag if run into issues here? --->
+						<!--- TODO: Fix preview - Write own tag here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
 							name="content", 
@@ -133,9 +134,6 @@
 						)#
 					</div>
 					<div class="form-group">
-						<!--- TODO: Setting to turn on/off excerpts? --->
-						<!---<cfif prc.cbSettings.cb_page_excerpts >--->
-						<!--- TODO: htmleditformat() ?  See above --->
 						#html.textarea(
 							label="Excerpt:",
 							name="excerpt", 
@@ -143,7 +141,6 @@
 							rows="10",
 							class="form-control"
 						)#
-						<!---</cfif>--->
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="filters">
@@ -212,7 +209,10 @@
 						)#
 					</div>
 				</div>
-				<!--- TODO: History? --->
+				<div role="tabpanel" class="tab-pane" id="history">
+					<!--- TODO: Fix This
+						#prc.versionsViewlet# --->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -225,7 +225,6 @@
 				#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/publishing", args={ content=prc.feed } )#
 				<div id="accordion" class="panel-group accordion" data-stateful="feed-sidebar">
 					<cfif prc.feed.isLoaded() >
-						<!--- Info --->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -287,7 +286,7 @@
 											<tr>
 												<th class="col-md-4">Feed Items:</th>
 												<td class="col-md-8">
-													#prc.feed.getNumberOfChildren()# <!--- TODO: Link to the page (using agHelpe? )--->
+													#prc.feed.getNumberOfChildren()#
 												</td>
 											</tr>
 										</cfif>
@@ -301,7 +300,6 @@
 								</div>
 							</div>
 						</div>
-						<!--- Feed preview --->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
@@ -334,7 +332,11 @@
 														</cfif>
 													>
 														<td>
-															<a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#">#feedItem.getTitle()#</a>
+															<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) >
+																<a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#">#feedItem.getTitle()#</a>
+															<cfelse>
+																#feedItem.getTitle()#
+															</cfif>
 														</td>
 														<td class="text-center">#feedItem.getDisplayCreatedDate()#</td>
 													</tr>
@@ -348,134 +350,133 @@
 							</div>
 						</div>
 					</cfif>
-					<!--- Feed processing --->
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##processing">
-									<i class="fa fa-cogs fa-lg"></i> Feed Processing
-								</a>
-							</h4>
-						</div>
-						<div id="processing" class="panel-collapse collapse">
-							<div class="panel-body">
-								<div class="form-group">
-									#html.label(
-										class="control-label",
-										field="isActive",
-										content="Import State"
-									)#
-									<div class="controls">
-										#html.select(
-											name="isActive",
-											options=[{name="Active",value="true"},{name="Paused",value="false"}],
-											column="value",
-											nameColumn="name",
-											selectedValue=prc.feed.getIsActive(),
-											class="form-control input-sm"
+					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##processing">
+										<i class="fa fa-cogs fa-lg"></i> Feed Processing
+									</a>
+								</h4>
+							</div>
+							<div id="processing" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="isActive",
+											content="Import State"
 										)#
+										<div class="controls">
+											#html.select(
+												name="isActive",
+												options=[{name="Active",value="true"},{name="Paused",value="false"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.feed.getIsActive(),
+												class="form-control input-sm"
+											)#
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									#html.label(
-										class="control-label",
-										field="autoPublishItems",
-										content="Publish Feed Items"
-									)#
-									<div class="controls">
-										#html.select(
-											name="autoPublishItems",
-											options=[{name="Yes",value="true"},{name="No",value="false"}],
-											column="value",
-											nameColumn="name",
-											selectedValue=prc.feed.getAutoPublishItems(),
-											class="form-control input-sm"
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="autoPublishItems",
+											content="Publish Feed Items"
 										)#
-									</div>
-								</div>
-								<div class="form-group">
-									#html.label(
-										class="control-label",
-										field="startDate",
-										content="Start Date"
-									)#
-									<div class="controls row">
-										<div class="col-md-6">
-											<div class="input-group">
-												#html.inputField(
-													size="9", 
-													name="startDate",
-													value=prc.feed.getStartDateForEditor(), 
-													class="form-control datepicker",
-													placeholder="Immediately"
-												)#
-												<span class="input-group-addon">
-													<span class="fa fa-calendar"></span>
-												</span>
-											</div>
-										</div>
-										<cfscript>
-											theTime = "";
-											hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
-											minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
-											if ( len( hour ) && len( minute ) ) {
-												theTime = hour & ":" & minute;
-											}
-										</cfscript>
-										<div class="col-md-6">
-											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-												<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
-												<span class="input-group-addon">
-													<span class="fa fa-clock-o"></span>
-												</span>
-											</div>
+										<div class="controls">
+											#html.select(
+												name="autoPublishItems",
+												options=[{name="Yes",value="true"},{name="No",value="false"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.feed.getAutoPublishItems(),
+												class="form-control input-sm"
+											)#
 										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									#html.label(
-										class="control-label",
-										field="stopDate",
-										content="Stop Date"
-									)#
-									<div class="controls row">
-										<div class="col-md-6">
-											<div class="input-group">
-												#html.inputField(
-													size="9", 
-													name="stopDate",
-													value=prc.feed.getStopDateForEditor(), 
-													class="form-control datepicker",
-													placeholder="Never"
-												)#
-												<span class="input-group-addon">
-													<span class="fa fa-calendar"></span>
-												</span>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="startDate",
+											content="Start Date"
+										)#
+										<div class="controls row">
+											<div class="col-md-6">
+												<div class="input-group">
+													#html.inputField(
+														size="9", 
+														name="startDate",
+														value=prc.feed.getStartDateForEditor(), 
+														class="form-control datepicker",
+														placeholder="Immediately"
+													)#
+													<span class="input-group-addon">
+														<span class="fa fa-calendar"></span>
+													</span>
+												</div>
+											</div>
+											<cfscript>
+												theTime = "";
+												hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
+												minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
+												if ( len( hour ) && len( minute ) ) {
+													theTime = hour & ":" & minute;
+												}
+											</cfscript>
+											<div class="col-md-6">
+												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+													<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
+													<span class="input-group-addon">
+														<span class="fa fa-clock-o"></span>
+													</span>
+												</div>
 											</div>
 										</div>
-										<cfscript>
-											theTime = "";
-											hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
-											minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
-											if ( len( hour ) && len( minute ) ) {
-												theTime = hour & ":" & minute;
-											}
-										</cfscript>
-										<div class="col-md-6">
-											<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-												<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
-												<span class="input-group-addon">
-													<span class="fa fa-clock-o"></span>
-												</span>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="stopDate",
+											content="Stop Date"
+										)#
+										<div class="controls row">
+											<div class="col-md-6">
+												<div class="input-group">
+													#html.inputField(
+														size="9", 
+														name="stopDate",
+														value=prc.feed.getStopDateForEditor(), 
+														class="form-control datepicker",
+														placeholder="Never"
+													)#
+													<span class="input-group-addon">
+														<span class="fa fa-calendar"></span>
+													</span>
+												</div>
+											</div>
+											<cfscript>
+												theTime = "";
+												hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
+												minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
+												if ( len( hour ) && len( minute ) ) {
+													theTime = hour & ":" & minute;
+												}
+											</cfscript>
+											<div class="col-md-6">
+												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+													<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
+													<span class="input-group-addon">
+														<span class="fa fa-clock-o"></span>
+													</span>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!--- TODO: Permission? --->
-					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_CATEGORIES" ) >--->
+					</cfif>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -510,9 +511,6 @@
 							</div>
 						</div>
 					</div>
-					<!---</cfif>--->
-					<!--- TODO: Permission here? --->
-					<!---<cfif prc.oCurrentAuthor.checkPermission( "EDITORS_FEATURED_IMAGE" )>  --->
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -547,7 +545,6 @@
 							</div>
 						</div>
 					</div>
-					<!---</cfif>--->
 				</div>
 			</div>
 		</div>

@@ -32,13 +32,13 @@ component persistent="true"
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
-		default="true"
+		default="false"
 		index="idx_isActive";
 
 	property name="autoPublishItems"
 		notnull="true"
 		ormtype="boolean"
-		default="true";
+		default="false";
 
 	property name="startDate"
 		notnull="false"

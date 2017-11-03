@@ -1,5 +1,4 @@
 <cfoutput>
-
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="h1">
@@ -8,7 +7,6 @@
 		</h1>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
@@ -34,22 +32,20 @@
 										Bulk Actions <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
-										<!--- TODO: Use builtin or add new permissions? --->
-										<!--- FEEDS_ADMIN --->
-										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
-										<li>
-											<a href="javascript:remove()"
-												class="confirmIt"
-												data-title="Delete Selected Feeds?"
-												data-message="This will delete the feed items, are you sure?">
-												<i class="fa fa-trash-o"></i> Delete Selected
-											</a>
-										</li>
-										<li><a href="javascript:changeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
-										<li><a href="javascript:changeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
-										<!---</cfif>--->
-										<li><a href="javascript:resetHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
-										<li><a href="javascript:contentShowAll()"><i class="fa fa-list"></i> Show All</a></li>
+										<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
+											<li>
+												<a href="javascript:remove();"
+													class="confirmIt"
+													data-title="Delete Selected Feeds?"
+													data-message="This will delete the feed items, are you sure?">
+													<i class="fa fa-trash-o"></i> Delete Selected
+												</a>
+											</li>
+											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-ban"></i> Draft Selected</a></li>
+											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
+											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+										</cfif>
+										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>
 							</div>
@@ -111,5 +107,4 @@
 		</div>
 	</div>
 </div>
-
 </cfoutput>

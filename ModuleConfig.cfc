@@ -25,7 +25,7 @@ component {
 			// TODO: Log file name? - add in logbox logging to test
 			// TODO: User Agent?
 
-			"ag_display_title_link" = true,
+			"ag_display_title_link" = "true",
 			"ag_display_author_show" = true,
 			"ag_display_source_show" = true,
 			"ag_display_source_link" = true,
@@ -74,10 +74,12 @@ component {
 		};
 
 		permissions = [ 
-			{ permission="FEEDS_ADMIN", description="Ability to manage feeds" },
-			{ permission="FEEDITEMS_ADMIN", description="Ability to manage feed items" },
-			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them" },
-			{ permission="FEEDITEMS_EDITOR", description="Ability to manage feed items but not publish them" }
+			{ permission="FEEDS_ADMIN", description="Ability to manage feeds", editor="false" },
+			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them", editor="true" },
+			{ permission="FEEDS_IMPORT", description="Ability to import feeds", editor="true" },
+			{ permission="FEED_ITEMS_ADMIN", description="Ability to manage feed items", editor="false" },
+			{ permission="FEED_ITEMS_EDITOR", description="Ability to manage feed items but not publish them", editor="true" },
+			{ permission="AGGREGATOR_SETTINGS", description="Ability to manage the rss aggregator module settings", editor="false" }
 		];
 
 		routes = [
@@ -126,8 +128,6 @@ component {
 		// Register portal namespace
 		registerAggregatorNameSpace();
 
-		// TODO: Add/Check permissions? - they can be passed in the menus below
-
 		menuService.addTopMenu(
 			name="aggregator",
 			label="<i class='fa fa-rss'></i> RSS Aggregator"
@@ -136,14 +136,17 @@ component {
 			topMenu="aggregator",
 			name="feeds",
 			label="Feeds",
-			href="#menuService.buildModuleLink('aggregator','feeds')#"
+			href="#menuService.buildModuleLink('aggregator','feeds')#",
+			permissions="FEEDS_ADMIN,FEEDS_EDITOR"
 		);
 		menuService.addSubMenu(
 			topMenu="aggregator",
 			name="feeditems",
 			label="Feed Items",
-			href="#menuService.buildModuleLink('aggregator','feeditems')#"
+			href="#menuService.buildModuleLink('aggregator','feeditems')#",
+			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
 		);
+		/*
 		menuService.addSubMenu(
 			topMenu="aggregator",
 			name="import",
@@ -156,11 +159,13 @@ component {
 			label="Debugging",
 			href="#menuService.buildModuleLink('aggregator','debugging')#"
 		);
+		*/
 		menuService.addSubMenu(
 			topMenu="aggregator",
 			name="settings",
 			label="Settings",
-			href="#menuService.buildModuleLink('aggregator','settings')#"
+			href="#menuService.buildModuleLink('aggregator','settings')#",
+			permissions="AGGREGATOR_SETTINGS"
 		);
 
 		// TODO: Why flush cache here?
@@ -240,7 +245,7 @@ component {
 				permission.setPermission( item["permission"] );
 				permission.setDescription( item["description"] );
 				permissionService.save( permission );
-				if ( !isNull( editorRole ) && right( item["permission"], 6 ) EQ "EDITOR" ) {
+				if ( !isNull( editorRole ) && item["editor"] ) {
 					editorRole.addPermission( permission );
 					roleService.save( editorRole );
 				}
@@ -268,7 +273,7 @@ component {
 		settingService.flushSettingsCache();
 
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
-		
+
 		for ( var item IN permissions ) {
 			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
 			if ( !isNull( permission ) ) {

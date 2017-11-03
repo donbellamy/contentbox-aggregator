@@ -15,6 +15,12 @@ component extends="baseHandler" {
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
+		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
+			cbMessagebox.error( "You do not have permission to access feed items." );
+			setNextEvent( prc.cbAdminEntryPoint );
+			return;
+		}
+
 	}
 
 	function index( event, rc, prc ) {
@@ -105,11 +111,9 @@ component extends="baseHandler" {
 
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
-		// TODO: Publishing permissions
-		// FEEDS_ADMIN ?
-		/*if( !prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" ) ){
+		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) ) {
 			rc.isPublished 	= "false";
-		}*/
+		}
 
 		prc.feedItem = feedItemService.get( rc.contentID );
 		var originalSlug = prc.feedItem.getSlug();
@@ -244,22 +248,6 @@ component extends="baseHandler" {
 		}
 
 		setNextEvent( prc.xehFeedItems );
-
-	}
-
-	// TODO: Move to baseAdminHandler ?  Or use cbadmins?
-	private function getUserDefaultEditor( required author ) {
-
-		var userEditor = arguments.author.getPreference( "editor", editorService.getDefaultEditor() );
-
-		if ( editorService.hasEditor( userEditor ) ) {
-			return userEditor;
-		}
-
-		arguments.author.setPreference( "editor", editorService.getDefaultEditor() );
-		authorService.save( arguments.author );
-
-		return editorService.getDefaultEditor();
 
 	}
 

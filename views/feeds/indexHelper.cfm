@@ -1,6 +1,5 @@
 <cfoutput>
 <script>
-
 function setupFeedView( settings ) {
 
 	$contentForm = $("##feedForm");
@@ -148,6 +147,5 @@ $(document).ready( function() {
 	setupFeedView();
 	contentLoad();
 });
-
 </script>
 </cfoutput>

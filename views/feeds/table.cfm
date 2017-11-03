@@ -30,15 +30,7 @@
 					<input type="checkbox" name="contentID" id="contentID" value="#feed.getContentID()#" />
 				</td>
 				<td>
-					<!--- TODO: Permissions?
-					<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_EDITOR,ENTRIES_ADMIN" )>--->
-						<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#" title="Edit Feed">#feed.getTitle()#</a>
-					<!---<cfelse>
-						#entry.getTitle()#
-					</cfif>--->
-					<!---<cfif entry.isPasswordProtected()>
-						<i class="fa fa-lock" title="Password Protected Content"></i>
-					</cfif>--->
+					<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#" title="Edit Feed">#feed.getTitle()#</a>
 					<br/><small><i class="fa fa-tag"></i> #feed.getCategoriesList()#</small>
 				</td>
 				<td class="text-center">
@@ -88,23 +80,19 @@
 					<div class="btn-group btn-group-sm">
 						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="##" title="Feed Actions"><i class="fa fa-cogs fa-lg"></i></a>
 						<ul class="dropdown-menu text-left pull-right">
-							<!--- TODO: Permissions ?
-							<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_EDITOR,ENTRIES_ADMIN" )> --->
-								<!---<li><a href="javascript:openCloneDialog('#entry.getContentID()#','#URLEncodedFormat(entry.getTitle())#')"><i class="fa fa-copy fa-lg"></i> Clone</a></li>--->
-								<li><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
-								<!---<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_ADMIN" )>--->
-									<li><a href="javascript:remove('#feed.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed?"><i id="delete_#feed.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
-								<!---</cfif>--->
-							<!---</cfif>--->
-							<!--- TODO: Export ?
-							<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_ADMIN,TOOLS_EXPORT" )>
-								<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.json" target="_blank"><i class="fa fa-download"></i> Export as JSON</a></li>
-								<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.xml" target="_blank"><i class="fa fa-download"></i> Export as XML</a></li>
-							</cfif>--->
-							<!--- TODO: History ?
-							<li><a href="#event.buildLink(prc.xehEntryHistory)#/contentID/#entry.getContentID()#"><i class="fa fa-clock-o fa-lg"></i> History</a></li>--->
-							<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
-							<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
+							<li><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
+							<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+								<li><a href="javascript:remove('#feed.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed?"><i id="delete_#feed.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
+								<!--- TODO: Export ?
+								<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_ADMIN,TOOLS_EXPORT" )>
+									<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.json" target="_blank"><i class="fa fa-download"></i> Export as JSON</a></li>
+									<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.xml" target="_blank"><i class="fa fa-download"></i> Export as XML</a></li>
+								</cfif>--->
+								<!--- TODO: History ?
+								<li><a href="#event.buildLink(prc.xehEntryHistory)#/contentID/#entry.getContentID()#"><i class="fa fa-clock-o fa-lg"></i> History</a></li>--->
+								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
+								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
+							</cfif>
 							<cfif prc.agSettings.ag_portal_enable >
 								<!---<li><a href="#prc.CBHelper.linkEntry(entry)#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>--->
 								<li><a href="javascript:alert('TODO: Implement open in site');" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>

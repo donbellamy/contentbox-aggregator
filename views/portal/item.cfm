@@ -1,1 +1,1 @@
-Item view
+Feed item view

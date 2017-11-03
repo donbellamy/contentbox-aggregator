@@ -1,5 +1,4 @@
 <cfoutput>
-
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="h1">
@@ -8,7 +7,6 @@
 		</h1>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
@@ -35,26 +33,27 @@
 										Bulk Actions <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu">
-										<!--- TODO: Use builtin or add new permissions? --->
-										<!--- FEEDS_ADMIN --->
-										<!---<cfif prc.oCurrentAuthor.checkPermission( "PAGES_ADMIN" )>--->
-										<li>
-											<a href="javascript:remove()"
-												class="confirmIt"
-												data-title="Delete Selected Feeds?"
-												data-message="This will delete the feeds and all imported items, are you sure?">
-												<i class="fa fa-trash-o"></i> Delete Selected
-											</a>
-										</li>
-										<li><a href="javascript:changeStatus('draft')"><i class="fa fa-ban"></i> Draft Selected</a></li>
-										<li><a href="javascript:changeStatus('publish')"><i class="fa fa-check"></i> Publish Selected</a></li>
-										<!---</cfif>--->
-										<li><a href="javascript:changeState('pause')"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
-										<li><a href="javascript:changeState('active')"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
-										<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Import Selected</a></li>
-										<!--- TODO: Hits enabled only when portal is enabled? --->
-										<li><a href="javascript:resetHits()"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
-										<li><a href="javascript:contentShowAll()"><i class="fa fa-list"></i> Show All</a></li>
+										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+											<li>
+												<a href="javascript:remove();"
+													class="confirmIt"
+													data-title="Delete Selected Feeds?"
+													data-message="This will delete the feeds and all imported items, are you sure?">
+													<i class="fa fa-trash-o"></i> Delete Selected
+												</a>
+											</li>
+											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-ban"></i> Draft Selected</a></li>
+											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
+											<li><a href="javascript:changeState('pause');"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
+											<li><a href="javascript:changeState('active');"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
+										</cfif>
+										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) >
+											<li><a href="javascript:importFeed();"><i class="fa fa-rss"></i> Import Selected</a></li>
+										</cfif>
+										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+										</cfif>
+										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>
 								<button class="btn btn-primary btn-sm" onclick="return to( '#event.buildLink( linkTo=prc.xehFeedEditor )#' )">Create Feed</button>
@@ -118,5 +117,4 @@
 		</div>
 	</div>
 </div>
-
 </cfoutput>
