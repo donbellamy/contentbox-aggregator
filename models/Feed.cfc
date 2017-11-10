@@ -8,6 +8,10 @@ component persistent="true"
 	joincolumn="contentID"
 	discriminatorValue="Feed" {
 
+	/* *********************************************************************
+	**							PROPERTIES									
+	********************************************************************* */
+
 	property name="url"
 		notnull="true"
 		length="255";
@@ -16,6 +20,39 @@ component persistent="true"
 		notnull="false"
 		ormtype="text"
 		length="8000";
+
+	property name="isActive"
+		notnull="true"
+		ormtype="boolean"
+		default="false"
+		index="idx_isActive";
+
+	property name="importStartDate"
+		notnull="false"
+		ormtype="timestamp"
+		index="idx_importStartDate";
+
+	property name="importStopDate"
+		notnull="false"
+		ormtype="timestamp" 
+		index="idx_importStopDate";
+
+	property name="itemDefaultStatus"
+		notnull="true"
+		length="10"
+		default="draft";
+
+	property name="itemAgeLimit"
+		notnull="false"
+		ormtype="long";
+
+	property name="itemAgeLimitUnit"
+		notnull="false"
+		length="10";
+
+	property name="itemNumberLimit"
+		notnull="false"
+		ormtype="long";
 
 	property name="filterByAny"
 		notnull="false"
@@ -29,34 +66,22 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	property name="isActive"
-		notnull="true"
-		ormtype="boolean"
-		default="false"
-		index="idx_isActive";
+	/* *********************************************************************
+	**							RELATIONSHIPS									
+	********************************************************************* */
 
-	property name="autoPublishItems"
-		notnull="true"
-		ormtype="boolean"
-		default="false";
-
-	property name="startDate"
-		notnull="false"
-		ormtype="timestamp"
-		index="idx_startDate";
-
-	property name="stopDate"
-		notnull="false"
-		ormtype="timestamp" 
-		index="idx_stopDate";
-
-	property name="lastImportedDate"
-		notnull="false"
-		ormtype="timestamp";
-
-	property name="metaInfo"
-		notnull="false"
-		ormtype="text";
+	// O2M -> Feed imports
+	property name="feedImports"
+		singularName="feedImport"
+		fieldtype="one-to-many"
+		type="array"
+		lazy="extra"
+		batchsize="25"
+		orderby="importedDate"
+		cfc="FeedImport"
+		fkcolumn="FK_feedID"
+		inverse="true"
+		cascade="all-delete-orphan";
 
 	// TODO: Overwrite properties?  From feed? - Same as import feeds
 
@@ -210,6 +235,14 @@ Delete old feed items number - unit
 			fDate &= " " & timeFormat( sDate, "hh:mm tt" );
 		}
 		return fDate;
+	}
+
+	any function getLastImportedDate() {
+		if ( hasFeedImport() ) {
+			return getFeedImports()[1].getImportedDate();
+		} else {
+			return "";
+		}
 	}
 
 	string function getDisplayLastImportedDate() {

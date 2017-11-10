@@ -70,6 +70,7 @@ component extends="baseHandler" {
 		prc.defaultEditor = getUserDefaultEditor( prc.oCurrentAuthor );
 		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
 
+		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
 		if ( !structKeyExists( prc, "feed" ) ) {
@@ -270,7 +271,7 @@ component extends="baseHandler" {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
 					importFeed( feed, prc.oCurrentAuthor );
-					arrayAppend( messages, "Items imported for '#feed.getTitle()#'." );
+					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}
 			cbMessageBox.info( messageArray=messages );

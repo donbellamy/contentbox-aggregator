@@ -13,17 +13,16 @@ component {
 
 		settings = {
 
-			"ag_general_interval" = "60",
-			"ag_general_limit_by_age" = "",
-			"ag_general_limit_by_age_unit" = "days",
-			"ag_general_limit_by_number" = "",
+			"ag_general_interval" = "60", // import_interval
 			"ag_general_default_creator" = "",
-			"ag_general_filter_by_any" = "",
-			"ag_general_filter_by_all" = "",
+			"ag_general_limit_by_age" = "", // item_age_limit
+			"ag_general_limit_by_age_unit" = "days", // item_age_limit_unit
+			"ag_general_limit_by_number" = "", // item_numer_limit
+			"ag_general_filter_by_any" = "", // filter_items_by_any
+			"ag_general_filter_by_all" = "", // 
 			"ag_general_filter_by_none" = "",
 			"ag_general_log_level" = "ERROR",
 			// TODO: Log file name? - add in logbox logging to test
-			// TODO: User Agent?
 
 			"ag_display_title_link" = "true",
 			"ag_display_author_show" = true,
@@ -106,14 +105,16 @@ component {
 			])
 		};
 
-		// TODO: Fix interceptors
+		// TODO: Admin and Portal interceptors
 		interceptors = [
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
 
-		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
+		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
+
+		// TODO: Logging
 
 	}
 

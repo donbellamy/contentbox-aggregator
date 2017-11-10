@@ -12,11 +12,6 @@
 <div class="row">
 	<div class="col-md-12">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
 		#html.startForm( name="settingsForm", action="#prc.xehSettingsSave#", novalidate="novalidate" )#
 			#html.anchor( name="top" )#
 			<div class="panel panel-default">
@@ -61,6 +56,28 @@
 										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
 										</div>--->
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_default_creator",
+											content="Default creator:"
+										)#
+										<div class="controls">
+											<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
+												<cfloop array="#prc.authors#" index="author">
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+												</cfloop>
+											</select>
+										</div>
+										<!--- Selecte default creator used when importing items
+										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
+										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
+										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
+										</div>--->
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -122,25 +139,6 @@
 									<hr>
 									<p><em>Use 0 or leave empty for no limit.</em></p>
 									</div>--->
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_default_creator",
-											content="Default creator:"
-										)#
-										<div class="controls">
-											<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
-												<cfloop array="#prc.authors#" index="author">
-													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
-												</cfloop>
-											</select>
-										</div>
-										<!--- Selecte default creator used when importing items
-										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
-										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
-										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
-										</div>--->
-									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
@@ -154,7 +152,7 @@
 											#html.textArea(
 												name="ag_general_filter_by_any", 
 												value=prc.agSettings.ag_general_filter_by_any,
-												rows="4",
+												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"
 											)#
@@ -170,7 +168,7 @@
 											#html.textArea(
 												name="ag_general_filter_by_all", 
 												value=prc.agSettings.ag_general_filter_by_all,
-												rows="4",
+												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"
 											)#
@@ -186,7 +184,7 @@
 											#html.textArea(
 												name="ag_general_filter_by_none", 
 												value=prc.agSettings.ag_general_filter_by_none, 
-												rows="4",
+												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"
 											)#

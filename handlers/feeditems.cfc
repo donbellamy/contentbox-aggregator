@@ -160,6 +160,7 @@ component extends="baseHandler" {
 			originalSlug=originalSlug
 		});
 
+
 		feedItemService.save( prc.feedItem );
 
 		announceInterception( "agadmin_postFeedItemSave", {

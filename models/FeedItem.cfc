@@ -8,6 +8,10 @@ component persistent="true"
 	joincolumn="contentID"
 	discriminatorValue="FeedItem" {
 
+	/* *********************************************************************
+	**							PROPERTIES									
+	********************************************************************* */
+
 	property name="excerpt"
 		notnull="false"
 		ormtype="text"
@@ -38,6 +42,10 @@ component persistent="true"
 	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
+
+	/* *********************************************************************
+	**							CONSTRAINTS									
+	********************************************************************* */
 
 	this.constraints["url"] = { required=true, type="url", size="1..255" };
 	this.constraints["uniqueId"] = { required=true, size="1..255" };

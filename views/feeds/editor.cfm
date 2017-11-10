@@ -41,8 +41,8 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##filters" aria-controls="filters" role="tab" data-toggle="tab">
-							<i class="fa fa-filter"></i> Keyword Filtering
+						<a href="##options" aria-controls="options" role="tab" data-toggle="tab">
+							<i class="fa fa-gear"></i> Options
 						</a>
 					</li>
 					<li role="presentation">
@@ -117,10 +117,10 @@
 									<i class="fa fa-rss"></i>
 								</a>
 							</div>
-<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_url">
-<p>The URL of the feed source. In most cases, the URL of the site will also work, but for best results we recommend trying to find the URL of the RSS feed.</p>
-<p>Also include the <code>http://</code> prefix in the URL.</p>
-</div> --->
+							<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_url">
+							<p>The URL of the feed source. In most cases, the URL of the site will also work, but for best results we recommend trying to find the URL of the RSS feed.</p>
+							<p>Also include the <code>http://</code> prefix in the URL.</p>
+							</div> --->
 						</div>
 					</div>
 					<div class="form-group">
@@ -143,40 +143,225 @@
 						)#
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="filters">
-					<div class="form-group">
-						#html.textArea(
-							name="filterByAny",
-							label="Contains any of these words/phrases:", 
-							bind=prc.feed,
-							class="form-control",
-							maxlength="255",
-							rows="5",
-							placeholder="Comma delimited list of words or phrases"
-						)#
-					</div>
-					<div class="form-group">
-						#html.textArea(
-							name="filterByAll",
-							label="Contains all of these words/phrases:", 
-							bind=prc.feed,
-							class="form-control",
-							maxlength="255",
-							rows="5",
-							placeholder="Comma delimited list of words or phrases"
-						)#
-					</div>
-					<div class="form-group">
-						#html.textArea(
-							name="filterByNone",
-							label="Contains none of these words/phrases:", 
-							bind=prc.feed,
-							class="form-control",
-							maxlength="255",
-							rows="5",
-							placeholder="Comma delimited list of words or phrases"
-						)#
-					</div>
+				<div role="tabpanel" class="tab-pane" id="options">
+					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+						<fieldset>
+							<legend><i class="fa fa-cogs fa-lg"></i> Feed Processing</legend>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="isActive",
+									content="Import State"
+								)#
+								<div class="controls">
+									#html.select(
+										name="isActive",
+										options=[{name="Active",value="true"},{name="Paused",value="false"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getIsActive(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
+							<!--- TODO: Change this to defaultItemStatus?  Published/Draft --->
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="autoPublishItems",
+									content="Publish Feed Items"
+								)#
+								<div class="controls">
+									#html.select(
+										name="autoPublishItems",
+										options=[{name="Yes",value="true"},{name="No",value="false"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getAutoPublishItems(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="startDate",
+									content="Start Date"
+								)#
+								<div class="controls row">
+									<div class="col-md-6">
+										<div class="input-group">
+											#html.inputField(
+												size="9", 
+												name="startDate",
+												value=prc.feed.getStartDateForEditor(), 
+												class="form-control datepicker",
+												placeholder="Immediately"
+											)#
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									</div>
+									<cfscript>
+										theTime = "";
+										hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
+										minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
+										if ( len( hour ) && len( minute ) ) {
+											theTime = hour & ":" & minute;
+										}
+									</cfscript>
+									<div class="col-md-6">
+										<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+											<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
+											<span class="input-group-addon">
+												<span class="fa fa-clock-o"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="stopDate",
+									content="Stop Date"
+								)#
+								<div class="controls row">
+									<div class="col-md-6">
+										<div class="input-group">
+											#html.inputField(
+												size="9", 
+												name="stopDate",
+												value=prc.feed.getStopDateForEditor(), 
+												class="form-control datepicker",
+												placeholder="Never"
+											)#
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									</div>
+									<cfscript>
+										theTime = "";
+										hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
+										minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
+										if ( len( hour ) && len( minute ) ) {
+											theTime = hour & ":" & minute;
+										}
+									</cfscript>
+									<div class="col-md-6">
+										<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+											<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
+											<span class="input-group-addon">
+												<span class="fa fa-clock-o"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</cfif>
+					<fieldset>
+						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="ag_general_limit_by_age",
+								content="Limit items by age:"
+							)#
+							<div class="controls row">
+								<div class="col-sm-6">
+									#html.inputField(
+										name="ag_general_limit_by_age",
+										type="number",
+										value=prc.agSettings.ag_general_limit_by_age,
+										class="form-control counter",
+										placeholder="No limit",
+										min="0"
+									)#
+								</div>
+								<div class="col-sm-6">
+									#html.select(
+										name="ag_general_limit_by_age_unit",
+										options=prc.limitUnits,
+										selectedValue=prc.agSettings.ag_general_limit_by_age_unit,
+										class="form-control"
+									)#
+								</div>
+							</div>
+							<!--- 
+							<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-by-age">
+							<p>The maximum age allowed for feed items.</p>
+							<hr>
+							<p>Items already imported will be deleted if they eventually exceed this age limit.</p>
+							<p>Also, items in the RSS feed that are already older than this age will not be imported at all.</p>
+							<hr>
+							<p><em>Leave empty for no limit.</em></p>
+							</div>--->
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="ag_general_limit_by_number",
+								content="Limit items by number:"
+							)#
+							<div class="controls">
+								#html.inputField(
+									name="ag_general_limit_by_number",
+									type="number",
+									value=prc.agSettings.ag_general_limit_by_number,
+									class="form-control counter",
+									placeholder="No limit",
+									min="0"
+								)#
+							</div>
+							<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-imported">
+							<p>The maximum number of imported items to keep stored, for feed sources that do not have their own limit.</p>
+							<hr>
+							<p>When new items are imported and the limit for a feed source is exceeded, the oldest feed items for that feed source will be deleted to make room for the new ones.</p>
+							<p>If you already have items imported from this feed source, setting this option now may delete some of your items, in order to comply with the limit.</p>
+							<hr>
+							<p><em>Use 0 or leave empty for no limit.</em></p>
+							</div>--->
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
+						<div class="form-group">
+							#html.textArea(
+								name="filterByAny",
+								label="Contains any of these words/phrases:", 
+								bind=prc.feed,
+								class="form-control",
+								maxlength="255",
+								rows="3",
+								placeholder="Comma delimited list of words or phrases"
+							)#
+						</div>
+						<div class="form-group">
+							#html.textArea(
+								name="filterByAll",
+								label="Contains all of these words/phrases:",
+								bind=prc.feed,
+								class="form-control",
+								maxlength="255",
+								rows="3",
+								placeholder="Comma delimited list of words or phrases"
+							)#
+						</div>
+						<div class="form-group">
+							#html.textArea(
+								name="filterByNone",
+								label="Contains none of these words/phrases:", 
+								bind=prc.feed,
+								class="form-control",
+								maxlength="255",
+								rows="3",
+								placeholder="Comma delimited list of words or phrases"
+							)#
+						</div>
+					</fieldset>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="seo">
 					<div class="form-group">
@@ -346,133 +531,6 @@
 									<cfelse>
 										<p>No items imported.</p>
 									</cfif>
-								</div>
-							</div>
-						</div>
-					</cfif>
-					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##processing">
-										<i class="fa fa-cogs fa-lg"></i> Feed Processing
-									</a>
-								</h4>
-							</div>
-							<div id="processing" class="panel-collapse collapse">
-								<div class="panel-body">
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="isActive",
-											content="Import State"
-										)#
-										<div class="controls">
-											#html.select(
-												name="isActive",
-												options=[{name="Active",value="true"},{name="Paused",value="false"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.feed.getIsActive(),
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="autoPublishItems",
-											content="Publish Feed Items"
-										)#
-										<div class="controls">
-											#html.select(
-												name="autoPublishItems",
-												options=[{name="Yes",value="true"},{name="No",value="false"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.feed.getAutoPublishItems(),
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="startDate",
-											content="Start Date"
-										)#
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9", 
-														name="startDate",
-														value=prc.feed.getStartDateForEditor(), 
-														class="form-control datepicker",
-														placeholder="Immediately"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<cfscript>
-												theTime = "";
-												hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
-												minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
-												if ( len( hour ) && len( minute ) ) {
-													theTime = hour & ":" & minute;
-												}
-											</cfscript>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="stopDate",
-											content="Stop Date"
-										)#
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9", 
-														name="stopDate",
-														value=prc.feed.getStopDateForEditor(), 
-														class="form-control datepicker",
-														placeholder="Never"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<cfscript>
-												theTime = "";
-												hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
-												minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
-												if ( len( hour ) && len( minute ) ) {
-													theTime = hour & ":" & minute;
-												}
-											</cfscript>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

@@ -2,6 +2,7 @@ component extends="BaseService" singleton {
 
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 
 	FeedService function init() {
@@ -50,7 +51,7 @@ component extends="BaseService" singleton {
 		}
 
 		if ( !len( arguments.sortOrder ) ) {
-			arguments.sortOrder = "title ASC";
+			//arguments.sortOrder = "title ASC";
 		}
 
 		results.count = c.count( "contentID" );
@@ -86,6 +87,7 @@ component extends="BaseService" singleton {
 
 	}
 
+	// TODO: Move to FeedImportService
 	FeedService function import( required Feed feed, required Author author ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -99,9 +101,19 @@ component extends="BaseService" singleton {
 
 			thread action="join" name="#threadName#" timeout="6000";
 
+			// Check for items in feed
 			if ( arrayLen( variables.feed.items ) ) {
 
+				// Set an item counter
+				var itemCount = 0;
+
 				for ( var item IN variables.feed.items ) {
+
+					// Create a unique id to track this item
+					var uniqueId = item.id;
+					if ( !len( uniqueId ) ) {
+						uniqueId = item.url;
+					}
 
 					// Validate title, url and body
 					if ( len( item.title ) && len( item.url ) && len( item.body ) ) {
@@ -110,6 +122,7 @@ component extends="BaseService" singleton {
 						var passedFilters = true;
 
 						// Combine filters
+						// TODO: Feed should overwrite settings
 						var filterByAny = listToArray( listAppend( settings.ag_general_filter_by_any, arguments.feed.getFilterByAny() ) );
 						var filterByAll = listToArray( listAppend( settings.ag_general_filter_by_all, arguments.feed.getFilterByAll() ) );
 						var filterByNone = listToArray( listAppend( settings.ag_general_filter_by_none, arguments.feed.getFilterByNone() ) );
@@ -141,19 +154,18 @@ component extends="BaseService" singleton {
 							}
 						}
 
+						// Import only if item passes the filters
 						if ( passedFilters ) {
 
-							var uniqueId = item.id;
-							if ( !len( uniqueId ) ) {
-								uniqueId = item.url;
-							}
-
+							// Check if item already exists
 							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
 
+							// Doesn't exist, so try and import
 							if ( !itemExists ) {
 
 								try {
 
+									// Create feed item
 									var feedItem = feedItemService.new();
 
 									// FeedItem properties
@@ -199,43 +211,73 @@ component extends="BaseService" singleton {
 										feedItem.setisPublished( false );
 									}
 
-									// Save 
+									// Save item
 									feedItemService.save( feedItem );
 
+									// Increase item count
+									itemCount++;
+
 								} catch( any e ) {
-									log.error( "Error saving feed item #arguments.feed.getTitle()# - #item.title# - #uniqueId#", e );
+
+									// Log error
+									log.error( "Error saving item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
+
 								}
 								
-								// TODO: Log here - item saved
+								// Log item saved
+								log.info("Item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
 
 							} else {
-								// TODO: Log here - item already exists
+
+								// Log item exists
+								log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+
 							}
 						} else {
-							// TODO: Log here - item filtered out
+
+							// Log item filtered out
+							log.info("Item ('#uniqueId#') filtered out for feed '#arguments.feed.getTitle()#'.");
+
 						}
+
 					} else {
-						// TODO: Log here - invalid item 
+						
+						// Log invalid item in feed
+						log.warn("Invalid item ('#uniqueId#') found for feed '#arguments.feed.getTitle()#'.");
+
 					}
 				}
-				// TODO: Log here - Feed imported (x items imported for feed)
-				log.info("Feed #arguments.feed.getTitle()# (#arguments.feed.getContentID()#) imported.");
+
+				// Log import
+				log.info("There were #itemCount# item(s) imported for feed '#arguments.feed.getTitle()#'.");
+
 			} else {
-				// TODO: Log here - Feed empty
+				
+				// Log empty feed
+				log.info("There were no items found for feed '#arguments.feed.getTitle()#'.");
+
 			}
 
 			// TODO: Remove outdated items - limit by age setting
-			
+
 			// TODO: Remove based on number limit - limit items by number setting
+			//if ( val( settings.ag_general_limit_by_number ) && 
+			//	arguments.feed.getNumberOfChildren() GT val( settings.ag_general_limit_by_number ) ) {
+			//}
 
 			// Set metadata, last import date and save
-			structDelete( variables.feed, "items" );
-			arguments.feed.setMetaInfo( serializeJSON( variables.feed ) );
-			arguments.feed.setLastImportedDate( now() );
-			save( arguments.feed );
+			// TODO: Change this to use a log table? like cb_feed_log - table,  cbFeedLog - entity name
+			// id, feedId, importDate, itemCount, metaInfo
+			// lastImportDate property of feed comes by selecting top 1 calculated field
+			//structDelete( variables.feed, "items" );
+			//arguments.feed.setMetaInfo( serializeJSON( variables.feed ) );
+			//arguments.feed.setLastImportedDate( now() );
+			//save( arguments.feed );
 
 		} catch ( any e ) {
-			log.error( "Error importing feed #arguments.feed.getTitle()#.", e );
+
+			log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
+
 		}
 
 		return this;

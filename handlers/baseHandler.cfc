@@ -3,7 +3,6 @@ component extends="coldbox.system.EventHandler" {
 	property name="settingService" inject="settingService@cb";
 	property name="cbMessageBox" inject="messagebox@cbmessagebox";
 	property name="cbHelper" inject="cbHelper@cb";
-	property name="agHelper" inject="helper@aggregator";
 
 	// TODO: rename to baseAdminHandler ?  That way we can move a lot of common things here that wont be used on public side of things
 	// TODO: baseContentHandler ?  Move stuff like slugunique, slugify, defaulteditor, etc... to it
@@ -11,7 +10,6 @@ component extends="coldbox.system.EventHandler" {
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		prc.cbHelper = cbHelper;
-		prc.agHelper = agHelper;
 
 		// TODO: Move to interceptor?
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
