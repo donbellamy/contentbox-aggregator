@@ -48,6 +48,7 @@ component extends="baseHandler" {
 
 		settingService.flushSettingsCache();
 
+		//TODO: only do this if different
 		var ses = getInterceptor("SES");
 		var routes = ses.getRoutes();
 		for( var key IN routes ) {

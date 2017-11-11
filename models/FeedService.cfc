@@ -121,32 +121,31 @@ component extends="BaseService" singleton {
 						// Did item pass the filters? Default to true
 						var passedFilters = true;
 
-						// Combine filters
-						// TODO: Feed should overwrite settings
-						var filterByAny = listToArray( listAppend( settings.ag_general_filter_by_any, arguments.feed.getFilterByAny() ) );
-						var filterByAll = listToArray( listAppend( settings.ag_general_filter_by_all, arguments.feed.getFilterByAll() ) );
-						var filterByNone = listToArray( listAppend( settings.ag_general_filter_by_none, arguments.feed.getFilterByNone() ) );
+						// Create filters
+						var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.ag_general_match_any_filter ) );
+						var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.ag_general_match_all_filter ) );
+						var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.ag_general_match_none_filter ) );
 
 						// Do filter checks
-						if ( arrayLen( filterByAny ) ) {
+						if ( arrayLen( matchAnyFilter ) ) {
 							passedFilters = false;
-							for ( var filter IN filterByAny ) {
+							for ( var filter IN matchAnyFilter ) {
 								if ( findNoCase( filter, item.title & " " & item.body ) ) {
 									passedFilters = true;
 									break;
 								}
 							}
 						}
-						if ( arrayLen( filterByAll ) && passedFilters ) {
-							for ( var filter IN filterByAll ) {
+						if ( arrayLen( matchAllFilter ) && passedFilters ) {
+							for ( var filter IN matchAllFilter ) {
 								if ( !findNoCase( filter, item.title & " " & item.body ) ) {
 									passedFilters = false;
 									break;
 								}
 							}
 						}
-						if ( arrayLen( filterByNone ) && passedFilters ) {
-							for ( var filter IN filterByNone ) {
+						if ( arrayLen( matchNoneFilter ) && passedFilters ) {
+							for ( var filter IN matchNoneFilter ) {
 								if ( findNoCase( filter, item.title & " " & item.body ) ) {
 									passedFilters = false;
 									break;
@@ -190,7 +189,7 @@ component extends="BaseService" singleton {
 
 									// BaseContent properties
 									feedItem.setTitle( item.title );
-									feedItem.setSlug( htmlHelper.slugify( item.title ) );
+									feedItem.setSlug( htmlHelper.slugify( item.title ) ); //TODO: Check for unique slug
 									feedItem.setCreator( arguments.author );
 									// TODO: Rip out image
 									// TODO: Clean html
@@ -205,7 +204,7 @@ component extends="BaseService" singleton {
 									} else {
 										feedItem.setpublishedDate( now );
 									}
-									if ( arguments.feed.getAutoPublishItems() ) {
+									if ( arguments.feed.autoPublishItems() ) {
 										feedItem.setisPublished( true );
 									} else {
 										feedItem.setisPublished( false );
@@ -273,6 +272,11 @@ component extends="BaseService" singleton {
 			//arguments.feed.setMetaInfo( serializeJSON( variables.feed ) );
 			//arguments.feed.setLastImportedDate( now() );
 			//save( arguments.feed );
+
+			var feedImport = feedImportService.new();
+			feedImport.setFeed( arguments.feed );
+			feedImport.setMetaInfo( serializeJSON( variables.feed ) );
+			feedImportService.save( feedImport );
 
 		} catch ( any e ) {
 

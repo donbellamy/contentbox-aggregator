@@ -81,15 +81,15 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_limit_by_age",
+											field="ag_general_max_age",
 											content="Limit items by age:"
 										)#
 										<div class="controls row">
 											<div class="col-sm-6">
 												#html.inputField(
-													name="ag_general_limit_by_age",
+													name="ag_general_max_age",
 													type="number",
-													value=prc.agSettings.ag_general_limit_by_age,
+													value=prc.agSettings.ag_general_max_age,
 													class="form-control counter",
 													placeholder="No limit",
 													min="0"
@@ -97,9 +97,9 @@
 											</div>
 											<div class="col-sm-6">
 												#html.select(
-													name="ag_general_limit_by_age_unit",
+													name="ag_general_max_age_unit",
 													options=prc.limitUnits,
-													selectedValue=prc.agSettings.ag_general_limit_by_age_unit,
+													selectedValue=prc.agSettings.ag_general_max_age_unit,
 													class="form-control"
 												)#
 											</div>
@@ -117,14 +117,14 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_limit_by_number",
+											field="ag_general_max_items",
 											content="Limit items by number:"
 										)#
 										<div class="controls">
 											#html.inputField(
-												name="ag_general_limit_by_number",
+												name="ag_general_max_items",
 												type="number",
-												value=prc.agSettings.ag_general_limit_by_number,
+												value=prc.agSettings.ag_general_max_items,
 												class="form-control counter",
 												placeholder="No limit",
 												min="0"
@@ -145,13 +145,13 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_by_any",
+											field="ag_general_match_any_filter",
 											content="Contains any of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_by_any", 
-												value=prc.agSettings.ag_general_filter_by_any,
+												name="ag_general_match_any_filter", 
+												value=prc.agSettings.ag_general_match_any_filter,
 												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"
@@ -161,13 +161,13 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_by_all",
+											field="ag_general_match_all_filter",
 											content="Contains all of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_by_all", 
-												value=prc.agSettings.ag_general_filter_by_all,
+												name="ag_general_match_all_filter", 
+												value=prc.agSettings.ag_general_match_all_filter,
 												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"
@@ -177,13 +177,13 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_filter_by_none",
+											field="ag_general_match_none_filter",
 											content="Contains none of these words/phrases:"
 										)#
 										<div class="controls">
 											#html.textArea(
-												name="ag_general_filter_by_none", 
-												value=prc.agSettings.ag_general_filter_by_none, 
+												name="ag_general_match_none_filter", 
+												value=prc.agSettings.ag_general_match_none_filter, 
 												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases"

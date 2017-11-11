@@ -174,10 +174,10 @@
 								<div class="controls">
 									#html.select(
 										name="autoPublishItems",
-										options=[{name="Yes",value="true"},{name="No",value="false"}],
+										options=[{name="Draft",value="draft"},{name="Published",value="published"}],
 										column="value",
 										nameColumn="name",
-										selectedValue=prc.feed.getAutoPublishItems(),
+										selectedValue=prc.feed.getDefaultStatus(),
 										class="form-control input-sm"
 									)#
 								</div>
@@ -267,15 +267,15 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="ag_general_limit_by_age",
+								field="maxAge",
 								content="Limit items by age:"
 							)#
 							<div class="controls row">
 								<div class="col-sm-6">
 									#html.inputField(
-										name="ag_general_limit_by_age",
+										name="maxAge",
 										type="number",
-										value=prc.agSettings.ag_general_limit_by_age,
+										value=prc.feed.getMaxAge(),
 										class="form-control counter",
 										placeholder="No limit",
 										min="0"
@@ -283,9 +283,9 @@
 								</div>
 								<div class="col-sm-6">
 									#html.select(
-										name="ag_general_limit_by_age_unit",
+										name="maxAgeUnit",
 										options=prc.limitUnits,
-										selectedValue=prc.agSettings.ag_general_limit_by_age_unit,
+										selectedValue=prc.feed.getMaxAgeUnit(),
 										class="form-control"
 									)#
 								</div>
@@ -303,14 +303,14 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="ag_general_limit_by_number",
+								field="maxItems",
 								content="Limit items by number:"
 							)#
 							<div class="controls">
 								#html.inputField(
-									name="ag_general_limit_by_number",
+									name="maxItems",
 									type="number",
-									value=prc.agSettings.ag_general_limit_by_number,
+									value=prc.feed.getMaxItems(),
 									class="form-control counter",
 									placeholder="No limit",
 									min="0"
@@ -330,7 +330,7 @@
 						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 						<div class="form-group">
 							#html.textArea(
-								name="filterByAny",
+								name="matchAnyFilter",
 								label="Contains any of these words/phrases:", 
 								bind=prc.feed,
 								class="form-control",
@@ -341,7 +341,7 @@
 						</div>
 						<div class="form-group">
 							#html.textArea(
-								name="filterByAll",
+								name="matchAllFilter",
 								label="Contains all of these words/phrases:",
 								bind=prc.feed,
 								class="form-control",
@@ -352,7 +352,7 @@
 						</div>
 						<div class="form-group">
 							#html.textArea(
-								name="filterByNone",
+								name="matchNoneFilter",
 								label="Contains none of these words/phrases:", 
 								bind=prc.feed,
 								class="form-control",

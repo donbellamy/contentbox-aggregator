@@ -27,42 +27,42 @@ component persistent="true"
 		default="false"
 		index="idx_isActive";
 
-	property name="importStartDate"
+	property name="startDate"
 		notnull="false"
 		ormtype="timestamp"
-		index="idx_importStartDate";
+		index="idx_startDate";
 
-	property name="importStopDate"
+	property name="stopDate"
 		notnull="false"
 		ormtype="timestamp" 
-		index="idx_importStopDate";
+		index="idx_stopDate";
 
-	property name="itemDefaultStatus"
+	property name="defaultStatus"
 		notnull="true"
 		length="10"
 		default="draft";
 
-	property name="itemAgeLimit"
+	property name="maxAge"
 		notnull="false"
 		ormtype="long";
 
-	property name="itemAgeLimitUnit"
+	property name="maxAgeUnit"
 		notnull="false"
 		length="10";
 
-	property name="itemNumberLimit"
+	property name="maxItems"
 		notnull="false"
 		ormtype="long";
 
-	property name="filterByAny"
+	property name="matchAnyFilter"
 		notnull="false"
 		length="255";
 
-	property name="filterByAll"
+	property name="matchAllFilter"
 		notnull="false"
 		length="255";
 
-	property name="filterByNone"
+	property name="matchNoneFilter"
 		notnull="false"
 		length="255";
 
@@ -179,6 +179,10 @@ Delete old feed items number - unit
 		return getIsActive() && ( !isDate( getStartDate() ) || getStartDate() LTE now() ) && ( !isDate( getStopDate() ) || getStopDate() GTE now() );
 	}
 
+	boolean function autoPublishItems() {
+		return getDefaultStatus() EQ "published";
+	}
+
 	Feed function addStartTime( required string hour, required string minute ) {
 		if ( isDate( getStartDate() ) ) { 
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
@@ -259,9 +263,9 @@ Delete old feed items number - unit
 		title = left( title, 200 );
 		slug = left( slug, 200 );
 
-		filterByAny = left( filterByAny, 255 );
-		filterByAll = left( filterByAll, 255 );
-		filterByNone = left( filterByNone, 255 );
+		matchAnyFilter = left( matchAnyFilter, 255 );
+		matchAllFilter = left( matchAllFilter, 255 );
+		matchNoneFilter = left( matchNoneFilter, 255 );
 
 		//TODO: Validate dates?
 		// TODO: excerpt

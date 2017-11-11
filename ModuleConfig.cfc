@@ -13,14 +13,14 @@ component {
 
 		settings = {
 
-			"ag_general_interval" = "60", // import_interval
+			"ag_general_interval" = "60",
 			"ag_general_default_creator" = "",
-			"ag_general_limit_by_age" = "", // item_age_limit
-			"ag_general_limit_by_age_unit" = "days", // item_age_limit_unit
-			"ag_general_limit_by_number" = "", // item_numer_limit
-			"ag_general_filter_by_any" = "", // filter_items_by_any
-			"ag_general_filter_by_all" = "", // 
-			"ag_general_filter_by_none" = "",
+			"ag_general_max_age" = "",
+			"ag_general_max_age_unit" = "days",
+			"ag_general_max_items" = "",
+			"ag_general_match_any_filter" = "",
+			"ag_general_match_all_filter" = "",
+			"ag_general_match_none_filter" = "",
 			"ag_general_log_level" = "ERROR",
 			// TODO: Log file name? - add in logbox logging to test
 
