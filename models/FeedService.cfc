@@ -118,6 +118,8 @@ component extends="BaseService" singleton {
 					// Validate title, url and body
 					if ( len( item.title ) && len( item.url ) && len( item.body ) ) {
 
+						// TODO: Move this to a function so it can be called in the feeditemcleanup interceptor
+
 						// Did item pass the filters? Default to true
 						var passedFilters = true;
 
@@ -257,26 +259,15 @@ component extends="BaseService" singleton {
 
 			}
 
-			// TODO: Remove outdated items - limit by age setting
-
-			// TODO: Remove based on number limit - limit items by number setting
-			//if ( val( settings.ag_general_limit_by_number ) && 
-			//	arguments.feed.getNumberOfChildren() GT val( settings.ag_general_limit_by_number ) ) {
-			//}
-
-			// Set metadata, last import date and save
-			// TODO: Change this to use a log table? like cb_feed_log - table,  cbFeedLog - entity name
-			// id, feedId, importDate, itemCount, metaInfo
-			// lastImportDate property of feed comes by selecting top 1 calculated field
-			//structDelete( variables.feed, "items" );
-			//arguments.feed.setMetaInfo( serializeJSON( variables.feed ) );
-			//arguments.feed.setLastImportedDate( now() );
-			//save( arguments.feed );
-
+			// Create feed import and save
 			var feedImport = feedImportService.new();
 			feedImport.setFeed( arguments.feed );
 			feedImport.setMetaInfo( serializeJSON( variables.feed ) );
 			feedImportService.save( feedImport );
+
+			// TODO: Handled in interceptor so these can be triggered after settings save, etc...
+			// TODO: Remove outdated items - limit by age setting
+			// TODO: Remove based on number limit - limit items by number setting
 
 		} catch ( any e ) {
 

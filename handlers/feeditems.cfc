@@ -142,8 +142,8 @@ component extends="baseHandler" {
 
 		// TODO: Do we care about this?  We will be using excerpt mainly, content is the full content on import
 		prc.feedItem.addNewContentVersion( 
-			content=rc.content, 
-			changelog=rc.changelog, 
+			content=rc.content,
+			changelog=rc.changelog,
 			author=prc.oCurrentAuthor
 		);
 
@@ -154,12 +154,11 @@ component extends="baseHandler" {
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feedItem.removeAllCategories().setCategories( categories );
 
-		announceInterception( "agadmin_preFeedItemSave", { // TODO: Add to moduleconfig, also to import routine
+		announceInterception( "agadmin_preFeedItemSave", {
 			feedItem=prc.feedItem,
-			isNew=isNew,
+			isNew=isNew, // TODO: Not relevanet
 			originalSlug=originalSlug
 		});
-
 
 		feedItemService.save( prc.feedItem );
 

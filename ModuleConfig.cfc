@@ -94,19 +94,20 @@ component {
 
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([ 
-				"agadmin_preFeedSave",
-				"agadmin_postFeedSave",
-				"agadmin_preFeedRemove",
-				"agadmin_postFeedRemove",
-				"agadmin_onFeedStatusUpdate",
-				"agadmin_onFeedStateUpdate",
-				"agadmin_preFeedItemRemove",
-				"agadmin_postFeedItemRemove"
+				"agadmin_preSettingsSave","agadmin_postSettingsSave",
+				"agadmin_preFeedSave","agadmin_postFeedSave",
+				"agadmin_preFeedRemove","agadmin_postFeedRemove",
+				"agadmin_onFeedStatusUpdate","agadmin_onFeedStateUpdate",
+				"agadmin_preFeedImport","agadmin_postFeedImport",
+				"agadmin_preFeedItemSave","agadmin_postFeedItemSave",
+				"agadmin_preFeedItemRemove","agadmin_postFeedItemRemove",
+				"agadmin_onFeedItemStatusUpdate"
 			])
 		};
 
 		// TODO: Admin and Portal interceptors
 		interceptors = [
+			{ class="#moduleMapping#.models.FeedItemCleanup", name="FeedItemCleanup@aggregator" },
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
 

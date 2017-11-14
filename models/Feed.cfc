@@ -24,7 +24,7 @@ component persistent="true"
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
-		default="false"
+		default="true"
 		index="idx_isActive";
 
 	property name="startDate"
@@ -258,20 +258,20 @@ Delete old feed items number - unit
 
 		var errors = [];
 
-		HTMLKeyWords = left( HTMLKeywords, 160 );
-		HTMLDescription = left( HTMLDescription, 160 );
-		title = left( title, 200 );
-		slug = left( slug, 200 );
+		HTMLKeyWords = trim( left( HTMLKeywords, 160 ) );
+		HTMLDescription = trim( left( HTMLDescription, 160 ) );
+		title = trim( left( title, 200 ) );
+		slug = trim( left( slug, 200 ) );
 
-		matchAnyFilter = left( matchAnyFilter, 255 );
-		matchAllFilter = left( matchAllFilter, 255 );
-		matchNoneFilter = left( matchNoneFilter, 255 );
+		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
+		matchAllFilter = trim( left( matchAllFilter, 255 ) );
+		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
-		//TODO: Validate dates?
+		// TODO: Validate dates?
 		// TODO: excerpt
 
-		if( !len( trim( title ) ) ) { arrayAppend( errors, "Title is required" ); }
-		if( !len( trim( slug ) ) ) { arrayAppend( errors, "Slug is required" ); }
+		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
+		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
 
 		return errors;
 

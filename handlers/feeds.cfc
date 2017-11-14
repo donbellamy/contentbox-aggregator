@@ -248,7 +248,7 @@ component extends="baseHandler" {
 
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
-			announceInterception( "cbadmin_onEntryStatusUpdate", { contentID=rc.contentID, state=rc.contentState } );
+			announceInterception( "agadmin_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
 			cbMessageBox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
 		} else {
 			cbMessageBox.warn( "No feeds selected!" );
@@ -270,7 +270,9 @@ component extends="baseHandler" {
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
+					announceInterception( "agadmin_preFeedImport", { feed=feed } );
 					importFeed( feed, prc.oCurrentAuthor );
+					announceInterception( "agadmin_postFeedImport", { feed=feed } );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}
