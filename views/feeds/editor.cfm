@@ -404,8 +404,8 @@
 															<cfelse>
 																#feedItem.getTitle()#
 															</cfif>
-														</td>
-														<td class="text-center">#feedItem.getDisplayCreatedDate()#</td>
+														</td> 
+														<td class="text-center">#feedItem.getDisplayDatePublished()#</td>
 													</tr>
 												</cfloop>
 											</tbody>

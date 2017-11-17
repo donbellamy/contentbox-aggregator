@@ -93,7 +93,7 @@ component {
 		];
 
 		interceptorSettings = {
-			customInterceptionPoints = arrayToList([ 
+			customInterceptionPoints = arrayToList([
 				"agadmin_preSettingsSave","agadmin_postSettingsSave",
 				"agadmin_preFeedSave","agadmin_postFeedSave",
 				"agadmin_preFeedRemove","agadmin_postFeedRemove",
@@ -106,8 +106,9 @@ component {
 		};
 
 		// TODO: Admin and Portal interceptors
+		// TODO: @contentbox-aggregator ?
 		interceptors = [
-			{ class="#moduleMapping#.models.FeedItemCleanup", name="FeedItemCleanup@aggregator" },
+			{ class="#moduleMapping#.models.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
 

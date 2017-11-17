@@ -30,7 +30,7 @@ component extends="baseHandler" {
 
 	function save( event, rc, prc ) {
 
-		announceInterception( "agadmin_preSettingsSave",{ oldSettings = prc.agSettings, newSettings = rc } );
+		announceInterception( "agadmin_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
 
 		for ( var key IN rc ) {
 			if ( structKeyExists( prc.agSettings, key ) ) {
@@ -58,7 +58,7 @@ component extends="baseHandler" {
 		}
 		ses.setRoutes( routes );
 
-		announceInterception( "agadmin_postSettingsSave" );
+		announceInterception( "agadmin_postSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } ); //TODO: this wont work
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehSettings );

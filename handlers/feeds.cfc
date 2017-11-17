@@ -2,6 +2,7 @@ component extends="baseHandler" {
 
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="categoryService" inject="categoryService@cb";
 	property name="authorService" inject="authorService@cb";
 	property name="editorService" inject="editorService@cb";
@@ -324,7 +325,7 @@ component extends="baseHandler" {
 		//var threadName = "import_feed_#hash( arguments.feed.getContentID() & now() )#";
 
 		//thread name="#threadName#" feed="#arguments.feed#" author="#arguments.author#" {
-			feedService.import( arguments.feed, arguments.author );
+			feedImportService.import( arguments.feed, arguments.author );
 		//}
 
 	}
