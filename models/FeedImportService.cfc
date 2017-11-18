@@ -5,7 +5,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
-	property name="log" inject="logbox:logger:{this}";
+	property name="log" inject="logbox:logger:{this}"; //TODO: Logging correct settings :)
 
 	FeedImportService function init( entityName="cbFeedImport" ) {
 
@@ -44,10 +44,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
 						// Check keyword filters
-						var passesFilters = itemPassesKeywordFilters( arguments.feed, item.title, item.body );
+						//var passesFilters = itemPassesKeywordFilters( arguments.feed, item.title, item.body );
 
 						// Import only if item passes the filters
-						if ( passesFilters ) {
+						//if ( passesFilters ) {
 
 							// Check if item already exists
 							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
@@ -117,7 +117,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 								}
 								
 								// Log item saved
-								log.info("Item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+								if ( log.canInfo() ) {
+									log.info("Item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+								}
 
 							} else {
 
@@ -125,12 +127,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 								log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
 
 							}
-						} else {
+						//} else {
 
 							// Log item filtered out
-							log.info("Item ('#uniqueId#') filtered out for feed '#arguments.feed.getTitle()#'.");
+						//	log.info("Item ('#uniqueId#') filtered out for feed '#arguments.feed.getTitle()#'.");
 
-						}
+						//}
 
 					} else {
 						
@@ -162,7 +164,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		} catch ( any e ) {
 
-			log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
+			if ( log.canError() ) { 
+				log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
+			}
 
 		}
 

@@ -58,7 +58,7 @@ component extends="baseHandler" {
 		}
 		ses.setRoutes( routes );
 
-		announceInterception( "agadmin_postSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } ); //TODO: this wont work
+		announceInterception( "agadmin_postSettingsSave" );
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehSettings );

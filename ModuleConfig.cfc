@@ -107,6 +107,10 @@ component {
 
 		// TODO: Admin and Portal interceptors
 		// TODO: @contentbox-aggregator ?
+		// PortalCacheCleanup
+		// RSSCacheCleanup
+		// AdminRequest
+		// PortalRequest
 		interceptors = [
 			{ class="#moduleMapping#.models.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
@@ -116,7 +120,7 @@ component {
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
 
-		// TODO: Logging
+		// TODO: Logging and changeable by settings
 
 	}
 
