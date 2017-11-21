@@ -43,112 +43,106 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Validate url, title and body
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
-						// Check keyword filters
-						//var passesFilters = itemPassesKeywordFilters( arguments.feed, item.title, item.body );
+						// Check if item already exists
+						var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
 
-						// Import only if item passes the filters
-						//if ( passesFilters ) {
+						// Doesn't exist, so try and import
+						if ( !itemExists ) {
 
-							// Check if item already exists
-							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
+							try {
 
-							// Doesn't exist, so try and import
-							if ( !itemExists ) {
+								// Create feed item
+								var feedItem = feedItemService.new();
 
-								try {
-
-									// Create feed item
-									var feedItem = feedItemService.new();
-
-									// FeedItem properties
-									feedItem.setUrl( item.url );
-									feedItem.setUniqueId( uniqueId );
-									if ( len( trim( item.author ) ) ) {
-										feedItem.setAuthor( item.author );
-									}
-									var now = now();
-									if ( isDate( item.datePublished ) ) {
-										feedItem.setDatePublished( item.datePublished );
-									} else {
-										feedItem.setDatePublished( now );
-									}
-									if ( isDate( item.dateUpdated ) ) {
-										feedItem.setDateUpdated( item.dateUpdated );
-									} else {
-										feedItem.setDateUpdated( now );
-									}
-									feedItem.setMetaInfo( serializeJSON( item ) );
-									feedItem.setParent( arguments.feed );
-
-									// BaseContent properties
-									feedItem.setTitle( item.title );
-									feedItem.setSlug( htmlHelper.slugify( item.title ) );
-									feedItem.setCreator( arguments.author );
-									// TODO: Rip out image
-									// TODO: Clean html
-									// TODO: Validate feedItem, so add contentversion as last step after validating the body
-									feedItem.addNewContentVersion( 
-										content=left( item.body, 8000 ), //TODO: Move this to validate()
-										changelog="Item imported.",
-										author=arguments.author
-									);
-									if ( feedItem.getDatePublished() GT now ) {
-										feedItem.setpublishedDate( feedItem.getDatePublished() );
-									} else {
-										feedItem.setpublishedDate( now );
-									}
-									if ( arguments.feed.autoPublishItems() ) {
-										feedItem.setisPublished( true );
-									} else {
-										feedItem.setisPublished( false );
-									}
-
-									// Save item
-									feedItemService.save( feedItem );
-
-									// Increase item count
-									itemCount++;
-
-								} catch( any e ) {
-
-									// Log error
-									log.error( "Error saving item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
-
+								// FeedItem properties
+								feedItem.setUrl( item.url );
+								feedItem.setUniqueId( uniqueId );
+								if ( len( trim( item.author ) ) ) {
+									feedItem.setAuthor( item.author );
 								}
-								
-								// Log item saved
-								if ( log.canInfo() ) {
-									log.info("Item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+								var now = now();
+								if ( isDate( item.datePublished ) ) {
+									feedItem.setDatePublished( item.datePublished );
+								} else {
+									feedItem.setDatePublished( now );
+								}
+								if ( isDate( item.dateUpdated ) ) {
+									feedItem.setDateUpdated( item.dateUpdated );
+								} else {
+									feedItem.setDateUpdated( now );
+								}
+								feedItem.setMetaInfo( serializeJSON( item ) );
+								feedItem.setParent( arguments.feed );
+
+								// BaseContent properties
+								feedItem.setTitle( item.title );
+								feedItem.setSlug( htmlHelper.slugify( item.title ) );
+								feedItem.setCreator( arguments.author );
+								// TODO: Rip out image
+								// TODO: Clean html
+								// TODO: Validate feedItem, so add contentversion as last step after validating the body
+								feedItem.addNewContentVersion( 
+									content=left( item.body, 8000 ), //TODO: Move this to validate()
+									changelog="Item imported.",
+									author=arguments.author
+								);
+								if ( feedItem.getDatePublished() GT now ) {
+									feedItem.setpublishedDate( feedItem.getDatePublished() );
+								} else {
+									feedItem.setpublishedDate( now );
+								}
+								if ( arguments.feed.autoPublishItems() ) {
+									feedItem.setisPublished( true );
+								} else {
+									feedItem.setisPublished( false );
 								}
 
-							} else {
+								// Save item
+								feedItemService.save( feedItem );
 
-								// Log item exists
-								log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+								// Increase item count
+								itemCount++;
+
+							} catch( any e ) {
+
+								// Log error
+								log.error( "Error saving item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 
 							}
-						//} else {
+							
+							// Log item saved
+							if ( log.canInfo() ) {
+								log.info("Item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+							}
 
-							// Log item filtered out
-						//	log.info("Item ('#uniqueId#') filtered out for feed '#arguments.feed.getTitle()#'.");
+						} else {
 
-						//}
+							// Log item exists
+							log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+
+						}
 
 					} else {
 						
 						// Log invalid item in feed
-						log.warn("Invalid item ('#uniqueId#') found for feed '#arguments.feed.getTitle()#'.");
+						if ( log.canWarn() ) {
+							log.warn("Invalid item ('#uniqueId#') found for feed '#arguments.feed.getTitle()#'.");
+						}
 
 					}
 				}
 
 				// Log import
-				log.info("There were #itemCount# item(s) imported for feed '#arguments.feed.getTitle()#'.");
+				if ( log.canInfo() ) {
+					log.info("There were #itemCount# item(s) imported for feed '#arguments.feed.getTitle()#'.");
+				}
 
 			} else {
 				
 				// Log empty feed
-				log.info("There were no items found for feed '#arguments.feed.getTitle()#'.");
+				if ( log.canInfo() ) {
+					log.info("There were no items found for feed '#arguments.feed.getTitle()#'.");
+				}
 
 			}
 
@@ -157,10 +151,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			feedImport.setFeed( arguments.feed );
 			feedImport.setMetaInfo( serializeJSON( variables.feed ) );
 			save( feedImport );
-
-			// TODO: Handled in interceptor so these can be triggered after settings save, etc...
-			// TODO: Remove outdated items - limit by age setting
-			// TODO: Remove based on number limit - limit items by number setting
 
 		} catch ( any e ) {
 
