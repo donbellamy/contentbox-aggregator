@@ -21,13 +21,12 @@ component extends="coldbox.system.Interceptor" {
 
 	private function doFeedItemCleanup( any feed ) {
 
-		var feeds = [];
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		if ( structKeyExists( arguments, "feed" ) ) {
-			arrayAppend( feeds, arguments.feed );
+			var feeds = [ arguments.feed ];
 		} else {
-			feeds = feedService.list( asQuery=false );
+			var feeds = feedService.list( asQuery=false );
 		}
 
 		// Loop over feeds
@@ -41,62 +40,126 @@ component extends="coldbox.system.Interceptor" {
 			// Filter out if any filters exist
 			if ( len( matchAnyFilter ) || len( matchAllFilter ) || len( matchNoneFilter ) ) {
 
-				// Query items that do not match any keywords
-				// to match any - any title/content LIKE keywords
-				// to not match any - any title/content !LIKE keywords
-				if ( len( matchAnyFilter ) ) {
-					var hql = "select fi from cbFeedItem fi inner join fi.activeContent ac where fi.parent = :parent and ( ";
-					var params = { parent=feed };
-					var count = 1;
-					for ( var keyword IN matchAnyFilter ) {
-						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
-						params["keyword#count#"] = "%#trim(keyword)#%";
-						if ( arrayLen( matchAnyFilter ) GT count ) hql &= " and ";
-						count++;
-					}
-					hql &= " )";
-					var results = feedItemService.executeQuery( query=hql, params=params );
-					writedump(params);
-					writedump(hql);
-					writedump(results);
-					abort;
-				}
-		
-
-				// Query items that do not match all keywords
-				// to match all - 
 				/*
-				if ( len( matchAllFilter ) ) {
-					var hql = "select fi from cbFeedItem fi inner join fi.activeContent ac where fi.parent = :parent and ( ";
-					var params = { parent=feed };
-					var count = 1;
-					for ( var keyword IN matchAnyFilter ) {
-					for ( var keyword IN matchAnyFilter ) {
-						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
-						params["keyword#count#"] = "%#trim(keyword)#%";
-						if ( arrayLen( matchAnyFilter ) GT count ) hql &= " and ";
-						count++;
-					}
-					}
-					hql &= " )";
-					var results = feedItemService.executeQuery( query=hql, params=params );
-					writedump(results);
-					abort;
-				}
+					// Grab items that match any keyword
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( 
+						( title LIKE :keyword or content LIKE :keyword )
+						OR ( title LIKE :keyword1 or content LIKE :keyword1 ) 
+					)
+					// Grab items that dont match any keyword
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( title NOT LIKE :keyword and content NOT LIKE :keyword )
+					AND ( title NOT LIKE :keyword1 and content NOT LIKE :keyword1 )
 				*/
 
-				// Query items that match none of the keywords
-				if ( len( matchNoneFilter ) ) {}
+				if ( len( matchAnyFilter ) ) {
+					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
+					var params = { parent=feed };
+					var count = 1;
+					for ( var keyword IN matchAnyFilter ) {
+						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
+						params["keyword#count#"] = "%#trim(keyword)#%";
+						if ( arrayLen( matchAnyFilter ) GT count ) hql &= " and ";
+						count++;
+					}
+					hql &= " )";
+					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					for ( feedItem IN feedItems ) {
+						feedItemService.deleteContent( feedItem );
+						// TODO: log this?
+					}
+				}
 
-				// Loop over results and delete matching feed items
+				/*
+					// Grab items that match all keywords
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( title LIKE :keyword or content LIKE :keyword )
+					AND ( title LIKE :keyword1 or content LIKE :keyword1 )
+					AND ( title LIKE :keyword2 or content LIKE :keyword2 )
+					// Grab items that dont match all keywords
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( 
+						( title NOT LIKE :keyword and content NOT LIKE :keyword )
+						OR ( title NOT LIKE :keyword1 and content NOT LIKE :keyword1 )
+						OR ( title NOT LIKE :keyword2 and content NOT LIKE :keyword2 )
+					)
+				*/
 
-					// Log removed feed item
+				if ( len( matchAllFilter ) ) {
+					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
+					var params = { parent=feed };
+					var count = 1;
+					for ( var keyword IN matchAllFilter ) {
+						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
+						params["keyword#count#"] = "%#trim(keyword)#%";
+						if ( arrayLen( matchAllFilter ) GT count ) hql &= " or ";
+						count++;
+					}
+					hql &= " )";
+					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					for ( feedItem IN feedItems ) {
+						feedItemService.deleteContent( feedItem );
+						// TODO: log this?
+					}
+				}
+
+				/*
+					// Grab items that match none of the keywords 
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( title NOT LIKE :keyword and content NOT LIKE :keyword )
+					AND ( title NOT LIKE :keyword1 and content NOT LIKE :keyword1 )
+					AND ( title NOT LIKE :keyword2 and content NOT LIKE :keyword2 )
+
+					// Grab items that dont match all keywords
+					SELECT * 
+					FROM content 
+					WHERE parent = :parent
+					AND ( 
+						( title LIKE :keyword or content LIKE :keyword )
+						OR ( title LIKE :keyword1 or content LIKE :keyword1 )
+						OR ( title LIKE :keyword2 or content LIKE :keyword2 )
+					)
+				*/
+
+				if ( len( matchNoneFilter ) ) {
+					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
+					var params = { parent=feed };
+					var count = 1;
+					for ( var keyword IN matchNoneFilter ) {
+						hql &= "( fi.title like :keyword#count# or ac.content like :keyword#count# )";
+						params["keyword#count#"] = "%#trim(keyword)#%";
+						if ( arrayLen( matchNoneFilter ) GT count ) hql &= " or ";
+						count++;
+					}
+					hql &= " )";
+					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					for ( feedItem IN feedItems ) {
+						feedItemService.deleteContent( feedItem );
+						// TODO: log this?
+					}
+				}
 
 			}
 
 			// Max age
 
 			// Max items
+			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_general_max_items );
+			if ( feed.getNumberOfFeedItems() GT maxItems ) {
+
+			}
+
 
 		}
 

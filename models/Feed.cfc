@@ -175,6 +175,10 @@ Delete old feed items number - unit
 		return hasChild();
 	}
 
+	numeric function getNumberOfFeedItems() {
+		return getNumberOfChildren();
+	}
+
 	boolean function isActive() {
 		return getIsActive() && ( !isDate( getStartDate() ) || getStartDate() LTE now() ) && ( !isDate( getStopDate() ) || getStopDate() GTE now() );
 	}

@@ -65,7 +65,7 @@ component extends="BaseService" singleton {
 
 		var c = newCriteria()
 			.eq( "parent.contentID", arguments.feed.getContentID() )
-			.list( max=arguments.max, sortOrder="createdDate DESC", asQuery=false );
+			.list( max=arguments.max, sortOrder="datePublished DESC", asQuery=false );
 
 		return c;
 
