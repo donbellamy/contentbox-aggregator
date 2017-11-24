@@ -70,6 +70,18 @@ component persistent="true"
 	**							RELATIONSHIPS									
 	********************************************************************* */
 
+	// O2M -> Feed Items (children)
+	property name="feedItems"
+		singularname="feedItem"
+		cfc="contentbox.models.content.BaseContent"
+		fieldtype="one-to-many"
+		fkcolumn="FK_parentID"
+		inverse="true"
+		batchsize="25"
+		update="false"
+		insert="false"
+		orderby="datePublished DESC";
+
 	// O2M -> Feed imports
 	property name="feedImports"
 		singularName="feedImport"
@@ -165,14 +177,6 @@ Delete old feed items number - unit
 		createdDate = now();
 		contentType = "Feed";
 		return this;
-	}
-
-	array function getFeedItems() {
-		return getChildren();
-	}
-
-	boolean function hasFeedItem() {
-		return hasChild();
 	}
 
 	numeric function getNumberOfFeedItems() {

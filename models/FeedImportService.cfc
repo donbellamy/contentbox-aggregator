@@ -23,8 +23,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				variables.feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
 			//}
 
-			//thread action="join" name="#threadName#" timeout="6000";
-
 			// Check for items in feed
 			if ( arrayLen( variables.feed.items ) ) {
 
@@ -106,7 +104,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 							} catch( any e ) {
 
 								// Log error
-								log.error( "Error saving item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
+								if ( log.canError() ) {
+									log.error( "Error saving item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
+								}
 
 							}
 							
@@ -118,7 +118,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						} else {
 
 							// Log item exists
-							log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+							if ( log.canInfo() ) {
+								log.info("Item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+							}
 
 						}
 
@@ -161,52 +163,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		}
 
 		return this;
-
-	}
-
-	boolean function itemPassesKeywordFilters( required Feed feed, required string title, required string body ) {
-
-		// Set vars
-		var passes = true;
-		var text = arguments.title & " " & arguments.body;
-		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.ag_general_match_any_filter ) );
-		var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.ag_general_match_all_filter ) );
-		var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.ag_general_match_none_filter ) );
-
-		// Check match any
-		if ( arrayLen( matchAnyFilter ) ) {
-			passes = false;
-			for ( var filter IN matchAnyFilter ) {
-				if ( findNoCase( filter, text ) ) {
-					passes = true;
-					break;
-				}
-			}
-		}
-
-		// Check match all
-		if ( arrayLen( matchAllFilter ) && passes ) {
-			for ( var filter IN matchAllFilter ) {
-				if ( !findNoCase( filter, text ) ) {
-					passes = false;
-					break;
-				}
-			}
-		}
-
-		// Check match none
-		if ( arrayLen( matchNoneFilter ) && passes ) {
-			for ( var filter IN matchNoneFilter ) {
-				if ( findNoCase( filter, text ) ) {
-					passes = false;
-					break;
-				}
-			}
-		}
-
-		// Did the item pass?
-		return passes;
 
 	}
 

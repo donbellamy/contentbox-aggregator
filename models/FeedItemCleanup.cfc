@@ -2,7 +2,6 @@ component extends="coldbox.system.Interceptor" {
 
 	property name="settingService" inject="settingService@cb";
 	property name="feedService" inject="feedService@aggregator";
-	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 
 	function agadmin_postFeedImport( event, interceptData ) {
@@ -70,8 +69,11 @@ component extends="coldbox.system.Interceptor" {
 					hql &= " )";
 					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
 					for ( feedItem IN feedItems ) {
+						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
-						// TODO: log this?
+						if ( log.canInfo() ) {
+							log.info("Item ('#uniqueId#') filtered out using match any filter '#arrayToList(matchAnyFilter)#' for feed '#feed.getTitle()#'");
+						}
 					}
 				}
 
@@ -107,8 +109,11 @@ component extends="coldbox.system.Interceptor" {
 					hql &= " )";
 					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
 					for ( feedItem IN feedItems ) {
+						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
-						// TODO: log this?
+						if ( log.canInfo() ) {
+							log.info("Item ('#uniqueId#') filtered out using match all filter '#arrayToList(matchAllFilter)#' for feed '#feed.getTitle()#'");
+						}
 					}
 				}
 
@@ -145,21 +150,65 @@ component extends="coldbox.system.Interceptor" {
 					hql &= " )";
 					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
 					for ( feedItem IN feedItems ) {
+						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
-						// TODO: log this?
+						if ( log.canInfo() ) {
+							log.info("Item ('#uniqueId#') filtered out using match none filter '#arrayToList(matchNoneFilter)#' for feed '#feed.getTitle()#'");
+						}
 					}
 				}
 
 			}
 
 			// Max age
+			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_general_max_age );
+			var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_general_max_age_unit;
+			if ( maxAge ) {
+				var maxDate = now();
+				switch( maxAgeUnit ) {
+					case "weeks": {
+						maxDate = dateAdd( "ww", -maxAge, maxDate );
+						break;
+					}
+					case "months": {
+						maxDate = dateAdd( "m", -maxAge, maxDate );
+						break;
+					}
+					case "years": {
+						maxDate = dateAdd( "yyyy", -maxAge, maxDate );
+						break;
+					}
+					default: {
+						maxDate = dateAdd( "d", -maxAge, maxDate );
+					}
+				}
+				var c = feedItemService.newCriteria()
+					.eq( "parent.contentID", feed.getContentID() )
+					.isLT( "datePublished", maxDate );
+				var feedItems = c.list( asQuery=false );
+				for ( var feedItem IN feedItems ) {
+					var uniqueId = feedItem.getUniqueId();
+					feedItemService.deleteContent( feedItem );
+					if ( log.canInfo() ) {
+						log.info("Item ('#uniqueId#') filtered out by age for feed '#feed.getTitle()#'");
+					}
+				}
+
+			}
 
 			// Max items
 			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_general_max_items );
 			if ( feed.getNumberOfFeedItems() GT maxItems ) {
-
+				var feedItems = feed.getFeedItems();
+				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
+				for ( var feedItem IN itemsToDelete ) {
+					var uniqueId = feedItem.getUniqueId();
+					feedItemService.deleteContent( feedItem );
+					if ( log.canInfo() ) {
+						log.info("Item ('#uniqueId#') filtered out by item limit for feed '#feed.getTitle()#'");
+					}
+				}
 			}
-
 
 		}
 
