@@ -8,6 +8,7 @@ component {
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
+	this.cfMapping = "aggregator";
 
 	function configure() {
 
@@ -22,7 +23,7 @@ component {
 			"ag_general_match_all_filter" = "",
 			"ag_general_match_none_filter" = "",
 			"ag_general_log_level" = "ERROR",
-			// TODO: Log file name? - add in logbox logging to test
+			"ag_general_log_file_name" = "aggregator",
 
 			"ag_display_title_link" = "true",
 			"ag_display_author_show" = true,
@@ -112,15 +113,16 @@ component {
 		// AdminRequest
 		// PortalRequest
 		interceptors = [
-			{ class="#moduleMapping#.models.FeedItemCleanup", name="feedItemCleanup@aggregator" },
-			{ class="#moduleMapping#.interceptors.request", name="request@aggregator" }
+			{ class = "#moduleMapping#.models.FeedItemCleanup", name="feedItemCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.request", name="request@aggregator" }
 		];
+
+		// TODO: Logging and changeable by settings
+
 
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
-
-		// TODO: Logging and changeable by settings
 
 	}
 
@@ -129,86 +131,14 @@ component {
 	*/
 	function onLoad() {
 
-		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
-		var settingService = controller.getWireBox().getInstance("settingService@cb");
+		// Add menu items
+		addMenuItems();
 
-		// Register portal namespace
-		registerAggregatorNameSpace();
+		// Register namespace
+		registerNameSpace();
 
-		menuService.addTopMenu(
-			name="aggregator",
-			label="<i class='fa fa-rss'></i> RSS Aggregator"
-		);
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="feeds",
-			label="Feeds",
-			href="#menuService.buildModuleLink('aggregator','feeds')#",
-			permissions="FEEDS_ADMIN,FEEDS_EDITOR"
-		);
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="feeditems",
-			label="Feed Items",
-			href="#menuService.buildModuleLink('aggregator','feeditems')#",
-			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
-		);
-		/*
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="import",
-			label="Import & Export",
-			href="#menuService.buildModuleLink('aggregator','import-export')#"
-		);
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="debug",
-			label="Debugging",
-			href="#menuService.buildModuleLink('aggregator','debugging')#"
-		);
-		*/
-		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="settings",
-			label="Settings",
-			href="#menuService.buildModuleLink('aggregator','settings')#",
-			permissions="AGGREGATOR_SETTINGS"
-		);
-
-		// TODO: Why flush cache here?
-		settingService.flushSettingsCache();
-
-	}
-
-	/**
-	* Registers the public namespace
-	*/
-	function registerAggregatorNameSpace() {
-
-		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
-		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
-		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var agEntryPoint = settings.ag_portal_entrypoint;
-
-		var setting = settingService.findWhere( criteria = { name="aggregator" } );
-		if ( !isNull( setting ) ) {
-			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			agEntryPoint = agSettings.ag_portal_entrypoint;
-		}
-
-		if ( len( cbEntryPoint ) ) {
-			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
-		} else {
-			ses.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
-		}
-
-		for( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
-			var args = duplicate( aggregatorRoutes[ x ] );
-			if ( structKeyExists( args, "handler" ) ) {
-				args.handler = "contentbox-aggregator:#args.handler#";
-			}
-			ses.addRoute(argumentCollection=args);
-		}
+		// Setup logging
+		setupLogging();
 
 	}
 
@@ -217,11 +147,13 @@ component {
 	*/
 	function onUnload() {
 
+		// Remove admin menu items
 		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
-		
 		menuService.removeTopMenu("aggregator");
 
-		// TODO: unregister namespace
+		// TODO: Unregister namespace
+
+		// TODO: Remove logger
 
 	}
 
@@ -234,8 +166,8 @@ component {
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
 		if ( isNull( setting ) ) {
-			var settings = settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } );
-			settingService.save( settings );
+			var agSettings = settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } );
+			settingService.save( agSettings );
 		}
 
 		settingService.flushSettingsCache();
@@ -287,6 +219,100 @@ component {
 				permissionService.deletePermission( permission.getPermissionID() );
 			}
 		}
+
+	}
+
+	/**
+	* Adds the menu items
+	*/
+	function addMenuItems() {
+
+		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
+
+		menuService.addTopMenu(
+			name="aggregator",
+			label="<i class='fa fa-rss'></i> RSS Aggregator"
+		);
+
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="feeds",
+			label="Feeds",
+			href="#menuService.buildModuleLink('aggregator','feeds')#",
+			permissions="FEEDS_ADMIN,FEEDS_EDITOR"
+		);
+
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="feeditems",
+			label="Feed Items",
+			href="#menuService.buildModuleLink('aggregator','feeditems')#",
+			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
+		);
+
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="settings",
+			label="Settings",
+			href="#menuService.buildModuleLink('aggregator','settings')#",
+			permissions="AGGREGATOR_SETTINGS"
+		);
+
+	}
+
+	/**
+	* Registers the public namespace
+	*/
+	function registerNameSpace() {
+
+		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
+		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
+		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
+		var agEntryPoint = settings.ag_portal_entrypoint;
+
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		if ( !isNull( setting ) ) {
+			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			agEntryPoint = agSettings.ag_portal_entrypoint;
+		}
+
+		if ( len( cbEntryPoint ) ) {
+			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
+		} else {
+			ses.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
+		}
+
+		for( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
+			var args = duplicate( aggregatorRoutes[ x ] );
+			if ( structKeyExists( args, "handler" ) ) {
+				args.handler = "contentbox-aggregator:#args.handler#";
+			}
+			ses.addRoute(argumentCollection=args);
+		}
+
+	}
+
+	/**
+	* Sets up the logging
+	*/
+	function setupLogging() {
+
+		var logLevel = settings.ag_general_log_level;
+		var fileName = settings.ag_general_log_file_name;
+		var logBox = controller.getLogBox();
+		var logBoxConfig = logBox.getConfig();
+		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
+
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		if ( !isNull( setting ) ) {
+			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			logLevel = agSettings.ag_general_log_level;
+			// TODO: log file name
+		}
+
+		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", properties={ fileName=fileName } );
+		logBoxConfig.category( name="aggregator", levelMax=logLevel, appenders="aggregator" );
+		logBox.configure( logBoxConfig );
 
 	}
 

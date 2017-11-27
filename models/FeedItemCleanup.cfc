@@ -3,6 +3,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="settingService" inject="settingService@cb";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="log" inject="logbox:logger:aggregator";
 
 	function agadmin_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
@@ -190,7 +191,7 @@ component extends="coldbox.system.Interceptor" {
 					var uniqueId = feedItem.getUniqueId();
 					feedItemService.deleteContent( feedItem );
 					if ( log.canInfo() ) {
-						log.info("Item ('#uniqueId#') filtered out by age for feed '#feed.getTitle()#'");
+						log.info("Item ('#uniqueId#') filtered out by age limit for feed '#feed.getTitle()#'");
 					}
 				}
 
@@ -198,7 +199,7 @@ component extends="coldbox.system.Interceptor" {
 
 			// Max items
 			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_general_max_items );
-			if ( feed.getNumberOfFeedItems() GT maxItems ) {
+			if ( maxItems && ( feed.getNumberOfFeedItems() GT maxItems ) ) {
 				var feedItems = feed.getFeedItems();
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
 				for ( var feedItem IN itemsToDelete ) {

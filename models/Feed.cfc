@@ -70,21 +70,22 @@ component persistent="true"
 	**							RELATIONSHIPS									
 	********************************************************************* */
 
+	// TODO: Fix this?  See below
 	// O2M -> Feed Items (children)
-	property name="feedItems"
+	/*property name="feedItems"
 		singularname="feedItem"
-		cfc="contentbox.models.content.BaseContent"
+		cfc="aggregator.models.FeedItem"
 		fieldtype="one-to-many"
 		fkcolumn="FK_parentID"
 		inverse="true"
 		batchsize="25"
 		update="false"
 		insert="false"
-		orderby="datePublished DESC";
+		orderby="datePublished DESC";*/
 
 	// O2M -> Feed imports
 	property name="feedImports"
-		singularName="feedImport"
+		singularName="FeedImport"
 		fieldtype="one-to-many"
 		type="array"
 		lazy="extra"
@@ -177,6 +178,15 @@ Delete old feed items number - unit
 		createdDate = now();
 		contentType = "Feed";
 		return this;
+	}
+
+	array function getFeedItems() {
+		// TODO: Got to change this so it sorts by DatePublished DESC instead of createdDate ASC
+		return getChildren();
+	}
+
+	boolean function hasFeedItem() {
+		return hasChild();
 	}
 
 	numeric function getNumberOfFeedItems() {

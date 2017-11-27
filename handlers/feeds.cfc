@@ -271,7 +271,7 @@ component extends="baseHandler" {
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
-					announceInterception( "agadmin_preFeedImport", { feed=feed } );
+					announceInterception( "agadmin_preFeedImport", { feed=feed } ); // TODO: move to feedimportservice?
 					importFeed( feed, prc.oCurrentAuthor );
 					announceInterception( "agadmin_postFeedImport", { feed=feed } );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );

@@ -5,13 +5,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
-	property name="log" inject="logbox:logger:{this}"; //TODO: Logging correct settings :)
+	property name="log" inject="logbox:logger:aggregator";
 
 	FeedImportService function init( entityName="cbFeedImport" ) {
 
 		super.init( entityName=arguments.entityName, useQueryCaching=true );
 
 		return this;
+
 	}
 
 	FeedImportService function import( required Feed feed, required Author author ) {

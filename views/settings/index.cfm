@@ -208,6 +208,20 @@
 											)#
 										</div>
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_log_file_name",
+											content="Log file name:"
+										)#
+										<div class="controls">
+											#html.textField(
+												name="ag_general_log_file_name",
+												value=prc.agSettings.ag_general_log_file_name,
+												class="form-control"
+											)#
+										</div>
+									</div>
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="display_options">
