@@ -14,7 +14,7 @@ component {
 
 		settings = {
 
-			"ag_general_interval" = "60",
+			"ag_general_interval" = "",
 			"ag_general_default_creator" = "",
 			"ag_general_max_age" = "",
 			"ag_general_max_age_unit" = "days",
@@ -26,47 +26,47 @@ component {
 			"ag_general_log_file_name" = "aggregator",
 
 			"ag_display_title_link" = "true",
-			"ag_display_author_show" = true,
-			"ag_display_source_show" = true,
-			"ag_display_source_link" = true,
-			"ag_display_link_new_window" = true,
-			"ag_display_link_as_nofollow" = true,
-			"ag_display_video_link" = true,
+			"ag_display_author_show" = "true",
+			"ag_display_source_show" = "true",
+			"ag_display_source_link" = "true",
+			"ag_display_link_new_window" = "true",
+			"ag_display_link_as_nofollow" = "true",
+			"ag_display_video_link" = "true",
 
-			"ag_display_excerpt_show" = true,
+			"ag_display_excerpt_show" = "true",
 			"ag_display_excerpt_word_limit" = "",
 			"ag_display_excerpt_ending" = "...",
-			"ag_display_read_more_show" = true,
+			"ag_display_read_more_show" = "true",
 			"ag_display_read_more_text" = "Read more...",
 
-			"ag_display_thumbnail_enable" = true,
-			"ag_display_thumbnail_link" = true,
+			"ag_display_thumbnail_enable" = "true",
+			"ag_display_thumbnail_link" = "true",
 			"ag_display_thumbnail_width" = 150,
 			"ag_display_thumbnail_height" = 150,
 
 			"ag_display_paging_max_rows" = 10,
 			"ag_display_paging_type" = "paging", 
 
-			"ag_portal_enable" = true,
+			"ag_portal_enable" = "true",
 			"ag_portal_title" = "RSS Aggregator News",
 			"ag_portal_entrypoint" = "news",
 			"ag_portal_layout" = "pages",
-			"ag_portal_hits_track" = true,
-			"ag_portal_hits_ignore_bots" = false,
+			"ag_portal_hits_track" = "true",
+			"ag_portal_hits_ignore_bots" = "false",
 			"ag_portal_hits_bot_regex" = "Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby", // Get setting from cb?
-			"ag_portal_cache_enable" = true,
+			"ag_portal_cache_enable" = "true",
 			"ag_portal_cache_name" = "Template",
 			"ag_portal_cache_timeout" = 60,
 			"ag_portal_cache_timeout_idle" = 15,
 
-			"ag_rss_enable" = true,
+			"ag_rss_enable" = "true",
 			"ag_rss_title" = "RSS Aggregator Feed",
 			"ag_rss_description" = "RSS Aggregator Feed",
 			"ag_rss_generator" = "RSS Aggregator by Perfect Code",
 			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
 			"ag_rss_webmaster" = "",
 			"ag_rss_max_items" = 10,
-			"ag_rss_cache_enable" = true,
+			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = 60,
 			"ag_rss_cache_timeout_idle" = 15
@@ -89,6 +89,7 @@ component {
 		aggregatorRoutes = [
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
+			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="item", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -113,12 +114,9 @@ component {
 		// AdminRequest
 		// PortalRequest
 		interceptors = [
-			{ class = "#moduleMapping#.models.FeedItemCleanup", name="feedItemCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.request", name="request@aggregator" }
+			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.Request", name="request@aggregator" }
 		];
-
-		// TODO: Logging and changeable by settings
-
 
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
@@ -129,6 +127,7 @@ component {
 	/**
 	* Fired when the module is registered and loaded.
 	*/
+	// TODO: research onload/onunload/onactivate/ondeactivate in modules
 	function onLoad() {
 
 		// Add menu items
@@ -137,8 +136,8 @@ component {
 		// Register namespace
 		registerNameSpace();
 
-		// Setup logging
-		setupLogging();
+		// Configure LogBox
+		configureLogBox();
 
 	}
 
@@ -162,6 +161,7 @@ component {
 	*/
 	function onActivate() {
 
+		// Save settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
@@ -172,6 +172,7 @@ component {
 
 		settingService.flushSettingsCache();
 
+		// Save permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
 		var roleService= controller.getWireBox().getInstance("roleService@cb");
 		var adminRole = roleService.findWhere( criteria = { role="Administrator" } );
@@ -202,6 +203,7 @@ component {
 	*/
 	function onDeactivate() {
 
+		// Delete settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
@@ -211,6 +213,7 @@ component {
 
 		settingService.flushSettingsCache();
 
+		// Delete permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
 
 		for ( var item IN permissions ) {
@@ -220,6 +223,8 @@ component {
 			}
 		}
 
+		// Delete scheduled task
+		cfschedule( action="delete", task="aggregator-import" );
 	}
 
 	/**
@@ -293,9 +298,9 @@ component {
 	}
 
 	/**
-	* Sets up the logging
+	* Configures LogBox settings for the aggreagator
 	*/
-	function setupLogging() {
+	function configureLogBox() {
 
 		var logLevel = settings.ag_general_log_level;
 		var fileName = settings.ag_general_log_file_name;
@@ -307,10 +312,10 @@ component {
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			logLevel = agSettings.ag_general_log_level;
-			// TODO: log file name
+			fileName = agSettings.ag_general_log_file_name;
 		}
 
-		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", properties={ fileName=fileName } );
+		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=logLevel, properties={ fileName=fileName } );
 		logBoxConfig.category( name="aggregator", levelMax=logLevel, appenders="aggregator" );
 		logBox.configure( logBoxConfig );
 

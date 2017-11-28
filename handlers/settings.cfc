@@ -6,12 +6,15 @@ component extends="baseHandler" {
 	function index( event, rc, prc ) {
 
 		prc.intervals = [
-			{ name="Every 15 Minutes", value="15" },
-			{ name="Every 30 Minutes", value="30" },
-			{ name="Every Hour", value="60" },
-			{ name="Every Two Hours", value="120" },
-			{ name="Every Twelve Hours", value="720" },
-			{ name="Once Daily", value="1440" }
+			{ name="Never", value="" },
+			{ name="Every 15 Minutes", value="900" },
+			{ name="Every 30 Minutes", value="1800" },
+			{ name="Every Hour", value="3600" },
+			{ name="Every Two Hours", value="7200" },
+			{ name="Every Twelve Hours", value="43200" },
+			{ name="Once a Day", value="daily" },
+			{ name="Once a Week", value="weekly" },
+			{ name="Once a Month", value="monthly" }
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
@@ -39,21 +42,42 @@ component extends="baseHandler" {
 		}
 
 		// TODO: Validate settings
+		// TODO: Our own settingsservice that inherits from contentbox?  That way we can validate, etc.... var errors = settingsService.validate() ?
 
 		var setting = settingService.findWhere( { name="aggregator" } );
 		setting.setValue( serializeJSON( prc.agSettings ) );
 		settingService.save( setting );
 
-		//TODO: Set scheduled task or some other way to schedule imports?
-
 		settingService.flushSettingsCache();
 
-		//TODO: only do this if different
+		// Import scheduled task
+		if ( len( rc["ag_general_interval"] ) ) {
+			// TODO: move to a helper?
+			var taskUrl = event.getSESBaseUrl() & rc["ag_portal_entrypoint"] & "/import?key=secretkey"
+			cfschedule( 
+				action="update",
+				task="aggregator-import",
+				url="#taskUrl#"
+				startDate="#dateFormat(now(),'mm/dd/yy')#", // TODO: change to setting?
+				startTime="11:00 PM", // TODO: change to setting?
+				interval=rc["ag_general_interval"]
+			);
+		} else {
+			cfschedule( action="delete", task="aggregator-import" );
+		}
+
+		// Configure LogBox
+		var logBoxConfig = logBox.getConfig();
+		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=rc["ag_general_log_level"], properties={ fileName=rc["ag_general_log_file_name"] } );
+		logBoxConfig.category( name="aggregator", levelMax=rc["ag_general_log_level"], appenders="aggregator" );
+		logBox.configure( logBoxConfig );
+
+		// Set portal entrypoint
 		var ses = getInterceptor("SES");
 		var routes = ses.getRoutes();
 		for( var key IN routes ) {
 			if( key.namespaceRouting eq "aggregator" ){
-				key.pattern = key.regexpattern = replace(  rc[ "ag_portal_entrypoint" ] , "/", "-", "all" ) & "/";
+				key.pattern = key.regexpattern = replace(  rc["ag_portal_entrypoint"] , "/", "-", "all" ) & "/";
 			}
 		}
 		ses.setRoutes( routes );

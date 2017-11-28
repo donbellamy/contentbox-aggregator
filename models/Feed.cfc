@@ -166,11 +166,12 @@ Delete old feed items number - unit
 --->
 
 	this.constraints["url"] = { required=true, type="url", size="1..255" };
-	this.constraints["filterByAny"] = { required=false, size="1..255" };
-	this.constraints["filterByAll"] = { required=false, size="1..255" };
-	this.constraints["filterByNone"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
+	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
+	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
+	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
+	// TODO: Finish this constriants...
 
 	Feed function init() {
 		super.init();

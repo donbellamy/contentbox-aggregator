@@ -10,8 +10,8 @@ component extends="coldbox.system.EventHandler" {
 
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
-		if ( !prc.agSettings.ag_portal_enable ) {
-			event.overrideEvent( "contentbox-aggregator:news.disabled" );
+		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-aggregator:portal.import" ) {
+			event.overrideEvent( "contentbox-aggregator:portal.disabled" );
 		}
 
 		// TODO Site maintenance check
@@ -47,6 +47,12 @@ component extends="coldbox.system.EventHandler" {
 
 	function feed( event, rc, prc ) {
 		event.setView( "portal/feed" );
+	}
+
+	function import( event, rc, prc ) {
+		// TODO: Check for matching key
+		// TODO: Run import
+		event.setView( "portal/import" );
 	}
 
 }
