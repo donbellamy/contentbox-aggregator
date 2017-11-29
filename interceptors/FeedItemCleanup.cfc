@@ -200,7 +200,7 @@ component extends="coldbox.system.Interceptor" {
 			// Max items
 			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_general_max_items );
 			if ( maxItems && ( feed.getNumberOfFeedItems() GT maxItems ) ) {
-				var feedItems = feed.getFeedItems();
+				var feedItems = feed.getFeedItems(); //TODO: This list needs to be sorted by datePublished DESC in Feed or FeedService?
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
 				for ( var feedItem IN itemsToDelete ) {
 					var uniqueId = feedItem.getUniqueId();

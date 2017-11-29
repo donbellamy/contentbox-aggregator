@@ -14,7 +14,9 @@ component {
 
 		settings = {
 
-			"ag_general_interval" = "",
+			"ag_general_import_interval" = "",
+			"ag_general_import_start_date" = "",
+			"ag_general_import_start_time" = "",
 			"ag_general_default_creator" = "",
 			"ag_general_max_age" = "",
 			"ag_general_max_age_unit" = "days",
@@ -107,15 +109,12 @@ component {
 			])
 		};
 
-		// TODO: Admin and Portal interceptors
-		// TODO: @contentbox-aggregator ?
-		// PortalCacheCleanup
-		// RSSCacheCleanup
-		// AdminRequest
-		// PortalRequest
 		interceptors = [
+			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.Request", name="request@aggregator" }
+			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
+			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
@@ -127,7 +126,6 @@ component {
 	/**
 	* Fired when the module is registered and loaded.
 	*/
-	// TODO: research onload/onunload/onactivate/ondeactivate in modules
 	function onLoad() {
 
 		// Add menu items

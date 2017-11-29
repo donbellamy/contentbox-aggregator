@@ -51,17 +51,18 @@ component extends="baseHandler" {
 		settingService.flushSettingsCache();
 
 		// Import scheduled task
-		if ( len( rc["ag_general_interval"] ) ) {
+		if ( len( rc["ag_general_import_interval"] ) ) {
 			// TODO: move to a helper?
 			var taskUrl = event.getSESBaseUrl() & rc["ag_portal_entrypoint"] & "/import?key=secretkey"
 			cfschedule( 
 				action="update",
 				task="aggregator-import",
-				url="#taskUrl#"
-				startDate="#dateFormat(now(),'mm/dd/yy')#", // TODO: change to setting?
-				startTime="11:00 PM", // TODO: change to setting?
-				interval=rc["ag_general_interval"]
+				url="#taskUrl#",
+				startDate="#dateFormat(now(),'mm/dd/yy')#", 
+				startTime="11:00 PM",
+				interval=rc["ag_general_import_interval"]
 			);
+			// TODO: change to setting?
 		} else {
 			cfschedule( action="delete", task="aggregator-import" );
 		}
