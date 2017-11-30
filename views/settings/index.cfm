@@ -56,65 +56,57 @@
 										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
 										</div>--->
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_import_start_date",
-											content="Start Date:"
-										)#
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9", 
-														name="ag_general_import_start_date",
-														value=prc.agSettings.ag_general_import_start_date, 
-														class="form-control datepicker",
-														placeholder="Immediately"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
+									<div class="start-date-group"<cfif !len( prc.agSettings.ag_general_import_interval ) > style="display:none;"</cfif>>
+										<div class="form-group">
+											#html.label(
+												class="control-label",
+												field="ag_general_import_start_date",
+												content="Start Date:"
+											)#
+											<div class="controls row">
+												<div class="col-md-6">
+													<div class="input-group">
+														#html.inputField(
+															size="9", 
+															name="ag_general_import_start_date",
+															value=prc.agSettings.ag_general_import_start_date, 
+															class="form-control datepicker",
+															placeholder="Immediately"
+														)#
+														<span class="input-group-addon">
+															<span class="fa fa-calendar"></span>
+														</span>
+													</div>
 												</div>
-											</div>
-											<cfscript>
-												theTime = "";
-												/*
-												hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
-												minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
-												if ( len( hour ) && len( minute ) ) {
-													theTime = hour & ":" & minute;
-												}
-												*/
-											</cfscript>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#theTime#" name="ag_general_import_start_time" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
+												<div class="col-md-6">
+													<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+														<input type="text" class="form-control inline" value="#prc.agSettings.ag_general_import_start_time#" name="ag_general_import_start_time" />
+														<span class="input-group-addon">
+															<span class="fa fa-clock-o"></span>
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_default_creator",
-											content="Default creator:"
-										)#
-										<div class="controls">
-											<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
-												<cfloop array="#prc.authors#" index="author">
-													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
-												</cfloop>
-											</select>
+										<div class="form-group">
+											#html.label(
+												class="control-label",
+												field="ag_general_default_creator",
+												content="Default creator:"
+											)#
+											<div class="controls">
+												<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
+													<cfloop array="#prc.authors#" index="author">
+														<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+													</cfloop>
+												</select>
+											</div>
+											<!--- Selecte default creator used when importing items
+											<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
+											<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
+											<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
+											</div>--->
 										</div>
-										<!--- Selecte default creator used when importing items
-										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
-										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
-										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
-										</div>--->
 									</div>
 								</fieldset>
 								<fieldset>

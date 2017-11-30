@@ -282,7 +282,7 @@ Delete old feed items number - unit
 		title = trim( left( title, 200 ) );
 		slug = trim( left( slug, 200 ) );
 
-		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
+		matchAnyFilter = trim( left( matchAnyFilter, 255 ) ); 
 		matchAllFilter = trim( left( matchAllFilter, 255 ) );
 		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 

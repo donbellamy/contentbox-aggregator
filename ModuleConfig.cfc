@@ -120,12 +120,10 @@ component {
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
+		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
 
 	}
 
-	/**
-	* Fired when the module is registered and loaded.
-	*/
 	function onLoad() {
 
 		// Add menu items
@@ -139,9 +137,6 @@ component {
 
 	}
 
-	/**
-	* Fired when the module is unregistered and unloaded
-	*/
 	function onUnload() {
 
 		// Remove admin menu items
@@ -154,9 +149,6 @@ component {
 
 	}
 
-	/**
-	* Fired when the module is activated by ContentBox
-	*/
 	function onActivate() {
 
 		// Save settings
@@ -196,9 +188,6 @@ component {
 
 	}
 
-	/**
-	* Fired when the module is deactivated by ContentBox
-	*/
 	function onDeactivate() {
 
 		// Delete settings
@@ -225,9 +214,6 @@ component {
 		cfschedule( action="delete", task="aggregator-import" );
 	}
 
-	/**
-	* Adds the menu items
-	*/
 	function addMenuItems() {
 
 		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
@@ -263,9 +249,6 @@ component {
 
 	}
 
-	/**
-	* Registers the public namespace
-	*/
 	function registerNameSpace() {
 
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
@@ -275,7 +258,7 @@ component {
 
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 		if ( !isNull( setting ) ) {
-			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );  // setting.getValue() ?
 			agEntryPoint = agSettings.ag_portal_entrypoint;
 		}
 
@@ -295,9 +278,6 @@ component {
 
 	}
 
-	/**
-	* Configures LogBox settings for the aggreagator
-	*/
 	function configureLogBox() {
 
 		var logLevel = settings.ag_general_log_level;

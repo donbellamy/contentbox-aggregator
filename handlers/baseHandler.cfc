@@ -1,6 +1,6 @@
 component extends="coldbox.system.EventHandler" {
 
-	property name="settingService" inject="settingService@cb";
+	property name="settingService" inject="settingService@aggregator";
 	property name="cbMessageBox" inject="messagebox@cbmessagebox";
 	property name="cbHelper" inject="cbHelper@cb";
 

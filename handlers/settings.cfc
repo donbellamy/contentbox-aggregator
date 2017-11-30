@@ -41,8 +41,14 @@ component extends="baseHandler" {
 			}
 		}
 
-		// TODO: Validate settings
-		// TODO: Our own settingsservice that inherits from contentbox?  That way we can validate, etc.... var errors = settingsService.validate() ?
+writedump(settingService);
+abort;
+
+		var errors = settingService.validateSettings();
+		if ( arrayLen( errors ) ) {
+			cbMessageBox.warn( messageArray=errors );
+			return index( argumentCollection=arguments );
+		}
 
 		var setting = settingService.findWhere( { name="aggregator" } );
 		setting.setValue( serializeJSON( prc.agSettings ) );
@@ -54,12 +60,13 @@ component extends="baseHandler" {
 		if ( len( rc["ag_general_import_interval"] ) ) {
 			// TODO: move to a helper?
 			var taskUrl = event.getSESBaseUrl() & rc["ag_portal_entrypoint"] & "/import?key=secretkey"
+			if ( isDate( rc["ag_general_import_"] ) )
 			cfschedule( 
 				action="update",
 				task="aggregator-import",
 				url="#taskUrl#",
-				startDate="#dateFormat(now(),'mm/dd/yy')#", 
-				startTime="11:00 PM",
+				startDate=rc["ag_general_import_start_date"], 
+				startTime=rc["ag_general_import_start_date"],
 				interval=rc["ag_general_import_interval"]
 			);
 			// TODO: change to setting?
