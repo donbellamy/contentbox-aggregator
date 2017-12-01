@@ -12,6 +12,7 @@ component extends="coldbox.system.EventHandler" {
 		prc.cbHelper = cbHelper;
 
 		// TODO: Move to interceptor?
+		// TODO: rename agSettings to something else
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		prc.agAdminEntryPoint = "#prc.cbAdminEntryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
 

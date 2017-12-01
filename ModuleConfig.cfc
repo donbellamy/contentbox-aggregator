@@ -14,6 +14,7 @@ component {
 
 		settings = {
 
+			// TODO: remove ag_ from names, unneeded imo
 			"ag_general_import_interval" = "",
 			"ag_general_import_start_date" = "",
 			"ag_general_import_start_time" = "",
@@ -43,10 +44,10 @@ component {
 
 			"ag_display_thumbnail_enable" = "true",
 			"ag_display_thumbnail_link" = "true",
-			"ag_display_thumbnail_width" = 150,
-			"ag_display_thumbnail_height" = 150,
+			"ag_display_thumbnail_width" = "150",
+			"ag_display_thumbnail_height" = "150",
 
-			"ag_display_paging_max_rows" = 10,
+			"ag_display_paging_max_rows" = "10",
 			"ag_display_paging_type" = "paging", 
 
 			"ag_portal_enable" = "true",
@@ -58,8 +59,8 @@ component {
 			"ag_portal_hits_bot_regex" = "Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby", // Get setting from cb?
 			"ag_portal_cache_enable" = "true",
 			"ag_portal_cache_name" = "Template",
-			"ag_portal_cache_timeout" = 60,
-			"ag_portal_cache_timeout_idle" = 15,
+			"ag_portal_cache_timeout" = "60",
+			"ag_portal_cache_timeout_idle" = "15",
 
 			"ag_rss_enable" = "true",
 			"ag_rss_title" = "RSS Aggregator Feed",
@@ -67,11 +68,11 @@ component {
 			"ag_rss_generator" = "RSS Aggregator by Perfect Code",
 			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
 			"ag_rss_webmaster" = "",
-			"ag_rss_max_items" = 10,
+			"ag_rss_max_items" = "10",
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
-			"ag_rss_cache_timeout" = 60,
-			"ag_rss_cache_timeout_idle" = 15
+			"ag_rss_cache_timeout" = "60",
+			"ag_rss_cache_timeout_idle" = "15"
 
 		};
 
@@ -91,7 +92,7 @@ component {
 		aggregatorRoutes = [
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
+			{ pattern="/import", handler="portal", action="import", namespace="aggregator" }, // TODO: research coldboox ways to do sched tasks
 			{ pattern="/:slug", handler="portal", action="item", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];

@@ -41,9 +41,6 @@ component extends="baseHandler" {
 			}
 		}
 
-writedump(settingService);
-abort;
-
 		var errors = settingService.validateSettings();
 		if ( arrayLen( errors ) ) {
 			cbMessageBox.warn( messageArray=errors );
@@ -57,19 +54,16 @@ abort;
 		settingService.flushSettingsCache();
 
 		// Import scheduled task
-		if ( len( rc["ag_general_import_interval"] ) ) {
-			// TODO: move to a helper?
-			var taskUrl = event.getSESBaseUrl() & rc["ag_portal_entrypoint"] & "/import?key=secretkey"
-			if ( isDate( rc["ag_general_import_"] ) )
+		if ( len( prc.agSettings.ag_general_import_interval ) ) {
+			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=secretkey"; // TODO: Create secretkey - look at examples
 			cfschedule( 
 				action="update",
 				task="aggregator-import",
 				url="#taskUrl#",
-				startDate=rc["ag_general_import_start_date"], 
-				startTime=rc["ag_general_import_start_date"],
-				interval=rc["ag_general_import_interval"]
+				startDate=prc.agSettings.ag_general_import_start_date, 
+				startTime=prc.agSettings.ag_general_import_start_time,
+				interval=prc.agSettings.ag_general_import_interval
 			);
-			// TODO: change to setting?
 		} else {
 			cfschedule( action="delete", task="aggregator-import" );
 		}

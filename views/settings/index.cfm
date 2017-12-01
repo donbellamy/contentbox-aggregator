@@ -173,6 +173,7 @@
 									<p><em>Use 0 or leave empty for no limit.</em></p>
 									</div>--->
 								</fieldset>
+								<!--- TODO: add limit to these texareas --->
 								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 									<div class="form-group">
