@@ -1,5 +1,4 @@
 <cfoutput>
-
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="h1">
@@ -8,7 +7,6 @@
 		</h1>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-md-12">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
@@ -42,6 +40,10 @@
 											content="Import interval:"
 										)#
 										<div class="controls">
+											<small>
+												How frequently the feeds should be checked for updates and imported.  
+												Select "Never" if you plan to manually import feeds.
+											</small>
 											#html.select(
 												name="ag_general_import_interval",
 												options=prc.intervals,
@@ -51,10 +53,6 @@
 												class="form-control"
 											)#
 										</div>
-										<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
-										<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
-										<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
-										</div>--->
 									</div>
 									<div class="start-date-group"<cfif !len( prc.agSettings.ag_general_import_interval ) > style="display:none;"</cfif>>
 										<div class="form-group">
@@ -63,6 +61,7 @@
 												field="ag_general_import_start_date",
 												content="Start Date:"
 											)#
+											<div><small>The date and time to begin importing feeds.</small></div>
 											<div class="controls row">
 												<div class="col-md-6">
 													<div class="input-group">
@@ -95,17 +94,13 @@
 												content="Default creator:"
 											)#
 											<div class="controls">
+												<small>The account used during the automated feed import process.</small>
 												<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
 													<cfloop array="#prc.authors#" index="author">
 														<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
 													</cfloop>
 												</select>
 											</div>
-											<!--- Selecte default creator used when importing items
-											<div class="wprss-tooltip-content" id="wprss-tooltip-setting-cron-interval">
-											<p>How frequently should the feed sources (that do not have their own update interval) check for updates and fetch items accordingly.</p>
-											<p>It is recommended to not have more than 20 feed sources that use this global update interval. Having too many feed sources updating precisely at the same time can cause the WP Cron System to crash.</p>
-											</div>--->
 										</div>
 									</div>
 								</fieldset>
@@ -117,6 +112,12 @@
 											field="ag_general_max_age",
 											content="Limit items by age:"
 										)#
+										<div>
+											<small>
+												The maximum age allowed for feed items.
+												Existing feed items will be deleted once they exceed this age limit.
+											</small>
+										</div>
 										<div class="controls row">
 											<div class="col-sm-6">
 												#html.inputField(
@@ -137,15 +138,6 @@
 												)#
 											</div>
 										</div>
-										<!--- 
-										<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-by-age">
-										<p>The maximum age allowed for feed items.</p>
-										<hr>
-										<p>Items already imported will be deleted if they eventually exceed this age limit.</p>
-										<p>Also, items in the RSS feed that are already older than this age will not be imported at all.</p>
-										<hr>
-										<p><em>Leave empty for no limit.</em></p>
-										</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -154,6 +146,10 @@
 											content="Limit items by number:"
 										)#
 										<div class="controls">
+											<small>
+												The maximum number of feed items to keep per feed.
+												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+											</small>
 											#html.inputField(
 												name="ag_general_max_items",
 												type="number",
@@ -164,16 +160,7 @@
 											)#
 										</div>
 									</div>
-									<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-imported">
-									<p>The maximum number of imported items to keep stored, for feed sources that do not have their own limit.</p>
-									<hr>
-									<p>When new items are imported and the limit for a feed source is exceeded, the oldest feed items for that feed source will be deleted to make room for the new ones.</p>
-									<p>If you already have items imported from this feed source, setting this option now may delete some of your items, in order to comply with the limit.</p>
-									<hr>
-									<p><em>Use 0 or leave empty for no limit.</em></p>
-									</div>--->
 								</fieldset>
-								<!--- TODO: add limit to these texareas --->
 								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 									<div class="form-group">
@@ -183,12 +170,14 @@
 											content="Contains any of these words/phrases:"
 										)#
 										<div class="controls">
+											<small>Only feed items that contain any of these words/phrases in the title or body will be imported.  Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.</small>
 											#html.textArea(
 												name="ag_general_match_any_filter", 
 												value=prc.agSettings.ag_general_match_any_filter,
 												rows="3",
 												class="form-control",
-												placeholder="Comma delimited list of words or phrases"
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
 											)#
 										</div>
 									</div>
@@ -199,12 +188,14 @@
 											content="Contains all of these words/phrases:"
 										)#
 										<div class="controls">
+											<small>Only feed items that contain all of these words/phrases in the title or body will be imported.  Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.</small>
 											#html.textArea(
 												name="ag_general_match_all_filter", 
 												value=prc.agSettings.ag_general_match_all_filter,
 												rows="3",
 												class="form-control",
-												placeholder="Comma delimited list of words or phrases"
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
 											)#
 										</div>
 									</div>
@@ -215,12 +206,14 @@
 											content="Contains none of these words/phrases:"
 										)#
 										<div class="controls">
+											<small>Only feed items that do not contain any of these words/phrases in the title or body will be imported.  Existing feed items that contain any of these words/phrases in the title or body will be deleted.</small>
 											#html.textArea(
 												name="ag_general_match_none_filter", 
 												value=prc.agSettings.ag_general_match_none_filter, 
 												rows="3",
 												class="form-control",
-												placeholder="Comma delimited list of words or phrases"
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
 											)#
 										</div>
 									</div>
@@ -234,6 +227,7 @@
 											content="Log level:"
 										)#
 										<div class="controls">
+											<small>The maximum log level used when logging module activity.</small>
 											#html.select(
 												name="ag_general_log_level",
 												options=prc.logLevels,
@@ -249,10 +243,12 @@
 											content="Log file name:"
 										)#
 										<div class="controls">
+											<small>The log file name used when logging module activity.</small>
 											#html.textField(
 												name="ag_general_log_file_name",
 												value=prc.agSettings.ag_general_log_file_name,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -462,7 +458,8 @@
 											#html.textField(
 												name="ag_display_excerpt_ending",
 												value=prc.agSettings.ag_display_excerpt_ending,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 										<!--- Characters appearing at end of excerpt --->
@@ -496,7 +493,8 @@
 											#html.textField(
 												name="ag_display_read_more_text",
 												value=prc.agSettings.ag_display_read_more_text,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -662,7 +660,8 @@
 											#html.textField(
 												name="ag_portal_title",
 												value=prc.agSettings.ag_portal_title,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -678,7 +677,8 @@
 											#html.textField(
 												name="ag_portal_entrypoint", 
 												value=prc.agSettings.ag_portal_entrypoint, 
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -746,8 +746,9 @@
 											#html.textArea(
 												name="ag_portal_hits_bot_regex", 
 												value=prc.agSettings.ag_portal_hits_bot_regex, 
-												rows="4",
-												class="form-control"
+												rows="3",
+												class="form-control",
+												maxlength="255"
 											)#
 										</div>
 									</div>
@@ -867,7 +868,8 @@
 												name="ag_rss_title",
 												required="required",
 												value=prc.agSettings.ag_rss_title,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 <!---Latest imported feed items on WP RSS Aggregator Simple Demo Dashboard
@@ -887,8 +889,9 @@
 											#html.textArea(
 												name="ag_rss_description",
 												value=prc.agSettings.ag_rss_description,
-												rows="4",
-												class="form-control"
+												rows="3",
+												class="form-control",
+												maxlength="255"
 											)#
 										</div>
 									</div>
@@ -904,7 +907,8 @@
 												name="ag_rss_generator",
 												required="required",
 												value=prc.agSettings.ag_rss_generator,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -920,7 +924,8 @@
 												name="ag_rss_copyright",
 												required="required",
 												value=prc.agSettings.ag_rss_copyright,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -935,7 +940,8 @@
 											#html.textField(
 												name="ag_rss_webmaster",
 												value=prc.agSettings.ag_rss_webmaster,
-												class="form-control"
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -959,9 +965,6 @@
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-custom-feed-limit">
-<p>The maximum number of feed items in the custom feed.</p>
-</div>--->
 									</div>
 								</fieldset>
 								<fieldset>
@@ -1056,5 +1059,4 @@
 		#html.endForm()#
 	</div>
 </div>
-
 </cfoutput>
