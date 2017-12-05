@@ -59,7 +59,7 @@
 											#html.label(
 												class="control-label",
 												field="ag_general_import_start_date",
-												content="Start Date:"
+												content="Start date:"
 											)#
 											<div><small>The date and time to begin importing feeds.</small></div>
 											<div class="controls row">
@@ -227,7 +227,7 @@
 											content="Log level:"
 										)#
 										<div class="controls">
-											<small>The maximum log level used when logging module activity.</small>
+											<small>The maximum log level used when logging activity.</small>
 											#html.select(
 												name="ag_general_log_level",
 												options=prc.logLevels,
@@ -243,7 +243,7 @@
 											content="Log file name:"
 										)#
 										<div class="controls">
-											<small>The log file name used when logging module activity.</small>
+											<small>The log file name used when logging activity.</small>
 											#html.textField(
 												name="ag_general_log_file_name",
 												value=prc.agSettings.ag_general_log_file_name,
@@ -263,6 +263,7 @@
 											field="ag_display_title_link",
 											content="Link title:"
 										)#
+										<div><small>If enabled, the feed item titles will link to the original article.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_title_link_toggle",
@@ -274,9 +275,6 @@
 												value=prc.agSettings.ag_display_title_link 
 											)#
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-link-enable">
-<p>Check this box to make the feed item titles link to the original article.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -284,6 +282,7 @@
 											field="ag_display_author_show",
 											content="Show author:"
 										)#
+										<div><small>If enabled, the author will display for each feed item if available.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_author_show_toggle",
@@ -295,9 +294,6 @@
 												value=prc.agSettings.ag_display_author_show 
 											)#
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-authors-enable">
-<p>Check this box to show the author for each feed item, if it is available.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -305,6 +301,7 @@
 											field="ag_display_source_show",
 											content="Show source:"
 										)#
+										<div><small>If enabled, the feed name will display for each feed item.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_source_show_toggle",
@@ -317,15 +314,13 @@
 											)#
 										</div>
 									</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-source-enable">
-<p>Enable this option to show the feed source name for each feed item.</p>
-</div>--->
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_display_source_link",
 											content="Link source:"
 										)#
+										<div><small>If enabled, the feed name will be linked to the source site.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_source_link_toggle",
@@ -337,9 +332,6 @@
 												value=prc.agSettings.ag_display_source_link 
 											)#
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-source-link">
-<p>Enable this option to link the feed source name to the RSS feed's source site.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -375,8 +367,8 @@
 												checked=prc.agSettings.ag_display_link_as_nofollow
 											)#
 											#html.hiddenField( 
-												name="ag_display_link_as_nofollow", 
-												value=prc.agSettings.ag_display_link_as_nofollow 
+												name="ag_display_link_as_nofollow",
+												value=prc.agSettings.ag_display_link_as_nofollow
 											)#
 										</div>
 <!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-follow-dd">
