@@ -299,7 +299,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_display_source_show",
-											content="Show source:"
+											content="Show feed source:"
 										)#
 										<div><small>If enabled, the feed name will display for each feed item.</small></div>
 										<div class="controls">
@@ -339,6 +339,7 @@
 											field="ag_display_link_new_window",
 											content="Open links in new window:"
 										)#
+										<div><small>If enabled, all links will open in a new window (tab).</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_link_new_window_toggle",
@@ -350,9 +351,6 @@
 												value=prc.agSettings.ag_display_link_new_window 
 											)#
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-open-dd"> - options lightbox/new window/self
-<p>Choose how you want links to be opened. This applies to the feed item title and the source link.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -360,6 +358,7 @@
 											field="ag_display_link_as_nofollow",
 											content="Set links as nofollow:"
 										)#
+										<div><small>If enabled, all links will use the "NoFollow" attribute.  "NoFollow" tells search engines to not follow the links.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_link_as_nofollow_toggle",
@@ -371,34 +370,25 @@
 												value=prc.agSettings.ag_display_link_as_nofollow
 											)#
 										</div>
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-follow-dd">
-<p>Enable this option to set all links displayed as "NoFollow".</p>
-<hr>
-<p>"Nofollow" provides a way to tell search engines to <em>not</em> follow certain links, such as links to feed items in this case.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_display_video_link",
-											content="Link videos:"
+											field="ag_display_video_embed",
+											content="Embed videos:"
 										)#
+										<div><small>If enabled, feed items from youtube, vimeo and dailymotion will display in an embedded video player, other videos will be linked.</small></div>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_display_video_link_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_video_link' },
-												checked=prc.agSettings.ag_display_video_link
+												name="ag_display_video_embed_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_video_embed' },
+												checked=prc.agSettings.ag_display_video_embed
 											)#
 											#html.hiddenField( 
-												name="ag_display_video_link", 
-												value=prc.agSettings.ag_display_video_link 
+												name="ag_display_video_embed", 
+												value=prc.agSettings.ag_display_video_embed 
 											)#
 										</div>
-<!---<select id="video-links" name="wprss_settings_general[video_link]">
-<option value="false" selected="selected">Original page link</option><option value="true">Embedded video player link</option>		</select>
-<div class="wprss-tooltip-content" id="wprss-tooltip-setting-video-links">
-<p>For feed items from YouTube, Vimeo or Dailymotion, you can choose whether you want to have the items link to the original page link, or a link to the embedded video player only.</p>
-</div>--->
 									</div>
 								</fieldset>
 								<fieldset>

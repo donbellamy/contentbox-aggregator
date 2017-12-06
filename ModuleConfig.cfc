@@ -34,7 +34,7 @@ component {
 			"ag_display_source_link" = "true",
 			"ag_display_link_new_window" = "true",
 			"ag_display_link_as_nofollow" = "true",
-			"ag_display_video_link" = "true",
+			"ag_display_video_embed" = "true",
 
 			"ag_display_excerpt_show" = "true",
 			"ag_display_excerpt_word_limit" = "",
