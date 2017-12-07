@@ -42,6 +42,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Validate url, title and body
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
+						// TODO: Add back in keyword filtering
+
 						// Check if item already exists
 						var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
 

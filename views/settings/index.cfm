@@ -318,7 +318,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_display_source_link",
-											content="Link source:"
+											content="Link feed source:"
 										)#
 										<div><small>If enabled, the feed name will be linked to the source site.</small></div>
 										<div class="controls">
@@ -399,6 +399,7 @@
 											field="ag_display_excerpt_show",
 											content="Show excerpts:"
 										)#
+										<div><small>If enabled, an excerpt will display under the feed item title.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_excerpt_show_toggle",
@@ -410,7 +411,6 @@
 												value=prc.agSettings.ag_display_excerpt_show 
 											)#
 										</div>
-										<!---Check this box to enable excerpt functionality--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -419,6 +419,7 @@
 											content="Word limit:"
 										)#
 										<div class="controls">
+											<small>The number of words to limit in the excerpt displayed.</small>
 											#html.inputField(
 												type="number",
 												min="0",
@@ -428,7 +429,6 @@
 												class="form-control counter"
 											)#
 										</div>
-										<!---The number of words used in the excerpt displayed--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -437,6 +437,7 @@
 											content="Excerpt ending:"
 										)#
 										<div class="controls">
+											<small>The characters appearing at the end of the excerpt.</small>
 											#html.textField(
 												name="ag_display_excerpt_ending",
 												value=prc.agSettings.ag_display_excerpt_ending,
@@ -444,7 +445,6 @@
 												maxlength="100"
 											)#
 										</div>
-										<!--- Characters appearing at end of excerpt --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -452,6 +452,7 @@
 											field="ag_display_read_more_show",
 											content="Show read more:"
 										)#
+										<div><small>If enabled, a "Read More" link will display at the end of the excerpt.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_read_more_show_toggle",
@@ -463,7 +464,6 @@
 												value=prc.agSettings.ag_display_read_more_show 
 											)#
 										</div>
-										<!--- Check this box to enable 'Read more' link functionality--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -472,6 +472,7 @@
 											content="Read more text:"
 										)#
 										<div class="controls">
+											<small>The text used for the "Read More" link.</small>
 											#html.textField(
 												name="ag_display_read_more_text",
 												value=prc.agSettings.ag_display_read_more_text,
@@ -489,6 +490,7 @@
 											field="ag_display_thumbnail_enable",
 											content="Enable thumbnails:"
 										)#
+										<div><small>If enabled, when possible a thumbnail will be imported and displayed for each feed item.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_thumbnail_enable_toggle",
@@ -500,7 +502,6 @@
 												value=prc.agSettings.ag_display_thumbnail_enable 
 											)#
 										</div>
-										<!--- Check this box to enable thumbnail functionality --->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -508,6 +509,7 @@
 											field="ag_display_thumbnail_link",
 											content="Link thumbnail:"
 										)#
+										<div><small>If enabled, the thumbnail will link to the feed item.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_display_thumbnail_link_toggle",
@@ -519,43 +521,6 @@
 												value=prc.agSettings.ag_display_thumbnail_link 
 											)#
 										</div>
-										<!--- Check this box to link the thumbnail to the feed item's permalink --->
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_thumbnail_width",
-											content="Thumbnail width:"
-										)#
-										<div class="controls">
-											#html.inputField(
-												type="number",
-												min="50",
-												max="300",
-												name="ag_display_thumbnail_width",
-												value=prc.agSettings.ag_display_thumbnail_width,
-												class="form-control"
-											)#
-										</div>
-										<!--- The thumbnail width in pixels --->
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_thumbnail_height",
-											content="Thumbnail height:"
-										)#
-										<div class="controls">
-											#html.inputField(
-												type="number",
-												min="50",
-												max="300",
-												name="ag_display_thumbnail_height",
-												value=prc.agSettings.ag_display_thumbnail_height,
-												class="form-control"
-											)#
-										</div>
-										<!--- The thumbnail height in pixels --->
 									</div>
 								</fieldset>
 								<fieldset>

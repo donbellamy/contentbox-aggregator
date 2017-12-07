@@ -7,7 +7,7 @@ component extends="coldbox.system.Interceptor" {
 
 	function agadmin_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
-		// doKeywordCleanup()
+		// doKeywordCleanup() - wont have to do this after import, just save routines
 		// doAgeCleanup()
 		// doMaxItemCleanup()
 		doFeedItemCleanup( feed );
@@ -21,6 +21,12 @@ component extends="coldbox.system.Interceptor" {
 	function agadmin_postSettingsSave( event, interceptData ) {
 		doFeedItemCleanUp();
 	}
+
+	private function doKeywordCleanup( any feed ) {}
+
+	private function doAgeCleanup( any feed ) {}
+
+	private function doMaxItemCleanup( any feed ) {}
 
 	private function doFeedItemCleanup( any feed ) {
 

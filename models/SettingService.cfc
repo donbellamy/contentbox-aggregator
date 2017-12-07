@@ -50,12 +50,6 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		}
 		prc.agSettings.ag_display_excerpt_ending = trim( prc.agSettings.ag_display_excerpt_ending );
 		prc.agSettings.ag_display_read_more_text = trim( prc.agSettings.ag_display_read_more_text );
-		if ( !val( prc.agSettings.ag_display_thumbnail_width ) ) {
-			arrayAppend( errors, "A valid thumbnail width is required." );
-		}
-		if ( !val( prc.agSettings.ag_display_thumbnail_height ) ) {
-			arrayAppend( errors, "A valid thumbnail height is required." );
-		}
 		if ( !val( prc.agSettings.ag_display_paging_max_rows ) ) {
 			arrayAppend( errors, "A valid paging max rows is required." );
 		}

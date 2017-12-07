@@ -44,8 +44,6 @@ component {
 
 			"ag_display_thumbnail_enable" = "true",
 			"ag_display_thumbnail_link" = "true",
-			"ag_display_thumbnail_width" = "150",
-			"ag_display_thumbnail_height" = "150",
 
 			"ag_display_paging_max_rows" = "10",
 			"ag_display_paging_type" = "paging", 
