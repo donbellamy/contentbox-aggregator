@@ -20,6 +20,7 @@ component extends="baseHandler" {
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.logLevels = [ "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG" ];
 		prc.pagingTypes = [
+			{ name="Load More Items", value="loadmore" },
 			{ name='Page numbers with "Next" and "Previous" page links', value="paging" },
 			{ name='"Older posts" and "Newer posts" links', value="oldnew" }
 		];

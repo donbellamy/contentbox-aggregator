@@ -544,10 +544,6 @@
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
 										</div>
-<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-setting-feed-limit">
-<p>The maximum number of feed items to display when using the shortcode.</p>
-<p>This enables pagination if set to a number smaller than the number of items to be displayed.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
@@ -556,6 +552,7 @@
 											content="Paging type:"
 										)#
 										<div class="controls">
+											<small>The type of pagination used when displaying feed items.</small>
 											#html.select(
 												name="ag_display_paging_type",
 												options=prc.pagingTypes,
@@ -566,14 +563,6 @@
 											)#
 										</div>
 									</div>
-<!---<select id="pagination" name="wprss_settings_general[pagination]">
-<option value="default" selected="selected">"Older posts" and "Newer posts" links</option>
-<option value="numbered">Page numbers with "Next" and "Previous" page links</option></select>--->
-<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-pagination">
-<p>The type of pagination to use when showing feed items on multiple pages.</p>
-<p>The first shows two links, "Older" and "Newer", which allow you to navigate through the pages.</p>
-<p>The second shows links for all the pages, together with links for the next and previous pages.</p>
-</div>--->
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="portal_options">
@@ -585,6 +574,7 @@
 											field="ag_portal_enable",
 											content="Enable portal:"
 										)#
+										<div><small>If enabled, the public portal will be enabled.  All feed items will point to their slugs rather than their permalinks and items stats will work if enabled.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_enable_toggle",
@@ -604,6 +594,7 @@
 											content="Portal title:"
 										)#
 										<div class="controls">
+											<small>The title used for the portal.</small>
 											#html.textField(
 												name="ag_portal_title",
 												value=prc.agSettings.ag_portal_title,
@@ -636,6 +627,7 @@
 											content="Portal layout:"
 										)#
 										<div class="controls">
+											<small>The layout used for the portal.</small>
 											#html.select(
 												name="ag_portal_layout",
 												options=prc.layouts,
@@ -653,6 +645,7 @@
 											field="ag_portal_hits_track",
 											content="Track item hits:"
 										)#
+										<div><small>If enabled, hit counts will be tracked for feeds and feed items.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_hits_track_toggle",
@@ -671,6 +664,7 @@
 											field="ag_portal_hits_ignore_bots",
 											content="Ignore bot hits:"
 										)#
+										<div><small>If enabled, the bot regex matching is ignored and hit tracking for bots is allowed.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_hits_ignore_bots_toggle",
@@ -690,6 +684,7 @@
 											content="Bot regex matches:"
 										)#
 										<div class="controls">
+											<small>A carriage return list of regular expressions to match against browser user agents. If it matches a bot, the hit count is ignored.</small>
 											#html.textArea(
 												name="ag_portal_hits_bot_regex", 
 												value=prc.agSettings.ag_portal_hits_bot_regex, 
@@ -708,6 +703,7 @@
 											field="ag_portal_cache_enable",
 											content="Enable portal caching:"
 										)#
+										<div><small>If enabled, feed content will be cached once it has been translated and rendered.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_cache_enable_toggle",
