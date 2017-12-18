@@ -152,6 +152,12 @@
 								field="maxAge",
 								content="Limit items by age:"
 							)#
+							<div>
+								<small>
+									The maximum age allowed for feed items.
+									Existing feed items will be deleted once they exceed this age limit.
+								</small>
+							</div>
 							<div class="controls row">
 								<div class="col-sm-6">
 									#html.inputField(
@@ -172,15 +178,6 @@
 									)#
 								</div>
 							</div>
-							<!--- 
-							<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-by-age">
-							<p>The maximum age allowed for feed items.</p>
-							<hr>
-							<p>Items already imported will be deleted if they eventually exceed this age limit.</p>
-							<p>Also, items in the RSS feed that are already older than this age will not be imported at all.</p>
-							<hr>
-							<p><em>Leave empty for no limit.</em></p>
-							</div>--->
 						</div>
 						<div class="form-group">
 							#html.label(
@@ -189,6 +186,10 @@
 								content="Limit items by number:"
 							)#
 							<div class="controls">
+								<small>
+									The maximum number of feed items to keep per feed.
+									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+								</small>
 								#html.inputField(
 									name="maxItems",
 									type="number",
@@ -198,50 +199,72 @@
 									min="0"
 								)#
 							</div>
-							<!---<div class="wprss-tooltip-content" id="wprss-tooltip-setting-limit-feed-items-imported">
-							<p>The maximum number of imported items to keep stored, for feed sources that do not have their own limit.</p>
-							<hr>
-							<p>When new items are imported and the limit for a feed source is exceeded, the oldest feed items for that feed source will be deleted to make room for the new ones.</p>
-							<p>If you already have items imported from this feed source, setting this option now may delete some of your items, in order to comply with the limit.</p>
-							<hr>
-							<p><em>Use 0 or leave empty for no limit.</em></p>
-							</div>--->
 						</div>
 					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 						<div class="form-group">
-							#html.textArea(
-								name="matchAnyFilter",
-								label="Contains any of these words/phrases:", 
-								bind=prc.feed,
-								class="form-control",
-								maxlength="255",
-								rows="3",
-								placeholder="Comma delimited list of words or phrases"
+							#html.label(
+								class="control-label",
+								field="matchAnyFilter",
+								content="Contains any of these words/phrases:"
 							)#
+							<div class="controls">
+								<small>
+									Only feed items that contain any of these words/phrases in the title or body will be imported.  
+									Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
+								</small>
+								#html.textArea(
+									name="matchAnyFilter", 
+									value=prc.feed.getMatchAnyFilter(),
+									rows="3",
+									class="form-control",
+									placeholder="Comma delimited list of words or phrases",
+									maxlength="255"
+								)#
+							</div>
 						</div>
 						<div class="form-group">
-							#html.textArea(
-								name="matchAllFilter",
-								label="Contains all of these words/phrases:",
-								bind=prc.feed,
-								class="form-control",
-								maxlength="255",
-								rows="3",
-								placeholder="Comma delimited list of words or phrases"
+							#html.label(
+								class="control-label",
+								field="matchAllFilter",
+								content="Contains all of these words/phrases:"
 							)#
+							<div class="controls">
+								<small>
+									Only feed items that contain all of these words/phrases in the title or body will be imported.  
+									Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
+								</small>
+								#html.textArea(
+									name="matchAllFilter", 
+									value=prc.feed.getMatchAllFilter(),
+									rows="3",
+									class="form-control",
+									placeholder="Comma delimited list of words or phrases",
+									maxlength="255"
+								)#
+							</div>
 						</div>
 						<div class="form-group">
-							#html.textArea(
-								name="matchNoneFilter",
-								label="Contains none of these words/phrases:", 
-								bind=prc.feed,
-								class="form-control",
-								maxlength="255",
-								rows="3",
-								placeholder="Comma delimited list of words or phrases"
+							#html.label(
+								class="control-label",
+								field="matchNoneFilter",
+								content="Contains none of these words/phrases:"
 							)#
+							<div class="controls">
+								<small>
+									Only feed items that do not contain any of these words/phrases in the title or body will be imported.  
+									Existing feed items that contain any of these words/phrases in the title or body will be deleted.
+								</small>
+								#html.textArea(
+									name="matchNoneFilter", 
+									value=prc.feed.getMatchNoneFilter(), 
+									rows="3",
+									class="form-control",
+									placeholder="Comma delimited list of words or phrases",
+									maxlength="255"
+								)#
+							</div>
 						</div>
 					</fieldset>
 				</div>

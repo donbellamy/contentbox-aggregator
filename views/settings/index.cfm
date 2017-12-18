@@ -170,7 +170,10 @@
 											content="Contains any of these words/phrases:"
 										)#
 										<div class="controls">
-											<small>Only feed items that contain any of these words/phrases in the title or body will be imported.  Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.</small>
+											<small>
+												Only feed items that contain any of these words/phrases in the title or body will be imported.  
+												Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
+											</small>
 											#html.textArea(
 												name="ag_general_match_any_filter", 
 												value=prc.agSettings.ag_general_match_any_filter,
@@ -188,7 +191,10 @@
 											content="Contains all of these words/phrases:"
 										)#
 										<div class="controls">
-											<small>Only feed items that contain all of these words/phrases in the title or body will be imported.  Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.</small>
+											<small>
+												Only feed items that contain all of these words/phrases in the title or body will be imported.  
+												Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
+											</small>
 											#html.textArea(
 												name="ag_general_match_all_filter", 
 												value=prc.agSettings.ag_general_match_all_filter,
@@ -206,7 +212,10 @@
 											content="Contains none of these words/phrases:"
 										)#
 										<div class="controls">
-											<small>Only feed items that do not contain any of these words/phrases in the title or body will be imported.  Existing feed items that contain any of these words/phrases in the title or body will be deleted.</small>
+											<small>
+												Only feed items that do not contain any of these words/phrases in the title or body will be imported.  
+												Existing feed items that contain any of these words/phrases in the title or body will be deleted.
+											</small>
 											#html.textArea(
 												name="ag_general_match_none_filter", 
 												value=prc.agSettings.ag_general_match_none_filter, 
@@ -815,11 +824,6 @@
 												maxlength="100"
 											)#
 										</div>
-<!---Latest imported feed items on WP RSS Aggregator Simple Demo Dashboard
-<div class="wprss-tooltip-content" id="wprss-tooltip-setting-custom-feed-title">
-<p>The title of the custom feed.</p>
-<p>This title will be included in the RSS source of the custom feed, in a <code>&lt;title&gt;</code> tag.</p>
-</div>--->
 									</div>
 									<div class="form-group">
 										#html.label(
