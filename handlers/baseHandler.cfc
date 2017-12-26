@@ -3,7 +3,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="settingService" inject="settingService@aggregator";
 	property name="cbMessageBox" inject="messagebox@cbmessagebox";
 	property name="cbHelper" inject="cbHelper@cb";
-
+	
 	// TODO: rename to baseAdminHandler ?  That way we can move a lot of common things here that wont be used on public side of things
 	// TODO: baseContentHandler ?  Move stuff like slugunique, slugify, defaulteditor, etc... to it
 
