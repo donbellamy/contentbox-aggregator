@@ -25,7 +25,7 @@ component {
 			"ag_general_match_any_filter" = "",
 			"ag_general_match_all_filter" = "",
 			"ag_general_match_none_filter" = "",
-			"ag_general_log_level" = "ERROR",
+			"ag_general_log_level" = "INFO",
 			"ag_general_log_file_name" = "aggregator",
 
 			"ag_display_title_link" = "true",
