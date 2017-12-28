@@ -10,7 +10,7 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 
 	}
 
-	array function validateSettings() { 
+	array function validateSettings() {
 
 		var prc = requestService.getContext().getCollection( private=true );
 		var errors = [];

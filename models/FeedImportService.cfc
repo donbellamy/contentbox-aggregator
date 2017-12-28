@@ -3,7 +3,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
-	property name="settingService" inject="settingService@cb";
+	property name="settingService" inject="settingService@aggregator";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="log" inject="logbox:logger:aggregator";
 

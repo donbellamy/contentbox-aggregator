@@ -1,22 +1,19 @@
 component extends="coldbox.system.EventHandler" {
+	//TODO: inherit from content ?
+	//contentbox.modules.contentbox-ui.handlers.content
 
-	property name="settingService" inject="settingService@cb";
-	property name="cbMessagebox" inject="messagebox@cbmessagebox";
-	property name="cbHelper" inject="CBHelper@cb";
+	property name="settingService" inject="settingService@aggregator";
+	property name="messagebox" inject="messagebox@cbmessagebox";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
-
-		CBHelper.prepareUIRequest(); // TODO: Move to interceptor
-
-		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-aggregator:portal.import" ) {
 			event.overrideEvent( "contentbox-aggregator:portal.disabled" );
 		}
 
-		// TODO Site maintenance check
+		// TODO: Site maintenance check
 
-		// TODO Portal Page Title
+		// TODO: Portal Page Title
 
 	}
 

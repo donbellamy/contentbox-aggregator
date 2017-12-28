@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-12">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
-		#html.startForm( name="settingsForm", action="#prc.xehSettingsSave#", novalidate="novalidate" )#
+		#html.startForm( name="settingsForm", action="#prc.xehAggregatorSettingsSave#", novalidate="novalidate" )#
 			#html.anchor( name="top" )#
 			<div class="panel panel-default">
 				<div class="panel-body">

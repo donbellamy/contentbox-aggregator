@@ -90,7 +90,7 @@ component {
 		aggregatorRoutes = [
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/import", handler="portal", action="import", namespace="aggregator" }, // TODO: research coldboox ways to do sched tasks
+			{ pattern="/import", handler="portal", action="import", namespace="aggregator" }, // TODO: research coldbox ways to do sched tasks
 			{ pattern="/:slug", handler="portal", action="item", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -109,10 +109,10 @@ component {
 		};
 
 		interceptors = [
+			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 

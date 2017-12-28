@@ -1,7 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="cachebox" inject="cachebox";
-	property name="settingService" inject="settingService@cb";
+	property name="settingService" inject="settingService@aggregator";
 	property name="log" inject="logbox:logger:aggregator";
 
 	function agadmin_postFeedSave( event, interceptData ) {

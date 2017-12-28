@@ -16,7 +16,7 @@ component extends="baseHandler" {
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
-			cbMessagebox.error( "You do not have permission to access feed items." );
+			messagebox.error( "You do not have permission to access feed items." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
@@ -129,7 +129,7 @@ component extends="baseHandler" {
 		}
 
 		if ( arrayLen( errors ) ) {
-			cbMessageBox.warn( messageArray=errors );
+			messagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
 
@@ -172,7 +172,7 @@ component extends="baseHandler" {
 			var rData = { "CONTENTID" = prc.feedItem.getContentID() };
 			event.renderData( type="json", data=rData );
 		} else {
-			cbMessageBox.info( "Feed Item Saved!" );
+			messagebox.info( "Feed Item Saved!" );
 			setNextEvent( prc.xehFeedItems );
 		}
 
@@ -197,9 +197,9 @@ component extends="baseHandler" {
 					arrayAppend( messages, "Feed item '#title#' deleted." );
 				}
 			}
-			cbMessageBox.info( messageArray=messages );
+			messagebox.info( messageArray=messages );
 		} else {
-			cbMessageBox.warn( "No feed Items selected!" );
+			messagebox.warn( "No feed Items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
@@ -214,9 +214,9 @@ component extends="baseHandler" {
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "agadmin_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
-			cbMessageBox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
+			messagebox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
 		} else {
-			cbMessageBox.warn( "No feed items selected!" );
+			messagebox.warn( "No feed items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
@@ -242,9 +242,9 @@ component extends="baseHandler" {
 					arrayAppend( messages, "Hits reset for '#feedItem.getTitle()#'." );
 				}
 			}
-			cbMessageBox.info( messageArray=messages );
+			messagebox.info( messageArray=messages );
 		} else {
-			cbMessageBox.warn( "No feed items selected!" );
+			messagebox.warn( "No feed items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
