@@ -7,9 +7,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="log" inject="logbox:logger:aggregator";
 
-	FeedImportService function init( entityName="cbFeedImport" ) {
+	FeedImportService function init() {
 
-		super.init( entityName=arguments.entityName, useQueryCaching=true );
+		super.init( entityName="cbFeedImport", useQueryCaching=true );
 
 		return this;
 
@@ -238,7 +238,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			}
 		}
 
-		// Did the item pass?
 		return passes;
 
 	}

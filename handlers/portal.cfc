@@ -2,6 +2,9 @@ component extends="coldbox.system.EventHandler" {
 	//TODO: inherit from content ?
 	//contentbox.modules.contentbox-ui.handlers.content
 
+	property name="feedService" inject="feedService@aggregator";
+	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="settingService" inject="settingService@aggregator";
 	property name="messagebox" inject="messagebox@cbmessagebox";
 
