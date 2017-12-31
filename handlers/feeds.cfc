@@ -178,7 +178,7 @@ component extends="baseHandler" {
 		feedService.save( prc.feed );
 
 		if ( isNew && prc.feed.isActive() || wasPaused && prc.feed.isActive() ) {
-			importFeed( prc.feed, prc.oCurrentAuthor );
+			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}
 
 		announceInterception( "agadmin_postFeedSave", {
@@ -266,13 +266,13 @@ component extends="baseHandler" {
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
-			for ( var contentID in rc.contentID ) {
+			for ( var contentID IN rc.contentID ) {
 				var feed = feedService.get( contentID );
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
-					announceInterception( "agadmin_preFeedImport", { feed=feed } ); // TODO: move to feedimportservice?
-					importFeed( feed, prc.oCurrentAuthor );
+					announceInterception( "agadmin_preFeedImport", { feed=feed } );
+					feedImportService.import( feed, prc.oCurrentAuthor );
 					announceInterception( "agadmin_postFeedImport", { feed=feed } );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
@@ -315,19 +315,7 @@ component extends="baseHandler" {
 	}
 
 	function slugify( event, rc, prc ) {
-		event.renderData( data=trim( HTMLHelper.slugify( rc.slug ) ), type="plain" );
-	}
-
-	private function importFeed( required feed, required author ) {
-
-		// TODO: Fix this so feed imports execute in their own thread, can probably remove thread stuff in feedservice
-
-		//var threadName = "import_feed_#hash( arguments.feed.getContentID() & now() )#";
-
-		//thread name="#threadName#" feed="#arguments.feed#" author="#arguments.author#" {
-			feedImportService.import( arguments.feed, arguments.author );
-		//}
-
+		event.renderData( data=trim( htmlHelper.slugify( rc.slug ) ), type="plain" );
 	}
 
 }

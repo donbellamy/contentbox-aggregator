@@ -19,6 +19,7 @@ component {
 			"ag_general_import_start_date" = "",
 			"ag_general_import_start_time" = "",
 			"ag_general_default_creator" = "",
+			"ag_general_secret_key" = hash( getCurrentTemplatePath() ),
 			"ag_general_max_age" = "",
 			"ag_general_max_age_unit" = "days",
 			"ag_general_max_items" = "",
@@ -204,6 +205,8 @@ component {
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
 		ses.removeNamespaceRoutes("aggregator");
 
+		// Remove logger?
+
 	}
 
 	function onActivate() {
@@ -220,8 +223,8 @@ component {
 		// Save permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
 		var roleService= controller.getWireBox().getInstance("roleService@cb");
-		var adminRole = roleService.findWhere( criteria = { role="Administrator" } );
-		var editorRole = roleService.findWhere( criteria = { role="Editor" } );
+		var adminRole = roleService.findWhere( { role="Administrator" } );
+		var editorRole = roleService.findWhere( { role="Editor" } );
 		for ( var item IN permissions ) {
 			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
 			if ( isNull( permission ) ) {
@@ -263,12 +266,6 @@ component {
 
 		// Delete scheduled task
 		cfschedule( action="delete", task="aggregator-import" );
-
-	}
-
-	function configureLogBox() {
-
-
 
 	}
 

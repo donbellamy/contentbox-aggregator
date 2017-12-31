@@ -22,13 +22,20 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		} else {
 			if ( len( prc.agSettings.ag_general_import_start_date ) && !isDate( prc.agSettings.ag_general_import_start_date ) ) {
 				arrayAppend( errors, "A valid start date is required." );
+			} else if ( isDate( prc.agSettings.ag_general_import_start_date ) ) {
+				prc.agSettings.ag_general_import_start_date = dateFormat( prc.agSettings.ag_general_import_start_date, "mm/dd/yy" );
 			} else {
 				prc.agSettings.ag_general_import_start_date = dateFormat( now(), "mm/dd/yy" );
 			}
 			if ( len( prc.agSettings.ag_general_import_start_time ) && !isDate( prc.agSettings.ag_general_import_start_time ) ) {
 				arrayAppend( errors, "A valid start time is required." );
+			} else if ( isDate( prc.agSettings.ag_general_import_start_time ) ) {
+				prc.agSettings.ag_general_import_start_time = timeFormat( prc.agSettings.ag_general_import_start_time, "short" );
 			} else {
 				prc.agSettings.ag_general_import_start_time = timeFormat( now(), "short" );
+			}
+			if ( !len( trim( prc.agSettings.ag_general_secret_key ) ) ) {
+				arrayAppend( errors, "A valid secret key is required." );
 			}
 		}
 		if ( len( prc.agSettings.ag_general_max_age ) && !isNumeric( prc.agSettings.ag_general_max_age ) ) {

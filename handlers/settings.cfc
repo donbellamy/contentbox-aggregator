@@ -56,7 +56,7 @@ component extends="baseHandler" {
 
 		// Import scheduled task
 		if ( len( prc.agSettings.ag_general_import_interval ) ) {
-			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=secretkey"; // TODO: Create secretkey - look at examples
+			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=" & prc.agSettings.ag_general_secret_key;
 			cfschedule( 
 				action="update",
 				task="aggregator-import",
@@ -71,16 +71,18 @@ component extends="baseHandler" {
 
 		// Configure LogBox
 		var logBoxConfig = logBox.getConfig();
-		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=rc["ag_general_log_level"], properties={ fileName=rc["ag_general_log_file_name"] } );
-		logBoxConfig.category( name="aggregator", levelMax=rc["ag_general_log_level"], appenders="aggregator" );
+		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=prc.agSettings.ag_general_log_level, properties={ fileName=prc.agSettings.ag_general_log_file_name } );
+		logBoxConfig.category( name="aggregator", levelMax=prc.agSettings.ag_general_log_level, appenders="aggregator" );
 		logBox.configure( logBoxConfig );
 
+		// TODO: test this with a cbEntryPoint defined?
+		// TODO: What if cbentrypoint is changed via the settings form?
 		// Set portal entrypoint
 		var ses = getInterceptor("SES");
 		var routes = ses.getRoutes();
 		for( var key IN routes ) {
-			if( key.namespaceRouting eq "aggregator" ){
-				key.pattern = key.regexpattern = replace(  rc["ag_portal_entrypoint"] , "/", "-", "all" ) & "/";
+			if( key.namespaceRouting EQ "aggregator" ){
+				key.pattern = key.regexpattern = replace(  prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
 			}
 		}
 		ses.setRoutes( routes );

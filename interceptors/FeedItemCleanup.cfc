@@ -7,8 +7,6 @@ component extends="coldbox.system.Interceptor" {
 
 	function agadmin_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
-		// TODO: Add keyword cleanup to import...
-		//doAgeCleanup( feed ); // TODO: Add age cleanup to import
 		doMaxItemCleanup( feed );
 	}
 

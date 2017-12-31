@@ -13,6 +13,8 @@ component extends="coldbox.system.Interceptor" {
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
+		// Entry points
+
 	}
 
 }

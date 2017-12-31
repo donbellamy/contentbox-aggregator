@@ -19,19 +19,17 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		try {
 
-			//var threadName = "retrieve_feed_#hash( arguments.feed.getContentID() & now() )#";
-			//thread action="run" name="#threadName#" url="#arguments.feed.getUrl()#" {
-				variables.feed = feedReader.retrieveFeed( arguments.feed.getUrl() );
-			//}
+			// Grab the remote feed
+			var retrievedFeed = feedReader.retrieveFeed( arguments.feed.getUrl() );
 
 			// Check for items in feed
-			if ( arrayLen( variables.feed.items ) ) {
+			if ( arrayLen( retrievedFeed.items ) ) {
 
 				// Set an item counter
 				var itemCount = 0;
 
 				// Loop over items
-				for ( var item IN variables.feed.items ) {
+				for ( var item IN retrievedFeed.items ) {
 
 					// Create a unique id to track this item
 					var uniqueId = item.id;
@@ -182,7 +180,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			// Create feed import and save
 			var feedImport = new();
 			feedImport.setFeed( arguments.feed );
-			feedImport.setMetaInfo( serializeJSON( variables.feed ) );
+			feedImport.setMetaInfo( serializeJSON( retrievedFeed ) );
 			save( feedImport );
 
 		} catch ( any e ) {

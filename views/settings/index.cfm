@@ -54,53 +54,67 @@
 											)#
 										</div>
 									</div>
-									<div class="start-date-group"<cfif !len( prc.agSettings.ag_general_import_interval ) > style="display:none;"</cfif>>
-										<div class="form-group">
-											#html.label(
-												class="control-label",
-												field="ag_general_import_start_date",
-												content="Start date:"
-											)#
-											<div><small>The date and time to begin importing feeds.</small></div>
-											<div class="controls row">
-												<div class="col-md-6">
-													<div class="input-group">
-														#html.inputField(
-															size="9", 
-															name="ag_general_import_start_date",
-															value=prc.agSettings.ag_general_import_start_date, 
-															class="form-control datepicker",
-															placeholder="Immediately"
-														)#
-														<span class="input-group-addon">
-															<span class="fa fa-calendar"></span>
-														</span>
-													</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_import_start_date",
+											content="Start date:"
+										)#
+										<div><small>The date and time to begin importing feeds.</small></div>
+										<div class="controls row">
+											<div class="col-md-6">
+												<div class="input-group">
+													#html.inputField(
+														size="9", 
+														name="ag_general_import_start_date",
+														value=prc.agSettings.ag_general_import_start_date, 
+														class="form-control datepicker",
+														placeholder="Immediately"
+													)#
+													<span class="input-group-addon">
+														<span class="fa fa-calendar"></span>
+													</span>
 												</div>
-												<div class="col-md-6">
-													<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-														<input type="text" class="form-control inline" value="#prc.agSettings.ag_general_import_start_time#" name="ag_general_import_start_time" />
-														<span class="input-group-addon">
-															<span class="fa fa-clock-o"></span>
-														</span>
-													</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+													<input type="text" class="form-control inline" value="#prc.agSettings.ag_general_import_start_time#" name="ag_general_import_start_time" id="ag_general_import_start_time" />
+													<span class="input-group-addon">
+														<span class="fa fa-clock-o"></span>
+													</span>
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											#html.label(
-												class="control-label",
-												field="ag_general_default_creator",
-												content="Default creator:"
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_default_creator",
+											content="Default creator:"
+										)#
+										<div class="controls">
+											<small>The account used during the automated feed import process.</small>
+											<select name="ag_general_default_creator" id="ag_general_default_creator" class="form-control">
+												<cfloop array="#prc.authors#" index="author">
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+												</cfloop>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_secret_key",
+											content="Secret key:"
+										)#
+										<div class="controls">
+											<small>The secret key used to secure the automated feed import process.</small>
+											#html.textField(
+												name="ag_general_secret_key",
+												value=prc.agSettings.ag_general_secret_key,
+												class="form-control",
+												maxlength="100"
 											)#
-											<div class="controls">
-												<small>The account used during the automated feed import process.</small>
-												<select name="ag_general_default_creator" id="crag_general_default_creatoreator" class="form-control">
-													<cfloop array="#prc.authors#" index="author">
-														<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
-													</cfloop>
-												</select>
-											</div>
 										</div>
 									</div>
 								</fieldset>
