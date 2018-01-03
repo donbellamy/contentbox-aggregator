@@ -20,16 +20,16 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		try {
 
 			// Grab the remote feed
-			var retrievedFeed = feedReader.retrieveFeed( arguments.feed.getUrl() );
+			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getUrl() );
 
 			// Check for items in feed
-			if ( arrayLen( retrievedFeed.items ) ) {
+			if ( arrayLen( remoteFeed.items ) ) {
 
 				// Set an item counter
 				var itemCount = 0;
 
 				// Loop over items
-				for ( var item IN retrievedFeed.items ) {
+				for ( var item IN remoteFeed.items ) {
 
 					// Create a unique id to track this item
 					var uniqueId = item.id;
@@ -112,6 +112,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										// Increase item count
 										itemCount++;
 
+										// Log item saved
+										if ( log.canInfo() ) {
+											log.info("Feed item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+										}
+
 									} catch( any e ) {
 
 										// Log error
@@ -119,11 +124,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 										}
 
-									}
-								
-									// Log item saved
-									if ( log.canInfo() ) {
-										log.info("Feed item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
 									}
 								
 								} else {
@@ -180,7 +180,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			// Create feed import and save
 			var feedImport = new();
 			feedImport.setFeed( arguments.feed );
-			feedImport.setMetaInfo( serializeJSON( retrievedFeed ) );
+			feedImport.setMetaInfo( serializeJSON( remoteFeed ) );
 			save( feedImport );
 
 		} catch ( any e ) {

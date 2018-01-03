@@ -16,9 +16,7 @@ component extends="coldbox.system.EventHandler" {
 			event.overrideEvent( "contentbox-aggregator:portal.disabled" );
 		}
 
-		// TODO: Site maintenance check
-
-		// TODO: Portal Page Title
+		// TODO: Site maintenance check?  or inherit from content handler?
 
 	}
 
@@ -26,8 +24,6 @@ component extends="coldbox.system.EventHandler" {
 
 		prc.missingPage = event.getCurrentRoutedURL();
 		prc.missingRoutedURL = event.getCurrentRoutedURL();
-
-		// TODO: Page Title - 404 etc...
 
 		event.setHTTPHeader( "404", "Page not found" );
 
@@ -37,6 +33,9 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	function index( event, rc, prc ) {
+
+		prc.oPaging = getModel( "Paging@cb" );		
+
 		event.setView( "portal/index" );
 	}
 
@@ -66,6 +65,9 @@ component extends="coldbox.system.EventHandler" {
 		}
 
 		if ( rc.key EQ prc.agSettings.ag_general_secret_key  && !isNull( author ) ) {
+
+			// Thread this?
+			setting requestTimeout="999999";
 
 			var feeds = feedService.findAllWhere( { isActive=true } );
 
