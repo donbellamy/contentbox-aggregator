@@ -20,12 +20,16 @@ component {
 			"ag_general_import_start_time" = "",
 			"ag_general_default_creator" = "",
 			"ag_general_secret_key" = hash( getCurrentTemplatePath() ),
+			"ag_general_max_feed_imports" = "20",
+
 			"ag_general_max_age" = "",
 			"ag_general_max_age_unit" = "days",
 			"ag_general_max_items" = "",
+			
 			"ag_general_match_any_filter" = "",
 			"ag_general_match_all_filter" = "",
 			"ag_general_match_none_filter" = "",
+
 			"ag_general_log_level" = "INFO",
 			"ag_general_log_file_name" = "aggregator",
 
@@ -91,7 +95,7 @@ component {
 		aggregatorRoutes = [
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/import", handler="portal", action="import", namespace="aggregator" }, // TODO: research coldbox ways to do sched tasks
+			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="item", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -113,6 +117,7 @@ component {
 			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
@@ -205,8 +210,6 @@ component {
 		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
 		ses.removeNamespaceRoutes("aggregator");
 
-		// Remove logger?
-
 	}
 
 	function onActivate() {
@@ -264,7 +267,7 @@ component {
 			}
 		}
 
-		// Delete scheduled task
+		// Delete scheduled task (will delete if one exists)
 		cfschedule( action="delete", task="aggregator-import" );
 
 	}

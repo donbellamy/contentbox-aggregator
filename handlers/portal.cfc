@@ -53,8 +53,10 @@ component extends="coldbox.system.EventHandler" {
 
 	function import( event, rc, prc ) {
 
+		// Secret key in settings
 		event.paramValue( name="key", value="" );
 
+		// To import we must have an author, so check for one first
 		if ( len( prc.agSettings.ag_general_default_creator ) ) {
 			var author = authorService.get( prc.agSettings.ag_general_default_creator );
 		} else if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
@@ -64,9 +66,10 @@ component extends="coldbox.system.EventHandler" {
 			var author = authorService.findWhere( { role=adminRole } );
 		}
 
+		// Only import if the keys match and an author is defined
 		if ( rc.key EQ prc.agSettings.ag_general_secret_key  && !isNull( author ) ) {
 
-			// Thread this?
+			// Thread this instead? - in a future version yes
 			setting requestTimeout="999999";
 
 			var feeds = feedService.findAllWhere( { isActive=true } );

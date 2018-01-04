@@ -22,6 +22,8 @@ component persistent="true"
 		update="false"
 		index="idx_importedDate";
 
+	// TODO: Add number imported
+
 	property name="metaInfo"
 		notnull="true"
 		ormtype="text";

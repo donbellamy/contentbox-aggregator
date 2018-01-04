@@ -117,6 +117,27 @@
 											)#
 										</div>
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_max_feed_imports",
+											content="Import history limit:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of records to keep in the feed import history.
+												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
+											</small>
+											#html.inputField(
+												name="ag_general_max_feed_imports",
+												type="number",
+												value=prc.agSettings.ag_general_max_feed_imports,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
