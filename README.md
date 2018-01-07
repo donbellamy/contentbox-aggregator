@@ -1,2 +1,2 @@
-# contentbox-aggregator
-ContentBox Aggregator
+# contentbox-rss-aggregator
+ContentBox RSS Aggregator

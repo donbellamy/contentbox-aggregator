@@ -42,4 +42,5 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 	}
+
 }

@@ -7,7 +7,7 @@ component extends="coldbox.system.Interceptor" {
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin"  {
 
 		// Only execute for aggregator module (eventPattern doesn't include the module name)
-		if( event.getValue("moduleEntryPoint","") NEQ getModuleConfig("contentbox-aggregator").entryPoint ) {
+		if( event.getValue("moduleEntryPoint","") NEQ getModuleConfig("contentbox-rss-aggregator").entryPoint ) {
 			return;
 		}
 
@@ -15,7 +15,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Entry point
-		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
+		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-rss-aggregator').entryPoint#";
 
 		// Feeds
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";

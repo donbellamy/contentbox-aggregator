@@ -12,8 +12,8 @@ component extends="coldbox.system.EventHandler" {
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
-		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-aggregator:portal.import" ) {
-			event.overrideEvent( "contentbox-aggregator:portal.disabled" );
+		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
+			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
 		}
 
 		// TODO: Site maintenance check?  or inherit from content handler?

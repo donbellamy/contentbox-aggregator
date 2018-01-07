@@ -1,6 +1,6 @@
 component {
 
-	this.title = "RSS Aggregator";
+	this.title = "ContentBox RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
 	this.description = "RSS feed aggregator for ContentBox";
@@ -179,7 +179,7 @@ component {
 		for ( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
 			var args = duplicate( aggregatorRoutes[ x ] );
 			if ( structKeyExists( args, "handler" ) ) {
-				args.handler = "contentbox-aggregator:#args.handler#";
+				args.handler = "contentbox-rss-aggregator:#args.handler#";
 			}
 			ses.addRoute(argumentCollection=args);
 		}
