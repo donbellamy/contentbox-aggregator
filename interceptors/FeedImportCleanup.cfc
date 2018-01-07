@@ -35,7 +35,7 @@ component extends="coldbox.system.Interceptor" {
 					item.removeFeedImport( feedImport );
 					feedImportService.delete( feedImport );
 					if ( log.canInfo() ) {
-						log.info("Feed import ('#id#') deleted by general setting 'Import history limit'.");
+						log.info("Feed import deleted for feed '#item.getTitle()#' using general setting for 'Import history limit'.");
 					}
 				}
 			}
