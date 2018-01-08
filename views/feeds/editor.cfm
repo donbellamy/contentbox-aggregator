@@ -56,11 +56,41 @@
 								<i class="fa fa-history"></i> History
 							</a>
 						</li>
+						<li role="presentation">
+							<a href="##imports" aria-controls="imports" role="tab" data-toggle="tab">
+								<i class="fa fa-download"></i> Imports
+							</a>
+						</li>
 					</cfif>
 				</ul>
 			</div>
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
+					<div class="form-group">
+						<label for="url" class="control-label">
+							Feed URL:
+						</label>
+						<div class="controls">
+							<small>
+								The URL of the feed source.
+								Be sure to include the <code>http(s)://</code> prefix in the url.
+							</small>
+							<div class="input-group">
+								#html.inputfield(
+									type="url",
+									name="url",
+									bind=prc.feed,
+									maxlength="255",
+									required="required",
+									title="The url for this feed",
+									class="form-control"
+								)#
+								<a id="validateFeed" title="Validate Feed URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Validate Feed URL" data-container="body">
+									<i class="fa fa-rss"></i>
+								</a>
+							</div>
+						</div>
+					</div>
 					#html.textfield(
 						label="Title:",
 						name="title",
@@ -96,31 +126,6 @@
 									<i id="togglePermalink" class="fa fa-#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'lock' : 'unlock'#"></i>
 								</a>
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="url" class="control-label">
-							Feed URL:
-						</label>
-						<div class="controls">
-							<div class="input-group">
-								#html.inputfield(
-									type="url",
-									name="url",
-									bind=prc.feed,
-									maxlength="255",
-									required="required",
-									title="The url for this feed",
-									class="form-control"
-								)#
-								<a id="validateFeed" title="Validate Feed URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Validate Feed URL" data-container="body">
-									<i class="fa fa-rss"></i>
-								</a>
-							</div>
-							<!--- <div class="wprss-tooltip-content" id="wprss-tooltip-field_wprss_url">
-							<p>The URL of the feed source. In most cases, the URL of the site will also work, but for best results we recommend trying to find the URL of the RSS feed.</p>
-							<p>Also include the <code>http://</code> prefix in the URL.</p>
-							</div> --->
 						</div>
 					</div>
 					<div class="form-group">
@@ -300,6 +305,10 @@
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="history">
+					<!--- TODO: Fix This
+						#prc.versionsViewlet# --->
+				</div>
+				<div role="tabpanel" class="tab-pane" id="imports">
 					<!--- TODO: Fix This
 						#prc.versionsViewlet# --->
 				</div>

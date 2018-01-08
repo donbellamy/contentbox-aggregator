@@ -1,6 +1,6 @@
 component {
 
-	this.title = "ContentBox RSS Aggregator";
+	this.title = "RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
 	this.description = "RSS feed aggregator for ContentBox";

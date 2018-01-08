@@ -91,6 +91,7 @@ component extends="baseHandler" {
 		// Editor
 		event.paramValue( "contentID", 0 );
 		event.paramValue( "contentType", "Feed" );
+		event.paramValue( "url", "" );
 		event.paramValue( "title", "" );
 		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
