@@ -22,7 +22,9 @@ component persistent="true"
 		update="false"
 		index="idx_importedDate";
 
-	// TODO: Add number imported
+	property name="numberImported"
+		notnull="true"
+		ormtype="long";
 
 	property name="metaInfo"
 		notnull="true"
@@ -41,6 +43,7 @@ component persistent="true"
 
 	FeedImport function init() {
 		importedDate = now();
+		numberImported = 0;
 		return this;
 	}
 

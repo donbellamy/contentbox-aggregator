@@ -3,7 +3,7 @@ component {
 	this.title = "RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
-	this.description = "RSS feed aggregator for ContentBox";
+	this.description = "RSS aggregator for ContentBox";
 	this.version = "1.0.0";
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
