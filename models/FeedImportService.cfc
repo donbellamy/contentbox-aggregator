@@ -92,7 +92,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										// TODO: Clean html
 										// TODO: Validate feedItem, so add contentversion as last step after validating the body
 										feedItem.addNewContentVersion( 
-											content=left( item.body, 8000 ), //TODO: Move this to validate()
+											content=left( item.body, 8000 ),
 											changelog="Item imported.",
 											author=arguments.author
 										);

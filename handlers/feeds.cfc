@@ -54,6 +54,7 @@ component extends="baseHandler" {
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			sortOrder="title ASC"
 		);
+
 		prc.feeds = results.feeds;
 		prc.feedsCount = results.count;
 

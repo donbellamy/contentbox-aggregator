@@ -133,14 +133,6 @@ component extends="baseHandler" {
 			return editor( argumentCollection=arguments );
 		}
 
-		// TODO: strip out, not needed?
-		var isNew = ( NOT prc.feedItem.isLoaded() );
-
-		if ( isNew ) {
-			prc.feed.setCreator( prc.oCurrentAuthor );
-		}
-
-		// TODO: Do we care about this?  We will be using excerpt mainly, content is the full content on import
 		prc.feedItem.addNewContentVersion( 
 			content=rc.content,
 			changelog=rc.changelog,
@@ -156,7 +148,6 @@ component extends="baseHandler" {
 
 		announceInterception( "agadmin_preFeedItemSave", {
 			feedItem=prc.feedItem,
-			isNew=isNew, // TODO: Not relevanet
 			originalSlug=originalSlug
 		});
 
@@ -164,7 +155,6 @@ component extends="baseHandler" {
 
 		announceInterception( "agadmin_postFeedItemSave", {
 			feedItem=prc.feedItem,
-			isNew=isNew,
 			originalSlug=originalSlug
 		});
 
