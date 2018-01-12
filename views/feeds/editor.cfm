@@ -336,6 +336,24 @@
 								<div class="panel-body">
 									<table class="table table-hover table-condensed table-striped size12">
 										<tr>
+											<th class="col-md-4">Last Imported:</th>
+											<td class="col-md-8">
+												<cfif isDate( prc.feed.getLastImportedDate() ) >
+													#prc.feed.getDisplayLastImportedDate()#
+												<cfelse>
+													Never imported
+												</cfif>
+											</td>
+										</tr>
+										<cfif prc.feed.hasChild() >
+											<tr>
+												<th class="col-md-4">Feed Items:</th>
+												<td class="col-md-8">
+													#prc.feed.getNumberOfChildren()#
+												</td>
+											</tr>
+										</cfif>
+										<tr>
 											<th class="col-md-4">Created By:</th>
 											<td class="col-md-8">
 												<a href="mailto:#prc.feed.getCreatorEmail()#">#prc.feed.getCreatorName()#</a>
@@ -371,24 +389,6 @@
 												#prc.feed.getActiveContent().getDisplayCreatedDate()#
 											</td>
 										</tr>
-										<tr>
-											<th class="col-md-4">Last Imported On:</th>
-											<td class="col-md-8">
-												<cfif isDate( prc.feed.getLastImportedDate() ) >
-													#prc.feed.getDisplayLastImportedDate()#
-												<cfelse>
-													Never imported
-												</cfif>
-											</td>
-										</tr>
-										<cfif prc.feed.hasChild() >
-											<tr>
-												<th class="col-md-4">Feed Items:</th>
-												<td class="col-md-8">
-													#prc.feed.getNumberOfChildren()#
-												</td>
-											</tr>
-										</cfif>
 										<tr>
 											<th class="col-md-4">Views:</th>
 											<td class="col-md-8">

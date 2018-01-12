@@ -34,14 +34,6 @@
 			</div>
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
-					<div class="form-group">
-						<label class="control-label">
-							Feed:
-						</label>
-						<div class="controls">
-							<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#prc.feedItem.getFeed().getContentID()#">#prc.feedItem.getFeed().getTitle()#</a>
-						</div>
-					</div>
 					#html.textfield(
 						label="Title:",
 						name="title",
@@ -136,8 +128,18 @@
 							<div id="feedItemInfo" class="panel-collapse collapse in">
 								<div class="panel-body">
 									<table class="table table-hover table-condensed table-striped size12">
-										<!--- TODO: What here?  Feed again?--->
-										<!--- DatePublished, author --->
+										<tr>
+											<th class="col-md-4">Feed:</th>
+											<td class="col-md-8">
+												<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#prc.feedItem.getFeed().getContentID()#">#prc.feedItem.getFeed().getTitle()#</a>
+											</td>
+										</tr>
+										<tr>
+											<th class="col-md-4">Published Date:</th>
+											<td class="col-md-8">
+												#prc.feedItem.getDisplayDatePublished()#
+											</td>
+										</tr>
 										<tr>
 											<th class="col-md-4">Created By:</th>
 											<td class="col-md-8">
