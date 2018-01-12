@@ -140,19 +140,19 @@
 											</td>
 										</tr>
 										<tr>
-											<th class="col-md-4">Published Date:</th>
+											<th class="col-md-4">Date Published:</th>
 											<td class="col-md-8">
 												#prc.feedItem.getDisplayDatePublished()#
 											</td>
 										</tr>
 										<tr>
-											<th class="col-md-4">Created By:</th>
+											<th class="col-md-4">Imported By:</th>
 											<td class="col-md-8">
 												<a href="mailto:#prc.feedItem.getCreatorEmail()#">#prc.feedItem.getCreatorName()#</a>
 											</td>
 										</tr>
 										<tr>
-											<th class="col-md-4">Created On:</th>
+											<th class="col-md-4">Imported On:</th>
 											<td class="col-md-8">
 												#prc.feedItem.getDisplayCreatedDate()#
 											</td>

@@ -62,20 +62,22 @@
 				<td class="text-center">
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feed.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feed.getContentID()#" class="hide">
-						<i class="fa fa-user"></i>
-						Created by <a href="mailto:#feed.getCreatorEmail()#">#feed.getCreatorName()#</a> on 
-						#feed.getDisplayCreatedDate()#
-						<br/>
-						<i class="fa fa-calendar"></i> 
-						Last edit by <a href="mailto:#feed.getAuthorEmail()#">#feed.getAuthorName()#</a> on 
-						#feed.getActiveContent().getDisplayCreatedDate()#
-						<br/>
 						<i class="fa fa-rss"></i>
+						Last imported: 
 						<cfif isDate( feed.getLastImportedDate() ) >
-							Last imported on #feed.getDisplayLastImportedDate()#
+							#feed.getDisplayLastImportedDate()#
 						<cfelse>
 							Never imported
 						</cfif>
+						<br />
+						<i class="fa fa-user"></i>
+						Created by: <a href="mailto:#feed.getCreatorEmail()#">#feed.getCreatorName()#</a> on 
+						#feed.getDisplayCreatedDate()#
+						<br />
+						<i class="fa fa-calendar"></i> 
+						Last edit by: <a href="mailto:#feed.getAuthorEmail()#">#feed.getAuthorName()#</a> on 
+						#feed.getActiveContent().getDisplayCreatedDate()#
+						<br />
 					</div>
 					<div class="btn-group btn-group-sm">
 						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="##" title="Feed Actions"><i class="fa fa-cogs fa-lg"></i></a>

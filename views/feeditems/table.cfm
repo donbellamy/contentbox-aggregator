@@ -5,7 +5,7 @@
 			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'contentID')"/></th>
 			<th>Name</th>
 			<th width="125">Feed</th>
-			<th width="100">Published Date</th>
+			<th width="100">Date Published</th>
 			<th width="40" class="text-center"><i class="fa fa-globe fa-lg" title="Published Status"></i></th>
 			<th width="40" class="text-center"><i class="fa fa-signal fa-lg" title="Hits"></i></th>
 			<th width="100" class="text-center {sorter:false}">Actions</th>
@@ -52,7 +52,14 @@
 				<td class="text-center">
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feedItem.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feedItem.getContentID()#" class="hide">
-						<!--- TODO: what do we want here? --->
+						<i class="fa fa-user"></i>
+						Imported by: <a href="mailto:#feedItem.getCreatorEmail()#">#feedItem.getCreatorName()#</a> on 
+						#feedItem.getDisplayCreatedDate()#
+						<br />
+						<i class="fa fa-calendar"></i>
+						Last edit by: <a href="mailto:#feedItem.getAuthorEmail()#">#feedItem.getAuthorName()#</a> on 
+						#feedItem.getActiveContent().getDisplayCreatedDate()#
+						<br />
 					</div>
 					<div class="btn-group btn-group-sm">
 						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="##" title="Feed Item Actions"><i class="fa fa-cogs fa-lg"></i></a>
