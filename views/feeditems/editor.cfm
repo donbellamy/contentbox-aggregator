@@ -7,7 +7,17 @@
 		<span class="fa fa-cog"></span>
 	</button>
 	<ul class="dropdown-menu">
-		<!--- TODO: What to do here? --->
+		<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
+			<li><a href="javascript:quickPublish( false )"><i class="fa fa-globe"></i> Publish</a></li>
+		</cfif>
+		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
+		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
+		<cfif prc.agSettings.ag_portal_enable >
+			<!--- prc.agHelper.linkFeedItem( prc.feedItem ) --->
+			<li><a href="#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/#prc.feedItem.getSlug()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+		<cfelse>
+			<li><a href="#prc.feedItem.getUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+		</cfif>
 	</ul>
 </div>
 #html.startForm( 

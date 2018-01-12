@@ -15,9 +15,12 @@
 		<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) && prc.feed.isLoaded() >
 			<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Quick Import</a></li>
 		</cfif>
-		<cfif prc.agSettings.ag_portal_enable && prc.feed.isLoaded() >
-			<!---<li><a href="#prc.cbHelper.linkPage( prc.page )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>--->
-			<li><a href="javascript:alert('TODO: Implement open in site');" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+		<cfif prc.feed.isLoaded() >
+			<cfif prc.agSettings.ag_portal_enable >
+				<li><a href="#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/#prc.feed.getSlug()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+			<cfelse>
+				<li><a href="#prc.feed.getUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+			</cfif>
 		</cfif>
 	</ul>
 </div>

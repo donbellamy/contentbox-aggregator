@@ -94,8 +94,9 @@
 								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
 							<cfif prc.agSettings.ag_portal_enable >
-								<!---<li><a href="#prc.CBHelper.linkEntry(entry)#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>--->
-								<li><a href="javascript:alert('TODO: Implement open in site');" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
+								<li><a href="#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/#feed.getSlug()#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
+							<cfelse>
+								<li><a href="#feed.getUrl()#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
 							</cfif>
 						</ul>
 					</div>
