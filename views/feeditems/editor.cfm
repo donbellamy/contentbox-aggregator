@@ -59,13 +59,10 @@
 					<div class="form-group">
 						<label for="slug" class="control-label">
 							Permalink:
-							<!--- TODO: Only show if portal is enabled --->
-							<!--- prc.agHelper.isPortalEnabled() --->
-							<!--- TODO: Create a helper for agHelper, like getPortalLink() getFeedLink() etc... --->
-							<!--- TODO: fix javascript slug functions --->
 							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<!--- TODO: Figure out correct url for feed items /news/? --->
-							<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/</small>
+							<cfif prc.agSettings.ag_portal_enable >
+								<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/</small>
+							</cfif>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>
@@ -85,7 +82,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<!--- TODO remove preview if portal is off --->
+						<!--- TODO: preview should pull in url from remote site --->
 						<!--- TODO: Write own tag if run into issues here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feedItem } )#
 						#html.textarea(
@@ -95,8 +92,6 @@
 							class="form-control"
 						)#
 					</div>
-					<p>TODO: Copy image to featured image??</p>
-					<p>TODO: Copy from above</p>
 					<div class="form-group">
 						<!--- TODO: rename Body and use content for excerpt --->
 						<!--- TODO: Setting to turn on/off excerpts? --->
