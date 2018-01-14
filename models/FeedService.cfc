@@ -60,6 +60,18 @@ component extends="BaseService" singleton {
 
 	}
 
+	array function getFeedsForImport() {
+
+		var hql = "SELECT f FROM cbFeed f 
+			WHERE f.isActive = true
+			AND ( f.startDate IS NULL OR f.startDate >= :now )
+			AND ( f.stopDate IS NULL OR f.stopDate <= :now )";
+		var params = { "now"=now() };
+		
+		return executeQuery( query=hql, params=params, asQuery=false );
+
+	}
+
 	FeedService function bulkActiveState( required any contentID, required string status ) {
 
 		var active = false;

@@ -72,7 +72,7 @@ component extends="coldbox.system.EventHandler" {
 			// Thread this instead? - in a future version yes
 			setting requestTimeout="999999";
 
-			var feeds = feedService.findAllWhere( { isActive=true } );
+			var feeds = feedService.getFeedsForImport();
 
 			for ( var feed IN feeds ) {
 				announceInterception( "agadmin_preFeedImport", { feed=feed } );
