@@ -80,7 +80,7 @@ component extends="baseHandler" {
 		}
 
 		if ( prc.feed.isLoaded() ) {
-			prc.feedItems = feedItemService.getLatest( prc.feed );
+			prc.feedItems = feedItemService.getLatestFeedItems( prc.feed );
 		}
 
 		event.setView( "feeds/editor" );

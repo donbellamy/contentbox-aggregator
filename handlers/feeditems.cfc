@@ -51,8 +51,7 @@ component extends="baseHandler" {
 			category=rc.category,
 			status=rc.status,
 			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
-			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			sortOrder="datePublished DESC"
+			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows )
 		);
 		prc.feedItems = results.feedItems;
 		prc.feedItemsCount = results.count;

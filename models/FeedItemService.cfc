@@ -46,7 +46,7 @@ component extends="BaseService" singleton {
 		}
 
 		if ( !len( arguments.sortOrder ) ) {
-			arguments.sortOrder = "title ASC";
+			arguments.sortOrder = "datePublished DESC";
 		}
 
 		results.count = c.count( "contentID" );
@@ -61,14 +61,19 @@ component extends="BaseService" singleton {
 
 	}
 
-	array function getLatest( required Feed feed, numeric max=5 ) {
+	array function getFeedItems( required Feed feed ) {
+		var results = search( feed=arguments.feed.getContentID() );
+		return results.feedItems;
+	}
 
-		var c = newCriteria()
-			.eq( "parent.contentID", arguments.feed.getContentID() )
-			.list( max=arguments.max, sortOrder="datePublished DESC", asQuery=false );
+	array function getLatestFeedItems( required Feed feed, numeric max=5 ) {
+		var results = search( feed=arguments.feed.getContentID(), max=arguments.max );
+		return results.feedItems;
+	}
 
-		return c;
-
+	struct function getPublishedFeedItems() {
+		var results = {};
+		return results;
 	}
 
 }

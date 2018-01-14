@@ -31,7 +31,6 @@ component extends="coldbox.system.Interceptor" {
 			if ( maxFeedImports && arrayLen( feedImports ) GT maxFeedImports ) {
 				var importsToDelete = arraySlice( feedImports, maxFeedImports + 1 );
 				for ( var feedImport IN importsToDelete ) {
-					var id = feedImport.getFeedImportID();
 					item.removeFeedImport( feedImport );
 					feedImportService.delete( feedImport );
 					if ( log.canInfo() ) {
