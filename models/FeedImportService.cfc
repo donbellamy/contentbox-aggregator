@@ -70,7 +70,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											feedItem.setAuthor( item.author );
 										}
 										var now = now();
-										// TODO: Validate these dates, we have 2 pu dates, one in the system and one in the feed, make sure we arent mixing them up
 										if ( isDate( item.datePublished ) ) {
 											feedItem.setDatePublished( item.datePublished );
 										} else {
@@ -97,14 +96,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											author=arguments.author
 										);
 										if ( feedItem.getDatePublished() GT now ) {
-											feedItem.setpublishedDate( feedItem.getDatePublished() );
+											feedItem.setPublishedDate( feedItem.getDatePublished() );
 										} else {
-											feedItem.setpublishedDate( now );
+											feedItem.setPublishedDate( now );
 										}
 										if ( arguments.feed.autoPublishItems() ) {
-											feedItem.setisPublished( true );
+											feedItem.setIsPublished( true );
 										} else {
-											feedItem.setisPublished( false );
+											feedItem.setIsPublished( false );
 										}
 
 										// Save item
