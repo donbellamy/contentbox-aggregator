@@ -19,6 +19,7 @@ $( document ).ready( function() {
 	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
+	$("##versionsPager .buttonBar .btn-default").hide();
 });
 function importFeed() {
 	var $feedForm = $("##feedForm");

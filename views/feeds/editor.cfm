@@ -307,14 +307,14 @@
 						)#
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="history">
-					<!--- TODO: Fix This
-						#prc.versionsViewlet# --->
-				</div>
-				<div role="tabpanel" class="tab-pane" id="imports">
-					<!--- TODO: Fix This
-						#prc.versionsViewlet# --->
-				</div>
+				<cfif prc.feed.isLoaded() >
+					<div role="tabpanel" class="tab-pane" id="history">
+						#prc.versionsViewlet#
+					</div>
+					<div role="tabpanel" class="tab-pane" id="imports">
+						<!--- TODO: Fix This #prc.versionsViewlet# --->
+					</div>
+				</cfif>
 			</div>
 		</div>
 	</div>

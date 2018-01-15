@@ -39,7 +39,11 @@
 							<i class="fa fa-edit"></i> Editor
 						</a>
 					</li>
-					<!--- TODO: History? --->
+					<li role="presentation">
+						<a href="##history" aria-controls="history" role="tab" data-toggle="tab">
+							<i class="fa fa-history"></i> History
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div class="panel-body tab-content">
@@ -107,6 +111,9 @@
 						<!---</cfif>--->
 					</div>
 				</div>
+				<div role="tabpanel" class="tab-pane" id="history">
+					#prc.versionsViewlet#
+				</div>
 			</div>
 		</div>
 	</div>
@@ -118,80 +125,75 @@
 			<div class="panel-body">
 				#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/publishing", args={ content=prc.feedItem } )#
 				<div id="accordion" class="panel-group accordion" data-stateful="feedItem-sidebar">
-					<!--- TODO: Would a feed item ever not be loaded?  
-						Do we want to support creating feeed items?  
-						Any reason to do so? --->
-					<cfif prc.feedItem.isLoaded() >
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="##accordion" href="##feedItemInfo">
-										<i class="fa fa-info-circle fa-lg"></i> Info
-									</a>
-								</h4>
-							</div>
-							<div id="feedItemInfo" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<table class="table table-hover table-condensed table-striped size12">
-										<tr>
-											<th class="col-md-4">Feed:</th>
-											<td class="col-md-8">
-												<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#prc.feedItem.getFeed().getContentID()#">#prc.feedItem.getFeed().getTitle()#</a>
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Date Published:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getDisplayDatePublished()#
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Imported By:</th>
-											<td class="col-md-8">
-												<a href="mailto:#prc.feedItem.getCreatorEmail()#">#prc.feedItem.getCreatorName()#</a>
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Imported On:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getDisplayCreatedDate()#
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Published On:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getDisplayPublishedDate()#
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Version:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getActiveContent().getVersion()#
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Last Edit By:</th>
-											<td class="col-md-8">
-												<a href="mailto:#prc.feedItem.getAuthorEmail()#">#prc.feedItem.getAuthorName()#</a>
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Last Edit On:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getActiveContent().getDisplayCreatedDate()#
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-4">Views:</th>
-											<td class="col-md-8">
-												#prc.feedItem.getNumberOfHits()#
-											</td>
-										</tr>
-									</table>
-								</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="##accordion" href="##feedItemInfo">
+									<i class="fa fa-info-circle fa-lg"></i> Info
+								</a>
+							</h4>
+						</div>
+						<div id="feedItemInfo" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<table class="table table-hover table-condensed table-striped size12">
+									<tr>
+										<th class="col-md-4">Feed:</th>
+										<td class="col-md-8">
+											<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#prc.feedItem.getFeed().getContentID()#">#prc.feedItem.getFeed().getTitle()#</a>
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Date Published:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getDisplayDatePublished()#
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Imported By:</th>
+										<td class="col-md-8">
+											<a href="mailto:#prc.feedItem.getCreatorEmail()#">#prc.feedItem.getCreatorName()#</a>
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Imported On:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getDisplayCreatedDate()#
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Published On:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getDisplayPublishedDate()#
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Version:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getActiveContent().getVersion()#
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Last Edit By:</th>
+										<td class="col-md-8">
+											<a href="mailto:#prc.feedItem.getAuthorEmail()#">#prc.feedItem.getAuthorName()#</a>
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Last Edit On:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getActiveContent().getDisplayCreatedDate()#
+										</td>
+									</tr>
+									<tr>
+										<th class="col-md-4">Views:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getNumberOfHits()#
+										</td>
+									</tr>
+								</table>
 							</div>
 						</div>
-					</cfif>
+					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">

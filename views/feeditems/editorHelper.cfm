@@ -5,6 +5,7 @@ var feedItemSaveUrl = "#event.buildLink( prc.xehFeedItemSave )#";
 $( document ).ready( function() {
 	var $feedItemForm = $("##feedItemForm");
 	setupEditors( $feedItemForm, true, feedItemSaveUrl );
+	$("##versionsPager .buttonBar .btn-default").hide();
 });
 </script>
 </cfoutput>

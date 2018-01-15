@@ -80,6 +80,7 @@ component extends="baseHandler" {
 		if ( !prc.feedItem.isLoaded() ) {
 			setNextEvent( prc.xehFeedItems );
 		} else {
+			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
 			event.setView( "feeditems/editor" );
 		}
 

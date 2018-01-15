@@ -81,6 +81,7 @@ component extends="baseHandler" {
 
 		if ( prc.feed.isLoaded() ) {
 			prc.feedItems = feedItemService.getLatestFeedItems( prc.feed );
+			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
 		}
 
 		event.setView( "feeds/editor" );
