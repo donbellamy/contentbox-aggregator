@@ -19,6 +19,8 @@ $( document ).ready( function() {
 	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
+	// Hide quick preview and full history links for now
+	$("##contentToolBar .pull-right").hide();
 	$("##versionsPager .buttonBar .btn-default").hide();
 });
 function importFeed() {
