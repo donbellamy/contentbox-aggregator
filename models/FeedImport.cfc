@@ -41,6 +41,15 @@ component persistent="true"
 		fkcolumn="FK_feedID"
 		lazy="true";
 
+	// M20 -> Importer
+	property name="importer"
+		notnull="true"
+		cfc="contentbox.models.security.Author"
+		fieldtype="many-to-one"
+		fkcolumn="FK_authorID"
+		lazy="true"
+		fetch="join";
+
 	FeedImport function init() {
 		importedDate = now();
 		numberImported = 0;

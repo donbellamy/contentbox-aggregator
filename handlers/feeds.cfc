@@ -265,6 +265,8 @@ component extends="baseHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		setting requestTimeout="999999";
+
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
