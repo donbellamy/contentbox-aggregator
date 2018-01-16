@@ -12,12 +12,7 @@ component persistent="true"
 	**							PROPERTIES									
 	********************************************************************* */
 
-	property name="excerpt"
-		notnull="false"
-		ormtype="text"
-		length="8000";
-
-	property name="url"
+	property name="itemUrl"
 		notnull="true"
 		length="255";
 
@@ -47,7 +42,7 @@ component persistent="true"
 	**							CONSTRAINTS									
 	********************************************************************* */
 
-	this.constraints["url"] = { required=true, type="url", size="1..255" };
+	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["author"] = { required=false, size="1..255" };
 	this.constraints["datePublished"] = { required=true, type="date" };
@@ -74,7 +69,11 @@ component persistent="true"
 
 		var errors = [];
 
-		//TODO: validate item
+		title = trim( left( title, 200 ) );
+		slug = trim( left( slug, 200 ) );
+
+		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
+		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
 
 		return errors;
 

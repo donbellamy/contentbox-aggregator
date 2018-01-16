@@ -20,7 +20,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		try {
 
 			// Grab the remote feed
-			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getUrl() );
+			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
@@ -64,7 +64,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										var feedItem = feedItemService.new();
 
 										// FeedItem properties
-										feedItem.setUrl( item.url );
+										feedItem.setItemUrl( item.url );
 										feedItem.setUniqueId( uniqueId );
 										if ( len( trim( item.author ) ) ) {
 											feedItem.setAuthor( item.author );

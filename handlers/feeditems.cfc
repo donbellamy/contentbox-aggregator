@@ -94,7 +94,6 @@ component extends="baseHandler" {
 		event.paramValue( "title", "" );
 		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
-		event.paramValue( "excerpt", "" );
 		// Publishing
 		event.paramValue( "isPublished", true );
 		event.paramValue( "publishedDate", now() );

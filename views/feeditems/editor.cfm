@@ -16,7 +16,7 @@
 			<!--- prc.agHelper.linkFeedItem( prc.feedItem ) --->
 			<li><a href="#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/#prc.feedItem.getSlug()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 		<cfelse>
-			<li><a href="#prc.feedItem.getUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+			<li><a href="#prc.feedItem.getItemUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 		</cfif>
 	</ul>
 </div>
@@ -86,8 +86,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<!--- TODO: preview should pull in url from remote site --->
-						<!--- TODO: Write own tag if run into issues here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feedItem } )#
 						#html.textarea(
 							name="content", 
@@ -95,20 +93,6 @@
 							rows="25", 
 							class="form-control"
 						)#
-					</div>
-					<div class="form-group">
-						<!--- TODO: rename Body and use content for excerpt --->
-						<!--- TODO: Setting to turn on/off excerpts? --->
-						<!---<cfif prc.cbSettings.cb_page_excerpts >--->
-						<!--- TODO: htmleditformat() ?  See above --->
-						#html.textarea(
-							label="Excerpt:",
-							name="excerpt", 
-							bind=prc.feedItem, 
-							rows="10",
-							class="form-control"
-						)#
-						<!---</cfif>--->
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="history">

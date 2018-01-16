@@ -19,7 +19,7 @@
 			<cfif prc.agSettings.ag_portal_enable >
 				<li><a href="#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/#prc.feed.getSlug()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 			<cfelse>
-				<li><a href="#prc.feed.getUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+				<li><a href="#prc.feed.getFeedUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 			</cfif>
 		</cfif>
 	</ul>
@@ -70,7 +70,7 @@
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
 					<div class="form-group">
-						<label for="url" class="control-label">
+						<label for="feedUrl" class="control-label">
 							Feed URL:
 						</label>
 						<div class="controls">
@@ -81,7 +81,7 @@
 							<div class="input-group">
 								#html.inputfield(
 									type="url",
-									name="url",
+									name="feedUrl",
 									bind=prc.feed,
 									maxlength="255",
 									required="required",
@@ -132,21 +132,11 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<!--- TODO: Fix preview - Write own tag here? --->
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
 							name="content", 
 							bind=prc.feed, 
 							rows="25", 
-							class="form-control"
-						)#
-					</div>
-					<div class="form-group">
-						#html.textarea(
-							label="Excerpt:",
-							name="excerpt", 
-							bind=prc.feed, 
-							rows="10",
 							class="form-control"
 						)#
 					</div>

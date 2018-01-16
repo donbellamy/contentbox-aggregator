@@ -6,7 +6,7 @@ $( document ).ready( function() {
 	var $feedForm = $("##feedForm");
 	setupEditors( $feedForm, true, feedSaveUrl );
 	$("##validateFeed").click(function() {
-		var feedUrl = $("##url").val();
+		var feedUrl = $("##feedUrl").val();
 		if ( isUrlValid( feedUrl ) ) {
 			var win = window.open( "http://validator.w3.org/feed/check.cgi?url=" + feedUrl, "_blank" );
 			if ( win ) {
