@@ -1,19 +1,10 @@
-component extends="baseHandler" {
-
-	property name="feedService" inject="feedService@aggregator";
-	property name="feedItemService" inject="feedItemService@aggregator";
-	property name="categoryService" inject="categoryService@cb";
-	property name="authorService" inject="authorService@cb";
-	property name="editorService" inject="editorService@cb";
-	property name="htmlHelper" inject="HTMLHelper@coldbox";
-	property name="ckHelper" inject="CKHelper@contentbox-ckeditor";
+component extends="baseContentHandler" {
 
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
-		
+
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
-		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
 			messagebox.error( "You do not have permission to access feed items." );
@@ -238,10 +229,6 @@ component extends="baseHandler" {
 
 		setNextEvent( prc.xehFeedItems );
 
-	}
-	
-	function slugify( event, rc, prc ) {
-		event.renderData( data=trim( htmlHelper.slugify( rc.slug ) ), type="plain" );
 	}
 
 }
