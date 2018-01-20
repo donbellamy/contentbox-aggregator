@@ -8,7 +8,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="settingService" inject="settingService@aggregator";
 	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
-	property name="messagebox" inject="messagebox@cbmessagebox";
+	property name="cbMessagebox" inject="messagebox@cbmessagebox";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 

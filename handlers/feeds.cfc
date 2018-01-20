@@ -9,7 +9,7 @@ component extends="baseContentHandler" {
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
 
 		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
-			messagebox.error( "You do not have permission to access feeds." );
+			cbMessagebox.error( "You do not have permission to access feeds." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
@@ -140,7 +140,7 @@ component extends="baseContentHandler" {
 		}
 
 		if ( arrayLen( errors ) ) {
-			messagebox.warn( messageArray=errors );
+			cbMessagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
 
@@ -157,7 +157,7 @@ component extends="baseContentHandler" {
 		);
 
 		var categories = [];
-		if( len( trim( rc.newCategories ) ) ){
+		if ( len( trim( rc.newCategories ) ) ) {
 			categories = categoryService.createCategories( trim( rc.newCategories ) );
 		}
 		categories.addAll( categoryService.inflateCategories( rc ) );
@@ -185,7 +185,7 @@ component extends="baseContentHandler" {
 			var rData = { "CONTENTID" = prc.feed.getContentID() };
 			event.renderData( type="json", data=rData );
 		} else {
-			messagebox.info( "Feed Saved!" );
+			cbMessagebox.info( "Feed Saved!" );
 			setNextEvent( prc.xehFeeds );
 		}
 
@@ -210,9 +210,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Feed '#title#' deleted." );
 				}
 			}
-			messagebox.info( messageArray=messages );
+			cbMessagebox.info( messageArray=messages );
 		} else {
-			messagebox.warn( "No feeds selected!" );
+			cbMessagebox.warn( "No feeds selected!" );
 		}
 
 		setNextEvent( prc.xehFeeds );
@@ -227,9 +227,37 @@ component extends="baseContentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "agadmin_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
-			messagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentStatus#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentStatus#'." );
 		} else {
-			messagebox.warn( "No feeds selected!" );
+			cbMessagebox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	function resetHits( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+		
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feed = feedService.get( contentID );
+				if ( isNull( feed ) ) {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+				} else {
+					if ( feed.hasStats() ) {
+						feed.getStats().setHits( 0 );
+						feedService.save( feed );
+					}
+					arrayAppend( messages, "Hits reset for '#feed.getTitle()#'." );
+				}
+			}
+			cbMessagebox.info( messageArray=messages );
+		} else {
+			cbMessagebox.warn( "No feeds selected!" );
 		}
 
 		setNextEvent( prc.xehFeeds );
@@ -244,9 +272,9 @@ component extends="baseContentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
 			announceInterception( "agadmin_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
-			messagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
 		} else {
-			messagebox.warn( "No feeds selected!" );
+			cbMessagebox.warn( "No feeds selected!" );
 		}
 
 		setNextEvent( prc.xehFeeds );
@@ -273,37 +301,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}
-			messagebox.info( messageArray=messages );
+			cbMessagebox.info( messageArray=messages );
 		} else {
-			messagebox.warn( "No feeds selected!" );
-		}
-
-		setNextEvent( prc.xehFeeds );
-
-	}
-
-	function resetHits( event, rc, prc ) {
-
-		event.paramValue( "contentID", "" );
-		
-		if ( len( rc.contentID ) ) {
-			rc.contentID = listToArray( rc.contentID );
-			var messages = [];
-			for ( var contentID in rc.contentID ) {
-				var feed = feedService.get( contentID );
-				if ( isNull( feed ) ) {
-					arrayAppend( messages, "Invalid feed selected: #contentID#." );
-				} else {
-					if ( feed.hasStats() ) {
-						feed.getStats().setHits( 0 );
-						feedService.save( feed );
-					}
-					arrayAppend( messages, "Hits reset for '#feed.getTitle()#'." );
-				}
-			}
-			messagebox.info( messageArray=messages );
-		} else {
-			messagebox.warn( "No feeds selected!" );
+			cbMessagebox.warn( "No feeds selected!" );
 		}
 
 		setNextEvent( prc.xehFeeds );

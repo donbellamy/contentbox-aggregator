@@ -10,8 +10,6 @@ component extends="baseHandler" {
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 		
-		super.preHandler( argumentCollection=arguments );
-
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}

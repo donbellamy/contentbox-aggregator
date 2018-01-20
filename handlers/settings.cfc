@@ -44,7 +44,7 @@ component extends="baseHandler" {
 
 		var errors = settingService.validateSettings();
 		if ( arrayLen( errors ) ) {
-			messagebox.warn( messageArray=errors );
+			cbMessagebox.warn( messageArray=errors );
 			return index( argumentCollection=arguments );
 		}
 
@@ -89,7 +89,7 @@ component extends="baseHandler" {
 
 		announceInterception( "agadmin_postSettingsSave" );
 
-		messagebox.info( "Settings Updated!" );
+		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehAggregatorSettings );
 
 	}

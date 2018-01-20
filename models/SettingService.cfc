@@ -34,9 +34,12 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 			} else {
 				prc.agSettings.ag_general_import_start_time = timeFormat( now(), "short" );
 			}
-			if ( !len( trim( prc.agSettings.ag_general_secret_key ) ) ) {
-				arrayAppend( errors, "A valid secret key is required." );
-			}
+		}
+		if ( !len( trim( prc.agSettings.ag_general_secret_key ) ) ) {
+			arrayAppend( errors, "A valid secret key is required." );
+		}
+		if ( len( prc.agSettings.ag_general_max_feed_imports ) && !isNumeric( prc.agSettings.ag_general_max_feed_imports ) ) {
+			arrayAppend( errors, "A valid import history limit is required." );
 		}
 		if ( len( prc.agSettings.ag_general_max_age ) && !isNumeric( prc.agSettings.ag_general_max_age ) ) {
 			arrayAppend( errors, "A valid age limit is required." );

@@ -1,8 +1,5 @@
-component extends="coldbox.system.EventHandler" {
+component extends="contentbox.modules.contentbox-admin.handlers.baseHandler" {
 
 	property name="settingService" inject="settingService@aggregator";
-	property name="messagebox" inject="messagebox@cbmessagebox";
-
-	function preHandler( event, rc, prc, action, eventArguments ) {}
 
 }

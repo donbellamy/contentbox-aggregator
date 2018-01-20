@@ -7,7 +7,7 @@ component extends="baseContentHandler" {
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
 
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
-			messagebox.error( "You do not have permission to access feed items." );
+			cbMessagebox.error( "You do not have permission to access feed items." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
@@ -44,6 +44,7 @@ component extends="baseContentHandler" {
 			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows )
 		);
+
 		prc.feedItems = results.feedItems;
 		prc.feedItemsCount = results.count;
 
@@ -119,7 +120,7 @@ component extends="baseContentHandler" {
 		}
 
 		if ( arrayLen( errors ) ) {
-			messagebox.warn( messageArray=errors );
+			cbMessagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
 
@@ -130,7 +131,7 @@ component extends="baseContentHandler" {
 		);
 
 		var categories = [];
-		if( len( trim( rc.newCategories ) ) ){
+		if ( len( trim( rc.newCategories ) ) ) {
 			categories = categoryService.createCategories( trim( rc.newCategories ) );
 		}
 		categories.addAll( categoryService.inflateCategories( rc ) );
@@ -152,7 +153,7 @@ component extends="baseContentHandler" {
 			var rData = { "CONTENTID" = prc.feedItem.getContentID() };
 			event.renderData( type="json", data=rData );
 		} else {
-			messagebox.info( "Feed Item Saved!" );
+			cbMessagebox.info( "Feed Item Saved!" );
 			setNextEvent( prc.xehFeedItems );
 		}
 
@@ -177,9 +178,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Feed item '#title#' deleted." );
 				}
 			}
-			messagebox.info( messageArray=messages );
+			cbMessagebox.info( messageArray=messages );
 		} else {
-			messagebox.warn( "No feed Items selected!" );
+			cbMessagebox.warn( "No feed Items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
@@ -194,9 +195,9 @@ component extends="baseContentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "agadmin_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
-			messagebox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
 		} else {
-			messagebox.warn( "No feed items selected!" );
+			cbMessagebox.warn( "No feed items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
@@ -222,9 +223,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Hits reset for '#feedItem.getTitle()#'." );
 				}
 			}
-			messagebox.info( messageArray=messages );
+			cbMessagebox.info( messageArray=messages );
 		} else {
-			messagebox.warn( "No feed items selected!" );
+			cbMessagebox.warn( "No feed items selected!" );
 		}
 
 		setNextEvent( prc.xehFeedItems );
