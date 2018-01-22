@@ -1,34 +1,25 @@
-component extends="coldbox.system.EventHandler" {
-	//TODO: inherit from content ?
-	//contentbox.modules.contentbox-ui.handlers.content
+component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
+	property name="settingService" inject="settingService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
-	property name="settingService" inject="settingService@aggregator";
-	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
-	property name="cbMessagebox" inject="messagebox@cbmessagebox";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
+
+		super.preHandler( argumentCollection=arguments );
 
 		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
 			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
 		}
 
-		// TODO: Site maintenance check?  or inherit from content handler?
-
 	}
 
 	function disabled( event, rc, prc ) {
 
-		prc.missingPage = event.getCurrentRoutedURL();
-		prc.missingRoutedURL = event.getCurrentRoutedURL();
-
-		event.setHTTPHeader( "404", "Page not found" );
-
-		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
+		// Not found
+		notFound( argumentCollection=arguments );
 
 	}
 
@@ -39,8 +30,32 @@ component extends="coldbox.system.EventHandler" {
 		event.setView( "portal/index" );
 	}
 
-	function item( event, rc, prc ) {
-		event.setView( "portal/item" );
+	function feeditem( event, rc, prc ) {
+		
+		event.paramValue( "slug", "" );
+
+		// Get the feed item
+		var feedItem = feedItemService.findBySlug( rc.slug );
+
+		// If loaded, else not found
+		if ( feedItem.isLoaded() ) {
+
+			// Record hit
+			feedItemService.updateHits( feedItem.getContentID() );
+			// Announce event
+			announceInterception( "agportal_onFeedItemView", { feedItem=feedItem, slug=rc.slug } );
+			// Relocate to item url
+			location( feedItem.getItemUrl() );
+
+		} else {
+
+			// Announce event
+			announceInterception( "agportal_onFeedItemNotFound", { feedItem=feedItem, slug=rc.slug } );
+			// Not found
+			notFound( argumentCollection=arguments );
+
+		}
+
 	}
 
 	function feeds( event, rc, prc ) {
@@ -84,15 +99,23 @@ component extends="coldbox.system.EventHandler" {
 
 		} else {
 
-			prc.missingPage = event.getCurrentRoutedURL();
-			prc.missingRoutedURL = event.getCurrentRoutedURL();
-	
-			event.setHTTPHeader( "404", "Page not found" );
-	
-			event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
-				.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
+			// Not found
+			notFound( argumentCollection=arguments );
 
 		}
+
+	}
+
+	private function notFound( event, rc, prc ) {
+
+		prc.missingPage = event.getCurrentRoutedURL();
+		prc.missingRoutedURL = event.getCurrentRoutedURL();
+
+		event.setHTTPHeader( "404", "Page not found" );
+
+		// Should be layout in settings?
+		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
+			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
 
 	}
 
