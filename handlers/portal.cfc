@@ -20,13 +20,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function index( event, rc, prc ) {
 
-		prc.oPaging = getModel( "Paging@cb" );		
+		event.setLayout( "../themes/default/layouts/portal" )
+			.setView( "../themes/default/views/feeditems" );
 
-		// TODO: Think about layouts/views -> Option for layout, including blog
-		// Use generic views or choose to use theme files?
-		// Check if files exist?
-		event.setLayout( name="#prc.cbTheme#/layouts/blog", module="contentbox" )
-			.setView( "portal/index" ); // TODO: make option
+		//event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
+		//	.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
 
 	}
 
