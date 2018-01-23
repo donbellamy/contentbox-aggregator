@@ -8,18 +8,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
-		super.preHandler( argumentCollection=arguments );
-
+		// Check if portal is enabled
 		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
 			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
 		}
 
-	}
-
-	function disabled( event, rc, prc ) {
-
-		// Not found
-		notFound( argumentCollection=arguments );
+		// Call super (check maint mode, etc.)
+		super.preHandler( argumentCollection=arguments );
 
 	}
 
@@ -27,7 +22,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		prc.oPaging = getModel( "Paging@cb" );		
 
-		event.setView( "portal/index" );
+		// TODO: Think about layouts/views -> Option for layout, including blog
+		// Use generic views or choose to use theme files?
+		// Check if files exist?
+		event.setLayout( name="#prc.cbTheme#/layouts/blog", module="contentbox" )
+			.setView( "portal/index" ); // TODO: make option
+
 	}
 
 	function feeditem( event, rc, prc ) {
@@ -106,6 +106,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	function disabled( event, rc, prc ) {
+		notFound( argumentCollection=arguments );
+	}
+
 	private function notFound( event, rc, prc ) {
 
 		prc.missingPage = event.getCurrentRoutedURL();
@@ -113,7 +117,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		event.setHTTPHeader( "404", "Page not found" );
 
-		// Should be layout in settings?
+		// TODO: Should be layout in settings?
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
 

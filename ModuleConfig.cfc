@@ -110,6 +110,7 @@ component {
 				"agadmin_preFeedItemSave","agadmin_postFeedItemSave",
 				"agadmin_preFeedItemRemove","agadmin_postFeedItemRemove",
 				"agadmin_onFeedItemStatusUpdate",
+				"agportal_preIndexDisplay","agportal_postIndexDisplay",
 				"agportal_onFeedItemView","agportal_onFeedItemNotFound"
 			])
 		};
