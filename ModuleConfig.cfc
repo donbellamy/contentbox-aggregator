@@ -56,7 +56,6 @@ component {
 			"ag_portal_enable" = "true",
 			"ag_portal_title" = "RSS Aggregator News",
 			"ag_portal_entrypoint" = "news",
-			"ag_portal_layout" = "pages",
 			"ag_portal_hits_track" = "true",
 			"ag_portal_hits_ignore_bots" = "false",
 			"ag_portal_hits_bot_regex" = "Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby", // Get setting from cb?
@@ -102,16 +101,16 @@ component {
 
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([
-				"agadmin_preSettingsSave","agadmin_postSettingsSave",
-				"agadmin_preFeedSave","agadmin_postFeedSave",
-				"agadmin_preFeedRemove","agadmin_postFeedRemove",
-				"agadmin_onFeedStatusUpdate","agadmin_onFeedStateUpdate",
-				"agadmin_preFeedImport","agadmin_postFeedImport",
-				"agadmin_preFeedItemSave","agadmin_postFeedItemSave",
-				"agadmin_preFeedItemRemove","agadmin_postFeedItemRemove",
-				"agadmin_onFeedItemStatusUpdate",
-				"agportal_preIndexDisplay","agportal_postIndexDisplay",
-				"agportal_onFeedItemView","agportal_onFeedItemNotFound"
+				"aggregator_preSettingsSave","aggregator_postSettingsSave",
+				"aggregator_preFeedSave","aggregator_postFeedSave",
+				"aggregator_preFeedRemove","aggregator_postFeedRemove",
+				"aggregator_onFeedStatusUpdate","aggregator_onFeedStateUpdate",
+				"aggregator_preFeedImport","aggregator_postFeedImport",
+				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
+				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
+				"aggregator_onFeedItemStatusUpdate",
+				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
+				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound"
 			])
 		};
 

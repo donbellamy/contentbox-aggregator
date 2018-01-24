@@ -137,14 +137,14 @@ component extends="baseContentHandler" {
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feedItem.removeAllCategories().setCategories( categories );
 
-		announceInterception( "agadmin_preFeedItemSave", {
+		announceInterception( "aggregator_preFeedItemSave", {
 			feedItem=prc.feedItem,
 			originalSlug=originalSlug
 		});
 
 		feedItemService.save( prc.feedItem );
 
-		announceInterception( "agadmin_postFeedItemSave", {
+		announceInterception( "aggregator_postFeedItemSave", {
 			feedItem=prc.feedItem,
 			originalSlug=originalSlug
 		});
@@ -172,9 +172,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				} else {
 					var title = feedItem.getTitle();
-					announceInterception( "agadmin_preFeedItemRemove", { feedItem=feedItem } );
+					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
 					feedItemService.deleteContent( feedItem );
-					announceInterception( "agadmin_postFeedItemRemove", { contentID=contentID } );
+					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
 					arrayAppend( messages, "Feed item '#title#' deleted." );
 				}
 			}
@@ -194,7 +194,7 @@ component extends="baseContentHandler" {
 
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
-			announceInterception( "agadmin_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
+			announceInterception( "aggregator_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
 			cbMessagebox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
 		} else {
 			cbMessagebox.warn( "No feed items selected!" );

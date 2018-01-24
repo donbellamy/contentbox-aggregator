@@ -163,7 +163,7 @@ component extends="baseContentHandler" {
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feed.removeAllCategories().setCategories( categories );
 
-		announceInterception( "agadmin_preFeedSave", {
+		announceInterception( "aggregator_preFeedSave", {
 			feed=prc.feed,
 			isNew=isNew,
 			originalSlug=originalSlug
@@ -175,7 +175,7 @@ component extends="baseContentHandler" {
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}
 
-		announceInterception( "agadmin_postFeedSave", {
+		announceInterception( "aggregator_postFeedSave", {
 			feed=prc.feed,
 			isNew=isNew,
 			originalSlug=originalSlug
@@ -204,9 +204,9 @@ component extends="baseContentHandler" {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
 					var title = feed.getTitle();
-					announceInterception( "agadmin_preFeedRemove", { feed=feed } );
+					announceInterception( "aggregator_preFeedRemove", { feed=feed } );
 					feedService.deleteContent( feed );
-					announceInterception( "agadmin_postFeedRemove", { contentID=contentID } );
+					announceInterception( "aggregator_postFeedRemove", { contentID=contentID } );
 					arrayAppend( messages, "Feed '#title#' deleted." );
 				}
 			}
@@ -226,7 +226,7 @@ component extends="baseContentHandler" {
 
 		if ( len( rc.contentID ) ) {
 			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
-			announceInterception( "agadmin_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
+			announceInterception( "aggregator_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
 			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentStatus#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
@@ -271,7 +271,7 @@ component extends="baseContentHandler" {
 
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
-			announceInterception( "agadmin_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
+			announceInterception( "aggregator_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
 			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
@@ -295,9 +295,9 @@ component extends="baseContentHandler" {
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
-					announceInterception( "agadmin_preFeedImport", { feed=feed } );
+					announceInterception( "aggregator_preFeedImport", { feed=feed } );
 					feedImportService.import( feed, prc.oCurrentAuthor );
-					announceInterception( "agadmin_postFeedImport", { feed=feed } );
+					announceInterception( "aggregator_postFeedImport", { feed=feed } );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}

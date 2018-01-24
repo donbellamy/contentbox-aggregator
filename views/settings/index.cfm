@@ -664,22 +664,6 @@
 											)#
 										</div>
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_layout",
-											content="Portal layout:"
-										)#
-										<div class="controls">
-											<small>The layout used for the portal.</small>
-											#html.select(
-												name="ag_portal_layout",
-												options=prc.layouts,
-												selectedValue=prc.agSettings.ag_portal_layout,
-												class="form-control"
-											)#
-										</div>
-									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-bar-chart-o fa-lg"></i> Item Stats Tracking</legend>

@@ -34,7 +34,7 @@ component extends="baseHandler" {
 
 	function save( event, rc, prc ) {
 
-		announceInterception( "agadmin_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
+		announceInterception( "aggregator_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
 
 		for ( var key IN rc ) {
 			if ( structKeyExists( prc.agSettings, key ) ) {
@@ -87,7 +87,7 @@ component extends="baseHandler" {
 		}
 		ses.setRoutes( routes );
 
-		announceInterception( "agadmin_postSettingsSave" );
+		announceInterception( "aggregator_postSettingsSave" );
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehAggregatorSettings );

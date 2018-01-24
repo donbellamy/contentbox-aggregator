@@ -5,19 +5,19 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="log" inject="logbox:logger:aggregator";
 
-	function agadmin_postFeedImport( event, interceptData ) {
+	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doMaxItemCleanup( feed );
 	}
 
-	function agadmin_postFeedSave( event, interceptData ) {
+	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doKeywordCleanup( feed );
 		doAgeCleanup( feed );
 		doMaxItemCleanup( feed );
 	}
 
-	function agadmin_postSettingsSave( event, interceptData ) {
+	function aggregator_postSettingsSave( event, interceptData ) {
 		doKeywordCleanup();
 		doAgeCleanup();
 		doMaxItemCleanup();

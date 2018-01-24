@@ -20,11 +20,21 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function index( event, rc, prc ) {
 
-		event.setLayout( "../themes/default/layouts/portal" )
-			.setView( "../themes/default/views/feeditems" );
+		// incoming params
+		event.paramValue( "page", 1 )
+			.paramValue( "category", "" )
+			.paramValue( "q", "" )
+			.paramValue( "format", "html" );
 
-		//event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-		//	.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
+		// Page numeric check
+		if( !isNumeric( rc.page ) ){ rc.page = 1; }
+
+		// XSS Cleanup
+		//rc.q = antiSamy.clean( rc.q );
+		//rc.category = antiSamy.clean( rc.category );
+
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/portal" );
 
 	}
 
@@ -41,14 +51,14 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Record hit
 			feedItemService.updateHits( feedItem.getContentID() );
 			// Announce event
-			announceInterception( "agportal_onFeedItemView", { feedItem=feedItem, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem, slug=rc.slug } );
 			// Relocate to item url
 			location( feedItem.getItemUrl() );
 
 		} else {
 
 			// Announce event
-			announceInterception( "agportal_onFeedItemNotFound", { feedItem=feedItem, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedItemNotFound", { feedItem=feedItem, slug=rc.slug } );
 			// Not found
 			notFound( argumentCollection=arguments );
 
@@ -57,11 +67,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	function feeds( event, rc, prc ) {
-		event.setView( "portal/feeds" );
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feeds" );
 	}
 
 	function feed( event, rc, prc ) {
-		event.setView( "portal/feed" );
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feed" );
 	}
 
 	function import( event, rc, prc ) {
@@ -88,12 +100,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var feeds = feedService.getFeedsForImport();
 
 			for ( var feed IN feeds ) {
-				announceInterception( "agadmin_preFeedImport", { feed=feed } );
+				announceInterception( "aggregator_preFeedImport", { feed=feed } );
 				feedImportService.import( feed, author );
-				announceInterception( "agadmin_postFeedImport", { feed=feed } );
+				announceInterception( "aggregator_postFeedImport", { feed=feed } );
 			}
 
-			event.setView( "portal/import" );
+			// Relocate
+			setNextEvent( prc.xehPortalHome );
 
 		} else {
 
@@ -115,7 +128,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		event.setHTTPHeader( "404", "Page not found" );
 
-		// TODO: Should be layout in settings?
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
 

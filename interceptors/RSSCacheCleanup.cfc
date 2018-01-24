@@ -3,11 +3,11 @@ component extends="coldbox.system.Interceptor" {
 	// postfeedimport ?
 	// postfeedimportprocess ?
 
-	function agadmin_postFeedItemSave( event, interceptData ) {
+	function aggregator_postFeedItemSave( event, interceptData ) {
 		//getModel( "rssService@cb" ).clearCaches();
 	}
 	
-	function agadmin_postFeedItemRemove( event, interceptData ) {
+	function aggregator_postFeedItemRemove( event, interceptData ) {
 		//getModel( "rssService@cb" ).clearCaches();
 	}
 

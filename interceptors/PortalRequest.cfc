@@ -13,7 +13,12 @@ component extends="coldbox.system.Interceptor" {
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
-		// Entry points
+		// Entry point
+		prc.agPortalEntryPoint = prc.agSettings.ag_portal_entrypoint;
+
+		// Portal
+		prc.xehPortalHome = prc.agPortalEntryPoint;
+		prc.xehPortalFeeds = "#prc.agPortalEntryPoint#.feeds";
 
 	}
 
