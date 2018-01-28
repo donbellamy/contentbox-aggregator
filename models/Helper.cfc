@@ -5,7 +5,7 @@ component accessors="true" singleton threadSafe {
 	}
 
 	function test() {
-		throw( message="It works", detail="I think it works?" );
+		writeoutput("This is working!!!");
 	}
 
 }

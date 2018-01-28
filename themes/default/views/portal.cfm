@@ -34,6 +34,8 @@
 						</div>
 					</cfif>--->
 
+					#ag.test()#
+
 					#cb.event( "aggregator_postIndexDisplay" )#
 				</div>
 

@@ -2,7 +2,7 @@ component extends="coldbox.system.Interceptor" {
 
 	property name="settingService" inject="settingService@aggregator";
 	property name="cbHelper" inject="CBHelper@cb";
-	property name="agHelper" inject="helper@aggreagator";
+	property name="agHelper" inject="helper@aggregator";
 
 	function configure() {}
 
@@ -30,7 +30,7 @@ component extends="coldbox.system.Interceptor" {
 
 	function afterInstanceCreation( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
-			var prc = event.getCollection( private=true );
+			var prc = event.getCollection( private=true ); // Needed?
 			// decorate it
 			arguments.interceptData.target.ag = agHelper;
 			arguments.interceptData.target.$agInject = variables.$agInject;
