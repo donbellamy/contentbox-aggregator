@@ -28,7 +28,7 @@
 						#cb.quickEntries()# --->
 
 					<!--- TODO: Pagination --->
-					<!---<cfif prc.entriesCount>
+					<!---<cfif prc.entriesCount >
 						<div class="contentBar">
 							#cb.quickPaging()#
 						</div>

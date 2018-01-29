@@ -21,6 +21,8 @@ component extends="BaseService" singleton {
 		var results = {};
 		var c = newCriteria();
 
+		if 
+
 		if ( len( trim( arguments.search ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
 			c.createAlias( "activeContent", "ac" );
 		}
@@ -42,7 +44,15 @@ component extends="BaseService" singleton {
 		}
 
 		if ( arguments.status NEQ "any" ) {
-			c.eq( "isPublished", javaCast( "boolean", arguments.status ) );
+			if ( arguments.status EQ "published" ) {
+				c.isTrue("isPublished")
+					.isLT( "publishedDate", now() )
+					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
+			} else if ( arguments.status EQ "expired" ) {
+				c.isTrue("isPublished").isLT( "expireDate", now() );
+			} else {
+				c.isFalse("isPublished");
+			}
 		}
 
 		if ( !len( arguments.sortOrder ) ) {
@@ -72,7 +82,7 @@ component extends="BaseService" singleton {
 	}
 
 	struct function getPublishedFeedItems() {
-		var results = {};
+		var results = search( status="published" );
 		return results;
 	}
 

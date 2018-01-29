@@ -94,8 +94,9 @@
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
 									<option value="any">Any Status</option>
-									<option value="true">Published</option>
-									<option value="false">Draft</option>
+									<option value="published">Published</option>
+									<option value="expired">Expired</option>
+									<option value="draft">Draft</option>
 								</select>
 							</div>
 						</div>

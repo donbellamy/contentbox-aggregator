@@ -27,7 +27,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Page numeric check
-		if( !isNumeric( rc.page ) ){ rc.page = 1; }
+		if( !isNumeric( rc.page ) ) { 
+			rc.page = 1; 
+		 }
 
 		// XSS Cleanup
 		//rc.q = antiSamy.clean( rc.q );
