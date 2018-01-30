@@ -35,13 +35,21 @@ component extends="BaseService" singleton {
 		if ( arguments.category NEQ "all" ) {
 			if( arguments.category EQ "none" ) {
 				c.isEmpty( "categories" );
-			} else{
+			} else {
 				c.createAlias( "categories", "cats" ).isIn( "cats.categoryID", javaCast( "java.lang.Integer[]", [ arguments.category ] ) );
 			}
 		}
 
 		if ( arguments.status NEQ "any" ) {
-			c.eq( "isPublished", javaCast( "boolean", arguments.status ) );
+			if ( arguments.status EQ "published" ) {
+				c.isTrue("isPublished")
+					.isLT( "publishedDate", now() )
+					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
+			} else if ( arguments.status EQ "expired" ) {
+				c.isTrue("isPublished").isLT( "expireDate", now() );
+			} else {
+				c.isFalse("isPublished");
+			}
 		}
 
 		if ( !len( arguments.sortOrder ) ) {
@@ -50,10 +58,10 @@ component extends="BaseService" singleton {
 
 		results.count = c.count( "contentID" );
 		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
-			offset=arguments.offset, 
-			max=arguments.max, 
-			sortOrder=arguments.sortOrder, 
-			asQuery=false 
+			offset=arguments.offset,
+			max=arguments.max,
+			sortOrder=arguments.sortOrder,
+			asQuery=false
 		);
 
 		return results;

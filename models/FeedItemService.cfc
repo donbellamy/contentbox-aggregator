@@ -38,7 +38,7 @@ component extends="BaseService" singleton {
 		if ( arguments.category NEQ "all" ) {
 			if( arguments.category EQ "none" ) {
 				c.isEmpty( "categories" );
-			} else{
+			} else {
 				c.createAlias( "categories", "cats" ).isIn( "cats.categoryID", javaCast( "java.lang.Integer[]", [ arguments.category ] ) );
 			}
 		}

@@ -42,7 +42,7 @@ component extends="baseContentHandler" {
 			state=rc.state,
 			category=rc.category,
 			status=rc.status,
-			offset=( rc.showAll ? 0 : prc.paging.startRow-1 ),
+			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 ),
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			sortOrder="title ASC"
 		);

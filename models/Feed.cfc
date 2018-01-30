@@ -9,7 +9,7 @@ component persistent="true"
 	discriminatorValue="Feed" {
 
 	/* *********************************************************************
-	**							PROPERTIES									
+	**							PROPERTIES
 	********************************************************************* */
 
 	property name="feedUrl"
@@ -62,7 +62,7 @@ component persistent="true"
 		length="255";
 
 	/* *********************************************************************
-	**							RELATIONSHIPS									
+	**							RELATIONSHIPS
 	********************************************************************* */
 
 	// O2M -> Feed imports
@@ -77,6 +77,18 @@ component persistent="true"
 		fkcolumn="FK_feedID"
 		inverse="true"
 		cascade="all-delete-orphan";
+
+	/* *********************************************************************
+	**							CALCULATED FIELDS
+	********************************************************************* */
+
+	property name="lastImportedDate"
+		formula="select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID"
+		default="";
+
+	/* *********************************************************************
+	**							CONSTRAINTS
+	********************************************************************* */
 
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
@@ -173,14 +185,6 @@ component persistent="true"
 			fDate &= " " & timeFormat( sDate, "hh:mm tt" );
 		}
 		return fDate;
-	}
-
-	any function getLastImportedDate() {
-		if ( hasFeedImport() ) {
-			return getFeedImports()[1].getImportedDate();
-		} else {
-			return "";
-		}
 	}
 
 	string function getDisplayLastImportedDate() {
