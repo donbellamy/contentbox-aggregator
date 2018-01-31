@@ -108,8 +108,8 @@ component {
 				"aggregator_preFeedImport","aggregator_postFeedImport",
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
-				"aggregator_onFeedItemStatusUpdate",
-				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
+				"aggregator_onFeedItemStatusUpdate","aggregator_onPortalIndex",
+				"aggregator_prePortalIndexDisplay","aggregator_postPortalIndexDisplay",
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound"
 			])
 		};
@@ -170,7 +170,7 @@ component {
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
 		var agEntryPoint = settings.ag_portal_entrypoint;
 		if ( !isNull( setting ) ) {
-			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );  // setting.getValue() ?
+			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			agEntryPoint = agSettings.ag_portal_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {

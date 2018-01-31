@@ -4,6 +4,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
+	property name="helper" inject="helper@aggregator";
 	property name="roleService" inject="roleService@cb";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
@@ -20,23 +21,36 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function index( event, rc, prc ) {
 
-		// incoming params
-		event.paramValue( "page", 1 )
-			.paramValue( "category", "" )
-			.paramValue( "q", "" )
-			.paramValue( "format", "html" );
+		// Incoming params
+		event.paramValue( "page", 1 );
 
 		// Page numeric check
 		if( !isNumeric( rc.page ) ) { 
 			rc.page = 1; 
-		 }
+		}
 
-		// XSS Cleanup
-		//rc.q = antiSamy.clean( rc.q );
-		//rc.category = antiSamy.clean( rc.category );
+		// Paging
+		prc.oPaging = getModel( "Paging@cb" );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=10 ); // TODO: setting indexmaxrows
+		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
-		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/portal" );
+		var results = feedItemService.getPublishedFeedItems(
+			offset=prc.pagingBoundaries.startRow - 1,
+			max=10 // TODO: Setting
+		);
+
+		prc.feedItems = results.feedItems;
+		prc.count = results.count;
+
+		announceInterception( 
+			"aggregator_onPortalIndex", {
+				feedItems = prc.feedItems,
+				count= prc.count
+			} 
+		);
+
+		event.setLayout( "../themes/default/layouts/aggregator/portal" )
+			.setView( "../themes/default/views/aggregator/index" );
 
 	}
 
@@ -69,13 +83,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	function feeds( event, rc, prc ) {
-		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feeds" );
+		event.setLayout( "../themes/default/layouts/aggregator/portal" )
+			.setView( "../themes/default/views/aggregator/feeds" );
 	}
 
 	function feed( event, rc, prc ) {
-		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feed" );
+		event.setLayout( "../themes/default/layouts/aggregator/portal" )
+			.setView( "../themes/default/views/aggregator/feed" );
 	}
 
 	function import( event, rc, prc ) {

@@ -71,6 +71,11 @@ component extends="BaseService" singleton {
 
 	}
 
+	struct function getPublishedFeedItems( numeric max=0, numeric offset=0 ) {
+		arguments["status"] = "published";
+		return search( argumentCollection=arguments );
+	}
+
 	array function getFeedItems( required Feed feed ) {
 		var results = search( feed=arguments.feed.getContentID() );
 		return results.feedItems;
@@ -79,11 +84,6 @@ component extends="BaseService" singleton {
 	array function getLatestFeedItems( required Feed feed, numeric max=5 ) {
 		var results = search( feed=arguments.feed.getContentID(), max=arguments.max );
 		return results.feedItems;
-	}
-
-	struct function getPublishedFeedItems() {
-		var results = search( status="published" );
-		return results;
 	}
 
 }

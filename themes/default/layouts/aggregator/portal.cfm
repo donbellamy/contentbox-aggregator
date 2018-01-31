@@ -1,7 +1,7 @@
 <cfoutput>
 <!--- Global Layout Arguments --->
-<cfparam name="args.print" 		default="false">
-<cfparam name="args.sidebar" 	default="true">
+<cfparam name="args.print" default="false" />
+<cfparam name="args.sidebar" default="true" />
 <!DOCTYPE html>
 <html lang="en">
 <head>

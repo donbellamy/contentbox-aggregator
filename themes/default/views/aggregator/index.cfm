@@ -22,7 +22,7 @@
 			<div class="row">
 				<!--- Content --->
 				<div class="col-sm-9">
-					#cb.event( "aggregator_preIndexDisplay" )#
+					#cb.event( "aggregator_prePortalIndexDisplay" )#
 					
 					<!--- TODO: Entries
 						#cb.quickEntries()# --->
@@ -34,9 +34,9 @@
 						</div>
 					</cfif>--->
 
-					#ag.test()#
+					#prc.pagingLink#
 
-					#cb.event( "aggregator_postIndexDisplay" )#
+					#cb.event( "aggregator_postPortalIndexDisplay" )#
 				</div>
 
 				<!--- TODO: SideBar --->
