@@ -30,7 +30,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 		// Paging
-		prc.oPaging = getModel( "Paging@cb" );
+		prc.oPaging = getModel("paging@cb");
 		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=10 ); // TODO: setting indexmaxrows
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
@@ -40,12 +40,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		);
 
 		prc.feedItems = results.feedItems;
-		prc.count = results.count;
+		prc.feedItemsCount = results.count;
 
 		announceInterception( 
 			"aggregator_onPortalIndex", {
 				feedItems = prc.feedItems,
-				count= prc.count
+				feedItemsCount = prc.feedItemsCount
 			} 
 		);
 

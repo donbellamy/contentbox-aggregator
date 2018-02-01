@@ -9,7 +9,7 @@ component persistent="true"
 	discriminatorValue="Feed" {
 
 	/* *********************************************************************
-	**							PROPERTIES
+	**                            PROPERTIES
 	********************************************************************* */
 
 	property name="feedUrl"
@@ -62,7 +62,7 @@ component persistent="true"
 		length="255";
 
 	/* *********************************************************************
-	**							RELATIONSHIPS
+	**                            RELATIONSHIPS
 	********************************************************************* */
 
 	// O2M -> Feed imports
@@ -79,7 +79,7 @@ component persistent="true"
 		cascade="all-delete-orphan";
 
 	/* *********************************************************************
-	**							CALCULATED FIELDS
+	**                            CALCULATED FIELDS
 	********************************************************************* */
 
 	property name="lastImportedDate"
@@ -87,7 +87,7 @@ component persistent="true"
 		default="";
 
 	/* *********************************************************************
-	**							CONSTRAINTS
+	**                            CONSTRAINTS
 	********************************************************************* */
 
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };

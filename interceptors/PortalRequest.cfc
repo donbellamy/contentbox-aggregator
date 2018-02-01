@@ -12,14 +12,14 @@ component extends="coldbox.system.Interceptor" {
 		CBHelper.prepareUIRequest(); //TODO: Set title, etc...
 
 		// Settings
-		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) ); // getAllSettings()
+		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Entry point
-		prc.agPortalEntryPoint = prc.agSettings.ag_portal_entrypoint;
+		prc.agEntryPoint = prc.agSettings.ag_portal_entrypoint;
 
 		// Portal
-		prc.xehPortalHome = prc.agPortalEntryPoint;
-		prc.xehPortalFeeds = "#prc.agPortalEntryPoint#.feeds";
+		prc.xehPortalHome = prc.agEntryPoint;
+		prc.xehPortalFeeds = "#prc.agEntryPoint#.feeds";
 
 	}
 

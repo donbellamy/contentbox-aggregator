@@ -22,21 +22,21 @@
 			<div class="row">
 				<!--- Content --->
 				<div class="col-sm-9">
+
 					#cb.event( "aggregator_prePortalIndexDisplay" )#
 					
 					<!--- TODO: Entries
 						#cb.quickEntries()# --->
 
 					<!--- TODO: Pagination --->
-					<!---<cfif prc.entriesCount >
+					<cfif prc.feedItemsCount >
 						<div class="contentBar">
-							#cb.quickPaging()#
+							<!---#ag.quickPaging()#--->
 						</div>
-					</cfif>--->
-
-					#prc.pagingLink#
+					</cfif>
 
 					#cb.event( "aggregator_postPortalIndexDisplay" )#
+
 				</div>
 
 				<!--- TODO: SideBar --->

@@ -10,9 +10,6 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 
 	}
 
-	// TODO: getallsettings
-	//function getAllSettings() {}
-
 	array function validateSettings() {
 
 		var prc = requestService.getContext().getCollection( private=true );
