@@ -58,8 +58,14 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		
 		event.paramValue( "slug", "" );
 
+		// Check if author is viewing
+		var showUnpublished = false;
+		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+			var showUnpublished = true;
+		}
+
 		// Get the feed item
-		var feedItem = feedItemService.findBySlug( rc.slug );
+		var feedItem = feedItemService.findBySlug( rc.slug, showUnpublished );
 
 		// If loaded, else not found
 		if ( feedItem.isLoaded() ) {

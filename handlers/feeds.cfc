@@ -1,4 +1,4 @@
-component extends="baseContentHandler" {
+component extends="contentHandler" {
 
 	property name="feedImportService" inject="feedImportService@aggregator";
 
@@ -219,7 +219,7 @@ component extends="baseContentHandler" {
 
 	}
 
-	function status( event, rc, prc ) {
+	function updateStatus( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentStatus", "draft" );

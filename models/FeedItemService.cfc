@@ -1,4 +1,4 @@
-component extends="BaseService" singleton {
+component extends="ContentService" singleton {
 
 	FeedItemService function init() {
 

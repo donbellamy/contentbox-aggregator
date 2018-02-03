@@ -1,6 +1,6 @@
 component extends="contentbox.models.content.ContentService" singleton{
 
-	BaseService function save( required any entity, boolean transactional=true ) {
+	ContentService function save( required any entity, boolean transactional=true ) {
 
 		if ( !isSlugUnique( arguments.entity.getSlug(), arguments.entity.getContentID() ) ) {
 			arguments.entity.setSlug( getUniqueSlug( arguments.entity.getSlug() ) );
