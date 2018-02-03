@@ -40,12 +40,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		);
 
 		prc.feedItems = results.feedItems;
-		prc.feedItemsCount = results.count;
+		prc.itemCount = results.itemCount;
 
 		announceInterception( 
 			"aggregator_onPortalIndex", {
 				feedItems = prc.feedItems,
-				feedItemsCount = prc.feedItemsCount
+				itemCount = prc.itemCount
 			} 
 		);
 
