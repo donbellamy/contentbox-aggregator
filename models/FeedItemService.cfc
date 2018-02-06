@@ -59,7 +59,7 @@ component extends="ContentService" singleton {
 			arguments.sortOrder = "datePublished DESC";
 		}
 
-		results.itemCount = c.count( "contentID" );
+		results.count = c.count( "contentID" );
 		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
 			offset=arguments.offset, 
 			max=arguments.max, 

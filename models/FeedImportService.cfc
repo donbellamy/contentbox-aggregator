@@ -64,10 +64,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										var feedItem = feedItemService.new();
 
 										// FeedItem properties
-										feedItem.setItemUrl( item.url );
 										feedItem.setUniqueId( uniqueId );
+										feedItem.setItemUrl( item.url );
 										if ( len( trim( item.author ) ) ) {
-											feedItem.setAuthor( item.author );
+											feedItem.setItemAuthor( item.author );
 										}
 										var now = now();
 										if ( isDate( item.datePublished ) ) {

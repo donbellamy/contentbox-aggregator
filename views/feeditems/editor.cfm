@@ -94,6 +94,15 @@
 							class="form-control"
 						)#
 					</div>
+					<div class="form-group">
+						#html.textarea(
+							label="Excerpt:", 
+							name="excerpt", 
+							bind=prc.feedItem, 
+							rows="10", 
+							class="form-control"
+						)#
+					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="history">
 					#prc.versionsViewlet#

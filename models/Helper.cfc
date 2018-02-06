@@ -9,6 +9,21 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Settings *********************************************/
 
+	function getSetting( required key, value ) {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc.agSettings, arguments.key ) ){
+			return prc.agSettings[ key ];
+		}
+		if ( structKeyExists( arguments, "value" ) ) {
+			return arguments.value;
+		}
+		throw(
+			message = "Setting requested: #arguments.key# not found",
+			detail = "Settings keys are #structKeyList( prc.agSettings )#",
+			type = "aggregator.helper.InvalidSetting" 
+		);
+	}
+
 	function getPortalEntryPoint() {
 		var prc = cb.getPrivateRequestCollection();
 		return prc.agEntryPoint;

@@ -107,11 +107,11 @@
 		</cfloop>
 	</tbody>
 </table>
-<cfif prc.feedsCount >
-	<cfif !rc.showAll && prc.feedsCount GT prc.cbSettings.cb_paging_maxrows >
-		#prc.oPaging.renderit( foundRows=prc.feedsCount, link=prc.pagingLink, asList=true )#
+<cfif prc.itemCount >
+	<cfif !rc.showAll && prc.itemCount GT prc.cbSettings.cb_paging_maxrows >
+		#prc.oPaging.renderit( foundRows=prc.itemCount, link=prc.pagingLink, asList=true )#
 	<cfelse>
-		<span class="label label-info">Total Feeds: #prc.feedsCount#</span>
+		<span class="label label-info">Total Feeds: #prc.itemCount#</span>
 	</cfif>
 </cfif>
 </cfoutput>

@@ -46,7 +46,7 @@ component extends="contentHandler" {
 		);
 
 		prc.feedItems = results.feedItems;
-		prc.feedItemsCount = results.count;
+		prc.itemCount = results.count;
 
 		event.setView( view="feeditems/table", layout="ajax" );
 

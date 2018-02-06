@@ -12,16 +12,20 @@ component persistent="true"
 	**							PROPERTIES									
 	********************************************************************* */
 
-	property name="itemUrl"
-		notnull="true"
-		length="255";
+	property name="excerpt" 
+		notnull="false" 
+		ormtype="text";
 
 	property name="uniqueId"
 		notnull="true"
 		length="255"
 		index="idx_uniqueId";
 
-	property name="author"
+	property name="itemUrl"
+		notnull="true"
+		length="255";
+
+	property name="itemAuthor"
 		notnull="false"
 		length="255";
 
@@ -38,6 +42,9 @@ component persistent="true"
 		notnull="false"
 		ormtype="text";
 
+	property name="renderedExcerpt" 
+		persistent="false";
+
 	/* *********************************************************************
 	**							CONSTRAINTS									
 	********************************************************************* */
@@ -51,9 +58,15 @@ component persistent="true"
 	FeedItem function init() {
 		super.init();
 		categories = [];
+		renderedContent = "";
+		renderedExcerpt	= "";
 		createdDate = now();
 		contentType = "FeedItem";
 		return this;
+	}
+
+	boolean function hasExcerpt() {
+		return len( trim( getExcerpt() ) );
 	}
 
 	Feed function getFeed() {

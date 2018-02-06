@@ -88,11 +88,11 @@
 		</cfloop>
 	</tbody>
 </table>
-<cfif prc.feedItemsCount >
-	<cfif !rc.showAll && prc.feedItemsCount GT prc.cbSettings.cb_paging_maxrows >
-		#prc.oPaging.renderit( foundRows=prc.feedItemsCount, link=prc.pagingLink, asList=true )#
+<cfif prc.itemCount >
+	<cfif !rc.showAll && prc.itemCount GT prc.cbSettings.cb_paging_maxrows >
+		#prc.oPaging.renderit( foundRows=prc.itemCount, link=prc.pagingLink, asList=true )#
 	<cfelse>
-		<span class="label label-info">Total Feed Items: #prc.feedItemsCount#</span>
+		<span class="label label-info">Total Feed Items: #prc.itemCount#</span>
 	</cfif>
 </cfif>
 </cfoutput>
