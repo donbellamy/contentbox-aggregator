@@ -69,6 +69,24 @@ component persistent="true"
 		return len( trim( getExcerpt() ) );
 	}
 
+	string function renderExcerpt() {
+
+		if ( NOT len( renderedExcerpt ) ) {
+			lock name="contentbox.excerptrendering.#getContentID()#" type="exclusive" throwontimeout="true" timeout="10" {
+				var b = createObject( "java","java.lang.StringBuilder" ).init( getExcerpt() );
+				var iData = {
+					builder = b,
+					content	= this
+				};
+				interceptorService.processState( "cb_onContentRendering", iData );
+				renderedExcerpt = b.toString();
+			}
+		}
+		
+		return renderedExcerpt;
+		
+	}
+
 	Feed function getFeed() {
 		return getParent();
 	}

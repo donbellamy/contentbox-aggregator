@@ -21,7 +21,7 @@
 	<div class="container">	
 		<div class="row">
 			<!--- Content --->
-			<div class="col-sm-9">
+			<div class="col-sm-12"><!--- TODO: 9 with sidebar --->
 				#cb.event( "aggregator_prePortalIndexDisplay" )#
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
