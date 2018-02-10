@@ -50,9 +50,16 @@ component accessors="true" singleton threadSafe {
 		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
 	}
 
-	function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL(), format="html" ) {
-		var outputFormat = ( arguments.format NEQ "html" ? ".#arguments.format#" : "" );
-		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() & "." & arguments.feedItem.getSlug() : getPortalEntryPoint() & "." & arguments.feedItem.getSlug() , ssl=arguments.ssl ) & outputFormat;
+	function linkFeed( required feed, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug();
+	}
+
+	function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkPortal( arguments.ssl ) & "/" & arguments.feedItem.getSlug();
+	}
+
+	function linkFeedItemAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkFeed( arguments.feedItem.getFeed(), arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
 	}
 
 	/************************************** Quick HTML *********************************************/
