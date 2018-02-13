@@ -55,8 +55,8 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		}
 
 		// Display settings
-		if ( len( prc.agSettings.ag_display_excerpt_word_limit ) && !isNumeric( prc.agSettings.ag_display_excerpt_word_limit ) ) {
-			arrayAppend( errors, "A valid word limit is required." );
+		if ( len( prc.agSettings.ag_display_excerpt_character_limit ) && !isNumeric( prc.agSettings.ag_display_excerpt_character_limit ) ) {
+			arrayAppend( errors, "A valid charcter limit is required." );
 		}
 		prc.agSettings.ag_display_excerpt_ending = trim( prc.agSettings.ag_display_excerpt_ending );
 		prc.agSettings.ag_display_read_more_text = trim( prc.agSettings.ag_display_read_more_text );

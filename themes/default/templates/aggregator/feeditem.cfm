@@ -10,7 +10,6 @@ Gettting this all working before adding in display settings
 
 <div class="post" id="feeditem_#feedItem.getContentID()#">
 	<div class="post-title">
-		<!--- TODO: featured image --->
 		<h2>
 			<a href="#ag.linkFeedItem( feedItem )#" 
 				title="#encodeForHtmlAttribute( feedItem.getTitle() )#" 
@@ -19,37 +18,33 @@ Gettting this all working before adding in display settings
 		</h2>
 		<div class="row">
 			<div class="col-sm-7 pull-left">
+				<i class="fa fa-rss"></i>
 				<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a>
 				<cfif len( feedItem.getItemAuthor() )  >
 					<span class="text-muted">-</span>
-					<i class="icon-user"></i>
+					<i class="fa fa-user"></i>
 					<a href="#ag.linkFeedItemAuthor( feedItem )#" title="#encodeForHTMLAttribute( feedItem.getItemAuthor() )#">#feedItem.getItemAuthor()#</a>
-					<!--- TODO: link author /news/?author=XXXX ? ag.linkAuthor() --->
-					<!--- TODO: link feed /news/feeds/feed-slug ? ag.linkFeed() --->
 				</cfif>
 			</div>
 			<div class="col-sm-5 pull-right text-right">
 				<i class="fa fa-calendar"></i>
-				#feedItem.getDisplayDatePublished()#
+				<time datetime="#feedItem.getDisplayDatePublished()#" title="#feedItem.getDisplayDatePublished()#">#ag.timeAgo( feedItem.getDisplayDatePublished() )#</time>
 			</div>
 		</div>
+	</div>
 		<div class="post-content">
-			<!--- If we've taken the time to create an excerpt, just display it --->
 			<cfif feedItem.hasExcerpt() > 
 				#feedItem.renderExcerpt()#
-				<div class="post-more">
-					<a href="#ag.linkFeedItem( feedItem )#" 
-						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
-						target="_blank"
-						rel="nofollow"><button class="btn btn-success">Read More...</button></a>
-				</div>
 			<cfelse>
-				#feedItem.renderContent()#
-				<!--- TODO: this should strip html and display x no of chars --->
-				<!--- TODO: Should have a read more link --->
+				#ag.renderContentExcerpt( feedItem, 500 )#...
 			</cfif>
+			<div class="post-more">
+				<a href="#ag.linkFeedItem( feedItem )#"
+					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
+					target="_blank"
+					rel="nofollow"><button class="btn btn-success">Read More...</button></a>
+			</div>
 		</div>
-	</div>
 </div>
 
 </cfoutput>

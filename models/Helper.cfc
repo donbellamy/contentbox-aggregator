@@ -55,11 +55,11 @@ component accessors="true" singleton threadSafe {
 	}
 
 	function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( arguments.ssl ) & "/" & arguments.feedItem.getSlug();
+		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug();
 	}
 
 	function linkFeedItemAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkFeed( arguments.feedItem.getFeed(), arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
+		return linkFeed( feed=arguments.feedItem.getFeed(), ssl=arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
 	}
 
 	/************************************** Quick HTML *********************************************/
@@ -91,6 +91,38 @@ component accessors="true" singleton threadSafe {
 			collectionAs = arguments.collectionAs,
 			args = arguments.args
 		);
+	}
+
+	/************************************** UTILITIES *********************************************/
+
+	function renderContentExcerpt( required FeedItem feedItem, numeric count=500 ) {
+		return left( stripHtml( arguments.feedItem.getContent() ), arguments.count );
+	}
+
+	function stripHtml( stringTarget ) {
+		return reReplaceNoCase( arguments.stringTarget, "<[^>]*>", "", "ALL" );
+	}
+
+	function timeAgo( required date time ) {
+
+		var now = now();
+		var diff = dateDiff( "s", arguments.time, now );
+
+		// x minutes ago
+		if ( diff LT 3600 ) {
+			var minutes = round( diff / 60 );
+			if ( minutes == 1 ) return "1 minute ago";
+			else return minutes & " minutes ago";
+		// x hours ago
+		} else if ( diff LT ( 3600 * 24 ) ) {
+			var hours = round( diff / 3600 );
+			if ( hours == 1 ) return "1 hour ago";
+			else return hours & " hours ago";
+		// older than 24 hours, just return the time
+		} else {
+			return arguments.time;
+		}
+
 	}
 
 }

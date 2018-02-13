@@ -14,7 +14,6 @@ component {
 
 		settings = {
 
-			// TODO: remove ag_ from names, unneeded imo
 			"ag_general_import_interval" = "",
 			"ag_general_import_start_date" = "",
 			"ag_general_import_start_time" = "",
@@ -33,25 +32,18 @@ component {
 			"ag_general_log_level" = "INFO",
 			"ag_general_log_file_name" = "aggregator",
 
-			"ag_display_title_link" = "true",
-			"ag_display_author_show" = "true",
 			"ag_display_source_show" = "true",
-			"ag_display_source_link" = "true",
+			"ag_display_author_show" = "true",
 			"ag_display_link_new_window" = "true",
 			"ag_display_link_as_nofollow" = "true",
-			"ag_display_video_embed" = "true",
 
 			"ag_display_excerpt_show" = "true",
-			"ag_display_excerpt_word_limit" = "",
+			"ag_display_excerpt_character_limit" = "500",
 			"ag_display_excerpt_ending" = "...",
 			"ag_display_read_more_show" = "true",
 			"ag_display_read_more_text" = "Read more...",
 
-			"ag_display_thumbnail_enable" = "true",
-			"ag_display_thumbnail_link" = "true",
-
 			"ag_display_paging_max_rows" = "10",
-			"ag_display_paging_type" = "paging", 
 
 			"ag_portal_enable" = "true",
 			"ag_portal_title" = "RSS Aggregator News",

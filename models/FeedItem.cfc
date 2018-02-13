@@ -42,7 +42,11 @@ component persistent="true"
 		notnull="false"
 		ormtype="text";
 
-	property name="renderedExcerpt" 
+	/* *********************************************************************
+	**							NON PERSISTED PROPERTIES					
+	********************************************************************* */
+
+	property name="renderedExcerpt"
 		persistent="false";
 
 	/* *********************************************************************
@@ -59,7 +63,8 @@ component persistent="true"
 		super.init();
 		categories = [];
 		renderedContent = "";
-		renderedExcerpt	= "";
+		renderedExcerpt = "";
+		renderedContentExcerpt = "";
 		createdDate = now();
 		contentType = "FeedItem";
 		return this;
@@ -91,9 +96,9 @@ component persistent="true"
 		return getParent();
 	}
 
-	string function getDisplayDatePublished() {
+	string function getDisplayDatePublished( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
 		var datePublished = getDatePublished();
-		return dateFormat( datePublished, "dd mmm yyyy" ) & " " & timeFormat( datePublished, "hh:mm tt" );
+		return dateFormat( datePublished, arguments.dateFormat ) & " " & timeFormat( datePublished, arguments.timeFormat );
 	}
 
 	array function validate() {

@@ -187,9 +187,9 @@ component persistent="true"
 		return fDate;
 	}
 
-	string function getDisplayLastImportedDate() {
+	string function getDisplayLastImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
 		var lastImportedDate = getLastImportedDate();
-		return dateFormat( lastImportedDate, "dd mmm yyyy" ) & " " & timeFormat( lastImportedDate, "hh:mm tt" );
+		return dateFormat( lastImportedDate, arguments.dateFormat ) & " " & timeFormat( lastImportedDate, arguments.timeFormat );
 	}
 
 	array function validate() {

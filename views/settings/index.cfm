@@ -304,44 +304,6 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_display_title_link",
-											content="Link title:"
-										)#
-										<div><small>If enabled, the feed item titles will link to the original article.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_title_link_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_title_link' },
-												checked	= prc.agSettings.ag_display_title_link
-											)#
-											#html.hiddenField( 
-												name="ag_display_title_link", 
-												value=prc.agSettings.ag_display_title_link 
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_author_show",
-											content="Show author:"
-										)#
-										<div><small>If enabled, the author will display for each feed item if available.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_author_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_author_show' },
-												checked=prc.agSettings.ag_display_author_show
-											)#
-											#html.hiddenField( 
-												name="ag_display_author_show", 
-												value=prc.agSettings.ag_display_author_show 
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="ag_display_source_show",
 											content="Show feed source:"
 										)#
@@ -361,19 +323,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_display_source_link",
-											content="Link feed source:"
+											field="ag_display_author_show",
+											content="Show author:"
 										)#
-										<div><small>If enabled, the feed name will be linked to the source site.</small></div>
+										<div><small>If enabled, the author will display for each feed item if available.</small></div>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_display_source_link_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_source_link' },
-												checked=prc.agSettings.ag_display_source_link
+												name="ag_display_author_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_author_show' },
+												checked=prc.agSettings.ag_display_author_show
 											)#
 											#html.hiddenField( 
-												name="ag_display_source_link", 
-												value=prc.agSettings.ag_display_source_link 
+												name="ag_display_author_show", 
+												value=prc.agSettings.ag_display_author_show 
 											)#
 										</div>
 									</div>
@@ -415,25 +377,6 @@
 											)#
 										</div>
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_video_embed",
-											content="Embed videos:"
-										)#
-										<div><small>If enabled, feed items from youtube, vimeo and dailymotion will display in an embedded video player, other videos will be linked.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_video_embed_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_video_embed' },
-												checked=prc.agSettings.ag_display_video_embed
-											)#
-											#html.hiddenField( 
-												name="ag_display_video_embed", 
-												value=prc.agSettings.ag_display_video_embed 
-											)#
-										</div>
-									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-list-alt fa-lg"></i> Excerpt Options</legend>
@@ -459,17 +402,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_display_excerpt_word_limit",
-											content="Word limit:"
+											field="ag_display_excerpt_character_limit",
+											content="Character limit:"
 										)#
 										<div class="controls">
-											<small>The number of words to limit in the excerpt displayed.</small>
+											<small>The number of characters to limit in the excerpt displayed.</small>
 											#html.inputField(
 												type="number",
 												min="0",
 												placeholder="No Limit",
-												name="ag_display_excerpt_word_limit",
-												value=prc.agSettings.ag_display_excerpt_word_limit,
+												name="ag_display_excerpt_character_limit",
+												value=prc.agSettings.ag_display_excerpt_character_limit,
 												class="form-control counter"
 											)#
 										</div>
@@ -527,47 +470,6 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-image fa-lg"></i> Thumbnail Options</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_thumbnail_enable",
-											content="Enable thumbnails:"
-										)#
-										<div><small>If enabled, when possible a thumbnail will be imported and displayed for each feed item.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_thumbnail_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_thumbnail_enable' },
-												checked=prc.agSettings.ag_display_thumbnail_enable
-											)#
-											#html.hiddenField( 
-												name="ag_display_thumbnail_enable", 
-												value=prc.agSettings.ag_display_thumbnail_enable 
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_thumbnail_link",
-											content="Link thumbnail:"
-										)#
-										<div><small>If enabled, the thumbnail will link to the feed item.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_thumbnail_link_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_thumbnail_link' },
-												checked=prc.agSettings.ag_display_thumbnail_link
-											)#
-											#html.hiddenField( 
-												name="ag_display_thumbnail_link", 
-												value=prc.agSettings.ag_display_thumbnail_link 
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
 									<div class="form-group">
 										<label class="control-label" for="ag_display_paging_max_rows">
@@ -587,24 +489,6 @@
 												data-slider-step="10"
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_paging_type",
-											content="Paging type:"
-										)#
-										<div class="controls">
-											<small>The type of pagination used when displaying feed items.</small>
-											#html.select(
-												name="ag_display_paging_type",
-												options=prc.pagingTypes,
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_display_paging_type,
-												class="form-control"
-											)#
 										</div>
 									</div>
 								</fieldset>
