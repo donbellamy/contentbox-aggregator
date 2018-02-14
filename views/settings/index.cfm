@@ -304,44 +304,6 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_display_source_show",
-											content="Show feed source:"
-										)#
-										<div><small>If enabled, the feed name will display for each feed item.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_source_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_source_show' },
-												checked=prc.agSettings.ag_display_source_show
-											)#
-											#html.hiddenField( 
-												name="ag_display_source_show", 
-												value=prc.agSettings.ag_display_source_show 
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_author_show",
-											content="Show author:"
-										)#
-										<div><small>If enabled, the author will display for each feed item if available.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_author_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_author_show' },
-												checked=prc.agSettings.ag_display_author_show
-											)#
-											#html.hiddenField( 
-												name="ag_display_author_show", 
-												value=prc.agSettings.ag_display_author_show 
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="ag_display_link_new_window",
 											content="Open links in new window:"
 										)#
@@ -374,6 +336,44 @@
 											#html.hiddenField( 
 												name="ag_display_link_as_nofollow",
 												value=prc.agSettings.ag_display_link_as_nofollow
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_source_show",
+											content="Show source:"
+										)#
+										<div><small>If enabled, the feed name will display for each feed item.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_source_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_source_show' },
+												checked=prc.agSettings.ag_display_source_show
+											)#
+											#html.hiddenField( 
+												name="ag_display_source_show", 
+												value=prc.agSettings.ag_display_source_show 
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_author_show",
+											content="Show author:"
+										)#
+										<div><small>If enabled, the author will display for each feed item if available.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_author_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_author_show' },
+												checked=prc.agSettings.ag_display_author_show
+											)#
+											#html.hiddenField( 
+												name="ag_display_author_show", 
+												value=prc.agSettings.ag_display_author_show 
 											)#
 										</div>
 									</div>

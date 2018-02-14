@@ -32,10 +32,10 @@ component {
 			"ag_general_log_level" = "INFO",
 			"ag_general_log_file_name" = "aggregator",
 
-			"ag_display_source_show" = "true",
-			"ag_display_author_show" = "true",
 			"ag_display_link_new_window" = "true",
 			"ag_display_link_as_nofollow" = "true",
+			"ag_display_source_show" = "true",
+			"ag_display_author_show" = "true",
 
 			"ag_display_excerpt_show" = "true",
 			"ag_display_excerpt_character_limit" = "500",
