@@ -5,7 +5,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@aggregator";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
-	property name="log" inject="logbox:logger:aggregator";
+	property name="log" inject="logbox:logger:{this}";
 
 	FeedImportService function init() {
 

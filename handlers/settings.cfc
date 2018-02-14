@@ -18,7 +18,6 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
-		prc.logLevels = [ "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG" ];
 		prc.pagingTypes = [
 			{ name="Load More Items", value="loadmore" },
 			{ name='Page numbers with "Next" and "Previous" page links', value="paging" },
@@ -68,12 +67,6 @@ component extends="baseHandler" {
 		} else {
 			cfschedule( action="delete", task="aggregator-import" );
 		}
-
-		// Configure LogBox
-		var logBoxConfig = logBox.getConfig();
-		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=prc.agSettings.ag_general_log_level, properties={ fileName=prc.agSettings.ag_general_log_file_name } );
-		logBoxConfig.category( name="aggregator", levelMax=prc.agSettings.ag_general_log_level, appenders="aggregator" );
-		logBox.configure( logBoxConfig );
 
 		// TODO: test this with a cbEntryPoint defined?
 		// TODO: What if cbentrypoint is changed via the settings form?

@@ -50,9 +50,6 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		prc.agSettings.ag_general_match_any_filter = trim( prc.agSettings.ag_general_match_any_filter );
 		prc.agSettings.ag_general_match_all_filter = trim( prc.agSettings.ag_general_match_all_filter );
 		prc.agSettings.ag_general_match_none_filter = trim( prc.agSettings.ag_general_match_none_filter );
-		if ( !len( trim( prc.agSettings.ag_general_log_file_name ) ) ) {
-			arrayAppend( errors, "A valid log file name is required." );
-		}
 
 		// Display settings
 		if ( len( prc.agSettings.ag_display_excerpt_character_limit ) && !isNumeric( prc.agSettings.ag_display_excerpt_character_limit ) ) {

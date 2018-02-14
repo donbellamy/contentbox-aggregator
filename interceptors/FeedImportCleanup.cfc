@@ -3,7 +3,6 @@ component extends="coldbox.system.Interceptor" {
 	property name="settingService" inject="settingService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
-	property name="log" inject="logbox:logger:aggregator";
 
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;

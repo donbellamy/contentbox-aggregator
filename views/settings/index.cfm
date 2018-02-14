@@ -262,41 +262,6 @@
 										</div>
 									</div>
 								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-database fa-lg"></i> Logging</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_log_level",
-											content="Log level:"
-										)#
-										<div class="controls">
-											<small>The maximum log level used when logging activity.</small>
-											#html.select(
-												name="ag_general_log_level",
-												options=prc.logLevels,
-												selectedValue=prc.agSettings.ag_general_log_level,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_log_file_name",
-											content="Log file name:"
-										)#
-										<div class="controls">
-											<small>The log file name used when logging activity.</small>
-											#html.textField(
-												name="ag_general_log_file_name",
-												value=prc.agSettings.ag_general_log_file_name,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-								</fieldset>
 							</div>
 							<div class="tab-pane" id="display_options">
 								<fieldset>

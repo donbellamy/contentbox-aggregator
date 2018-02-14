@@ -29,9 +29,6 @@ component {
 			"ag_general_match_all_filter" = "",
 			"ag_general_match_none_filter" = "",
 
-			"ag_general_log_level" = "INFO",
-			"ag_general_log_file_name" = "aggregator",
-
 			"ag_display_link_new_window" = "true",
 			"ag_display_link_as_nofollow" = "true",
 			"ag_display_source_show" = "true",
@@ -177,20 +174,6 @@ component {
 			}
 			ses.addRoute(argumentCollection=args);
 		}
-
-		// Configure logbox
-		var logLevel = settings.ag_general_log_level;
-		var fileName = settings.ag_general_log_file_name;
-		var logBox = controller.getLogBox();
-		var logBoxConfig = logBox.getConfig();
-		if ( !isNull( setting ) ) {
-			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			logLevel = agSettings.ag_general_log_level;
-			fileName = agSettings.ag_general_log_file_name;
-		}
-		logBoxConfig.appender( name="aggregator", class="coldbox.system.logging.appenders.CFAppender", levelMax=logLevel, properties={ fileName=fileName } );
-		logBoxConfig.category( name="aggregator", levelMax=logLevel, appenders="aggregator" );
-		logBox.configure( logBoxConfig );
 
 	}
 
