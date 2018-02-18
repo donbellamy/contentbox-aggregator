@@ -4,7 +4,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@aggregator";
+	property name="moduleSettings" inject="coldbox:setting:modules";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
+	property name="jsoup" inject="jsoup@cbjsoup";
 	property name="log" inject="logbox:logger:{this}";
 
 	FeedImportService function init() {
@@ -17,10 +19,35 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	FeedImportService function import( required Feed feed, required Author author ) {
 
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+
 		try {
 
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
+
+			// Save the feed image if enabled and not already populated
+			// TODO: Check setting for this?
+			if ( len( remoteFeed.image.url ) && !len( arguments.feed.getFeaturedImage() ) ) {
+
+				var httpService = new http( url=remoteFeed.image.url, method="GET" );
+				var result = httpService.send().getPrefix();
+				if ( result.status_code == "200" ) {
+
+					var imageName = feed.getSlug() & "." & listLast( remoteFeed.image.url, "." );
+					var imagePath = getFeedFolderPath() & imageName;
+					var imageUrl = getFeedFolderUrl() & imageName;
+
+					fileWrite( imagePath, result.fileContent );
+
+					arguments.feed.setFeaturedImage( imagePath );
+					arguments.feed.setFeaturedImageUrl( imageUrl );
+					
+					feedService.save( arguments.feed );
+
+				}
+
+			}
 
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
@@ -87,9 +114,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setTitle( item.title );
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
-										// TODO: Rip out image
-										// TODO: Clean html
-										// TODO: Validate feedItem, so add contentversion as last step after validating the body
+
+										// TODO: set to 8000 characters
+										// parse to fix any html stuff
+										// Clean?
+										// insert content
 										feedItem.addNewContentVersion( 
 											content=item.body,
 											changelog="Item imported.",
@@ -109,6 +138,31 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										// Save item
 										feedItemService.save( feedItem );
 
+										// Check for images
+										// TODO: setting here
+										var images = jsoup.parse( item.body ).getElementsByTag("img");
+										if ( arrayLen( images ) ) {
+
+											var src = images[1].attr("src");
+											var httpService = new http( url=src, method="GET" );
+											var result = httpService.send().getPrefix();
+											if ( result.status_code == "200" ) {
+							
+												var imageName = feedItem.getSlug() & "." & listLast( src, "." );
+												var imagePath = getFeedItemFolderPath() & imageName;
+												var imageUrl = getFeedItemFolderUrl() & imageName;
+							
+												fileWrite( imagePath, result.fileContent );
+							
+												feedItem.setFeaturedImage( imagePath );
+												feedItem.setFeaturedImageUrl( imageUrl );
+												
+												feedItemService.save( feedItem );
+							
+											}
+
+										}
+
 										// Increase item count
 										itemCount++;
 
@@ -118,6 +172,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										}
 
 									} catch( any e ) {
+
+										rethrow;
 
 										// Log error
 										if ( log.canError() ) {
@@ -187,6 +243,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		} catch ( any e ) {
 
+			rethrow;
+
 			if ( log.canError() ) { 
 				log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
 			}
@@ -197,7 +255,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	}
 
-	boolean function checkKeywordFilters( required Feed feed, required string title, required string body ) {
+	private boolean function checkKeywordFilters( required Feed feed, required string title, required string body ) {
 
 		// Set vars
 		var passes = true;
@@ -242,7 +300,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	}
 
-	boolean function checkAgeLimits( required Feed feed, required any datePublished ) {
+	private boolean function checkAgeLimits( required Feed feed, required any datePublished ) {
 	
 		var passes = true;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -275,6 +333,45 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		return passes
 	
+	}
+
+	private string function getFeedFolderPath() {
+		return getFolderPath("feeds");
+	}
+
+	private string function getFeedItemFolderPath() {
+		return getFolderPath("feeditems");
+	}
+
+	private string function getFolderPath( required string type ) {
+
+		var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\" & arguments.type;
+
+		if ( !directoryExists( folderPath ) ) {
+			directoryCreate( folderPath );
+			if ( log.canInfo() ) {
+				log.info("Created #arguments.type# image folder.");
+			}
+		}
+
+		return folderPath;
+
+	}
+
+	private string function getFeedFolderUrl() {
+		return getFolderUrl("feeds");
+	}
+
+	private string function getFeedItemFolderUrl() {
+		return getFolderUrl("feeditems");
+	}
+
+	private string function getFolderUrl( required string type ) {
+
+		var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+
+		return folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/" & arguments.type;
+
 	}
 
 }

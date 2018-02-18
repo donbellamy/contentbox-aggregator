@@ -1,6 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="settingService" inject="settingService@aggregator";
+	property name="agHelper" inject="helper@aggregator";
 
 	function configure() {}
 
@@ -11,10 +12,16 @@ component extends="coldbox.system.Interceptor" {
 			return;
 		}
 
+		// Helper
+		prc.agHelper = agHelper;
+
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
-		// Entry point
+		// Portal entry point
+		prc.agEntryPoint = prc.agSettings.ag_portal_entrypoint;
+
+		// Admin entry point
 		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-rss-aggregator').entryPoint#";
 
 		// Feeds

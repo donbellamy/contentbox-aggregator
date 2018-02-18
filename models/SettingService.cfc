@@ -1,7 +1,5 @@
 component extends="contentbox.models.system.SettingService" accessors="true" threadsafe singleton {
 
-	property name="requestService" inject="coldbox:requestService";
-
 	SettingService function init() {
 
 		super.init();

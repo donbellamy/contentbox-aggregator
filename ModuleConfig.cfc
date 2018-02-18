@@ -9,6 +9,7 @@ component {
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
 	this.cfMapping = "aggregator";
+	this.dependencies = ["cbjsoup"];
 
 	function configure() {
 

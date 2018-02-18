@@ -36,7 +36,7 @@
 											<li>
 												<a href="javascript:remove();"
 													class="confirmIt"
-													data-title="Delete Selected Feeds?"
+													data-title="Delete Selected Feed Items?"
 													data-message="This will delete the feed items, are you sure?">
 													<i class="fa fa-trash-o"></i> Delete Selected
 												</a>
