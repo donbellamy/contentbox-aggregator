@@ -30,21 +30,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			// TODO: Check setting for this?
 			if ( len( remoteFeed.image.url ) && !len( arguments.feed.getFeaturedImage() ) ) {
 
-				var httpService = new http( url=remoteFeed.image.url, method="GET" );
-				var result = httpService.send().getPrefix();
-				if ( result.status_code == "200" ) {
+				var imageName = downloadImage( remoteFeed.image.url, getFeedFolderPath(), feed.getSlug() );
 
-					var imageName = feed.getSlug() & "." & listLast( remoteFeed.image.url, "." );
-					var imagePath = getFeedFolderPath() & imageName;
-					var imageUrl = getFeedFolderUrl() & imageName;
-
-					fileWrite( imagePath, result.fileContent );
-
-					arguments.feed.setFeaturedImage( imagePath );
-					arguments.feed.setFeaturedImageUrl( imageUrl );
-					
+				if ( len( imageName ) ) {
+					arguments.feed.setFeaturedImage( getFeedFolderPath() & imageName );
+					arguments.feed.setFeaturedImageUrl( getFeedFolderUrl() & imageName );
 					feedService.save( arguments.feed );
-
 				}
 
 			}
@@ -115,9 +106,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
 
-										// TODO: set to 8000 characters
-										// parse to fix any html stuff
-										// Clean?
+										// TODO: Clean out non utf-8 stuff
+										// https://stackoverflow.com/questions/13653712/java-sql-sqlexception-incorrect-string-value-xf0-x9f-x91-xbd-xf0-x9f
 										// insert content
 										feedItem.addNewContentVersion( 
 											content=item.body,
@@ -143,22 +133,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										var images = jsoup.parse( item.body ).getElementsByTag("img");
 										if ( arrayLen( images ) ) {
 
-											var src = images[1].attr("src");
-											var httpService = new http( url=src, method="GET" );
-											var result = httpService.send().getPrefix();
-											if ( result.status_code == "200" ) {
-							
-												var imageName = feedItem.getSlug() & "." & listLast( src, "." );
-												var imagePath = getFeedItemFolderPath() & imageName;
-												var imageUrl = getFeedItemFolderUrl() & imageName;
-							
-												fileWrite( imagePath, result.fileContent );
-							
-												feedItem.setFeaturedImage( imagePath );
-												feedItem.setFeaturedImageUrl( imageUrl );
-												
+											// Download and set the image name
+											var imageName = downloadImage( images[1].attr("src"), getFeedItemFolderPath(), feedItem.getSlug() );
+
+											// Set featured image, if download was successful
+											if ( len( imageName ) ) {
+												feedItem.setFeaturedImage( getFeedItemFolderPath() & imageName );
+												feedItem.setFeaturedImageUrl( getFeedItemFolderUrl() & imageName );
 												feedItemService.save( feedItem );
-							
 											}
 
 										}
@@ -172,8 +154,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										}
 
 									} catch( any e ) {
-
-										rethrow;
 
 										// Log error
 										if ( log.canError() ) {
@@ -242,8 +222,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			save( feedImport );
 
 		} catch ( any e ) {
-
-			rethrow;
 
 			if ( log.canError() ) { 
 				log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
@@ -345,7 +323,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	private string function getFolderPath( required string type ) {
 
-		var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\" & arguments.type;
+		var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\#arguments.type#\";
 
 		if ( !directoryExists( folderPath ) ) {
 			directoryCreate( folderPath );
@@ -370,7 +348,54 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
 
-		return folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/" & arguments.type;
+		return folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/#arguments.type#/";
+
+	}
+
+	private string function downloadImage( required string url, required string folderPath, required string slug ) {
+
+		var mimeTypes = "image/gif,image/png,image/bmp,image/jpeg";
+		var imageName = "";
+		var ext = "";
+
+		try {
+
+			var result = new http( url=arguments.url, method="GET" ).send().getPrefix();
+			if ( result.status_code == "200" && listFindNoCase( mimeTypes, result.mimeType ) ) {
+
+				switch ( result.mimeType ) {
+					case "image/gif":
+						ext = "gif";
+						break;
+					case "image/png":
+						ext = "png";
+						break;
+					case "image/bmp":
+						ext = "bmp";
+						break;
+					default:
+						ext = "jpg";
+				}
+
+				imageName = arguments.slug & "." & ext;
+
+				fileWrite( arguments.folderPath & imageName, result.fileContent );
+
+			}
+
+		} catch( any e ) {
+
+			if ( log.canError() ) {
+				log.error( "Error retrieving and saving image '#arguments.url#' to path '#arguments.imagePath#'.", e );
+			}
+
+		}
+
+		return imageName;
+
+	}
+
+	private string function getImageType( required string url ) {
 
 	}
 
