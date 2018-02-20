@@ -18,14 +18,7 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
-		prc.pagingTypes = [
-			{ name="Load More Items", value="loadmore" },
-			{ name='Page numbers with "Next" and "Previous" page links', value="paging" },
-			{ name='"Older posts" and "Newer posts" links', value="oldnew" }
-		];
 		prc.cacheNames = cachebox.getCacheNames();
-		prc.activeTheme = themeService.getActiveTheme();
-		prc.layouts = reReplaceNoCase( prc.activeTheme.layouts, "blog_?[a-zA-Z]*,?", "", "all" );
 
 		event.setView( "settings/index" );
 
