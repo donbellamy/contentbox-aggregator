@@ -11,6 +11,7 @@ component {
 	this.cfMapping = "aggregator";
 	this.dependencies = ["cbjsoup"];
 
+	
 	function configure() {
 
 		settings = {
@@ -20,15 +21,20 @@ component {
 			"ag_general_import_start_time" = "",
 			"ag_general_default_creator" = "",
 			"ag_general_secret_key" = hash( getCurrentTemplatePath() ),
-			"ag_general_max_feed_imports" = "20",
+			"ag_general_max_feed_imports" = "10",
+
+			"ag_general_match_any_filter" = "",
+			"ag_general_match_all_filter" = "",
+			"ag_general_match_none_filter" = "",
 
 			"ag_general_max_age" = "",
 			"ag_general_max_age_unit" = "days",
 			"ag_general_max_items" = "",
-			
-			"ag_general_match_any_filter" = "",
-			"ag_general_match_all_filter" = "",
-			"ag_general_match_none_filter" = "",
+
+			"ag_general_thumbnail_enable" = "true",
+			"ag_general_thumbnail_use_default" = "true",
+			"ag_general_thumbnail_default_image" = "",
+			"ag_general_thumbnail_default_image_url" = "",
 
 			"ag_display_link_new_window" = "true",
 			"ag_display_link_as_nofollow" = "true",

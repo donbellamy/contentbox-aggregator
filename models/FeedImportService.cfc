@@ -26,7 +26,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
-
+writedump(remoteFeed);
+abort;
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
 
@@ -172,6 +173,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										// Save item
 										feedItemService.save( feedItem );
 
+										// TODO: Check attachments first, then scan body
 										// Check for images
 										var images = jsoup.parse( item.body ).getElementsByTag("img");
 										if ( arrayLen( images ) ) {

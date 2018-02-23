@@ -140,63 +140,6 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_max_age",
-											content="Limit items by age:"
-										)#
-										<div>
-											<small>
-												The maximum age allowed for feed items.
-												Existing feed items will be deleted once they exceed this age limit.
-											</small>
-										</div>
-										<div class="controls row">
-											<div class="col-sm-6">
-												#html.inputField(
-													name="ag_general_max_age",
-													type="number",
-													value=prc.agSettings.ag_general_max_age,
-													class="form-control counter",
-													placeholder="No limit",
-													min="0"
-												)#
-											</div>
-											<div class="col-sm-6">
-												#html.select(
-													name="ag_general_max_age_unit",
-													options=prc.limitUnits,
-													selectedValue=prc.agSettings.ag_general_max_age_unit,
-													class="form-control"
-												)#
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_max_items",
-											content="Limit items by number:"
-										)#
-										<div class="controls">
-											<small>
-												The maximum number of feed items to keep per feed.
-												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-											</small>
-											#html.inputField(
-												name="ag_general_max_items",
-												type="number",
-												value=prc.agSettings.ag_general_max_items,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 									<div class="form-group">
 										#html.label(
@@ -261,6 +204,66 @@
 											)#
 										</div>
 									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_max_age",
+											content="Limit items by age:"
+										)#
+										<div>
+											<small>
+												The maximum age allowed for feed items.
+												Existing feed items will be deleted once they exceed this age limit.
+											</small>
+										</div>
+										<div class="controls row">
+											<div class="col-sm-6">
+												#html.inputField(
+													name="ag_general_max_age",
+													type="number",
+													value=prc.agSettings.ag_general_max_age,
+													class="form-control counter",
+													placeholder="No limit",
+													min="0"
+												)#
+											</div>
+											<div class="col-sm-6">
+												#html.select(
+													name="ag_general_max_age_unit",
+													options=prc.limitUnits,
+													selectedValue=prc.agSettings.ag_general_max_age_unit,
+													class="form-control"
+												)#
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_max_items",
+											content="Limit items by number:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of feed items to keep per feed.
+												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+											</small>
+											#html.inputField(
+												name="ag_general_max_items",
+												type="number",
+												value=prc.agSettings.ag_general_max_items,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-picture-o fa-lg"></i> Thumbnail Options</legend>
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="display_options">
