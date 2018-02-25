@@ -18,6 +18,11 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
+		prc.thumbnailOptions = [ 
+			{ name="Use the default thumbnail", value="default" },
+			{ name="Use the feed's thumbnail", value="feed" },
+			{ name="Do not display a thumbnail", value="none" }
+		];
 		prc.cacheNames = cachebox.getCacheNames();
 
 		event.setView( "settings/index" );

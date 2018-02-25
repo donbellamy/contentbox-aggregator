@@ -32,7 +32,7 @@ component {
 			"ag_general_max_items" = "",
 
 			"ag_general_thumbnail_enable" = "true",
-			"ag_general_thumbnail_use_default" = "true",
+			"ag_general_thumbnail_missing_behavior" = "default",
 			"ag_general_thumbnail_default_image" = "",
 			"ag_general_thumbnail_default_image_url" = "",
 

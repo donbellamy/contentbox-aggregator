@@ -26,8 +26,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
-writedump(remoteFeed);
-abort;
+
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
 
@@ -173,69 +172,74 @@ abort;
 										// Save item
 										feedItemService.save( feedItem );
 
-										// TODO: Check attachments first, then scan body
-										// Check for images
-										var images = jsoup.parse( item.body ).getElementsByTag("img");
-										if ( arrayLen( images ) ) {
+										// Import images if thumbnails are enabled
+										if ( settings.ag_general_thumbnail_enable ) {
 
-											try {
+											// TODO: Check attachments first, then scan body
+											// Check for images
+											var images = jsoup.parse( item.body ).getElementsByTag("img");
+											if ( arrayLen( images ) ) {
 
-												// Grab the image
-												var result = new http( url=images[1].attr("src"), method="GET" ).send().getPrefix();
+												try {
 
-												// Check for error and valid image
-												if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
+													// Grab the image
+													var result = new http( url=images[1].attr("src"), method="GET" ).send().getPrefix();
 
-													// Set the file extension
-													var extension = "";
-													switch ( result.mimeType ) {
-														case "image/gif":
-															extension = "gif";
-															break;
-														case "image/png":
-															extension = "png";
-															break;
-														case "image/bmp":
-															extension = "bmp";
-															break;
-														default:
-															extension = "jpg";
-													}
+													// Check for error and valid image
+													if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
 
-													// Set the folder path and create if needed
-													var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\";
-													if ( !directoryExists( folderPath ) ) {
-														directoryCreate( folderPath );
-														if ( log.canInfo() ) {
-															log.info("Created aggregator image folder.");
+														// Set the file extension
+														var extension = "";
+														switch ( result.mimeType ) {
+															case "image/gif":
+																extension = "gif";
+																break;
+															case "image/png":
+																extension = "png";
+																break;
+															case "image/bmp":
+																extension = "bmp";
+																break;
+															default:
+																extension = "jpg";
 														}
+
+														// Set the folder path and create if needed
+														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\";
+														if ( !directoryExists( folderPath ) ) {
+															directoryCreate( folderPath );
+															if ( log.canInfo() ) {
+																log.info("Created aggregator image folder.");
+															}
+														}
+
+														// Set image name and path
+														var imageName = feedItem.getSlug() & "." & extension;
+														var imagePath = folderPath & imageName;
+
+														// Save the image
+														fileWrite( imagePath, result.fileContent );
+
+														// Set the image url
+														var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+														var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/";
+														var imageUrl = folderUrl & imageName;
+
+														// Update feedItem
+														feedItem.setFeaturedImage( imagePath );
+														feedItem.setFeaturedImageUrl( imageUrl );
+														feedItemService.save( feedItem );
+
 													}
 
-													// Set image name and path
-													var imageName = feedItem.getSlug() & "." & extension;
-													var imagePath = folderPath & imageName;
+												} catch( any e ) {
 
-													// Save the image
-													fileWrite( imagePath, result.fileContent );
-
-													// Set the image url
-													var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-													var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/";
-													var imageUrl = folderUrl & imageName;
-
-													// Update feedItem
-													feedItem.setFeaturedImage( imagePath );
-													feedItem.setFeaturedImageUrl( imageUrl );
-													feedItemService.save( feedItem );
-
+													if ( log.canError() ) {
+														log.error( "Error retrieving and saving featured image for feed item ('#uniqueId#').", e );
+													}
+										
 												}
 
-											} catch( any e ) {
-
-												if ( log.canError() ) {
-													log.error( "Error retrieving and saving featured image for feed item ('#uniqueId#').", e );
-												}
-									
 											}
 
 										}
