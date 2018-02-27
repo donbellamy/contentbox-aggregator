@@ -35,7 +35,19 @@ component persistent="true"
 	property name="defaultStatus"
 		notnull="true"
 		length="10"
-		default="draft";
+		default="published";
+
+	property name="matchAnyFilter"
+		notnull="false"
+		length="255";
+
+	property name="matchAllFilter"
+		notnull="false"
+		length="255";
+
+	property name="matchNoneFilter"
+		notnull="false"
+		length="255";
 
 	property name="maxAge"
 		notnull="false"
@@ -49,17 +61,16 @@ component persistent="true"
 		notnull="false"
 		ormtype="long";
 
-	property name="matchAnyFilter"
-		notnull="false"
-		length="255";
+	property name="importImages"
+		notnull="true"
+		ormtype="boolean"
+		default="true"
+		index="idx_importImages";
 
-	property name="matchAllFilter"
-		notnull="false"
-		length="255";
-
-	property name="matchNoneFilter"
-		notnull="false"
-		length="255";
+	property name="missingImageBehavior"
+		notnull="true"
+		length="10"
+		default="default";
 
 	/* *********************************************************************
 	**                            RELATIONSHIPS
@@ -100,6 +111,7 @@ component persistent="true"
 	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
 	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
 	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
+	this.constraints["missingImageBehavior"] = { required=true, regex="(default|feed|none)" };
 
 	Feed function init() {
 		super.init();

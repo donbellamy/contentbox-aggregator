@@ -59,11 +59,11 @@
 								<i class="fa fa-history"></i> History
 							</a>
 						</li>
-						<li role="presentation">
+						<!--- TODO:<li role="presentation">
 							<a href="##imports" aria-controls="imports" role="tab" data-toggle="tab">
 								<i class="fa fa-download"></i> Imports
 							</a>
-						</li>
+						</li>--->
 					</cfif>
 				</ul>
 			</div>
@@ -143,63 +143,6 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="options">
 					<fieldset>
-						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="maxAge",
-								content="Limit items by age:"
-							)#
-							<div>
-								<small>
-									The maximum age allowed for feed items.
-									Existing feed items will be deleted once they exceed this age limit.
-								</small>
-							</div>
-							<div class="controls row">
-								<div class="col-sm-6">
-									#html.inputField(
-										name="maxAge",
-										type="number",
-										value=prc.feed.getMaxAge(),
-										class="form-control counter",
-										placeholder="No limit",
-										min="0"
-									)#
-								</div>
-								<div class="col-sm-6">
-									#html.select(
-										name="maxAgeUnit",
-										options=prc.limitUnits,
-										selectedValue=prc.feed.getMaxAgeUnit(),
-										class="form-control"
-									)#
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="maxItems",
-								content="Limit items by number:"
-							)#
-							<div class="controls">
-								<small>
-									The maximum number of feed items to keep per feed.
-									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-								</small>
-								#html.inputField(
-									name="maxItems",
-									type="number",
-									value=prc.feed.getMaxItems(),
-									class="form-control counter",
-									placeholder="No limit",
-									min="0"
-								)#
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
 						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 						<div class="form-group">
 							#html.label(
@@ -265,6 +208,109 @@
 							</div>
 						</div>
 					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="maxAge",
+								content="Limit items by age:"
+							)#
+							<div>
+								<small>
+									The maximum age allowed for feed items.
+									Existing feed items will be deleted once they exceed this age limit.
+								</small>
+							</div>
+							<div class="controls row">
+								<div class="col-sm-6">
+									#html.inputField(
+										name="maxAge",
+										type="number",
+										value=prc.feed.getMaxAge(),
+										class="form-control counter",
+										placeholder="No limit",
+										min="0"
+									)#
+								</div>
+								<div class="col-sm-6">
+									#html.select(
+										name="maxAgeUnit",
+										options=prc.limitUnits,
+										selectedValue=prc.feed.getMaxAgeUnit(),
+										class="form-control"
+									)#
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="maxItems",
+								content="Limit items by number:"
+							)#
+							<div class="controls">
+								<small>
+									The maximum number of feed items to keep per feed.
+									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+								</small>
+								#html.inputField(
+									name="maxItems",
+									type="number",
+									value=prc.feed.getMaxItems(),
+									class="form-control counter",
+									placeholder="No limit",
+									min="0"
+								)#
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="importImages",
+								content="Import Images:"
+							)#
+							<div>
+								<small>
+									If enabled, an image will be saved for each feed item when imported if one is available.
+								</small>
+							</div>
+							<div class="controls">
+								#html.checkbox(
+									name="importImages_toggle",
+									data={ toggle: 'toggle', match: 'importImages' },
+									checked=prc.feed.getImportImages()
+								)#
+								#html.hiddenField( 
+									name="importImages",
+									value=prc.feed.getImportImages() 
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="missingImageBehavior",
+								content="Missing Image:"
+							)#
+							<div class="controls">
+								<small>
+									The default behavior when a feed item has no image.
+								</small>
+								#html.select(
+									name="missingImageBehavior",
+									options=prc.imageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getMissingImageBehavior(),
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</fieldset>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="seo">
 					<div class="form-group">
@@ -301,9 +347,9 @@
 					<div role="tabpanel" class="tab-pane" id="history">
 						#prc.versionsViewlet#
 					</div>
-					<div role="tabpanel" class="tab-pane" id="imports">
+					<!---<div role="tabpanel" class="tab-pane" id="imports">
 						<div>Do we need this?</div>
-					</div>
+					</div>--->
 				</cfif>
 			</div>
 		</div>

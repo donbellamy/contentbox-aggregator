@@ -263,42 +263,46 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-picture-o fa-lg"></i> Thumbnail Options</legend>
+									<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_thumbnail_enable",
-											content="Import Thumbnails:"
+											field="ag_general_image_import_enable",
+											content="Import Images:"
 										)#
-										<div><small>If enabled, a thumbnail will be saved as the featured image for each feed item as feeds are imported if an image is available.</small></div>
+										<div>
+											<small>
+												If enabled, an image will be saved for each feed item when imported if one is available.
+											</small>
+										</div>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_general_thumbnail_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_general_thumbnail_enable' },
-												checked=prc.agSettings.ag_general_thumbnail_enable
+												name="ag_general_image_import_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_general_image_import_enable' },
+												checked=prc.agSettings.ag_general_image_import_enable
 											)#
 											#html.hiddenField( 
-												name="ag_general_thumbnail_enable", 
-												value=prc.agSettings.ag_general_thumbnail_enable 
+												name="ag_general_image_import_enable", 
+												value=prc.agSettings.ag_general_image_import_enable 
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_thumbnail_missing_behavior",
-											content="Missing Thumbnail:"
+											field="ag_general_image_missing_behavior",
+											content="Missing Image:"
 										)#
 										<div class="controls">
 											<small>
-												The default behavior when a feed item has no thumbnail.
+												The default behavior when a feed item has no image.
 											</small>
 											#html.select(
-												name="ag_general_thumbnail_missing_behavior",
-												options=prc.thumbnailOptions,
+												name="ag_general_image_missing_behavior",
+												options=prc.imageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_general_thumbnail_missing_behavior,
+												selectedValue=prc.agSettings.ag_general_image_missing_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -306,24 +310,24 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_general_thumbnail_default_image",
-											content="Default Thumbnail:"
+											field="ag_general_image_default",
+											content="Default Image:"
 										)#
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_general_thumbnail_default_image ) >hide</cfif> form-group" id="default_image_controls">
+											<div class="<cfif !len( prc.agSettings.ag_general_image_default ) >hide</cfif> form-group" id="default_image_controls">
 												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
 												#html.hiddenField(
-													name="ag_general_thumbnail_default_image",
-													value=prc.agSettings.ag_general_thumbnail_default_image
+													name="ag_general_image_default",
+													value=prc.agSettings.ag_general_image_default
 												)#
 												#html.hiddenField(
-													name="ag_general_thumbnail_default_image_url",
-													value=prc.agSettings.ag_general_thumbnail_default_image_url
+													name="ag_general_image_default_url",
+													value=prc.agSettings.ag_general_image_default_url
 												)#
 												<div class="margin10">
-													<cfif len( prc.agSettings.ag_general_thumbnail_default_image_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_general_thumbnail_default_image_url#" class="img-thumbnail" height="75">
+													<cfif len( prc.agSettings.ag_general_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_general_image_default_url#" class="img-thumbnail" height="75">
 													<cfelse>
 														<img id="default_image_preview" class="img-thumbnail" height="75">
 													</cfif>
@@ -935,7 +939,7 @@
 								</fieldset>
 							</div>
 							<div class="form-actions">
-								#html.submitButton( value="Save Settings", class="btn btn-danger" )#
+								<br />#html.submitButton( value="Save Settings", class="btn btn-danger" )#
 							</div>
 						</div>
 					</div>
