@@ -62,15 +62,12 @@ component persistent="true"
 		ormtype="long";
 
 	property name="importImages"
-		notnull="true"
-		ormtype="boolean"
-		default="true"
-		index="idx_importImages";
+		notnull="false"
+		ormtype="boolean";
 
 	property name="missingImageBehavior"
-		notnull="true"
-		length="10"
-		default="default";
+		notnull="false"
+		length="10";
 
 	/* *********************************************************************
 	**                            RELATIONSHIPS

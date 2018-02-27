@@ -18,8 +18,8 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
-		prc.imageOptions = [
-			{ name="Use the global default image", value="default" },
+		prc.missingImageOptions = [
+			{ name="Use the default image", value="default" },
 			{ name="Use the feed's featured image", value="feed" },
 			{ name="Do not display an image", value="none" }
 		];

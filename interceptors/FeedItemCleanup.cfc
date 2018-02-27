@@ -4,6 +4,13 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 
+	function aggregator_preFeedItemRemove( event, interceptData ) {
+		var feedItem = arguments.interceptData.feedItem;
+		if ( len( feedItem.getFeaturedImage() ) && fileExists( feedItem.getFeaturedImage()  ) ) {
+			try { fileDelete( feedItem.getFeaturedImage() ); } catch( any e ) {}
+		}
+	}
+
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doMaxItemCleanup( feed );

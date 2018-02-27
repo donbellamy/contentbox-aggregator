@@ -173,7 +173,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItemService.save( feedItem );
 
 										// Import images if enabled
-										if ( settings.ag_general_image_import_enable && arguments.feed.getImportImages() ) {
+										var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
+										if ( importImages ) {
 
 											// TODO: Check attachments first, then scan body
 											// Check for images

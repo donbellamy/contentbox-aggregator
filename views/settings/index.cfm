@@ -299,7 +299,7 @@
 											</small>
 											#html.select(
 												name="ag_general_image_missing_behavior",
-												options=prc.imageOptions,
+												options=prc.missingImageOptions,
 												column="value",
 												nameColumn="name",
 												selectedValue=prc.agSettings.ag_general_image_missing_behavior,

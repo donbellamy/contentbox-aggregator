@@ -11,7 +11,6 @@ component {
 	this.cfMapping = "aggregator";
 	this.dependencies = ["cbjsoup"];
 
-	
 	function configure() {
 
 		settings = {
@@ -113,6 +112,7 @@ component {
 		interceptors = [
 			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
+			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },

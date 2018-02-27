@@ -24,6 +24,8 @@ component accessors="true" singleton threadSafe {
 		);
 	}
 
+	/************************************** Root Methods *********************************************/
+
 	function getPortalEntryPoint() {
 		var prc = cb.getPrivateRequestCollection();
 		return prc.agEntryPoint;
@@ -93,11 +95,28 @@ component accessors="true" singleton threadSafe {
 		);
 	}
 
-	/************************************** UTILITIES *********************************************/
+	/************************************** Feed Item Methods *********************************************/
 
-	function renderContentExcerpt( required FeedItem feedItem, numeric count=500 ) {
-		return left( stripHtml( arguments.feedItem.getContent() ), arguments.count );
+	function getFeedItemFeaturedImageUrl( required FeedItem feedItem ) {
+		var feed = arguments.feedItem.getFeed();
+		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : getSetting("ag_general_image_missing_behavior");
+		if ( len( feedItem.getFeaturedImageUrl() ) ) {
+			return feedItem.getFeaturedImageUrl();
+		} else if ( behavior == "default" ) {
+			return getSetting("ag_general_image_default_url");
+		} else if ( behavior == "feed" ) {
+			return feed.getFeaturedImageUrl();
+		} else {
+			return "";
+		}
 	}
+
+	function renderContentExcerpt( required FeedItem feedItem, numeric count=500, string excerptEnding="..." ) {
+		var content = trim( left( stripHtml( arguments.feedItem.getContent() ), arguments.count ) );
+		return "<p>" & content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" ) & "</p>";
+	}
+
+	/************************************** UTILITIES *********************************************/
 
 	function stripHtml( stringTarget ) {
 		return reReplaceNoCase( arguments.stringTarget, "<[^>]*>", "", "ALL" );

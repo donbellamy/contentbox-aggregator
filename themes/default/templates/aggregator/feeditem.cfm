@@ -11,6 +11,7 @@
 <cfoutput>
 
 <div class="post" id="feeditem_#feedItem.getContentID()#">
+
 	<div class="post-title">
 		<h2>
 			<a href="#ag.linkFeedItem( feedItem )#"
@@ -38,23 +39,35 @@
 			</div>
 		</div>
 	</div>
+
 	<cfif args.showExcerpt >
-		<div class="post-content">
-			<cfif feedItem.hasExcerpt() > 
-				#feedItem.renderExcerpt()#
-			<cfelse>
-				#ag.renderContentExcerpt( feedItem, val( args.characterLimit ) )##args.excerptEnding#
-			</cfif>
-			<cfif args.showReadMore >
-				<div class="post-more">
-					<a href="#ag.linkFeedItem( feedItem )#"
-						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif args.useNoFollow >rel="nofollow"</cfif>
-						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
+		<div class="post-content row">
+			<cfif len( ag.getFeedItemFeaturedImageUrl( feedItem ) ) >
+				<div class="col-sm-3">
+					<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
+					<cfif args.openNewWindow >target="_blank"</cfif>
+					<cfif args.useNoFollow >rel="nofollow"</cfif>
+					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#ag.getFeedItemFeaturedImageUrl( feedItem )#" /></a>
 				</div>
 			</cfif>
+			<div class="<cfif len( ag.getFeedItemFeaturedImageUrl( feedItem ) ) >col-sm-9<cfelse>col-sm-12</cfif>">
+				<cfif feedItem.hasExcerpt() >
+					#feedItem.renderExcerpt()#
+				<cfelse>
+					#ag.renderContentExcerpt( feedItem, val( args.characterLimit ), args.excerptEnding )#
+				</cfif>
+				<cfif args.showReadMore >
+					<div class="post-more">
+						<a href="#ag.linkFeedItem( feedItem )#"
+							<cfif args.openNewWindow >target="_blank"</cfif>
+							<cfif args.useNoFollow >rel="nofollow"</cfif>
+							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
+					</div>
+				</cfif>
+			</div>
 		</div>
 	</cfif>
+
 </div>
 
 </cfoutput>

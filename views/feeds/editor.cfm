@@ -273,20 +273,17 @@
 								field="importImages",
 								content="Import Images:"
 							)#
-							<div>
+							<div class="controls">
 								<small>
 									If enabled, an image will be saved for each feed item when imported if one is available.
 								</small>
-							</div>
-							<div class="controls">
-								#html.checkbox(
-									name="importImages_toggle",
-									data={ toggle: 'toggle', match: 'importImages' },
-									checked=prc.feed.getImportImages()
-								)#
-								#html.hiddenField( 
+								#html.select(
 									name="importImages",
-									value=prc.feed.getImportImages() 
+									options=prc.importImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getImportImages(),
+									class="form-control"
 								)#
 							</div>
 						</div>
@@ -302,7 +299,7 @@
 								</small>
 								#html.select(
 									name="missingImageBehavior",
-									options=prc.imageOptions,
+									options=prc.missingImageOptions,
 									column="value",
 									nameColumn="name",
 									selectedValue=prc.feed.getMissingImageBehavior(),

@@ -66,9 +66,15 @@ component extends="contentHandler" {
 
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.categories = categoryService.getAll( sortOrder="category" );
-		prc.imageOptions = [
-			{ name="Use the global default image", value="default" },
-			{ name="Use the feed's featured image", value="feed" },
+		prc.importImageOptions = [
+			{ name="Use the default setting", value="" },
+			{ name="Import images for this feed", value="true" },
+			{ name="Do not import images for this feed", value="false" }
+		];
+		prc.missingImageOptions = [
+			{ name="Use the default setting", value="" },
+			{ name="Use the default image", value="default" },
+			{ name="Use this feed's featured image", value="feed" },
 			{ name="Do not display an image", value="none" }
 		];
 
