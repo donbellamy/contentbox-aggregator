@@ -1,12 +1,12 @@
-<cfparam name="args.openNewWindow" default="#ag.getSetting('ag_display_link_new_window',true)#" />
-<cfparam name="args.useNoFollow" default="#ag.getSetting('ag_display_link_as_nofollow',true)#" />
-<cfparam name="args.showSource" default="#ag.getSetting('ag_display_source_show',true)#" />
-<cfparam name="args.showAuthor" default="#ag.getSetting('ag_display_author_show',true)#" />
-<cfparam name="args.showExcerpt" default="#ag.getSetting('ag_display_excerpt_show',true)#" />
-<cfparam name="args.characterLimit" default="#ag.getSetting('ag_display_excerpt_character_limit',500)#" />
-<cfparam name="args.excerptEnding" default="#ag.getSetting('ag_display_excerpt_ending','...')#" />
-<cfparam name="args.showReadMore" default="#ag.getSetting('ag_display_read_more_show',true)#" />
-<cfparam name="args.readMoreText" default="#ag.getSetting('ag_display_read_more_text','Read more...')#" />
+<cfparam name="args.openNewWindow" default="#ag.setting('ag_display_link_new_window',true)#" />
+<cfparam name="args.useNoFollow" default="#ag.setting('ag_display_link_as_nofollow',true)#" />
+<cfparam name="args.showSource" default="#ag.setting('ag_display_source_show',true)#" />
+<cfparam name="args.showAuthor" default="#ag.setting('ag_display_author_show',true)#" />
+<cfparam name="args.showExcerpt" default="#ag.setting('ag_display_excerpt_show',true)#" />
+<cfparam name="args.characterLimit" default="#ag.setting('ag_display_excerpt_character_limit',500)#" />
+<cfparam name="args.excerptEnding" default="#ag.setting('ag_display_excerpt_ending','...')#" />
+<cfparam name="args.showReadMore" default="#ag.setting('ag_display_read_more_show',true)#" />
+<cfparam name="args.readMoreText" default="#ag.setting('ag_display_read_more_text','Read more...')#" />
 
 <cfoutput>
 
@@ -41,16 +41,17 @@
 	</div>
 
 	<cfif args.showExcerpt >
+		<cfset featuredImageUrl = ag.getFeedItemFeaturedImageUrl( feedItem ) />
 		<div class="post-content row">
-			<cfif len( ag.getFeedItemFeaturedImageUrl( feedItem ) ) >
+			<cfif len( featuredImageUrl ) >
 				<div class="col-sm-3">
 					<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
 					<cfif args.useNoFollow >rel="nofollow"</cfif>
-					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#ag.getFeedItemFeaturedImageUrl( feedItem )#" /></a>
+					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#featuredImageUrl#" /></a>
 				</div>
 			</cfif>
-			<div class="<cfif len( ag.getFeedItemFeaturedImageUrl( feedItem ) ) >col-sm-9<cfelse>col-sm-12</cfif>">
+			<div class="<cfif len( featuredImageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
 				<cfif feedItem.hasExcerpt() >
 					#feedItem.renderExcerpt()#
 				<cfelse>

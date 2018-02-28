@@ -27,6 +27,74 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
+			// Check if we are importing images
+			var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
+
+			// Grab the feed image if we can
+			if ( importImages && len( remoteFeed.image.url ) && !len( arguments.feed.getFeaturedImage() ) ) {
+
+				try {
+
+					// Grab the image
+					var result = new http( url=remoteFeed.image.url, method="GET" ).send().getPrefix();
+
+					// Check for error and valid image
+					if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
+
+						// Set the file extension
+						var extension = "";
+						switch ( result.mimeType ) {
+							case "image/gif":
+								extension = "gif";
+								break;
+							case "image/png":
+								extension = "png";
+								break;
+							case "image/bmp":
+								extension = "bmp";
+								break;
+							default:
+								extension = "jpg";
+						}
+
+						// Set the folder path and create if needed
+						var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeds\";
+						if ( !directoryExists( folderPath ) ) {
+							directoryCreate( folderPath );
+							if ( log.canInfo() ) {
+								log.info("Created aggregator feeds image folder.");
+							}
+						}
+
+						// Set image name and path
+						var imageName = arguments.feed.getSlug() & "." & extension;
+						var imagePath = folderPath & imageName;
+
+						// Save the image
+						fileWrite( imagePath, result.fileContent );
+
+						// Set the image url
+						var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+						var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeds/";
+						var imageUrl = folderUrl & imageName;
+
+						// Update feed
+						arguments.feed.setFeaturedImage( imagePath );
+						arguments.feed.setFeaturedImageUrl( imageUrl );
+						feedService.save( arguments.feed );
+
+					}
+
+				} catch( any e ) {
+
+					if ( log.canError() ) {
+						log.error( "Error retrieving and saving featured image for feed '#arguments.feed.getTitle()#'.", e );
+					}
+		
+				}
+
+			}
+
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
 
@@ -173,7 +241,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItemService.save( feedItem );
 
 										// Import images if enabled
-										var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
 										if ( importImages ) {
 
 											// TODO: Check attachments first, then scan body
@@ -206,11 +273,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														}
 
 														// Set the folder path and create if needed
-														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\";
+														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\";
 														if ( !directoryExists( folderPath ) ) {
 															directoryCreate( folderPath );
 															if ( log.canInfo() ) {
-																log.info("Created aggregator image folder.");
+																log.info("Created aggregator feeditems image folder.");
 															}
 														}
 
@@ -223,7 +290,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 														// Set the image url
 														var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-														var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/";
+														var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/";
 														var imageUrl = folderUrl & imageName;
 
 														// Update feedItem

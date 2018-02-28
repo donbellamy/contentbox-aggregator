@@ -230,6 +230,16 @@ component {
 			}
 		}
 
+		// Create media directories if needed
+		var feedFolderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeds\";
+		if ( !directoryExists( feedFolderPath ) ) {
+			directoryCreate( feedFolderPath );
+		}
+		var feedItemFolderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\";
+		if ( !directoryExists( feedItemFolderPath ) ) {
+			directoryCreate( feedItemFolderPath );
+		}
+
 	}
 
 	function onDeactivate() {

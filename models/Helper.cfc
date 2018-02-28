@@ -9,7 +9,7 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Settings *********************************************/
 
-	function getSetting( required key, value ) {
+	function setting( required key, value ) {
 		var prc = cb.getPrivateRequestCollection();
 		if ( structKeyExists( prc.agSettings, arguments.key ) ){
 			return prc.agSettings[ key ];
@@ -99,11 +99,11 @@ component accessors="true" singleton threadSafe {
 
 	function getFeedItemFeaturedImageUrl( required FeedItem feedItem ) {
 		var feed = arguments.feedItem.getFeed();
-		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : getSetting("ag_general_image_missing_behavior");
+		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : setting("ag_general_image_missing_behavior");
 		if ( len( feedItem.getFeaturedImageUrl() ) ) {
 			return feedItem.getFeaturedImageUrl();
 		} else if ( behavior == "default" ) {
-			return getSetting("ag_general_image_default_url");
+			return setting("ag_general_image_default_url");
 		} else if ( behavior == "feed" ) {
 			return feed.getFeaturedImageUrl();
 		} else {
