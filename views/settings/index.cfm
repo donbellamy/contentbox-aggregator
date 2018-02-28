@@ -290,6 +290,44 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_general_image_minimum_width",
+											content="Minimum Width:"
+										)#
+										
+										<div class="controls">
+											<small>Images smaller than the minimum width below will not be imported.</small>
+											#html.inputField(
+												name="ag_general_image_minimum_width",
+												type="number",
+												value=prc.agSettings.ag_general_image_minimum_width,
+												class="form-control counter",
+												placeholder="No minimum width",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_general_image_minimum_height",
+											content="Minimum Height:"
+										)#
+										
+										<div class="controls">
+											<small>Images smaller than the minimum height below will not be imported.</small>
+											#html.inputField(
+												name="ag_general_image_minimum_height",
+												type="number",
+												value=prc.agSettings.ag_general_image_minimum_height,
+												class="form-control counter",
+												placeholder="No minimum height",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_general_image_missing_behavior",
 											content="Missing Image:"
 										)#
@@ -327,9 +365,9 @@
 												)#
 												<div class="margin10">
 													<cfif len( prc.agSettings.ag_general_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_general_image_default_url#" class="img-thumbnail" height="75">
+														<img id="default_image_preview" src="#prc.agSettings.ag_general_image_default_url#" class="img-thumbnail" height="75" />
 													<cfelse>
-														<img id="default_image_preview" class="img-thumbnail" height="75">
+														<img id="default_image_preview" class="img-thumbnail" height="75" />
 													</cfif>
 												</div>
 											</div>

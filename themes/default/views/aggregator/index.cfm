@@ -22,14 +22,14 @@
 		<div class="row">
 			<!--- Content --->
 			<div class="col-sm-12"><!--- TODO: 9 with sidebar --->
-				#cb.event( "aggregator_prePortalIndexDisplay" )#
+				#cb.event( "aggregator_prePortalDisplay" )#
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
 				</cfif>
-				#cb.event( "aggregator_postPortalIndexDisplay" )#
+				#cb.event( "aggregator_postPortalDisplay" )#
 			</div>
 			<!--- TODO: SideBar --->
 			<!---<cfif args.sidebar>

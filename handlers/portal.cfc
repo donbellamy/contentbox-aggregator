@@ -94,6 +94,18 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	function feed( event, rc, prc ) {
+
+		event.paramValue( "slug", "" );
+
+		// Check if author is viewing
+		var showUnpublished = false;
+		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+			var showUnpublished = true;
+		}
+
+		// Get the feed
+		prc.feed = feedService.findBySlug( rc.slug, showUnpublished );
+
 		event.setLayout( "../themes/default/layouts/aggregator/portal" )
 			.setView( "../themes/default/views/aggregator/feed" );
 	}

@@ -27,79 +27,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
-			// Check if we are importing images
-			var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
-
-			// Grab the feed image if we can
-			if ( importImages && len( remoteFeed.image.url ) && !len( arguments.feed.getFeaturedImage() ) ) {
-
-				try {
-
-					// Grab the image
-					var result = new http( url=remoteFeed.image.url, method="GET" ).send().getPrefix();
-
-					// Check for error and valid image
-					if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
-
-						// Set the file extension
-						var extension = "";
-						switch ( result.mimeType ) {
-							case "image/gif":
-								extension = "gif";
-								break;
-							case "image/png":
-								extension = "png";
-								break;
-							case "image/bmp":
-								extension = "bmp";
-								break;
-							default:
-								extension = "jpg";
-						}
-
-						// Set the folder path and create if needed
-						var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeds\";
-						if ( !directoryExists( folderPath ) ) {
-							directoryCreate( folderPath );
-							if ( log.canInfo() ) {
-								log.info("Created aggregator feeds image folder.");
-							}
-						}
-
-						// Set image name and path
-						var imageName = arguments.feed.getSlug() & "." & extension;
-						var imagePath = folderPath & imageName;
-
-						// Save the image
-						fileWrite( imagePath, result.fileContent );
-
-						// Set the image url
-						var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-						var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeds/";
-						var imageUrl = folderUrl & imageName;
-
-						// Update feed
-						arguments.feed.setFeaturedImage( imagePath );
-						arguments.feed.setFeaturedImageUrl( imageUrl );
-						feedService.save( arguments.feed );
-
-					}
-
-				} catch( any e ) {
-
-					if ( log.canError() ) {
-						log.error( "Error retrieving and saving featured image for feed '#arguments.feed.getTitle()#'.", e );
-					}
-		
-				}
-
-			}
-
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
 
 				// Set an item counter
 				var itemCount = 0;
+
+				// Check if we are importing images
+				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -246,7 +181,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											// TODO: Check attachments first, then scan body
 											// Check for images
 											var images = jsoup.parse( item.body ).getElementsByTag("img");
-											if ( arrayLen( images ) ) {
+
+											// Import if images found and valid src
+											if ( arrayLen( images ) && len( images[1].attr("src") ) ) {
 
 												try {
 
@@ -288,22 +225,40 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														// Save the image
 														fileWrite( imagePath, result.fileContent );
 
-														// Set the image url
-														var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-														var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/";
-														var imageUrl = folderUrl & imageName;
+														// Grab the image object
+														var img = imageRead( imagePath );
 
-														// Update feedItem
-														feedItem.setFeaturedImage( imagePath );
-														feedItem.setFeaturedImageUrl( imageUrl );
-														feedItemService.save( feedItem );
+														// Save the image if it is valid
+														if ( img.getWidth() GTE val( settings.ag_general_image_minimum_width ) && 
+															img.getHeight() GTE val( settings.ag_general_image_minimum_height ) ) {
+
+															// Set the image url
+															var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+															var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/";
+															var imageUrl = folderUrl & imageName;
+
+															// Update feedItem
+															feedItem.setFeaturedImage( imagePath );
+															feedItem.setFeaturedImageUrl( imageUrl );
+															feedItemService.save( feedItem );
+
+														} else {
+
+															// Delete the image
+															fileDelete( imagePath );
+
+															if ( log.canInfo() ) {
+																log.info("Invalid image size for feed item ('#uniqueId#').");
+															}
+
+														}
 
 													}
 
 												} catch( any e ) {
 
 													if ( log.canError() ) {
-														log.error( "Error retrieving and saving featured image for feed item ('#uniqueId#').", e );
+														log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
 													}
 										
 												}

@@ -31,6 +31,8 @@ component {
 			"ag_general_max_items" = "",
 
 			"ag_general_image_import_enable" = "true",
+			"ag_general_image_minimum_width" = "100",
+			"ag_general_image_minimum_height" = "100",
 			"ag_general_image_missing_behavior" = "default",
 			"ag_general_image_default" = "",
 			"ag_general_image_default_url" = "",
@@ -104,7 +106,8 @@ component {
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate","aggregator_onPortalIndex",
-				"aggregator_prePortalIndexDisplay","aggregator_postPortalIndexDisplay",
+				"aggregator_prePortalDisplay","aggregator_postPortalDisplay",
+				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound"
 			])
 		};

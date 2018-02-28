@@ -48,6 +48,12 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		prc.agSettings.ag_general_match_any_filter = trim( prc.agSettings.ag_general_match_any_filter );
 		prc.agSettings.ag_general_match_all_filter = trim( prc.agSettings.ag_general_match_all_filter );
 		prc.agSettings.ag_general_match_none_filter = trim( prc.agSettings.ag_general_match_none_filter );
+		if ( len( prc.agSettings.ag_general_image_minimum_width ) && !isNumeric( prc.agSettings.ag_general_image_minimum_width ) ) {
+			arrayAppend( errors, "A valid minimum width is required." );
+		}
+		if ( len( prc.agSettings.ag_general_image_minimum_height ) && !isNumeric( prc.agSettings.ag_general_image_minimum_height ) ) {
+			arrayAppend( errors, "A valid minimum height is required." );
+		}
 
 		// Display settings
 		if ( len( prc.agSettings.ag_display_excerpt_character_limit ) && !isNumeric( prc.agSettings.ag_display_excerpt_character_limit ) ) {

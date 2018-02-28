@@ -11,7 +11,6 @@
 <cfoutput>
 
 <div class="post" id="feeditem_#feedItem.getContentID()#">
-
 	<div class="post-title">
 		<h2>
 			<a href="#ag.linkFeedItem( feedItem )#"
@@ -39,7 +38,6 @@
 			</div>
 		</div>
 	</div>
-
 	<cfif args.showExcerpt >
 		<cfset featuredImageUrl = ag.getFeedItemFeaturedImageUrl( feedItem ) />
 		<div class="post-content row">
@@ -68,7 +66,6 @@
 			</div>
 		</div>
 	</cfif>
-
 </div>
 
 </cfoutput>
