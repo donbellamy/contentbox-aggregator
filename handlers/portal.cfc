@@ -24,21 +24,22 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Incoming params
 		event.paramValue( "page", 1 );
 
+		// TODO: Category filter
+		// TODO: Search filter
+
 		// Page numeric check
-		if( !isNumeric( rc.page ) ) { 
-			rc.page = 1; 
-		}
+		if( !isNumeric( rc.page ) ) rc.page = 1;
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=10 ); // TODO: setting indexmaxrows
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
+		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			offset=prc.pagingBoundaries.startRow - 1,
-			max=10 // TODO: Setting
+			max=prc.agSettings.ag_display_paging_max_rows,
+			offset=prc.pagingBoundaries.startRow - 1
 		);
-
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
@@ -72,15 +73,18 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Record hit
 			feedItemService.updateHits( feedItem.getContentID() );
+
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem, slug=rc.slug } );
+
 			// Relocate to item url
-			location( feedItem.getItemUrl() );
+			location( url=feedItem.getItemUrl(), addToken="no" );
 
 		} else {
 
 			// Announce event
 			announceInterception( "aggregator_onFeedItemNotFound", { feedItem=feedItem, slug=rc.slug } );
+
 			// Not found
 			notFound( argumentCollection=arguments );
 
@@ -96,6 +100,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	function feed( event, rc, prc ) {
 
 		event.paramValue( "slug", "" );
+		event.paramValue( "page", 1 );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -106,8 +111,45 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Get the feed
 		prc.feed = feedService.findBySlug( rc.slug, showUnpublished );
 
-		event.setLayout( "../themes/default/layouts/aggregator/portal" )
-			.setView( "../themes/default/views/aggregator/feed" );
+		// If loaded, else not found
+		if ( prc.feed.isLoaded() ) {
+
+			// Page numeric check
+			if( !isNumeric( rc.page ) ) rc.page = 1;
+
+			// Paging
+			prc.oPaging = getModel("paging@cb");
+			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
+
+			// Grab the feed items
+			var results = feedItemService.getPublishedFeedItemsByFeed(
+				feed=prc.feed,
+				max=prc.agSettings.ag_display_paging_max_rows,
+				offset=prc.pagingBoundaries.startRow - 1
+			);
+			prc.feedItems = results.feedItems;
+			prc.itemCount = results.count;
+
+			// Record hit
+			feedService.updateHits( prc.feed.getContentID() );
+
+			// Announce event
+			announceInterception( "aggregator_onFeedView", { feed=prc.feed, slug=rc.slug } );
+
+			event.setLayout( "../themes/default/layouts/aggregator/portal" )
+				.setView( "../themes/default/views/aggregator/feed" );
+
+		} else {
+
+			// Announce event
+			announceInterception( "aggregator_onFeedNotFound", { feed=prc.feed, slug=rc.slug } );
+
+			// Not found
+			notFound( argumentCollection=arguments );
+
+		}
+
 	}
 
 	function import( event, rc, prc ) {

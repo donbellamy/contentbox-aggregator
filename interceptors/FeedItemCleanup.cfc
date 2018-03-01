@@ -188,7 +188,7 @@ component extends="coldbox.system.Interceptor" {
 			// Max items
 			var maxItems = val( item.getMaxItems() ) ? val( item.getMaxItems() ) : val( settings.ag_general_max_items );
 			if ( maxItems && ( item.getNumberOfFeedItems() GT maxItems ) ) {
-				var feedItems = feedItemService.getFeedItems( item );
+				var feedItems = feedItemService.getFeedItemsByFeed( item );
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
 				for ( var feedItem IN itemsToDelete ) {
 					var uniqueId = feedItem.getUniqueId();

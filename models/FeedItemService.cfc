@@ -21,8 +21,6 @@ component extends="ContentService" singleton {
 		var results = {};
 		var c = newCriteria();
 
-		if 
-
 		if ( len( trim( arguments.search ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
 			c.createAlias( "activeContent", "ac" );
 		}
@@ -71,19 +69,27 @@ component extends="ContentService" singleton {
 
 	}
 
-	struct function getPublishedFeedItems( numeric max=0, numeric offset=0 ) {
-		arguments["status"] = "published";
-		return search( argumentCollection=arguments );
-	}
-
-	array function getFeedItems( required Feed feed ) {
+	array function getFeedItemsByFeed( required Feed feed ) {
 		var results = search( feed=arguments.feed.getContentID() );
 		return results.feedItems;
 	}
 
-	array function getLatestFeedItems( required Feed feed, numeric max=5 ) {
+	array function getLatestFeedItemsByFeed( required Feed feed, numeric max=5 ) {
 		var results = search( feed=arguments.feed.getContentID(), max=arguments.max );
 		return results.feedItems;
+	}
+
+	struct function getPublishedFeedItems( numeric max=0, numeric offset=0 ) {
+		// TODO: Change this to it's own query, will need the feed to also be published
+		arguments["status"] = "published";
+		return search( argumentCollection=arguments );
+	}
+
+	struct function getPublishedFeedItemsByFeed( required Feed feed, numeric max=0, numeric offset=0 ) {
+		// TODO: call getPublishedFeedItems() and pass in the feed
+		arguments["status"] = "published";
+		arguments["feed"] = arguments.feed.getContentID();
+		return search( argumentCollection=arguments );
 	}
 
 }

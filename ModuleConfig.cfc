@@ -108,6 +108,7 @@ component {
 				"aggregator_onFeedItemStatusUpdate","aggregator_onPortalIndex",
 				"aggregator_prePortalDisplay","aggregator_postPortalDisplay",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
+				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound"
 			])
 		};

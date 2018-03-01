@@ -83,7 +83,7 @@ component extends="contentHandler" {
 		}
 
 		if ( prc.feed.isLoaded() ) {
-			prc.feedItems = feedItemService.getLatestFeedItems( prc.feed );
+			prc.feedItems = feedItemService.getLatestFeedItemsByFeed( prc.feed );
 			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
 		}
 
