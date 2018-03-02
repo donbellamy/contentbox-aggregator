@@ -15,7 +15,7 @@ component extends="ContentService" singleton {
 		string status="any",
 		numeric max=0,
 		numeric offset=0,
-		string sortOrder=""
+		string sortOrder="datePublished DESC"
 	) {
 
 		var results = {};
@@ -53,10 +53,6 @@ component extends="ContentService" singleton {
 			}
 		}
 
-		if ( !len( arguments.sortOrder ) ) {
-			arguments.sortOrder = "datePublished DESC";
-		}
-
 		results.count = c.count( "contentID" );
 		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
 			offset=arguments.offset, 
@@ -79,17 +75,44 @@ component extends="ContentService" singleton {
 		return results.feedItems;
 	}
 
-	struct function getPublishedFeedItems( numeric max=0, numeric offset=0 ) {
-		// TODO: Change this to it's own query, will need the feed to also be published
-		arguments["status"] = "published";
-		return search( argumentCollection=arguments );
+	struct function getPublishedFeedItems( 
+		numeric max=0,
+		numeric offset=0,
+		string feed="all",
+		string sortOrder="datePublished DESC"
+	) {
+
+		var results = {};
+		var c = newCriteria();
+
+		// Only published feed items and parent feed
+		c.isTrue( "isPublished" )
+			.isLT( "publishedDate", now() )
+			.or( c.restrictions.isNull( "expireDate" ), c.restrictions.isGT( "expireDate", now() ) );
+		c.createAlias( "parent", "p" )
+			.isTrue( "p.isPublished" )
+			.isLT( "p.publishedDate", now() )
+			.or( c.restrictions.isNull( "p.expireDate" ), c.restrictions.isGT( "p.expireDate", now() ) );
+
+		if ( arguments.feed NEQ "all" ) {
+			c.eq( "p.contentID", javaCast( "int", arguments.feed ) );
+		}
+
+		results.count = c.count( "contentID" );
+		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
+			offset=arguments.offset, 
+			max=arguments.max, 
+			sortOrder=arguments.sortOrder, 
+			asQuery=false 
+		);
+
+		return results;
+
 	}
 
 	struct function getPublishedFeedItemsByFeed( required Feed feed, numeric max=0, numeric offset=0 ) {
-		// TODO: call getPublishedFeedItems() and pass in the feed
-		arguments["status"] = "published";
 		arguments["feed"] = arguments.feed.getContentID();
-		return search( argumentCollection=arguments );
+		return getPublishedFeedItems( argumentCollection=arguments );
 	}
 
 }

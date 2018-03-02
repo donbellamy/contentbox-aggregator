@@ -13,6 +13,9 @@
 	<div class="container">
 		<div class="underlined-title">
 			<h1 style="#bodyHeaderH1Style#">#prc.feed.getTitle()#</h1>
+			<cfif len( prc.feed.getContent() ) >
+				<div class="text-center">#prc.feed.getContent()#</div>
+			</cfif>
 		</div>
 	</div>
 </div>
