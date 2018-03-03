@@ -75,7 +75,7 @@ component {
 
 		};
 
-		permissions = [ 
+		permissions = [
 			{ permission="FEEDS_ADMIN", description="Ability to manage feeds", editor="false" },
 			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them", editor="true" },
 			{ permission="FEEDS_IMPORT", description="Ability to import feeds", editor="true" },
@@ -89,9 +89,11 @@ component {
 		];
 
 		aggregatorRoutes = [
+			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
 			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
+			{ pattern="/search", handler="portal", action="index", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];

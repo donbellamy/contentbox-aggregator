@@ -15,30 +15,44 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 		// Call super (check maint mode, etc.)
-		super.preHandler( argumentCollection=arguments );
-
+		super.preHandler( argumentCollection=arguments ); 
 	}
 
 	function index( event, rc, prc ) {
 
 		// Incoming params
-		event.paramValue( "page", 1 );
+		event.paramValue( "page", 1 )
+			.paramValue( "q", "" )
+			.paramValue( "category", "" );
 
-		// TODO: Category filter
-		// TODO: Search filter
-
-		// Page numeric check
+		// Page check
 		if( !isNumeric( rc.page ) ) rc.page = 1;
+
+		// XSS Cleanup
+		rc.q = antiSamy.clean( rc.q );
+		rc.category = antiSamy.clean( rc.category );
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
 		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
+		// Search paging
+		if ( len( trim( rc.q ) ) ) {
+			prc.pagingLink &= "&q=" & rc.q;
+		}
+
+		// Category paging
+		if ( len( trim( rc.category ) ) ) {
+			prc.pagingLink = helper.linkPortal() & "/category/#rc.category#/?page=@page@";
+		}
+
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
 			max=prc.agSettings.ag_display_paging_max_rows,
-			offset=prc.pagingBoundaries.startRow - 1
+			offset=prc.pagingBoundaries.startRow - 1,
+			search=rc.q,
+			category=rc.category
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
@@ -99,8 +113,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function feed( event, rc, prc ) {
 
-		event.paramValue( "slug", "" );
-		event.paramValue( "page", 1 );
+		event.paramValue( "slug", "" )
+			.paramValue( "page", 1 )
+			.paramValue( "author", "" );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -117,16 +132,25 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Page numeric check
 			if( !isNumeric( rc.page ) ) rc.page = 1;
 
+			// XSS Cleanup
+			rc.author = antiSamy.clean( rc.author );
+
 			// Paging
 			prc.oPaging = getModel("paging@cb");
 			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
 			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
 
+			// Author filter
+			if ( len( trim( rc.author ) ) ) {
+				prc.pagingLink &= "&author=" & rc.author;
+			}
+
 			// Grab the feed items
 			var results = feedItemService.getPublishedFeedItemsByFeed(
-				feed=prc.feed,
 				max=prc.agSettings.ag_display_paging_max_rows,
-				offset=prc.pagingBoundaries.startRow - 1
+				offset=prc.pagingBoundaries.startRow - 1,
+				feed=prc.feed,
+				author=rc.author
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;

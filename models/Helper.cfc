@@ -66,7 +66,7 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Quick HTML *********************************************/
 
-	function quickPaging() {
+	function quickPaging( numeric maxRows=setting("ag_display_paging_max_rows") ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(
@@ -78,8 +78,7 @@ component accessors="true" singleton threadSafe {
 		return prc.oPaging.renderit(
 			foundRows = prc.itemCount, 
 			link = prc.pagingLink, 
-			pagingMaxRows = 10 //setting( "cb_paging_maxentries" ) 
-			// TODO: should default to setting, but allow to be passed in via theme
+			pagingMaxRows = arguments.maxRows
 		);
 	}
 

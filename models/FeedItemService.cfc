@@ -78,14 +78,17 @@ component extends="ContentService" singleton {
 	struct function getPublishedFeedItems( 
 		numeric max=0,
 		numeric offset=0,
-		string feed="all",
+		string search="",
+		string category="",
+		string author="",
+		string feed="",
 		string sortOrder="datePublished DESC"
 	) {
 
 		var results = {};
 		var c = newCriteria();
 
-		// Only published feed items and parent feed
+		// Only published feed items and parent feed must also be published
 		c.isTrue( "isPublished" )
 			.isLT( "publishedDate", now() )
 			.or( c.restrictions.isNull( "expireDate" ), c.restrictions.isGT( "expireDate", now() ) );
@@ -94,10 +97,30 @@ component extends="ContentService" singleton {
 			.isLT( "p.publishedDate", now() )
 			.or( c.restrictions.isNull( "p.expireDate" ), c.restrictions.isGT( "p.expireDate", now() ) );
 
-		if ( arguments.feed NEQ "all" ) {
+
+		// Search filter
+		if ( len( trim( arguments.search ) ) ) {
+			c.createAlias( "activeContent", "ac" );
+			c.or( c.restrictions.like( "title", "%#arguments.search#%" ),
+				  c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
+		}
+
+		// Category filter
+		if ( len( trim( arguments.category ) ) ) {
+			c.createAlias( "categories", "cats" ).isIn( "cats.slug", listToArray( arguments.category ) );
+		}
+
+		// Author filter
+		if ( len( trim( arguments.author ) ) ) {
+			c.eq( "itemAuthor", "#arguments.author#" );
+		}
+
+		// Feed filter
+		if ( len( arguments.feed ) ) {
 			c.eq( "p.contentID", javaCast( "int", arguments.feed ) );
 		}
 
+		// Set the results
 		results.count = c.count( "contentID" );
 		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
 			offset=arguments.offset, 
@@ -110,7 +133,12 @@ component extends="ContentService" singleton {
 
 	}
 
-	struct function getPublishedFeedItemsByFeed( required Feed feed, numeric max=0, numeric offset=0 ) {
+	struct function getPublishedFeedItemsByFeed(
+		required Feed feed,
+		numeric max=0, 
+		numeric offset=0,
+		string author=""
+	) {
 		arguments["feed"] = arguments.feed.getContentID();
 		return getPublishedFeedItems( argumentCollection=arguments );
 	}
