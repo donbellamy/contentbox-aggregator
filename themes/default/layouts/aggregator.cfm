@@ -15,7 +15,7 @@
 	<!--- ContentBoxEvent --->
 	#cb.event( "cbui_afterBodyStart" )#
 	<!--- Header --->
-	#cb.quickView( view='_header' )# <!--- TODO: Add to site navigation --->
+	#cb.quickView( view='_header' )#
 	<!--- ContentBoxEvent --->
 	#cb.event( "cbui_beforeContent" )#
 

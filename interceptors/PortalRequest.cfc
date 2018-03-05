@@ -1,15 +1,21 @@
 component extends="coldbox.system.Interceptor" {
 
+	// TODO: rename to publicrequest or uirequest?
 	property name="settingService" inject="settingService@aggregator";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="agHelper" inject="helper@aggregator";
 
 	function configure() {}
 
-	function preProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
+	function preProcess( event, interceptData, buffer, rc, prc ) {
 
-		// Prepare UI Request
-		CBHelper.prepareUIRequest(); //TODO: Set title, etc...
+		// Prepare UI if we are in the aggregator module
+		if ( reFindNoCase( "^contentbox-rss-aggregator", event.getCurrentEvent() ) ) {
+			CBHelper.prepareUIRequest();
+		// Return if in admin module
+		} else if ( reFindNoCase( "^contentbox-admin", event.getCurrentEvent() ) ) {
+			return;
+		}
 
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -23,7 +29,6 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
-	// TODO: adminbar 
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {}
 
 	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {}

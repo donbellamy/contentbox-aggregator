@@ -51,7 +51,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		var results = feedItemService.getPublishedFeedItems(
 			max=prc.agSettings.ag_display_paging_max_rows,
 			offset=prc.pagingBoundaries.startRow - 1,
-			search=rc.q,
+			searchTerm=rc.q,
 			category=rc.category
 		);
 		prc.feedItems = results.feedItems;
@@ -64,8 +64,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			} 
 		);
 
-		event.setLayout( "../themes/default/layouts/aggregator/portal" )
-			.setView( "../themes/default/views/aggregator/index" );
+		//event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+		//	.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feeditems" );
 
 	}
 
@@ -107,8 +109,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	function feeds( event, rc, prc ) {
-		event.setLayout( "../themes/default/layouts/aggregator/portal" )
-			.setView( "../themes/default/views/aggregator/feeds" );
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feeds" );
 	}
 
 	function feed( event, rc, prc ) {
@@ -161,8 +163,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Announce event
 			announceInterception( "aggregator_onFeedView", { feed=prc.feed, slug=rc.slug } );
 
-			event.setLayout( "../themes/default/layouts/aggregator/portal" )
-				.setView( "../themes/default/views/aggregator/feed" );
+			event.setLayout( "../themes/default/layouts/aggregator" )
+				.setView( "../themes/default/views/feed" );
 
 		} else {
 

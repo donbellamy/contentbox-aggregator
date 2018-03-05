@@ -8,9 +8,9 @@ component extends="coldbox.system.Interceptor" {
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin"  {
 
 		// Only execute for aggregator module (eventPattern doesn't include the module name)
-		if( event.getValue("moduleEntryPoint","") NEQ getModuleConfig("contentbox-rss-aggregator").entryPoint ) {
-			return;
-		}
+		//if( event.getValue("moduleEntryPoint","") NEQ getModuleConfig("contentbox-rss-aggregator").entryPoint ) {
+		//	return;
+		//}
 
 		// Helper
 		prc.agHelper = agHelper;

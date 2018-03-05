@@ -8,7 +8,7 @@ component extends="ContentService" singleton {
 
 	}
 
-	struct function search( 
+	struct function search(
 		string search="",
 		string feed="all",
 		string category="all",
@@ -78,7 +78,7 @@ component extends="ContentService" singleton {
 	struct function getPublishedFeedItems( 
 		numeric max=0,
 		numeric offset=0,
-		string search="",
+		string searchTerm="",
 		string category="",
 		string author="",
 		string feed="",
@@ -99,10 +99,10 @@ component extends="ContentService" singleton {
 
 
 		// Search filter
-		if ( len( trim( arguments.search ) ) ) {
+		if ( len( trim( arguments.searchTerm ) ) ) {
 			c.createAlias( "activeContent", "ac" );
-			c.or( c.restrictions.like( "title", "%#arguments.search#%" ),
-				  c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
+			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ),
+				  c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
 		}
 
 		// Category filter

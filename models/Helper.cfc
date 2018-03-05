@@ -78,6 +78,7 @@ component accessors="true" singleton threadSafe {
 		return prc.oPaging.renderit(
 			foundRows = prc.itemCount, 
 			link = prc.pagingLink, 
+
 			pagingMaxRows = arguments.maxRows
 		);
 	}
@@ -87,7 +88,7 @@ component accessors="true" singleton threadSafe {
 		return controller.getRenderer().renderView(
 			//view = "#cb.themeName()#/templates/aggregator/#arguments.template#", 
 			// TODO: Need to create functions to check for theme file, if not found use indluded files ?
-			view = "../themes/default/templates/aggregator/#arguments.template#",
+			view = "../themes/default/templates/#arguments.template#",
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args
