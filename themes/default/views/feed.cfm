@@ -19,12 +19,10 @@
 		</div>
 	</div>
 </div>
-<!--- Body Main --->
 <section id="body-main">
 	<div class="container">	
 		<div class="row">
-			<!--- Content --->
-			<div class="col-sm-12"><!--- TODO: 9 with sidebar --->
+			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event( "aggregator_preFeedDisplay" )#
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
@@ -34,12 +32,12 @@
 				</cfif>
 				#cb.event( "aggregator_postFeedDisplay" )#
 			</div>
-			<!--- TODO: SideBar --->
-			<!---<cfif args.sidebar>
+			<cfif args.sidebar >
 				<div class="col-sm-3" id="blog-sidenav">
-					#cb.quickView( view='_blogsidebar', args=args )#
+					#renderView( view="../themes/default/views/_aggregator_sidebar", args=args )#
+					<!---#cb.quickView( view="_aggregator_sidebar", args=args )#--->
 				</div>
-			</cfif>--->
+			</cfif>
 		</div>
 	</div>
 </div>

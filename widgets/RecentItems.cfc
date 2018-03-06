@@ -12,32 +12,36 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @max.hint The number of feed items to display.
-	* @max.label Maximum Items
-	* @title.hint An optional title to display using an H tag.
 	* @title.label Title
-	* @titleLevel.hint The H{level} to use.
+	* @title.hint An optional title to display using an H tag.
 	* @titleLevel.label Title Level
-	* @category.hint The list of categories to filter on.
+	* @titleLevel.hint The H{level} to use.
+	* @titleLevel.options 1,2,3,4,5
+	* @max.label Maximum Items
+	* @max.hint The number of feed items to display.
+	* @max.options 1,5,10,15,20,25,50,100
+	* @feed.label Feed
+	* @feed.hint The feed to filter on.
+	* @feed.optionsUDF getFeedSlugs
 	* @category.label Category
+	* @category.hint The list of categories to filter on.
 	* @category.multiOptionsUDF getAllCategories
-	* @searchTerm.hint The search term to filter on.
 	* @searchTerm.label Search Term
-	* @sortOrder.hint How to order the results, defaults to date published from the feed.
+	* @searchTerm.hint The search term to filter on.
 	* @sortOrder.label Sort Order
+	* @sortOrder.hint How to order the results, defaults to date published from the feed.
 	* @sortOrder.options Most Recent,Most Popular
 	*/
-	// TODO: feed argument
-	// TODO: list, listitem classes
 	string function renderIt(
-		numeric max=5,
 		string title="",
 		numeric titleLevel=2,
+		numeric max=5,
+		string feed = "",
 		string category="",
 		string searchTerm="",
 		string sortOrder="Most Recent"
 	) {
-		
+
 		// Sort order
 		switch( arguments.sortOrder ) {
 			case "Most Popular": { 
@@ -54,6 +58,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			max=arguments.max,
 			category=arguments.category,
 			searchTerm=arguments.searchTerm,
+			feed=arguments.feed,
 			sortOrder=arguments.sortOrder
 		);
 
@@ -72,10 +77,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" ); 
 			}
 			// List start
-			writeOutput('<ul id="recentEntries">');
+			writeOutput('<ul id="recentItems">');
 			// List items
 			for ( var x=1; x LTE arguments.max; x++ ) {
-				writeOutput('<li class="recentEntries"><a href="#ag.linkFeedItem( results.feedItems[x] )#">#results.feedItems[x].getTitle()#</a></li>');
+				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#">#results.feedItems[x].getTitle()#</a></li>');
 			}
 			// List end
 			writeOutput( "</ul>" );
@@ -84,9 +89,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 		return html;
 	}
 
-	/**
-	* Get all the categories
-	*/
+	array function getFeedSlugs() cbIgnore {
+		var slugs = feedService.getAllFlatSlugs();
+		arrayPrepend( slugs, "" );
+		return slugs;
+	}
+
 	array function getAllCategories() cbIgnore {
 		return categoryService.getAllNames();
 	}

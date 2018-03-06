@@ -52,6 +52,16 @@ component accessors="true" singleton threadSafe {
 		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
 	}
 
+	function linkCategory( required any category, boolean ssl=cb.getRequestContext().isSSL() ) { 
+		var slug = "";
+		if ( isSimpleValue( arguments.category ) ) {
+			slug = arguments.category;
+		} else {
+			slug = category.getSlug();
+		}
+		return linkPortal( ssl=arguments.ssl ) & "/category/" & slug;
+	}
+
 	function linkFeed( required feed, boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug();
 	}
@@ -62,6 +72,10 @@ component accessors="true" singleton threadSafe {
 
 	function linkFeedItemAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkFeed( feed=arguments.feedItem.getFeed(), ssl=arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
+	}
+
+	function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkPortal() & "/rss/";
 	}
 
 	/************************************** Quick HTML *********************************************/

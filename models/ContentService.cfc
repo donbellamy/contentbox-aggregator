@@ -1,4 +1,4 @@
-component extends="contentbox.models.content.ContentService" singleton{
+component extends="contentbox.models.content.ContentService" singleton {
 
 	ContentService function save( required any entity, boolean transactional=true ) {
 

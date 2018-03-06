@@ -94,6 +94,7 @@ component {
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
 			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/search", handler="portal", action="index", namespace="aggregator" },
+			{ pattern="/rss", handler="portal", action="rss", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -125,11 +126,13 @@ component {
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 
+		binder.map("categoryService@aggregator").to("#moduleMapping#.models.CategoryService");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
-		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
+		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
+		
 
 	}
 

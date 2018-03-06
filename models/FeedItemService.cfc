@@ -65,16 +65,6 @@ component extends="ContentService" singleton {
 
 	}
 
-	array function getFeedItemsByFeed( required Feed feed ) {
-		var results = search( feed=arguments.feed.getContentID() );
-		return results.feedItems;
-	}
-
-	array function getLatestFeedItemsByFeed( required Feed feed, numeric max=5 ) {
-		var results = search( feed=arguments.feed.getContentID(), max=arguments.max );
-		return results.feedItems;
-	}
-
 	struct function getPublishedFeedItems( 
 		numeric max=0,
 		numeric offset=0,
@@ -116,8 +106,10 @@ component extends="ContentService" singleton {
 		}
 
 		// Feed filter
-		if ( len( arguments.feed ) ) {
+		if ( isNumeric( arguments.feed ) ) {
 			c.eq( "p.contentID", javaCast( "int", arguments.feed ) );
+		} else if ( len( trim( arguments.feed ) ) ) {
+			c.eq( "p.slug", "#arguments.feed#" );
 		}
 
 		// Set the results
@@ -131,16 +123,6 @@ component extends="ContentService" singleton {
 
 		return results;
 
-	}
-
-	struct function getPublishedFeedItemsByFeed(
-		required Feed feed,
-		numeric max=0, 
-		numeric offset=0,
-		string author=""
-	) {
-		arguments["feed"] = arguments.feed.getContentID();
-		return getPublishedFeedItems( argumentCollection=arguments );
 	}
 
 }

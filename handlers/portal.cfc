@@ -148,10 +148,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Grab the feed items
-			var results = feedItemService.getPublishedFeedItemsByFeed(
+			var results = feedItemService.getPublishedFeedItems(
 				max=prc.agSettings.ag_display_paging_max_rows,
 				offset=prc.pagingBoundaries.startRow - 1,
-				feed=prc.feed,
+				feed=prc.feed.getContentID(),
 				author=rc.author
 			);
 			prc.feedItems = results.feedItems;
@@ -176,6 +176,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		}
 
+	}
+
+	function rss() {
+		
 	}
 
 	function import( event, rc, prc ) {
