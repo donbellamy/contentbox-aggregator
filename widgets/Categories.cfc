@@ -30,10 +30,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 		boolean showItemCount=true
 	) {
 
-		// Grab the categories TODO: Filter on feeditems and bring back number of them
+		// Grab the categories
 		var categories = categoryService.list( sortOrder="category", asQuery=false );
-		//var categories = feedItemService.getFeedItemCategories();
-		//OR categoryService
 
 		// Set return html
 		var html = "";
@@ -57,42 +55,56 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildDropDown(categories,showPostCount){
-		var rString = "";
-		// generate recent comments
-		saveContent variable="rString"{
+	private function buildDropDown( categories, showItemCount ) {
+
+		// Set return html
+		var html = "";
+
+		// Generate html
+		saveContent variable="html" {
+			// Select start
 			writeOutput('<select name="categories" id="categories" onchange="window.location=this.value" )><option value="##">Select Category</option>');
-			// iterate and create
-			for(var x=1; x lte arrayLen( arguments.categories ); x++){
-				if( arguments.categories[ x ].getNumberOfEntries() gt 0 ){
-					writeOutput('<option value="#cb.linkCategory(arguments.categories[ x ])#">#arguments.categories[ x ].getCategory()#');
-					if( arguments.showPostCount ){ writeOutput( " (#arguments.categories[ x ].getNumberOfEntries()#)" ); }
+			// Select options
+			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
+				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true ).count;
+				if ( feedItemCount ) {
+					writeOutput('<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
+					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
 					writeOutput('</option>');
 				}
 			}
-			// close ul
+			// Select end
 			writeOutput( "</select>" );
 		}
-		return rString;
+
+		return html;
+
 	}
 
-	private function buildList(categories,showPostCount){
-		var rString = "";
-		// generate recent comments
-		saveContent variable="rString"{
+	private function buildList( categories, showItemCount ) {
+
+		// Set return html
+		var html = "";
+
+		// Generate html
+		saveContent variable="html" {
+			// List start
 			writeOutput('<ul id="categories">');
-			// iterate and create
-			for(var x=1; x lte arrayLen( arguments.categories ); x++){
-				if( arguments.categories[ x ].getNumberOfEntries() gt 0 ){
-					writeOutput('<li class="categories"><a href="#cb.linkCategory(arguments.categories[ x ])#">#arguments.categories[ x ].getCategory()#');
-					if( arguments.showPostCount ){ writeOutput( " (#arguments.categories[ x ].getNumberOfEntries()#)" ); }
+			// List items
+			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
+				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true ).count;
+				if ( feedItemCount ) {
+					writeOutput('<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
+					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
 					writeOutput('</a></li>');
 				}
 			}
-			// close ul
+			// List end
 			writeOutput( "</ul>" );
 		}
-		return rString;
+
+		return html;
+
 	}
 
 }

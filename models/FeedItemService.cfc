@@ -72,7 +72,8 @@ component extends="ContentService" singleton {
 		string category="",
 		string author="",
 		string feed="",
-		string sortOrder="datePublished DESC"
+		string sortOrder="datePublished DESC",
+		boolean countOnly=false
 	) {
 
 		var results = {};
@@ -114,12 +115,16 @@ component extends="ContentService" singleton {
 
 		// Set the results
 		results.count = c.count( "contentID" );
-		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
-			offset=arguments.offset, 
-			max=arguments.max, 
-			sortOrder=arguments.sortOrder, 
-			asQuery=false 
-		);
+		if ( arguments.countOnly ) {
+			results.feedItems = [];
+		} else {
+			results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
+				offset=arguments.offset, 
+				max=arguments.max, 
+				sortOrder=arguments.sortOrder, 
+				asQuery=false 
+			);
+		}
 
 		return results;
 

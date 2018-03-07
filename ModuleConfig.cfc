@@ -126,7 +126,6 @@ component {
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 
-		binder.map("categoryService@aggregator").to("#moduleMapping#.models.CategoryService");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
