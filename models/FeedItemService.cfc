@@ -54,18 +54,18 @@ component extends="ContentService" singleton {
 		}
 
 		results.count = c.count( "contentID" );
-		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
-			offset=arguments.offset, 
-			max=arguments.max, 
-			sortOrder=arguments.sortOrder, 
-			asQuery=false 
+		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
+			offset=arguments.offset,
+			max=arguments.max,
+			sortOrder=arguments.sortOrder,
+			asQuery=false
 		);
 
 		return results;
 
 	}
 
-	struct function getPublishedFeedItems( 
+	struct function getPublishedFeedItems(
 		numeric max=0,
 		numeric offset=0,
 		string searchTerm="",
@@ -82,12 +82,12 @@ component extends="ContentService" singleton {
 		// Only published feed items and parent feed must also be published
 		c.isTrue( "isPublished" )
 			.isLT( "publishedDate", now() )
+			.isLT( "datePublished", now() )
 			.or( c.restrictions.isNull( "expireDate" ), c.restrictions.isGT( "expireDate", now() ) );
 		c.createAlias( "parent", "p" )
 			.isTrue( "p.isPublished" )
 			.isLT( "p.publishedDate", now() )
 			.or( c.restrictions.isNull( "p.expireDate" ), c.restrictions.isGT( "p.expireDate", now() ) );
-
 
 		// Search filter
 		if ( len( trim( arguments.searchTerm ) ) ) {
@@ -118,15 +118,35 @@ component extends="ContentService" singleton {
 		if ( arguments.countOnly ) {
 			results.feedItems = [];
 		} else {
-			results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
-				offset=arguments.offset, 
-				max=arguments.max, 
-				sortOrder=arguments.sortOrder, 
-				asQuery=false 
+			results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
+				offset=arguments.offset,
+				max=arguments.max,
+				sortOrder=arguments.sortOrder,
+				asQuery=false
 			);
 		}
 
 		return results;
+
+	}
+
+	function getArchiveReport() {
+
+		// Set hql
+		var hql = "SELECT new map( count(*) as count, YEAR(publishedDate) as year, MONTH(publishedDate) as month )
+				FROM cbFeedItem
+				WHERE isPublished = true
+					AND publishedDate <= :now
+					AND datePublished <= :now
+					AND ( expireDate IS NULL OR expireDate >= :now )
+				GROUP BY YEAR(publishedDate), MONTH(publishedDate)
+				ORDER BY 2 DESC, 3 DESC";
+
+		var params = {};
+		params[ "now" ] = now();
+
+		// Return results
+		return executeQuery( query=hql, params=params, asQuery=false );
 
 	}
 

@@ -1,9 +1,9 @@
 component extends="aggregator.models.BaseWidget" singleton {
 
-	RecentItems function init() {
-		setName( "Recent Items" );
+	FeedItems function init() {
+		setName( "Feed Items" );
 		setVersion( "1.0" );
-		setDescription( "A basic widget that displays recent feed items." );
+		setDescription( "A widget that displays a list of feed items." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list" );
@@ -31,6 +31,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 	* @sortOrder.label Sort Order
 	* @sortOrder.hint How to order the results, defaults to date published from the feed.
 	* @sortOrder.options Most Recent,Most Popular
+	* @newWindow.label Open In New Window?
+	* @newWindow.hint Open feed items in a new window (tab), default is true.
 	*/
 	string function renderIt(
 		string title="",
@@ -39,22 +41,23 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string feed = "",
 		string category="",
 		string searchTerm="",
-		string sortOrder="Most Recent"
+		string sortOrder="Most Recent",
+		boolean newWindow=true
 	) {
 
 		// Sort order
 		switch( arguments.sortOrder ) {
-			case "Most Popular": { 
+			case "Most Popular": {
 				arguments.sortOrder = "numberOfHits DESC";
-				break; 
+				break;
 			}
-			default : { 
-				arguments.sortOrder = "publishedDate DESC"; 
+			default : {
+				arguments.sortOrder = "publishedDate DESC";
 			}
 		}
 
 		// Grab the results
-		var results = feedItemService.getPublishedFeedItems( 
+		var results = feedItemService.getPublishedFeedItems(
 			max=arguments.max,
 			category=arguments.category,
 			searchTerm=arguments.searchTerm,
@@ -63,7 +66,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		);
 
 		// iteration cap
-		if( results.count LT arguments.max ){
+		if ( results.count LT arguments.max ) {
 			arguments.max = results.count;
 		}
 
@@ -73,20 +76,25 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Generate html
 		saveContent variable="html" {
 			// Title
-			if ( len( trim( arguments.title ) ) ) { 
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" ); 
+			if ( len( trim( arguments.title ) ) ) {
+				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
 			}
 			// List start
 			writeOutput('<ul id="recentItems">');
 			// List items
 			for ( var x=1; x LTE arguments.max; x++ ) {
-				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#">#results.feedItems[x].getTitle()#</a></li>');
+				var target = "_self";
+				if ( arguments.newWindow ) {
+					target = "_blank";
+				}
+				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#">#results.feedItems[x].getTitle()#</a></li>');
 			}
 			// List end
 			writeOutput( "</ul>" );
 		}
 
 		return html;
+
 	}
 
 	array function getFeedSlugs() cbIgnore {

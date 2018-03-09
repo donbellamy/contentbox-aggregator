@@ -15,7 +15,8 @@ component extends="ContentService" singleton {
 		string status="any",
 		numeric max=0,
 		numeric offset=0,
-		string sortOrder="" ) {
+		string sortOrder=""
+	) {
 
 		var results = {};
 		var c = newCriteria();
@@ -57,7 +58,7 @@ component extends="ContentService" singleton {
 		}
 
 		results.count = c.count( "contentID" );
-		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list( 
+		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
 			offset=arguments.offset,
 			max=arguments.max,
 			sortOrder=arguments.sortOrder,
@@ -70,12 +71,12 @@ component extends="ContentService" singleton {
 
 	array function getFeedsForImport() {
 
-		var hql = "SELECT f FROM cbFeed f 
+		var hql = "SELECT f FROM cbFeed f
 			WHERE f.isActive = true
 			AND ( f.startDate IS NULL OR f.startDate >= :now )
 			AND ( f.stopDate IS NULL OR f.stopDate <= :now )";
 		var params = { "now"=now() };
-		
+
 		return executeQuery( query=hql, params=params, asQuery=false );
 
 	}
@@ -89,7 +90,7 @@ component extends="ContentService" singleton {
 		}
 
 		var feeds = getAll( id=arguments.contentID );
-		
+
 		if ( arrayLen( feeds ) ) {
 			for ( var x=1; x LTE arrayLen( feeds ); x++ ) {
 				feeds[ x ].setisActive( active );

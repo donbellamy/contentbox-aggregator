@@ -16,10 +16,11 @@
 		<div class="panel-heading">
 			<h4>Recent Items</h4>
 		</div>
-		#cb.widget( "RecentItems@contentbox-rss-aggregator" )#
+		#cb.widget( "FeedItems@contentbox-rss-aggregator" )#
 	</div>
 </cfif>
 
+<!--- TODO: if RSS is on --->
 <cfif cb.themeSetting( "showSiteUpdatesBlogSide", true )>
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -30,6 +31,16 @@
 		</ul>
 	</div>
 </cfif>
+
+<!--- TODO: Archives --->
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Archives</h4>
+	</div>
+	#cb.widget( "Archives@contentbox-rss-aggregator" )#
+</div>
+
+<!--- TODO: Search --->
 
 #cb.event( "cbui_afterSideBar" )#
 

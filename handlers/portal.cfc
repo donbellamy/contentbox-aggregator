@@ -1,21 +1,41 @@
-component extends="contentbox.modules.contentbox-ui.handlers.content" {
+component extends="coldbox.system.EventHandler" {
+	//component extends="coldbox.system.EventHandler"
 
+	// ContentBox injections
+	property name="antiSamy" inject="antisamy@cbantisamy";
+	property name="authorService" inject="id:authorService@cb";
+	property name="roleService" inject="roleService@cb";
+
+	// Aggregator injections
 	property name="settingService" inject="settingService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="helper" inject="helper@aggregator";
-	property name="roleService" inject="roleService@cb";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
-		// Check if portal is enabled
-		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
-			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
+		// Maintenance mode?
+		if ( prc.cbSettings.cb_site_maintenance ) {
+			if( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
+				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );	
+			} else {
+				event.overrideEvent( "contentbox-ui:page.maintenance" );
+				return;
+			}
 		}
 
-		// Call super (check maint mode, etc.)
-		super.preHandler( argumentCollection=arguments ); 
+		// Portal enabled?
+		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
+			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
+			return;
+		}
+
+		// If UI export is disabled, default to contentbox
+		if ( !prc.cbSettings.cb_content_uiexport ) {
+			rc.format = "html";
+		}
+
 	}
 
 	function index( event, rc, prc ) {
@@ -178,7 +198,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
-	function rss() {
+	function rss( event, rc, prc ) {
 		
 	}
 
@@ -226,6 +246,28 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	function disabled( event, rc, prc ) {
 		notFound( argumentCollection=arguments );
 	}
+
+	function onError( event, rc, prc, faultAction, exception, eventArguments ) {
+
+		// Excceptions
+		prc.faultAction = arguments.faultAction;
+		prc.exception   = arguments.exception;
+
+		// Announce event
+		announceInterception( 
+			"cbui_onError", {
+				faultAction = arguments.faultAction,
+				exception = arguments.exception,
+				eventArguments = arguments.eventArguments
+			} 
+		);
+
+		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
+			.setView( view="#prc.cbTheme#/views/error", module="contentbox" );
+
+	}
+
+	/************************************** PRIVATE *********************************************/
 
 	private function notFound( event, rc, prc ) {
 

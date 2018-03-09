@@ -20,7 +20,7 @@ component accessors="true" singleton threadSafe {
 		throw(
 			message = "Setting requested: #arguments.key# not found",
 			detail = "Settings keys are #structKeyList( prc.agSettings )#",
-			type = "aggregator.helper.InvalidSetting" 
+			type = "aggregator.helper.InvalidSetting"
 		);
 	}
 
@@ -35,8 +35,8 @@ component accessors="true" singleton threadSafe {
 
 	function getCurrentFeedItems() {
 		var prc = cb.getPrivateRequestCollection();
-		if( structKeyExists( prc, "feedItems" ) ) { 
-			return prc.feedItems; 
+		if( structKeyExists( prc, "feedItems" ) ) {
+			return prc.feedItems;
 		} else {
 			throw(
 				message="Feed items not found in collection",
@@ -52,7 +52,15 @@ component accessors="true" singleton threadSafe {
 		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
 	}
 
-	function linkCategory( required any category, boolean ssl=cb.getRequestContext().isSSL() ) { 
+	function linkArchive( string year, string month, string day, boolean ssl=cb.getRequestContext().isSSL() ) {
+		var link = linkPortal( ssl=arguments.ssl ) & "/archives";
+		if ( structKeyExists( arguments, "year" ) ) { link &= "/#arguments.year#"; }
+		if ( structKeyExists( arguments, "month" ) ) { link &= "/#arguments.month#"; }
+		if ( structKeyExists( arguments, "day" ) ) { link &= "/#arguments.day#"; }
+		return link;
+	}
+
+	function linkCategory( required any category, boolean ssl=cb.getRequestContext().isSSL() ) {
 		var slug = "";
 		if ( isSimpleValue( arguments.category ) ) {
 			slug = arguments.category;
@@ -86,12 +94,12 @@ component accessors="true" singleton threadSafe {
 			throw(
 				message = "Paging object is not in the collection",
 				detail = "This probably means you are trying to use the paging object in an non-index page.",
-				type = "aggregator.helper.InvalidPagingContext" 
+				type = "aggregator.helper.InvalidPagingContext"
 			);
 		}
 		return prc.oPaging.renderit(
-			foundRows = prc.itemCount, 
-			link = prc.pagingLink, 
+			foundRows = prc.itemCount,
+			link = prc.pagingLink,
 
 			pagingMaxRows = arguments.maxRows
 		);
@@ -100,7 +108,7 @@ component accessors="true" singleton threadSafe {
 	function quickFeedItems( string template="feeditem", string collectionAs="feeditem", struct args=structnew() ) {
 		var feedItems = getCurrentFeedItems();
 		return controller.getRenderer().renderView(
-			//view = "#cb.themeName()#/templates/aggregator/#arguments.template#", 
+			//view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 			// TODO: Need to create functions to check for theme file, if not found use indluded files ?
 			view = "../themes/default/templates/#arguments.template#",
 			collection = feedItems,

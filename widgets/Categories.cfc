@@ -1,16 +1,15 @@
 component extends="aggregator.models.BaseWidget" singleton {
 
 	Categories function init() {
-		setName( "Categories" );
+		setName( "Feed Item Categories" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays feed item categories." );
+		setDescription( "A widget that displays a list of feed item categories." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "tags" );
 		setCategory( "Aggregator" );
 		return this;
 	}
-
 
 	/**
 	* @title.label Title
@@ -39,8 +38,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Generate html
 		saveContent variable="html" {
 			// Title
-			if ( len( trim( arguments.title ) ) ) { 
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" ); 
+			if ( len( trim( arguments.title ) ) ) {
+				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
 			}
 			// Dropdown
 			if( arguments.useDropdown ){
