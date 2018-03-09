@@ -1,6 +1,5 @@
 component extends="coldbox.system.Interceptor" {
 
-	// TODO: rename to publicrequest or uirequest?
 	property name="settingService" inject="settingService@aggregator";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="agHelper" inject="helper@aggregator";
@@ -41,9 +40,9 @@ component extends="coldbox.system.Interceptor" {
 			arguments.interceptData.target.$agInject = variables.$agInject;
 			arguments.interceptData.target.$agInject();
 			// re-broadcast event
-			//announceInterception( 
+			//announceInterception(
 			//	"cbui_onRendererDecoration",
-			//	{ renderer=arguments.interceptData.target, CBHelper=arguments.interceptData.target.cb } 
+			//	{ renderer=arguments.interceptData.target, CBHelper=arguments.interceptData.target.cb }
 			//);
 		}
 	}

@@ -12,6 +12,10 @@ component persistent="true"
 	**                            PROPERTIES
 	********************************************************************* */
 
+	property name="siteUrl"
+		notnull="true"
+		length="255";
+
 	property name="feedUrl"
 		notnull="true"
 		length="255";
@@ -29,7 +33,7 @@ component persistent="true"
 
 	property name="stopDate"
 		notnull="false"
-		ormtype="timestamp" 
+		ormtype="timestamp"
 		index="idx_stopDate";
 
 	property name="defaultStatus"
@@ -98,6 +102,7 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
+	this.constraints["siteUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
@@ -139,7 +144,7 @@ component persistent="true"
 	}
 
 	Feed function addStartTime( required string hour, required string minute ) {
-		if ( isDate( getStartDate() ) ) { 
+		if ( isDate( getStartDate() ) ) {
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
 			if ( !len( arguments.minute ) ) arguments.minute = "00";
 			var time = timeformat( "#arguments.hour#:#arguments.minute#", "hh:mm tt" );
@@ -168,7 +173,7 @@ component persistent="true"
 	}
 
 	Feed function addStopTime( required string hour, required string minute ) {
-		if ( isDate( getStopDate() ) ) { 
+		if ( isDate( getStopDate() ) ) {
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
 			if ( !len( arguments.minute ) ) arguments.minute = "00";
 			var time = timeformat( "#arguments.hour#:#arguments.minute#", "hh:mm tt" );
@@ -205,13 +210,13 @@ component persistent="true"
 
 		var errors = [];
 
-		feedUrl = trim( left( feedUrl, 255 ) );
-		title = trim( left( title, 200 ) );
-		slug = trim( left( slug, 200 ) );
-		
 		HTMLKeyWords = trim( left( HTMLKeywords, 160 ) );
 		HTMLDescription = trim( left( HTMLDescription, 160 ) );
+		title = trim( left( title, 200 ) );
+		slug = trim( left( slug, 200 ) );
 
+		siteUrl = trim( left( siteUrl, 255 ) );
+		feedUrl = trim( left( feedUrl, 255 ) );
 		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
 		matchAllFilter = trim( left( matchAllFilter, 255 ) );
 		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );

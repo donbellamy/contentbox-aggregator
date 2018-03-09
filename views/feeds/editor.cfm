@@ -24,11 +24,11 @@
 		</cfif>
 	</ul>
 </div>
-#html.startForm( 
-	action=prc.xehFeedSave, 
-	name="feedForm", 
+#html.startForm(
+	action=prc.xehFeedSave,
+	name="feedForm",
 	novalidate="novalidate",
-	class="form-vertical" 
+	class="form-vertical"
 )#
 <div class="row">
 	<div class="col-md-8" id="main-content-slot">
@@ -70,6 +70,31 @@
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
 					<div class="form-group">
+						<label for="siteUrl" class="control-label">
+							Site URL:
+						</label>
+						<div class="controls">
+							<small>
+								The URL of the site providing the feed.
+								Be sure to include the <code>http(s)://</code> prefix in the url.
+							</small>
+							<div class="input-group">
+								#html.inputfield(
+									type="url",
+									name="siteUrl",
+									bind=prc.feed,
+									maxlength="255",
+									required="true",
+									title="The site url for this feed",
+									class="form-control"
+								)#
+								<a id="openSiteUrl" title="Open Site URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Open Site URL" data-container="body">
+									<i class="fa fa-external-link"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="feedUrl" class="control-label">
 							Feed URL:
 						</label>
@@ -94,6 +119,7 @@
 							</div>
 						</div>
 					</div>
+
 					#html.textfield(
 						label="Title:",
 						name="title",
@@ -118,11 +144,11 @@
 							<div id='slugCheckErrors'></div>
 							<div class="input-group">
 								#html.textfield(
-									name="slug", 
-									bind=prc.feed, 
+									name="slug",
+									bind=prc.feed,
 									maxlength="200",
-									class="form-control", 
-									title="The URL permalink for this feed", 
+									class="form-control",
+									title="The URL permalink for this feed",
 									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
 								)#
 								<a title="Lock/Unlock Permalink" class="input-group-addon" href="javascript:void(0);" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
@@ -134,9 +160,9 @@
 					<div class="form-group">
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(
-							name="content", 
-							bind=prc.feed, 
-							rows="25", 
+							name="content",
+							bind=prc.feed,
+							rows="25",
 							class="form-control"
 						)#
 					</div>
@@ -152,11 +178,11 @@
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain any of these words/phrases in the title or body will be imported.  
+									Only feed items that contain any of these words/phrases in the title or body will be imported.
 									Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchAnyFilter", 
+									name="matchAnyFilter",
 									value=prc.feed.getMatchAnyFilter(),
 									rows="3",
 									class="form-control",
@@ -173,11 +199,11 @@
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain all of these words/phrases in the title or body will be imported.  
+									Only feed items that contain all of these words/phrases in the title or body will be imported.
 									Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchAllFilter", 
+									name="matchAllFilter",
 									value=prc.feed.getMatchAllFilter(),
 									rows="3",
 									class="form-control",
@@ -194,12 +220,12 @@
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that do not contain any of these words/phrases in the title or body will be imported.  
+									Only feed items that do not contain any of these words/phrases in the title or body will be imported.
 									Existing feed items that contain any of these words/phrases in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchNoneFilter", 
-									value=prc.feed.getMatchNoneFilter(), 
+									name="matchNoneFilter",
+									value=prc.feed.getMatchNoneFilter(),
 									rows="3",
 									class="form-control",
 									placeholder="Comma delimited list of words or phrases",
@@ -313,7 +339,7 @@
 					<div class="form-group">
 						#html.textfield(
 							name="htmlTitle",
-							label="Title: (Leave blank to use the feed title)", 
+							label="Title: (Leave blank to use the feed title)",
 							bind=prc.feed,
 							class="form-control",
 							maxlength="255"
@@ -322,7 +348,7 @@
 					<div class="form-group">
 						#html.textArea(
 							name="htmlKeywords",
-							label="Keywords: (<span id='html_keywords_count'>0</span>/160 characters left)", 
+							label="Keywords: (<span id='html_keywords_count'>0</span>/160 characters left)",
 							bind=prc.feed,
 							class="form-control",
 							maxlength="160",
@@ -332,7 +358,7 @@
 					<div class="form-group">
 						#html.textArea(
 							name="htmlDescription",
-							label="Description: (<span id='html_description_count'>0</span>/160 characters left)", 
+							label="Description: (<span id='html_description_count'>0</span>/160 characters left)",
 							bind=prc.feed,
 							class="form-control",
 							maxlength="160",
@@ -472,7 +498,7 @@
 															<cfelse>
 																#feedItem.getTitle()#
 															</cfif>
-														</td> 
+														</td>
 														<td class="text-center">#feedItem.getDisplayDatePublished()#</td>
 													</tr>
 												</cfloop>
@@ -540,9 +566,9 @@
 											<div class="col-md-6">
 												<div class="input-group">
 													#html.inputField(
-														size="9", 
+														size="9",
 														name="startDate",
-														value=prc.feed.getStartDateForEditor(), 
+														value=prc.feed.getStartDateForEditor(),
 														class="form-control datepicker",
 														placeholder="Immediately"
 													)#
@@ -579,9 +605,9 @@
 											<div class="col-md-6">
 												<div class="input-group">
 													#html.inputField(
-														size="9", 
+														size="9",
 														name="stopDate",
-														value=prc.feed.getStopDateForEditor(), 
+														value=prc.feed.getStopDateForEditor(),
 														class="form-control datepicker",
 														placeholder="Never"
 													)#
