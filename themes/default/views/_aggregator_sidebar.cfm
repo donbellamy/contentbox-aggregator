@@ -2,26 +2,28 @@
 
 #cb.event( "cbui_BeforeSideBar" )#
 
-<cfif cb.themeSetting( "showCategoriesBlogSide", true )>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4>Categories</h4>
-		</div>
-		#cb.widget( "Categories@contentbox-rss-aggregator" )#
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Categories</h4>
 	</div>
-</cfif>
+	#cb.widget( "Categories@contentbox-rss-aggregator" )#
+</div>
 
-<cfif cb.themeSetting( "showRecentEntriesBlogSide", true ) >
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4>Recent Items</h4>
-		</div>
-		#cb.widget( "FeedItems@contentbox-rss-aggregator" )#
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Recent Items</h4>
 	</div>
-</cfif>
+	#cb.widget( "FeedItems@contentbox-rss-aggregator" )#
+</div>
 
-<!--- TODO: if RSS is on --->
-<cfif cb.themeSetting( "showSiteUpdatesBlogSide", true )>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>Archives</h4>
+	</div>
+	#cb.widget( "Archives@contentbox-rss-aggregator" )#
+</div>
+
+<cfif ag.setting("ag_rss_enable") >
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4>News Updates</h4>
@@ -32,15 +34,12 @@
 	</div>
 </cfif>
 
-<!--- TODO: Archives --->
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h4>Archives</h4>
+		<h4>Search</h4>
 	</div>
-	#cb.widget( "Archives@contentbox-rss-aggregator" )#
+	#cb.widget( "SearchForm@contentbox-rss-aggregator" )#
 </div>
-
-<!--- TODO: Search --->
 
 #cb.event( "cbui_afterSideBar" )#
 

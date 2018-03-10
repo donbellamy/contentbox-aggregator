@@ -70,11 +70,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 			arguments.max = results.count;
 		}
 
-		// Set return html
-		var html = "";
+		// Set return string
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// Title
 			if ( len( trim( arguments.title ) ) ) {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
@@ -93,17 +93,17 @@ component extends="aggregator.models.BaseWidget" singleton {
 			writeOutput( "</ul>" );
 		}
 
-		return html;
+		return string;
 
 	}
 
-	array function getFeedSlugs() cbIgnore {
+	array function getFeedSlugs() {
 		var slugs = feedService.getAllFlatSlugs();
 		arrayPrepend( slugs, "" );
 		return slugs;
 	}
 
-	array function getAllCategories() cbIgnore {
+	array function getAllCategories() {
 		return categoryService.getAllNames();
 	}
 

@@ -32,11 +32,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the archives
 		var archives = feedItemService.getArchiveReport();
 
-		// Set return html
-		var html = "";
+		// Set return string
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// Title
 			if ( len( trim( arguments.title ) ) ) {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
@@ -50,7 +50,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 			}
 		}
 
-		return html;
+		return string;
+
 	}
 
 	private function buildList( archives, showItemCount ) {

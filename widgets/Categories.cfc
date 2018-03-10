@@ -32,11 +32,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the categories
 		var categories = categoryService.list( sortOrder="category", asQuery=false );
 
-		// Set return html
-		var html = "";
+		// Set return string
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// Title
 			if ( len( trim( arguments.title ) ) ) {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
@@ -50,17 +50,17 @@ component extends="aggregator.models.BaseWidget" singleton {
 			}
 		}
 
-		return html;
+		return string;
 
 	}
 
 	private function buildDropDown( categories, showItemCount ) {
 
-		// Set return html
-		var html = "";
+		// Set return string
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// Select start
 			writeOutput('<select name="categories" id="categories" onchange="window.location=this.value" )><option value="##">Select Category</option>');
 			// Select options
@@ -76,17 +76,17 @@ component extends="aggregator.models.BaseWidget" singleton {
 			writeOutput( "</select>" );
 		}
 
-		return html;
+		return string;
 
 	}
 
 	private function buildList( categories, showItemCount ) {
 
-		// Set return html
-		var html = "";
+		// Set return string
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// List start
 			writeOutput('<ul id="categories">');
 			// List items
@@ -102,7 +102,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			writeOutput( "</ul>" );
 		}
 
-		return html;
+		return string;
 
 	}
 
