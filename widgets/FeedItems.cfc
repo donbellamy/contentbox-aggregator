@@ -58,11 +58,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			max=arguments.max,
 			category=arguments.category,
 			searchTerm=arguments.searchTerm,
 			feed=arguments.feed,
-			sortOrder=arguments.sortOrder
+			sortOrder=arguments.sortOrder,
+			max=arguments.max
 		);
 
 		// iteration cap

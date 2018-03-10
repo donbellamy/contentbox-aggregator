@@ -89,12 +89,14 @@ component {
 		];
 
 		aggregatorRoutes = [
+			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator" },
+			{ pattern="/rss/:category", handler="portal", action="rss", namespace="aggregator" },
+			{ pattern="/rss", handler="portal", action="rss", namespace="aggregator" },
 			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/search", handler="portal", action="index", namespace="aggregator" },
-			{ pattern="/rss", handler="portal", action="rss", namespace="aggregator" },
+			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -112,7 +114,8 @@ component {
 				"aggregator_prePortalDisplay","aggregator_postPortalDisplay",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
-				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound"
+				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
+				"aggregator_onArchives"
 			])
 		};
 
@@ -131,7 +134,7 @@ component {
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
-		
+
 
 	}
 

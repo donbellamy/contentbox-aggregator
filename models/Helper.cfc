@@ -52,11 +52,11 @@ component accessors="true" singleton threadSafe {
 		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
 	}
 
-	function linkArchive( string year, string month, string day, boolean ssl=cb.getRequestContext().isSSL() ) {
+	function linkArchive( string year="", string month="", string day="", boolean ssl=cb.getRequestContext().isSSL() ) {
 		var link = linkPortal( ssl=arguments.ssl ) & "/archives";
-		if ( structKeyExists( arguments, "year" ) ) { link &= "/#arguments.year#"; }
-		if ( structKeyExists( arguments, "month" ) ) { link &= "/#arguments.month#"; }
-		if ( structKeyExists( arguments, "day" ) ) { link &= "/#arguments.day#"; }
+		if ( len( arguments.year ) ) { link &= "/#arguments.year#"; }
+		if ( len( arguments.month ) ) { link &= "/#arguments.month#"; }
+		if ( len( arguments.day ) ) { link &= "/#arguments.day#"; }
 		return link;
 	}
 

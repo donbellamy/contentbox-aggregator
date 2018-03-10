@@ -13,9 +13,9 @@ component extends="ContentService" singleton {
 		string state="any",
 		string category="all",
 		string status="any",
+		string sortOrder="",
 		numeric max=0,
-		numeric offset=0,
-		string sortOrder=""
+		numeric offset=0
 	) {
 
 		var results = {};

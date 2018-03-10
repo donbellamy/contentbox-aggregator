@@ -18,7 +18,7 @@ component extends="coldbox.system.EventHandler" {
 		// Maintenance mode?
 		if ( prc.cbSettings.cb_site_maintenance ) {
 			if( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
-				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );	
+				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );
 			} else {
 				event.overrideEvent( "contentbox-ui:page.maintenance" );
 				return;
@@ -69,19 +69,19 @@ component extends="coldbox.system.EventHandler" {
 
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			max=prc.agSettings.ag_display_paging_max_rows,
-			offset=prc.pagingBoundaries.startRow - 1,
 			searchTerm=rc.q,
-			category=rc.category
+			category=rc.category,
+			max=prc.agSettings.ag_display_paging_max_rows,
+			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
-		announceInterception( 
+		announceInterception(
 			"aggregator_onPortalIndex", {
 				feedItems = prc.feedItems,
-				count = prc.itemCount
-			} 
+				feedItemscount = prc.itemCount
+			}
 		);
 
 		//event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
@@ -91,8 +91,50 @@ component extends="coldbox.system.EventHandler" {
 
 	}
 
+	function archives( event, rc, prc ) {
+
+		// incoming params
+		event.paramValue( "page", 1 )
+			.paramValue( "year", 0 )
+			.paramValue( "month", 0 )
+			.paramValue( "day", 0 );
+
+		// Page check
+		if( !isNumeric( rc.page ) ) rc.page = 1;
+
+		// Paging
+		prc.oPaging = getModel("paging@cb");
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+		prc.pagingLink = helper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
+
+		// Grab the results
+		var results = feedItemService.getPublishedFeedItemsByDate(
+			year=rc.year,
+			month=rc.month,
+			day=rc.day,
+			max=prc.agSettings.ag_display_paging_max_rows,
+			offset=prc.pagingBoundaries.startRow - 1
+		);
+		prc.feedItems = results.feedItems;
+		prc.itemCount = results.count;
+
+		// announce event
+		announceInterception( "aggregator_onArchives", {
+				feedItems = prc.feedItems,
+				feedItemscount = prc.itemCount
+			}
+		);
+
+		// TODO: archives view?
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feeditems" );
+
+	}
+
+	function rss( event, rc, prc ) {}
+
 	function feeditem( event, rc, prc ) {
-		
+
 		event.paramValue( "slug", "" );
 
 		// Check if author is viewing
@@ -169,10 +211,10 @@ component extends="coldbox.system.EventHandler" {
 
 			// Grab the feed items
 			var results = feedItemService.getPublishedFeedItems(
-				max=prc.agSettings.ag_display_paging_max_rows,
-				offset=prc.pagingBoundaries.startRow - 1,
 				feed=prc.feed.getContentID(),
-				author=rc.author
+				author=rc.author,
+				max=prc.agSettings.ag_display_paging_max_rows,
+				offset=prc.pagingBoundaries.startRow - 1
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -196,10 +238,6 @@ component extends="coldbox.system.EventHandler" {
 
 		}
 
-	}
-
-	function rss( event, rc, prc ) {
-		
 	}
 
 	function import( event, rc, prc ) {
@@ -254,12 +292,12 @@ component extends="coldbox.system.EventHandler" {
 		prc.exception   = arguments.exception;
 
 		// Announce event
-		announceInterception( 
+		announceInterception(
 			"cbui_onError", {
 				faultAction = arguments.faultAction,
 				exception = arguments.exception,
 				eventArguments = arguments.eventArguments
-			} 
+			}
 		);
 
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )

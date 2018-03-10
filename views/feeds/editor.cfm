@@ -119,7 +119,6 @@
 							</div>
 						</div>
 					</div>
-
 					#html.textfield(
 						label="Title:",
 						name="title",

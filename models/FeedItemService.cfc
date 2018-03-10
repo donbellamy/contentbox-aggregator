@@ -13,9 +13,9 @@ component extends="ContentService" singleton {
 		string feed="all",
 		string category="all",
 		string status="any",
+		string sortOrder="datePublished DESC",
 		numeric max=0,
 		numeric offset=0,
-		string sortOrder="datePublished DESC"
 	) {
 
 		var results = {};
@@ -53,6 +53,7 @@ component extends="ContentService" singleton {
 			}
 		}
 
+		// Get the results
 		results.count = c.count( "contentID" );
 		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
 			offset=arguments.offset,
@@ -66,14 +67,14 @@ component extends="ContentService" singleton {
 	}
 
 	struct function getPublishedFeedItems(
-		numeric max=0,
-		numeric offset=0,
 		string searchTerm="",
 		string category="",
 		string author="",
 		string feed="",
 		string sortOrder="datePublished DESC",
-		boolean countOnly=false
+		boolean countOnly=false,
+		numeric max=0,
+		numeric offset=0
 	) {
 
 		var results = {};
@@ -113,7 +114,7 @@ component extends="ContentService" singleton {
 			c.eq( "p.slug", "#arguments.feed#" );
 		}
 
-		// Set the results
+		// Get the results
 		results.count = c.count( "contentID" );
 		if ( arguments.countOnly ) {
 			results.feedItems = [];
@@ -133,13 +134,16 @@ component extends="ContentService" singleton {
 	function getArchiveReport() {
 
 		// Set hql
-		var hql = "SELECT new map( count(*) as count, YEAR(publishedDate) as year, MONTH(publishedDate) as month )
-				FROM cbFeedItem
-				WHERE isPublished = true
-					AND publishedDate <= :now
-					AND datePublished <= :now
-					AND ( expireDate IS NULL OR expireDate >= :now )
-				GROUP BY YEAR(publishedDate), MONTH(publishedDate)
+		var hql = "SELECT new map( count(*) AS count, YEAR(fi.publishedDate) AS year, MONTH(fi.publishedDate) AS month )
+				FROM cbFeedItem fi
+				WHERE fi.isPublished = true
+					AND fi.publishedDate <= :now
+					AND fi.datePublished <= :now
+					AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
+					AND fi.parent.isPublished = true
+					AND fi.parent.publishedDate <= :now
+					AND ( fi.parent.expireDate IS NULL OR fi.parent.expireDate >= :now )
+				GROUP BY YEAR(fi.publishedDate), MONTH(fi.publishedDate)
 				ORDER BY 2 DESC, 3 DESC";
 
 		var params = {};
@@ -147,6 +151,70 @@ component extends="ContentService" singleton {
 
 		// Return results
 		return executeQuery( query=hql, params=params, asQuery=false );
+
+	}
+
+	function getPublishedFeedItemsByDate(
+		numeric year=0,
+		numeric month=0,
+		numeric day=0,
+		numeric max=0,
+		numeric offset=0
+	) {
+
+		var results = {};
+
+		// Set hql
+		var hql = "FROM cbFeedItem fi
+			WHERE fi.isPublished = true
+				AND fi.publishedDate <= :now
+				AND fi.datePublished <= :now
+				AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
+				AND fi.parent.isPublished = true
+				AND fi.parent.publishedDate <= :now
+				AND ( fi.parent.expireDate IS NULL OR fi.parent.expireDate >= :now )";
+		var params = {};
+		params[ "now" ] = now();
+
+		// Year
+		if( val( arguments.year ) ){
+			params["year"] = arguments.year;
+			hql &= " AND YEAR(fi.publishedDate) = :year";
+		}
+
+		// Month
+		if( val( arguments.month ) ){
+			params["month"] = arguments.month;
+			hql &= " AND MONTH(fi.publishedDate) = :month";
+		}
+
+		// Day
+		if( val( arguments.day ) ){
+			params["day"] = arguments.day;
+			hql &= " AND DAY(fi.publishedDate ) = :day";
+		}
+
+		// Count
+		results.count = executeQuery(
+			query="select count( * ) #hql#",
+			params=params,
+			max=1,
+			asQuery=false
+		)[1];
+
+		// Order by
+		hql &= " ORDER BY fi.datePublished DESC";
+
+		// Get the results
+		results.feedItems = executeQuery(
+			query=hql,
+			params=params,
+			max=arguments.max,
+			offset=arguments.offset,
+			asQuery=false
+		);
+
+		return results;
 
 	}
 

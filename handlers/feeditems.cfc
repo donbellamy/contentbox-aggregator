@@ -41,8 +41,8 @@ component extends="contentHandler" {
 			feed=rc.feed,
 			category=rc.category,
 			status=rc.status,
-			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 ),
-			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows )
+			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
+			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
 
 		prc.feedItems = results.feedItems;
@@ -124,7 +124,7 @@ component extends="contentHandler" {
 			return editor( argumentCollection=arguments );
 		}
 
-		prc.feedItem.addNewContentVersion( 
+		prc.feedItem.addNewContentVersion(
 			content=rc.content,
 			changelog=rc.changelog,
 			author=prc.oCurrentAuthor
@@ -160,7 +160,7 @@ component extends="contentHandler" {
 	}
 
 	function remove( event, rc, prc ) {
-		
+
 		event.paramValue( "contentID", "" );
 
 		if ( len( rc.contentID ) ) {
@@ -207,7 +207,7 @@ component extends="contentHandler" {
 	function resetHits( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
-		
+
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];

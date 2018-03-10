@@ -3,7 +3,7 @@ component extends="contentHandler" {
 	property name="feedImportService" inject="feedImportService@aggregator";
 
 	function preHandler( event, action, eventArguments, rc, prc ) {
-		
+
 		super.preHandler( argumentCollection=arguments );
 
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
@@ -42,9 +42,9 @@ component extends="contentHandler" {
 			state=rc.state,
 			category=rc.category,
 			status=rc.status,
-			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 ),
+			sortOrder="title ASC",
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			sortOrder="title ASC"
+			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
 
 		prc.feeds = results.feeds;
@@ -161,9 +161,9 @@ component extends="contentHandler" {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
 
-		prc.feed.addNewContentVersion( 
-			content=rc.content, 
-			changelog=rc.changelog, 
+		prc.feed.addNewContentVersion(
+			content=rc.content,
+			changelog=rc.changelog,
 			author=prc.oCurrentAuthor
 		);
 
@@ -203,7 +203,7 @@ component extends="contentHandler" {
 	}
 
 	function remove( event, rc, prc ) {
-		
+
 		event.paramValue( "contentID", "" );
 
 		if ( len( rc.contentID ) ) {
@@ -250,7 +250,7 @@ component extends="contentHandler" {
 	function resetHits( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
-		
+
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -276,7 +276,7 @@ component extends="contentHandler" {
 	}
 
 	function state( event, rc, prc ) {
-		
+
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentState", "pause" );
 
