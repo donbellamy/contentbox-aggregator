@@ -119,7 +119,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											maxDate = dateAdd( "d", -maxAge, maxDate );
 										}
 									}
-									if ( dateCompare( maxDate, arguments.datePublished ) EQ 1 ) {
+									if ( dateCompare( maxDate, item.datePublished ) EQ 1 ) {
 										passesAgeLimits = false;
 									}
 								}
@@ -156,7 +156,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setTitle( item.title );
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
-										feedItem.addNewContentVersion( 
+										feedItem.addNewContentVersion(
 											content=item.body,
 											changelog="Item imported.",
 											author=arguments.author
@@ -229,7 +229,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														var img = imageRead( imagePath );
 
 														// Save the image if it is valid
-														if ( img.getWidth() GTE val( settings.ag_general_image_minimum_width ) && 
+														if ( img.getWidth() GTE val( settings.ag_general_image_minimum_width ) &&
 															img.getHeight() GTE val( settings.ag_general_image_minimum_height ) ) {
 
 															// Set the image url
@@ -260,7 +260,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													if ( log.canError() ) {
 														log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
 													}
-										
+
 												}
 
 											}
@@ -283,7 +283,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										}
 
 									}
-								
+
 								} else {
 
 									// Log item too old
@@ -312,7 +312,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						}
 
 					} else {
-						
+
 						// Log invalid item in feed
 						if ( log.canWarn() ) {
 							log.warn("Invalid feed item ('#uniqueId#') found for feed '#arguments.feed.getTitle()#'.");
@@ -327,7 +327,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				}
 
 			} else {
-				
+
 				// Log empty feed
 				if ( log.canInfo() ) {
 					log.info("There were no feed items found for feed '#arguments.feed.getTitle()#'.");
@@ -345,7 +345,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		} catch ( any e ) {
 
-			if ( log.canError() ) { 
+			if ( log.canError() ) {
 				log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
 			}
 

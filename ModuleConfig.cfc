@@ -95,11 +95,18 @@ component {
 			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/search", handler="portal", action="index", namespace="aggregator" },
+			{ pattern="/search", handler="portal", action="index", namespace="aggregator" }, // TODO: is this used?
 			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
+
+		// TODO:
+		// /feeds
+		// /feed/:slug
+		// /feed/:slug/:category
+		// /feed/:slug/rss
+		// /feed/:slug/rss/:category
 
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([
@@ -133,8 +140,8 @@ component {
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
+		binder.map("rssService@aggregator").to("#moduleMapping#.models.RSSService");
 		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
-
 
 	}
 

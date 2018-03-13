@@ -1,17 +1,17 @@
 component extends="coldbox.system.EventHandler" {
-	//component extends="coldbox.system.EventHandler"
 
 	// ContentBox injections
 	property name="antiSamy" inject="antisamy@cbantisamy";
-	property name="authorService" inject="id:authorService@cb";
+	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
 
 	// Aggregator injections
-	property name="settingService" inject="settingService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="helper" inject="helper@aggregator";
+	property name="rssService" inject="rssService@aggregator";
+	property name="settingService" inject="settingService@aggregator";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
@@ -27,7 +27,7 @@ component extends="coldbox.system.EventHandler" {
 
 		// Portal enabled?
 		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
-			event.overrideEvent( "contentbox-rss-aggregator:portal.disabled" );
+			notFound( argumentCollection=arguments );
 			return;
 		}
 
@@ -131,7 +131,23 @@ component extends="coldbox.system.EventHandler" {
 
 	}
 
-	function rss( event, rc, prc ) {}
+	function rss( event, rc, prc ) {
+
+		// RSS enabled?
+		if ( !prc.agSettings.ag_rss_enable ) {
+			notFound( argumentCollection=arguments );
+			return;
+		}
+
+		// Params
+		event.paramValue( "category", "" );
+		rc.format = "rss";
+
+		var feed = rssService.getRSS( category=rc.category );
+
+		event.renderData( type="plain", data=feed, contentType="text/xml" );
+
+	}
 
 	function feeditem( event, rc, prc ) {
 
@@ -279,10 +295,6 @@ component extends="coldbox.system.EventHandler" {
 
 		}
 
-	}
-
-	function disabled( event, rc, prc ) {
-		notFound( argumentCollection=arguments );
 	}
 
 	function onError( event, rc, prc, faultAction, exception, eventArguments ) {

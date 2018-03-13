@@ -1,8 +1,8 @@
 component extends="coldbox.system.Interceptor" {
 
-	property name="settingService" inject="settingService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="settingService" inject="settingService@aggregator";
 
 	function aggregator_preFeedItemRemove( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;

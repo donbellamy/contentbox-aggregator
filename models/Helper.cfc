@@ -83,7 +83,7 @@ component accessors="true" singleton threadSafe {
 	}
 
 	function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal() & "/rss/";
+		return linkPortal() & "/rss";
 	}
 
 	/************************************** Quick HTML *********************************************/

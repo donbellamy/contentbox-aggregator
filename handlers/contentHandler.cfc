@@ -9,7 +9,7 @@ component extends="baseHandler" {
 	property name="ckHelper" inject="CKHelper@contentbox-ckeditor";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
-		
+
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
