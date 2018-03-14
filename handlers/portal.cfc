@@ -129,7 +129,7 @@ component extends="coldbox.system.EventHandler" {
 
 		// Set params
 		event.paramValue( "category", "" )
-			.paramValue( "feed", "" );
+			.paramValue( "slug", "" );
 
 		// Set format
 		rc.format = "rss";
@@ -137,7 +137,7 @@ component extends="coldbox.system.EventHandler" {
 		// Grab the rss feed
 		var rssFeed = rssService.getRSS(
 			category=rc.category,
-			feed=rc.feed
+			feed=rc.slug
 		);
 
 		// Render the xml

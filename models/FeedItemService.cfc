@@ -146,6 +146,7 @@ component extends="ContentService" singleton {
 				GROUP BY YEAR(fi.publishedDate), MONTH(fi.publishedDate)
 				ORDER BY 2 DESC, 3 DESC";
 
+		// Set params
 		var params = {};
 		params[ "now" ] = now();
 
