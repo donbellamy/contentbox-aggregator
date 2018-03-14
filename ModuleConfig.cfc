@@ -90,9 +90,10 @@ component {
 
 		aggregatorRoutes = [
 			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator" },
+			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
 			{ pattern="/rss/:category", handler="portal", action="rss", namespace="aggregator" },
 			{ pattern="/rss", handler="portal", action="rss", namespace="aggregator" },
-			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
+			{ pattern="/feeds/:slug/rss", handler="portal", action="rss", namespace="aggregator" },
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
 			{ pattern="/search", handler="portal", action="index", namespace="aggregator" }, // TODO: is this used?
@@ -100,13 +101,6 @@ component {
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
-
-		// TODO:
-		// /feeds
-		// /feed/:slug
-		// /feed/:slug/:category
-		// /feed/:slug/rss
-		// /feed/:slug/rss/:category
 
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([

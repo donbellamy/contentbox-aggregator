@@ -1,11 +1,8 @@
 component extends="coldbox.system.EventHandler" {
 
-	// ContentBox injections
 	property name="antiSamy" inject="antisamy@cbantisamy";
 	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
-
-	// Aggregator injections
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
@@ -40,7 +37,7 @@ component extends="coldbox.system.EventHandler" {
 
 	function index( event, rc, prc ) {
 
-		// Incoming params
+		// Set params
 		event.paramValue( "page", 1 )
 			.paramValue( "q", "" )
 			.paramValue( "category", "" );
@@ -77,15 +74,10 @@ component extends="coldbox.system.EventHandler" {
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
-		announceInterception(
-			"aggregator_onPortalIndex", {
-				feedItems = prc.feedItems,
-				feedItemscount = prc.itemCount
-			}
-		);
+		// Announce event
+		announceInterception( "aggregator_onPortalIndex", { feedItems = prc.feedItems, feedItemscount = prc.itemCount } );
 
-		//event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
-		//	.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
+		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeditems" );
 
@@ -93,7 +85,7 @@ component extends="coldbox.system.EventHandler" {
 
 	function archives( event, rc, prc ) {
 
-		// incoming params
+		// Set params
 		event.paramValue( "page", 1 )
 			.paramValue( "year", 0 )
 			.paramValue( "month", 0 )
@@ -118,14 +110,10 @@ component extends="coldbox.system.EventHandler" {
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
-		// announce event
-		announceInterception( "aggregator_onArchives", {
-				feedItems = prc.feedItems,
-				feedItemscount = prc.itemCount
-			}
-		);
+		// Announce event
+		announceInterception( "aggregator_onArchives", { feedItems = prc.feedItems, feedItemscount = prc.itemCount } );
 
-		// TODO: archives view?
+		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeditems" );
 
@@ -139,18 +127,27 @@ component extends="coldbox.system.EventHandler" {
 			return;
 		}
 
-		// Params
-		event.paramValue( "category", "" );
+		// Set params
+		event.paramValue( "category", "" )
+			.paramValue( "feed", "" );
+
+		// Set format
 		rc.format = "rss";
 
-		var feed = rssService.getRSS( category=rc.category );
+		// Grab the rss feed
+		var rssFeed = rssService.getRSS(
+			category=rc.category,
+			feed=rc.feed
+		);
 
-		event.renderData( type="plain", data=feed, contentType="text/xml" );
+		// Render the xml
+		event.renderData( type="plain", data=rssFeed, contentType="text/xml" );
 
 	}
 
 	function feeditem( event, rc, prc ) {
 
+		// Set params
 		event.paramValue( "slug", "" );
 
 		// Check if author is viewing
@@ -187,12 +184,16 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	function feeds( event, rc, prc ) {
+
+		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeds" );
+
 	}
 
 	function feed( event, rc, prc ) {
 
+		// Set params
 		event.paramValue( "slug", "" )
 			.paramValue( "page", 1 )
 			.paramValue( "author", "" );
@@ -312,6 +313,7 @@ component extends="coldbox.system.EventHandler" {
 			}
 		);
 
+		// Set layout and view
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/error", module="contentbox" );
 
@@ -321,11 +323,14 @@ component extends="coldbox.system.EventHandler" {
 
 	private function notFound( event, rc, prc ) {
 
+		// Grab page and url
 		prc.missingPage = event.getCurrentRoutedURL();
 		prc.missingRoutedURL = event.getCurrentRoutedURL();
 
+		// Set header
 		event.setHTTPHeader( "404", "Page not found" );
 
+		// Set layout and view
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
 
