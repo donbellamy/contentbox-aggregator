@@ -74,6 +74,10 @@ component accessors="true" singleton threadSafe {
 		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug();
 	}
 
+	function linkFeedForm( required feed, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds/editor/contentID/" & arguments.feed.getContentID();
+	}
+
 	function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug();
 	}
