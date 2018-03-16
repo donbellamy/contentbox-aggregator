@@ -79,6 +79,7 @@ component singleton {
 		}
 
 		// Populate the feedStruct
+		// TODO: If feed is passed in then adjust the title and?
 		feedStruct.title = settings.ag_rss_title;
 		feedStruct.description = settings.ag_rss_description;
 		feedStruct.generator = settings.ag_rss_generator;

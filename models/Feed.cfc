@@ -118,6 +118,7 @@ component persistent="true"
 	Feed function init() {
 		super.init();
 		categories = [];
+		renderedContent = "";
 		createdDate = now();
 		contentType = "Feed";
 		return this;

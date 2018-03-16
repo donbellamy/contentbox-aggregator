@@ -114,6 +114,9 @@ component {
 				"aggregator_onIndexView",
 				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
 
+				"aggregator_onFeedsView",
+				"aggregator_preFeedsDisplay","aggregator_postFeedsDisplay",
+
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
 

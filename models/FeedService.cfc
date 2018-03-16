@@ -13,7 +13,7 @@ component extends="ContentService" singleton {
 		string state="any",
 		string category="all",
 		string status="any",
-		string sortOrder="",
+		string sortOrder="title ASC",
 		numeric max=0,
 		numeric offset=0
 	) {
@@ -53,10 +53,6 @@ component extends="ContentService" singleton {
 			}
 		}
 
-		if ( !len( arguments.sortOrder ) ) {
-			arguments.sortOrder = "title ASC";
-		}
-
 		results.count = c.count( "contentID" );
 		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
 			offset=arguments.offset,
@@ -67,6 +63,10 @@ component extends="ContentService" singleton {
 
 		return results;
 
+	}
+
+	struct function getPublishedFeeds( numeric max=0, numeric offset=0 ) {
+		return search( status="published", max=arguments.max, offset=arguments.offset );
 	}
 
 	array function getFeedsForImport() {

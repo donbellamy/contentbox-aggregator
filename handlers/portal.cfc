@@ -148,6 +148,36 @@ component extends="coldbox.system.EventHandler" {
 
 	}
 
+	function feeds( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( "page", 1 );
+
+		// Page check
+		if( !isNumeric( rc.page ) ) rc.page = 1;
+
+		// Paging
+		prc.oPaging = getModel("paging@cb");
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+		prc.pagingLink = helper.linkFeeds() & "?page=@page@";
+
+		// Grab the results
+		var results = feedService.getPublishedFeeds(
+			max=prc.agSettings.ag_display_paging_max_rows,
+			offset=prc.pagingBoundaries.startRow - 1
+		);
+		prc.feeds = results.feeds;
+		prc.itemCount = results.count;
+
+		// Announce event
+		announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
+
+		// Set layout and view
+		event.setLayout( "../themes/default/layouts/aggregator" )
+			.setView( "../themes/default/views/feeds" );
+
+	}
+
 	function feeditem( event, rc, prc ) {
 
 		// Set params
@@ -183,14 +213,6 @@ component extends="coldbox.system.EventHandler" {
 			notFound( argumentCollection=arguments );
 
 		}
-
-	}
-
-	function feeds( event, rc, prc ) {
-
-		// Set layout and view
-		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feeds" );
 
 	}
 
