@@ -75,11 +75,11 @@ component extends="coldbox.system.EventHandler" {
 		prc.itemCount = results.count;
 
 		// Announce event
-		announceInterception( "aggregator_onPortalIndex", { feedItems = prc.feedItems, feedItemscount = prc.itemCount } );
+		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemscount=prc.itemCount } );
 
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feeditems" );
+			.setView( "../themes/default/views/feedindex" );
 
 	}
 
@@ -111,11 +111,11 @@ component extends="coldbox.system.EventHandler" {
 		prc.itemCount = results.count;
 
 		// Announce event
-		announceInterception( "aggregator_onArchives", { feedItems = prc.feedItems, feedItemscount = prc.itemCount } );
+		announceInterception( "aggregator_onArchivesView", { feedItems=prc.feedItems, feedItemscount=prc.itemCount } );
 
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feeditems" );
+			.setView( "../themes/default/views/feedarchives" );
 
 	}
 
@@ -139,6 +139,9 @@ component extends="coldbox.system.EventHandler" {
 			category=rc.category,
 			feed=rc.slug
 		);
+
+		// Announce event
+		announceInterception( "aggregator_onRSSView", { category=rc.category, slug=rc.slug } );
 
 		// Render the xml
 		event.renderData( type="plain", data=rssFeed, contentType="text/xml" );
@@ -166,7 +169,7 @@ component extends="coldbox.system.EventHandler" {
 			feedItemService.updateHits( feedItem.getContentID() );
 
 			// Announce event
-			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
 			// Relocate to item url
 			location( url=feedItem.getItemUrl(), addToken="no" );
@@ -174,7 +177,7 @@ component extends="coldbox.system.EventHandler" {
 		} else {
 
 			// Announce event
-			announceInterception( "aggregator_onFeedItemNotFound", { feedItem=feedItem, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedItemNotFound", { slug=rc.slug } );
 
 			// Not found
 			notFound( argumentCollection=arguments );
@@ -240,7 +243,7 @@ component extends="coldbox.system.EventHandler" {
 			feedService.updateHits( prc.feed.getContentID() );
 
 			// Announce event
-			announceInterception( "aggregator_onFeedView", { feed=prc.feed, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedView", { feed=prc.feed } );
 
 			event.setLayout( "../themes/default/layouts/aggregator" )
 				.setView( "../themes/default/views/feed" );
@@ -248,7 +251,7 @@ component extends="coldbox.system.EventHandler" {
 		} else {
 
 			// Announce event
-			announceInterception( "aggregator_onFeedNotFound", { feed=prc.feed, slug=rc.slug } );
+			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } );
 
 			// Not found
 			notFound( argumentCollection=arguments );
@@ -302,14 +305,14 @@ component extends="coldbox.system.EventHandler" {
 
 		// Excceptions
 		prc.faultAction = arguments.faultAction;
-		prc.exception   = arguments.exception;
+		prc.exception = arguments.exception;
 
 		// Announce event
 		announceInterception(
 			"cbui_onError", {
-				faultAction = arguments.faultAction,
-				exception = arguments.exception,
-				eventArguments = arguments.eventArguments
+				faultAction=arguments.faultAction,
+				exception=arguments.exception,
+				eventArguments=arguments.eventArguments
 			}
 		);
 
@@ -329,6 +332,8 @@ component extends="coldbox.system.EventHandler" {
 
 		// Set header
 		event.setHTTPHeader( "404", "Page not found" );
+
+		// TODO: on404 ?
 
 		// Set layout and view
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )

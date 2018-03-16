@@ -91,12 +91,10 @@ component {
 		aggregatorRoutes = [
 			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator" },
 			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
-			{ pattern="/rss/:category", handler="portal", action="rss", namespace="aggregator" },
-			{ pattern="/rss", handler="portal", action="rss", namespace="aggregator" },
-			{ pattern="/feeds/:slug/rss", handler="portal", action="rss", namespace="aggregator" },
+			{ pattern="/rss/:category?", handler="portal", action="rss", namespace="aggregator" },
+			{ pattern="/feeds/:slug/rss/:category?", handler="portal", action="rss", namespace="aggregator" },
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/search", handler="portal", action="index", namespace="aggregator" }, // TODO: is this used?
 			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
@@ -111,12 +109,20 @@ component {
 				"aggregator_preFeedImport","aggregator_postFeedImport",
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
-				"aggregator_onFeedItemStatusUpdate","aggregator_onPortalIndex",
-				"aggregator_prePortalDisplay","aggregator_postPortalDisplay",
-				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
+				"aggregator_onFeedItemStatusUpdate",
+
+				"aggregator_onIndexView",
+				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
+
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
+				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
+
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
-				"aggregator_onArchives"
+
+				"aggregator_onArchivesView",
+				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
+
+				"aggregator_onRSSView"
 			])
 		};
 

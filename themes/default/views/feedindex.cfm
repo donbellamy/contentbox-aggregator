@@ -12,10 +12,7 @@
 <div id="body-header" style="#bodyHeaderStyle#">
 	<div class="container">
 		<div class="underlined-title">
-			<h1 style="#bodyHeaderH1Style#">#prc.feed.getTitle()#</h1>
-			<cfif len( prc.feed.getContent() ) >
-				<div class="text-center">#prc.feed.getContent()#</div>
-			</cfif>
+			<h1 style="#bodyHeaderH1Style#">#prc.agSettings.ag_portal_title#</h1>
 		</div>
 	</div>
 </div>
@@ -23,14 +20,26 @@
 	<div class="container">
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-				#cb.event( "aggregator_preFeedDisplay" )#
+				#cb.event( "aggregator_preIndexDisplay" )#
+				<cfif len( rc.q ) >
+					<div class="alert alert-info">
+						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear search and view all items">Clear Search</a>
+						Searching for: '#rc.q#'
+					</div>
+				</cfif>
+				<cfif len( rc.category ) >
+					<div class="alert alert-info">
+						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear category and view all items">Clear Category</a>
+						Category: '#rc.category#'
+					</div>
+				</cfif>
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
 				</cfif>
-				#cb.event( "aggregator_postFeedDisplay" )#
+				#cb.event( "aggregator_postIndexDisplay" )#
 			</div>
 			<cfif args.sidebar >
 				<div class="col-sm-3" id="blog-sidenav">

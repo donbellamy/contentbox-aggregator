@@ -8,7 +8,7 @@
 	<cfif len( cb.themeSetting( 'overrideHeaderTextColor' ) ) >
 		<cfset bodyHeaderH1Style = bodyHeaderH1Style & 'color: ' & cb.themeSetting( 'overrideHeaderTextColor' ) & ';' />
 	</cfif>
-</cfif>		
+</cfif>
 <div id="body-header" style="#bodyHeaderStyle#">
 	<div class="container">
 		<div class="underlined-title">
@@ -17,22 +17,29 @@
 	</div>
 </div>
 <section id="body-main">
-	<div class="container">	
+	<div class="container">
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-				#cb.event( "aggregator_prePortalDisplay" )#
+				#cb.event( "aggregator_preArchivesDisplay" )#
+				<cfif val( rc.year ) >
+					<div class="alert alert-info">
+						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear archives and view all items">Clear Archives</a>
+						Year: '#rc.year#'
+						<cfif val( rc.month ) >- Month: '#rc.month#'</cfif>
+						<cfif val( rc.day ) >- Day: '#rc.day#'</cfif>
+					</div>
+				</cfif>
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
 				</cfif>
-				#cb.event( "aggregator_postPortalDisplay" )#
+				#cb.event( "aggregator_postArchivesDisplay" )#
 			</div>
 			<cfif args.sidebar >
 				<div class="col-sm-3" id="blog-sidenav">
 					#renderView( view="../themes/default/views/_aggregator_sidebar", args=args )#
-					<!---#cb.quickView( view="_aggregator_sidebar", args=args )#--->
 				</div>
 			</cfif>
 		</div>
