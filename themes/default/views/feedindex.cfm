@@ -24,13 +24,15 @@
 				<cfif len( rc.q ) >
 					<div class="alert alert-info">
 						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear search and view all items">Clear Search</a>
-						Searching for: '#rc.q#'
+						<strong>#reReplace( rc.q,"(^[a-z])","\U\1","ALL")#</strong>
+						<br/><small>Search Results</small>
 					</div>
 				</cfif>
 				<cfif len( rc.category ) >
 					<div class="alert alert-info">
 						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear category and view all items">Clear Category</a>
-						Category: '#rc.category#'
+						<strong>#prc.category.getCategory()#</strong>
+						<br/><small>Category Results</small>
 					</div>
 				</cfif>
 				#ag.quickFeedItems()#

@@ -33,6 +33,33 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Context Methods *********************************************/
 
+	boolean function isIndexView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.index" );
+	}
+
+	boolean function isArchivesView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.archives" );
+	}
+
+	boolean function isFeedsView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.feeds" );
+	}
+
+	boolean function isFeedView() {
+		var event = cb.getRequestContext();
+		return (
+			// TODO: export?
+			// If in static export, then mark as yes
+			//event.getPrivateValue( "staticExport", false )
+			//OR
+			// In executing view
+			event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.feed"
+		);
+	}
+
 	array function getCurrentFeeds() {
 		var prc = cb.getPrivateRequestCollection();
 		if ( structKeyExists( prc, "feeds" ) ) {
@@ -58,6 +85,8 @@ component accessors="true" singleton threadSafe {
 			);
 		}
 	}
+
+	/************************************** SEO Metadata *********************************************/
 
 	/************************************** Link Methods *********************************************/
 
