@@ -9,11 +9,11 @@ component persistent="true"
 	discriminatorValue="FeedItem" {
 
 	/* *********************************************************************
-	**							PROPERTIES									
+	**							PROPERTIES
 	********************************************************************* */
 
-	property name="excerpt" 
-		notnull="false" 
+	property name="excerpt"
+		notnull="false"
 		ormtype="text";
 
 	property name="uniqueId"
@@ -43,14 +43,14 @@ component persistent="true"
 		ormtype="text";
 
 	/* *********************************************************************
-	**							NON PERSISTED PROPERTIES					
+	**							NON PERSISTED PROPERTIES
 	********************************************************************* */
 
 	property name="renderedExcerpt"
 		persistent="false";
 
 	/* *********************************************************************
-	**							CONSTRAINTS									
+	**							CONSTRAINTS
 	********************************************************************* */
 
 	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
@@ -61,6 +61,7 @@ component persistent="true"
 
 	FeedItem function init() {
 		super.init();
+		allowComments = false;
 		categories = [];
 		renderedContent = "";
 		renderedExcerpt = "";
@@ -87,9 +88,9 @@ component persistent="true"
 				renderedExcerpt = b.toString();
 			}
 		}
-		
+
 		return renderedExcerpt;
-		
+
 	}
 
 	Feed function getFeed() {

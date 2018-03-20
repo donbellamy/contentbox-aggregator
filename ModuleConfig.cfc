@@ -48,14 +48,16 @@ component {
 			"ag_display_read_more_show" = "true",
 			"ag_display_read_more_text" = "Read more...",
 
-			"ag_display_paging_max_rows" = "10",
-
-			"ag_portal_enable" = "true",
-			"ag_portal_title" = "RSS Aggregator News",
 			"ag_portal_entrypoint" = "news",
-			"ag_portal_hits_track" = "true",
-			"ag_portal_hits_ignore_bots" = "false",
-			"ag_portal_hits_bot_regex" = "Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby", // Get setting from cb?
+			"ag_portal_title" = "RSS Aggregator News",
+			"ag_portal_description" = "",
+			"ag_portal_keywords" = "",
+			"ag_portal_feeds_title" = "News Feeds",
+
+			"ag_portal_paging_max_rows" = "10",
+			"ag_portal_feeds_paging_max_rows" = "10",
+			"ag_portal_feed_paging_max_rows" = "10",
+
 			"ag_portal_cache_enable" = "true",
 			"ag_portal_cache_name" = "Template",
 			"ag_portal_cache_timeout" = "60",

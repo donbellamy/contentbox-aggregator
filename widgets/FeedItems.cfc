@@ -46,7 +46,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	) {
 
 		// Sort order
-		switch( arguments.sortOrder ) {
+		switch ( arguments.sortOrder ) {
 			case "Most Popular": {
 				arguments.sortOrder = "numberOfHits DESC";
 				break;

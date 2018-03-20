@@ -54,11 +54,11 @@ component extends="baseHandler" {
 		// Import scheduled task
 		if ( len( prc.agSettings.ag_general_import_interval ) ) {
 			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=" & prc.agSettings.ag_general_secret_key;
-			cfschedule( 
+			cfschedule(
 				action="update",
 				task="aggregator-import",
 				url="#taskUrl#",
-				startDate=prc.agSettings.ag_general_import_start_date, 
+				startDate=prc.agSettings.ag_general_import_start_date,
 				startTime=prc.agSettings.ag_general_import_start_time,
 				interval=prc.agSettings.ag_general_import_interval
 			);

@@ -15,7 +15,7 @@
 	</thead>
 	<tbody>
 		<cfloop array="#prc.feeds#" index="feed">
-			<tr data-contentID="#feed.getContentID()#" 
+			<tr data-contentID="#feed.getContentID()#"
 				<cfif feed.isExpired() >
 					class="danger"
 				<cfelseif feed.isPublishedInFuture() >
@@ -63,7 +63,7 @@
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feed.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feed.getContentID()#" class="hide">
 						<i class="fa fa-rss"></i>
-						Last imported: 
+						Last imported:
 						<cfif isDate( feed.getLastImportedDate() ) >
 							#feed.getDisplayLastImportedDate()#
 						<cfelse>
@@ -71,11 +71,11 @@
 						</cfif>
 						<br />
 						<i class="fa fa-user"></i>
-						Created by: <a href="mailto:#feed.getCreatorEmail()#">#feed.getCreatorName()#</a> on 
+						Created by: <a href="mailto:#feed.getCreatorEmail()#">#feed.getCreatorName()#</a> on
 						#feed.getDisplayCreatedDate()#
 						<br />
-						<i class="fa fa-calendar"></i> 
-						Last edit by: <a href="mailto:#feed.getAuthorEmail()#">#feed.getAuthorName()#</a> on 
+						<i class="fa fa-calendar"></i>
+						Last edit by: <a href="mailto:#feed.getAuthorEmail()#">#feed.getAuthorName()#</a> on
 						#feed.getActiveContent().getDisplayCreatedDate()#
 						<br />
 					</div>
@@ -95,11 +95,7 @@
 								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
 								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
-							<cfif prc.agSettings.ag_portal_enable >
-								<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
-							<cfelse>
-								<li><a href="#feed.getFeedUrl()#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
-							</cfif>
+							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
 						</ul>
 					</div>
 				</td>

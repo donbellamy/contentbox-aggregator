@@ -16,11 +16,7 @@
 			<li><a href="javascript:importFeed()"><i class="fa fa-rss"></i> Quick Import</a></li>
 		</cfif>
 		<cfif prc.feed.isLoaded() >
-			<cfif prc.agSettings.ag_portal_enable >
-				<li><a href="#prc.agHelper.linkFeed( prc.feed )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
-			<cfelse>
-				<li><a href="#prc.feed.getFeedUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
-			</cfif>
+			<li><a href="#prc.agHelper.linkFeed( prc.feed )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 		</cfif>
 	</ul>
 </div>
@@ -134,10 +130,8 @@
 					<div class="form-group">
 						<label for="slug" class="control-label">
 							Permalink:
-							<cfif prc.agSettings.ag_portal_enable >
-								<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-								<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/feeds/</small>
-							</cfif>
+							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
+							<small>#prc.agHelper.linkFeeds()#/</small>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>

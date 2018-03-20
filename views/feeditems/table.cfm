@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 		<cfloop array="#prc.feedItems#" index="feedItem">
-			<tr data-contentID="#feedItem.getContentID()#" 
+			<tr data-contentID="#feedItem.getContentID()#"
 				<cfif feedItem.isExpired() >
 					class="danger"
 				<cfelseif feedItem.isPublishedInFuture() >
@@ -53,11 +53,11 @@
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feedItem.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feedItem.getContentID()#" class="hide">
 						<i class="fa fa-user"></i>
-						Imported by: <a href="mailto:#feedItem.getCreatorEmail()#">#feedItem.getCreatorName()#</a> on 
+						Imported by: <a href="mailto:#feedItem.getCreatorEmail()#">#feedItem.getCreatorName()#</a> on
 						#feedItem.getDisplayCreatedDate()#
 						<br />
 						<i class="fa fa-calendar"></i>
-						Last edit by: <a href="mailto:#feedItem.getAuthorEmail()#">#feedItem.getAuthorName()#</a> on 
+						Last edit by: <a href="mailto:#feedItem.getAuthorEmail()#">#feedItem.getAuthorName()#</a> on
 						#feedItem.getActiveContent().getDisplayCreatedDate()#
 						<br />
 					</div>
@@ -76,11 +76,7 @@
 								<li><a href="#event.buildLink(prc.xehEntryHistory)#/contentID/#entry.getContentID()#"><i class="fa fa-clock-o fa-lg"></i> History</a></li>--->
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
-							<cfif prc.agSettings.ag_portal_enable >
-								<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
-							<cfelse>
-								<li><a href="#feedItem.getItemUrl()#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
-							</cfif>
+							<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
 						</ul>
 					</div>
 				</td>

@@ -117,6 +117,7 @@ component persistent="true"
 
 	Feed function init() {
 		super.init();
+		allowComments = false;
 		categories = [];
 		renderedContent = "";
 		createdDate = now();

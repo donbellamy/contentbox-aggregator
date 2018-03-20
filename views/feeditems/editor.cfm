@@ -12,18 +12,14 @@
 		</cfif>
 		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
-		<cfif prc.agSettings.ag_portal_enable >
-			<li><a href="#prc.agHelper.linkFeedItem( prc.feedItem )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
-		<cfelse>
-			<li><a href="#prc.feedItem.getItemUrl()#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
-		</cfif>
+		<li><a href="#prc.agHelper.linkFeedItem( prc.feedItem )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 	</ul>
 </div>
-#html.startForm( 
-	action=prc.xehFeedItemSave, 
-	name="feedItemForm", 
+#html.startForm(
+	action=prc.xehFeedItemSave,
+	name="feedItemForm",
 	novalidate="novalidate",
-	class="form-vertical" 
+	class="form-vertical"
 )#
 <div class="row">
 	<div class="col-md-8" id="main-content-slot">
@@ -63,19 +59,17 @@
 						<label for="slug" class="control-label">
 							Permalink:
 							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<cfif prc.agSettings.ag_portal_enable >
-								<small>#prc.cbHelper.linkHome()##prc.agSettings.ag_portal_entrypoint#/</small>
-							</cfif>
+							<small>#prc.agHelper.linkPortal()#/</small>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>
 							<div class="input-group">
 								#html.textfield(
-									name="slug", 
-									bind=prc.feedItem, 
+									name="slug",
+									bind=prc.feedItem,
 									maxlength="200",
-									class="form-control", 
-									title="The URL permalink for this feed item", 
+									class="form-control",
+									title="The URL permalink for this feed item",
 									disabled="#prc.feedItem.isLoaded() && prc.feedItem.getIsPublished() ? 'true' : 'false'#"
 								)#
 								<a title="Lock/Unlock Permalink" class="input-group-addon" href="javascript:void(0);" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
@@ -87,18 +81,18 @@
 					<div class="form-group">
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feedItem } )#
 						#html.textarea(
-							name="content", 
-							bind=prc.feedItem, 
-							rows="25", 
+							name="content",
+							bind=prc.feedItem,
+							rows="25",
 							class="form-control"
 						)#
 					</div>
 					<div class="form-group">
 						#html.textarea(
-							label="Excerpt:", 
-							name="excerpt", 
-							bind=prc.feedItem, 
-							rows="10", 
+							label="Excerpt:",
+							name="excerpt",
+							bind=prc.feedItem,
+							rows="10",
 							class="form-control"
 						)#
 					</div>

@@ -41,7 +41,7 @@
 										)#
 										<div class="controls">
 											<small>
-												How frequently the feeds should be checked for updates and imported.  
+												How frequently the feeds should be checked for updates and imported.
 												Select "Never" if you plan to manually import feeds.
 											</small>
 											#html.select(
@@ -65,9 +65,9 @@
 											<div class="col-md-6">
 												<div class="input-group">
 													#html.inputField(
-														size="9", 
+														size="9",
 														name="ag_general_import_start_date",
-														value=prc.agSettings.ag_general_import_start_date, 
+														value=prc.agSettings.ag_general_import_start_date,
 														class="form-control datepicker",
 														placeholder="Immediately"
 													)#
@@ -149,11 +149,11 @@
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that contain any of these words/phrases in the title or body will be imported.  
+												Only feed items that contain any of these words/phrases in the title or body will be imported.
 												Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
 											</small>
 											#html.textArea(
-												name="ag_general_match_any_filter", 
+												name="ag_general_match_any_filter",
 												value=prc.agSettings.ag_general_match_any_filter,
 												rows="3",
 												class="form-control",
@@ -170,11 +170,11 @@
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that contain all of these words/phrases in the title or body will be imported.  
+												Only feed items that contain all of these words/phrases in the title or body will be imported.
 												Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
 											</small>
 											#html.textArea(
-												name="ag_general_match_all_filter", 
+												name="ag_general_match_all_filter",
 												value=prc.agSettings.ag_general_match_all_filter,
 												rows="3",
 												class="form-control",
@@ -191,12 +191,12 @@
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that do not contain any of these words/phrases in the title or body will be imported.  
+												Only feed items that do not contain any of these words/phrases in the title or body will be imported.
 												Existing feed items that contain any of these words/phrases in the title or body will be deleted.
 											</small>
 											#html.textArea(
-												name="ag_general_match_none_filter", 
-												value=prc.agSettings.ag_general_match_none_filter, 
+												name="ag_general_match_none_filter",
+												value=prc.agSettings.ag_general_match_none_filter,
 												rows="3",
 												class="form-control",
 												placeholder="Comma delimited list of words or phrases",
@@ -281,9 +281,9 @@
 												data={ toggle: 'toggle', match: 'ag_general_image_import_enable' },
 												checked=prc.agSettings.ag_general_image_import_enable
 											)#
-											#html.hiddenField( 
-												name="ag_general_image_import_enable", 
-												value=prc.agSettings.ag_general_image_import_enable 
+											#html.hiddenField(
+												name="ag_general_image_import_enable",
+												value=prc.agSettings.ag_general_image_import_enable
 											)#
 										</div>
 									</div>
@@ -293,7 +293,7 @@
 											field="ag_general_image_minimum_width",
 											content="Minimum Width:"
 										)#
-										
+
 										<div class="controls">
 											<small>Images smaller than the minimum width below will not be imported.</small>
 											#html.inputField(
@@ -312,7 +312,7 @@
 											field="ag_general_image_minimum_height",
 											content="Minimum Height:"
 										)#
-										
+
 										<div class="controls">
 											<small>Images smaller than the minimum height below will not be imported.</small>
 											#html.inputField(
@@ -391,9 +391,9 @@
 												data={ toggle: 'toggle', match: 'ag_display_link_new_window' },
 												checked=prc.agSettings.ag_display_link_new_window
 											)#
-											#html.hiddenField( 
-												name="ag_display_link_new_window", 
-												value=prc.agSettings.ag_display_link_new_window 
+											#html.hiddenField(
+												name="ag_display_link_new_window",
+												value=prc.agSettings.ag_display_link_new_window
 											)#
 										</div>
 									</div>
@@ -410,7 +410,7 @@
 												data={ toggle: 'toggle', match: 'ag_display_link_as_nofollow' },
 												checked=prc.agSettings.ag_display_link_as_nofollow
 											)#
-											#html.hiddenField( 
+											#html.hiddenField(
 												name="ag_display_link_as_nofollow",
 												value=prc.agSettings.ag_display_link_as_nofollow
 											)#
@@ -429,9 +429,9 @@
 												data={ toggle: 'toggle', match: 'ag_display_source_show' },
 												checked=prc.agSettings.ag_display_source_show
 											)#
-											#html.hiddenField( 
-												name="ag_display_source_show", 
-												value=prc.agSettings.ag_display_source_show 
+											#html.hiddenField(
+												name="ag_display_source_show",
+												value=prc.agSettings.ag_display_source_show
 											)#
 										</div>
 									</div>
@@ -448,9 +448,9 @@
 												data={ toggle: 'toggle', match: 'ag_display_author_show' },
 												checked=prc.agSettings.ag_display_author_show
 											)#
-											#html.hiddenField( 
-												name="ag_display_author_show", 
-												value=prc.agSettings.ag_display_author_show 
+											#html.hiddenField(
+												name="ag_display_author_show",
+												value=prc.agSettings.ag_display_author_show
 											)#
 										</div>
 									</div>
@@ -470,9 +470,9 @@
 												data={ toggle: 'toggle', match: 'ag_display_excerpt_show' },
 												checked=prc.agSettings.ag_display_excerpt_show
 											)#
-											#html.hiddenField( 
-												name="ag_display_excerpt_show", 
-												value=prc.agSettings.ag_display_excerpt_show 
+											#html.hiddenField(
+												name="ag_display_excerpt_show",
+												value=prc.agSettings.ag_display_excerpt_show
 											)#
 										</div>
 									</div>
@@ -523,9 +523,9 @@
 												data={ toggle: 'toggle', match: 'ag_display_read_more_show' },
 												checked=prc.agSettings.ag_display_read_more_show
 											)#
-											#html.hiddenField( 
-												name="ag_display_read_more_show", 
-												value=prc.agSettings.ag_display_read_more_show 
+											#html.hiddenField(
+												name="ag_display_read_more_show",
+												value=prc.agSettings.ag_display_read_more_show
 											)#
 										</div>
 									</div>
@@ -546,29 +546,6 @@
 										</div>
 									</div>
 								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
-									<div class="form-group">
-										<label class="control-label" for="ag_display_paging_max_rows">
-											Paging max rows:
-											<span class="badge badge-info" id="ag_display_paging_max_rows_label">#prc.agSettings.ag_display_paging_max_rows#</span>
-										</label>
-										<div class="controls">
-											<strong class="margin10">10</strong>
-											<input 	type="text"
-												id="ag_display_paging_max_rows"
-												name="ag_display_paging_max_rows"
-												class="slider"
-												data-slider-value="#prc.agSettings.ag_display_paging_max_rows#"
-												data-provide="slider"
-												data-slider-min="10"
-												data-slider-max="50"
-												data-slider-step="10"
-												data-slider-tooltip="hide" />
-											<strong class="margin10">50</strong>
-										</div>
-									</div>
-								</fieldset>
 							</div>
 							<div class="tab-pane" id="portal_options">
 								<fieldset>
@@ -576,19 +553,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_enable",
-											content="Enable portal:"
+											field="ag_portal_entrypoint",
+											content="Portal entry point:"
 										)#
-										<div><small>If enabled, the public portal will be enabled.  All feed items will point to their slugs rather than their permalinks and items stats will work if enabled.</small></div>
 										<div class="controls">
-											#html.checkbox(
-												name="ag_portal_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_enable' },
-												checked=prc.agSettings.ag_portal_enable
-											)#
-											#html.hiddenField( 
-												name="ag_portal_enable", 
-												value=prc.agSettings.ag_portal_enable 
+											<small>Choose the entry point in the URL to trigger the portal engine. The usual default entry point pattern is <strong>news</strong>. Do not use symbols or slashes (/ \)</small><br/>
+											<code>#prc.cbHelper.linkHome()#</code>
+											#html.textField(
+												name="ag_portal_entrypoint",
+												value=prc.agSettings.ag_portal_entrypoint,
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -611,15 +586,46 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_entrypoint",
-											content="Portal entry point:" 
+											field="ag_portal_description",
+											content="Portal description:"
 										)#
 										<div class="controls">
-											<small>Choose the entry point in the URL to trigger the portal engine. The usual default entry point pattern is <strong>news</strong>. Do not use symbols or slashes (/ \)</small><br/>
-											<code>#prc.cbHelper.linkHome()#</code> 
+											<small>The default description used in the meta tags of the portal.</small><br/>
+											#html.textarea(
+												name="ag_portal_description",
+												value=prc.agSettings.ag_portal_description,
+												rows=3,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_keywords",
+											content="Portal keywords:"
+										)#
+										<div class="controls">
+											<small>The default keywords used in the meta tags of the portal.</small><br/>
+											#html.textarea(
+												name="ag_portal_keywords",
+												value=prc.agSettings.ag_portal_keywords,
+												rows=3,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_feeds_title",
+											content="Feeds title:"
+										)#
+										<div class="controls">
+											<small>The title used for the feeds page.</small>
 											#html.textField(
-												name="ag_portal_entrypoint", 
-												value=prc.agSettings.ag_portal_entrypoint, 
+												name="ag_portal_feeds_title",
+												value=prc.agSettings.ag_portal_feeds_title,
 												class="form-control",
 												maxlength="100"
 											)#
@@ -627,60 +633,68 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-bar-chart-o fa-lg"></i> Item Stats Tracking</legend>
+									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
 									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_hits_track",
-											content="Track item hits:"
-										)#
-										<div><small>If enabled, hit counts will be tracked for feeds and feed items.</small></div>
+										<label class="control-label" for="ag_portal_paging_max_rows">
+											Max home page items:
+											<span class="badge badge-info" id="ag_portal_paging_max_rows_label">#prc.agSettings.ag_portal_paging_max_rows#</span>
+										</label>
 										<div class="controls">
-											#html.checkbox(
-												name="ag_portal_hits_track_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_hits_track' },
-												checked=prc.agSettings.ag_portal_hits_track
-											)#
-											#html.hiddenField( 
-												name="ag_portal_hits_track", 
-												value=prc.agSettings.ag_portal_hits_track 
-											)#
+											<small>Here is the description...</small><br />
+											<strong class="margin10">10</strong>
+											<input 	type="text"
+												id="ag_portal_paging_max_rows"
+												name="ag_portal_paging_max_rows"
+												class="slider"
+												data-slider-value="#prc.agSettings.ag_portal_paging_max_rows#"
+												data-provide="slider"
+												data-slider-min="10"
+												data-slider-max="50"
+												data-slider-step="10"
+												data-slider-tooltip="hide" />
+											<strong class="margin10">50</strong>
 										</div>
 									</div>
 									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_hits_ignore_bots",
-											content="Ignore bot hits:"
-										)#
-										<div><small>If enabled, the bot regex matching is ignored and hit tracking for bots is allowed.</small></div>
+										<label class="control-label" for="ag_portal_feeds_paging_max_rows">
+											Max feeds page items:
+											<span class="badge badge-info" id="ag_portal_feeds_paging_max_rows_label">#prc.agSettings.ag_portal_feeds_paging_max_rows#</span>
+										</label>
 										<div class="controls">
-											#html.checkbox(
-												name="ag_portal_hits_ignore_bots_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_hits_ignore_bots' },
-												checked=prc.agSettings.ag_portal_hits_ignore_bots
-											)#
-											#html.hiddenField( 
-												name="ag_portal_hits_ignore_bots", 
-												value=prc.agSettings.ag_portal_hits_ignore_bots 
-											)#
+											<small>Here is the description...</small><br />
+											<strong class="margin10">10</strong>
+											<input 	type="text"
+												id="ag_portal_feeds_paging_max_rows"
+												name="ag_portal_feeds_paging_max_rows"
+												class="slider"
+												data-slider-value="#prc.agSettings.ag_portal_feeds_paging_max_rows#"
+												data-provide="slider"
+												data-slider-min="10"
+												data-slider-max="50"
+												data-slider-step="10"
+												data-slider-tooltip="hide" />
+											<strong class="margin10">50</strong>
 										</div>
 									</div>
 									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_hits_bot_regex",
-											content="Bot regex matches:"
-										)#
+										<label class="control-label" for="ag_portal_feed_paging_max_rows">
+											Max feed page items:
+											<span class="badge badge-info" id="ag_portal_feed_paging_max_rows_label">#prc.agSettings.ag_portal_feed_paging_max_rows#</span>
+										</label>
 										<div class="controls">
-											<small>A carriage return list of regular expressions to match against browser user agents. If it matches a bot, the hit count is ignored.</small>
-											#html.textArea(
-												name="ag_portal_hits_bot_regex", 
-												value=prc.agSettings.ag_portal_hits_bot_regex, 
-												rows="3",
-												class="form-control",
-												maxlength="255"
-											)#
+											<small>Here is the description...</small><br />
+											<strong class="margin10">10</strong>
+											<input 	type="text"
+												id="ag_portal_feed_paging_max_rows"
+												name="ag_portal_feed_paging_max_rows"
+												class="slider"
+												data-slider-value="#prc.agSettings.ag_portal_feed_paging_max_rows#"
+												data-provide="slider"
+												data-slider-min="10"
+												data-slider-max="50"
+												data-slider-step="10"
+												data-slider-tooltip="hide" />
+											<strong class="margin10">50</strong>
 										</div>
 									</div>
 								</fieldset>
@@ -782,9 +796,9 @@
 												data={ toggle: 'toggle', match: 'ag_rss_enable' },
 												checked=prc.agSettings.ag_rss_enable
 											)#
-											#html.hiddenField( 
-												name="ag_rss_enable", 
-												value=prc.agSettings.ag_rss_enable 
+											#html.hiddenField(
+												name="ag_rss_enable",
+												value=prc.agSettings.ag_rss_enable
 											)#
 										</div>
 									</div>
@@ -809,7 +823,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_description",
-											content="Feed description:" 
+											content="Feed description:"
 										)#
 										<div class="controls">
 											<small>The description of the rss feed</small><br/>
@@ -826,7 +840,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_generator",
-											content="Feed generator:" 
+											content="Feed generator:"
 										)#
 										<div class="controls">
 											<small>The generator of the rss feed</small><br/>
@@ -843,7 +857,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_copyright",
-											content="Feed copyright:" 
+											content="Feed copyright:"
 										)#
 										<div class="controls">
 											<small>The copyright of the rss feed</small><br/>
@@ -860,7 +874,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_webmaster",
-											content="Feed webmaster:" 
+											content="Feed webmaster:"
 										)#
 										<div class="controls">
 											<small>The rss feed webmaster. Ex: myemail@mysite.com (Site Administrator)</small><br/>

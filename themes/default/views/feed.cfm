@@ -24,6 +24,13 @@
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event( "aggregator_preFeedDisplay" )#
+				<cfif len( rc.author ) >
+					<div class="alert alert-info">
+						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkFeed( prc.feed )#" title="Clear author and view all items">Clear Author</a>
+						<strong>#rc.author#</strong>
+						<br/><small>Author Results</small>
+					</div>
+				</cfif>
 				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
 					<div class="contentBar">

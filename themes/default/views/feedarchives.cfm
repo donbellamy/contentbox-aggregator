@@ -24,9 +24,8 @@
 				<cfif val( rc.year ) >
 					<div class="alert alert-info">
 						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkPortal()#" title="Clear archives and view all items">Clear Archives</a>
-						Year: '#rc.year#'
-						<cfif val( rc.month ) >- Month: '#rc.month#'</cfif>
-						<cfif val( rc.day ) >- Day: '#rc.day#'</cfif>
+						<strong>#prc.formattedDate#</strong>
+						<br/><small>Archives</small>
 					</div>
 				</cfif>
 				#ag.quickFeedItems()#

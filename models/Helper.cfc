@@ -142,7 +142,8 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Quick HTML *********************************************/
 
-	string function quickPaging( numeric maxRows=setting("ag_display_paging_max_rows") ) {
+	// TODO: put settings in views
+	string function quickPaging( numeric maxRows=setting("ag_portal_paging_max_rows") ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(

@@ -16,18 +16,12 @@ component extends="coldbox.system.EventHandler" {
 
 		// Maintenance mode?
 		if ( prc.cbSettings.cb_site_maintenance ) {
-			if( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
+			if ( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
 				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );
 			} else {
 				event.overrideEvent( "contentbox-ui:page.maintenance" );
 				return;
 			}
-		}
-
-		// Portal enabled?
-		if ( !prc.agSettings.ag_portal_enable && event.getCurrentEvent() NEQ "contentbox-rss-aggregator:portal.import" ) {
-			notFound( argumentCollection=arguments );
-			return;
 		}
 
 		// If UI export is disabled, default to contentbox
@@ -48,9 +42,9 @@ component extends="coldbox.system.EventHandler" {
 		var title = " | " & cbHelper.siteName();
 
 		// Page check
-		if( !isNumeric( rc.page ) ) rc.page = 1;
+		if ( !isNumeric( rc.page ) ) rc.page = 1;
 		if ( rc.page GT 1 ) {
-			title = " - " & "Page " & rc.page & title; // TODO: Setting replaceNoCase( setting, "{{Page}}", rc.page );
+			title = " - " & "Page " & rc.page & title;
 		}
 
 		// XSS Cleanup
@@ -59,13 +53,13 @@ component extends="coldbox.system.EventHandler" {
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_paging_max_rows );
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
 		// Search
 		if ( len( trim( rc.q ) ) ) {
 			prc.pagingLink &= "&q=" & rc.q;
-			title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & " Results" & title; // TODO: Setting replaceNoCase( setting, "{{Query}}", uCaseFirstLetter( rc.q ) );
+			title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 		}
 
 		// Category
@@ -73,7 +67,7 @@ component extends="coldbox.system.EventHandler" {
 			prc.category = categoryService.findBySlug( rc.category );
 			if ( !isNull( prc.category ) ) {
 				prc.pagingLink = helper.linkPortal() & "/category/#rc.category#/?page=@page@";
-				title = " - " & prc.category.getCategory() & " News" & title; // TODO: Setting replaceNoCase( setting, "{{Category}}", prc.category.getCategory() );
+				title = " - " & prc.category.getCategory() & title;
 			} else {
 				notFound( argumentCollection=arguments );
 				return;
@@ -84,14 +78,14 @@ component extends="coldbox.system.EventHandler" {
 		var results = feedItemService.getPublishedFeedItems(
 			searchTerm=rc.q,
 			category=rc.category,
-			max=prc.agSettings.ag_display_paging_max_rows,
+			max=prc.agSettings.ag_portal_paging_max_rows,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
 		// Announce event
-		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemscount=prc.itemCount } );
+		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
 
 		// Set the page title
 		title = prc.agSettings.ag_portal_title & title;
@@ -107,25 +101,40 @@ component extends="coldbox.system.EventHandler" {
 
 	function archives( event, rc, prc ) {
 
-		// TODO: We'll never use day, so lets ge rid of it?
 		// Set params
 		event.paramValue( "page", 1 )
 			.paramValue( "year", 0 )
 			.paramValue( "month", 0 )
 			.paramValue( "day", 0 );
 
-		// Make sure we are passing in a valid year - Check month as well?
-		if ( val( rc.year ) ) {
+		// Validate the passed date
+		var validDate = true;
+		try {
+			var archiveDate = createDate( rc.year );
+			if ( val( rc.month ) && val( rc.day )  ) {
+				archiveDate = createDate( rc.year, rc.month, rc.day );
+			} else if ( val( rc.month ) ) {
+				archiveDate = createDate( rc.year, rc.month );
+			}
+		} catch ( any e ) {
+			validDate = false;
+		}
+
+		// Make sure we are passing in a valid date
+		if ( validDate ) {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
 
 			// Page check
-			if( !isNumeric( rc.page ) ) rc.page = 1;
+			if ( !isNumeric( rc.page ) ) rc.page = 1;
+			if ( rc.page GT 1 ) {
+				title = " - " & "Page " & rc.page & title;
+			}
 
 			// Paging
 			prc.oPaging = getModel("paging@cb");
-			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_paging_max_rows );
 			prc.pagingLink = helper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
 
 			// Grab the results
@@ -133,16 +142,23 @@ component extends="coldbox.system.EventHandler" {
 				year=rc.year,
 				month=rc.month,
 				day=rc.day,
-				max=prc.agSettings.ag_display_paging_max_rows,
+				max=prc.agSettings.ag_portal_paging_max_rows,
 				offset=prc.pagingBoundaries.startRow - 1
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
 
 			// Announce event
-			announceInterception( "aggregator_onArchivesView", { feedItems=prc.feedItems, feedItemscount=prc.itemCount } );
+			announceInterception( "aggregator_onArchivesView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
 
-			// Set the page title
+			// Set the formatted date and page title
+			prc.formattedDate = dateFormat( archiveDate, "yyyy" );
+			if ( val( rc.month ) && val( rc.day ) ) {
+				prc.formattedDate = dateFormat( archiveDate, "mmmm d, yyyy" );
+			} else if ( val( rc.month ) ) {
+				prc.formattedDate = dateFormat( archiveDate, "mmmm, yyyy" );
+			}
+			title = " - " & prc.formattedDate & title;
 			title = prc.agSettings.ag_portal_title & title;
 			cbHelper.setMetaTitle( title );
 
@@ -195,17 +211,23 @@ component extends="coldbox.system.EventHandler" {
 		// Set params
 		event.paramValue( "page", 1 );
 
+		// Set vars
+		var title = " | " & cbHelper.siteName();
+
 		// Page check
-		if( !isNumeric( rc.page ) ) rc.page = 1;
+		if ( !isNumeric( rc.page ) ) rc.page = 1;
+		if ( rc.page GT 1 ) {
+			title = " - " & "Page " & rc.page & title;
+		}
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_feeds_paging_max_rows );
 		prc.pagingLink = helper.linkFeeds() & "?page=@page@";
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
-			max=prc.agSettings.ag_display_paging_max_rows,
+			max=prc.agSettings.ag_portal_feeds_paging_max_rows,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feeds = results.feeds;
@@ -214,9 +236,92 @@ component extends="coldbox.system.EventHandler" {
 		// Announce event
 		announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
 
+		// Set the page title
+		title = prc.agSettings.ag_portal_feeds_title & title;
+		cbHelper.setMetaTitle( title );
+
+		// TODO: Set keywords and description ?
+
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeds" );
+
+	}
+
+	function feed( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( "slug", "" )
+			.paramValue( "page", 1 )
+			.paramValue( "author", "" );
+
+		// Check if author is viewing
+		var showUnpublished = false;
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+			var showUnpublished = true;
+		}
+
+		// Get the feed
+		prc.feed = feedService.findBySlug( rc.slug, showUnpublished );
+
+		// If loaded, else not found
+		if ( prc.feed.isLoaded() ) {
+
+			// Set vars
+			var title = " | " & cbHelper.siteName();
+
+			// Page numeric check
+			if ( !isNumeric( rc.page ) ) rc.page = 1;
+			if ( rc.page GT 1 ) {
+				title = " - " & "Page " & rc.page & title;
+			}
+
+			// XSS Cleanup
+			rc.author = antiSamy.clean( rc.author );
+
+			// Paging
+			prc.oPaging = getModel("paging@cb");
+			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_feed_paging_max_rows );
+			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
+
+			// Author filter
+			if ( len( trim( rc.author ) ) ) {
+				prc.pagingLink &= "&author=" & rc.author;
+				title = " - " & rc.author & title;
+			}
+
+			// Grab the feed items
+			var results = feedItemService.getPublishedFeedItems(
+				feed=prc.feed.getContentID(),
+				author=rc.author,
+				max=prc.agSettings.ag_portal_feed_paging_max_rows,
+				offset=prc.pagingBoundaries.startRow - 1
+			);
+			prc.feedItems = results.feedItems;
+			prc.itemCount = results.count;
+
+			// Record hit
+			feedService.updateHits( prc.feed.getContentID() );
+
+			// Announce event
+			announceInterception( "aggregator_onFeedView", { feed=prc.feed } );
+
+			// Set the page title
+			title = prc.feed.getTitle() & title;
+			cbHelper.setMetaTitle( title );
+
+			event.setLayout( "../themes/default/layouts/aggregator" )
+				.setView( "../themes/default/views/feed" );
+
+		} else {
+
+			// Announce event
+			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } );
+
+			// Not found
+			notFound( argumentCollection=arguments );
+
+		}
 
 	}
 
@@ -227,7 +332,7 @@ component extends="coldbox.system.EventHandler" {
 
 		// Check if author is viewing
 		var showUnpublished = false;
-		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
 			var showUnpublished = true;
 		}
 
@@ -250,72 +355,6 @@ component extends="coldbox.system.EventHandler" {
 
 			// Announce event
 			announceInterception( "aggregator_onFeedItemNotFound", { slug=rc.slug } );
-
-			// Not found
-			notFound( argumentCollection=arguments );
-
-		}
-
-	}
-
-	function feed( event, rc, prc ) {
-
-		// Set params
-		event.paramValue( "slug", "" )
-			.paramValue( "page", 1 )
-			.paramValue( "author", "" );
-
-		// Check if author is viewing
-		var showUnpublished = false;
-		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
-			var showUnpublished = true;
-		}
-
-		// Get the feed
-		prc.feed = feedService.findBySlug( rc.slug, showUnpublished );
-
-		// If loaded, else not found
-		if ( prc.feed.isLoaded() ) {
-
-			// Page numeric check
-			if( !isNumeric( rc.page ) ) rc.page = 1;
-
-			// XSS Cleanup
-			rc.author = antiSamy.clean( rc.author );
-
-			// Paging
-			prc.oPaging = getModel("paging@cb");
-			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_display_paging_max_rows );
-			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
-
-			// Author filter
-			if ( len( trim( rc.author ) ) ) {
-				prc.pagingLink &= "&author=" & rc.author;
-			}
-
-			// Grab the feed items
-			var results = feedItemService.getPublishedFeedItems(
-				feed=prc.feed.getContentID(),
-				author=rc.author,
-				max=prc.agSettings.ag_display_paging_max_rows,
-				offset=prc.pagingBoundaries.startRow - 1
-			);
-			prc.feedItems = results.feedItems;
-			prc.itemCount = results.count;
-
-			// Record hit
-			feedService.updateHits( prc.feed.getContentID() );
-
-			// Announce event
-			announceInterception( "aggregator_onFeedView", { feed=prc.feed } );
-
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feed" );
-
-		} else {
-
-			// Announce event
-			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } );
 
 			// Not found
 			notFound( argumentCollection=arguments );

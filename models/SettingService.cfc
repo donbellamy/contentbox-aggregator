@@ -61,22 +61,32 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 		}
 		prc.agSettings.ag_display_excerpt_ending = trim( prc.agSettings.ag_display_excerpt_ending );
 		prc.agSettings.ag_display_read_more_text = trim( prc.agSettings.ag_display_read_more_text );
-		if ( !val( prc.agSettings.ag_display_paging_max_rows ) ) {
-			arrayAppend( errors, "A valid paging max rows is required." );
-		}
 
 		// Portal settings
-		if ( !len( trim( prc.agSettings.ag_portal_title ) ) ) {
-			arrayAppend( errors, "A valid portal title is required." );
-		} else {
-			prc.agSettings.ag_portal_title = trim( prc.agSettings.ag_portal_title );
-		}
 		if ( !len( trim( prc.agSettings.ag_portal_entrypoint ) ) ) {
 			arrayAppend( errors, "A valid portal entry point is required." );
 		} else {
 			prc.agSettings.ag_portal_entrypoint = trim( prc.agSettings.ag_portal_entrypoint );
 		}
-		prc.agSettings.ag_portal_hits_bot_regex = trim( prc.agSettings.ag_portal_hits_bot_regex );
+		if ( !len( trim( prc.agSettings.ag_portal_title ) ) ) {
+			arrayAppend( errors, "A valid portal title is required." );
+		} else {
+			prc.agSettings.ag_portal_title = trim( prc.agSettings.ag_portal_title );
+		}
+		if ( !len( trim( prc.agSettings.ag_portal_feeds_title ) ) ) {
+			arrayAppend( errors, "A valid feeds title is required." );
+		} else {
+			prc.agSettings.ag_portal_feeds_title = trim( prc.agSettings.ag_portal_feeds_title );
+		}
+		if ( !val( prc.agSettings.ag_portal_paging_max_rows ) ) {
+			arrayAppend( errors, "A valid max home page items is required." );
+		}
+		if ( !val( prc.agSettings.ag_portal_feeds_paging_max_rows ) ) {
+			arrayAppend( errors, "A valid max feeds page items is required." );
+		}
+		if ( !val( prc.agSettings.ag_portal_feed_paging_max_rows ) ) {
+			arrayAppend( errors, "A valid max feed page items is required." );
+		}
 		if ( !val( prc.agSettings.ag_portal_cache_timeout ) ) {
 			arrayAppend( errors, "A valid portal cache timeout is required." );
 		}
