@@ -52,15 +52,15 @@ component extends="baseHandler" {
 		settingService.flushSettingsCache();
 
 		// Import scheduled task
-		if ( len( prc.agSettings.ag_general_import_interval ) ) {
-			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=" & prc.agSettings.ag_general_secret_key;
+		if ( len( prc.agSettings.ag_importing_import_interval ) ) {
+			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=" & prc.agSettings.ag_importing_secret_key;
 			cfschedule(
 				action="update",
 				task="aggregator-import",
 				url="#taskUrl#",
-				startDate=prc.agSettings.ag_general_import_start_date,
-				startTime=prc.agSettings.ag_general_import_start_time,
-				interval=prc.agSettings.ag_general_import_interval
+				startDate=prc.agSettings.ag_importing_import_start_date,
+				startTime=prc.agSettings.ag_importing_import_start_time,
+				interval=prc.agSettings.ag_importing_import_interval
 			);
 		} else {
 			cfschedule( action="delete", task="aggregator-import" );

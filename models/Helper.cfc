@@ -143,7 +143,7 @@ component accessors="true" singleton threadSafe {
 	/************************************** Quick HTML *********************************************/
 
 	// TODO: put settings in views
-	string function quickPaging( numeric maxRows=setting("ag_portal_paging_max_rows") ) {
+	string function quickPaging( numeric maxRows ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(
@@ -152,11 +152,14 @@ component accessors="true" singleton threadSafe {
 				type = "aggregator.helper.InvalidPagingContext"
 			);
 		}
+		if ( !structKeyExists( arguments, "maxRows" ) ) {
+			arguments.maxRows = prc.oPaging.getPagingMaxRows();
+		}
 		if ( prc.itemCount GT arguments.maxRows ) {
+			//writedump(arguments.maxRows);abort;
 			return prc.oPaging.renderit(
-				foundRows = prc.itemCount,
-				link = prc.pagingLink,
-				pagingMaxRows = arguments.maxRows
+				foundRows=prc.itemCount,
+				link=prc.pagingLink
 			);
 		} else {
 			return "";
@@ -191,11 +194,11 @@ component accessors="true" singleton threadSafe {
 
 	string function getFeedItemFeaturedImageUrl( required FeedItem feedItem ) {
 		var feed = arguments.feedItem.getFeed();
-		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : setting("ag_general_image_missing_behavior");
+		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : setting("ag_importing_image_missing_behavior");
 		if ( len( feedItem.getFeaturedImageUrl() ) ) {
 			return feedItem.getFeaturedImageUrl();
 		} else if ( behavior == "default" ) {
-			return setting("ag_general_image_default_url");
+			return setting("ag_importing_image_default_url");
 		} else if ( behavior == "feed" ) {
 			return feed.getFeaturedImageUrl();
 		} else {

@@ -19,12 +19,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=ag.setting("ag_portal_paging_max_rows") );
+		prc.oPaging.setpagingMaxRows( ag.setting("ag_portal_paging_max_items") );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = ag.linkPortal() & "?page=@page@";
 
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			max=ag.setting("ag_portal_paging_max_rows"),
+			max=ag.setting("ag_portal_paging_max_items"),
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 

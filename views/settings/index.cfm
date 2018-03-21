@@ -17,537 +17,20 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li class="active">
-								<a href="##general_options" data-toggle="tab"><i class="fa fa-cog fa-lg"></i> General</a>
-							</li>
-							<li>
-								<a href="##display_options" data-toggle="tab"><i class="fa fa-desktop fa-lg"></i> Display</a>
-							</li>
-							<li>
 								<a href="##portal_options" data-toggle="tab"><i class="fa fa-newspaper-o fa-lg"></i> Portal</a>
+							</li>
+							<li>
+								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing</a>
 							</li>
 							<li>
 								<a href="##rss_options" data-toggle="tab"><i class="fa fa-rss fa-lg"></i> RSS Feed</a>
 							</li>
+							<!---<li>
+								<a href="##display_options" data-toggle="tab"><i class="fa fa-desktop fa-lg"></i> Display</a>
+							</li>--->
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="general_options">
-								<fieldset>
-									<legend><i class="fa fa-cog fa-lg"></i> General Options</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_import_interval",
-											content="Import interval:"
-										)#
-										<div class="controls">
-											<small>
-												How frequently the feeds should be checked for updates and imported.
-												Select "Never" if you plan to manually import feeds.
-											</small>
-											#html.select(
-												name="ag_general_import_interval",
-												options=prc.intervals,
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_general_import_interval,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_import_start_date",
-											content="Start date:"
-										)#
-										<div><small>The date and time to begin importing feeds.</small></div>
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9",
-														name="ag_general_import_start_date",
-														value=prc.agSettings.ag_general_import_start_date,
-														class="form-control datepicker",
-														placeholder="Immediately"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#prc.agSettings.ag_general_import_start_time#" name="ag_general_import_start_time" id="ag_general_import_start_time" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_default_creator",
-											content="Default creator:"
-										)#
-										<div class="controls">
-											<small>The account used during the automated feed import process.</small>
-											<select name="ag_general_default_creator" id="ag_general_default_creator" class="form-control">
-												<cfloop array="#prc.authors#" index="author">
-													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_general_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
-												</cfloop>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_secret_key",
-											content="Secret key:"
-										)#
-										<div class="controls">
-											<small>The secret key used to secure the automated feed import process.</small>
-											#html.textField(
-												name="ag_general_secret_key",
-												value=prc.agSettings.ag_general_secret_key,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_max_feed_imports",
-											content="Import history limit:"
-										)#
-										<div class="controls">
-											<small>
-												The maximum number of records to keep in the feed import history.
-												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
-											</small>
-											#html.inputField(
-												name="ag_general_max_feed_imports",
-												type="number",
-												value=prc.agSettings.ag_general_max_feed_imports,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_match_any_filter",
-											content="Contains any of these words/phrases:"
-										)#
-										<div class="controls">
-											<small>
-												Only feed items that contain any of these words/phrases in the title or body will be imported.
-												Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
-											</small>
-											#html.textArea(
-												name="ag_general_match_any_filter",
-												value=prc.agSettings.ag_general_match_any_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_match_all_filter",
-											content="Contains all of these words/phrases:"
-										)#
-										<div class="controls">
-											<small>
-												Only feed items that contain all of these words/phrases in the title or body will be imported.
-												Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
-											</small>
-											#html.textArea(
-												name="ag_general_match_all_filter",
-												value=prc.agSettings.ag_general_match_all_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_match_none_filter",
-											content="Contains none of these words/phrases:"
-										)#
-										<div class="controls">
-											<small>
-												Only feed items that do not contain any of these words/phrases in the title or body will be imported.
-												Existing feed items that contain any of these words/phrases in the title or body will be deleted.
-											</small>
-											#html.textArea(
-												name="ag_general_match_none_filter",
-												value=prc.agSettings.ag_general_match_none_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_max_age",
-											content="Limit items by age:"
-										)#
-										<div>
-											<small>
-												The maximum age allowed for feed items.
-												Existing feed items will be deleted once they exceed this age limit.
-											</small>
-										</div>
-										<div class="controls row">
-											<div class="col-sm-6">
-												#html.inputField(
-													name="ag_general_max_age",
-													type="number",
-													value=prc.agSettings.ag_general_max_age,
-													class="form-control counter",
-													placeholder="No limit",
-													min="0"
-												)#
-											</div>
-											<div class="col-sm-6">
-												#html.select(
-													name="ag_general_max_age_unit",
-													options=prc.limitUnits,
-													selectedValue=prc.agSettings.ag_general_max_age_unit,
-													class="form-control"
-												)#
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_max_items",
-											content="Limit items by number:"
-										)#
-										<div class="controls">
-											<small>
-												The maximum number of feed items to keep per feed.
-												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-											</small>
-											#html.inputField(
-												name="ag_general_max_items",
-												type="number",
-												value=prc.agSettings.ag_general_max_items,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_image_import_enable",
-											content="Import Images:"
-										)#
-										<div>
-											<small>
-												If enabled, an image will be saved for each feed item when imported if one is available.
-											</small>
-										</div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_general_image_import_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_general_image_import_enable' },
-												checked=prc.agSettings.ag_general_image_import_enable
-											)#
-											#html.hiddenField(
-												name="ag_general_image_import_enable",
-												value=prc.agSettings.ag_general_image_import_enable
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_image_minimum_width",
-											content="Minimum Width:"
-										)#
-
-										<div class="controls">
-											<small>Images smaller than the minimum width below will not be imported.</small>
-											#html.inputField(
-												name="ag_general_image_minimum_width",
-												type="number",
-												value=prc.agSettings.ag_general_image_minimum_width,
-												class="form-control counter",
-												placeholder="No minimum width",
-												min="0"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_image_minimum_height",
-											content="Minimum Height:"
-										)#
-
-										<div class="controls">
-											<small>Images smaller than the minimum height below will not be imported.</small>
-											#html.inputField(
-												name="ag_general_image_minimum_height",
-												type="number",
-												value=prc.agSettings.ag_general_image_minimum_height,
-												class="form-control counter",
-												placeholder="No minimum height",
-												min="0"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_image_missing_behavior",
-											content="Missing Image:"
-										)#
-										<div class="controls">
-											<small>
-												The default behavior when a feed item has no image.
-											</small>
-											#html.select(
-												name="ag_general_image_missing_behavior",
-												options=prc.missingImageOptions,
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_general_image_missing_behavior,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_general_image_default",
-											content="Default Image:"
-										)#
-										<div class="controls text-center">
-											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_general_image_default ) >hide</cfif> form-group" id="default_image_controls">
-												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
-												#html.hiddenField(
-													name="ag_general_image_default",
-													value=prc.agSettings.ag_general_image_default
-												)#
-												#html.hiddenField(
-													name="ag_general_image_default_url",
-													value=prc.agSettings.ag_general_image_default_url
-												)#
-												<div class="margin10">
-													<cfif len( prc.agSettings.ag_general_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_general_image_default_url#" class="img-thumbnail" height="75" />
-													<cfelse>
-														<img id="default_image_preview" class="img-thumbnail" height="75" />
-													</cfif>
-												</div>
-											</div>
-										</div>
-									</div>
-								</fieldset>
-							</div>
-							<div class="tab-pane" id="display_options">
-								<fieldset>
-									<legend><i class="fa fa-desktop fa-lg"></i> Display Options</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_link_new_window",
-											content="Open links in new window:"
-										)#
-										<div><small>If enabled, all links will open in a new window (tab).</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_link_new_window_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_link_new_window' },
-												checked=prc.agSettings.ag_display_link_new_window
-											)#
-											#html.hiddenField(
-												name="ag_display_link_new_window",
-												value=prc.agSettings.ag_display_link_new_window
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_link_as_nofollow",
-											content="Set links as nofollow:"
-										)#
-										<div><small>If enabled, all links will use the "NoFollow" attribute.  "NoFollow" tells search engines to not follow the links.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_link_as_nofollow_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_link_as_nofollow' },
-												checked=prc.agSettings.ag_display_link_as_nofollow
-											)#
-											#html.hiddenField(
-												name="ag_display_link_as_nofollow",
-												value=prc.agSettings.ag_display_link_as_nofollow
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_source_show",
-											content="Show source:"
-										)#
-										<div><small>If enabled, the feed name will display for each feed item.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_source_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_source_show' },
-												checked=prc.agSettings.ag_display_source_show
-											)#
-											#html.hiddenField(
-												name="ag_display_source_show",
-												value=prc.agSettings.ag_display_source_show
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_author_show",
-											content="Show author:"
-										)#
-										<div><small>If enabled, the author will display for each feed item if available.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_author_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_author_show' },
-												checked=prc.agSettings.ag_display_author_show
-											)#
-											#html.hiddenField(
-												name="ag_display_author_show",
-												value=prc.agSettings.ag_display_author_show
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-list-alt fa-lg"></i> Excerpt Options</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_excerpt_show",
-											content="Show excerpts:"
-										)#
-										<div><small>If enabled, an excerpt will display under the feed item title.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_excerpt_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_excerpt_show' },
-												checked=prc.agSettings.ag_display_excerpt_show
-											)#
-											#html.hiddenField(
-												name="ag_display_excerpt_show",
-												value=prc.agSettings.ag_display_excerpt_show
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_excerpt_character_limit",
-											content="Character limit:"
-										)#
-										<div class="controls">
-											<small>The number of characters to limit in the excerpt displayed.</small>
-											#html.inputField(
-												type="number",
-												min="0",
-												placeholder="No Limit",
-												name="ag_display_excerpt_character_limit",
-												value=prc.agSettings.ag_display_excerpt_character_limit,
-												class="form-control counter"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_excerpt_ending",
-											content="Excerpt ending:"
-										)#
-										<div class="controls">
-											<small>The characters appearing at the end of the excerpt.</small>
-											#html.textField(
-												name="ag_display_excerpt_ending",
-												value=prc.agSettings.ag_display_excerpt_ending,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_read_more_show",
-											content="Show read more:"
-										)#
-										<div><small>If enabled, a "Read More" link will display at the end of the excerpt.</small></div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_display_read_more_show_toggle",
-												data={ toggle: 'toggle', match: 'ag_display_read_more_show' },
-												checked=prc.agSettings.ag_display_read_more_show
-											)#
-											#html.hiddenField(
-												name="ag_display_read_more_show",
-												value=prc.agSettings.ag_display_read_more_show
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_display_read_more_text",
-											content="Read more text:"
-										)#
-										<div class="controls">
-											<small>The text used for the "Read More" link.</small>
-											#html.textField(
-												name="ag_display_read_more_text",
-												value=prc.agSettings.ag_display_read_more_text,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-								</fieldset>
-							</div>
-							<div class="tab-pane" id="portal_options">
+							<div class="tab-pane active" id="portal_options">
 								<fieldset>
 									<legend><i class="fa fa-newspaper-o fa-lg"></i> Portal Options</legend>
 									<div class="form-group">
@@ -635,18 +118,18 @@
 								<fieldset>
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_paging_max_rows">
-											Max home page items:
-											<span class="badge badge-info" id="ag_portal_paging_max_rows_label">#prc.agSettings.ag_portal_paging_max_rows#</span>
+										<label class="control-label" for="ag_portal_paging_max_items">
+											Max feed items:
+											<span class="badge badge-info" id="ag_portal_paging_max_items_label">#prc.agSettings.ag_portal_paging_max_items#</span>
 										</label>
 										<div class="controls">
-											<small>Here is the description...</small><br />
+											<small>The number of feed items displayed on the main portal page and feed page before paging.</small><br />
 											<strong class="margin10">10</strong>
 											<input 	type="text"
-												id="ag_portal_paging_max_rows"
-												name="ag_portal_paging_max_rows"
+												id="ag_portal_paging_max_items"
+												name="ag_portal_paging_max_items"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_paging_max_rows#"
+												data-slider-value="#prc.agSettings.ag_portal_paging_max_items#"
 												data-provide="slider"
 												data-slider-min="10"
 												data-slider-max="50"
@@ -656,39 +139,18 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_feeds_paging_max_rows">
-											Max feeds page items:
-											<span class="badge badge-info" id="ag_portal_feeds_paging_max_rows_label">#prc.agSettings.ag_portal_feeds_paging_max_rows#</span>
+										<label class="control-label" for="ag_portal_paging_max_feeds">
+											Max feeds:
+											<span class="badge badge-info" id="ag_portal_paging_max_feeds_label">#prc.agSettings.ag_portal_paging_max_feeds#</span>
 										</label>
 										<div class="controls">
-											<small>Here is the description...</small><br />
+											<small>The number of feeds displayed on the feeds page before paging..</small><br />
 											<strong class="margin10">10</strong>
 											<input 	type="text"
-												id="ag_portal_feeds_paging_max_rows"
-												name="ag_portal_feeds_paging_max_rows"
+												id="ag_portal_paging_max_feeds"
+												name="ag_portal_paging_max_feeds"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_feeds_paging_max_rows#"
-												data-provide="slider"
-												data-slider-min="10"
-												data-slider-max="50"
-												data-slider-step="10"
-												data-slider-tooltip="hide" />
-											<strong class="margin10">50</strong>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="control-label" for="ag_portal_feed_paging_max_rows">
-											Max feed page items:
-											<span class="badge badge-info" id="ag_portal_feed_paging_max_rows_label">#prc.agSettings.ag_portal_feed_paging_max_rows#</span>
-										</label>
-										<div class="controls">
-											<small>Here is the description...</small><br />
-											<strong class="margin10">10</strong>
-											<input 	type="text"
-												id="ag_portal_feed_paging_max_rows"
-												name="ag_portal_feed_paging_max_rows"
-												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_feed_paging_max_rows#"
+												data-slider-value="#prc.agSettings.ag_portal_paging_max_feeds#"
 												data-provide="slider"
 												data-slider-min="10"
 												data-slider-max="50"
@@ -777,6 +239,351 @@
 												data-slider-tooltip="hide"
 												data-slider-scale="logarithmic" />
 											<strong class="margin10">500</strong>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div class="tab-pane" id="importing_options">
+								<fieldset>
+									<legend><i class="fa fa-download fa-lg"></i> Importing Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_import_interval",
+											content="Import interval:"
+										)#
+										<div class="controls">
+											<small>
+												How frequently the feeds should be checked for updates and imported.
+												Select "Never" if you plan to manually import feeds.
+											</small>
+											#html.select(
+												name="ag_importing_import_interval",
+												options=prc.intervals,
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_import_interval,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_import_start_date",
+											content="Start date:"
+										)#
+										<div><small>The date and time to begin importing feeds.</small></div>
+										<div class="controls row">
+											<div class="col-md-6">
+												<div class="input-group">
+													#html.inputField(
+														size="9",
+														name="ag_importing_import_start_date",
+														value=prc.agSettings.ag_importing_import_start_date,
+														class="form-control datepicker",
+														placeholder="Immediately"
+													)#
+													<span class="input-group-addon">
+														<span class="fa fa-calendar"></span>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+													<input type="text" class="form-control inline" value="#prc.agSettings.ag_importing_import_start_time#" name="ag_importing_import_start_time" id="ag_importing_import_start_time" />
+													<span class="input-group-addon">
+														<span class="fa fa-clock-o"></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_default_creator",
+											content="Default creator:"
+										)#
+										<div class="controls">
+											<small>The account used during the automated feed import process.</small>
+											<select name="ag_importing_default_creator" id="ag_importing_default_creator" class="form-control">
+												<cfloop array="#prc.authors#" index="author">
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_importing_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+												</cfloop>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_secret_key",
+											content="Secret key:"
+										)#
+										<div class="controls">
+											<small>The secret key used to secure the automated feed import process.</small>
+											#html.textField(
+												name="ag_importing_secret_key",
+												value=prc.agSettings.ag_importing_secret_key,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_feed_imports",
+											content="Import history limit:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of records to keep in the feed import history.
+												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
+											</small>
+											#html.inputField(
+												name="ag_importing_max_feed_imports",
+												type="number",
+												value=prc.agSettings.ag_importing_max_feed_imports,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_match_any_filter",
+											content="Contains any of these words/phrases:"
+										)#
+										<div class="controls">
+											<small>
+												Only feed items that contain any of these words/phrases in the title or body will be imported.
+												Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
+											</small>
+											#html.textArea(
+												name="ag_importing_match_any_filter",
+												value=prc.agSettings.ag_importing_match_any_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_match_all_filter",
+											content="Contains all of these words/phrases:"
+										)#
+										<div class="controls">
+											<small>
+												Only feed items that contain all of these words/phrases in the title or body will be imported.
+												Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
+											</small>
+											#html.textArea(
+												name="ag_importing_match_all_filter",
+												value=prc.agSettings.ag_importing_match_all_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_match_none_filter",
+											content="Contains none of these words/phrases:"
+										)#
+										<div class="controls">
+											<small>
+												Only feed items that do not contain any of these words/phrases in the title or body will be imported.
+												Existing feed items that contain any of these words/phrases in the title or body will be deleted.
+											</small>
+											#html.textArea(
+												name="ag_importing_match_none_filter",
+												value=prc.agSettings.ag_importing_match_none_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_age",
+											content="Limit items by age:"
+										)#
+										<div>
+											<small>
+												The maximum age allowed for feed items.
+												Existing feed items will be deleted once they exceed this age limit.
+											</small>
+										</div>
+										<div class="controls row">
+											<div class="col-sm-6">
+												#html.inputField(
+													name="ag_importing_max_age",
+													type="number",
+													value=prc.agSettings.ag_importing_max_age,
+													class="form-control counter",
+													placeholder="No limit",
+													min="0"
+												)#
+											</div>
+											<div class="col-sm-6">
+												#html.select(
+													name="ag_importing_max_age_unit",
+													options=prc.limitUnits,
+													selectedValue=prc.agSettings.ag_importing_max_age_unit,
+													class="form-control"
+												)#
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_items",
+											content="Limit items by number:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of feed items to keep per feed.
+												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+											</small>
+											#html.inputField(
+												name="ag_importing_max_items",
+												type="number",
+												value=prc.agSettings.ag_importing_max_items,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_image_import_enable",
+											content="Import Images:"
+										)#
+										<div>
+											<small>
+												If enabled, an image will be saved for each feed item when imported if one is available.
+											</small>
+										</div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_importing_image_import_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_importing_image_import_enable' },
+												checked=prc.agSettings.ag_importing_image_import_enable
+											)#
+											#html.hiddenField(
+												name="ag_importing_image_import_enable",
+												value=prc.agSettings.ag_importing_image_import_enable
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_image_minimum_width",
+											content="Minimum Width:"
+										)#
+
+										<div class="controls">
+											<small>Images smaller than the minimum width below will not be imported.</small>
+											#html.inputField(
+												name="ag_importing_image_minimum_width",
+												type="number",
+												value=prc.agSettings.ag_importing_image_minimum_width,
+												class="form-control counter",
+												placeholder="No minimum width",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_image_minimum_height",
+											content="Minimum Height:"
+										)#
+
+										<div class="controls">
+											<small>Images smaller than the minimum height below will not be imported.</small>
+											#html.inputField(
+												name="ag_importing_image_minimum_height",
+												type="number",
+												value=prc.agSettings.ag_importing_image_minimum_height,
+												class="form-control counter",
+												placeholder="No minimum height",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_image_missing_behavior",
+											content="Missing Image:"
+										)#
+										<div class="controls">
+											<small>
+												The default behavior when a feed item has no image.
+											</small>
+											#html.select(
+												name="ag_importing_image_missing_behavior",
+												options=prc.missingImageOptions,
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_image_missing_behavior,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_image_default",
+											content="Default Image:"
+										)#
+										<div class="controls text-center">
+											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
+											<div class="<cfif !len( prc.agSettings.ag_importing_image_default ) >hide</cfif> form-group" id="default_image_controls">
+												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
+												#html.hiddenField(
+													name="ag_importing_image_default",
+													value=prc.agSettings.ag_importing_image_default
+												)#
+												#html.hiddenField(
+													name="ag_importing_image_default_url",
+													value=prc.agSettings.ag_importing_image_default_url
+												)#
+												<div class="margin10">
+													<cfif len( prc.agSettings.ag_importing_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_importing_image_default_url#" class="img-thumbnail" height="75" />
+													<cfelse>
+														<img id="default_image_preview" class="img-thumbnail" height="75" />
+													</cfif>
+												</div>
+											</div>
 										</div>
 									</div>
 								</fieldset>
@@ -990,6 +797,178 @@
 									</div>
 								</fieldset>
 							</div>
+							<!---<div class="tab-pane" id="display_options">
+								<fieldset>
+									<legend><i class="fa fa-desktop fa-lg"></i> Display Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_link_new_window",
+											content="Open links in new window:"
+										)#
+										<div><small>If enabled, all links will open in a new window (tab).</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_link_new_window_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_link_new_window' },
+												checked=prc.agSettings.ag_display_link_new_window
+											)#
+											#html.hiddenField(
+												name="ag_display_link_new_window",
+												value=prc.agSettings.ag_display_link_new_window
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_link_as_nofollow",
+											content="Set links as nofollow:"
+										)#
+										<div><small>If enabled, all links will use the "NoFollow" attribute.  "NoFollow" tells search engines to not follow the links.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_link_as_nofollow_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_link_as_nofollow' },
+												checked=prc.agSettings.ag_display_link_as_nofollow
+											)#
+											#html.hiddenField(
+												name="ag_display_link_as_nofollow",
+												value=prc.agSettings.ag_display_link_as_nofollow
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_source_show",
+											content="Show source:"
+										)#
+										<div><small>If enabled, the feed name will display for each feed item.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_source_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_source_show' },
+												checked=prc.agSettings.ag_display_source_show
+											)#
+											#html.hiddenField(
+												name="ag_display_source_show",
+												value=prc.agSettings.ag_display_source_show
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_author_show",
+											content="Show author:"
+										)#
+										<div><small>If enabled, the author will display for each feed item if available.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_author_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_author_show' },
+												checked=prc.agSettings.ag_display_author_show
+											)#
+											#html.hiddenField(
+												name="ag_display_author_show",
+												value=prc.agSettings.ag_display_author_show
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-list-alt fa-lg"></i> Excerpt Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_excerpt_show",
+											content="Show excerpts:"
+										)#
+										<div><small>If enabled, an excerpt will display under the feed item title.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_excerpt_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_excerpt_show' },
+												checked=prc.agSettings.ag_display_excerpt_show
+											)#
+											#html.hiddenField(
+												name="ag_display_excerpt_show",
+												value=prc.agSettings.ag_display_excerpt_show
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_excerpt_character_limit",
+											content="Character limit:"
+										)#
+										<div class="controls">
+											<small>The number of characters to limit in the excerpt displayed.</small>
+											#html.inputField(
+												type="number",
+												min="0",
+												placeholder="No Limit",
+												name="ag_display_excerpt_character_limit",
+												value=prc.agSettings.ag_display_excerpt_character_limit,
+												class="form-control counter"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_excerpt_ending",
+											content="Excerpt ending:"
+										)#
+										<div class="controls">
+											<small>The characters appearing at the end of the excerpt.</small>
+											#html.textField(
+												name="ag_display_excerpt_ending",
+												value=prc.agSettings.ag_display_excerpt_ending,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_read_more_show",
+											content="Show read more:"
+										)#
+										<div><small>If enabled, a "Read More" link will display at the end of the excerpt.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_display_read_more_show_toggle",
+												data={ toggle: 'toggle', match: 'ag_display_read_more_show' },
+												checked=prc.agSettings.ag_display_read_more_show
+											)#
+											#html.hiddenField(
+												name="ag_display_read_more_show",
+												value=prc.agSettings.ag_display_read_more_show
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_display_read_more_text",
+											content="Read more text:"
+										)#
+										<div class="controls">
+											<small>The text used for the "Read More" link.</small>
+											#html.textField(
+												name="ag_display_read_more_text",
+												value=prc.agSettings.ag_display_read_more_text,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+								</fieldset>
+							</div>--->
 							<div class="form-actions">
 								<br />#html.submitButton( value="Save Settings", class="btn btn-danger" )#
 							</div>

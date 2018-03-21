@@ -25,7 +25,7 @@ component extends="coldbox.system.Interceptor" {
 
 		// Loop over feeds
 		for ( var item IN feeds ) {
-			var maxFeedImports = val( settings.ag_general_max_feed_imports );
+			var maxFeedImports = val( settings.ag_importing_max_feed_imports );
 			var feedImports = item.getFeedImports();
 			if ( maxFeedImports && arrayLen( feedImports ) GT maxFeedImports ) {
 				var importsToDelete = arraySlice( feedImports, maxFeedImports + 1 );

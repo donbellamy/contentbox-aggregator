@@ -15,54 +15,40 @@ component {
 
 		settings = {
 
-			"ag_general_import_interval" = "",
-			"ag_general_import_start_date" = "",
-			"ag_general_import_start_time" = "",
-			"ag_general_default_creator" = "",
-			"ag_general_secret_key" = hash( getCurrentTemplatePath() ),
-			"ag_general_max_feed_imports" = "10",
-
-			"ag_general_match_any_filter" = "",
-			"ag_general_match_all_filter" = "",
-			"ag_general_match_none_filter" = "",
-
-			"ag_general_max_age" = "",
-			"ag_general_max_age_unit" = "days",
-			"ag_general_max_items" = "",
-
-			"ag_general_image_import_enable" = "true",
-			"ag_general_image_minimum_width" = "100",
-			"ag_general_image_minimum_height" = "100",
-			"ag_general_image_missing_behavior" = "default",
-			"ag_general_image_default" = "",
-			"ag_general_image_default_url" = "",
-
-			"ag_display_link_new_window" = "true",
-			"ag_display_link_as_nofollow" = "true",
-			"ag_display_source_show" = "true",
-			"ag_display_author_show" = "true",
-
-			"ag_display_excerpt_show" = "true",
-			"ag_display_excerpt_character_limit" = "500",
-			"ag_display_excerpt_ending" = "...",
-			"ag_display_read_more_show" = "true",
-			"ag_display_read_more_text" = "Read more...",
-
+			// Portal
 			"ag_portal_entrypoint" = "news",
 			"ag_portal_title" = "RSS Aggregator News",
 			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
 			"ag_portal_feeds_title" = "News Feeds",
-
-			"ag_portal_paging_max_rows" = "10",
-			"ag_portal_feeds_paging_max_rows" = "10",
-			"ag_portal_feed_paging_max_rows" = "10",
-
+			"ag_portal_paging_max_items" = "10",
+			"ag_portal_paging_max_feeds" = "10",
 			"ag_portal_cache_enable" = "true",
 			"ag_portal_cache_name" = "Template",
 			"ag_portal_cache_timeout" = "60",
 			"ag_portal_cache_timeout_idle" = "15",
 
+			// Importing
+			"ag_importing_import_interval" = "",
+			"ag_importing_import_start_date" = "",
+			"ag_importing_import_start_time" = "",
+			"ag_importing_default_creator" = "",
+			"ag_importing_secret_key" = hash( getCurrentTemplatePath() ),
+			"ag_importing_max_feed_imports" = "10",
+			"ag_importing_match_any_filter" = "",
+			"ag_importing_match_all_filter" = "",
+			"ag_importing_match_none_filter" = "",
+			"ag_importing_max_age" = "",
+			"ag_importing_max_age_unit" = "days",
+			"ag_importing_max_items" = "",
+			"ag_importing_image_import_enable" = "true",
+			"ag_importing_image_minimum_width" = "100",
+			"ag_importing_image_minimum_height" = "100",
+			"ag_importing_image_missing_behavior" = "default",
+			"ag_importing_image_default" = "",
+			"ag_importing_image_default_url" = "",
+
+			// RSS
 			"ag_rss_enable" = "true",
 			"ag_rss_title" = "RSS Aggregator Feed",
 			"ag_rss_description" = "RSS Aggregator Feed",
@@ -73,7 +59,18 @@ component {
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = "60",
-			"ag_rss_cache_timeout_idle" = "15"
+			"ag_rss_cache_timeout_idle" = "15",
+
+			// Display
+			"ag_display_link_new_window" = "true",
+			"ag_display_link_as_nofollow" = "true",
+			"ag_display_source_show" = "true",
+			"ag_display_author_show" = "true",
+			"ag_display_excerpt_show" = "true",
+			"ag_display_excerpt_character_limit" = "500",
+			"ag_display_excerpt_ending" = "...",
+			"ag_display_read_more_show" = "true",
+			"ag_display_read_more_text" = "Read more..."
 
 		};
 

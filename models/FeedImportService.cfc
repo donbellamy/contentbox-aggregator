@@ -34,7 +34,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				var itemCount = 0;
 
 				// Check if we are importing images
-				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_general_image_import_enable;
+				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_importing_image_import_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -57,9 +57,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 							// Check keyword filters
 							var passesFilters = true;
 							var itemText = item.title & " " & item.body;
-							var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.ag_general_match_any_filter ) );
-							var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.ag_general_match_all_filter ) );
-							var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.ag_general_match_none_filter ) );
+							var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
+							var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
+							var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
 
 							// Check match any
 							if ( arrayLen( matchAnyFilter ) ) {
@@ -97,8 +97,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 								// Check age limits
 								var passesAgeLimits = true;
-								var maxAge = val( arguments.feed.getMaxAge() ) ? val( arguments.feed.getMaxAge() ) : val( settings.ag_general_max_age );
-								var maxAgeUnit = val( arguments.feed.getMaxAge() ) ? arguments.feed.getMaxAgeUnit() : settings.ag_general_max_age_unit;
+								var maxAge = val( arguments.feed.getMaxAge() ) ? val( arguments.feed.getMaxAge() ) : val( settings.ag_importing_max_age );
+								var maxAgeUnit = val( arguments.feed.getMaxAge() ) ? arguments.feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
 
 								if ( maxAge && isDate( item.datePublished ) ) {
 									var maxDate = now();
@@ -229,8 +229,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														var img = imageRead( imagePath );
 
 														// Save the image if it is valid
-														if ( img.getWidth() GTE val( settings.ag_general_image_minimum_width ) &&
-															img.getHeight() GTE val( settings.ag_general_image_minimum_height ) ) {
+														if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
+															img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
 
 															// Set the image url
 															var entryPoint = moduleSettings["contentbox-ui"].entryPoint;

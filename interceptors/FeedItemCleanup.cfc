@@ -43,9 +43,9 @@ component extends="coldbox.system.Interceptor" {
 		for ( var item IN feeds ) {
 
 			// Keyword filters
-			var matchAnyFilter = listToArray( len( trim( item.getMatchAnyFilter() ) ) ? item.getMatchAnyFilter() : trim( settings.ag_general_match_any_filter ) );
-			var matchAllFilter = listToArray( len( trim( item.getMatchAllFilter() ) ) ? item.getMatchAllFilter() : trim( settings.ag_general_match_all_filter ) );
-			var matchNoneFilter = listToArray( len( trim( item.getMatchNoneFilter() ) ) ? item.getMatchNoneFilter() : trim( settings.ag_general_match_none_filter ) );
+			var matchAnyFilter = listToArray( len( trim( item.getMatchAnyFilter() ) ) ? item.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
+			var matchAllFilter = listToArray( len( trim( item.getMatchAllFilter() ) ) ? item.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
+			var matchNoneFilter = listToArray( len( trim( item.getMatchNoneFilter() ) ) ? item.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
 
 			// Filter out if any filters exist
 			if ( len( matchAnyFilter ) || len( matchAllFilter ) || len( matchNoneFilter ) ) {
@@ -133,8 +133,8 @@ component extends="coldbox.system.Interceptor" {
 		for ( var item IN feeds ) {
 
 			// Max age
-			var maxAge = val( item.getMaxAge() ) ? val( item.getMaxAge() ) : val( settings.ag_general_max_age );
-			var maxAgeUnit = val( item.getMaxAge() ) ? item.getMaxAgeUnit() : settings.ag_general_max_age_unit;
+			var maxAge = val( item.getMaxAge() ) ? val( item.getMaxAge() ) : val( settings.ag_importing_max_age );
+			var maxAgeUnit = val( item.getMaxAge() ) ? item.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
 			if ( maxAge ) {
 				var maxDate = now();
 				switch( maxAgeUnit ) {
@@ -186,7 +186,7 @@ component extends="coldbox.system.Interceptor" {
 		for ( var item IN feeds ) {
 
 			// Max items
-			var maxItems = val( item.getMaxItems() ) ? val( item.getMaxItems() ) : val( settings.ag_general_max_items );
+			var maxItems = val( item.getMaxItems() ) ? val( item.getMaxItems() ) : val( settings.ag_importing_max_items );
 			if ( maxItems && ( item.getNumberOfFeedItems() GT maxItems ) ) {
 				var feedItems = feedItemService.search( feed=item.getContentID() ).feedItems;
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );

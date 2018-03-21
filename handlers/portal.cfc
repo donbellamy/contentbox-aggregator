@@ -53,7 +53,8 @@ component extends="coldbox.system.EventHandler" {
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_paging_max_rows );
+		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
 
 		// Search
@@ -78,7 +79,7 @@ component extends="coldbox.system.EventHandler" {
 		var results = feedItemService.getPublishedFeedItems(
 			searchTerm=rc.q,
 			category=rc.category,
-			max=prc.agSettings.ag_portal_paging_max_rows,
+			max=prc.agSettings.ag_portal_paging_max_items,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feedItems = results.feedItems;
@@ -134,7 +135,8 @@ component extends="coldbox.system.EventHandler" {
 
 			// Paging
 			prc.oPaging = getModel("paging@cb");
-			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_paging_max_rows );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = helper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
 
 			// Grab the results
@@ -142,7 +144,7 @@ component extends="coldbox.system.EventHandler" {
 				year=rc.year,
 				month=rc.month,
 				day=rc.day,
-				max=prc.agSettings.ag_portal_paging_max_rows,
+				max=prc.agSettings.ag_portal_paging_max_items,
 				offset=prc.pagingBoundaries.startRow - 1
 			);
 			prc.feedItems = results.feedItems;
@@ -222,12 +224,13 @@ component extends="coldbox.system.EventHandler" {
 
 		// Paging
 		prc.oPaging = getModel("paging@cb");
-		prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_feeds_paging_max_rows );
+		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_feeds );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = helper.linkFeeds() & "?page=@page@";
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
-			max=prc.agSettings.ag_portal_feeds_paging_max_rows,
+			max=prc.agSettings.ag_portal_paging_max_feeds,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feeds = results.feeds;
@@ -281,7 +284,8 @@ component extends="coldbox.system.EventHandler" {
 
 			// Paging
 			prc.oPaging = getModel("paging@cb");
-			prc.pagingBoundaries = prc.oPaging.getBoundaries( pagingMaxRows=prc.agSettings.ag_portal_feed_paging_max_rows );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
 
 			// Author filter
@@ -294,7 +298,7 @@ component extends="coldbox.system.EventHandler" {
 			var results = feedItemService.getPublishedFeedItems(
 				feed=prc.feed.getContentID(),
 				author=rc.author,
-				max=prc.agSettings.ag_portal_feed_paging_max_rows,
+				max=prc.agSettings.ag_portal_paging_max_items,
 				offset=prc.pagingBoundaries.startRow - 1
 			);
 			prc.feedItems = results.feedItems;
@@ -369,8 +373,8 @@ component extends="coldbox.system.EventHandler" {
 		event.paramValue( name="key", value="" );
 
 		// To import we must have an author, so check for one first
-		if ( len( prc.agSettings.ag_general_default_creator ) ) {
-			var author = authorService.get( prc.agSettings.ag_general_default_creator );
+		if ( len( prc.agSettings.ag_importing_default_creator ) ) {
+			var author = authorService.get( prc.agSettings.ag_importing_default_creator );
 		} else if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
 			var author = prc.oCurrentAuthor;
 		} else {
@@ -379,7 +383,7 @@ component extends="coldbox.system.EventHandler" {
 		}
 
 		// Only import if the keys match and an author is defined
-		if ( rc.key EQ prc.agSettings.ag_general_secret_key  && !isNull( author ) ) {
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key  && !isNull( author ) ) {
 
 			// Thread this instead? - in a future version yes
 			setting requestTimeout="999999";
