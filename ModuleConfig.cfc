@@ -59,18 +59,7 @@ component {
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = "60",
-			"ag_rss_cache_timeout_idle" = "15",
-
-			// Display
-			"ag_display_link_new_window" = "true",
-			"ag_display_link_as_nofollow" = "true",
-			"ag_display_source_show" = "true",
-			"ag_display_author_show" = "true",
-			"ag_display_excerpt_show" = "true",
-			"ag_display_excerpt_character_limit" = "500",
-			"ag_display_excerpt_ending" = "...",
-			"ag_display_read_more_show" = "true",
-			"ag_display_read_more_text" = "Read more..."
+			"ag_rss_cache_timeout_idle" = "15"
 
 		};
 

@@ -1,15 +1,14 @@
-<cfparam name="args.openNewWindow" default="#ag.setting('ag_display_link_new_window',true)#" />
-<cfparam name="args.useNoFollow" default="#ag.setting('ag_display_link_as_nofollow',true)#" />
-<cfparam name="args.showSource" default="#ag.setting('ag_display_source_show',true)#" />
-<cfparam name="args.showAuthor" default="#ag.setting('ag_display_author_show',true)#" />
-<cfparam name="args.showExcerpt" default="#ag.setting('ag_display_excerpt_show',true)#" />
-<cfparam name="args.characterLimit" default="#ag.setting('ag_display_excerpt_character_limit',500)#" />
-<cfparam name="args.excerptEnding" default="#ag.setting('ag_display_excerpt_ending','...')#" />
-<cfparam name="args.showReadMore" default="#ag.setting('ag_display_read_more_show',true)#" />
-<cfparam name="args.readMoreText" default="#ag.setting('ag_display_read_more_text','Read more...')#" />
+<cfparam name="args.openNewWindow" default="true" />
+<cfparam name="args.useNoFollow" default="true" />
+<cfparam name="args.showSource" default="true" />
+<cfparam name="args.showAuthor" default="true" />
+<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.characterLimit" default="500" />
+<cfparam name="args.excerptEnding" default="..." />
+<cfparam name="args.showReadMore" default="true" />
+<cfparam name="args.readMoreText" default="Read more..." />
 
 <cfoutput>
-
 <div class="post" id="feeditem_#feedItem.getContentID()#">
 	<div class="post-title">
 		<h2>
@@ -67,5 +66,4 @@
 		</div>
 	</cfif>
 </div>
-
 </cfoutput>

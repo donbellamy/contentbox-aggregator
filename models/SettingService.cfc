@@ -112,16 +112,6 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 			arrayAppend( errors, "A valid feed cache idle timeout is required." );
 		}
 
-		// Display settings
-		/*
-		if ( len( prc.agSettings.ag_display_excerpt_character_limit ) && !isNumeric( prc.agSettings.ag_display_excerpt_character_limit ) ) {
-			arrayAppend( errors, "A valid charcter limit is required." );
-		}
-		prc.agSettings.ag_display_excerpt_ending = trim( prc.agSettings.ag_display_excerpt_ending );
-		prc.agSettings.ag_display_read_more_text = trim( prc.agSettings.ag_display_read_more_text );
-		*/
-
-
 		return errors;
 
 	}
