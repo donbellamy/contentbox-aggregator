@@ -29,6 +29,14 @@ component extends="coldbox.system.EventHandler" {
 			rc.format = "html";
 		}
 
+		// Default description and keywords
+		if ( len( trim( prc.agSettings.ag_portal_description ) ) ) {
+			cbHelper.setMetaDescription( prc.agSettings.ag_portal_description );
+		}
+		if ( len( trim( prc.agSettings.ag_portal_keywords ) ) ) {
+			cbHelper.setMetaKeywords( prc.agSettings.ag_portal_keywords );
+		}
+
 	}
 
 	function index( event, rc, prc ) {
@@ -91,8 +99,6 @@ component extends="coldbox.system.EventHandler" {
 		// Set the page title
 		title = prc.agSettings.ag_portal_title & title;
 		cbHelper.setMetaTitle( title );
-
-		// TODO: Set keywords and description ?
 
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
@@ -163,8 +169,6 @@ component extends="coldbox.system.EventHandler" {
 			title = " - " & prc.formattedDate & title;
 			title = prc.agSettings.ag_portal_title & title;
 			cbHelper.setMetaTitle( title );
-
-			// TODO: Set keywords and description ?
 
 			// Set layout and view
 			event.setLayout( "../themes/default/layouts/aggregator" )
@@ -243,8 +247,6 @@ component extends="coldbox.system.EventHandler" {
 		title = prc.agSettings.ag_portal_feeds_title & title;
 		cbHelper.setMetaTitle( title );
 
-		// TODO: Set keywords and description ?
-
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeds" );
@@ -311,8 +313,16 @@ component extends="coldbox.system.EventHandler" {
 			announceInterception( "aggregator_onFeedView", { feed=prc.feed } );
 
 			// Set the page title
-			title = prc.feed.getTitle() & title;
+			title = ( len( trim( prc.feed.getHTMLTitle() ) ) ? prc.feed.getHTMLTitle() : prc.feed.getTitle() ) & title;
 			cbHelper.setMetaTitle( title );
+
+			// Description and keywords
+			if ( len( trim( prc.feed.getHTMLDescription() ) ) ) {
+				cbHelper.setMetaDescription( prc.feed.getHTMLDescription() );
+			}
+			if ( len( trim( prc.feed.getHTMLKeywords() ) ) ) {
+				cbHelper.setMetaKeywords( prc.feed.getHTMLKeywords() );
+			}
 
 			event.setLayout( "../themes/default/layouts/aggregator" )
 				.setView( "../themes/default/views/feed" );
