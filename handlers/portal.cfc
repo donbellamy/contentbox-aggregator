@@ -25,6 +25,7 @@ component extends="coldbox.system.EventHandler" {
 		}
 
 		// If UI export is disabled, default to contentbox
+		// TODO: even needed?
 		if ( !prc.cbSettings.cb_content_uiexport ) {
 			rc.format = "html";
 		}

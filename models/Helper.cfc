@@ -35,17 +35,17 @@ component accessors="true" singleton threadSafe {
 
 	boolean function isIndexView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.index" );
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.index" );
 	}
 
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.archives" );
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.archives" );
 	}
 
 	boolean function isFeedsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.feeds" );
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feeds" );
 	}
 
 	boolean function isFeedView() {
@@ -56,8 +56,21 @@ component accessors="true" singleton threadSafe {
 			//event.getPrivateValue( "staticExport", false )
 			//OR
 			// In executing view
-			event.getCurrentEvent() EQ "contentbox-rss-aggreagator:portal.feed"
+			event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feed"
 		);
+	}
+
+	Feed function getCurrentFeed() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "feed" ) ) {
+			return prc.feed;
+		} else {
+			throw(
+				message="Feed not found in collection",
+				detail="This probably means you are trying to use the feed in an non-feed page.",
+				type="aggregator.helper.InvalidFeedContext"
+			);
+		}
 	}
 
 	array function getCurrentFeeds() {
