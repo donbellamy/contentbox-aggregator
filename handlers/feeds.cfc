@@ -96,14 +96,27 @@ component extends="contentHandler" {
 		// Editor
 		event.paramValue( "contentID", 0 );
 		event.paramValue( "contentType", "Feed" );
+		event.paramValue( "siteUrl", "" );
 		event.paramValue( "feedUrl", "" );
 		event.paramValue( "title", "" );
+		event.paramValue( "tagLine", "" );
 		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
-		// Filtering
-		event.paramValue( "filterByAny", "" );
-		event.paramValue( "filterByAll", "" );
-		event.paramValue( "filterByNone", "" );
+		// Importing
+		event.paramValue( "isActive", true );
+		event.paramValue( "defaultStatus", "published" );
+		event.paramValue( "startDate", "" );
+		event.paramValue( "startTime", "" );
+		event.paramValue( "stopDate", "" );
+		event.paramValue( "stopTime", "" );
+		event.paramValue( "matchAnyFilter", "" );
+		event.paramValue( "matchAllFilter", "" );
+		event.paramValue( "matchNoneFilter", "" );
+		event.paramValue( "maxAge", "" );
+		event.paramValue( "maxAgeUnit", "" );
+		event.paramValue( "maxItems", "" );
+		event.paramValue( "importImages", "" );
+		event.paramValue( "missingImageBehavior", "" );
 		// SEO
 		event.paramValue( "htmlTitle", "" );
 		event.paramValue( "htmlKeywords", "" );
@@ -115,12 +128,6 @@ component extends="contentHandler" {
 		event.paramValue( "expireDate", "" );
 		event.paramValue( "expireTime", "" );
 		event.paramValue( "changelog", "" );
-		// Feed processing
-		event.paramValue( "isActive", true );
-		event.paramValue( "startDate", "" );
-		event.paramValue( "startTime", "" );
-		event.paramValue( "stopDate", "" );
-		event.paramValue( "stopTime", "" );
 		// Categories
 		event.paramValue( "newCategories", "" );
 

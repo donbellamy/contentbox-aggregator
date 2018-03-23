@@ -5,8 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!--- Page Includes --->
-	<!---#cb.quickView( "_blogIncludes" )#--->
 	<!--- Portal includes --->
 	#renderView( view="../themes/default/views/_aggregator_includes", args=args )#
 	<!--- ContentBoxEvent --->

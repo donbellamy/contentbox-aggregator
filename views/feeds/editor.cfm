@@ -150,6 +150,17 @@
 							</div>
 						</div>
 					</div>
+					#html.textfield(
+						label="Tag line:",
+						name="tagLine",
+						bind=prc.feed,
+						maxlength="255",
+						title="The tag line for this feed",
+						class="form-control",
+						wrapper="div class=controls",
+						labelClass="control-label",
+						groupWrapper="div class=form-group"
+					)#
 					<div class="form-group">
 						#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/content/markup", args={ content=prc.feed } )#
 						#html.textarea(

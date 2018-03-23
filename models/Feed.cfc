@@ -20,6 +20,10 @@ component persistent="true"
 		notnull="true"
 		length="255";
 
+	property name="tagLine"
+		notnull="false"
+		length="255";
+
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
@@ -104,6 +108,7 @@ component persistent="true"
 
 	this.constraints["siteUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
+	this.constraints["tagLine"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
 	this.constraints["defaultStatus"] = { required=true, regex="(draft|published)" };
@@ -219,10 +224,12 @@ component persistent="true"
 
 		siteUrl = trim( left( siteUrl, 255 ) );
 		feedUrl = trim( left( feedUrl, 255 ) );
+		tagLine = trim( left( tagLine, 255 ) );
 		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
 		matchAllFilter = trim( left( matchAllFilter, 255 ) );
 		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
+		if( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
 		if( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
 		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
 		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
