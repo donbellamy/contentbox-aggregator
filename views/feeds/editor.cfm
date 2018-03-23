@@ -40,8 +40,8 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##options" aria-controls="options" role="tab" data-toggle="tab">
-							<i class="fa fa-gear"></i> Options
+						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
+							<i class="fa fa-download"></i> Importing
 						</a>
 					</li>
 					<li role="presentation">
@@ -171,7 +171,124 @@
 						)#
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="options">
+				<div role="tabpanel" class="tab-pane" id="importing">
+					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+						<fieldset>
+							<legend><i class="fa fa-download fa-lg"></i> Importing Options</legend>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="isActive",
+									content="Import State"
+								)#
+								<div class="controls">
+									#html.select(
+										name="isActive",
+										options=[{name="Active",value="true"},{name="Paused",value="false"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getIsActive(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="defaultStatus",
+									content="Default Item Status"
+								)#
+								<div class="controls">
+									#html.select(
+										name="defaultStatus",
+										options=[{name="Draft",value="draft"},{name="Published",value="published"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getDefaultStatus(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="startDate",
+									content="Start Date"
+								)#
+								<div class="controls row">
+									<div class="col-md-6">
+										<div class="input-group">
+											#html.inputField(
+												size="9",
+												name="startDate",
+												value=prc.feed.getStartDateForEditor(),
+												class="form-control datepicker",
+												placeholder="Immediately"
+											)#
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									</div>
+									<cfscript>
+										theTime = "";
+										hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
+										minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
+										if ( len( hour ) && len( minute ) ) {
+											theTime = hour & ":" & minute;
+										}
+									</cfscript>
+									<div class="col-md-6">
+										<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+											<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
+											<span class="input-group-addon">
+												<span class="fa fa-clock-o"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="stopDate",
+									content="Stop Date"
+								)#
+								<div class="controls row">
+									<div class="col-md-6">
+										<div class="input-group">
+											#html.inputField(
+												size="9",
+												name="stopDate",
+												value=prc.feed.getStopDateForEditor(),
+												class="form-control datepicker",
+												placeholder="Never"
+											)#
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									</div>
+									<cfscript>
+										theTime = "";
+										hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
+										minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
+										if ( len( hour ) && len( minute ) ) {
+											theTime = hour & ":" & minute;
+										}
+									</cfscript>
+									<div class="col-md-6">
+										<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+											<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
+											<span class="input-group-addon">
+												<span class="fa fa-clock-o"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</cfif>
 					<fieldset>
 						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 						<div class="form-group">
@@ -511,133 +628,6 @@
 									<cfelse>
 										<p>No items imported.</p>
 									</cfif>
-								</div>
-							</div>
-						</div>
-					</cfif>
-					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##processing">
-										<i class="fa fa-cogs fa-lg"></i> Feed Processing
-									</a>
-								</h4>
-							</div>
-							<div id="processing" class="panel-collapse collapse">
-								<div class="panel-body">
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="isActive",
-											content="Import State"
-										)#
-										<div class="controls">
-											#html.select(
-												name="isActive",
-												options=[{name="Active",value="true"},{name="Paused",value="false"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.feed.getIsActive(),
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="defaultStatus",
-											content="Default Item Status"
-										)#
-										<div class="controls">
-											#html.select(
-												name="defaultStatus",
-												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.feed.getDefaultStatus(),
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="startDate",
-											content="Start Date"
-										)#
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9",
-														name="startDate",
-														value=prc.feed.getStartDateForEditor(),
-														class="form-control datepicker",
-														placeholder="Immediately"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<cfscript>
-												theTime = "";
-												hour = prc.ckHelper.ckHour( prc.feed.getStartDateForEditor( showTime=true ) );
-												minute = prc.ckHelper.ckMinute( prc.feed.getStartDateForEditor( showTime=true ) );
-												if ( len( hour ) && len( minute ) ) {
-													theTime = hour & ":" & minute;
-												}
-											</cfscript>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#theTime#" name="startTime" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="stopDate",
-											content="Stop Date"
-										)#
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9",
-														name="stopDate",
-														value=prc.feed.getStopDateForEditor(),
-														class="form-control datepicker",
-														placeholder="Never"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<cfscript>
-												theTime = "";
-												hour = prc.ckHelper.ckHour( prc.feed.getStopDateForEditor( showTime=true ) );
-												minute = prc.ckHelper.ckMinute( prc.feed.getStopDateForEditor( showTime=true ) );
-												if ( len( hour ) && len( minute ) ) {
-													theTime = hour & ":" & minute;
-												}
-											</cfscript>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#theTime#" name="stopTime" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
