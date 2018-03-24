@@ -138,17 +138,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										if ( len( trim( item.author ) ) ) {
 											feedItem.setItemAuthor( item.author );
 										}
-										var now = now();
-										if ( isDate( item.datePublished ) ) {
-											feedItem.setDatePublished( item.datePublished );
-										} else {
-											feedItem.setDatePublished( now );
-										}
-										if ( isDate( item.dateUpdated ) ) {
-											feedItem.setDateUpdated( item.dateUpdated );
-										} else {
-											feedItem.setDateUpdated( now );
-										}
 										feedItem.setMetaInfo( serializeJSON( item ) );
 										feedItem.setParent( arguments.feed );
 
@@ -161,19 +150,22 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											changelog="Item imported.",
 											author=arguments.author
 										);
-										if ( feedItem.getDatePublished() GT now ) {
-											feedItem.setPublishedDate( feedItem.getDatePublished() );
+										var now = now();
+										if ( isDate( item.datePublished ) ) {
+											feedItem.setPublishedDate( item.datePublished );
 										} else {
 											feedItem.setPublishedDate( now );
+										}
+										if ( isDate( item.dateUpdated ) ) {
+											feedItem.setModifiedDate( item.dateUpdated );
+										} else {
+											feedItem.setModifiedDate( now );
 										}
 										if ( arguments.feed.autoPublishItems() ) {
 											feedItem.setIsPublished( true );
 										} else {
 											feedItem.setIsPublished( false );
 										}
-
-										// Save item
-										feedItemService.save( feedItem );
 
 										// Import images if enabled
 										if ( importImages ) {
@@ -237,10 +229,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/";
 															var imageUrl = folderUrl & imageName;
 
-															// Update feedItem
+															// Set image properties
 															feedItem.setFeaturedImage( imagePath );
 															feedItem.setFeaturedImageUrl( imageUrl );
-															feedItemService.save( feedItem );
 
 														} else {
 
@@ -266,6 +257,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											}
 
 										}
+
+										// Save item
+										feedItemService.save( feedItem );
 
 										// Increase item count
 										itemCount++;

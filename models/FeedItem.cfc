@@ -29,15 +29,6 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	property name="datePublished"
-		notnull="true"
-		ormtype="timestamp"
-		index="idx_datePublished";
-
-	property name="dateUpdated"
-		notnull="true"
-		ormtype="timestamp";
-
 	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
@@ -62,8 +53,6 @@ component persistent="true"
 	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["author"] = { required=false, size="1..255" };
-	this.constraints["datePublished"] = { required=true, type="date" };
-	this.constraints["dateUpdated"] = { required=false, type="date" };
 
 	FeedItem function init() {
 		super.init();
@@ -100,15 +89,13 @@ component persistent="true"
 
 	}
 
-	// TODO: Move Helper rendered content to here, so we can use it below
-
 	struct function getResponseMemento(
 		required array slugCache=[],
 		boolean showAuthor=false,
 		boolean showComments=false,
 		boolean showCustomFields=false,
 		boolean showContentVersions=false,
-		boolean showParent=true,
+		boolean showParent=false,
 		boolean showChildren=false,
 		boolean showCategories=true,
 		boolean showRelatedContent=false,
@@ -119,18 +106,24 @@ component persistent="true"
 
 		var result 	= super.getResponseMemento( argumentCollection=arguments );
 
-		result[ "excerpt" ] = renderExcerpt(); // TODO: ContentExcerpt here
-		result[ "featuredImageUrl" ] = getFeaturedImageUrl();
-		// TODO: add feeditem properties here
+		result["excerpt"] = renderExcerpt();
+		result["uniqueId"] = getUniqueId();
+		result["itemUrl"] = getItemUrl();
+		result["itemAuthor"] = getItemAuthor();
+		result["feed"] = {
+			"slug" = getParent().getSlug(),
+			"title" = getParent().getTitle(),
+			"contentType" = getParent().getContentType()
+		};
 
 		return result;
 
 	}
 
-	string function getFeaturedImageUrl() {
+	string function getImageUrl() {
 
-		if ( len( super.getFeaturedImageUrl() ) ) {
-			return super.getFeaturedImageUrl();
+		if ( len( getFeaturedImageUrl() ) ) {
+			return getFeaturedImageUrl();
 		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
@@ -148,11 +141,6 @@ component persistent="true"
 
 	Feed function getFeed() {
 		return getParent();
-	}
-
-	string function getDisplayDatePublished( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
-		var datePublished = getDatePublished();
-		return dateFormat( datePublished, arguments.dateFormat ) & " " & timeFormat( datePublished, arguments.timeFormat );
 	}
 
 	array function validate() {

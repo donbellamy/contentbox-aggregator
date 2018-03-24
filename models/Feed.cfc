@@ -213,6 +213,27 @@ component persistent="true"
 		return dateFormat( lastImportedDate, arguments.dateFormat ) & " " & timeFormat( lastImportedDate, arguments.timeFormat );
 	}
 
+	struct function getResponseMemento(
+		required array slugCache=[],
+		boolean showAuthor=false,
+		boolean showComments=false,
+		boolean showCustomFields=false,
+		boolean showContentVersions=false,
+		boolean showParent=false,
+		boolean showChildren=false,
+		boolean showCategories=true,
+		boolean showRelatedContent=false,
+		boolean showStats=false,
+		boolean showCommentSubscriptions=false,
+		excludes="activeContent,linkedContent,commentSubscriptions,isDeleted,allowComments"
+	) {
+
+		var result 	= super.getResponseMemento( argumentCollection=arguments );
+
+		return result;
+
+	}
+
 	array function validate() {
 
 		var errors = [];

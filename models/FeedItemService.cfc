@@ -13,7 +13,7 @@ component extends="ContentService" singleton {
 		string feed="all",
 		string category="all",
 		string status="any",
-		string sortOrder="datePublished DESC",
+		string sortOrder="publishedDate DESC",
 		numeric max=0,
 		numeric offset=0,
 	) {
@@ -71,7 +71,7 @@ component extends="ContentService" singleton {
 		string category="",
 		string author="",
 		string feed="",
-		string sortOrder="datePublished DESC",
+		string sortOrder="publishedDate DESC",
 		boolean countOnly=false,
 		numeric max=0,
 		numeric offset=0
@@ -83,7 +83,6 @@ component extends="ContentService" singleton {
 		// Only published feed items and parent feed must also be published
 		c.isTrue( "isPublished" )
 			.isLT( "publishedDate", now() )
-			.isLT( "datePublished", now() )
 			.or( c.restrictions.isNull( "expireDate" ), c.restrictions.isGT( "expireDate", now() ) );
 		c.createAlias( "parent", "p" )
 			.isTrue( "p.isPublished" )
@@ -138,7 +137,6 @@ component extends="ContentService" singleton {
 				FROM cbFeedItem fi
 				WHERE fi.isPublished = true
 					AND fi.publishedDate <= :now
-					AND fi.datePublished <= :now
 					AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
 					AND fi.parent.isPublished = true
 					AND fi.parent.publishedDate <= :now
@@ -169,7 +167,6 @@ component extends="ContentService" singleton {
 		var hql = "FROM cbFeedItem fi
 			WHERE fi.isPublished = true
 				AND fi.publishedDate <= :now
-				AND fi.datePublished <= :now
 				AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
 				AND fi.parent.isPublished = true
 				AND fi.parent.publishedDate <= :now
@@ -204,7 +201,7 @@ component extends="ContentService" singleton {
 		)[1];
 
 		// Order by
-		hql &= " ORDER BY fi.datePublished DESC";
+		hql &= " ORDER BY fi.publishedDate DESC";
 
 		// Get the results
 		results.feedItems = executeQuery(

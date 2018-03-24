@@ -117,7 +117,6 @@ component extends="coldbox.system.EventHandler" {
 				event.setLayout( "../themes/default/layouts/aggregator" )
 					.setView( "../themes/default/views/feedindex" );
 			}
-
 		}
 
 	}
@@ -128,7 +127,8 @@ component extends="coldbox.system.EventHandler" {
 		event.paramValue( "page", 1 )
 			.paramValue( "year", 0 )
 			.paramValue( "month", 0 )
-			.paramValue( "day", 0 );
+			.paramValue( "day", 0 )
+			.paramValue( "format", "html" );
 
 		// Validate the passed date
 		var validDate = true;
@@ -186,9 +186,22 @@ component extends="coldbox.system.EventHandler" {
 			title = prc.agSettings.ag_portal_title & title;
 			cbHelper.setMetaTitle( title );
 
-			// Set layout and view
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feedarchives" );
+			// Formats
+			switch ( rc.format ) {
+				case "xml": case "json": {
+					var results = [];
+					for( var feedItem in prc.feedItems ){
+						results.append( feedItem.getResponseMemento() );
+					}
+					event.renderData( type=rc.format, data=results, xmlRootName="feedItems" );
+					break;
+				}
+				default: {
+					// Set layout and view
+					event.setLayout( "../themes/default/layouts/aggregator" )
+						.setView( "../themes/default/views/feedarchives" );
+				}
+			}
 
 		} else {
 

@@ -620,7 +620,7 @@
 																#feedItem.getTitle()#
 															</cfif>
 														</td>
-														<td class="text-center">#feedItem.getDisplayDatePublished()#</td>
+														<td class="text-center">#feedItem.getDisplayPublishedDate()#</td>
 													</tr>
 												</cfloop>
 											</tbody>

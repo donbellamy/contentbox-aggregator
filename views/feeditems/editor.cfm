@@ -131,7 +131,7 @@
 									<tr>
 										<th class="col-md-4">Date Published:</th>
 										<td class="col-md-8">
-											#prc.feedItem.getDisplayDatePublished()#
+											#prc.feedItem.getDisplayPublishedDate()#
 										</td>
 									</tr>
 									<tr>

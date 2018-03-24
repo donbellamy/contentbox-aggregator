@@ -33,22 +33,22 @@
 			</cfif>
 			<div class="col-sm-5 pull-right text-right">
 				<i class="fa fa-calendar"></i>
-				<time datetime="#feedItem.getDisplayDatePublished()#" title="#feedItem.getDisplayDatePublished()#">#ag.timeAgo( feedItem.getDisplayDatePublished() )#</time>
+				<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 			</div>
 		</div>
 	</div>
 	<cfif args.showExcerpt >
-		<cfset featuredImageUrl = feedItem.getFeaturedImageUrl() />
+		<cfset imageUrl = feedItem.getImageUrl() />
 		<div class="post-content row">
-			<cfif len( featuredImageUrl ) >
+			<cfif len( imageUrl ) >
 				<div class="col-sm-3">
 					<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
 						<cfif args.useNoFollow >rel="nofollow"</cfif>
-						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#featuredImageUrl#" /></a>
+						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 				</div>
 			</cfif>
-			<div class="<cfif len( featuredImageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
+			<div class="<cfif len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
 				<cfif feedItem.hasExcerpt() >
 					#feedItem.renderExcerpt()#
 				<cfelse>

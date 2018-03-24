@@ -156,7 +156,7 @@ component extends="coldbox.system.Interceptor" {
 				}
 				var c = feedItemService.newCriteria()
 					.eq( "parent.contentID", item.getContentID() )
-					.isLT( "datePublished", maxDate );
+					.isLT( "publishedDate", maxDate );
 				var feedItems = c.list( asQuery=false );
 				for ( var feedItem IN feedItems ) {
 					var uniqueId = feedItem.getUniqueId();

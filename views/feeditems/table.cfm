@@ -5,7 +5,7 @@
 			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'contentID')"/></th>
 			<th>Name</th>
 			<th width="125">Feed</th>
-			<th width="100">Date Published</th>
+			<th width="100">Published Date</th>
 			<th width="40" class="text-center"><i class="fa fa-globe fa-lg" title="Published Status"></i></th>
 			<th width="40" class="text-center"><i class="fa fa-signal fa-lg" title="Hits"></i></th>
 			<th width="100" class="text-center {sorter:false}">Actions</th>
@@ -32,7 +32,7 @@
 					<br/><small><i class="fa fa-tag"></i> #feedItem.getCategoriesList()#</small>
 				</td>
 				<td><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feedItem.getFeed().getContentID()#" title="Edit Feed">#feedItem.getFeed().getTitle()#</a></td>
-				<td nowrap="nowrap">#feedItem.getDisplayDatePublished()#</td>
+				<td nowrap="nowrap">#feedItem.getDisplayPublishedDate()#</td>
 				<td class="text-center">
 					<cfif feedItem.isExpired() >
 						<i id="status_#feedItem.getContentID()#" class="fa fa-clock-o fa-lg textRed" title="Feed item expired on (#feedItem.getDisplayExpireDate()#)"></i>
@@ -74,6 +74,8 @@
 								</cfif>--->
 								<!--- TODO: History ?
 								<li><a href="#event.buildLink(prc.xehEntryHistory)#/contentID/#entry.getContentID()#"><i class="fa fa-clock-o fa-lg"></i> History</a></li>--->
+								<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-ban fa-lg"></i> Draft </a></li>
+								<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
