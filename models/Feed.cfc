@@ -142,7 +142,7 @@ component persistent="true"
 		return getNumberOfChildren();
 	}
 
-	boolean function isActive() {
+	boolean function canImport() {
 		return getIsActive() && ( !isDate( getStartDate() ) || getStartDate() LTE now() ) && ( !isDate( getStopDate() ) || getStopDate() GTE now() );
 	}
 
@@ -229,6 +229,38 @@ component persistent="true"
 	) {
 
 		var result 	= super.getResponseMemento( argumentCollection=arguments );
+
+		result["siteUrl"] = getSiteUrl();
+		result["feedUrl"] = getFeedUrl();
+		result["tagLine"] = getTagLine();
+		result["lastImportedDate"] = getDisplayLastImportedDate();
+		result["isActive"] = canImport();
+		/*result["feedItems"] = [];
+		if ( hasFeedItem() ) {
+			for ( var feedItem IN getFeedItems() ) {
+				if ( feedItem.isContentPublished() ) {
+					arrayAppend( result["feedItems"], {
+						"slug" = feedItem.getSlug(),
+						"title" = feedItem.getTitle()
+					});
+				}
+			}
+		}*/
+
+		/*
+		No reason to make these fields public
+		"startDate"
+		"stopDate"
+		"defaultStatus"
+		"matchAnyFilter"
+		"matchAllFilter"
+		"matchNoneFilter"
+		"maxAge"
+		"maxAgeUnit"
+		"maxItems"
+		"importImages"
+		"missingImageBehavior"
+		*/
 
 		return result;
 

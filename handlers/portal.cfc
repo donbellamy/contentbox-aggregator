@@ -24,8 +24,7 @@ component extends="coldbox.system.EventHandler" {
 			}
 		}
 
-		// If UI export is disabled, default to contentbox
-		// TODO: even needed?
+		// If UI export is disabled, default to html
 		if ( !prc.cbSettings.cb_content_uiexport ) {
 			rc.format = "html";
 		}
@@ -244,7 +243,8 @@ component extends="coldbox.system.EventHandler" {
 	function feeds( event, rc, prc ) {
 
 		// Set params
-		event.paramValue( "page", 1 );
+		event.paramValue( "page", 1 )
+			.paramValue( "format", "html" );
 
 		// Set vars
 		var title = " | " & cbHelper.siteName();
@@ -280,6 +280,23 @@ component extends="coldbox.system.EventHandler" {
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeds" );
 
+		// Formats
+		switch ( rc.format ) {
+			case "xml": case "json": {
+				var results = [];
+				for( var feed in prc.feeds ){
+					results.append( feed.getResponseMemento() );
+				}
+				event.renderData( type=rc.format, data=results, xmlRootName="feeds" );
+				break;
+			}
+			default: {
+				// Set layout and view
+				event.setLayout( "../themes/default/layouts/aggregator" )
+					.setView( "../themes/default/views/feeds" );
+			}
+		}
+
 	}
 
 	function feed( event, rc, prc ) {
@@ -287,7 +304,8 @@ component extends="coldbox.system.EventHandler" {
 		// Set params
 		event.paramValue( "slug", "" )
 			.paramValue( "page", 1 )
-			.paramValue( "author", "" );
+			.paramValue( "author", "" )
+			.paramValue( "format", "html" );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -353,8 +371,24 @@ component extends="coldbox.system.EventHandler" {
 				cbHelper.setMetaKeywords( prc.feed.getHTMLKeywords() );
 			}
 
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feed" );
+			// Formats
+			switch ( rc.format ) {
+				case "xml": case "json": {
+					var feedMemento = prc.feed.getResponseMemento();
+					var results = [];
+					for( var feedItem in prc.feedItems ){
+						results.append( feedItem.getResponseMemento() );
+					}
+					feedMemento["feedItems"] = results;
+					event.renderData( type=rc.format, data=feedMemento, xmlRootName="feed" );
+					break;
+				}
+				default: {
+					// Set layout and view
+					event.setLayout( "../themes/default/layouts/aggregator" )
+						.setView( "../themes/default/views/feed" );
+				}
+			}
 
 		} else {
 
@@ -371,7 +405,8 @@ component extends="coldbox.system.EventHandler" {
 	function feeditem( event, rc, prc ) {
 
 		// Set params
-		event.paramValue( "slug", "" );
+		event.paramValue( "slug", "" )
+			.paramValue( "format", "html" );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -391,8 +426,18 @@ component extends="coldbox.system.EventHandler" {
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			// Relocate to item url
-			location( url=feedItem.getItemUrl(), addToken="no" );
+			// Formats
+			switch ( rc.format ) {
+				case "xml": case "json": {
+					event.renderData( type=rc.format, data=feedItem.getResponseMemento(), xmlRootName="feedItem" );
+					break;
+				}
+				default: {
+					// Relocate to item url
+					location( url=feedItem.getItemUrl(), addToken="no" );
+				}
+			}
+
 
 		} else {
 

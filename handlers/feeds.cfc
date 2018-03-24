@@ -143,7 +143,7 @@ component extends="contentHandler" {
 
 		prc.feed = feedService.get( rc.contentID );
 		var originalSlug = prc.feed.getSlug();
-		var wasPaused = !prc.feed.isActive();
+		var wasPaused = !prc.feed.canImport();
 
 		populateModel( prc.feed )
 			.addJoinedPublishedtime( rc.publishedTime )
@@ -189,7 +189,7 @@ component extends="contentHandler" {
 
 		feedService.save( prc.feed );
 
-		if ( isNew && prc.feed.isActive() || wasPaused && prc.feed.isActive() ) {
+		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}
 

@@ -112,8 +112,7 @@ component persistent="true"
 		result["itemAuthor"] = getItemAuthor();
 		result["feed"] = {
 			"slug" = getParent().getSlug(),
-			"title" = getParent().getTitle(),
-			"contentType" = getParent().getContentType()
+			"title" = getParent().getTitle()
 		};
 
 		return result;
