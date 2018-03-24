@@ -85,7 +85,7 @@ component extends="coldbox.system.Interceptor" {
 		// Hide custom fields and insert options
 		if ( structKeyExists( prc, "feed" ) ) {
 			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; }</style>";
-			adminBar &= "<script>$('<a href=""#args.linkEdit###options"" class=""button options"" target=""_blank"">Options</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
+			adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button options"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
 		}
 
 		// Add to html

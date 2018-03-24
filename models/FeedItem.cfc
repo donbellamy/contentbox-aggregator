@@ -43,6 +43,12 @@ component persistent="true"
 		ormtype="text";
 
 	/* *********************************************************************
+	**							DI INJECTIONS
+	********************************************************************* */
+
+	property name="settingService" inject="settingService@aggregator" persistent="false";
+
+	/* *********************************************************************
 	**							NON PERSISTED PROPERTIES
 	********************************************************************* */
 
@@ -77,7 +83,8 @@ component persistent="true"
 
 	string function renderExcerpt() {
 
-		if ( NOT len( renderedExcerpt ) ) {
+		// TODO: Should we empty this onsave? - look at entry onsave
+		if ( len( getExcerpt() ) AND NOT len( renderedExcerpt ) ) {
 			lock name="contentbox.excerptrendering.#getContentID()#" type="exclusive" throwontimeout="true" timeout="10" {
 				var b = createObject( "java","java.lang.StringBuilder" ).init( getExcerpt() );
 				var iData = {
@@ -90,6 +97,52 @@ component persistent="true"
 		}
 
 		return renderedExcerpt;
+
+	}
+
+	// TODO: Move Helper rendered content to here, so we can use it below
+
+	struct function getResponseMemento(
+		required array slugCache=[],
+		boolean showAuthor=false,
+		boolean showComments=false,
+		boolean showCustomFields=false,
+		boolean showContentVersions=false,
+		boolean showParent=true,
+		boolean showChildren=false,
+		boolean showCategories=true,
+		boolean showRelatedContent=false,
+		boolean showStats=false,
+		boolean showCommentSubscriptions=false,
+		excludes="activeContent,linkedContent,commentSubscriptions,isDeleted,allowComments,HTMLTitle,HTMLDescription,HTMLKeywords"
+	) {
+
+		var result 	= super.getResponseMemento( argumentCollection=arguments );
+
+		result[ "excerpt" ] = renderExcerpt(); // TODO: ContentExcerpt here
+		result[ "featuredImageUrl" ] = getFeaturedImageUrl();
+		// TODO: add feeditem properties here
+
+		return result;
+
+	}
+
+	string function getFeaturedImageUrl() {
+
+		if ( len( super.getFeaturedImageUrl() ) ) {
+			return super.getFeaturedImageUrl();
+		} else {
+			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			var feed = getFeed();
+			var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : settings.ag_importing_image_missing_behavior;
+			if ( behavior == "feed" ) {
+				return feed.getFeaturedImageUrl();
+			} else if ( behavior == "default" ) {
+				return settings.ag_importing_image_default_url;
+			} else {
+				return "";
+			}
+		}
 
 	}
 

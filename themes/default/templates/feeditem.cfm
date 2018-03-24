@@ -38,14 +38,14 @@
 		</div>
 	</div>
 	<cfif args.showExcerpt >
-		<cfset featuredImageUrl = ag.getFeedItemFeaturedImageUrl( feedItem ) />
+		<cfset featuredImageUrl = feedItem.getFeaturedImageUrl() />
 		<div class="post-content row">
 			<cfif len( featuredImageUrl ) >
 				<div class="col-sm-3">
 					<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
-					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.useNoFollow >rel="nofollow"</cfif>
-					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#featuredImageUrl#" /></a>
+						<cfif args.openNewWindow >target="_blank"</cfif>
+						<cfif args.useNoFollow >rel="nofollow"</cfif>
+						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#featuredImageUrl#" /></a>
 				</div>
 			</cfif>
 			<div class="<cfif len( featuredImageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">

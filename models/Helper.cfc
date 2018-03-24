@@ -205,21 +205,7 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Feed Item Methods *********************************************/
 
-	string function getFeedItemFeaturedImageUrl( required FeedItem feedItem ) {
-		var feed = arguments.feedItem.getFeed();
-		var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : setting("ag_importing_image_missing_behavior");
-		if ( len( feedItem.getFeaturedImageUrl() ) ) {
-			return feedItem.getFeaturedImageUrl();
-		} else if ( behavior == "default" ) {
-			return setting("ag_importing_image_default_url");
-		} else if ( behavior == "feed" ) {
-			return feed.getFeaturedImageUrl();
-		} else {
-			return "";
-		}
-	}
-
-	// TODO: Should probably rename this so it isn't confused with the actual renderedExcerpt
+	// TODO: Should probably rename this so it isn't confused with the actual renderedExcerpt and move to FeedItem
 	string function renderContentExcerpt( required FeedItem feedItem, numeric count=500, string excerptEnding="..." ) {
 		var content = trim( left( stripHtml( arguments.feedItem.getContent() ), arguments.count ) );
 		return "<p>" & content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" ) & "</p>";
