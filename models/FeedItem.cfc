@@ -66,6 +66,10 @@ component persistent="true"
 		return this;
 	}
 
+	Feed function getFeed() {
+		return getParent();
+	}
+
 	boolean function hasExcerpt() {
 		return len( trim( getExcerpt() ) );
 	}
@@ -138,8 +142,14 @@ component persistent="true"
 
 	}
 
-	Feed function getFeed() {
-		return getParent();
+	string function getContentExcerpt( numeric count=500, string excerptEnding="..." ) {
+
+		var content = reReplaceNoCase( getContent(), "<[^>]*>", "", "ALL" );
+		content = trim( left( content, arguments.count ) );
+		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
+
+		return "<p>" & content & "</p>";
+
 	}
 
 	array function validate() {

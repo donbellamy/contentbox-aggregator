@@ -235,20 +235,8 @@ component persistent="true"
 		result["tagLine"] = getTagLine();
 		result["lastImportedDate"] = getDisplayLastImportedDate();
 		result["isActive"] = canImport();
-		/*result["feedItems"] = [];
-		if ( hasFeedItem() ) {
-			for ( var feedItem IN getFeedItems() ) {
-				if ( feedItem.isContentPublished() ) {
-					arrayAppend( result["feedItems"], {
-						"slug" = feedItem.getSlug(),
-						"title" = feedItem.getTitle()
-					});
-				}
-			}
-		}*/
 
 		/*
-		No reason to make these fields public
 		"startDate"
 		"stopDate"
 		"defaultStatus"

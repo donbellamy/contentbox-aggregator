@@ -52,7 +52,7 @@
 				<cfif feedItem.hasExcerpt() >
 					#feedItem.renderExcerpt()#
 				<cfelse>
-					#ag.renderContentExcerpt( feedItem, val( args.characterLimit ), args.excerptEnding )#
+					#feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
 				</cfif>
 				<cfif args.showReadMore >
 					<div class="post-more">

@@ -203,14 +203,6 @@ component accessors="true" singleton threadSafe {
 		);
 	}
 
-	/************************************** Feed Item Methods *********************************************/
-
-	// TODO: Should probably rename this so it isn't confused with the actual renderedExcerpt and move to FeedItem
-	string function renderContentExcerpt( required FeedItem feedItem, numeric count=500, string excerptEnding="..." ) {
-		var content = trim( left( stripHtml( arguments.feedItem.getContent() ), arguments.count ) );
-		return "<p>" & content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" ) & "</p>";
-	}
-
 	/************************************** UTILITIES *********************************************/
 
 	string function stripHtml( stringTarget ) {
