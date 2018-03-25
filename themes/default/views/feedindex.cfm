@@ -35,11 +35,13 @@
 						<br/><small>Category Results</small>
 					</div>
 				</cfif>
-				#ag.quickFeedItems()#
 				<cfif prc.itemCount >
+					#ag.quickFeedItems()#
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
+				<cfelse>
+					<div>No results found.</div>
 				</cfif>
 				#cb.event( "aggregator_postIndexDisplay" )#
 			</div>

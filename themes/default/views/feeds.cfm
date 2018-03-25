@@ -21,11 +21,13 @@
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event( "aggregator_preFeedsDisplay" )#
-				#ag.quickFeeds()#
 				<cfif prc.itemCount >
+					#ag.quickFeeds()#
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
+				<cfelse>
+					<div>No results found.</div>
 				</cfif>
 				#cb.event( "aggregator_postFeedsDisplay" )#
 			</div>
