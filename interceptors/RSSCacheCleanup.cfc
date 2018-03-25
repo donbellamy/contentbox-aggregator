@@ -1,14 +1,29 @@
 component extends="coldbox.system.Interceptor" {
 
-	// postfeedimport ?
-	// postfeedimportprocess ?
+	property name="rssService" inject="rssService@aggregator";
+
+	function aggregator_postFeedSave( event, interceptData ) {
+		rssService.clearCaches();
+	}
+
+	function aggregator_postFeedRemove( event, interceptData ) {
+		rssService.clearCaches();
+	}
 
 	function aggregator_postFeedItemSave( event, interceptData ) {
-		//getModel( "rssService@cb" ).clearCaches();
+		rssService.clearCaches();
 	}
-	
+
 	function aggregator_postFeedItemRemove( event, interceptData ) {
-		//getModel( "rssService@cb" ).clearCaches();
+		rssService.clearCaches();
+	}
+
+	function aggregator_postFeedImports( event, interceptData ) {
+		rssService.clearCaches();
+	}
+
+	function aggregator_postSettingsSave( event, interceptData ) {
+		rssService.clearCaches();
 	}
 
 }

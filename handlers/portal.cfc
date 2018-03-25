@@ -480,6 +480,9 @@ component extends="coldbox.system.EventHandler" {
 				announceInterception( "aggregator_postFeedImport", { feed=feed } );
 			}
 
+			// Post feed imports
+			announceInterception( "aggregator_postFeedImports" );
+
 			// Relocate
 			setNextEvent( prc.xehPortalHome );
 

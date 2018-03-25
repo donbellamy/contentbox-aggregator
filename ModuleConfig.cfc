@@ -94,7 +94,7 @@ component {
 				"aggregator_preFeedSave","aggregator_postFeedSave",
 				"aggregator_preFeedRemove","aggregator_postFeedRemove",
 				"aggregator_onFeedStatusUpdate","aggregator_onFeedStateUpdate",
-				"aggregator_preFeedImport","aggregator_postFeedImport",
+				"aggregator_preFeedImport","aggregator_postFeedImport", "aggregator_postFeedImports",
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate",

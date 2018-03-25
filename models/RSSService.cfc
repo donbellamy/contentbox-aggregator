@@ -12,6 +12,20 @@ component singleton {
 		return this;
 	}
 
+	RSSService function clearCaches() {
+
+		// Set vars
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
+		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems";
+
+		// Clear cache
+		cache.clearByKeySnippet(keySnippet=cacheKey,async=false);
+
+		return this;
+
+	}
+
 	string function getRSS( string category="", string feed="" ) {
 
 		// Set vars, ( we use cb-feeds so cache can be cleared in admin )

@@ -319,6 +319,7 @@ component extends="contentHandler" {
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}
+			announceInterception( "aggregator_postFeedImports" );
 			cbMessagebox.info( messageArray=messages );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
