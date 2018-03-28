@@ -13,6 +13,8 @@ component extends="coldbox.system.Interceptor" {
 		doFeedImportCleanup();
 	}
 
+	/************************************** PRIVATE *********************************************/
+
 	private function doFeedImportCleanup( any feed ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );

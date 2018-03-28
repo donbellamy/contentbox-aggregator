@@ -6,26 +6,10 @@ component singleton {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="helper" inject="helper@aggregator";
 	property name="settingService" inject="settingService@aggregator";
-	property name="log" inject="logbox:logger:{this}";
+
 
 	RSSService function init() {
 		return this;
-	}
-
-	RSSService function clearCaches() {
-
-		// Set vars
-		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems";
-
-		// Clear cache
-		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
-
-		// TODO: log
-
-		return this;
-
 	}
 
 	string function getRSS( string category="", string feed="" ) {

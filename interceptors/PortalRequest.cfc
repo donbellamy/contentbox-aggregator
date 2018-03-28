@@ -1,7 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="settingService" inject="settingService@aggregator";
-	//property name="contentService" inject="contentService@cb";
+	property name="contentService" inject="contentService@cb";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="helper" inject="helper@aggregator";
 	property name="html" inject="HTMLHelper@coldbox";
@@ -64,10 +64,15 @@ component extends="coldbox.system.Interceptor" {
 
 		// Check for cache
 		if( structKeyExists( prc, "contentCacheData" ) ) {
-			if ( prc.contentCacheData.contentType neq "text/html" ) {
+			if ( prc.contentCacheData.contentType NEQ "text/html" ) {
 				return;
 			}
-			//args.oContent = contentService.get( prc.contentCacheData.contentID );
+			if ( val( prc.contentCacheData.contentID ) ) {
+				args.oContent = contentService.get( prc.contentCacheData.contentID );
+				if ( !isNull( args.oContent ) && args.oContent.getContentType() == "Feed" ) {
+					prc.feed = args.oContent;
+				}
+			}
 		}
 
 		// Check for feed

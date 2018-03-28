@@ -29,6 +29,8 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup();
 	}
 
+	/************************************** PRIVATE *********************************************/
+
 	private function doKeywordCleanup( any feed ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );

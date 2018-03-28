@@ -13,7 +13,7 @@ component extends="contentbox.models.content.ContentService" singleton {
 	}
 
 	string function getUniqueSlug( required string slug ) {
-		
+
 		var count = 1;
 		var uniqueSlug = arguments.slug;
 		var existing = findWhere( { slug=uniqueSlug } );
