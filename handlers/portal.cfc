@@ -1,5 +1,6 @@
 component extends="coldbox.system.EventHandler" {
 
+	// DI
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="antiSamy" inject="antisamy@cbantisamy";
 	property name="authorService" inject="authorService@cb";
@@ -11,6 +12,12 @@ component extends="coldbox.system.EventHandler" {
 	property name="helper" inject="helper@aggregator";
 	property name="rssService" inject="rssService@aggregator";
 	property name="settingService" inject="settingService@aggregator";
+	property name="themeService" inject="themeService@cb";
+	property name="dataMarshaller" inject="dataMarshaller@coldbox";
+	property name="contentService" inject="contentService@cb";
+
+	// Around handler exeptions
+	this.aroundhandler_except = "rss,import,onError,notFound";
 
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
@@ -35,6 +42,155 @@ component extends="coldbox.system.EventHandler" {
 		}
 		if ( len( trim( prc.agSettings.ag_portal_keywords ) ) ) {
 			cbHelper.setMetaKeywords( prc.agSettings.ag_portal_keywords );
+		}
+
+	}
+
+	function aroundHandler( event, targetAction, eventArguments, rc, prc ) {
+
+		// Set params
+		event.paramValue( "format", "html" );
+
+		// Set vars
+		var cacheEnabled = (
+			prc.agSettings.ag_portal_cache_enable AND
+			!event.valueExists("cbCache")
+		);
+
+		// Check the cache
+		if ( cacheEnabled ) {
+
+			// Set cache and cacheKey
+			var cache = cacheBox.getCache( prc.agSettings.ag_portal_cache_name );
+			var cacheKey = "cb-content-aggregator-#cgi.http_host#-#left( event.getCurrentRoutedURL(), 500 )#";
+			cacheKey &= hash( ".#getFWLocale()#.#rc.format#.#event.isSSL()#" & prc.cbox_incomingContextHash );
+
+			// Get cache
+			prc.contentCacheData = cache.get( cacheKey );
+
+			// Output cache if defined
+			if ( !isNull( prc.contentCacheData ) ) {
+
+				// Set cache headers
+				if ( prc.cbSettings.cb_content_cachingHeader ) {
+					event.setHTTPHeader( statusCode="203", statustext="ContentBoxCache Non-Authoritative Information" )
+						.setHTTPHeader( name="x-contentbox-cached-content", value="true" );
+				}
+
+				// Update hits
+				if ( val( prc.contentCacheData.contentID ) ) {
+					contentService.updateHits( prc.contentCacheData.contentID );
+				}
+
+				// Render the cached data
+				event.renderData(
+					data = prc.contentCacheData.content,
+					contentType = prc.contentCacheData.contentType,
+					isBinary = prc.contentCacheData.isBinary
+				);
+
+				// Return
+				return;
+
+			}
+
+		}
+
+		// Prepare data
+		var data = { contentID = "", contentType = "text/html", isBinary = false };
+
+		// Set arguments
+		var args = { event = arguments.event, rc = arguments.rc, prc = arguments.prc };
+		structAppend( args, arguments.eventArguments );
+
+		// Execute the wrapped action
+		var data.content = arguments.targetAction( argumentCollection=args );
+
+		// Generate content if needed
+		if ( isNull( data.content ) ) {
+			// Render the layout
+			data.content = renderLayout(
+				//layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
+				//module = "contentbox",
+				//viewModule = "contentbox"
+				layout = "../themes/default/layouts/aggregator",
+				module = "contentbox-rss-aggregator",
+				viewmodule = "contentbox-rss-aggregator"
+			);
+		}
+
+		// Switch on format
+		switch ( rc.format ) {
+			case "xml": case "json": {
+				var results = [];
+				var xmlRootName = "";
+				if ( structKeyExists( prc, "feed" ) ) {
+					xmlRootName = "feed";
+					results = prc.feed.getResponseMemento();
+					var feedItems = [];
+					for ( var feedItem in prc.feedItems ) {
+						feedItems.append( feedItem.getResponseMemento() );
+					}
+					results["feedItems"] = feedItems;
+				} else if ( structKeyExists( prc, "feedItems" ) ) {
+					xmlRootName = "feeditems"
+					for ( var feedItem IN prc.feedItems ) {
+						results.append( feedItem.getResponseMemento() );
+					}
+				}
+				if ( structKeyExists( prc, "feeds" ) ) {
+					xmlRootName = "feeds";
+					for ( var feed IN prc.feeds ) {
+						results.append( feed.getResponseMemento() );
+					}
+				}
+				if ( structKeyExists( prc, "feedItem" ) ) {
+					xmlRootName = "feeditem";
+					results = prc.feedItem.getResponseMemento();
+				}
+				if ( rc.format == "json" ) {
+					data.content = dataMarshaller.marshallData( data=results, type="json" );
+					data.contentType = "application/json";
+					data.isBinary = false;
+				} else {
+					data.content = dataMarshaller.marshallData( data=results, type="xml", xmlRootName=xmlRootName );
+					data.contentType = "text/xml";
+					data.isBinary = false;
+				}
+				break;
+			}
+			// TODO: pdf, doc stuff
+			default: {
+				data.contentType = "text/html";
+				data.isBinary = false;
+			}
+		}
+
+		// Render the data
+		event.renderData(
+			data = data.content,
+			contentType = data.contentType,
+			isBinary = data.isBinary
+		);
+
+		// Save cache
+		if ( cacheEnabled ) {
+
+			// Check for feed/feed item
+			if ( structKeyExists( prc, "feed" ) && prc.feed.isLoaded() ) {
+				data.contentID = prc.feed.getContentID();
+			} else if ( structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
+				data.contentID = prc.feedItem.getContentID();
+			}
+
+			// Set the cache
+			cache.set(
+				cacheKey,
+				data,
+				prc.agSettings.ag_portal_cache_timeout,
+				prc.agSettings.ag_portal_cache_timeout_idle
+			);
+
 		}
 
 	}
@@ -101,22 +257,9 @@ component extends="coldbox.system.EventHandler" {
 		title = prc.agSettings.ag_portal_title & title;
 		cbHelper.setMetaTitle( title );
 
-		// Formats
-		switch ( rc.format ) {
-			case "xml": case "json": {
-				var results = [];
-				for( var feedItem in prc.feedItems ){
-					results.append( feedItem.getResponseMemento() );
-				}
-				event.renderData( type=rc.format, data=results, xmlRootName="feedItems" );
-				break;
-			}
-			default: {
-				// Set layout and view
-				event.setLayout( "../themes/default/layouts/aggregator" )
-					.setView( "../themes/default/views/feedindex" );
-			}
-		}
+		// Set layout and view
+		event.setLayout( name="../themes/default/layouts/aggregator" )
+			.setView( view="../themes/default/views/feedindex" );
 
 	}
 
@@ -185,27 +328,15 @@ component extends="coldbox.system.EventHandler" {
 			title = prc.agSettings.ag_portal_title & title;
 			cbHelper.setMetaTitle( title );
 
-			// Formats
-			switch ( rc.format ) {
-				case "xml": case "json": {
-					var results = [];
-					for( var feedItem in prc.feedItems ){
-						results.append( feedItem.getResponseMemento() );
-					}
-					event.renderData( type=rc.format, data=results, xmlRootName="feedItems" );
-					break;
-				}
-				default: {
-					// Set layout and view
-					event.setLayout( "../themes/default/layouts/aggregator" )
-						.setView( "../themes/default/views/feedarchives" );
-				}
-			}
+			// Set layout and view
+			event.setLayout( "../themes/default/layouts/aggregator" )
+				.setView( "../themes/default/views/feedarchives" );
 
 		} else {
 
 			// Not found
 			notFound( argumentCollection=arguments );
+			return;
 
 		}
 
@@ -279,23 +410,6 @@ component extends="coldbox.system.EventHandler" {
 		// Set layout and view
 		event.setLayout( "../themes/default/layouts/aggregator" )
 			.setView( "../themes/default/views/feeds" );
-
-		// Formats
-		switch ( rc.format ) {
-			case "xml": case "json": {
-				var results = [];
-				for( var feed in prc.feeds ){
-					results.append( feed.getResponseMemento() );
-				}
-				event.renderData( type=rc.format, data=results, xmlRootName="feeds" );
-				break;
-			}
-			default: {
-				// Set layout and view
-				event.setLayout( "../themes/default/layouts/aggregator" )
-					.setView( "../themes/default/views/feeds" );
-			}
-		}
 
 	}
 
@@ -371,24 +485,9 @@ component extends="coldbox.system.EventHandler" {
 				cbHelper.setMetaKeywords( prc.feed.getHTMLKeywords() );
 			}
 
-			// Formats
-			switch ( rc.format ) {
-				case "xml": case "json": {
-					var feedMemento = prc.feed.getResponseMemento();
-					var results = [];
-					for( var feedItem in prc.feedItems ){
-						results.append( feedItem.getResponseMemento() );
-					}
-					feedMemento["feedItems"] = results;
-					event.renderData( type=rc.format, data=feedMemento, xmlRootName="feed" );
-					break;
-				}
-				default: {
-					// Set layout and view
-					event.setLayout( "../themes/default/layouts/aggregator" )
-						.setView( "../themes/default/views/feed" );
-				}
-			}
+			// Set layout and view
+			event.setLayout( "../themes/default/layouts/aggregator" )
+				.setView( "../themes/default/views/feed" );
 
 		} else {
 
@@ -397,6 +496,7 @@ component extends="coldbox.system.EventHandler" {
 
 			// Not found
 			notFound( argumentCollection=arguments );
+			return;
 
 		}
 
@@ -415,29 +515,21 @@ component extends="coldbox.system.EventHandler" {
 		}
 
 		// Get the feed item
-		var feedItem = feedItemService.findBySlug( rc.slug, showUnpublished );
+		prc.feedItem = feedItemService.findBySlug( rc.slug, showUnpublished );
 
 		// If loaded, else not found
-		if ( feedItem.isLoaded() ) {
+		if ( prc.feedItem.isLoaded() ) {
 
 			// Record hit
-			feedItemService.updateHits( feedItem.getContentID() );
+			feedItemService.updateHits( prc.feedItem.getContentID() );
 
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			// Formats
-			switch ( rc.format ) {
-				case "xml": case "json": {
-					event.renderData( type=rc.format, data=feedItem.getResponseMemento(), xmlRootName="feedItem" );
-					break;
-				}
-				default: {
-					// Relocate to item url
-					location( url=feedItem.getItemUrl(), addToken="no" );
-				}
-			}
-
+			// TODO: make a setting?
+			// Set layout and view
+			event.setLayout( "../themes/default/layouts/aggregator" )
+				.setView( "../themes/default/views/feeditem" );
 
 		} else {
 
@@ -446,6 +538,7 @@ component extends="coldbox.system.EventHandler" {
 
 			// Not found
 			notFound( argumentCollection=arguments );
+			return;
 
 		}
 
@@ -490,6 +583,7 @@ component extends="coldbox.system.EventHandler" {
 
 			// Not found
 			notFound( argumentCollection=arguments );
+			return;
 
 		}
 
@@ -526,8 +620,6 @@ component extends="coldbox.system.EventHandler" {
 
 		// Set header
 		event.setHTTPHeader( "404", "Page not found" );
-
-		// TODO: on404 ?
 
 		// Set layout and view
 		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )

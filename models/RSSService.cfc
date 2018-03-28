@@ -20,7 +20,9 @@ component singleton {
 		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems";
 
 		// Clear cache
-		cache.clearByKeySnippet(keySnippet=cacheKey,async=false);
+		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
+
+		// TODO: log
 
 		return this;
 
@@ -28,7 +30,7 @@ component singleton {
 
 	string function getRSS( string category="", string feed="" ) {
 
-		// Set vars, ( we use cb-feeds so cache can be cleared in admin )
+		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
 		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems-#hash( arguments.category & arguments.feed & "FeedItem" )#";
@@ -75,7 +77,7 @@ component singleton {
 		for ( var item IN feedItems ) {
 			queryAddRow( items, 1 );
 			querySetCell( items, "title", item.getTitle() );
-			var description = helper.renderContentExcerpt( item );
+			var description = item.getContentExcerpt();
 			if ( item.hasExcerpt() ) {
 				description = item.renderExcerpt();
 			}

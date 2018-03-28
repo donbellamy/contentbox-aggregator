@@ -169,7 +169,6 @@ component accessors="true" singleton threadSafe {
 			arguments.maxRows = prc.oPaging.getPagingMaxRows();
 		}
 		if ( prc.itemCount GT arguments.maxRows ) {
-			//writedump(arguments.maxRows);abort;
 			return prc.oPaging.renderit(
 				foundRows=prc.itemCount,
 				link=prc.pagingLink

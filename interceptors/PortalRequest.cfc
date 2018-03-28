@@ -1,6 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="settingService" inject="settingService@aggregator";
+	//property name="contentService" inject="contentService@cb";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="helper" inject="helper@aggregator";
 	property name="html" inject="HTMLHelper@coldbox";
@@ -61,13 +62,13 @@ component extends="coldbox.system.Interceptor" {
 			oCurrentAuthor=prc.oCurrentAuthor
 		};
 
-		// TODO: work this in when doing caching stuff
-		/*if( structKeyExists( prc, "contentCacheData" ) ){
-			if( prc.contentCacheData.contentType neq "text/html" ){
+		// Check for cache
+		if( structKeyExists( prc, "contentCacheData" ) ) {
+			if ( prc.contentCacheData.contentType neq "text/html" ) {
 				return;
 			}
-			var feed = contentService.get( prc.contentCacheData.contentID );
-		}*/
+			//args.oContent = contentService.get( prc.contentCacheData.contentID );
+		}
 
 		// Check for feed
 		if ( structKeyExists( prc, "feed" ) ) {
@@ -82,10 +83,11 @@ component extends="coldbox.system.Interceptor" {
 			args=args
 		);
 
+		// TODO: test this with caching
 		// Hide custom fields and insert options
 		if ( structKeyExists( prc, "feed" ) ) {
-			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; }</style>";
-			adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button options"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
+			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; } @media (max-width: 768px) { .button.importing{ display:none; } }</style>";
+			adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button importing"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
 		}
 
 		// Add to html
