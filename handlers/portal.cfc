@@ -370,7 +370,7 @@ component extends="coldbox.system.EventHandler" {
 		// Grab the rss feed
 		var rssFeed = rssService.getRSS(
 			category=rc.category,
-			feed=rc.slug
+			slug=rc.slug
 		);
 
 		// Announce event

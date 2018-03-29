@@ -42,7 +42,7 @@ component singleton {
 
 	/************************************** PRIVATE *********************************************/
 
-	private string function buildFeed( string category="", string feed="" ) {
+	private string function buildFeed( string category="", string slug="" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting("aggregator") );
@@ -51,7 +51,7 @@ component singleton {
 		// Get results
 		var results = feedItemService.getPublishedFeedItems(
 			category=arguments.category,
-			feed=arguments.feed,
+			feed=arguments.slug,
 			max=settings.ag_rss_max_items
 		);
 		var feedItems = results.feedItems;
@@ -79,9 +79,16 @@ component singleton {
 		}
 
 		// Populate the feedStruct
-		// TODO: If feed is passed in then adjust the title and?
-		feedStruct.title = settings.ag_rss_title;
-		feedStruct.description = settings.ag_rss_description;
+		if ( len( arguments.slug ) ) {
+			var feed = feedService.findBySlug( arguments.slug );
+			feedStruct.title = feed.getTitle();
+			feedStruct.description = feed.getTagLine();
+			feedStruct.link = helper.linkFeed( feed );
+		} else {
+			feedStruct.title = settings.ag_rss_title;
+			feedStruct.description = settings.ag_rss_description;
+			feedStruct.link = helper.linkPortal();
+		}
 		feedStruct.generator = settings.ag_rss_generator;
 		feedStruct.copyright = settings.ag_rss_copyright;
 		if( len( settings.ag_rss_webmaster ) ) {
@@ -89,7 +96,7 @@ component singleton {
 		}
 		feedStruct.pubDate = now();
 		feedStruct.lastBuildDate = now();
-		feedStruct.link = helper.linkPortal();
+
 		feedStruct.items = items;
 
 		// Return the generated the feed
