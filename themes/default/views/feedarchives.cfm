@@ -40,7 +40,7 @@
 			</div>
 			<cfif args.sidebar >
 				<div class="col-sm-3" id="blog-sidenav">
-					#renderView( view="../themes/default/views/_aggregator_sidebar", args=args )#
+					#cb.quickView( view="_aggregator_sidebar", args=args )#
 				</div>
 			</cfif>
 		</div>
