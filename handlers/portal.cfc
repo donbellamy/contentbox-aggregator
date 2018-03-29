@@ -109,13 +109,9 @@ component extends="coldbox.system.EventHandler" {
 		if ( isNull( data.content ) ) {
 			// Render the layout
 			data.content = renderLayout(
-				// TODO: Do this
-				//layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
-				//module = "contentbox",
-				//viewModule = "contentbox"
-				layout = "../themes/default/layouts/aggregator",
-				module = "contentbox-rss-aggregator",
-				viewmodule = "contentbox-rss-aggregator"
+				layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
+				module = "contentbox",
+				viewModule = "contentbox"
 			);
 		}
 
@@ -268,8 +264,8 @@ component extends="coldbox.system.EventHandler" {
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
-		event.setLayout( name="../themes/default/layouts/aggregator" )
-			.setView( view="../themes/default/views/feedindex" );
+		event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+			.setView( view="#prc.cbTheme#/views/feedindex", module="contentbox" );
 
 	}
 
@@ -339,8 +335,8 @@ component extends="coldbox.system.EventHandler" {
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feedarchives" );
+			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+				.setView( view="#prc.cbTheme#/views/feedarchives", module="contentbox" );
 
 		} else {
 
@@ -418,8 +414,8 @@ component extends="coldbox.system.EventHandler" {
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
-		event.setLayout( "../themes/default/layouts/aggregator" )
-			.setView( "../themes/default/views/feeds" );
+		event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+			.setView( view="#prc.cbTheme#/views/feeds", module="contentbox" );
 
 	}
 
@@ -496,8 +492,8 @@ component extends="coldbox.system.EventHandler" {
 			}
 
 			// Set layout and view
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feed" );
+			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+				.setView( view="#prc.cbTheme#/views/feed", module="contentbox" );
 
 		} else {
 
@@ -537,8 +533,8 @@ component extends="coldbox.system.EventHandler" {
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
 			// Set layout and view
-			event.setLayout( "../themes/default/layouts/aggregator" )
-				.setView( "../themes/default/views/feeditem" );
+			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+				.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
 
 		} else {
 
