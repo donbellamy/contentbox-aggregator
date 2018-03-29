@@ -15,7 +15,9 @@ component extends="baseHandler" {
 	}
 
 	function slugify( event, rc, prc ) {
+
 		event.renderData( data=trim( htmlHelper.slugify( rc.slug ) ), type="plain" );
+
 	}
 
 	private function getUserDefaultEditor( required author ) {

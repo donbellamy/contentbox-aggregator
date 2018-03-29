@@ -1,6 +1,5 @@
 component extends="coldbox.system.EventHandler" {
 
-	// DI
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="antiSamy" inject="antisamy@cbantisamy";
 	property name="authorService" inject="authorService@cb";
@@ -110,6 +109,7 @@ component extends="coldbox.system.EventHandler" {
 		if ( isNull( data.content ) ) {
 			// Render the layout
 			data.content = renderLayout(
+				// TODO: Do this
 				//layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
 				//module = "contentbox",
 				//viewModule = "contentbox"
@@ -159,7 +159,17 @@ component extends="coldbox.system.EventHandler" {
 				}
 				break;
 			}
-			// TODO: pdf, doc stuff
+			case "pdf": {
+				data.content = dataMarshaller.marshallData( data=data.content, type="pdf" );
+				data.contentType = "application/pdf";
+				data.isBinary = true;
+				break;
+			}
+			case "doc": {
+				data.contentType = "application/msword";
+				data.isBinary = false;
+				break;
+			}
 			default: {
 				data.contentType = "text/html";
 				data.isBinary = false;
@@ -526,7 +536,6 @@ component extends="coldbox.system.EventHandler" {
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			// TODO: make a setting?
 			// Set layout and view
 			event.setLayout( "../themes/default/layouts/aggregator" )
 				.setView( "../themes/default/views/feeditem" );
