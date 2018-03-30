@@ -264,7 +264,7 @@ component extends="coldbox.system.EventHandler" {
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+		event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/feedindex", module="contentbox" );
 
 	}
@@ -335,7 +335,7 @@ component extends="coldbox.system.EventHandler" {
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 				.setView( view="#prc.cbTheme#/views/feedarchives", module="contentbox" );
 
 		} else {
@@ -414,7 +414,7 @@ component extends="coldbox.system.EventHandler" {
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+		event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 			.setView( view="#prc.cbTheme#/views/feeds", module="contentbox" );
 
 	}
@@ -492,7 +492,7 @@ component extends="coldbox.system.EventHandler" {
 			}
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 				.setView( view="#prc.cbTheme#/views/feed", module="contentbox" );
 
 		} else {
@@ -533,7 +533,7 @@ component extends="coldbox.system.EventHandler" {
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/aggregator", module="contentbox" )
+			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 				.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
 
 		} else {

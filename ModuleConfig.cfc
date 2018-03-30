@@ -94,25 +94,20 @@ component {
 				"aggregator_preFeedSave","aggregator_postFeedSave",
 				"aggregator_preFeedRemove","aggregator_postFeedRemove",
 				"aggregator_onFeedStatusUpdate","aggregator_onFeedStateUpdate",
-				"aggregator_preFeedImport","aggregator_postFeedImport", "aggregator_postFeedImports",
+				"aggregator_preFeedImport","aggregator_postFeedImport",
+				"aggregator_postFeedImports",
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate",
-
 				"aggregator_onIndexView",
 				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
-
 				"aggregator_onFeedsView",
 				"aggregator_preFeedsDisplay","aggregator_postFeedsDisplay",
-
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
-
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
-
 				"aggregator_onArchivesView",
 				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
-
 				"aggregator_onRSSView"
 			])
 		};
