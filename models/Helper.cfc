@@ -150,7 +150,11 @@ component accessors="true" singleton threadSafe {
 	}
 
 	string function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal() & "/rss";
+		return linkPortal( ssl=arguments.ssl ) & "/rss";
+	}
+
+	string function linkImport( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkPortal( ssl=arguments.ssl ) & "/import?key=" & setting("ag_importing_secret_key");
 	}
 
 	/************************************** Quick HTML *********************************************/
@@ -191,7 +195,9 @@ component accessors="true" singleton threadSafe {
 	string function quickFeedItems( string template="feeditem", string collectionAs="feeditem", struct args=structnew() ) {
 		var feedItems = getCurrentFeedItems();
 		return controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/#arguments.template#",
+			//view = "#cb.themeName()#/templates/#arguments.template#",
+			view = "../themes/default/templates/#arguments.template#",
+			module = "contentbox-rss-aggregator",
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args

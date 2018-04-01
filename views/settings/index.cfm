@@ -111,6 +111,25 @@
 											)#
 										</div>
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_use_interstitial_page",
+											content="Use interstitial page:"
+										)#
+										<div><small>If enabled, an interstitial page will be displayed when a user clicks on a feed item before leaving the site.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_portal_use_interstitial_page_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_use_interstitial_page' },
+												checked=prc.agSettings.ag_portal_use_interstitial_page
+											)#
+											#html.hiddenField(
+												name="ag_portal_use_interstitial_page",
+												value=prc.agSettings.ag_portal_use_interstitial_page
+											)#
+										</div>
+									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
@@ -165,7 +184,7 @@
 											field="ag_portal_cache_enable",
 											content="Enable portal caching:"
 										)#
-										<div><small>If enabled, feed content will be cached once it has been translated and rendered.</small></div>
+										<div><small>If enabled, portal content will be cached once it has been translated and rendered.</small></div>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_cache_enable_toggle",

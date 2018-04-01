@@ -185,7 +185,7 @@ component extends="coldbox.system.EventHandler" {
 			// Check for feed/feed item
 			if ( structKeyExists( prc, "feed" ) && prc.feed.isLoaded() ) {
 				data.contentID = prc.feed.getContentID();
-			} else if ( structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
+			} else if (  structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
 				data.contentID = prc.feedItem.getContentID();
 			}
 
@@ -532,9 +532,22 @@ component extends="coldbox.system.EventHandler" {
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-				.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
+			if ( prc.agSettings.ag_portal_use_interstitial_page ) {
+
+				// Set title
+				cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
+
+				// Set layout and view
+				event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
+					//.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
+					.setView( view="../themes/default/views/feeditem", module="contentbox-rss-aggregator" );
+
+			} else {
+
+				// Relocate to feed item
+				location( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
+
+			}
 
 		} else {
 
@@ -545,6 +558,15 @@ component extends="coldbox.system.EventHandler" {
 			notFound( argumentCollection=arguments );
 			return;
 
+		}
+
+	}
+
+	function preFeedItem( event, action, eventArguments, rc, prc ) {
+
+		// If not using an interstitial page, turn cache off
+		if ( !prc.agSettings.ag_portal_use_interstitial_page ) {
+			rc.cbCache = true;
 		}
 
 	}

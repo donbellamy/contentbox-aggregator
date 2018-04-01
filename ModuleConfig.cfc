@@ -21,6 +21,7 @@ component {
 			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
 			"ag_portal_feeds_title" = "News Feeds",
+			"ag_portal_use_interstitial_page" = "false",
 			"ag_portal_paging_max_items" = "10",
 			"ag_portal_paging_max_feeds" = "10",
 			"ag_portal_cache_enable" = "true",

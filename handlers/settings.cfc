@@ -2,6 +2,7 @@ component extends="baseHandler" {
 
 	property name="authorService" inject="authorService@cb";
 	property name="themeService" inject="themeService@cb";
+	property name="helper" inject="helper@aggregator";
 
 	function index( event, rc, prc ) {
 
@@ -53,11 +54,10 @@ component extends="baseHandler" {
 
 		// Import scheduled task
 		if ( len( prc.agSettings.ag_importing_import_interval ) ) {
-			var taskUrl = event.getSESBaseUrl() & prc.agSettings.ag_portal_entrypoint & "/import?key=" & prc.agSettings.ag_importing_secret_key;
 			cfschedule(
 				action="update",
 				task="aggregator-import",
-				url="#taskUrl#",
+				url="#helper.linkImport()#",
 				startDate=prc.agSettings.ag_importing_import_start_date,
 				startTime=prc.agSettings.ag_importing_import_start_time,
 				interval=prc.agSettings.ag_importing_import_interval

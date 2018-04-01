@@ -1,5 +1,4 @@
-<cfparam name="args.openNewWindow" default="true" />
-<cfparam name="args.useNoFollow" default="true" />
+<cfparam name="args.openNewWindow" default="#ag.setting('ag_portal_use_interstitial_page')#" />
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="true" />
 <cfparam name="args.showExcerpt" default="true" />
@@ -14,7 +13,7 @@
 		<h2>
 			<a href="#ag.linkFeedItem( feedItem )#"
 				<cfif args.openNewWindow >target="_blank"</cfif>
-				<cfif args.useNoFollow >rel="nofollow"</cfif>
+				rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 				title="#encodeForHtmlAttribute( feedItem.getTitle() )#">#feedItem.getTitle()#</a>
 		</h2>
 		<div class="row">
@@ -44,7 +43,7 @@
 				<div class="col-sm-3">
 					<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif args.useNoFollow >rel="nofollow"</cfif>
+						rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 				</div>
 			</cfif>
@@ -58,7 +57,7 @@
 					<div class="post-more">
 						<a href="#ag.linkFeedItem( feedItem )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif args.useNoFollow >rel="nofollow"</cfif>
+							rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
 					</div>
 				</cfif>

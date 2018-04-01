@@ -71,6 +71,8 @@ component extends="coldbox.system.Interceptor" {
 				args.oContent = contentService.get( prc.contentCacheData.contentID );
 				if ( !isNull( args.oContent ) && args.oContent.getContentType() == "Feed" ) {
 					prc.feed = args.oContent;
+				} else {
+					args.oContent = javaCast( "null", "" );
 				}
 			}
 		}
