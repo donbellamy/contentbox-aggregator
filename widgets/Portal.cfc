@@ -3,7 +3,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	Portal function init() {
 		setName( "Portal" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays the portal index." );
+		setDescription( "A widget that displays a list of feed items, similar to the portal home page." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "newspaper-o" );

@@ -193,9 +193,7 @@ component accessors="true" singleton threadSafe {
 	string function quickFeedItems( string template="feeditem", string collectionAs="feeditem", struct args=structnew() ) {
 		var feedItems = getCurrentFeedItems();
 		return controller.getRenderer().renderView(
-			//view = "#cb.themeName()#/templates/#arguments.template#",
-			view = "../themes/default/templates/#arguments.template#",
-			module = "contentbox-rss-aggregator",
+			view = "#cb.themeName()#/templates/#arguments.template#",
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args
@@ -205,9 +203,7 @@ component accessors="true" singleton threadSafe {
 	function mainView( struct args=structNew() ) {
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
-				//view = "#cb.themeName()#/views/portal",
-				view = "../themes/default/views/portal",
-				module = "contentbox-rss-aggregator",
+				view = "#cb.themeName()#/views/portal",
 				args = arguments.args
 			);
 		} else {

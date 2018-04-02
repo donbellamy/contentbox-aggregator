@@ -539,8 +539,7 @@ component extends="coldbox.system.EventHandler" {
 
 				// Set layout and view
 				event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-					//.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
-					.setView( view="../themes/default/views/feeditem", module="contentbox-rss-aggregator" );
+					.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
 
 			} else {
 
