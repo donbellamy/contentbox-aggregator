@@ -31,8 +31,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 	* @sortOrder.label Sort Order
 	* @sortOrder.hint How to order the results, defaults to date published from the feed.
 	* @sortOrder.options Most Recent,Most Popular
-	* @newWindow.label Open In New Window?
-	* @newWindow.hint Open feed items in a new window (tab), default is true.
+	* @openNewWindow.label Open In New Window?
+	* @openNewWindow.hint Open feed items in a new window (tab), default is false.
 	*/
 	string function renderIt(
 		string title="",
@@ -42,7 +42,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category="",
 		string searchTerm="",
 		string sortOrder="Most Recent",
-		boolean newWindow=true
+		boolean openNewWindow=false
 	) {
 
 		// Sort order
@@ -84,11 +84,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 			// List items
 			for ( var x=1; x LTE arguments.max; x++ ) {
 				var target = "_self";
-				if ( arguments.newWindow ) {
+				if ( arguments.openNewWindow ) {
 					target = "_blank";
 				}
-				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#">#results.feedItems[x].getTitle()#</a></li>');
-			}
+				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
 			// List end
 			writeOutput( "</ul>" );
 		}
@@ -97,13 +96,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	array function getFeedSlugs() {
+	array function getFeedSlugs() cbIgnore {
 		var slugs = feedService.getAllFlatSlugs();
 		arrayPrepend( slugs, "" );
 		return slugs;
 	}
 
-	array function getAllCategories() {
+	array function getAllCategories() cbIgnore {
 		return categoryService.getAllNames();
 	}
 

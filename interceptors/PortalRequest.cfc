@@ -90,7 +90,6 @@ component extends="coldbox.system.Interceptor" {
 			args=args
 		);
 
-		// TODO: test this with caching
 		// Hide custom fields and insert options
 		if ( structKeyExists( prc, "feed" ) ) {
 			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; } @media (max-width: 768px) { .button.importing{ display:none; } }</style>";
@@ -102,20 +101,24 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
-	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {}
+	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
+		// TODO:
+		// announce event
+		//announceInterception( "cbui_postRequest" );
+	}
 
-	function afterInstanceCreation( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
+	function afterInstanceCreation( event, interceptData, buffer ) {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
-			var prc = event.getCollection( private=true ); // Needed?
+			var prc = event.getCollection( private=true );
 			// decorate it
 			arguments.interceptData.target.ag = helper;
 			arguments.interceptData.target.$agInject = variables.$agInject;
 			arguments.interceptData.target.$agInject();
+			// TODO:
 			// re-broadcast event
-			// TODO: test this
 			//announceInterception(
 			//	"cbui_onRendererDecoration",
-			//	{ renderer=arguments.interceptData.target, CBHelper=arguments.interceptData.target.cb }
+			//	{ renderer=arguments.interceptData.target, AGHelper=arguments.interceptData.target.ag }
 			//);
 		}
 	}

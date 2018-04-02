@@ -99,8 +99,6 @@ component accessors="true" singleton threadSafe {
 		}
 	}
 
-	/************************************** SEO Metadata *********************************************/
-
 	/************************************** Link Methods *********************************************/
 
 	string function linkPortal( boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -202,6 +200,19 @@ component accessors="true" singleton threadSafe {
 			collectionAs = arguments.collectionAs,
 			args = arguments.args
 		);
+	}
+
+	function mainView( struct args=structNew() ) {
+		if ( cb.isPageView() ) {
+			return controller.getRenderer().renderView(
+				//view = "#cb.themeName()#/views/portal",
+				view = "../themes/default/views/portal",
+				module = "contentbox-rss-aggregator",
+				args = arguments.args
+			);
+		} else {
+			return controller.getRenderer().renderView( view="", args=arguments.args );
+		}
 	}
 
 	/************************************** UTILITIES *********************************************/
