@@ -1,0 +1,1 @@
+<cfoutput>#cb.quickLayout( "portal_print" )#</cfoutput>

@@ -38,6 +38,16 @@ component accessors="true" singleton threadSafe {
 		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.index" );
 	}
 
+	boolean function isSearchView() {
+		var rc = cb.getRequestCollection();
+		return ( isIndexView() AND structKeyExists( rc, "q" ) AND len( rc.q ) );
+	}
+
+	boolean function isCategoryView() {
+		var rc = cb.getRequestCollection();
+		return ( isIndexView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
+	}
+
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
 		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.archives" );
@@ -50,14 +60,11 @@ component accessors="true" singleton threadSafe {
 
 	boolean function isFeedView() {
 		var event = cb.getRequestContext();
-		return (
-			// TODO: export?
-			// If in static export, then mark as yes
-			//event.getPrivateValue( "staticExport", false )
-			//OR
-			// In executing view
-			event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feed"
-		);
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feed" );
+	}
+
+	string function getSearchTerm() {
+		return cb.getRequestContext().getValue( "q", "" );
 	}
 
 	Feed function getCurrentFeed() {
@@ -99,18 +106,49 @@ component accessors="true" singleton threadSafe {
 		}
 	}
 
+	string function getCurrentArchiveDate() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "archiveDate" ) ) {
+			return prc.archiveDate;
+		} else {
+			throw(
+				message="Archive date not found in collection",
+				detail="This probably means you are trying to use the archive date in an non-index page.",
+				type="aggregator.helper.InvalidArchiveDateContext"
+			);
+		}
+	}
+
+	string function getCurrentFormattedArchiveDate() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "formattedDate" ) ) {
+			return prc.formattedDate;
+		} else {
+			throw(
+				message="Formatted date not found in collection",
+				detail="This probably means you are trying to use the formatted date in an non-index page.",
+				type="aggregator.helper.InvalidFormattedDateContext"
+			);
+		}
+	}
+
+	Category function getCurrentCategory() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "category" ) ) {
+			return prc.category;
+		} else {
+			throw(
+				message="Category not found in collection",
+				detail="This probably means you are trying to use the category in an non-index page.",
+				type="aggregator.helper.InvalidCategoryContext"
+			);
+		}
+	}
+
 	/************************************** Link Methods *********************************************/
 
 	string function linkPortal( boolean ssl=cb.getRequestContext().isSSL() ) {
 		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
-	}
-
-	string function linkArchive( string year="", string month="", string day="", boolean ssl=cb.getRequestContext().isSSL() ) {
-		var link = linkPortal( ssl=arguments.ssl ) & "/archives";
-		if ( len( arguments.year ) ) { link &= "/#arguments.year#"; }
-		if ( len( arguments.month ) ) { link &= "/#arguments.month#"; }
-		if ( len( arguments.day ) ) { link &= "/#arguments.day#"; }
-		return link;
 	}
 
 	string function linkCategory( required any category, boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -121,6 +159,14 @@ component accessors="true" singleton threadSafe {
 			slug = category.getSlug();
 		}
 		return linkPortal( ssl=arguments.ssl ) & "/category/" & slug;
+	}
+
+	string function linkArchive( string year="", string month="", string day="", boolean ssl=cb.getRequestContext().isSSL() ) {
+		var link = linkPortal( ssl=arguments.ssl ) & "/archives";
+		if ( val( arguments.year ) ) { link &= "/#arguments.year#"; }
+		if ( val( arguments.month ) ) { link &= "/#arguments.month#"; }
+		if ( val( arguments.day ) ) { link &= "/#arguments.day#"; }
+		return link;
 	}
 
 	string function linkFeeds( boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -155,9 +201,21 @@ component accessors="true" singleton threadSafe {
 		return linkPortal( ssl=arguments.ssl ) & "/import?key=" & setting("ag_importing_secret_key");
 	}
 
+	string function linkExport( required format, boolean ssl=cb.getRequestContext().isSSL() ) {
+		var event = cb.getRequestContext();
+		var link = event.buildLink( linkTo=event.getCurrentRoutedURL(), ssl=arguments.ssl );
+		if ( right( link, 1 ) EQ "/" ) {
+			link = left( link, len( link ) - 1 );
+		}
+		link &= "." & arguments.format;
+		if ( len( cgi.query_string ) ) {
+			link &= "?" & cgi.query_string;
+		}
+		return link;
+	}
+
 	/************************************** Quick HTML *********************************************/
 
-	// TODO: put settings in views
 	string function quickPaging( numeric maxRows ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
@@ -211,9 +269,42 @@ component accessors="true" singleton threadSafe {
 		}
 	}
 
+	/************************************** MENUS *********************************************/
+
+	string function breadCrumbs( string separator=">" ){
+		var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_title")#</a> ';
+		if ( isSearchView() ) {
+			var searchTerm = getSearchTerm();
+			bc &= '#arguments.separator# <a href="#linkPortal()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+		}
+		if ( isCategoryView() ) {
+			var category = getCurrentCategory();
+			bc &= '#arguments.separator# <a href="#linkCategory( category )#">#category.getCategory()#</a> ';
+		}
+		if ( isArchivesView() ) {
+			var archiveDate = getCurrentArchiveDate();
+			if ( isDate( archiveDate ) ) {
+				rc = cb.getRequestCollection();
+				bc &= '#arguments.separator# <a href="#linkArchive( rc.year, rc.month, rc.day )#">#getCurrentFormattedArchiveDate()#</a> ';
+			}
+		}
+		if ( isFeedsView() || isFeedView() ) {
+			bc &= '#arguments.separator# <a href="#linkFeeds()#">#setting("ag_portal_feeds_title")#</a> ';
+		}
+		if ( isFeedView() ) {
+			var feed = getCurrentFeed();
+			bc &= '#arguments.separator# <a href="#linkFeed( feed )#">#feed.getTitle()#</a> ';
+			var rc = cb.getRequestCollection();
+			if ( structKeyExists( rc, "author" ) AND len( rc.author ) ) {
+				bc &= '#arguments.separator# <a href="#linkFeed( feed )#?author=#rc.author#">#rc.author#</a> ';
+			}
+		}
+		return bc;
+	}
+
 	/************************************** UTILITIES *********************************************/
 
-	string function stripHtml( stringTarget ) {
+	string function stripHtml( string stringTarget="" ) {
 		return reReplaceNoCase( arguments.stringTarget, "<[^>]*>", "", "ALL" );
 	}
 

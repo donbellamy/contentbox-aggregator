@@ -281,11 +281,14 @@ component extends="coldbox.system.EventHandler" {
 		// Validate the passed date
 		var validDate = true;
 		try {
-			var archiveDate = createDate( rc.year );
+			prc.archiveDate = createDate( rc.year );
 			if ( val( rc.month ) && val( rc.day )  ) {
-				archiveDate = createDate( rc.year, rc.month, rc.day );
+				prc.archiveDate = createDate( rc.year, rc.month, rc.day );
 			} else if ( val( rc.month ) ) {
-				archiveDate = createDate( rc.year, rc.month );
+				prc.archiveDate = createDate( rc.year, rc.month );
+			}
+			if ( prc.archiveDate GT now() ) {
+				validDate = false;
 			}
 		} catch ( any e ) {
 			validDate = false;
@@ -324,11 +327,11 @@ component extends="coldbox.system.EventHandler" {
 			announceInterception( "aggregator_onArchivesView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
 
 			// Set the formatted date and page title
-			prc.formattedDate = dateFormat( archiveDate, "yyyy" );
+			prc.formattedDate = dateFormat( prc.archiveDate, "yyyy" );
 			if ( val( rc.month ) && val( rc.day ) ) {
-				prc.formattedDate = dateFormat( archiveDate, "mmmm d, yyyy" );
+				prc.formattedDate = dateFormat( prc.archiveDate, "mmmm d, yyyy" );
 			} else if ( val( rc.month ) ) {
-				prc.formattedDate = dateFormat( archiveDate, "mmmm, yyyy" );
+				prc.formattedDate = dateFormat( prc.archiveDate, "mmmm, yyyy" );
 			}
 			title = " - " & prc.formattedDate & title;
 			title = prc.agSettings.ag_portal_title & title;

@@ -94,6 +94,9 @@ component extends="coldbox.system.Interceptor" {
 		if ( structKeyExists( prc, "feed" ) ) {
 			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; } @media (max-width: 768px) { .button.importing{ display:none; } }</style>";
 			adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button importing"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
+		// Insert clear cache button
+		} else if ( structKeyExists( prc, "contentCacheData" ) ) {
+			adminBar &= "<script>$('<a href=""#event.buildLink( event.getCurrentRoutedURL() )#?cbCache=true"" class=""button button-admin clear-cache"">Clear Cache</a>').insertBefore('##cb-admin-bar-actions .button-admin');</script>";
 		}
 
 		// Add to html

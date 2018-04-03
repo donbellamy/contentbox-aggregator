@@ -21,32 +21,41 @@
 </div>
 <section id="body-main">
 	<div class="container">
-		<div class="row">
-			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-				#cb.event( "aggregator_preFeedDisplay" )#
-				<cfif len( rc.author ) >
-					<div class="alert alert-info">
-						<a class="btn btn-primary pull-right btn-sm" href="#ag.linkFeed( prc.feed )#" title="Clear author and view all items">Clear Author</a>
-						<strong>#rc.author#</strong>
-						<br/><small>Author Results</small>
-					</div>
-				</cfif>
-				<cfif prc.itemCount >
-					#ag.quickFeedItems()#
+		<cfif !args.print >
+			<div id="body-breadcrumbs" class="col-sm-9">
+				<i class="fa fa-home"></i> #ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
+			</div>
+			<cfif cb.setting("cb_content_uiexport") >
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Export Page...">
+						<i class="fa fa-print"></i> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#ag.linkExport( "print" )#" target="_blank">Print Format</a></li>
+						<li><a href="#ag.linkExport( "pdf" )#" target="_blank">PDF</a></li>
+					</ul>
+				</div>
+			</cfif>
+		</cfif>
+		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
+			#cb.event( "aggregator_preFeedDisplay" )#
+			<cfif prc.itemCount >
+				#ag.quickFeedItems()#
+				<cfif !args.print >
 					<div class="contentBar">
 						#ag.quickPaging()#
 					</div>
-				<cfelse>
-					<div>No results found.</div>
 				</cfif>
-				#cb.event( "aggregator_postFeedDisplay" )#
-			</div>
-			<cfif args.sidebar >
-				<div class="col-sm-3" id="blog-sidenav">
-					#cb.quickView( view="_portalsidebar", args=args )#
-				</div>
+			<cfelse>
+				<div>No results found.</div>
 			</cfif>
+			#cb.event( "aggregator_postFeedDisplay" )#
 		</div>
+		<cfif args.sidebar >
+			<div class="col-sm-3" id="blog-sidenav">
+				#cb.quickView( view="_portalsidebar", args=args )#
+			</div>
+		</cfif>
 	</div>
 </div>
 </cfoutput>
