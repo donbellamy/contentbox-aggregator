@@ -38,7 +38,7 @@
 		<cfif feedItem.hasCategories() >
 			<div class="row">
 				<div class="col-sm-12">
-					<i class="fa fa-tag"></i> #cb.quickCategoryLinks( feedItem )#
+					<i class="fa fa-tag"></i> #ag.quickCategoryLinks( feedItem )#
 				</div>
 			</div>
 		</cfif>

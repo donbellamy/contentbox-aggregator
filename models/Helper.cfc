@@ -216,6 +216,27 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** Quick HTML *********************************************/
 
+	string function quickCategoryLinks( required feedItem ) {
+
+		// Check for categories
+		if ( NOT arguments.feedItem.hasCategories() ) {
+			return "";
+		}
+
+		// Set vars
+		var cats = arguments.feedItem.getCategories();
+		var catList = [];
+
+		// iterate and create links
+		for ( var x=1; x LTE arrayLen( cats ); x++ ) {
+			var link = '<a href="#linkCategory( cats[x] )#" title="Filter items by ''#cats[x].getCategory()#''">#cats[x].getCategory()#</a>';
+			arrayAppend( catList, link );
+		}
+
+		// Return links
+		return replace( arrayToList( catList ), ",", ", ", "all" );
+	}
+
 	string function quickPaging( numeric maxRows ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
