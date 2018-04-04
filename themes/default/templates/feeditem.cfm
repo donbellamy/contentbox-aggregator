@@ -35,6 +35,13 @@
 				<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 			</div>
 		</div>
+		<cfif feedItem.hasCategories() >
+			<div class="row">
+				<div class="col-sm-12">
+					<i class="fa fa-tag"></i> #cb.quickCategoryLinks( feedItem )#
+				</div>
+			</div>
+		</cfif>
 	</div>
 	<cfif args.showExcerpt >
 		<cfset imageUrl = feedItem.getImageUrl() />
