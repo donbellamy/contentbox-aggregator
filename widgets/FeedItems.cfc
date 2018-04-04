@@ -80,14 +80,14 @@ component extends="aggregator.models.BaseWidget" singleton {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
 			}
 			// List start
-			writeOutput('<ul id="recentItems">');
+			writeOutput('<ul id="feedItems">');
 			// List items
 			for ( var x=1; x LTE arguments.max; x++ ) {
 				var target = "_self";
 				if ( arguments.openNewWindow ) {
 					target = "_blank";
 				}
-				writeOutput('<li class="recentItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
+				writeOutput('<li class="feedItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
 			// List end
 			writeOutput( "</ul>" );
 		}

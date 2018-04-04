@@ -271,7 +271,7 @@ component accessors="true" singleton threadSafe {
 
 	/************************************** MENUS *********************************************/
 
-	string function breadCrumbs( string separator=">" ){
+	string function breadCrumbs( string separator=">" ) {
 		var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_title")#</a> ';
 		if ( isSearchView() ) {
 			var searchTerm = getSearchTerm();

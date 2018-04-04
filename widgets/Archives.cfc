@@ -54,6 +54,30 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
+	private function buildDropDown( archives, showItemCount ) {
+
+		// Set return string
+		var string = "";
+
+		// Generate html
+		saveContent variable="string" {
+			// Select start
+			writeOutput('<select name="archives" id="archives" onchange="window.location=this.value" )><option value="##">Select Archive</option>');
+			// Select options
+			for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
+				var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
+				writeOutput('<option value="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#');
+				if ( arguments.showItemCount ) { writeOutput( " (#arguments.archives[x]['count']#)" ); }
+				writeOutput('</option>');
+			}
+			// Select end
+			writeOutput( "</select>" );
+		}
+
+		return string;
+
+	}
+
 	private function buildList( archives, showItemCount ) {
 
 		// Set return html
