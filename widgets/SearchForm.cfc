@@ -29,30 +29,19 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the event
 		var event = getRequestContext();
 
-		// Check incoming text
-		var q = htmlEditFormat( event.getValue( "q", "" ) );
+		// Set args
+		var args = {
+			title = arguments.title,
+			titleLevel = arguments.titleLevel,
+			q = htmlEditFormat( event.getValue( "q", "" ) )
+		};
 
-		// TODO: Change this to use a template rather than hardcoded classes
-		// Generate html
-		saveContent variable="string"{
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// Form
-			writeOutput('
-			#html.startForm( name="searchForm", action=ag.linkPortal(), method="get" )#
-				<div class="input-group">
-					#html.textField( name="q", placeholder="Search", value=q, class="form-control")#
-					<span class="input-group-btn">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-					</span>
-				</div>
-			#html.endForm()#
-			');
-		}
-
-		return string;
+		// Render the search form
+		return renderView(
+			view = "#cb.themeName()#/templates/portalsearch",
+			module = "contentbox",
+			args = args
+		);
 
 	}
 

@@ -35,7 +35,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category = "",
 		string searchTerm = "",
 		string sortOrder = "Most Recent",
-		boolean openNewWindow=false
+		boolean openNewWindow = false
 	) {
 
 		// Sort order
@@ -53,6 +53,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
 
+		// Fixes bug in widget preview where prc.cbTheme is not defined
+		prc.cbTheme = prc.cbSettings.cb_site_theme;
+
 		// Paging
 		prc.oPaging = getModel("paging@cb");
 		prc.oPaging.setpagingMaxRows( arguments.max );
@@ -61,33 +64,27 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			category=arguments.category,
-			searchTerm=arguments.searchTerm,
-			feed=arguments.feed,
-			sortOrder=arguments.sortOrder,
+			category = arguments.category,
+			searchTerm = arguments.searchTerm,
+			feed = arguments.feed,
+			sortOrder = arguments.sortOrder,
 			max = arguments.max,
 			offset = prc.pagingBoundaries.startRow - 1
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
-		// Set return string
-		var string = "";
+		// Set args
 		var args = {
 			openNewWindow = arguments.openNewWindow
 		};
 
-		// Generate html
-		saveContent variable="string" {
-			if ( prc.itemCount ) {
-				writeOutput( "#ag.quickFeedItems( args=args )#" );
-				writeOutput( '<div class="contentBar">#ag.quickPaging()#</div>' );
-			} else {
-				writeOutput( "<div>No results found.</div>" );
-			}
-		}
-
-		return string;
+		// Render the portal template
+		return renderView(
+			view = "#cb.themeName()#/templates/portal",
+			module = "contentbox",
+			args = args
+		);
 
 	}
 

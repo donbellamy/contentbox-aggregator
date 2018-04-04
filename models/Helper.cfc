@@ -244,7 +244,8 @@ component accessors="true" singleton threadSafe {
 			view = "#cb.themeName()#/templates/#arguments.template#",
 			collection = feeds,
 			collectionAs = arguments.collectionAs,
-			args = arguments.args
+			args = arguments.args,
+			module = "contentbox"
 		);
 	}
 
@@ -254,7 +255,8 @@ component accessors="true" singleton threadSafe {
 			view = "#cb.themeName()#/templates/#arguments.template#",
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
-			args = arguments.args
+			args = arguments.args,
+			module = "contentbox"
 		);
 	}
 
@@ -262,7 +264,8 @@ component accessors="true" singleton threadSafe {
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/portal",
-				args = arguments.args
+				args = arguments.args,
+				module = "contentbox"
 			);
 		} else {
 			return controller.getRenderer().renderView( view="", args=arguments.args );
