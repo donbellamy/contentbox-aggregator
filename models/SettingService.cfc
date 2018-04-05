@@ -112,6 +112,18 @@ component extends="contentbox.models.system.SettingService" accessors="true" thr
 			arrayAppend( errors, "A valid feed cache idle timeout is required." );
 		}
 
+		// Global html
+		prc.agSettings.ag_html_pre_index_display = trim( prc.agSettings.ag_html_pre_index_display );
+		prc.agSettings.ag_html_post_index_display = trim( prc.agSettings.ag_html_post_index_display );
+		prc.agSettings.ag_html_pre_feeds_display = trim( prc.agSettings.ag_html_pre_feeds_display );
+		prc.agSettings.ag_html_post_feeds_display = trim( prc.agSettings.ag_html_post_feeds_display );
+		prc.agSettings.ag_html_pre_feed_display = trim( prc.agSettings.ag_html_pre_feed_display );
+		prc.agSettings.ag_html_post_feed_display = trim( prc.agSettings.ag_html_post_feed_display );
+		prc.agSettings.ag_html_pre_archives_display = trim( prc.agSettings.ag_html_pre_archives_display );
+		prc.agSettings.ag_html_post_archives_display = trim( prc.agSettings.ag_html_post_archives_display );
+		prc.agSettings.ag_html_pre_sidebar_display = trim( prc.agSettings.ag_html_pre_sidebar_display );
+		prc.agSettings.ag_html_post_sidebar_display = trim( prc.agSettings.ag_html_post_sidebar_display );
+
 		return errors;
 
 	}

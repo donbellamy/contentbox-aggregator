@@ -35,7 +35,7 @@
 			</cfif>
 		</cfif>
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			#cb.event( "aggregator_preArchivesDisplay" )#
+			#cb.event("aggregator_preArchivesDisplay")#
 			<cfif prc.itemCount >
 				#ag.quickFeedItems()#
 				<cfif !args.print >
@@ -46,7 +46,7 @@
 			<cfelse>
 				<div>No results found.</div>
 			</cfif>
-			#cb.event( "aggregator_postArchivesDisplay" )#
+			#cb.event("aggregator_postArchivesDisplay")#
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">

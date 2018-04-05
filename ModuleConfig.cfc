@@ -60,7 +60,19 @@ component {
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = "60",
-			"ag_rss_cache_timeout_idle" = "15"
+			"ag_rss_cache_timeout_idle" = "15",
+
+			// Global html
+			"ag_html_pre_index_display" = "",
+			"ag_html_post_index_display" = "",
+			"ag_html_pre_feeds_display" = "",
+			"ag_html_post_feeds_display" = "",
+			"ag_html_pre_feed_display" = "",
+			"ag_html_post_feed_display" = "",
+			"ag_html_pre_archives_display" = "",
+			"ag_html_post_archives_display" = "",
+			"ag_html_pre_sidebar_display" = "",
+			"ag_html_post_sidebar_display" = ""
 
 		};
 
@@ -100,15 +112,23 @@ component {
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate",
+
 				"aggregator_onIndexView",
 				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
+
 				"aggregator_onFeedsView",
 				"aggregator_preFeedsDisplay","aggregator_postFeedsDisplay",
+
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
+
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
+
 				"aggregator_onArchivesView",
 				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
+
+				"aggregator_preSideBarDisplay","aggregator_postSideBarDisplay",
+
 				"aggregator_onRSSView"
 			])
 		};
@@ -119,6 +139,7 @@ component {
 			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];

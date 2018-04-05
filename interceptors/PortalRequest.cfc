@@ -6,8 +6,6 @@ component extends="coldbox.system.Interceptor" {
 	property name="helper" inject="helper@aggregator";
 	property name="html" inject="HTMLHelper@coldbox";
 
-	function configure() {}
-
 	function preProcess( event, interceptData, buffer, rc, prc ) {
 
 		// Prepare UI if we are in the aggregator module
