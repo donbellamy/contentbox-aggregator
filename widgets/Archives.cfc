@@ -81,10 +81,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 	private function buildList( archives, showItemCount ) {
 
 		// Set return html
-		var html = "";
+		var string = "";
 
 		// Generate html
-		saveContent variable="html" {
+		saveContent variable="string" {
 			// List start
 			writeOutput('<ul id="archives">');
 			// List items
@@ -98,7 +98,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			writeOutput( "</ul>" );
 		}
 
-		return html;
+		return string;
 
 	}
 

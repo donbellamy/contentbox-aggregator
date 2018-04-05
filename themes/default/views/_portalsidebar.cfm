@@ -23,9 +23,7 @@
 		<div class="panel-heading">
 			<h4>News Updates</h4>
 		</div>
-		<ul>
-			<li><a href='#ag.linkRSS()#' title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href='#ag.linkRSS()#' title="Subscribe to our RSS Feed!">RSS Feed</a></li>
-		</ul>
+		#cb.widget("RSS@contentbox-rss-aggregator")#
 	</div>
 </cfif>
 <div class="panel panel-default">
