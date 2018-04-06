@@ -1,6 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="cachebox" inject="cachebox";
+	property name="contentService" inject="contentService@cb";
 	property name="settingService" inject="settingService@aggregator";
 
 	function aggregator_postFeedSave( event, interceptData ) {
@@ -31,8 +32,6 @@ component extends="coldbox.system.Interceptor" {
 
 	private function doCacheCleanup() {
 
-		// TODO: Add in clearing cb-content-feed/cb-content-feeditem if we are ever outputting renderedContent()
-
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
@@ -41,10 +40,13 @@ component extends="coldbox.system.Interceptor" {
 		// Clear cache
 		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
 
-		// Log
+		// Log it
 		if ( log.canInfo() ) {
 			log.info( "Sent clear command using the following content key: #cacheKey# from provider: #cache.getName()#" );
 		}
+
+		// Clear content caches
+		contentService.clearAllCaches();
 
 		return this;
 
