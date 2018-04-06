@@ -48,9 +48,12 @@ component extends="coldbox.system.Interceptor" {
 
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
-		// Add portal link to nav
+		// Add portal link and create feed to nav bar
 		if ( !event.isAjax() ) {
-			html.$htmlhead( "<script>$(function() {$('div.user-nav ul>li:nth-child(1)').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>" );
+			html.$htmlhead( "<script>$(function() {$('div.user-nav ul li').first().after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>" );
+			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
+				html.$htmlhead( "<script>$(function() {$('div.user-nav ul.dropdown-menu').first().append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});</script>" );
+			}
 		}
 
 	}
