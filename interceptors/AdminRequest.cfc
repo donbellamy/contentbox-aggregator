@@ -1,17 +1,13 @@
 component extends="coldbox.system.Interceptor" {
 
+	property name="html" inject="HTMLHelper@coldbox";
 	property name="settingService" inject="settingService@aggregator";
-	property name="agHelper" inject="helper@aggregator";
+	property name="helper" inject="helper@aggregator";
 
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin"  {
 
-		// Only execute for aggregator module (eventPattern doesn't include the module name)
-		//if( event.getValue("moduleEntryPoint","") NEQ getModuleConfig("contentbox-rss-aggregator").entryPoint ) {
-		//	return;
-		//}
-
 		// Helper
-		prc.agHelper = agHelper;
+		prc.agHelper = helper;
 
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -47,6 +43,15 @@ component extends="coldbox.system.Interceptor" {
 		// Settings
 		prc.xehAggregatorSettings = "#prc.agAdminEntryPoint#.settings";
 		prc.xehAggregatorSettingsSave = "#prc.agAdminEntryPoint#.settings.save";
+
+	}
+
+	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
+
+		// Add portal link to nav
+		if ( !event.isAjax() ) {
+			html.$htmlhead( "<script>$(function() {$('div.user-nav ul>li:nth-child(1)').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>" );
+		}
 
 	}
 
