@@ -197,6 +197,14 @@ component accessors="true" singleton threadSafe {
 		return linkFeed( feed=arguments.feedItem.getFeed(), ssl=arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
 	}
 
+	string function linkFeedItemForm( feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		if ( structKeyExists( arguments, "feedItem" ) ) {
+			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor/contentID/" & arguments.feedItem.getContentID();
+		} else {
+			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor";
+		}
+	}
+
 	string function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkPortal( ssl=arguments.ssl ) & "/rss";
 	}
