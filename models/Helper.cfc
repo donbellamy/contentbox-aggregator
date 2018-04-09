@@ -173,8 +173,8 @@ component accessors="true" singleton threadSafe {
 		return linkPortal( ssl=arguments.ssl ) & "/feeds";
 	}
 
-	string function linkFeed( required feed, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug();
+	string function linkFeed( required feed, boolean ssl=cb.getRequestContext().isSSL(), string format="html" ) {
+		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
 	string function linkFeedRSS( required feed, boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -189,8 +189,8 @@ component accessors="true" singleton threadSafe {
 		}
 	}
 
-	string function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug();
+	string function linkFeedItem( required feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
+		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
 	string function linkFeedItemAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -224,6 +224,23 @@ component accessors="true" singleton threadSafe {
 			link &= "?" & cgi.query_string;
 		}
 		return link;
+	}
+
+	string function linkContent( required content, boolean ssl=cb.getRequestContext().isSSL(), format="html" ) {
+		switch ( arguments.content.getContentType() ) {
+			case "entry":
+				return cb.linkEntry( arguments.content, arguments.ssl, arguments.format );
+				break;
+			case "page":
+				return cb.linkPage( arguments.content, arguments.ssl, arguments.format );
+				break;
+			case "feed":
+				return linkFeed( arguments.content, arguments.ssl, arguments.format );
+				break;
+			case "feedItem":
+				return linkFeedItem( arguments.content, arguments.ssl, arguments.format );
+				break;
+		}
 	}
 
 	/************************************** Quick HTML *********************************************/

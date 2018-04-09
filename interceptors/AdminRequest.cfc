@@ -18,6 +18,11 @@ component extends="coldbox.system.Interceptor" {
 		// Admin entry point
 		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-rss-aggregator').entryPoint#";
 
+		// Dashboard
+		prc.xehTopContent = "#prc.agAdminEntryPoint#.dashboard.topcontent";
+		prc.xehTopCommented = "#prc.agAdminEntryPoint#.dashboard.topcommented";
+		prc.xehContentCounts = "#prc.agAdminEntryPoint#.dashboard.contentcounts";
+
 		// Feeds
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
@@ -56,7 +61,7 @@ component extends="coldbox.system.Interceptor" {
 			}
 		}
 
-		// Change edit links on dashboard content tables
+		// Fix dashbaord content links
 		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestsystemedits" ) {
 			html.$htmlhead('<script>
 				$(function() {
@@ -82,14 +87,16 @@ component extends="coldbox.system.Interceptor" {
 			</script>');
 		}
 
-		// TODO: Snapshot links - fix, but how?  Or just remove them?
-		/*if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestSnapshot" ) {
+		// Fix top hit links, top commented links and add content counts
+		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestSnapshot" ) {
 			html.$htmlhead('<script>
 				$(function() {
-
+					$( "##topcontent table:first tbody" ).load( "#event.buildLink( prc.xehTopContent )#" );
+					$( "##topcontent table:last tbody" ).load( "#event.buildLink( prc.xehTopCommented )#" );
+					$( "##content div" ).load( "#event.buildLink( prc.xehContentCounts )#" );
 				});
 			</script>');
-		}*/
+		}
 
 	}
 
