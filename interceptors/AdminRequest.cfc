@@ -22,6 +22,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehTopContent = "#prc.agAdminEntryPoint#.dashboard.topcontent";
 		prc.xehTopCommented = "#prc.agAdminEntryPoint#.dashboard.topcommented";
 		prc.xehContentCounts = "#prc.agAdminEntryPoint#.dashboard.contentcounts";
+		prc.xehClearPortalCache = "#prc.agAdminEntryPoint#.dashboard.clearcache";
 
 		// Feeds
 		prc.xehFeeds = "#prc.agAdminEntryPoint#.feeds";
@@ -53,11 +54,14 @@ component extends="coldbox.system.Interceptor" {
 
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
-		// Add portal link and new feed to nav bar
+		// Add portal link, new feed and clear cache to nav bar
 		if ( !event.isAjax() ) {
-			html.$htmlhead("<script>$(function() {$('div.user-nav ul li').first().after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>");
+			html.$htmlhead("<script>$(function() {$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>");
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
-				html.$htmlhead("<script>$(function() {$('div.user-nav ul.dropdown-menu').first().append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});</script>");
+				html.$htmlhead("<script>$(function() {$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});</script>");
+			}
+			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
+				html.$htmlhead("<script>$(function() {$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>')});</script>");
 			}
 		}
 

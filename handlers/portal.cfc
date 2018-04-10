@@ -13,7 +13,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="settingService" inject="settingService@aggregator";
 	property name="themeService" inject="themeService@cb";
 	property name="dataMarshaller" inject="dataMarshaller@coldbox";
-	property name="contentService" inject="contentService@cb";
+	property name="contentService" inject="contentService@aggregator";
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,onError,notFound";

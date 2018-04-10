@@ -1,5 +1,13 @@
 component extends="contentbox.models.content.ContentService" singleton {
 
+	ContentService function init( entityName="cbContent", boolean useQueryCaching=true ) {
+
+		super.init( argumentCollection=arguments );
+
+		return this;
+
+	}
+
 	ContentService function save( required any entity, boolean transactional=true ) {
 
 		if ( !isSlugUnique( arguments.entity.getSlug(), arguments.entity.getContentID() ) ) {
@@ -25,6 +33,23 @@ component extends="contentbox.models.content.ContentService" singleton {
 		}
 
 		return uniqueSlug;
+
+	}
+
+	ContentService function clearAllCaches( boolean async=false ) {
+
+		// Set vars
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
+		var cacheKey = "cb-content-aggregator";
+
+		// Clear portal cache
+		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
+
+		// Clear content caches
+		super.clearAllCaches( arguments.async );
+
+		return this;
 
 	}
 

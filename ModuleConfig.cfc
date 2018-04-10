@@ -112,23 +112,16 @@ component {
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate",
-
 				"aggregator_onIndexView",
 				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
-
 				"aggregator_onFeedsView",
 				"aggregator_preFeedsDisplay","aggregator_postFeedsDisplay",
-
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
-
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
-
 				"aggregator_onArchivesView",
 				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
-
 				"aggregator_preSideBarDisplay","aggregator_postSideBarDisplay",
-
 				"aggregator_onRSSView"
 			])
 		};
@@ -144,6 +137,7 @@ component {
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 
+		binder.map("contentService@aggregator").to("#moduleMapping#.models.ContentService");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
