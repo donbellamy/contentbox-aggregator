@@ -1,6 +1,10 @@
 <cfoutput>
 <script>
 $( document ).ready( function() {
+	$("##settingsForm").validate();
+	$("input.slider").on( "slide", function( slideEvt ) {
+		$( "##" + slideEvt.target.id + "_label" ).text( slideEvt.value );
+	});
 	$("##ag_importing_import_interval").on("change",function(){
 		if ( $(this).val() == "" ) {
 			$("##ag_importing_import_start_date").val("");
