@@ -36,21 +36,4 @@ component extends="contentbox.models.content.ContentService" singleton {
 
 	}
 
-	ContentService function clearAllCaches( boolean async=false ) {
-
-		// Set vars
-		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-content-aggregator";
-
-		// Clear portal cache
-		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
-
-		// Clear content caches
-		super.clearAllCaches( arguments.async );
-
-		return this;
-
-	}
-
 }

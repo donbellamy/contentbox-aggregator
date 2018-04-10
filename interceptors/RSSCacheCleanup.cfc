@@ -34,15 +34,10 @@ component extends="coldbox.system.Interceptor" {
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems";
+		var cacheKey = "cb-feeds-aggregator";
 
 		// Clear cache
 		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
-
-		// Log
-		if ( log.canInfo() ) {
-			log.info( "Sent clear command using the following content key: #cacheKey# from provider: #cache.getName()#" );
-		}
 
 		return this;
 

@@ -17,7 +17,7 @@ component singleton {
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-feeds-#cgi.http_host#-feeditems-#hash( arguments.category & arguments.feed & "FeedItem" )#";
+		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.feed & "FeedItem" )#";
 		var rssFeed = "";
 
 		// Check cache
