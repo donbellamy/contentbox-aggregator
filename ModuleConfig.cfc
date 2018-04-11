@@ -17,10 +17,10 @@ component {
 
 			// Portal
 			"ag_portal_entrypoint" = "news",
-			"ag_portal_title" = "RSS Aggregator News",
+			"ag_portal_title" = "News",
 			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
-			"ag_portal_feeds_title" = "News Feeds",
+			"ag_portal_feeds_title" = "Feeds",
 			"ag_portal_use_interstitial_page" = "false",
 			"ag_portal_paging_max_items" = "10",
 			"ag_portal_paging_max_feeds" = "10",
@@ -49,6 +49,18 @@ component {
 			"ag_importing_image_default" = "",
 			"ag_importing_image_default_url" = "",
 
+			// Global html
+			"ag_html_pre_index_display" = "",
+			"ag_html_post_index_display" = "",
+			"ag_html_pre_feeds_display" = "",
+			"ag_html_post_feeds_display" = "",
+			"ag_html_pre_feed_display" = "",
+			"ag_html_post_feed_display" = "",
+			"ag_html_pre_archives_display" = "",
+			"ag_html_post_archives_display" = "",
+			"ag_html_pre_sidebar_display" = "",
+			"ag_html_post_sidebar_display" = "",
+
 			// RSS
 			"ag_rss_enable" = "true",
 			"ag_rss_title" = "RSS Aggregator Feed",
@@ -60,19 +72,7 @@ component {
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
 			"ag_rss_cache_timeout" = "60",
-			"ag_rss_cache_timeout_idle" = "15",
-
-			// Global html
-			"ag_html_pre_index_display" = "",
-			"ag_html_post_index_display" = "",
-			"ag_html_pre_feeds_display" = "",
-			"ag_html_post_feeds_display" = "",
-			"ag_html_pre_feed_display" = "",
-			"ag_html_post_feed_display" = "",
-			"ag_html_pre_archives_display" = "",
-			"ag_html_post_archives_display" = "",
-			"ag_html_pre_sidebar_display" = "",
-			"ag_html_post_sidebar_display" = ""
+			"ag_rss_cache_timeout_idle" = "15"
 
 		};
 

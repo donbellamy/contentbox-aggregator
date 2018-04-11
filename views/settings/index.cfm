@@ -23,10 +23,10 @@
 								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing</a>
 							</li>
 							<li>
-								<a href="##rss_options" data-toggle="tab"><i class="fa fa-rss fa-lg"></i> RSS Feed</a>
+								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> HTML</a>
 							</li>
 							<li>
-								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> Global HTML</a>
+								<a href="##rss_options" data-toggle="tab"><i class="fa fa-rss fa-lg"></i> RSS Feed</a>
 							</li>
 						</ul>
 						<div class="tab-content">
@@ -607,6 +607,112 @@
 									</div>
 								</fieldset>
 							</div>
+							<div class="tab-pane" id="global_html">
+								<fieldset>
+									<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
+									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
+									#html.textarea(
+										name="ag_html_pre_index_display",
+										label="Before portal index:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_index_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_index_display",
+										label="After portal index:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_index_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_pre_feeds_display",
+										label="Before feeds index:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_feeds_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_feeds_display",
+										label="After feeds index:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_feeds_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_pre_feed_display",
+										label="Before feed:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_feed_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_feed_display",
+										label="After feed:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_feed_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_pre_archives_display",
+										label="Before archives:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_archives_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_archives_display",
+										label="After archives:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_archives_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_pre_sidebar_display",
+										label="Before sidebar:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_sidebar_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_sidebar_display",
+										label="After sidebar:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_sidebar_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+								</fieldset>
+							</div>
 							<div class="tab-pane" id="rss_options">
 								<fieldset>
 									<legend><i class="fa fa-rss fa-lg"></i> RSS Feed Options</legend>
@@ -814,111 +920,6 @@
 											<strong class="margin10">500</strong>
 										</div>
 									</div>
-								</fieldset>
-							</div>
-							<div class="tab-pane" id="global_html">
-								<fieldset>
-									<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
-									#html.textarea(
-										name="ag_html_pre_index_display",
-										label="Before portal index:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_pre_index_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_post_index_display",
-										label="After portal index:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_post_index_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_pre_feeds_display",
-										label="Before feeds index:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_pre_feeds_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_post_feeds_display",
-										label="After feeds index:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_post_feeds_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_pre_feed_display",
-										label="Before feed:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_pre_feed_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_post_feed_display",
-										label="After feed:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_post_feed_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_pre_archives_display",
-										label="Before archives:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_pre_archives_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_post_archives_display",
-										label="After archives:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_post_archives_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_pre_sidebar_display",
-										label="Before sidebar:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_pre_sidebar_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
-									#html.textarea(
-										name="ag_html_post_sidebar_display",
-										label="After sidebar:",
-										rows="6",
-										class="form-control",
-										value=prc.agSettings.ag_html_post_sidebar_display,
-										wrapper="div class=controls",
-										labelClass="control-label",
-										groupWrapper="div class=form-group"
-									)#
 								</fieldset>
 							</div>
 							<div class="form-actions">
