@@ -76,7 +76,6 @@ component persistent="true"
 
 	string function renderExcerpt() {
 
-		// TODO: Should we empty this onsave? - look at entry onsave
 		if ( len( getExcerpt() ) AND NOT len( renderedExcerpt ) ) {
 			lock name="contentbox.excerptrendering.#getContentID()#" type="exclusive" throwontimeout="true" timeout="10" {
 				var b = createObject( "java","java.lang.StringBuilder" ).init( getExcerpt() );

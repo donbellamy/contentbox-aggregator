@@ -66,14 +66,12 @@ component extends="baseHandler" {
 			cfschedule( action="delete", task="aggregator-import" );
 		}
 
-		// TODO: test this with a cbEntryPoint defined?
-		// TODO: What if cbentrypoint is changed via the settings form?
 		// Set portal entrypoint
 		var ses = getInterceptor("SES");
 		var routes = ses.getRoutes();
-		for( var key IN routes ) {
-			if( key.namespaceRouting EQ "aggregator" ){
-				key.pattern = key.regexpattern = replace(  prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
+		for ( var key IN routes ) {
+			if ( key.namespaceRouting EQ "aggregator" ) {
+				key.pattern = key.regexpattern = replace( prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
 			}
 		}
 		ses.setRoutes( routes );

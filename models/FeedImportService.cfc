@@ -170,7 +170,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										// Import images if enabled
 										if ( importImages ) {
 
-											// TODO: Check attachments first, then scan body
 											// Check for images
 											var images = jsoup.parse( item.body ).getElementsByTag("img");
 

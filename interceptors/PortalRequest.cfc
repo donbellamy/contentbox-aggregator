@@ -102,25 +102,12 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
-	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
-		// TODO:
-		// announce event
-		//announceInterception( "cbui_postRequest" );
-	}
-
 	function afterInstanceCreation( event, interceptData, buffer ) {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
 			var prc = event.getCollection( private=true );
-			// decorate it
 			arguments.interceptData.target.ag = helper;
 			arguments.interceptData.target.$agInject = variables.$agInject;
 			arguments.interceptData.target.$agInject();
-			// TODO:
-			// re-broadcast event
-			//announceInterception(
-			//	"cbui_onRendererDecoration",
-			//	{ renderer=arguments.interceptData.target, AGHelper=arguments.interceptData.target.ag }
-			//);
 		}
 	}
 

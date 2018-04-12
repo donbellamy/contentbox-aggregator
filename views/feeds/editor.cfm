@@ -55,11 +55,6 @@
 								<i class="fa fa-history"></i> History
 							</a>
 						</li>
-						<!--- TODO:<li role="presentation">
-							<a href="##imports" aria-controls="imports" role="tab" data-toggle="tab">
-								<i class="fa fa-download"></i> Imports
-							</a>
-						</li>--->
 					</cfif>
 				</ul>
 			</div>
@@ -491,9 +486,6 @@
 					<div role="tabpanel" class="tab-pane" id="history">
 						#prc.versionsViewlet#
 					</div>
-					<!---<div role="tabpanel" class="tab-pane" id="imports">
-						<div>Do we need this?</div>
-					</div>--->
 				</cfif>
 			</div>
 		</div>

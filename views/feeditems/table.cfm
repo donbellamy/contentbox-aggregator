@@ -67,13 +67,6 @@
 							<li><a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
 							<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
 								<li><a href="javascript:remove('#feedItem.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed Item?"><i id="delete_#feedItem.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
-								<!--- TODO: Export ?
-								<cfif prc.oCurrentAuthor.checkPermission( "ENTRIES_ADMIN,TOOLS_EXPORT" )>
-									<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.json" target="_blank"><i class="fa fa-download"></i> Export as JSON</a></li>
-									<li><a href="#event.buildLink(linkto=prc.xehEntryExport)#/contentID/#entry.getContentID()#.xml" target="_blank"><i class="fa fa-download"></i> Export as XML</a></li>
-								</cfif>--->
-								<!--- TODO: History ?
-								<li><a href="#event.buildLink(prc.xehEntryHistory)#/contentID/#entry.getContentID()#"><i class="fa fa-clock-o fa-lg"></i> History</a></li>--->
 								<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-ban fa-lg"></i> Draft </a></li>
 								<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
