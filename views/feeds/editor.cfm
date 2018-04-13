@@ -55,6 +55,13 @@
 								<i class="fa fa-history"></i> History
 							</a>
 						</li>
+						<cfif prc.feed.hasFeedImport() >
+							<li role="presentation">
+								<a href="##imports" aria-controls="imports" role="tab" data-toggle="tab">
+									<i class="fa fa-rss"></i> Feed Imports
+								</a>
+							</li>
+						</cfif>
 					</cfif>
 				</ul>
 			</div>
@@ -486,6 +493,43 @@
 					<div role="tabpanel" class="tab-pane" id="history">
 						#prc.versionsViewlet#
 					</div>
+					<cfif prc.feed.hasFeedImport() >
+						<div role="tabpanel" class="tab-pane" id="imports">
+							<p>Imports go here...</p>
+							<table id="feedImportsTable" width="100%" class="table table-hover table-condensed table-striped" border="0">
+								<thead>
+									<tr>
+										<th width="160" class="text-center">Date</th>
+										<th width="130" class="text-center">Item Count</th>
+										<th width="130" class="text-center">Imported Count</th>
+										<th class="text-left">Imported By</th>
+										<th width="100" class="text-center">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<cfloop array="#prc.feed.getFeedImports()#" index="feedImport">
+										<tr>
+										<tr id="import_row_#feedImport.getFeedImportID()#" data-feedImportID="#feedImport.getFeedImportID()#">
+											<td class="text-center">#feedImport.getDisplayImportedDate()#</td>
+											<td class="text-center">#feedImport.getItemCount()#</td>
+											<td class="text-center">#feedImport.getImportedCount()#</td>
+											<td><a href="mailto:#feedImport.getImporter().getEmail()#">#feedImport.getImporter().getName()#</a></td>
+											<td class="text-center">
+												<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feedImport.getFeedImportID()#');">
+													<i class="fa fa-eye fa-lg"></i>
+												</a>
+												<a href="javascript:removeImport('#feedImport.getFeedImportID()#')" title="Remove Feed Import" class="confirmIt"
+													data-title="<i class='fa fa-trash-o'></i> Remove Feed Import"
+													data-message="Do you really want to remove this feed import?">
+													<i class="fa fa-trash-o fa-lg" id="import_delete_#feedImport.getFeedImportID()#"></i>
+												</a>
+											</td>
+										</tr>
+									</cfloop>
+								</tbody>
+							</table>
+						</div>
+					</cfif>
 				</cfif>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ component persistent="true"
 	cacheuse="read-write" {
 
 	/* *********************************************************************
-	**							PROPERTIES									
+	**							PROPERTIES
 	********************************************************************* */
 
 	property name="feedImportID"
@@ -22,7 +22,7 @@ component persistent="true"
 		update="false"
 		index="idx_importedDate";
 
-	property name="numberImported"
+	property name="importedCount"
 		notnull="true"
 		ormtype="long";
 
@@ -31,7 +31,7 @@ component persistent="true"
 		ormtype="text";
 
 	/* *********************************************************************
-	**							RELATIONSHIPS									
+	**							RELATIONSHIPS
 	********************************************************************* */
 
 	// M20 -> Feed
@@ -52,8 +52,18 @@ component persistent="true"
 
 	FeedImport function init() {
 		importedDate = now();
-		numberImported = 0;
+		importedCount = 0;
 		return this;
+	}
+
+	numeric function getItemCount() {
+		var import = deserializeJSON( getMetaInfo() );
+		return arrayLen( import.items );
+	}
+
+	string function getDisplayImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
+		var importedDate = getImportedDate();
+		return dateFormat( importedDate, arguments.dateFormat ) & " " & timeFormat( importedDate, arguments.timeFormat );
 	}
 
 }

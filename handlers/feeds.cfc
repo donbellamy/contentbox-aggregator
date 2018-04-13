@@ -329,4 +329,38 @@ component extends="contentHandler" {
 
 	}
 
+	function viewImport( event, rc, prc ) {
+
+		event.paramValue( "feedImportID", "" );
+
+		prc.feedImport  = feedImportService.get( rc.feedImportID );
+
+		event.setView( view="feeds/import", layout="ajax" );
+
+	}
+
+	function removeImport( event, rc, prc ) {
+
+		event.paramValue( "feedImportID", "" );
+
+		var results = { "ERROR" = false, "MESSAGES" = "" };
+
+		prc.feedImport  = feedImportService.get( rc.feedImportID );
+
+		if ( !isNull( prc.feedImport ) ) {
+
+			// TODO: Announce?
+			feedImportService.deleteByID( rc.feedImportID );
+			// TODO: Announce?
+			results.messages = "Feed import removed!";
+
+		} else {
+			results.error = true;
+			results.messages = "Invalid feed import!";
+		}
+
+		event.renderData( type="json", data=results );
+
+	}
+
 }

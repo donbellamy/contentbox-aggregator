@@ -332,7 +332,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			var feedImport = new();
 			feedImport.setFeed( arguments.feed );
 			feedImport.setImporter( arguments.author );
-			feedImport.setNumberImported( itemCount );
+			feedImport.setImportedCount( itemCount );
 			feedImport.setMetaInfo( serializeJSON( remoteFeed ) );
 			save( feedImport );
 
