@@ -72,6 +72,7 @@
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
+							<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#feedItem.getContentID()#');"><i class="fa fa-download fa-lg"></i> View Import</a></li>
 						</ul>
 					</div>
 				</td>

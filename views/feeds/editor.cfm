@@ -67,6 +67,41 @@
 			</div>
 			<div class="panel-body tab-content">
 				<div role="tabpanel" class="tab-pane active" id="editor">
+					#html.textfield(
+						label="Title:",
+						name="title",
+						bind=prc.feed,
+						maxlength="200",
+						required="required",
+						title="The title for this feed",
+						class="form-control",
+						wrapper="div class=controls",
+						labelClass="control-label",
+						groupWrapper="div class=form-group"
+					)#
+					<div class="form-group">
+						<label for="slug" class="control-label">
+							Permalink:
+							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
+							<small>#prc.agHelper.linkFeeds()#/</small>
+						</label>
+						<div class="controls">
+							<div id='slugCheckErrors'></div>
+							<div class="input-group">
+								#html.textfield(
+									name="slug",
+									bind=prc.feed,
+									maxlength="200",
+									class="form-control",
+									title="The URL permalink for this feed",
+									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
+								)#
+								<a title="Lock/Unlock Permalink" class="input-group-addon" href="javascript:void(0);" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
+									<i id="togglePermalink" class="fa fa-#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'lock' : 'unlock'#"></i>
+								</a>
+							</div>
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="siteUrl" class="control-label">
 							Site URL:
@@ -113,41 +148,6 @@
 								)#
 								<a id="validateFeed" title="Validate Feed URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Validate Feed URL" data-container="body">
 									<i class="fa fa-rss"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					#html.textfield(
-						label="Title:",
-						name="title",
-						bind=prc.feed,
-						maxlength="200",
-						required="required",
-						title="The title for this feed",
-						class="form-control",
-						wrapper="div class=controls",
-						labelClass="control-label",
-						groupWrapper="div class=form-group"
-					)#
-					<div class="form-group">
-						<label for="slug" class="control-label">
-							Permalink:
-							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<small>#prc.agHelper.linkFeeds()#/</small>
-						</label>
-						<div class="controls">
-							<div id='slugCheckErrors'></div>
-							<div class="input-group">
-								#html.textfield(
-									name="slug",
-									bind=prc.feed,
-									maxlength="200",
-									class="form-control",
-									title="The URL permalink for this feed",
-									disabled="#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'true' : 'false'#"
-								)#
-								<a title="Lock/Unlock Permalink" class="input-group-addon" href="javascript:void(0);" onclick="togglePermalink(); return false;" data-original-title="Lock/Unlock Permalink" data-container="body">
-									<i id="togglePermalink" class="fa fa-#prc.feed.isLoaded() && prc.feed.getIsPublished() ? 'lock' : 'unlock'#"></i>
 								</a>
 							</div>
 						</div>

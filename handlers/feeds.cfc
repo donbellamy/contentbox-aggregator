@@ -333,7 +333,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "feedImportID", "" );
 
-		prc.feedImport  = feedImportService.get( rc.feedImportID );
+		prc.feedImport  = feedImportService.get( rc.feedImportID, false );
 
 		event.setView( view="feeds/import", layout="ajax" );
 
@@ -345,7 +345,8 @@ component extends="contentHandler" {
 
 		var results = { "ERROR" = false, "MESSAGES" = "" };
 
-		prc.feedImport  = feedImportService.get( rc.feedImportID );
+		// TODO: Test across app, the get function where I am using !isNull()
+		prc.feedImport  = feedImportService.get( rc.feedImportID, false );
 
 		if ( !isNull( prc.feedImport ) ) {
 

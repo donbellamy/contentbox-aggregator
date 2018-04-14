@@ -13,6 +13,11 @@
 		<li><a href="javascript:quickPublish( true )"><i class="fa fa-eraser"></i> Publish as Draft</a></li>
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
 		<li><a href="#prc.agHelper.linkFeedItem( prc.feedItem )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+		<li>
+			<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#prc.feedItem.getContentID()#');">
+				<i class="fa fa-download"></i> View Import
+			</a>
+		</li>
 	</ul>
 </div>
 #html.startForm(
@@ -143,7 +148,9 @@
 									<tr>
 										<th class="col-md-4">Imported On:</th>
 										<td class="col-md-8">
-											#prc.feedItem.getDisplayCreatedDate()#
+											<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#prc.feedItem.getContentID()#');">
+												#prc.feedItem.getDisplayCreatedDate()#
+											</a>
 										</td>
 									</tr>
 									<tr>

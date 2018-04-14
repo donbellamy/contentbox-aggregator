@@ -232,4 +232,14 @@ component extends="contentHandler" {
 
 	}
 
+	function viewImport( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+
+		prc.feedItem  = feedItemService.get( rc.contentID, false );
+
+		event.setView( view="feeditems/import", layout="ajax" );
+
+	}
+
 }
