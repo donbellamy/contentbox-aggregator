@@ -11,16 +11,17 @@ component extends="coldbox.system.Interceptor" {
 		}
 	}
 
-	function aggregator_postFeedImport( event, interceptData ) {
-		var feed = arguments.interceptData.feed;
-		doMaxItemCleanup( feed );
-	}
-
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doKeywordCleanup( feed );
 		doAgeCleanup( feed );
 		doMaxItemCleanup( feed );
+	}
+
+	function aggregator_postFeedImports( event, interceptData ) {
+		doKeywordCleanup();
+		doAgeCleanup();
+		doMaxItemCleanup();
 	}
 
 	function aggregator_postSettingsSave( event, interceptData ) {
