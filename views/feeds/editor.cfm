@@ -495,7 +495,11 @@
 					</div>
 					<cfif prc.feed.hasFeedImport() >
 						<div role="tabpanel" class="tab-pane" id="imports">
-							<p>Imports go here...</p>
+							<p>
+								Below are the most recent feed imports.
+								You can view the import record by right clicking on the table row or clicking the view icon.
+								The current import history limit of <strong>#prc.agSettings.ag_importing_max_feed_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
+							</p>
 							<table id="feedImportsTable" width="100%" class="table table-hover table-condensed table-striped" border="0">
 								<thead>
 									<tr>
@@ -515,7 +519,7 @@
 											<td class="text-center">#feedImport.getImportedCount()#</td>
 											<td><a href="mailto:#feedImport.getImporter().getEmail()#">#feedImport.getImporter().getName()#</a></td>
 											<td class="text-center">
-												<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feedImport.getFeedImportID()#');">
+												<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feedImport.getFeedImportID()#');" title="View Feed Import">
 													<i class="fa fa-eye fa-lg"></i>
 												</a>
 												<a href="javascript:removeImport('#feedImport.getFeedImportID()#')" title="Remove Feed Import" class="confirmIt"

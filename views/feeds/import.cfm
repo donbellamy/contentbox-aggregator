@@ -3,7 +3,8 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3>Imported on #prc.feedImport.getDisplayImportedDate()#</h3>
+			<h3>Feed Import</h3>
+			<h4>Imported on: #prc.feedImport.getDisplayImportedDate()#</h4>
 		</div>
 		<div class="modal-body">
 			<cfdump var="#deserializeJSON( prc.feedImport.getMetaInfo() )#" />

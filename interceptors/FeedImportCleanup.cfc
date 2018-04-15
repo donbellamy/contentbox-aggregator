@@ -29,13 +29,13 @@ component extends="coldbox.system.Interceptor" {
 		for ( var item IN feeds ) {
 			var maxFeedImports = val( settings.ag_importing_max_feed_imports );
 			var feedImports = item.getFeedImports();
-			if ( maxFeedImports && arrayLen( feedImports ) GT maxFeedImports ) {
+			if ( maxFeedImports && ( arrayLen( feedImports ) GT maxFeedImports ) ) {
 				var importsToDelete = arraySlice( feedImports, maxFeedImports + 1 );
 				for ( var feedImport IN importsToDelete ) {
-					item.removeFeedImport( feedImport );
-					feedImportService.delete( feedImport );
+					var feedImportID = feedImport.getFeedImportID();
+					feedImportService.deleteByID( feedImportID );
 					if ( log.canInfo() ) {
-						log.info("Feed import deleted for feed '#item.getTitle()#' using general setting for 'Import history limit'.");
+						log.info("Feed import ('#feedImportID#') deleted for feed '#item.getTitle()#' using general setting for 'Import history limit'.");
 					}
 				}
 			}
