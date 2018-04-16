@@ -43,7 +43,7 @@ component persistent="true"
 	property name="defaultStatus"
 		notnull="true"
 		length="10"
-		default="published";
+		default="draft";
 
 	property name="matchAnyFilter"
 		notnull="false"

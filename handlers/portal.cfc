@@ -591,7 +591,6 @@ component extends="coldbox.system.EventHandler" {
 		// Only import if the keys match and an author is defined
 		if ( rc.key EQ prc.agSettings.ag_importing_secret_key  && !isNull( author ) ) {
 
-			// Thread this instead? - in a future version yes
 			setting requestTimeout="999999";
 
 			var feeds = feedService.getFeedsForImport();
