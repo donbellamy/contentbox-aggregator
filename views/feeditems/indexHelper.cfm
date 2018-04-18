@@ -5,14 +5,14 @@ function setupFeedView( settings ) {
 	$contentForm = $("##feedItemForm");
 	$tableContainer = $("##feedItemsTableContainer");
 
-	$("##search").keyup( 
+	$("##search").keyup(
 		_.debounce(
 			function() {
 				var $this = $( this );
 				contentLoad( { search : $this.val() } );
-			}, 
-			300 
-		) 
+			},
+			300
+		)
 	);
 
 }
@@ -26,10 +26,10 @@ function contentLoad( criteria ) {
 	if ( !( "category" in criteria) ) { criteria.category = "all"; }
 	if ( !( "status" in criteria) ) { criteria.status = "any"; }
 	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
-	
+
 	$tableContainer.css( "opacity", .60 );
 
-	var args = {  
+	var args = {
 		page : criteria.page,
 		search : criteria.search,
 		feed : criteria.feed,
@@ -124,6 +124,33 @@ function contentPaginate( page ) {
 		category : $("##category").val(),
 		status : $("##status").val()
 	} );
+}
+
+function categoryChooser( contentID ) {
+
+	// Set vars
+	var $categoriesDialog = $("##categoriesDialog");
+	var $categoriesForm = $("##categoriesForm");
+
+	// Check single selection
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+
+	// Open modal
+	openModal( $categoriesDialog );
+
+	// Submit form
+	$categoriesDialog.find("##categoriesSubmit").click( function(e) {
+		var contentIDs = [];
+		$("input[type='checkbox'][name='contentID']:checked").each(function(i){
+			contentIDs[i] = $(this).val();
+		});
+		contentIDs = contentIDs.join(",");
+		$categoriesForm.find("##contentID").val(contentIDs);
+		$categoriesForm.submit();
+	});
+
 }
 
 $(document).ready( function() {

@@ -11,7 +11,7 @@
 	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
 		#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
-			#html.hiddenField(name="contentStatus", value="" )#
+			#html.hiddenField( name="contentStatus", value="" )#
 			#html.hiddenField( name="contentID", value="" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -44,6 +44,7 @@
 											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-ban"></i> Draft Selected</a></li>
 											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
 											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+											<li><a href="javascript:categoryChooser();"><i class="fa fa-tags"></i> Assign Categories</a></li>
 										</cfif>
 										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
@@ -108,4 +109,7 @@
 		</div>
 	</div>
 </div>
+<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
+	#renderView( view="feeditems/categories" )#
+</cfif>
 </cfoutput>

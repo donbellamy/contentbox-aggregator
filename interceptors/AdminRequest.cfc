@@ -45,6 +45,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedItemStatus = "#prc.agAdminEntryPoint#.feeditems.updateStatus";
 		prc.xehFeedItemEditor = "#prc.agAdminEntryPoint#.feeditems.editor";
 		prc.xehFeedItemSave = "#prc.agAdminEntryPoint#.feeditems.save";
+		prc.xehFeedItemCategories = "#prc.agAdminEntryPoint#.feeditems.saveCategories";
 		prc.xehFeedItemRemove = "#prc.agAdminEntryPoint#.feeditems.remove";
 		prc.xehFeedItemResetHits = "#prc.agAdminEntryPoint#.feeditems.resetHits";
 		prc.xehFeedItemImportView = "#prc.agAdminEntryPoint#.feeditems.viewImport";
@@ -57,8 +58,11 @@ component extends="coldbox.system.Interceptor" {
 
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
+		// Param format
+		event.paramValue( "format", "html" );
+
 		// Add portal link, new feed and clear cache to nav bar
-		if ( !event.isAjax() ) {
+		if ( !event.isAjax() && rc.format EQ "html" ) {
 			html.$htmlhead("<script>$(function() {$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>");
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
 				html.$htmlhead("<script>$(function() {$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});</script>");

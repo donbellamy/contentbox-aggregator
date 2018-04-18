@@ -10,7 +10,7 @@
 			<cfdump var="#deserializeJSON( prc.feedItem.getMetaInfo() )#" />
 		</div>
 		<div class="modal-footer">
-			<button class="btn" onclick="closeRemoteModal();"> Close </button>
+			<button class="btn" onclick="closeRemoteModal();">Close</button>
 		</div>
 	</div>
 </div>
