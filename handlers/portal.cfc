@@ -223,7 +223,7 @@ component extends="coldbox.system.EventHandler" {
 		rc.category = antiSamy.clean( rc.category );
 
 		// Paging
-		prc.oPaging = getModel("paging@cb");
+		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = helper.linkPortal() & "?page=@page@";
@@ -307,7 +307,7 @@ component extends="coldbox.system.EventHandler" {
 			}
 
 			// Paging
-			prc.oPaging = getModel("paging@cb");
+			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = helper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
@@ -396,7 +396,7 @@ component extends="coldbox.system.EventHandler" {
 		}
 
 		// Paging
-		prc.oPaging = getModel("paging@cb");
+		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_feeds );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = helper.linkFeeds() & "?page=@page@";
@@ -455,7 +455,7 @@ component extends="coldbox.system.EventHandler" {
 			rc.author = antiSamy.clean( rc.author );
 
 			// Paging
-			prc.oPaging = getModel("paging@cb");
+			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";

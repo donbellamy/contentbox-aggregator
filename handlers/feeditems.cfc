@@ -32,7 +32,7 @@ component extends="contentHandler" {
 		event.paramValue( "status", "any" );
 		event.paramValue( "showAll", false );
 
-		prc.oPaging = getModel( "Paging@cb" );
+		prc.oPaging = getModel("paging@aggregator");
 		prc.paging = prc.oPaging.getBoundaries();
 		prc.pagingLink = "javascript:contentPaginate(@page@)";
 

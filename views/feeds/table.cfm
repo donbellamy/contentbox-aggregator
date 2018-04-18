@@ -98,7 +98,7 @@
 </table>
 <cfif prc.itemCount >
 	<cfif !rc.showAll && prc.itemCount GT prc.cbSettings.cb_paging_maxrows >
-		#prc.oPaging.renderit( foundRows=prc.itemCount, link=prc.pagingLink, asList=true )#
+		#prc.oPaging.renderit( foundRows=prc.itemCount, link=prc.pagingLink, asList=true, type="feeds" )#
 	<cfelse>
 		<span class="label label-info">Total Feeds: #prc.itemCount#</span>
 	</cfif>

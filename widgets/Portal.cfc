@@ -57,7 +57,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		prc.cbTheme = prc.cbSettings.cb_site_theme;
 
 		// Paging
-		prc.oPaging = getModel("paging@cb");
+		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( arguments.max );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = ag.linkPortal() & "?page=@page@";

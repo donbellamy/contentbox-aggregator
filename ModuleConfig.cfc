@@ -142,6 +142,7 @@ component {
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
+		binder.map("paging@aggregator").to("#moduleMapping#.models.Paging");
 		binder.map("rssService@aggregator").to("#moduleMapping#.models.RSSService");
 		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
 

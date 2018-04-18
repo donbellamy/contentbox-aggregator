@@ -16,7 +16,6 @@
 								#html.checkbox(
 									name="category_#x#",
 									value="#prc.categories[x].getCategoryID()#"
-									//,checked=prc.feedItem.hasCategories( prc.categories[ x ] )
 								)#
 								#prc.categories[x].getCategory()#
 							</label>

@@ -266,7 +266,7 @@ component accessors="true" singleton threadSafe {
 		return replace( arrayToList( catList ), ",", ", ", "all" );
 	}
 
-	string function quickPaging( numeric maxRows ) {
+	string function quickPaging( numeric maxRows, string type="items" ) {
 		var prc = cb.getPrivateRequestCollection();
 		if( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(
@@ -281,7 +281,8 @@ component accessors="true" singleton threadSafe {
 		if ( prc.itemCount GT arguments.maxRows ) {
 			return prc.oPaging.renderit(
 				foundRows=prc.itemCount,
-				link=prc.pagingLink
+				link=prc.pagingLink,
+				type=arguments.type
 			);
 		} else {
 			return "";
