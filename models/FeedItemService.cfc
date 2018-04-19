@@ -216,4 +216,24 @@ component extends="ContentService" singleton {
 
 	}
 
+	FeedItemService function bulkPublishStatus( required string contentID, required string status ) {
+
+		var publish = false;
+		if ( arguments.status EQ "publish" ) {
+			publish = true;
+		}
+
+		var contentObjects = getAll( id=arguments.contentID );
+
+		for ( var x=1; x LTE arrayLen( contentObjects ); x++ ) {
+			// NOTE - Need to preserve published date for feed items when bulk updating
+			//contentObjects[x].setpublishedDate( now() );
+			contentObjects[x].setisPublished( publish );
+		}
+
+		saveAll( contentObjects );
+
+		return this;
+	}
+
 }

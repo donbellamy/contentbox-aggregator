@@ -12,11 +12,19 @@ component extends="coldbox.system.Interceptor" {
 		doCacheCleanup();
 	}
 
+	function aggregator_onFeedStatusUpdate( event, interceptData ) {
+		doCacheCleanup();
+	}
+
 	function aggregator_postFeedItemSave( event, interceptData ) {
 		doCacheCleanup();
 	}
 
 	function aggregator_postFeedItemRemove( event, interceptData ) {
+		doCacheCleanup();
+	}
+
+	function aggregator_onFeedItemStatusUpdate( event, interceptData ) {
 		doCacheCleanup();
 	}
 

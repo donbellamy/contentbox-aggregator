@@ -168,6 +168,7 @@ component extends="contentHandler" {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
 
+		// TODO: check if content is different?
 		prc.feed.addNewContentVersion(
 			content=rc.content,
 			changelog=rc.changelog,
