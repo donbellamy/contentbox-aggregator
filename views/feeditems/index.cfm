@@ -8,11 +8,11 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-9">
-		#getModel( "messagebox@cbMessagebox" ).renderit()#
-		#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
-			#html.hiddenField( name="contentStatus", value="" )#
-			#html.hiddenField( name="contentID", value="" )#
+	#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
+		#html.hiddenField( name="contentStatus", value="" )#
+		#html.hiddenField( name="contentID", value="" )#
+		<div class="col-md-9">
+			#getModel( "messagebox@cbMessagebox" ).renderit()#
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
@@ -21,7 +21,8 @@
 								#html.textField(
 									name="search",
 									class="form-control",
-									placeholder="Quick Search"
+									placeholder="Quick Search",
+									value="#rc.search#"
 								)#
 							</div>
 						</div>
@@ -59,22 +60,20 @@
 					</div>
 				</div>
 			</div>
-		#html.endForm()#
-	</div>
-	<div class="col-md-3">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title"><i class="fa fa-filter"></i> Filters</h3>
-			</div>
-			<div class="panel-body">
-				<div id="filterBox">
-					#html.startForm( name="feedItemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
-					    <div class="form-group">
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-filter"></i> Filters</h3>
+				</div>
+				<div class="panel-body">
+					<div id="filterBox">
+						<div class="form-group">
 							<label for="creator" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">
-								<option value="all" selected="selected">All Feeds</option>
+								<option value="all"<cfif rc.feed EQ "all" > selected="selected"</cfif>>All Feeds</option>
 								<cfloop array="#prc.feeds#" index="feed">
-									<option value="#feed.getContentID()#">#feed.getTitle()#</option>
+									<option value="#feed.getContentID()#"<cfif rc.feed EQ feed.getContentID() > selected="selected"</cfif>>#feed.getTitle()#</option>
 								</cfloop>
 							</select>
 						</div>
@@ -82,10 +81,10 @@
 							<label for="category" class="control-label">Categories:</label>
 							<div class="controls">
 								<select name="category" id="category" class="form-control input-sm valid">
-									<option value="all">All Categories</option>
-									<option value="none">Uncategorized</option>
+									<option value="all"<cfif rc.category EQ "all" > selected="selected"</cfif>>All Categories</option>
+									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
 									<cfloop array="#prc.categories#" index="category">
-										<option value="#category.getCategoryID()#">#category.getCategory()#</option>
+										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
 									</cfloop>
 								</select>
 							</div>
@@ -94,20 +93,20 @@
 							<label for="status" class="control-label">Status:</label>
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
-									<option value="any">Any Status</option>
-									<option value="published">Published</option>
-									<option value="expired">Expired</option>
-									<option value="draft">Draft</option>
+									<option value="any"<cfif rc.status EQ "any" > selected="selected"</cfif>>Any Status</option>
+									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
+									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
+									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
 								</select>
 							</div>
 						</div>
 						<a class="btn btn-info btn-sm" href="javascript:contentFilter()">Apply Filters</a>
 						<a class="btn btn-sm btn-default" href="javascript:resetFilter( true )">Reset</a>
-					#html.endForm()#
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	#html.endForm()#
 </div>
 <cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
 	#renderView( view="feeditems/categories" )#

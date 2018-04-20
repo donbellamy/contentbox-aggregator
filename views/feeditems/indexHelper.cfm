@@ -117,13 +117,13 @@ function resetHits( contentID ) {
 }
 
 function contentPaginate( page ) {
-	contentLoad( {
+	contentLoad({
 		search : $("##search").val(),
 		page : page,
 		feed : $("##feed").val(),
 		category : $("##category").val(),
 		status : $("##status").val()
-	} );
+	});
 }
 
 function categoryChooser( contentID ) {
@@ -140,22 +140,36 @@ function categoryChooser( contentID ) {
 	// Open modal
 	openModal( $categoriesDialog );
 
-	// Submit form
-	$categoriesDialog.find("##categoriesSubmit").click( function(e) {
-		var contentIDs = [];
-		$("input[type='checkbox'][name='contentID']:checked").each(function(i){
-			contentIDs[i] = $(this).val();
+	// Cancel
+	$categoriesDialog.find("##categoriesClose").click( function() {
+		$("input[type='checkbox'][name*='category_']:checked").prop( "checked", false );
+		closeModal( $categoriesDialog );
+		return false;
+	});
+
+	// Assign categories
+	$categoriesDialog.find("##categoriesSubmit").click( function() {
+		$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemCategories )#" );
+		$("input[type='checkbox'][name*='category_']:checked").each(function(){
+			$contentForm.append( $("<input type='hidden' name='" + $(this).attr("name") + "' value='" + $(this).val() + "'/>" ) );
 		});
-		contentIDs = contentIDs.join(",");
-		$categoriesForm.find("##contentID").val(contentIDs);
-		$categoriesForm.submit();
+		$contentForm.append( $("<input type='hidden' name='newCategories' value='" + $("input[name='newCategories']").val() + "'/>") );
+		$contentForm.submit();
 	});
 
 }
 
 $(document).ready( function() {
 	setupFeedView();
-	contentLoad();
+	var criteria = {
+		page: "#rc.page#",
+		search: "#rc.search#",
+		feed: "#rc.feed#",
+		category: "#rc.category#",
+		status: "#rc.status#",
+		showAll: "#rc.showAll#"
+	};
+	contentLoad( criteria );
 });
 </script>
 </cfoutput>

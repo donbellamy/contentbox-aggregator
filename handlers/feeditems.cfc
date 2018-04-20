@@ -16,6 +16,13 @@ component extends="contentHandler" {
 
 	function index( event, rc, prc ) {
 
+		event.paramValue( "page", 1 );
+		event.paramValue( "search", "" );
+		event.paramValue( "feed", "all" );
+		event.paramValue( "category", "all" );
+		event.paramValue( "status", "any" );
+		event.paramValue( "showAll", false );
+
 		prc.feeds = feedService.getAll( sortOrder="title" );
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
@@ -188,7 +195,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( prc.xehFeedItems );
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
 
 	}
 
@@ -216,7 +223,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed Items selected!" );
 		}
 
-		setNextEvent( prc.xehFeedItems );
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
 
 	}
 
@@ -233,7 +240,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( prc.xehFeedItems );
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
 
 	}
 
@@ -261,7 +268,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( prc.xehFeedItems );
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
 
 	}
 
@@ -272,6 +279,23 @@ component extends="contentHandler" {
 		prc.feedItem  = feedItemService.get( rc.contentID, false );
 
 		event.setView( view="feeditems/import", layout="ajax" );
+
+	}
+
+	/************************************** PRIVATE *********************************************/
+
+	private struct function getFilters( rc ) {
+
+		var filters = {};
+
+		//if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
+		if ( structKeyExists( rc, "search" ) ) filters.search = rc.search;
+		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
+		if ( structKeyExists( rc, "category" ) ) filters.category = rc.category;
+		if ( structKeyExists( rc, "status" ) ) filters.status = rc.status;
+		//if ( structKeyExists( rc, "showAll" ) ) filters.feed = rc.showAll;
+
+		return filters;
 
 	}
 

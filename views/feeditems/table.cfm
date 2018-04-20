@@ -67,7 +67,7 @@
 							<li><a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
 							<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
 								<li><a href="javascript:remove('#feedItem.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed Item?"><i id="delete_#feedItem.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
-								<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-ban fa-lg"></i> Draft </a></li>
+								<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-ban fa-lg"></i> Draft</a></li>
 								<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 								<li><a href="javascript:categoryChooser('#feedItem.getContentID()#');"><i class="fa fa-tags fa-lg"></i> Assign Categories</a></li>

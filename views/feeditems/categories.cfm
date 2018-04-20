@@ -8,27 +8,27 @@
 			</div>
 			<div class="modal-body">
 				#html.startForm( name="categoriesForm", action="#prc.xehFeedItemCategories#", class="form-vertical", role="form" )#
-				#html.hiddenField( name="contentID", value="" )#
-				<div id="categoriesChecks">
-					<cfloop from="1" to="#arrayLen( prc.categories )#" index="x">
-						<div class="checkbox">
-							<label>
-								#html.checkbox(
-									name="category_#x#",
-									value="#prc.categories[x].getCategoryID()#"
-								)#
-								#prc.categories[x].getCategory()#
-							</label>
-						</div>
-					</cfloop>
-				</div>
-				#html.textField(
-					name="newCategories",
-					label="New Categories",
-					size="30",
-					title="Comma delimited list of new categories to create",
-					class="form-control"
-				)#
+					#html.hiddenField( name="contentID", value="" )#
+					<div id="categoriesChecks">
+						<cfloop from="1" to="#arrayLen( prc.categories )#" index="x">
+							<div class="checkbox">
+								<label>
+									#html.checkbox(
+										name="category_#x#",
+										value="#prc.categories[x].getCategoryID()#"
+									)#
+									#prc.categories[x].getCategory()#
+								</label>
+							</div>
+						</cfloop>
+					</div>
+					#html.textField(
+						name="newCategories",
+						label="New Categories",
+						size="30",
+						title="Comma delimited list of new categories to create",
+						class="form-control"
+					)#
 				#html.endForm()#
 			</div>
 			<div class="modal-footer">
