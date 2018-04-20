@@ -51,6 +51,9 @@ function contentFilter() {
 	} else {
 		$("##filterBox").removeClass("selected");
 	}
+	$("##feedFilter").val( $("##feed").val() );
+	$("##categoryFilter").val( $("##category").val() );
+	$("##statusFilter").val( $("##status").val() );
 	contentLoad({
 		search : $("##search").val(),
 		feed : $("##feed").val(),
@@ -69,6 +72,9 @@ function resetFilter( reload ){
 		contentLoad();
 	}
 	$("##search").val("");
+	$("##feedFilter").val("all");
+	$("##categoryFilter").val("all");
+	$("##statusFilter").val("any");
 	$("##feed").val("all");
 	$("##category").val("all");
 	$("##status").val("any");

@@ -288,12 +288,11 @@ component extends="contentHandler" {
 
 		var filters = {};
 
-		//if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
+		if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
 		if ( structKeyExists( rc, "search" ) ) filters.search = rc.search;
 		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
 		if ( structKeyExists( rc, "category" ) ) filters.category = rc.category;
 		if ( structKeyExists( rc, "status" ) ) filters.status = rc.status;
-		//if ( structKeyExists( rc, "showAll" ) ) filters.feed = rc.showAll;
 
 		return filters;
 

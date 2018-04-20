@@ -8,11 +8,14 @@
 	</div>
 </div>
 <div class="row">
-	#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
-		#html.hiddenField( name="contentStatus", value="" )#
-		#html.hiddenField( name="contentID", value="" )#
-		<div class="col-md-9">
-			#getModel( "messagebox@cbMessagebox" ).renderit()#
+	<div class="col-md-9">
+		#getModel( "messagebox@cbMessagebox" ).renderit()#
+		#html.startForm( name="feedItemForm", action=prc.xehFeedItemRemove )#
+			#html.hiddenField( name="contentStatus", value="" )#
+			#html.hiddenField( name="contentID", value="" )#
+			#html.hiddenField( name="feed", id="feedFilter", value="#rc.feed#" )#
+			#html.hiddenField( name="category", id="categoryFilter", value="#rc.category#" )#
+			#html.hiddenField( name="status", id="statusFilter", value="#rc.status#" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
@@ -60,14 +63,16 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title"><i class="fa fa-filter"></i> Filters</h3>
-				</div>
-				<div class="panel-body">
-					<div id="filterBox">
+		#html.endForm()#
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-filter"></i> Filters</h3>
+			</div>
+			<div class="panel-body">
+				<div id="filterBox">
+					#html.startForm( name="feedItemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
 						<div class="form-group">
 							<label for="creator" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">
@@ -101,12 +106,12 @@
 							</div>
 						</div>
 						<a class="btn btn-info btn-sm" href="javascript:contentFilter()">Apply Filters</a>
-						<a class="btn btn-sm btn-default" href="javascript:resetFilter( true )">Reset</a>
-					</div>
+						<a class="btn btn-sm btn-default" href="javascript:resetFilter(true)">Reset</a>
+					#html.endForm()#
 				</div>
 			</div>
 		</div>
-	#html.endForm()#
+	</div>
 </div>
 <cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
 	#renderView( view="feeditems/categories" )#

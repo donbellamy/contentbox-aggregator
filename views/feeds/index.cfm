@@ -14,6 +14,9 @@
 			#html.hiddenField(name="contentStatus", value="" )#
 			#html.hiddenField(name="contentState", value="" )#
 			#html.hiddenField( name="contentID", value="" )#
+			#html.hiddenField( name="state", id="stateFilter", value="#rc.state#" )#
+			#html.hiddenField( name="category", id="categoryFilter", value="#rc.category#" )#
+			#html.hiddenField( name="status", id="statusFilter", value="#rc.status#" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
@@ -81,9 +84,9 @@
 							<label for="state" class="control-label">Import State:</label>
 							<div class="controls">
 								<select name="state" id="state" class="form-control input-sm valid">
-									<option value="any">Any State</option>
-									<option value="true">Active</option>
-									<option value="false">Paused</option>
+									<option value="any"<cfif rc.state EQ "any" > selected="selected"</cfif>>Any State</option>
+									<option value="true"<cfif rc.state EQ "true" > selected="selected"</cfif>>Active</option>
+									<option value="false"<cfif rc.state EQ "false" > selected="selected"</cfif>>Paused</option>
 								</select>
 							</div>
 						</div>
@@ -91,10 +94,10 @@
 							<label for="category" class="control-label">Categories:</label>
 							<div class="controls">
 								<select name="category" id="category" class="form-control input-sm valid">
-									<option value="all">All Categories</option>
-									<option value="none">Uncategorized</option>
+									<option value="all"<cfif rc.category EQ "all" > selected="selected"</cfif>>All Categories</option>
+									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
 									<cfloop array="#prc.categories#" index="category">
-										<option value="#category.getCategoryID()#">#category.getCategory()#</option>
+										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
 									</cfloop>
 								</select>
 							</div>
@@ -103,10 +106,10 @@
 							<label for="status" class="control-label">Status:</label>
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
-									<option value="any">Any Status</option>
-									<option value="published">Published</option>
-									<option value="expired">Expired</option>
-									<option value="draft">Draft</option>
+									<option value="any"<cfif rc.status EQ "any" > selected="selected"</cfif>>Any Status</option>
+									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
+									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
+									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
 								</select>
 							</div>
 						</div>

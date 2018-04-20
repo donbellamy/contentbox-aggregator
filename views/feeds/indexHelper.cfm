@@ -5,14 +5,14 @@ function setupFeedView( settings ) {
 	$contentForm = $("##feedForm");
 	$tableContainer = $("##feedsTableContainer");
 
-	$("##search").keyup( 
+	$("##search").keyup(
 		_.debounce(
 			function() {
 				var $this = $( this );
 				contentLoad( { search : $this.val() } );
-			}, 
-			300 
-		) 
+			},
+			300
+		)
 	);
 
 }
@@ -26,10 +26,10 @@ function contentLoad( criteria ) {
 	if ( !( "category" in criteria) ) { criteria.category = "all"; }
 	if ( !( "status" in criteria) ) { criteria.status = "any"; }
 	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
-	
+
 	$tableContainer.css( "opacity", .60 );
 
-	var args = {  
+	var args = {
 		page : criteria.page,
 		search : criteria.search,
 		state : criteria.state,
@@ -51,6 +51,9 @@ function contentFilter() {
 	} else {
 		$("##filterBox").removeClass("selected");
 	}
+	$("##stateFilter").val( $("##state").val() );
+	$("##categoryFilter").val( $("##category").val() );
+	$("##statusFilter").val( $("##status").val() );
 	contentLoad({
 		search : $("##search").val(),
 		state : $("##state").val(),
@@ -69,6 +72,9 @@ function resetFilter( reload ){
 		contentLoad();
 	}
 	$("##search").val("");
+	$("##stateFilter").val("any");
+	$("##categoryFilter").val("all");
+	$("##statusFilter").val("any");
 	$("##state").val("any");
 	$("##category").val("all");
 	$("##status").val("any");
@@ -145,7 +151,15 @@ function contentPaginate( page ) {
 
 $(document).ready( function() {
 	setupFeedView();
-	contentLoad();
+	var criteria = {
+		page: "#rc.page#",
+		search: "#rc.search#",
+		state: "#rc.state#",
+		category: "#rc.category#",
+		status: "#rc.status#",
+		showAll: "#rc.showAll#"
+	};
+	contentLoad( criteria );
 });
 </script>
 </cfoutput>

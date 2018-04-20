@@ -18,6 +18,13 @@ component extends="contentHandler" {
 
 	function index( event, rc, prc ) {
 
+		event.paramValue( "page", 1 );
+		event.paramValue( "search", "" );
+		event.paramValue( "state", "any" );
+		event.paramValue( "category", "all" );
+		event.paramValue( "status", "any" );
+		event.paramValue( "showAll", false );
+
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
 		event.setView( "feeds/index" );
@@ -234,7 +241,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( prc.xehFeeds );
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
 
 	}
 
@@ -251,7 +258,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( prc.xehFeeds );
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
 
 	}
 
@@ -279,7 +286,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( prc.xehFeeds );
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
 
 	}
 
@@ -296,7 +303,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( prc.xehFeeds );
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
 
 	}
 
@@ -362,6 +369,22 @@ component extends="contentHandler" {
 		}
 
 		event.renderData( type="json", data=results );
+
+	}
+
+	/************************************** PRIVATE *********************************************/
+
+	private struct function getFilters( rc ) {
+
+		var filters = {};
+
+		if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
+		if ( structKeyExists( rc, "search" ) ) filters.search = rc.search;
+		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
+		if ( structKeyExists( rc, "category" ) ) filters.category = rc.category;
+		if ( structKeyExists( rc, "status" ) ) filters.status = rc.status;
+
+		return filters;
 
 	}
 

@@ -1,4 +1,5 @@
 <cfoutput>
+#html.hiddenField( name="page", value="#rc.page#" )#
 <table name="feeds" id="feeds" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%">
 	<thead>
 		<tr>
