@@ -150,17 +150,16 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											changelog="Item imported.",
 											author=arguments.author
 										);
-										var now = now();
+										var datePublished = now();
 										if ( isDate( item.datePublished ) ) {
-											feedItem.setPublishedDate( item.datePublished );
-										} else {
-											feedItem.setPublishedDate( now );
+											datePublished = item.datePublished;
 										}
+										feedItem.setPublishedDate( datePublished );
+										var dateUpdated = now();
 										if ( isDate( item.dateUpdated ) ) {
-											feedItem.setModifiedDate( item.dateUpdated );
-										} else {
-											feedItem.setModifiedDate( now );
+											dateUpdated = item.dateUpdated;
 										}
+										feedItem.setModifiedDate( dateUpdated );
 										if ( arguments.feed.autoPublishItems() ) {
 											feedItem.setIsPublished( true );
 										} else {
@@ -201,11 +200,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														}
 
 														// Set the folder path and create if needed
-														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\";
+														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( datePublished, "yyyy\mm\" );
 														if ( !directoryExists( folderPath ) ) {
 															directoryCreate( folderPath );
 															if ( log.canInfo() ) {
-																log.info("Created aggregator feeditems image folder.");
+																log.info("Created aggregator feeditems image folder - #folderPath#.");
 															}
 														}
 
@@ -225,7 +224,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 															// Set the image url
 															var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-															var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/";
+															var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( datePublished, "yyyy/mm/" );
 															var imageUrl = folderUrl & imageName;
 
 															// Set image properties
