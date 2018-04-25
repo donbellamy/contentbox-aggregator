@@ -58,7 +58,7 @@
 						<span class="hidden">paused</span>
 					</cfif>
 				</td>
-				<td class="text-center"><span class="badge badge-info">#feed.getNumberOfChildren()#</span></td>
+				<td class="text-center"><span class="badge badge-info"><a href="#prc.agHelper.linkFeedItemsAdmin( feed.getContentID() )#" style="color: white;">#feed.getNumberOfChildren()#</a></span></td>
 				<td class="text-center"><span class="badge badge-info">#feed.getNumberOfHits()#</span></td>
 				<td class="text-center">
 					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feed.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>

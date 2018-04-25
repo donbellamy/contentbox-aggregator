@@ -145,6 +145,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setTitle( item.title );
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
+										// TODO: doc.getElementsByTag("style").remove();
+										// TODO: doc.select("[style]").removeAttr("style");
+										// TODO: Clean the body using jsoup - use whitelist?
+										// Jsoup.parseBodyFragment(fragment);
 										feedItem.addNewContentVersion(
 											content=item.body,
 											changelog="Item imported.",

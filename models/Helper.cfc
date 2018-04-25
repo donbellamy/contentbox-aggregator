@@ -181,6 +181,10 @@ component accessors="true" singleton threadSafe {
 		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & "/rss";
 	}
 
+	string function linkFeedAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkFeed( feed=arguments.feedItem.getFeed(), ssl=arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
+	}
+
 	string function linkFeedForm( feed, boolean ssl=cb.getRequestContext().isSSL() ) {
 		if ( structKeyExists( arguments, "feed" ) ) {
 			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds/editor/contentID/" & arguments.feed.getContentID();
@@ -193,16 +197,16 @@ component accessors="true" singleton threadSafe {
 		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
-	string function linkFeedItemAuthor( required feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkFeed( feed=arguments.feedItem.getFeed(), ssl=arguments.ssl ) & "?author=" & encodeForURL( arguments.feedItem.getItemAuthor() );
-	}
-
 	string function linkFeedItemForm( feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
 		if ( structKeyExists( arguments, "feedItem" ) ) {
 			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor/contentID/" & arguments.feedItem.getContentID();
 		} else {
 			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor";
 		}
+	}
+
+	string function linkFeedItemsAdmin( required numeric contentID, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems?feed=" & arguments.contentID;
 	}
 
 	string function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
@@ -377,6 +381,8 @@ component accessors="true" singleton threadSafe {
 			if ( hours == 1 ) return "1 hour ago";
 			else return hours & " hours ago";
 		// older than 24 hours, just return the time
+		// TODO: Lets go out a bit further - yesterday, two days ago, three days ago, etc....
+		// Maybe make it an option?
 		} else {
 			return arguments.time;
 		}

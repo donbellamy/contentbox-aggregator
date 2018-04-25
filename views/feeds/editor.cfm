@@ -572,7 +572,7 @@
 											<tr>
 												<th class="col-md-4">Feed Items:</th>
 												<td class="col-md-8">
-													#prc.feed.getNumberOfChildren()#
+													<a href="#prc.agHelper.linkFeedItemsAdmin( prc.feed.getContentID() )#">#prc.feed.getNumberOfChildren()#</a>
 												</td>
 											</tr>
 										</cfif>
