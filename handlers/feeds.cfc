@@ -78,7 +78,12 @@ component extends="contentHandler" {
 			{ name="Import images for this feed", value="true" },
 			{ name="Do not import images for this feed", value="false" }
 		];
-		prc.missingImageOptions = [
+		prc.importFeaturedImageOptions = [
+			{ name="Use the default setting", value="" },
+			{ name="Import featured images for this feed", value="true" },
+			{ name="Do not import featured images for this feed", value="false" }
+		];
+		prc.featuredImageOptions = [
 			{ name="Use the default setting", value="" },
 			{ name="Use the default image", value="default" },
 			{ name="Use this feed's featured image", value="feed" },
@@ -123,7 +128,8 @@ component extends="contentHandler" {
 		event.paramValue( "maxAgeUnit", "" );
 		event.paramValue( "maxItems", "" );
 		event.paramValue( "importImages", "" );
-		event.paramValue( "missingImageBehavior", "" );
+		event.paramValue( "importFeaturedImages", "" );
+		event.paramValue( "featuredImageBehavior", "" );
 		// SEO
 		event.paramValue( "htmlTitle", "" );
 		event.paramValue( "htmlKeywords", "" );

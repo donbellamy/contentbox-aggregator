@@ -37,7 +37,7 @@ component persistent="true"
 	**							DI INJECTIONS
 	********************************************************************* */
 
-	property name="settingService" inject="settingService@aggregator" persistent="false";
+	property name="settingService" inject="settingService@cb" persistent="false";
 
 	/* *********************************************************************
 	**							NON PERSISTED PROPERTIES
@@ -129,11 +129,11 @@ component persistent="true"
 		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
-			var behavior = len( feed.getMissingImageBehavior() ) ? feed.getMissingImageBehavior() : settings.ag_importing_image_missing_behavior;
+			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_importing_featured_image_behavior;
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
 			} else if ( behavior == "default" ) {
-				return settings.ag_importing_image_default_url;
+				return settings.ag_importing_featured_image_default_url;
 			} else {
 				return "";
 			}

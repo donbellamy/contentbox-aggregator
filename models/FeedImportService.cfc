@@ -3,7 +3,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 	property name="moduleSettings" inject="coldbox:setting:modules";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="jsoup" inject="jsoup@cbjsoup";
@@ -145,15 +145,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setTitle( item.title );
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
-										// TODO: doc.getElementsByTag("style").remove();
-										// TODO: doc.select("[style]").removeAttr("style");
-										// TODO: Clean the body using jsoup - use whitelist?
-										// Jsoup.parseBodyFragment(fragment);
-										feedItem.addNewContentVersion(
-											content=item.body,
-											changelog="Item imported.",
-											author=arguments.author
-										);
 										var datePublished = now();
 										if ( isDate( item.datePublished ) ) {
 											datePublished = item.datePublished;
@@ -170,11 +161,53 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											feedItem.setIsPublished( false );
 										}
 
+										writedump( item.body );
+
+										// Clean the item body
+										var whitelist = jsoup.getWhiteList();
+										//TODO: whitelist.addTags( javacast( "string[]", ["iframe"] ) );
+										//TODO: Add iframe attributes
+										whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
+										var feedBody = jsoup.clean( item.body, whitelist );
+
+										writedump( feedBody );
+
+										// Import images
+										var doc = jsoup.parseBodyFragment( feedBody );
+										var images = doc.getElementsByTag("img");
+										// All or just the first? reset to one if just the first
+										for ( var image IN images ) {
+
+											try {
+
+												// Fetch image
+												// Save image
+												// Change in doc
+
+												// If first image, set as the featured image
+
+											} catch( any e ) {
+
+											}
+
+										}
+
+										// Reset the content
+										// feedBody = doc.body().html();
+
+										/*feedItem.addNewContentVersion(
+											content=feedBody,
+											changelog="Item imported.",
+											author=arguments.author
+										);*/
+
+										abort;
+
 										// Import images if enabled
 										if ( importImages ) {
 
 											// Check for images
-											var images = jsoup.parse( item.body ).getElementsByTag("img");
+											var images = jsoup.parseBodyFragment( feedBody ).getElementsByTag("img");
 
 											// Import if images found and valid src
 											if ( arrayLen( images ) && len( images[1].attr("src") ) ) {
@@ -188,19 +221,19 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
 
 														// Set the file extension
-														var extension = "";
+														var ext = "";
 														switch ( result.mimeType ) {
 															case "image/gif":
-																extension = "gif";
+																ext = "gif";
 																break;
 															case "image/png":
-																extension = "png";
+																ext = "png";
 																break;
 															case "image/bmp":
-																extension = "bmp";
+																ext = "bmp";
 																break;
 															default:
-																extension = "jpg";
+																ext = "jpg";
 														}
 
 														// Set the folder path and create if needed
@@ -213,7 +246,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														}
 
 														// Set image name and path
-														var imageName = feedItem.getSlug() & "." & extension;
+														var imageName = feedItem.getSlug() & "." & ext; // and counter if > 1
 														var imagePath = folderPath & imageName;
 
 														// Save the image

@@ -1,6 +1,6 @@
 component extends="coldbox.system.Interceptor" {
 
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 	property name="contentService" inject="contentService@cb";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="helper" inject="helper@aggregator";

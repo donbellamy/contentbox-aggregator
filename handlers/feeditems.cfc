@@ -1,5 +1,7 @@
 component extends="contentHandler" {
 
+	property name="jsoup" inject="jsoup@cbjsoup";
+
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
@@ -74,6 +76,31 @@ component extends="contentHandler" {
 		if ( !structKeyExists( prc, "feedItem" ) ) {
 			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
 		}
+
+		// Show original
+		writedump( prc.feedItem.getContent() );
+
+		// Set whitelist and clean
+		var whitelist = jsoup.getWhiteList().relaxed().addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
+		var cleanContent = jsoup.clean( prc.feedItem.getContent(), whitelist );
+
+		// Show clean content
+		writedump( cleanContent );
+
+		// Grab the doc
+		var doc = jsoup.parseBodyFragment( cleanContent );
+		var images = doc.getElementsByTag("img");
+
+		for ( var image IN images ) {
+			image.attr("src","http://www.google.com");
+		}
+
+		// Show the doc
+		writedump( doc.body().html() );
+
+
+
+		abort;
 
 		// We dont support creating feed items
 		if ( !prc.feedItem.isLoaded() ) {

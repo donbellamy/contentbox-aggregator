@@ -45,9 +45,10 @@ component {
 			"ag_importing_image_import_enable" = "true",
 			"ag_importing_image_minimum_width" = "100",
 			"ag_importing_image_minimum_height" = "100",
-			"ag_importing_image_missing_behavior" = "default",
-			"ag_importing_image_default" = "",
-			"ag_importing_image_default_url" = "",
+			"ag_importing_featured_image_enable" = "true",
+			"ag_importing_featured_image_behavior" = "default",
+			"ag_importing_featured_image_default" = "",
+			"ag_importing_featured_image_default_url" = "",
 
 			// Global html
 			"ag_html_pre_index_display" = "",
@@ -144,7 +145,6 @@ component {
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("paging@aggregator").to("#moduleMapping#.models.Paging");
 		binder.map("rssService@aggregator").to("#moduleMapping#.models.RSSService");
-		binder.map("settingService@aggregator").to("#moduleMapping#.models.SettingService");
 
 	}
 

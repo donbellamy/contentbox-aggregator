@@ -181,7 +181,7 @@
 								#html.label(
 									class="control-label",
 									field="isActive",
-									content="Import State"
+									content="Import state"
 								)#
 								<div class="controls">
 									#html.select(
@@ -198,7 +198,7 @@
 								#html.label(
 									class="control-label",
 									field="defaultStatus",
-									content="Default Item Status"
+									content="Default item status"
 								)#
 								<div class="controls">
 									#html.select(
@@ -215,7 +215,7 @@
 								#html.label(
 									class="control-label",
 									field="startDate",
-									content="Start Date"
+									content="Start date"
 								)#
 								<div class="controls row">
 									<div class="col-md-6">
@@ -254,7 +254,7 @@
 								#html.label(
 									class="control-label",
 									field="stopDate",
-									content="Stop Date"
+									content="Stop date"
 								)#
 								<div class="controls row">
 									<div class="col-md-6">
@@ -415,12 +415,12 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
+						<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
 								field="importImages",
-								content="Import Images:"
+								content="Import images:"
 							)#
 							<div class="controls">
 								<small>
@@ -439,19 +439,39 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="missingImageBehavior",
-								content="Missing Image:"
+								field="importFeaturedImages",
+								content="Import featured images:"
+							)#
+							<div class="controls">
+								<small>
+									If enabled, an image will be saved for each feed item when imported if one is available.
+								</small>
+								#html.select(
+									name="importFeaturedImages",
+									options=prc.importFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getImportFeaturedImages(),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="featuredImageBehavior",
+								content="Featured image behavior:"
 							)#
 							<div class="controls">
 								<small>
 									The default behavior when a feed item has no image.
 								</small>
 								#html.select(
-									name="missingImageBehavior",
-									options=prc.missingImageOptions,
+									name="featuredImageBehavior",
+									options=prc.featuredImageOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getMissingImageBehavior(),
+									selectedValue=prc.feed.getFeaturedImageBehavior(),
 									class="form-control"
 								)#
 							</div>

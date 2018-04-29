@@ -73,7 +73,11 @@ component persistent="true"
 		notnull="false"
 		ormtype="boolean";
 
-	property name="missingImageBehavior"
+	property name="importFeaturedImages"
+		notnull="false"
+		ormtype="boolean";
+
+	property name="featuredImageBehavior"
 		notnull="false"
 		length="10";
 
@@ -118,7 +122,7 @@ component persistent="true"
 	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
 	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
 	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
-	this.constraints["missingImageBehavior"] = { required=true, regex="(default|feed|none)" };
+	this.constraints["featuredImageBehavior"] = { required=true, regex="(default|feed|none)" };
 
 	Feed function init() {
 		super.init();
@@ -247,7 +251,8 @@ component persistent="true"
 		"maxAgeUnit"
 		"maxItems"
 		"importImages"
-		"missingImageBehavior"
+		"importFeaturedImages"
+		"featuredImageBehavior"
 		*/
 
 		return result;

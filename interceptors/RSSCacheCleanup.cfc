@@ -1,7 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="cachebox" inject="cachebox";
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 
 	function aggregator_postFeedSave( event, interceptData ) {
 		doCacheCleanup();

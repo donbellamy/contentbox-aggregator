@@ -495,16 +495,16 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-picture-o fa-lg"></i> Image Settings</legend>
+									<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_import_enable",
-											content="Import Images:"
+											content="Import images:"
 										)#
 										<div>
 											<small>
-												If enabled, an image will be saved for each feed item when imported if one is available.
+												If enabled, all images will be saved locally for each feed item when imported.
 											</small>
 										</div>
 										<div class="controls">
@@ -523,7 +523,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_minimum_width",
-											content="Minimum Width:"
+											content="Minimum width:"
 										)#
 
 										<div class="controls">
@@ -542,7 +542,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_minimum_height",
-											content="Minimum Height:"
+											content="Minimum height:"
 										)#
 
 										<div class="controls">
@@ -560,19 +560,42 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_importing_image_missing_behavior",
-											content="Missing Image:"
+											field="ag_importing_featured_image_enable",
+											content="Enable featured images:"
+										)#
+										<div>
+											<small>
+												If enabled, an image will be saved locally as the featured image for each feed item when imported.
+											</small>
+										</div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_importing_featured_image_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_importing_featured_image_enable' },
+												checked=prc.agSettings.ag_importing_featured_image_enable
+											)#
+											#html.hiddenField(
+												name="ag_importing_featured_image_enable",
+												value=prc.agSettings.ag_importing_featured_image_enable
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_featured_image_behavior",
+											content="Featured image behavior:"
 										)#
 										<div class="controls">
 											<small>
-												The default behavior when a feed item has no image.
+												The default behavior when a feed item has no featured image.
 											</small>
 											#html.select(
-												name="ag_importing_image_missing_behavior",
-												options=prc.missingImageOptions,
+												name="ag_importing_featured_image_behavior",
+												options=prc.featuredImageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_importing_image_missing_behavior,
+												selectedValue=prc.agSettings.ag_importing_featured_image_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -580,24 +603,24 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_importing_image_default",
-											content="Default Image:"
+											field="ag_importing_featured_image_default",
+											content="Default featured image:"
 										)#
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_importing_image_default ) >hide</cfif> form-group" id="default_image_controls">
+											<div class="<cfif !len( prc.agSettings.ag_importing_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
 												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
 												#html.hiddenField(
-													name="ag_importing_image_default",
-													value=prc.agSettings.ag_importing_image_default
+													name="ag_importing_featured_image_default",
+													value=prc.agSettings.ag_importing_featured_image_default
 												)#
 												#html.hiddenField(
-													name="ag_importing_image_default_url",
-													value=prc.agSettings.ag_importing_image_default_url
+													name="ag_importing_featured_image_default_url",
+													value=prc.agSettings.ag_importing_featured_image_default_url
 												)#
 												<div class="margin10">
-													<cfif len( prc.agSettings.ag_importing_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_importing_image_default_url#" class="img-thumbnail" height="75" />
+													<cfif len( prc.agSettings.ag_importing_featured_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_importing_featured_image_default_url#" class="img-thumbnail" height="75" />
 													<cfelse>
 														<img id="default_image_preview" class="img-thumbnail" height="75" />
 													</cfif>
@@ -605,6 +628,8 @@
 											</div>
 										</div>
 									</div>
+								</fieldset>
+								<fieldset>
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="global_html">

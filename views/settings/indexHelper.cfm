@@ -26,16 +26,16 @@ function loadAssetChooser( callback, w, h ){
 	);
 }
 function defaultImageCallback( filePath, fileURL, fileType ){
-	if( $( "##ag_importing_image_default" ).val().length ){ cancelDefaultImage(); }
+	if( $( "##ag_importing_featured_image_default" ).val().length ){ cancelDefaultImage(); }
     $( "##default_image_controls" ).toggleClass( "hide" );
-    $( "##ag_importing_image_default" ).val( filePath );
-    $( "##ag_importing_image_default_url" ).val( fileURL );
+    $( "##ag_importing_featured_image_default" ).val( filePath );
+    $( "##ag_importing_featured_image_default_url" ).val( fileURL );
     $( "##default_image_preview" ).attr( "src", fileURL );
     closeRemoteModal();
 }
 function cancelDefaultImage(){
-    $( "##ag_importing_image_default" ).val( "" );
-    $( "##ag_importing_image_default_url" ).val( "" );
+    $( "##ag_importing_featured_image_default" ).val( "" );
+    $( "##ag_importing_featured_image_default_url" ).val( "" );
     $( "##default_image_preview" ).attr( "src", "" );
     $( "##default_image_controls" ).toggleClass( "hide" );
 }

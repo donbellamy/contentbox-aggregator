@@ -1,7 +1,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	property name="html" inject="HTMLHelper@coldbox";
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 	property name="helper" inject="helper@aggregator";
 
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin"  {

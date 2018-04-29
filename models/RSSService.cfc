@@ -5,7 +5,7 @@ component singleton {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="helper" inject="helper@aggregator";
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 
 
 	RSSService function init() {

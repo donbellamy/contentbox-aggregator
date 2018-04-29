@@ -10,7 +10,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="helper" inject="helper@aggregator";
 	property name="rssService" inject="rssService@aggregator";
-	property name="settingService" inject="settingService@aggregator";
+	property name="settingService" inject="settingService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="dataMarshaller" inject="dataMarshaller@coldbox";
 	property name="contentService" inject="contentService@cb";
