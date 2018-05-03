@@ -6,9 +6,12 @@ component extends="coldbox.system.Interceptor" {
 
 	function aggregator_preFeedItemRemove( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
-		// TODO: Change this to delete all images based on slug and date
-		if ( len( feedItem.getFeaturedImage() ) && fileExists( feedItem.getFeaturedImage()  ) ) {
-			try { fileDelete( feedItem.getFeaturedImage() ); } catch( any e ) {}
+		var imagePath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( feedItem.getPublishedDate(), "yyyy\mm\" );
+		var images = directoryList( path=imagePath, filter="#feedItem.getSlug()#_*" );
+		for ( var image IN images ) {
+			if ( fileExists( image ) ) {
+				try { fileDelete( image ); } catch( any e ) {}
+			}
 		}
 	}
 
@@ -19,6 +22,7 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup( feed );
 	}
 
+	// TODO: change back to single feed import
 	function aggregator_postFeedImports( event, interceptData ) {
 		doKeywordCleanup();
 		doAgeCleanup();

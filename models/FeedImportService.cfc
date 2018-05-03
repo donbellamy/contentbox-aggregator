@@ -224,8 +224,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																}
 															}
 
-															// Set image name and path
-															var imageName = feedItem.getSlug() & ( idx GT 1 ? "-" & idx : "" ) & "." & ext;
+															// Set image name and path (using _ to differentiate identical slugs)
+															var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
 															var imagePath = folderPath & imageName;
 
 															// Save the image
