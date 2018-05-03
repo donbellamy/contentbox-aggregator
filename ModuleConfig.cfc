@@ -42,7 +42,7 @@ component {
 			"ag_importing_max_age" = "",
 			"ag_importing_max_age_unit" = "days",
 			"ag_importing_max_items" = "",
-			"ag_importing_image_import_enable" = "true",
+			"ag_importing_image_import_enable" = "false",
 			"ag_importing_image_minimum_width" = "100",
 			"ag_importing_image_minimum_height" = "100",
 			"ag_importing_featured_image_enable" = "true",

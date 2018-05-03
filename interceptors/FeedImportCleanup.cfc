@@ -5,6 +5,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedImportService" inject="feedImportService@aggregator";
 
 	function aggregator_postFeedImports( event, interceptData ) {
+		// TODO: Change this back to do after individual imports
 		doFeedImportCleanup();
 	}
 

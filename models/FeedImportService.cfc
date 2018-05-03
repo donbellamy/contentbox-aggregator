@@ -35,6 +35,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Check if we are importing images
 				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_importing_image_import_enable;
+				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -161,137 +162,135 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											feedItem.setIsPublished( false );
 										}
 
-										writedump( item.body );
-
-										// Clean the item body
+										// Set whitelist
 										var whitelist = jsoup.getWhiteList();
-										//TODO: whitelist.addTags( javacast( "string[]", ["iframe"] ) );
-										//TODO: Add iframe attributes
+										// Add rel, target to a tag
 										whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
+										// Add iframe tag and attributes
+										whitelist.addTags( javacast( "string[]", ["iframe"] ) );
+										whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
+
+										// Clean
 										var feedBody = jsoup.clean( item.body, whitelist );
 
-										writedump( feedBody );
+										// Are we importing images?
+										if ( importImages || importFeaturedImages ) {
 
-										// Import images
-										var doc = jsoup.parseBodyFragment( feedBody );
-										var images = doc.getElementsByTag("img");
-										// All or just the first? reset to one if just the first
-										for ( var image IN images ) {
+											// Set array to hold all image paths
+											var imagePaths = [];
 
-											try {
+											// Parse the html and get the images
+											var doc = jsoup.parseBodyFragment( feedBody );
+											var images = doc.getElementsByTag("img");
 
-												// Fetch image
-												// Save image
-												// Change in doc
+											// Make sure we have some images
+											if ( arrayLen( images ) ) {
 
-												// If first image, set as the featured image
+												// Reset images array if only importing featured image
+												if ( !importImages && importFeaturedImages ) {
+													images = [ images[1] ];
+												}
 
-											} catch( any e ) {
+												// Loop over images
+												for ( var idx=1; idx LTE arrayLen( images ); idx++ ) {
 
-											}
+													try {
 
-										}
+														// Grab the image
+														var result = new http( url=images[idx].attr("src"), method="GET" ).send().getPrefix();
 
-										// Reset the content
-										// feedBody = doc.body().html();
+														// Check for error and valid image
+														if ( result.status_code == "200" && listFindNoCase( "image/gif,image/jpeg,image/png", result.mimeType ) ) {
 
-										/*feedItem.addNewContentVersion(
-											content=feedBody,
-											changelog="Item imported.",
-											author=arguments.author
-										);*/
-
-										abort;
-
-										// Import images if enabled
-										if ( importImages ) {
-
-											// Check for images
-											var images = jsoup.parseBodyFragment( feedBody ).getElementsByTag("img");
-
-											// Import if images found and valid src
-											if ( arrayLen( images ) && len( images[1].attr("src") ) ) {
-
-												try {
-
-													// Grab the image
-													var result = new http( url=images[1].attr("src"), method="GET" ).send().getPrefix();
-
-													// Check for error and valid image
-													if ( result.status_code == "200" && listFindNoCase( "image/gif,image/png,image/bmp,image/jpeg", result.mimeType ) ) {
-
-														// Set the file extension
-														var ext = "";
-														switch ( result.mimeType ) {
-															case "image/gif":
-																ext = "gif";
-																break;
-															case "image/png":
-																ext = "png";
-																break;
-															case "image/bmp":
-																ext = "bmp";
-																break;
-															default:
-																ext = "jpg";
-														}
-
-														// Set the folder path and create if needed
-														var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( datePublished, "yyyy\mm\" );
-														if ( !directoryExists( folderPath ) ) {
-															directoryCreate( folderPath );
-															if ( log.canInfo() ) {
-																log.info("Created aggregator feeditems image folder - #folderPath#.");
+															// Set the extension
+															var ext = "";
+															switch ( result.mimeType ) {
+																case "image/gif":
+																	ext = "gif";
+																	break;
+																case "image/jpeg":
+																	ext = "jpg";
+																	break;
+																default:
+																	ext = "png";
 															}
-														}
 
-														// Set image name and path
-														var imageName = feedItem.getSlug() & "." & ext; // and counter if > 1
-														var imagePath = folderPath & imageName;
+															// Set the folder path and create if needed
+															var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( datePublished, "yyyy\mm\" );
+															if ( !directoryExists( folderPath ) ) {
+																directoryCreate( folderPath );
+																if ( log.canInfo() ) {
+																	log.info("Created aggregator feeditems image folder - #folderPath#.");
+																}
+															}
 
-														// Save the image
-														fileWrite( imagePath, result.fileContent );
+															// Set image name and path
+															var imageName = feedItem.getSlug() & ( idx GT 1 ? "-" & idx : "" ) & "." & ext;
+															var imagePath = folderPath & imageName;
 
-														// Grab the image object
-														var img = imageRead( imagePath );
+															// Save the image
+															fileWrite( imagePath, result.fileContent );
 
-														// Save the image if it is valid
-														if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
-															img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
+															// Grab the image object
+															var img = imageRead( imagePath );
 
-															// Set the image url
-															var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-															var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( datePublished, "yyyy/mm/" );
-															var imageUrl = folderUrl & imageName;
+															// Save the image if it is valid
+															if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
+																img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
 
-															// Set image properties
-															feedItem.setFeaturedImage( imagePath );
-															feedItem.setFeaturedImageUrl( imageUrl );
+																// Set the image url
+																var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+																var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( datePublished, "yyyy/mm/" );
+																var imageUrl = folderUrl & imageName;
 
-														} else {
+																// Set featured image
+																if ( importFeaturedImages && !len( feedItem.getFeaturedImage() ) ) {
+																	feedItem.setFeaturedImage( imagePath );
+																	feedItem.setFeaturedImageUrl( imageUrl );
+																}
 
-															// Delete the image
-															fileDelete( imagePath );
+																// Update image
+																images[idx].attr( "src", imageUrl );
 
-															if ( log.canInfo() ) {
-																log.info("Invalid image size for feed item ('#uniqueId#').");
+																// Add to image path array
+																arrayAppend( imagePaths, imagePath );
+
+															} else {
+
+																// Delete the image
+																fileDelete( imagePath );
+
+																if ( log.canInfo() ) {
+																	log.info("Invalid image size for feed item ('#uniqueId#').");
+																}
+
 															}
 
 														}
 
-													}
+													} catch( any e ) {
 
-												} catch( any e ) {
+														if ( log.canError() ) {
+															log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
+														}
 
-													if ( log.canError() ) {
-														log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
 													}
 
 												}
 
+												// Reset the content
+												feedBody = doc.body().html();
+
 											}
 
 										}
+
+										// Add the content version
+										feedItem.addNewContentVersion(
+											content=feedBody,
+											changelog="Item imported.",
+											author=arguments.author
+										);
 
 										// Save item
 										feedItemService.save( feedItem );
@@ -306,9 +305,15 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 									} catch( any e ) {
 
-										// Log error
+										// Log the error
 										if ( log.canError() ) {
 											log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
+											// Delete any images
+											for ( var imagePath IN imagePaths  ) {
+												if ( fileExists( imagePath ) ) {
+													fileDelete( imagePath );
+												}
+											}
 										}
 
 									}

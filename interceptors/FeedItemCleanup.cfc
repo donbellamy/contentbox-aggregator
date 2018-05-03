@@ -6,6 +6,7 @@ component extends="coldbox.system.Interceptor" {
 
 	function aggregator_preFeedItemRemove( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
+		// TODO: Change this to delete all images based on slug and date
 		if ( len( feedItem.getFeaturedImage() ) && fileExists( feedItem.getFeaturedImage()  ) ) {
 			try { fileDelete( feedItem.getFeaturedImage() ); } catch( any e ) {}
 		}
