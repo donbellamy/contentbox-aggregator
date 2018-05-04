@@ -4,9 +4,9 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 
-	// TODO: Change this back to do after individual imports
-	function aggregator_postFeedImports( event, interceptData ) {
-		doFeedImportCleanup();
+	function aggregator_postFeedImport( event, interceptData ) {
+		var feed = arguments.interceptData.feed;
+		doFeedImportCleanup( feed );
 	}
 
 	function aggregator_postSettingsSave( event, interceptData ) {

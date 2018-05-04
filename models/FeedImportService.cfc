@@ -309,6 +309,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										if ( log.canError() ) {
 											log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 											// Delete any images
+											// TODO: delete empty folders?
 											for ( var imagePath IN imagePaths  ) {
 												if ( fileExists( imagePath ) ) {
 													fileDelete( imagePath );

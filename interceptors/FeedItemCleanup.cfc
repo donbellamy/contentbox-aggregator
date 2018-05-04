@@ -13,6 +13,7 @@ component extends="coldbox.system.Interceptor" {
 				try { fileDelete( image ); } catch( any e ) {}
 			}
 		}
+		// TODO: delete empty folders?
 	}
 
 	function aggregator_postFeedSave( event, interceptData ) {
@@ -22,11 +23,11 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup( feed );
 	}
 
-	// TODO: change back to single feed import
-	function aggregator_postFeedImports( event, interceptData ) {
-		doKeywordCleanup();
-		doAgeCleanup();
-		doMaxItemCleanup();
+	function aggregator_postFeedImport( event, interceptData ) {
+		var feed = arguments.interceptData.feed;
+		doKeywordCleanup( feed );
+		doAgeCleanup( feed );
+		doMaxItemCleanup( feed );
 	}
 
 	function aggregator_postSettingsSave( event, interceptData ) {
