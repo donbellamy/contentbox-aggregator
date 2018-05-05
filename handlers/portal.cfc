@@ -2,9 +2,7 @@ component extends="coldbox.system.EventHandler" {
 
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="antiSamy" inject="antisamy@cbantisamy";
-	property name="authorService" inject="authorService@cb";
 	property name="categoryService" inject="categoryService@cb";
-	property name="roleService" inject="roleService@cb";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
@@ -578,28 +576,14 @@ component extends="coldbox.system.EventHandler" {
 		// Secret key in settings
 		event.paramValue( name="key", value="" );
 
-		// To import we must have an author, so check for one first
-		if ( len( prc.agSettings.ag_importing_default_creator ) ) {
-			var author = authorService.get( prc.agSettings.ag_importing_default_creator );
-		} else if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
-			var author = prc.oCurrentAuthor;
-		} else {
-			var adminRole = roleService.findWhere( { role="Administrator" } );
-			var author = authorService.findWhere( { role=adminRole } );
-		}
+		// Only import if the keys match
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key ) {
 
-		// Only import if the keys match and an author is defined
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key  && !isNull( author ) ) {
-
+			// Set timeout
 			setting requestTimeout="999999";
 
-			var feeds = feedService.getFeedsForImport();
-
-			for ( var feed IN feeds ) {
-				announceInterception( "aggregator_preFeedImport", { feed=feed } );
-				feedImportService.import( feed, author );
-				announceInterception( "aggregator_postFeedImport", { feed=feed } );
-			}
+			// Import feeds
+			feedImportService.import();
 
 			// Post feed imports
 			announceInterception( "aggregator_postFeedImports" );

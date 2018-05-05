@@ -13,7 +13,10 @@ component extends="coldbox.system.Interceptor" {
 				try { fileDelete( image ); } catch( any e ) {}
 			}
 		}
-		// TODO: delete empty folders?
+		var files = directoryList( imagePath );
+		if ( !arrayLen( files ) ) {
+			try { directoryDelete( imagePath ); } catch( any e ) {}
+		}
 	}
 
 	function aggregator_postFeedSave( event, interceptData ) {
@@ -49,19 +52,19 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Loop over feeds
-		for ( var item IN feeds ) {
+		for ( var feed IN feeds ) {
 
 			// Keyword filters
-			var matchAnyFilter = listToArray( len( trim( item.getMatchAnyFilter() ) ) ? item.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
-			var matchAllFilter = listToArray( len( trim( item.getMatchAllFilter() ) ) ? item.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
-			var matchNoneFilter = listToArray( len( trim( item.getMatchNoneFilter() ) ) ? item.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
+			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
+			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
+			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
 
 			// Filter out if any filters exist
 			if ( len( matchAnyFilter ) || len( matchAllFilter ) || len( matchNoneFilter ) ) {
 
 				if ( len( matchAnyFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
-					var params = { parent=item };
+					var params = { parent=feed };
 					var count = 1;
 					for ( var keyword IN matchAnyFilter ) {
 						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
@@ -75,14 +78,14 @@ component extends="coldbox.system.Interceptor" {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
 						if ( log.canInfo() ) {
-							log.info("Feed item ('#uniqueId#') filtered out using match any filter '#arrayToList(matchAnyFilter)#' for feed '#item.getTitle()#'");
+							log.info("Feed item ('#uniqueId#') filtered out using match any filter '#arrayToList(matchAnyFilter)#' for feed '#feed.getTitle()#'");
 						}
 					}
 				}
 
 				if ( len( matchAllFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
-					var params = { parent=item };
+					var params = { parent=feed };
 					var count = 1;
 					for ( var keyword IN matchAllFilter ) {
 						hql &= "( fi.title not like :keyword#count# and ac.content not like :keyword#count# )";
@@ -96,14 +99,14 @@ component extends="coldbox.system.Interceptor" {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
 						if ( log.canInfo() ) {
-							log.info("Feed item ('#uniqueId#') filtered out using match all filter '#arrayToList(matchAllFilter)#' for feed '#item.getTitle()#'");
+							log.info("Feed item ('#uniqueId#') filtered out using match all filter '#arrayToList(matchAllFilter)#' for feed '#feed.getTitle()#'");
 						}
 					}
 				}
 
 				if ( len( matchNoneFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
-					var params = { parent=item };
+					var params = { parent=feed };
 					var count = 1;
 					for ( var keyword IN matchNoneFilter ) {
 						hql &= "( fi.title like :keyword#count# or ac.content like :keyword#count# )";
@@ -117,7 +120,7 @@ component extends="coldbox.system.Interceptor" {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
 						if ( log.canInfo() ) {
-							log.info("Feed item ('#uniqueId#') filtered out using match none filter '#arrayToList(matchNoneFilter)#' for feed '#item.getTitle()#'");
+							log.info("Feed item ('#uniqueId#') filtered out using match none filter '#arrayToList(matchNoneFilter)#' for feed '#feed.getTitle()#'");
 						}
 					}
 				}
@@ -139,11 +142,11 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Loop over feeds
-		for ( var item IN feeds ) {
+		for ( var feed IN feeds ) {
 
 			// Max age
-			var maxAge = val( item.getMaxAge() ) ? val( item.getMaxAge() ) : val( settings.ag_importing_max_age );
-			var maxAgeUnit = val( item.getMaxAge() ) ? item.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
+			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
+			var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
 			if ( maxAge ) {
 				var maxDate = now();
 				switch( maxAgeUnit ) {
@@ -164,14 +167,14 @@ component extends="coldbox.system.Interceptor" {
 					}
 				}
 				var c = feedItemService.newCriteria()
-					.eq( "parent.contentID", item.getContentID() )
+					.eq( "parent.contentID", feed.getContentID() )
 					.isLT( "publishedDate", maxDate );
 				var feedItems = c.list( asQuery=false );
 				for ( var feedItem IN feedItems ) {
 					var uniqueId = feedItem.getUniqueId();
 					feedItemService.deleteContent( feedItem );
 					if ( log.canInfo() ) {
-						log.info("Feed item ('#uniqueId#') filtered out by age limit for feed '#item.getTitle()#'");
+						log.info("Feed item ('#uniqueId#') filtered out by age limit for feed '#feed.getTitle()#'");
 					}
 				}
 
@@ -192,18 +195,18 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Loop over feeds
-		for ( var item IN feeds ) {
+		for ( var feed IN feeds ) {
 
 			// Max items
-			var maxItems = val( item.getMaxItems() ) ? val( item.getMaxItems() ) : val( settings.ag_importing_max_items );
-			if ( maxItems && ( item.getNumberOfFeedItems() GT maxItems ) ) {
-				var feedItems = feedItemService.search( feed=item.getContentID() ).feedItems;
+			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_importing_max_items );
+			if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
+				var feedItems = feed.getFeedItems();
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
 				for ( var feedItem IN itemsToDelete ) {
 					var uniqueId = feedItem.getUniqueId();
 					feedItemService.deleteContent( feedItem );
 					if ( log.canInfo() ) {
-						log.info("Feed item ('#uniqueId#') filtered out by item limit for feed '#item.getTitle()#'");
+						log.info("Feed item ('#uniqueId#') filtered out by item limit for feed '#feed.getTitle()#'");
 					}
 				}
 			}

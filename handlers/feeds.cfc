@@ -317,6 +317,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		// Set timeout
 		setting requestTimeout="999999";
 
 		if ( len( rc.contentID ) ) {
@@ -327,9 +328,7 @@ component extends="contentHandler" {
 				if ( isNull( feed ) ) {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				} else {
-					announceInterception( "aggregator_preFeedImport", { feed=feed } );
 					feedImportService.import( feed, prc.oCurrentAuthor );
-					announceInterception( "aggregator_postFeedImport", { feed=feed } );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				}
 			}
