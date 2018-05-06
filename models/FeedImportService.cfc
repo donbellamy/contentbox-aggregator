@@ -250,17 +250,17 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																	}
 
 																	// Set the folder path and create if needed
-																	var folderPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( datePublished, "yyyy\mm\" );
-																	if ( !directoryExists( folderPath ) ) {
-																		directoryCreate( folderPath );
+																	var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( datePublished, "yyyy\mm\" );
+																	if ( !directoryExists( directoryPath ) ) {
+																		directoryCreate( directoryPath );
 																		if ( log.canInfo() ) {
-																			log.info("Created aggregator feeditems image folder - #folderPath#.");
+																			log.info("Created aggregator feeditems image folder - #directoryPath#.");
 																		}
 																	}
 
 																	// Set image name and path (using _ to differentiate identical slugs)
 																	var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
-																	var imagePath = folderPath & imageName;
+																	var imagePath = directoryPath & imageName;
 
 																	// Save the image
 																	fileWrite( imagePath, result.fileContent );
@@ -293,6 +293,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 																		// Delete the image
 																		fileDelete( imagePath );
+
+																		// Delete directory if empty
+																		deleteDirectoryIfEmpty( directoryPath );
 
 																		if ( log.canInfo() ) {
 																			log.info("Invalid image size for feed item ('#uniqueId#').");
@@ -343,11 +346,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												if ( log.canError() ) {
 													log.error( "Error saving feed item ('#uniqueId#') for feed '#feed.getTitle()#'.", e );
 													// Delete any images
-													// TODO: delete empty folders?
-													for ( var imagePath IN imagePaths  ) {
-														if ( fileExists( imagePath ) ) {
-															fileDelete( imagePath );
+													if ( importImages || importFeaturedImages ) {
+														for ( var imagePath IN imagePaths  ) {
+															if ( fileExists( imagePath ) ) {
+																fileDelete( imagePath );
+															}
 														}
+														// Delete directory if empty
+														deleteDirectoryIfEmpty( directoryPath );
 													}
 												}
 
@@ -429,6 +435,13 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		return this;
 
+	}
+
+	private function deleteDirectoryIfEmpty( required string directoryPath ) {
+		var files = directoryList( arguments.directoryPath );
+		if ( !arrayLen( files ) ) {
+			try { directoryDelete( arguments.directoryPath ); } catch( any e ) {}
+		}
 	}
 
 }
