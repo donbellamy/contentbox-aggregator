@@ -69,8 +69,24 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_portal_feeds_title",
+											content="Feeds title:"
+										)#
+										<div class="controls">
+											<small>The title used for the feeds page.</small>
+											#html.textField(
+												name="ag_portal_feeds_title",
+												value=prc.agSettings.ag_portal_feeds_title,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_portal_description",
-											content="Portal description:"
+											content="Default description:"
 										)#
 										<div class="controls">
 											<small>The default description used in the meta tags of the portal.</small><br/>
@@ -86,7 +102,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_keywords",
-											content="Portal keywords:"
+											content="Default keywords:"
 										)#
 										<div class="controls">
 											<small>The default keywords used in the meta tags of the portal.</small><br/>
@@ -95,22 +111,6 @@
 												value=prc.agSettings.ag_portal_keywords,
 												rows=3,
 												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_feeds_title",
-											content="Feeds title:"
-										)#
-										<div class="controls">
-											<small>The title used for the feeds page.</small>
-											#html.textField(
-												name="ag_portal_feeds_title",
-												value=prc.agSettings.ag_portal_feeds_title,
-												class="form-control",
-												maxlength="100"
 											)#
 										</div>
 									</div>
@@ -372,6 +372,99 @@
 									</div>
 								</fieldset>
 								<fieldset>
+									<legend><i class="fa fa-list-ol fa-lg"></i> Item Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_default_status",
+											content="Default status:"
+										)#
+										<div class="controls">
+											<small>The default status for imported feed items.</small>
+											#html.select(
+												name="ag_importing_default_status",
+												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_default_status,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_default_pub_date",
+											content="Published date:"
+										)#
+										<div class="controls">
+											<small>The default published date for imported feed items.</small>
+											#html.select(
+												name="ag_importing_default_pub_date",
+												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_default_pub_date,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_age",
+											content="Limit items by age:"
+										)#
+										<div>
+											<small>
+												The maximum age allowed for feed items.
+												Existing feed items will be deleted once they exceed this age limit.
+											</small>
+										</div>
+										<div class="controls row">
+											<div class="col-sm-6">
+												#html.inputField(
+													name="ag_importing_max_age",
+													type="number",
+													value=prc.agSettings.ag_importing_max_age,
+													class="form-control counter",
+													placeholder="No limit",
+													min="0"
+												)#
+											</div>
+											<div class="col-sm-6">
+												#html.select(
+													name="ag_importing_max_age_unit",
+													options=prc.limitUnits,
+													selectedValue=prc.agSettings.ag_importing_max_age_unit,
+													class="form-control"
+												)#
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_items",
+											content="Limit items by number:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of feed items to keep per feed.
+												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+											</small>
+											#html.inputField(
+												name="ag_importing_max_items",
+												type="number",
+												value=prc.agSettings.ag_importing_max_items,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
 									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 									<div class="form-group">
 										#html.label(
@@ -438,63 +531,6 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_max_age",
-											content="Limit items by age:"
-										)#
-										<div>
-											<small>
-												The maximum age allowed for feed items.
-												Existing feed items will be deleted once they exceed this age limit.
-											</small>
-										</div>
-										<div class="controls row">
-											<div class="col-sm-6">
-												#html.inputField(
-													name="ag_importing_max_age",
-													type="number",
-													value=prc.agSettings.ag_importing_max_age,
-													class="form-control counter",
-													placeholder="No limit",
-													min="0"
-												)#
-											</div>
-											<div class="col-sm-6">
-												#html.select(
-													name="ag_importing_max_age_unit",
-													options=prc.limitUnits,
-													selectedValue=prc.agSettings.ag_importing_max_age_unit,
-													class="form-control"
-												)#
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_max_items",
-											content="Limit items by number:"
-										)#
-										<div class="controls">
-											<small>
-												The maximum number of feed items to keep per feed.
-												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-											</small>
-											#html.inputField(
-												name="ag_importing_max_items",
-												type="number",
-												value=prc.agSettings.ag_importing_max_items,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
 									<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
 									<div class="form-group">
 										#html.label(
@@ -503,9 +539,7 @@
 											content="Import images:"
 										)#
 										<div>
-											<small>
-												If enabled, all images will be saved locally for each feed item when imported.
-											</small>
+											<small>If enabled, all images will be saved locally for each feed item when imported.</small>
 										</div>
 										<div class="controls">
 											#html.checkbox(
@@ -628,8 +662,6 @@
 											</div>
 										</div>
 									</div>
-								</fieldset>
-								<fieldset>
 								</fieldset>
 							</div>
 							<div class="tab-pane" id="global_html">
@@ -862,6 +894,25 @@
 												data-slider-step="10"
 												data-slider-tooltip="hide" />
 											<strong class="margin10">50</strong>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_rss_content_enable",
+											content="Include content:"
+										)#
+										<div><small>If enabled, the feed item content as well as description will be included in the rss feed.</small></div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_rss_content_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_rss_content_enable' },
+												checked=prc.agSettings.ag_rss_content_enable
+											)#
+											#html.hiddenField(
+												name="ag_rss_content_enable",
+												value=prc.agSettings.ag_rss_content_enable
+											)#
 										</div>
 									</div>
 								</fieldset>

@@ -7,7 +7,6 @@ component singleton {
 	property name="helper" inject="helper@aggregator";
 	property name="settingService" inject="settingService@cb";
 
-
 	RSSService function init() {
 		return this;
 	}
@@ -55,7 +54,7 @@ component singleton {
 			max=settings.ag_rss_max_items
 		);
 		var feedItems = results.feedItems;
-		var items = queryNew("title,description,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url");
+		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url");
 
 		// Build the items query
 		for ( var item IN feedItems ) {
@@ -65,10 +64,13 @@ component singleton {
 			if ( item.hasExcerpt() ) {
 				description = item.renderExcerpt();
 			}
-			querySetCell( items, "description", helper.stripHtml( description ) );
+			querySetCell( items, "description", "<![CDATA[" & description & "]]>" );
+			if ( settings.ag_rss_content_enable ) {
+				querySetCell( items, "content_encoded", "<![CDATA[" & item.renderContent() & "]]>" );
+			}
 			querySetCell( items, "link", helper.linkFeedItem( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
-			querySetCell( items, "dcmiterm_creator", item.getItemAuthor() );
+			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & item.getItemAuthor() & "]]>" );
 			if ( item.hasCategories() ) {
 				querySetCell( items, "category_tag", item.getCategoriesList() );
 			}

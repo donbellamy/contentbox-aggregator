@@ -424,7 +424,7 @@
 							)#
 							<div class="controls">
 								<small>
-									If enabled, an image will be saved for each feed item when imported if one is available.
+									If enabled, all images will be saved locally for each feed item when imported.
 								</small>
 								#html.select(
 									name="importImages",
@@ -444,7 +444,7 @@
 							)#
 							<div class="controls">
 								<small>
-									If enabled, an image will be saved for each feed item when imported if one is available.
+									If enabled, an image will be saved locally as the featured image for each feed item when imported.
 								</small>
 								#html.select(
 									name="importFeaturedImages",
@@ -464,7 +464,7 @@
 							)#
 							<div class="controls">
 								<small>
-									The default behavior when a feed item has no image.
+									The default behavior when a feed item has no featured image.
 								</small>
 								#html.select(
 									name="featuredImageBehavior",

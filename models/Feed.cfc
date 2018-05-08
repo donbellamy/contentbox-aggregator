@@ -45,6 +45,11 @@ component persistent="true"
 		length="10"
 		default="draft";
 
+	property name="defaultPubDate"
+		notnull="true"
+		length="10"
+		default="original";
+
 	property name="matchAnyFilter"
 		notnull="false"
 		length="255";
@@ -116,6 +121,7 @@ component persistent="true"
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
 	this.constraints["defaultStatus"] = { required=true, regex="(draft|published)" };
+	this.constraints["defaultPubDate"] = { required=true, regex="(original|imported)" };
 	this.constraints["maxAge"] = { required=false, type="numeric" };
 	this.constraints["maxAgeUnit"] = { required=false, regex="(days|weeks|months|years)" };
 	this.constraints["maxItems"] = { required=false, type="numeric" };
@@ -131,6 +137,7 @@ component persistent="true"
 		renderedContent = "";
 		createdDate = now();
 		contentType = "Feed";
+		feedImports = [];
 		return this;
 	}
 
@@ -244,6 +251,7 @@ component persistent="true"
 		"startDate"
 		"stopDate"
 		"defaultStatus"
+		"defaultPubDate"
 		"matchAnyFilter"
 		"matchAllFilter"
 		"matchNoneFilter"
