@@ -40,15 +40,13 @@ component persistent="true"
 		ormtype="timestamp"
 		index="idx_stopDate";
 
-	property name="defaultStatus"
-		notnull="true"
-		length="10"
-		default="draft";
+	property name="itemStatus"
+		notnull="false"
+		length="10";
 
-	property name="defaultPubDate"
-		notnull="true"
-		length="10"
-		default="original";
+	property name="ItemPubDate"
+		notnull="false"
+		length="10";
 
 	property name="matchAnyFilter"
 		notnull="false"
@@ -120,8 +118,8 @@ component persistent="true"
 	this.constraints["tagLine"] = { required=false, size="1..255" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
-	this.constraints["defaultStatus"] = { required=true, regex="(draft|published)" };
-	this.constraints["defaultPubDate"] = { required=true, regex="(original|imported)" };
+	this.constraints["itemStatus"] = { required=true, regex="(draft|published)" };
+	this.constraints["ItemPubDate"] = { required=true, regex="(original|imported)" };
 	this.constraints["maxAge"] = { required=false, type="numeric" };
 	this.constraints["maxAgeUnit"] = { required=false, regex="(days|weeks|months|years)" };
 	this.constraints["maxItems"] = { required=false, type="numeric" };
@@ -158,7 +156,7 @@ component persistent="true"
 	}
 
 	boolean function autoPublishItems() {
-		return getDefaultStatus() EQ "published";
+		return getItemStatus() EQ "published";
 	}
 
 	Feed function addStartTime( required string hour, required string minute ) {
@@ -250,8 +248,8 @@ component persistent="true"
 		/*
 		"startDate"
 		"stopDate"
-		"defaultStatus"
-		"defaultPubDate"
+		"itemStatus"
+		"ItemPubDate"
 		"matchAnyFilter"
 		"matchAllFilter"
 		"matchNoneFilter"

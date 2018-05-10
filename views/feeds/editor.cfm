@@ -184,6 +184,7 @@
 									content="Import state"
 								)#
 								<div class="controls">
+									<small>When active, this feed will be included in the automated feed import process.</small>
 									#html.select(
 										name="isActive",
 										options=[{name="Active",value="true"},{name="Paused",value="false"}],
@@ -197,26 +198,10 @@
 							<div class="form-group">
 								#html.label(
 									class="control-label",
-									field="defaultStatus",
-									content="Default item status"
-								)#
-								<div class="controls">
-									#html.select(
-										name="defaultStatus",
-										options=[{name="Draft",value="draft"},{name="Published",value="published"}],
-										column="value",
-										nameColumn="name",
-										selectedValue=prc.feed.getDefaultStatus(),
-										class="form-control input-sm"
-									)#
-								</div>
-							</div>
-							<div class="form-group">
-								#html.label(
-									class="control-label",
 									field="startDate",
 									content="Start date"
 								)#
+								<div><small>The date and time to begin importing this feed.</small></div>
 								<div class="controls row">
 									<div class="col-md-6">
 										<div class="input-group">
@@ -256,6 +241,7 @@
 									field="stopDate",
 									content="Stop date"
 								)#
+								<div><small>The date and time to stop importing this feed.</small></div>
 								<div class="controls row">
 									<div class="col-md-6">
 										<div class="input-group">
@@ -289,8 +275,101 @@
 									</div>
 								</div>
 							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="itemStatus",
+									content="Default status"
+								)#
+								<div class="controls">
+									<small>The status used for imported feed items.</small>
+									#html.select(
+										name="itemStatus",
+										options=[{name="Use the default setting",value=""},{name="Draft",value="draft"},{name="Published",value="published"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getItemStatus(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
+							<div class="form-group">
+								#html.label(
+									class="control-label",
+									field="ItemPubDate",
+									content="Published date:"
+								)#
+								<div class="controls">
+									<small>The value used as the published date for imported feed items.</small>
+									#html.select(
+										name="ItemPubDate",
+										options=[{name="Use the default setting",value=""},{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+										column="value",
+										nameColumn="name",
+										selectedValue=prc.feed.getItemPubDate(),
+										class="form-control input-sm"
+									)#
+								</div>
+							</div>
 						</fieldset>
 					</cfif>
+					<fieldset>
+						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="maxAge",
+								content="Limit items by age:"
+							)#
+							<div>
+								<small>
+									The maximum age allowed for feed items.
+									Existing feed items will be deleted once they exceed this age limit.
+								</small>
+							</div>
+							<div class="controls row">
+								<div class="col-sm-6">
+									#html.inputField(
+										name="maxAge",
+										type="number",
+										value=prc.feed.getMaxAge(),
+										class="form-control counter",
+										placeholder="No limit",
+										min="0"
+									)#
+								</div>
+								<div class="col-sm-6">
+									#html.select(
+										name="maxAgeUnit",
+										options=prc.limitUnits,
+										selectedValue=prc.feed.getMaxAgeUnit(),
+										class="form-control"
+									)#
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="maxItems",
+								content="Limit items by number:"
+							)#
+							<div class="controls">
+								<small>
+									The maximum number of feed items to keep per feed.
+									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
+								</small>
+								#html.inputField(
+									name="maxItems",
+									type="number",
+									value=prc.feed.getMaxItems(),
+									class="form-control counter",
+									placeholder="No limit",
+									min="0"
+								)#
+							</div>
+						</div>
+					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
 						<div class="form-group">
@@ -353,63 +432,6 @@
 									class="form-control",
 									placeholder="Comma delimited list of words or phrases",
 									maxlength="255"
-								)#
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="maxAge",
-								content="Limit items by age:"
-							)#
-							<div>
-								<small>
-									The maximum age allowed for feed items.
-									Existing feed items will be deleted once they exceed this age limit.
-								</small>
-							</div>
-							<div class="controls row">
-								<div class="col-sm-6">
-									#html.inputField(
-										name="maxAge",
-										type="number",
-										value=prc.feed.getMaxAge(),
-										class="form-control counter",
-										placeholder="No limit",
-										min="0"
-									)#
-								</div>
-								<div class="col-sm-6">
-									#html.select(
-										name="maxAgeUnit",
-										options=prc.limitUnits,
-										selectedValue=prc.feed.getMaxAgeUnit(),
-										class="form-control"
-									)#
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="maxItems",
-								content="Limit items by number:"
-							)#
-							<div class="controls">
-								<small>
-									The maximum number of feed items to keep per feed.
-									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-								</small>
-								#html.inputField(
-									name="maxItems",
-									type="number",
-									value=prc.feed.getMaxItems(),
-									class="form-control counter",
-									placeholder="No limit",
-									min="0"
 								)#
 							</div>
 						</div>

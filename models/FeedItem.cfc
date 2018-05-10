@@ -37,7 +37,9 @@ component persistent="true"
 	**							DI INJECTIONS
 	********************************************************************* */
 
-	property name="settingService" inject="settingService@cb" persistent="false";
+	property name="settingService"
+		inject="settingService@cb"
+		persistent="false";
 
 	/* *********************************************************************
 	**							NON PERSISTED PROPERTIES
@@ -60,7 +62,6 @@ component persistent="true"
 		categories = [];
 		renderedContent = "";
 		renderedExcerpt = "";
-		renderedContentExcerpt = "";
 		createdDate = now();
 		contentType = "FeedItem";
 		return this;

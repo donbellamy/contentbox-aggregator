@@ -116,7 +116,7 @@ component extends="contentHandler" {
 		event.paramValue( "content", "" );
 		// Importing
 		event.paramValue( "isActive", true );
-		event.paramValue( "defaultStatus", "published" );
+		event.paramValue( "itemStatus", "published" );
 		event.paramValue( "startDate", "" );
 		event.paramValue( "startTime", "" );
 		event.paramValue( "stopDate", "" );

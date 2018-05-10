@@ -336,6 +336,42 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_importing_item_status",
+											content="Default status:"
+										)#
+										<div class="controls">
+											<small>The status used for imported feed items.</small>
+											#html.select(
+												name="ag_importing_item_status",
+												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_item_status,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_item_pub_date",
+											content="Published date:"
+										)#
+										<div class="controls">
+											<small>The value used as the published date for imported feed items.</small>
+											#html.select(
+												name="ag_importing_item_pub_date",
+												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_importing_item_pub_date,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_importing_secret_key",
 											content="Secret key:"
 										)#
@@ -372,43 +408,7 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-list-ol fa-lg"></i> Item Options</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_default_status",
-											content="Default status:"
-										)#
-										<div class="controls">
-											<small>The default status for imported feed items.</small>
-											#html.select(
-												name="ag_importing_default_status",
-												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_importing_default_status,
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_default_pub_date",
-											content="Published date:"
-										)#
-										<div class="controls">
-											<small>The default published date for imported feed items.</small>
-											#html.select(
-												name="ag_importing_default_pub_date",
-												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_importing_default_pub_date,
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
+									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",

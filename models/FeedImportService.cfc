@@ -64,12 +64,26 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Check for items in feed
 					if ( arrayLen( remoteFeed.items ) ) {
 
-						// Set an item counter
-						var itemCount = 0;
+						// Grab item settings
+						var itemStatus = len( feed.getItemStatus() ) ? feed.getItemStatus() : settings.ag_importing_item_status;
+						// TODO:
+						var ItemPubDate = len( feed.getItemPubDate() ) ? feed.getItemPubDate() : settings.ag_importing_item_pub_date;
+						var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
+						var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
 
-						// Check if we are importing images
+						// TODO: Are we goign to do anything with item limits durign the import process?  Currently handled in event
+
+						// Grab the keyword settings
+						var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
+						var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
+						var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
+
+						// Grab image settings
 						var importImages = len( feed.getImportImages() ) ? feed.getImportImages() : settings.ag_importing_image_import_enable;
 						var importFeaturedImages = len( feed.getImportFeaturedImages() ) ? feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
+
+						// Set an item counter
+						var itemCount = 0;
 
 						// Loop over items
 						for ( var item IN remoteFeed.items ) {
@@ -92,9 +106,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 									// Check keyword filters
 									var passesFilters = true;
 									var itemText = item.title & " " & item.body;
-									var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
-									var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
-									var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
 
 									// Check match any
 									if ( arrayLen( matchAnyFilter ) ) {
@@ -132,8 +143,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 										// Check age limits
 										var passesAgeLimits = true;
-										var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
-										var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
 
 										if ( maxAge && isDate( item.datePublished ) ) {
 											var maxDate = now();
@@ -190,7 +199,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													dateUpdated = item.dateUpdated;
 												}
 												feedItem.setModifiedDate( dateUpdated );
-												if ( feed.autoPublishItems() ) {
+												if ( itemStatus == "published" ) {
 													feedItem.setIsPublished( true );
 												} else {
 													feedItem.setIsPublished( false );
@@ -201,6 +210,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												// Add rel, target to a tag
 												whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
 												// Add iframe tag and attributes
+												// TODO: This should be a setting
 												whitelist.addTags( javacast( "string[]", ["iframe"] ) );
 												whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
 
