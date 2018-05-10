@@ -66,14 +66,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 						// Grab item settings
 						var itemStatus = len( feed.getItemStatus() ) ? feed.getItemStatus() : settings.ag_importing_item_status;
-						// TODO:
 						var ItemPubDate = len( feed.getItemPubDate() ) ? feed.getItemPubDate() : settings.ag_importing_item_pub_date;
+
+						// Grab item limit settings
 						var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
 						var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
+						var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_importing_max_items );
 
-						// TODO: Are we goign to do anything with item limits durign the import process?  Currently handled in event
-
-						// Grab the keyword settings
+						// Grab the keyword filter settings
 						var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
 						var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
 						var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
@@ -190,12 +190,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												feedItem.setSlug( htmlHelper.slugify( item.title ) );
 												feedItem.setCreator( arguments.author );
 												var datePublished = now();
-												if ( isDate( item.datePublished ) ) {
+												if ( isDate( item.datePublished ) && ItemPubDate == "original" ) {
 													datePublished = item.datePublished;
 												}
 												feedItem.setPublishedDate( datePublished );
 												var dateUpdated = now();
-												if ( isDate( item.dateUpdated ) ) {
+												if ( isDate( item.dateUpdated ) && ItemPubDate == "original" ) {
 													dateUpdated = item.dateUpdated;
 												}
 												feedItem.setModifiedDate( dateUpdated );
@@ -418,6 +418,19 @@ component extends="cborm.models.VirtualEntityService" singleton {
 							log.info("There were no feed items found for feed '#feed.getTitle()#'.");
 						}
 
+					}
+
+					// Check maxItems
+					if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
+						var feedItems = feed.getFeedItems();
+						var itemsToDelete = arraySlice( feedItems, maxItems + 1 );
+						for ( var feedItem IN itemsToDelete ) {
+							var uniqueId = feedItem.getUniqueId();
+							feedItemService.deleteContent( feedItem );
+							if ( log.canInfo() ) {
+								log.info("Feed item ('#uniqueId#') filtered out by item limit for feed '#feed.getTitle()#'");
+							}
+						}
 					}
 
 					// Create feed import and save

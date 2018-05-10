@@ -26,13 +26,6 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup( feed );
 	}
 
-	function aggregator_postFeedImport( event, interceptData ) {
-		var feed = arguments.interceptData.feed;
-		doKeywordCleanup( feed );
-		doAgeCleanup( feed );
-		doMaxItemCleanup( feed );
-	}
-
 	function aggregator_postSettingsSave( event, interceptData ) {
 		doKeywordCleanup();
 		doAgeCleanup();
