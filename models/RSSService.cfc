@@ -93,7 +93,7 @@ component singleton {
 		}
 		feedStruct.generator = settings.ag_rss_generator;
 		feedStruct.copyright = settings.ag_rss_copyright;
-		if( len( settings.ag_rss_webmaster ) ) {
+		if ( len( settings.ag_rss_webmaster ) ) {
 			feedStruct.webmaster = settings.ag_rss_webmaster;
 		}
 		feedStruct.pubDate = now();

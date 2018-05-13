@@ -1,4 +1,4 @@
-<cfparam name="args.openNewWindow" default="#ag.setting('ag_portal_use_interstitial_page')#" />
+<cfparam name="args.openNewWindow" default="false" /> <!--- TODO: Should only be true if using interstitial --->
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="true" />
 <cfparam name="args.showExcerpt" default="true" />

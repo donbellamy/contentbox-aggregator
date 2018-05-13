@@ -209,8 +209,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												var whitelist = jsoup.getWhiteList();
 												// Add rel, target to a tag
 												whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
-												// Add iframe tag and attributes
-												// TODO: This should be a setting
+												// Add iframe tag and attributes (youtube, etc.)
 												whitelist.addTags( javacast( "string[]", ["iframe"] ) );
 												whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
 

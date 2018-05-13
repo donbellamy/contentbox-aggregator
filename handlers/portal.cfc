@@ -533,20 +533,26 @@ component extends="coldbox.system.EventHandler" {
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			if ( prc.agSettings.ag_portal_use_interstitial_page ) {
-
-				// Set title
-				cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
-
-				// Set layout and view
-				event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-					.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
-
-			} else {
-
-				// Relocate to feed item
-				location( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
-
+			// Disply feed item based on setting
+			// TODO: Should take into account feed and feed item setting..
+			switch( prc.agSettings.ag_portal_item_link_behavior ) {
+				// Forward user to feed item
+				case "forward": {
+					location( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
+					break;
+				}
+				// Use interstitial page to forward user to feed item
+				case "interstitial": {
+					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
+					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" ).setView( view="#prc.cbTheme#/views/interstitial", module="contentbox" );
+					break;
+				}
+				// Display the feed item
+				case "display": {
+					// TODO: SEO
+					// TODO: layout/view
+					break;
+				}
 			}
 
 		} else {
@@ -564,8 +570,8 @@ component extends="coldbox.system.EventHandler" {
 
 	function preFeedItem( event, action, eventArguments, rc, prc ) {
 
-		// If not using an interstitial page, turn cache off
-		if ( !prc.agSettings.ag_portal_use_interstitial_page ) {
+		// Turn off cache if forwarding user to feed item
+		if ( prc.agSettings.ag_portal_item_link_behavior == "forward" ) {
 			rc.cbCache = true;
 		}
 

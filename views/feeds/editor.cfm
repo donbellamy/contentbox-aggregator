@@ -275,44 +275,47 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								#html.label(
-									class="control-label",
-									field="itemStatus",
-									content="Default status"
-								)#
-								<div class="controls">
-									<small>The status used for imported feed items.</small>
-									#html.select(
-										name="itemStatus",
-										options=[{name="Use the default setting",value=""},{name="Draft",value="draft"},{name="Published",value="published"}],
-										column="value",
-										nameColumn="name",
-										selectedValue=prc.feed.getItemStatus(),
-										class="form-control input-sm"
-									)#
-								</div>
-							</div>
-							<div class="form-group">
-								#html.label(
-									class="control-label",
-									field="ItemPubDate",
-									content="Published date:"
-								)#
-								<div class="controls">
-									<small>The value used as the published date for imported feed items.</small>
-									#html.select(
-										name="ItemPubDate",
-										options=[{name="Use the default setting",value=""},{name="Original published date",value="original"},{name="Imported date",value="imported"}],
-										column="value",
-										nameColumn="name",
-										selectedValue=prc.feed.getItemPubDate(),
-										class="form-control input-sm"
-									)#
-								</div>
-							</div>
 						</fieldset>
 					</cfif>
+					<fieldset>
+						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="itemStatus",
+								content="Default status"
+							)#
+							<div class="controls">
+								<small>The status used for imported feed items.</small>
+								#html.select(
+									name="itemStatus",
+									options=[{name="Use the default setting",value=""},{name="Draft",value="draft"},{name="Published",value="published"}],
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getItemStatus(),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="ItemPubDate",
+								content="Published date:"
+							)#
+							<div class="controls">
+								<small>The value used as the published date for imported feed items.</small>
+								#html.select(
+									name="ItemPubDate",
+									options=[{name="Use the default setting",value=""},{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getItemPubDate(),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
 						<div class="form-group">

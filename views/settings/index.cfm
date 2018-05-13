@@ -117,19 +117,22 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_use_interstitial_page",
-											content="Use interstitial page:"
+											field="ag_portal_item_link_behavior",
+											content="Link behavior:"
 										)#
-										<div><small>If enabled, an interstitial page will be displayed when a user clicks on a feed item before leaving the site.</small></div>
 										<div class="controls">
-											#html.checkbox(
-												name="ag_portal_use_interstitial_page_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_use_interstitial_page' },
-												checked=prc.agSettings.ag_portal_use_interstitial_page
-											)#
-											#html.hiddenField(
-												name="ag_portal_use_interstitial_page",
-												value=prc.agSettings.ag_portal_use_interstitial_page
+											<small>The behavior used when clicking on a feed item.</small>
+											#html.select(
+												name="ag_portal_item_link_behavior",
+												options=[
+													{name="Forward the user directly to the feed item.",value="forward"},
+													{name="Use an interstitial page before forwarding the user to the feed item.",value="interstitial"},
+													{name="Display the entire feed item within the site.",value="display"}
+												],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_portal_item_link_behavior,
+												class="form-control input-sm"
 											)#
 										</div>
 									</div>
@@ -321,6 +324,46 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_importing_secret_key",
+											content="Secret key:"
+										)#
+										<div class="controls">
+											<small>The secret key used to secure the automated feed import process.</small>
+											#html.textField(
+												name="ag_importing_secret_key",
+												value=prc.agSettings.ag_importing_secret_key,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_importing_max_feed_imports",
+											content="Import history limit:"
+										)#
+										<div class="controls">
+											<small>
+												The maximum number of records to keep in the feed import history.
+												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
+											</small>
+											#html.inputField(
+												name="ag_importing_max_feed_imports",
+												type="number",
+												value=prc.agSettings.ag_importing_max_feed_imports,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_importing_default_creator",
 											content="Default creator:"
 										)#
@@ -366,43 +409,6 @@
 												nameColumn="name",
 												selectedValue=prc.agSettings.ag_importing_item_pub_date,
 												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_secret_key",
-											content="Secret key:"
-										)#
-										<div class="controls">
-											<small>The secret key used to secure the automated feed import process.</small>
-											#html.textField(
-												name="ag_importing_secret_key",
-												value=prc.agSettings.ag_importing_secret_key,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_max_feed_imports",
-											content="Import history limit:"
-										)#
-										<div class="controls">
-											<small>
-												The maximum number of records to keep in the feed import history.
-												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
-											</small>
-											#html.inputField(
-												name="ag_importing_max_feed_imports",
-												type="number",
-												value=prc.agSettings.ag_importing_max_feed_imports,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
 											)#
 										</div>
 									</div>
