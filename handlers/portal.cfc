@@ -544,13 +544,15 @@ component extends="coldbox.system.EventHandler" {
 				// Use interstitial page to forward user to feed item
 				case "interstitial": {
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
-					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" ).setView( view="#prc.cbTheme#/views/interstitial", module="contentbox" );
+					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
+						.setView( view="#prc.cbTheme#/views/interstitial", module="contentbox" );
 					break;
 				}
 				// Display the feed item
 				case "display": {
 					// TODO: SEO
-					// TODO: layout/view
+					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
+						.setView( view="../themes/default/views/feeditem", module="contentbox-rss-aggregator" );
 					break;
 				}
 			}
