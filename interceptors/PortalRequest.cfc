@@ -111,7 +111,7 @@ component extends="coldbox.system.Interceptor" {
 		}
 	}
 
-	function $aginject() {
+	private function $aginject() {
 		variables.ag = this.ag;
 	}
 

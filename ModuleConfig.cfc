@@ -101,6 +101,7 @@ component {
 			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
 			{ pattern="/import", handler="portal", action="import", namespace="aggregator" },
+			{ pattern="/:slug/commentPost", handler="portal", action="commentPost", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
@@ -132,13 +133,14 @@ component {
 		};
 
 		interceptors = [
-			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
+			{ class = "#moduleMapping#.interceptors.CBUIListener", name="cbuiListener@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 

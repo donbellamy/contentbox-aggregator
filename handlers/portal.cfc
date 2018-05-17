@@ -1,17 +1,12 @@
-component extends="coldbox.system.EventHandler" {
+component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
-	property name="cbHelper" inject="CBHelper@cb";
-	property name="antiSamy" inject="antisamy@cbantisamy";
-	property name="categoryService" inject="categoryService@cb";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
-	property name="helper" inject="helper@aggregator";
 	property name="rssService" inject="rssService@aggregator";
-	property name="settingService" inject="settingService@cb";
-	property name="themeService" inject="themeService@cb";
-	property name="dataMarshaller" inject="dataMarshaller@coldbox";
-	property name="contentService" inject="contentService@cb";
+	property name="helper" inject="helper@aggregator";
+
+	// TODO: test unneeded functions here now that we are inheriting from cb
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,onError,notFound";
@@ -509,6 +504,15 @@ component extends="coldbox.system.EventHandler" {
 
 	}
 
+	function preFeedItem( event, action, eventArguments, rc, prc ) {
+
+		// Turn off cache if forwarding user to feed item
+		if ( prc.agSettings.ag_portal_item_link_behavior == "forward" ) {
+			rc.cbCache = true;
+		}
+
+	}
+
 	function feeditem( event, rc, prc ) {
 
 		// Set params
@@ -536,24 +540,48 @@ component extends="coldbox.system.EventHandler" {
 			// Disply feed item based on setting
 			// TODO: Should take into account feed and feed item setting..
 			switch( prc.agSettings.ag_portal_item_link_behavior ) {
+
 				// Forward user to feed item
 				case "forward": {
+
 					location( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
+
 					break;
+
 				}
+
 				// Use interstitial page to forward user to feed item
 				case "interstitial": {
+
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
+
 					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 						.setView( view="#prc.cbTheme#/views/interstitial", module="contentbox" );
+
 					break;
+
 				}
+
 				// Display the feed item
 				case "display": {
-					// TODO: SEO
+
+					// Set the page title
+					var title = ( len( trim( prc.feedItem.getHTMLTitle() ) ) ? prc.feedItem.getHTMLTitle() : prc.feedItem.getTitle() ) & " | " & cbHelper.siteName();
+					cbHelper.setMetaTitle( title );
+
+					// Description and keywords
+					if ( len( trim( prc.feedItem.getHTMLDescription() ) ) ) {
+						cbHelper.setMetaDescription( prc.feedItem.getHTMLDescription() );
+					}
+					if ( len( trim( prc.feedItem.getHTMLKeywords() ) ) ) {
+						cbHelper.setMetaKeywords( prc.feedItem.getHTMLKeywords() );
+					}
+
 					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
 						.setView( view="../themes/default/views/feeditem", module="contentbox-rss-aggregator" );
+
 					break;
+
 				}
 			}
 
@@ -566,15 +594,6 @@ component extends="coldbox.system.EventHandler" {
 			notFound( argumentCollection=arguments );
 			return;
 
-		}
-
-	}
-
-	function preFeedItem( event, action, eventArguments, rc, prc ) {
-
-		// Turn off cache if forwarding user to feed item
-		if ( prc.agSettings.ag_portal_item_link_behavior == "forward" ) {
-			rc.cbCache = true;
 		}
 
 	}

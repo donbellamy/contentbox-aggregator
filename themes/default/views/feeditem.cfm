@@ -39,7 +39,7 @@
 			<!--- TODO: #cb.event("cbui_preEntryDisplay")#--->
 			<div class="post" id="post_#prc.feedItem.getContentID()#">
 				<div class="post-title">
-					<h2><a href="#ag.linkFeedItem(prc.feedItem)#" rel="bookmark" title="#prc.feedItem.getTitle()#">#prc.feedItem.getTitle()#</a></h2>
+					<h2><a href="#ag.linkFeedItem(prc.feedItem)#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
 					<div class="row">
 						<div class="col-sm-7 pull-left"><span class="text-muted">Posted by</span> <i class="icon-user"></i> <a href="#ag.linkFeedAuthor( prc.feedItem )#">#prc.feedItem.getItemAuthor()#</a></div>
 						<div class="col-sm-5 pull-right text-right"><i class="fa fa-calendar"></i> #prc.feedItem.getDisplayPublishedDate()#</div>
@@ -49,19 +49,14 @@
 					</div>
 					<div class="row">
 						<cfif prc.feedItem.hasCategories() >
-							<div class="col-xs-9 pull-left">
+							<div class="col-xs-12 pull-left">
 								<i class="fa fa-tag"></i> Tags: #ag.quickCategoryLinks( prc.feedItem )#
-							</div>
-						</cfif>
-						<cfif prc.feedItem.getAllowComments() >
-							<div class="col-xs-3 pull-right text-right">
-								<i class="fa fa-comment"></i> <a href="#ag.linkFeedItem( prc.feedItem )###comments" title="View Comments"> #prc.feedItem.getNumberOfApprovedComments()# Comments</a>
 							</div>
 						</cfif>
 					</div>
 				</div>
 			</div>
-			<!--- TODO: #cb.event("cbui_preEntryDisplay")#--->
+			<!--- TODO: #cb.event("cbui_postEntryDisplay")#--->
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">
