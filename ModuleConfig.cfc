@@ -4,7 +4,7 @@ component {
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
 	this.description = "RSS aggregator for ContentBox";
-	this.version = "1.0.0";
+	this.version = "0.0.1";
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
@@ -19,9 +19,10 @@ component {
 			"ag_portal_entrypoint" = "news",
 			"ag_portal_title" = "News",
 			"ag_portal_feeds_title" = "Feeds",
-			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
-			"ag_portal_item_link_behavior" = "forward", // forward,interstitial,display
+			"ag_portal_description" = "",
+			"ag_portal_link_behavior" = "forward",
+			"ag_portal_featured_image_behavior" = "default",
 			"ag_portal_paging_max_items" = "20",
 			"ag_portal_paging_max_feeds" = "20",
 			"ag_portal_cache_enable" = "true",
@@ -44,11 +45,10 @@ component {
 			"ag_importing_max_age" = "",
 			"ag_importing_max_age_unit" = "days",
 			"ag_importing_max_items" = "",
+			"ag_importing_featured_image_enable" = "true",
 			"ag_importing_image_import_enable" = "false",
 			"ag_importing_image_minimum_width" = "100",
 			"ag_importing_image_minimum_height" = "100",
-			"ag_importing_featured_image_enable" = "true",
-			"ag_importing_featured_image_behavior" = "default",
 			"ag_importing_featured_image_default" = "",
 			"ag_importing_featured_image_default_url" = "",
 
@@ -124,6 +124,7 @@ component {
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
 				"aggregator_preFeedDisplay","aggregator_postFeedDisplay",
 				"aggregator_onFeedItemView","aggregator_onFeedItemNotFound",
+				"aggregator_preFeedItemDisplay", "aggregator_postFeedItemDisplay",
 				"aggregator_onArchivesView",
 				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
 				"aggregator_preSideBarDisplay","aggregator_postSideBarDisplay",
@@ -134,7 +135,6 @@ component {
 
 		interceptors = [
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
-			{ class = "#moduleMapping#.interceptors.CBUIListener", name="cbuiListener@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },

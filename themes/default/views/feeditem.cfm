@@ -20,7 +20,6 @@
 	<div class="container">
 		<cfif !args.print >
 			<div id="body-breadcrumbs" class="col-sm-9">
-				<!--- TODO: add feed item to breadcrumbs --->
 				<i class="fa fa-home"></i> #ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
 			</div>
 			<cfif cb.setting("cb_content_uiexport") >
@@ -36,7 +35,7 @@
 			</cfif>
 		</cfif>
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			<!--- TODO: #cb.event("cbui_preEntryDisplay")#--->
+			#cb.event("aggregator_preFeedItemDisplay")#
 			<div class="post" id="post_#prc.feedItem.getContentID()#">
 				<div class="post-title">
 					<h2><a href="#ag.linkFeedItem(prc.feedItem)#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
@@ -56,7 +55,7 @@
 					</div>
 				</div>
 			</div>
-			<!--- TODO: #cb.event("cbui_postEntryDisplay")#--->
+			#cb.event("aggregator_postFeedItemDisplay")#
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">

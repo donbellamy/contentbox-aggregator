@@ -507,7 +507,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	function preFeedItem( event, action, eventArguments, rc, prc ) {
 
 		// Turn off cache if forwarding user to feed item
-		if ( prc.agSettings.ag_portal_item_link_behavior == "forward" ) {
+		if ( prc.agSettings.ag_portal_link_behavior == "forward" ) {
 			rc.cbCache = true;
 		}
 
@@ -539,7 +539,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Disply feed item based on setting
 			// TODO: Should take into account feed and feed item setting..
-			switch( prc.agSettings.ag_portal_item_link_behavior ) {
+			switch( prc.agSettings.ag_portal_link_behavior ) {
 
 				// Forward user to feed item
 				case "forward": {

@@ -63,6 +63,11 @@ component accessors="true" singleton threadSafe {
 		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feed" );
 	}
 
+	boolean function isFeedItemView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feeditem" );
+	}
+
 	string function getSearchTerm() {
 		return cb.getRequestContext().getValue( "q", "" );
 	}
@@ -89,6 +94,19 @@ component accessors="true" singleton threadSafe {
 				message="Feeds not found in collection",
 				detail="This probably means you are trying to use the feeds in an non-index page.",
 				type="aggregator.helper.InvalidFeedsContext"
+			);
+		}
+	}
+
+	FeedItem function getCurrentFeedItem() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "feedItem" ) ) {
+			return prc.feedItem;
+		} else {
+			throw(
+				message="Feed item not found in collection",
+				detail="This probably means you are trying to use the feed item in an non-feed item page.",
+				type="aggregator.helper.InvalidFeedItemContext"
 			);
 		}
 	}
@@ -356,6 +374,10 @@ component accessors="true" singleton threadSafe {
 			if ( structKeyExists( rc, "author" ) AND len( rc.author ) ) {
 				bc &= '#arguments.separator# <a href="#linkFeed( feed )#?author=#rc.author#">#rc.author#</a> ';
 			}
+		}
+		if ( isFeedItemView() ) {
+			var feedItem = getCurrentFeedItem();
+			bc &= '#arguments.separator# <a href="#linkFeedItem( feedItem )#">#feedItem.getTitle()#</a> ';
 		}
 		return bc;
 	}

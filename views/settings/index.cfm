@@ -85,24 +85,8 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_description",
-											content="Default description:"
-										)#
-										<div class="controls">
-											<small>The default description used in the meta tags of the portal.</small><br/>
-											#html.textarea(
-												name="ag_portal_description",
-												value=prc.agSettings.ag_portal_description,
-												rows=3,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="ag_portal_keywords",
-											content="Default keywords:"
+											content="Keywords:"
 										)#
 										<div class="controls">
 											<small>The default keywords used in the meta tags of the portal.</small><br/>
@@ -117,13 +101,32 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_item_link_behavior",
+											field="ag_portal_description",
+											content="Description:"
+										)#
+										<div class="controls">
+											<small>The default description used in the meta tags of the portal.</small><br/>
+											#html.textarea(
+												name="ag_portal_description",
+												value=prc.agSettings.ag_portal_description,
+												rows=3,
+												class="form-control"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_link_behavior",
 											content="Link behavior:"
 										)#
 										<div class="controls">
-											<small>The behavior used when clicking on a feed item.</small>
+											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
-												name="ag_portal_item_link_behavior",
+												name="ag_portal_link_behavior",
 												options=[
 													{name="Forward the user directly to the feed item.",value="forward"},
 													{name="Use an interstitial page before forwarding the user to the feed item.",value="interstitial"},
@@ -131,8 +134,26 @@
 												],
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_portal_item_link_behavior,
+												selectedValue=prc.agSettings.ag_portal_link_behavior,
 												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_featured_image_behavior",
+											content="Featured image:"
+										)#
+										<div class="controls">
+											<small>What is displayed when a feed item does not have a featured image.</small>
+											#html.select(
+												name="ag_portal_featured_image_behavior",
+												options=prc.featuredImageOptions,
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.ag_portal_featured_image_behavior,
+												class="form-control"
 											)#
 										</div>
 									</div>
@@ -541,8 +562,29 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_importing_featured_image_enable",
+											content="Import featured images:"
+										)#
+										<div>
+											<small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small>
+										</div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_importing_featured_image_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_importing_featured_image_enable' },
+												checked=prc.agSettings.ag_importing_featured_image_enable
+											)#
+											#html.hiddenField(
+												name="ag_importing_featured_image_enable",
+												value=prc.agSettings.ag_importing_featured_image_enable
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_importing_image_import_enable",
-											content="Import images:"
+											content="Import all images:"
 										)#
 										<div>
 											<small>If enabled, all images will be saved locally for each feed item when imported.</small>
@@ -600,52 +642,10 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_importing_featured_image_enable",
-											content="Enable featured images:"
-										)#
-										<div>
-											<small>
-												If enabled, an image will be saved locally as the featured image for each feed item when imported.
-											</small>
-										</div>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_importing_featured_image_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_importing_featured_image_enable' },
-												checked=prc.agSettings.ag_importing_featured_image_enable
-											)#
-											#html.hiddenField(
-												name="ag_importing_featured_image_enable",
-												value=prc.agSettings.ag_importing_featured_image_enable
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_featured_image_behavior",
-											content="Featured image behavior:"
-										)#
-										<div class="controls">
-											<small>
-												The default behavior when a feed item has no featured image.
-											</small>
-											#html.select(
-												name="ag_importing_featured_image_behavior",
-												options=prc.featuredImageOptions,
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.ag_importing_featured_image_behavior,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="ag_importing_featured_image_default",
 											content="Default featured image:"
 										)#
+										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
 											<div class="<cfif !len( prc.agSettings.ag_importing_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">

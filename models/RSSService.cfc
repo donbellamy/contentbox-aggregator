@@ -11,12 +11,12 @@ component singleton {
 		return this;
 	}
 
-	string function getRSS( string category="", string feed="" ) {
+	string function getRSS( string category="", string slug="" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.feed & "FeedItem" )#";
+		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.slug & "FeedItem" )#";
 		var rssFeed = "";
 
 		// Check cache

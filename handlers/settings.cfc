@@ -20,9 +20,9 @@ component extends="baseHandler" {
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.featuredImageOptions = [
-			{ name="Use the default image", value="default" },
-			{ name="Use the feed's featured image", value="feed" },
-			{ name="Do not display an image", value="none" }
+			{ name="Display the default featured image", value="default" },
+			{ name="Display the parent feed's featured image", value="feed" },
+			{ name="Do not display a featured image", value="none" }
 		];
 		prc.cacheNames = cachebox.getCacheNames();
 
