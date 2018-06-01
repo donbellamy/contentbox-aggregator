@@ -348,7 +348,7 @@ component accessors="true" singleton threadSafe {
 	/************************************** MENUS *********************************************/
 
 	string function breadCrumbs( string separator=">" ) {
-		var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_title")#</a> ';
+		var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_name")#</a> ';
 		if ( isSearchView() ) {
 			var searchTerm = getSearchTerm();
 			bc &= '#arguments.separator# <a href="#linkPortal()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';

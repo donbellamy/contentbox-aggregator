@@ -253,7 +253,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
 
 		// Set the page title
-		title = prc.agSettings.ag_portal_title & title;
+		title = prc.agSettings.ag_portal_name & title;
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
@@ -327,7 +327,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				prc.formattedDate = dateFormat( prc.archiveDate, "mmmm, yyyy" );
 			}
 			title = " - " & prc.formattedDate & title;
-			title = prc.agSettings.ag_portal_title & title;
+			title = prc.agSettings.ag_portal_name & title;
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view

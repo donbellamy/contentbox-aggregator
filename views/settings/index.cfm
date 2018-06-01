@@ -17,13 +17,13 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li class="active">
-								<a href="##portal_options" data-toggle="tab"><i class="fa fa-newspaper-o fa-lg"></i> Portal</a>
+								<a href="##portal_options" data-toggle="tab"><i class="fa fa-cog fa-lg"></i> Portal Options</a>
 							</li>
 							<li>
-								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing</a>
+								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing Options</a>
 							</li>
 							<li>
-								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> HTML</a>
+								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> Global HTML</a>
 							</li>
 							<li>
 								<a href="##rss_options" data-toggle="tab"><i class="fa fa-rss fa-lg"></i> RSS Feed</a>
@@ -32,12 +32,44 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="portal_options">
 								<fieldset>
-									<legend><i class="fa fa-newspaper-o fa-lg"></i> Portal Options</legend>
+									<legend><i class="fa fa-cog fa-lg"></i> Portal Options</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_name",
+											content="Portal Name:"
+										)#
+										<div class="controls">
+											<small>The name used for the portal.</small>
+											#html.textField(
+												name="ag_portal_name",
+												value=prc.agSettings.ag_portal_name,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_tagline",
+											content="Portal Tag Line:"
+										)#
+										<div class="controls">
+											<small>The tag line used for the portal.</small>
+											#html.textField(
+												name="ag_portal_tagline",
+												value=prc.agSettings.ag_portal_tagline,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_portal_entrypoint",
-											content="Portal entry point:"
+											content="Portal Entry Point:"
 										)#
 										<div class="controls">
 											<small>Choose the entry point in the URL to trigger the portal engine. The usual default entry point pattern is <strong>news</strong>. Do not use symbols or slashes (/ \)</small><br/>
@@ -50,22 +82,7 @@
 											)#
 										</div>
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_title",
-											content="Portal title:"
-										)#
-										<div class="controls">
-											<small>The title used for the portal.</small>
-											#html.textField(
-												name="ag_portal_title",
-												value=prc.agSettings.ag_portal_title,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
+									<!---
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -82,33 +99,34 @@
 											)#
 										</div>
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_keywords",
-											content="Keywords:"
-										)#
-										<div class="controls">
-											<small>The default keywords used in the meta tags of the portal.</small><br/>
-											#html.textarea(
-												name="ag_portal_keywords",
-												value=prc.agSettings.ag_portal_keywords,
-												rows=3,
-												class="form-control"
-											)#
-										</div>
-									</div>
+									--->
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_portal_description",
-											content="Description:"
+											content="Portal Description:"
 										)#
 										<div class="controls">
 											<small>The default description used in the meta tags of the portal.</small><br/>
 											#html.textarea(
 												name="ag_portal_description",
 												value=prc.agSettings.ag_portal_description,
+												rows=3,
+												class="form-control mde"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_keywords",
+											content="Portal Keywords:"
+										)#
+										<div class="controls">
+											<small>The default keywords used in the meta tags of the portal.</small><br/>
+											#html.textarea(
+												name="ag_portal_keywords",
+												value=prc.agSettings.ag_portal_keywords,
 												rows=3,
 												class="form-control"
 											)#
@@ -121,7 +139,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_link_behavior",
-											content="Link behavior:"
+											content="Link Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when clicking on a feed item.</small>
@@ -143,7 +161,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_featured_image_behavior",
-											content="Featured image:"
+											content="Featured Image:"
 										)#
 										<div class="controls">
 											<small>What is displayed when a feed item does not have a featured image.</small>
@@ -162,7 +180,7 @@
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
 									<div class="form-group">
 										<label class="control-label" for="ag_portal_paging_max_items">
-											Max feed items:
+											Max Feed Items:
 											<span class="badge badge-info" id="ag_portal_paging_max_items_label">#prc.agSettings.ag_portal_paging_max_items#</span>
 										</label>
 										<div class="controls">
@@ -183,7 +201,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_portal_paging_max_feeds">
-											Max feeds:
+											Max Feeds:
 											<span class="badge badge-info" id="ag_portal_paging_max_feeds_label">#prc.agSettings.ag_portal_paging_max_feeds#</span>
 										</label>
 										<div class="controls">
@@ -209,7 +227,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_cache_enable",
-											content="Enable portal caching:"
+											content="Enable Portal Caching:"
 										)#
 										<div><small>If enabled, portal content will be cached once it has been translated and rendered.</small></div>
 										<div class="controls">
@@ -228,7 +246,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_cache_name",
-											content="Portal cache provider:"
+											content="Portal Cache Provider:"
 										)#
 										<div class="controls">
 											<small>Choose the CacheBox provider to cache portal content into.</small><br/>
@@ -242,7 +260,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_portal_cache_timeout">
-											Portal cache timeouts:
+											Portal Cache Timeouts:
 											<span class="badge badge-info" id="ag_portal_cache_timeout_label">#prc.agSettings.ag_portal_cache_timeout#</span>
 										</label>
 										<div class="controls">
@@ -264,7 +282,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_portal_cache_timeout_idle">
-											Portal cache idle timeouts:
+											Portal Cache Idle Timeouts:
 											<span class="badge badge-info" id="ag_portal_cache_timeout_idle_label">#prc.agSettings.ag_portal_cache_timeout_idle#</span>
 										</label>
 										<div class="controls">

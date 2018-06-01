@@ -1,10 +1,28 @@
 <cfoutput>
+<style>
+.CodeMirror, .CodeMirror-scroll {
+	height: 200px;
+	min-height: 200px;
+}
+</style>
 <script>
 $( document ).ready( function() {
 	$("##settingsForm").validate();
 	$("input.slider").on( "slide", function( slideEvt ) {
 		$( "##" + slideEvt.target.id + "_label" ).text( slideEvt.value );
 	});
+	var mdEditors =  {};
+	$( ".mde" ).each( function(){
+		mdEditors[ $( this ).prop( "id" ) ] = new SimpleMDE( {
+			element 		: this,
+			autosave 		: { enabled : false },
+			promptURLs 		: true,
+			tabSize 		: 2,
+			forceSync 		: true,
+			placeholder 	: 'Type here...',
+			spellChecker 	: false
+		} );
+	} );
 	$("##ag_importing_import_interval").on("change",function(){
 		if ( $(this).val() == "" ) {
 			$("##ag_importing_import_start_date").val("");

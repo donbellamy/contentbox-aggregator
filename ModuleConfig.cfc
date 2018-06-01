@@ -16,11 +16,12 @@ component {
 		settings = {
 
 			// Portal
+			"ag_portal_name" = "News",
+			"ag_portal_tagline" = "The Latest News",
 			"ag_portal_entrypoint" = "news",
-			"ag_portal_title" = "News",
-			"ag_portal_feeds_title" = "Feeds",
-			"ag_portal_keywords" = "",
 			"ag_portal_description" = "",
+			"ag_portal_keywords" = "",
+
 			"ag_portal_link_behavior" = "forward",
 			"ag_portal_featured_image_behavior" = "default",
 			"ag_portal_paging_max_items" = "20",
