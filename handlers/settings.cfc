@@ -91,7 +91,7 @@ component extends="baseHandler" {
 
 		// Portal settings
 		if ( !len( trim( prc.agSettings.ag_portal_name ) ) ) {
-			arrayAppend( errors, "A valid portal title is required." );
+			arrayAppend( errors, "A valid portal name is required." );
 		} else {
 			prc.agSettings.ag_portal_name = trim( prc.agSettings.ag_portal_name );
 		}
@@ -103,14 +103,11 @@ component extends="baseHandler" {
 		}
 		prc.agSettings.ag_portal_description = trim( prc.agSettings.ag_portal_description );
 		prc.agSettings.ag_portal_keywords = trim( prc.agSettings.ag_portal_keywords );
-
-		/*
 		if ( !len( trim( prc.agSettings.ag_portal_feeds_title ) ) ) {
 			arrayAppend( errors, "A valid feeds title is required." );
 		} else {
 			prc.agSettings.ag_portal_feeds_title = trim( prc.agSettings.ag_portal_feeds_title );
 		}
-		*/
 		if ( !val( prc.agSettings.ag_portal_paging_max_items ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );
 		}

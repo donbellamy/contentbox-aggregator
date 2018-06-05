@@ -82,24 +82,6 @@
 											)#
 										</div>
 									</div>
-									<!---
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_feeds_title",
-											content="Feeds title:"
-										)#
-										<div class="controls">
-											<small>The title used for the feeds page.</small>
-											#html.textField(
-												name="ag_portal_feeds_title",
-												value=prc.agSettings.ag_portal_feeds_title,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									--->
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -129,6 +111,22 @@
 												value=prc.agSettings.ag_portal_keywords,
 												rows=3,
 												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_feeds_title",
+											content="Feeds Title:"
+										)#
+										<div class="controls">
+											<small>The title used for the feeds page.</small>
+											#html.textField(
+												name="ag_portal_feeds_title",
+												value=prc.agSettings.ag_portal_feeds_title,
+												class="form-control",
+												maxlength="100"
 											)#
 										</div>
 									</div>
