@@ -20,6 +20,11 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
+		prc.linkOptions = [
+			{ name="Forward the user directly to the feed item.",value="forward" },
+			{ name="Use an interstitial page before forwarding the user to the feed item.",value="interstitial" },
+			{ name="Display the entire feed item within the site.",value="display" }
+		];
 		prc.featuredImageOptions = [
 			{ name="Display the default featured image", value="default" },
 			{ name="Display the parent feed's featured image", value="feed" },
@@ -104,7 +109,7 @@ component extends="baseHandler" {
 		prc.agSettings.ag_portal_description = trim( prc.agSettings.ag_portal_description );
 		prc.agSettings.ag_portal_keywords = trim( prc.agSettings.ag_portal_keywords );
 		if ( !len( trim( prc.agSettings.ag_portal_feeds_title ) ) ) {
-			arrayAppend( errors, "A valid feeds title is required." );
+			arrayAppend( errors, "A valid feeds page title is required." );
 		} else {
 			prc.agSettings.ag_portal_feeds_title = trim( prc.agSettings.ag_portal_feeds_title );
 		}

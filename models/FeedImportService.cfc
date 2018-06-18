@@ -39,8 +39,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		// Check for author
 		if ( !structKeyExists( arguments, "author" ) ) {
-			if ( len( settings.ag_importing_default_creator ) ) {
-				arguments.author = authorService.get( settings.ag_importing_default_creator );
+			if ( len( settings.ag_importing_item_author ) ) {
+				arguments.author = authorService.get( settings.ag_importing_item_author );
 			} else {
 				var adminRole = roleService.findWhere( { role="Administrator" } );
 				arguments.author = authorService.findWhere( { role=adminRole } );

@@ -118,7 +118,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_portal_feeds_title",
-											content="Feeds Title:"
+											content="Feeds Page Title:"
 										)#
 										<div class="controls">
 											<small>The title used for the feeds page.</small>
@@ -136,21 +136,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_link_behavior",
+											field="ag_portal_item_link_behavior",
 											content="Link Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
-												name="ag_portal_link_behavior",
-												options=[
-													{name="Forward the user directly to the feed item.",value="forward"},
-													{name="Use an interstitial page before forwarding the user to the feed item.",value="interstitial"},
-													{name="Display the entire feed item within the site.",value="display"}
-												],
+												name="ag_portal_item_link_behavior",
+												options=prc.linkOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_portal_link_behavior,
+												selectedValue=prc.agSettings.ag_portal_item_link_behavior,
 												class="form-control input-sm"
 											)#
 										</div>
@@ -158,17 +154,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_featured_image_behavior",
-											content="Featured Image:"
+											field="ag_portal_item_featured_image_behavior",
+											content="Featured Image Behavior:"
 										)#
 										<div class="controls">
-											<small>What is displayed when a feed item does not have a featured image.</small>
+											<small>The default behavior when a feed item does not have a featured image.</small>
 											#html.select(
-												name="ag_portal_featured_image_behavior",
+												name="ag_portal_item_featured_image_behavior",
 												options=prc.featuredImageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_portal_featured_image_behavior,
+												selectedValue=prc.agSettings.ag_portal_item_featured_image_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -309,7 +305,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_import_interval",
-											content="Import interval:"
+											content="Import Interval:"
 										)#
 										<div class="controls">
 											<small>
@@ -330,7 +326,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_import_start_date",
-											content="Start date:"
+											content="Start Date:"
 										)#
 										<div><small>The date and time to begin importing feeds.</small></div>
 										<div class="controls row">
@@ -362,7 +358,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_secret_key",
-											content="Secret key:"
+											content="Secret Key:"
 										)#
 										<div class="controls">
 											<small>The secret key used to secure the automated feed import process.</small>
@@ -378,7 +374,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_max_feed_imports",
-											content="Import history limit:"
+											content="Import History Limit:"
 										)#
 										<div class="controls">
 											<small>
@@ -397,18 +393,18 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Defaults</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_importing_default_creator",
-											content="Default creator:"
+											field="ag_importing_item_author",
+											content="Item Author:"
 										)#
 										<div class="controls">
-											<small>The account used during the automated feed import process.</small>
-											<select name="ag_importing_default_creator" id="ag_importing_default_creator" class="form-control">
+											<small>The account used as the feed item author during the automated feed import process.</small>
+											<select name="ag_importing_item_author" id="ag_importing_item_author" class="form-control">
 												<cfloop array="#prc.authors#" index="author">
-													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_importing_default_creator EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.ag_importing_item_author EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
 												</cfloop>
 											</select>
 										</div>
@@ -417,7 +413,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_item_status",
-											content="Default status:"
+											content="Item Status:"
 										)#
 										<div class="controls">
 											<small>The status used for imported feed items.</small>
@@ -435,7 +431,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_item_pub_date",
-											content="Published date:"
+											content="Published Date:"
 										)#
 										<div class="controls">
 											<small>The value used as the published date for imported feed items.</small>
@@ -579,7 +575,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_featured_image_enable",
-											content="Import featured images:"
+											content="Import Featured Images:"
 										)#
 										<div>
 											<small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small>
@@ -600,7 +596,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_import_enable",
-											content="Import all images:"
+											content="Import All Images:"
 										)#
 										<div>
 											<small>If enabled, all images will be saved locally for each feed item when imported.</small>
@@ -621,7 +617,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_minimum_width",
-											content="Minimum width:"
+											content="Minimum Width:"
 										)#
 
 										<div class="controls">
@@ -640,7 +636,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_image_minimum_height",
-											content="Minimum height:"
+											content="Minimum Height:"
 										)#
 
 										<div class="controls">
@@ -659,7 +655,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_featured_image_default",
-											content="Default featured image:"
+											content="Default Featured Image:"
 										)#
 										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
 										<div class="controls text-center">
@@ -799,7 +795,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_enable",
-											content="Enable rss feed:"
+											content="Enable RSS Feed:"
 										)#
 										<div class="controls">
 											#html.checkbox(
@@ -817,7 +813,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_title",
-											content="Feed title:"
+											content="Feed Title:"
 										)#
 										<div class="controls">
 											<small>The title of the rss feed</small><br/>
@@ -834,7 +830,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_description",
-											content="Feed description:"
+											content="Feed Description:"
 										)#
 										<div class="controls">
 											<small>The description of the rss feed</small><br/>
@@ -851,7 +847,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_generator",
-											content="Feed generator:"
+											content="Feed Generator:"
 										)#
 										<div class="controls">
 											<small>The generator of the rss feed</small><br/>
@@ -868,7 +864,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_copyright",
-											content="Feed copyright:"
+											content="Feed Copyright:"
 										)#
 										<div class="controls">
 											<small>The copyright of the rss feed</small><br/>
@@ -885,7 +881,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_webmaster",
-											content="Feed webmaster:"
+											content="Feed Webmaster:"
 										)#
 										<div class="controls">
 											<small>The rss feed webmaster. Ex: myemail@mysite.com (Site Administrator)</small><br/>
@@ -899,7 +895,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_rss_max_items">
-											Max rss content items:
+											Max RSS Content Items:
 											<span class="badge badge-info" id="ag_rss_max_items_label">#prc.agSettings.ag_rss_max_items#</span>
 										</label>
 										<div class="controls">
@@ -922,7 +918,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_content_enable",
-											content="Include content:"
+											content="Include Item Content:"
 										)#
 										<div><small>If enabled, the feed item content as well as description will be included in the rss feed.</small></div>
 										<div class="controls">
@@ -944,7 +940,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_cache_enable",
-											content="Enable rss feed caching:"
+											content="Enable RSS Feed Caching:"
 										)#
 										<div class="controls">
 											#html.checkbox(
@@ -962,7 +958,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_rss_cache_name",
-											content="Feed cache provider:"
+											content="Feed Cache Provider:"
 										)#
 										<div class="controls">
 											<small>Choose the CacheBox provider to cache feed content into.</small><br/>
@@ -976,7 +972,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_rss_cache_timeout">
-											Feed cache timeouts:
+											Feed Cache Timeouts:
 											<span class="badge badge-info" id="ag_rss_cache_timeout_label">#prc.agSettings.ag_rss_cache_timeout#</span>
 										</label>
 										<div class="controls">
@@ -998,7 +994,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_rss_cache_timeout_idle">
-											Feed cache idle timeouts:
+											Feed Cache Idle Timeouts:
 											<span class="badge badge-info" id="ag_rss_cache_timeout_idle_label">#prc.agSettings.ag_rss_cache_timeout_idle#</span>
 										</label>
 										<div class="controls">
@@ -1030,4 +1026,4 @@
 		#html.endForm()#
 	</div>
 </div>
-</cfoutput>
+</cfoutput>S
