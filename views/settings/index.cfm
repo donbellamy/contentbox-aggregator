@@ -688,7 +688,7 @@
 									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 									#html.textarea(
 										name="ag_html_pre_index_display",
-										label="Before portal index:",
+										label="Before Portal Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_index_display,
@@ -698,7 +698,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_index_display",
-										label="After portal index:",
+										label="After Portal Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_index_display,
@@ -708,7 +708,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_pre_feeds_display",
-										label="Before feeds index:",
+										label="Before Feeds Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_feeds_display,
@@ -718,7 +718,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_feeds_display",
-										label="After feeds index:",
+										label="After Feeds Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_feeds_display,
@@ -728,7 +728,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_pre_feed_display",
-										label="Before feed:",
+										label="Before Feed:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_feed_display,
@@ -738,7 +738,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_feed_display",
-										label="After feed:",
+										label="After Feed:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_feed_display,
@@ -748,7 +748,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_pre_archives_display",
-										label="Before archives:",
+										label="Before Archives:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_archives_display,
@@ -758,7 +758,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_archives_display",
-										label="After archives:",
+										label="After Archives:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_archives_display,
@@ -768,7 +768,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_pre_sidebar_display",
-										label="Before sidebar:",
+										label="Before Sidebar:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_sidebar_display,
@@ -778,7 +778,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_sidebar_display",
-										label="After sidebar:",
+										label="After Sidebar:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_sidebar_display,
@@ -1026,4 +1026,4 @@
 		#html.endForm()#
 	</div>
 </div>
-</cfoutput>S
+</cfoutput>
