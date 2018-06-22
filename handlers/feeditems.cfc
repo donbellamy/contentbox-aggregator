@@ -1,7 +1,5 @@
 component extends="contentHandler" {
 
-	property name="jsoup" inject="jsoup@cbjsoup";
-
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );

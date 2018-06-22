@@ -153,7 +153,7 @@
 						</div>
 					</div>
 					#html.textfield(
-						label="Tag line:",
+						label="Tag Line:",
 						name="tagLine",
 						bind=prc.feed,
 						maxlength="255",
@@ -181,7 +181,7 @@
 								#html.label(
 									class="control-label",
 									field="isActive",
-									content="Import state"
+									content="Import State"
 								)#
 								<div class="controls">
 									<small>When active, this feed will be included in the automated feed import process.</small>
@@ -199,7 +199,7 @@
 								#html.label(
 									class="control-label",
 									field="startDate",
-									content="Start date"
+									content="Start Date"
 								)#
 								<div><small>The date and time to begin importing this feed.</small></div>
 								<div class="controls row">
@@ -239,7 +239,7 @@
 								#html.label(
 									class="control-label",
 									field="stopDate",
-									content="Stop date"
+									content="Stop Date"
 								)#
 								<div><small>The date and time to stop importing this feed.</small></div>
 								<div class="controls row">
@@ -278,12 +278,12 @@
 						</fieldset>
 					</cfif>
 					<fieldset>
-						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Defaults</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
 								field="itemStatus",
-								content="Default status"
+								content="Item Status"
 							)#
 							<div class="controls">
 								<small>The status used for imported feed items.</small>
@@ -301,7 +301,7 @@
 							#html.label(
 								class="control-label",
 								field="ItemPubDate",
-								content="Published date:"
+								content="Published Date:"
 							)#
 							<div class="controls">
 								<small>The value used as the published date for imported feed items.</small>
@@ -444,28 +444,8 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="importImages",
-								content="Import images:"
-							)#
-							<div class="controls">
-								<small>
-									If enabled, all images will be saved locally for each feed item when imported.
-								</small>
-								#html.select(
-									name="importImages",
-									options=prc.importImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getImportImages(),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
 								field="importFeaturedImages",
-								content="Import featured images:"
+								content="Import Featured Images:"
 							)#
 							<div class="controls">
 								<small>
@@ -484,8 +464,28 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
+								field="importImages",
+								content="Import All Images:"
+							)#
+							<div class="controls">
+								<small>
+									If enabled, all images will be saved locally for each feed item when imported.
+								</small>
+								#html.select(
+									name="importImages",
+									options=prc.importImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getImportImages(),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
 								field="featuredImageBehavior",
-								content="Featured image behavior:"
+								content="Featured Image Behavior:"
 							)#
 							<div class="controls">
 								<small>

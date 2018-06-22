@@ -82,12 +82,12 @@ component {
 		};
 
 		permissions = [
-			{ permission="FEEDS_ADMIN", description="Ability to manage feeds", editor="false" },
-			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them", editor="true" },
-			{ permission="FEEDS_IMPORT", description="Ability to import feeds", editor="true" },
-			{ permission="FEED_ITEMS_ADMIN", description="Ability to manage feed items", editor="false" },
-			{ permission="FEED_ITEMS_EDITOR", description="Ability to manage feed items but not publish them", editor="true" },
-			{ permission="AGGREGATOR_SETTINGS", description="Ability to manage the rss aggregator module settings", editor="false" }
+			{ permission="FEEDS_ADMIN", description="Ability to manage feeds", level="admin" },
+			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them", level="editor" },
+			{ permission="FEEDS_IMPORT", description="Ability to import feeds", level="editor" },
+			{ permission="FEED_ITEMS_ADMIN", description="Ability to manage feed items", level="admin" },
+			{ permission="FEED_ITEMS_EDITOR", description="Ability to manage feed items but not publish them", level="editor" },
+			{ permission="AGGREGATOR_SETTINGS", description="Ability to manage the rss aggregator module settings", level="admin" }
 		];
 
 		routes = [
@@ -246,7 +246,7 @@ component {
 				permission.setPermission( item["permission"] );
 				permission.setDescription( item["description"] );
 				permissionService.save( permission );
-				if ( !isNull( editorRole ) && item["editor"] ) {
+				if ( !isNull( editorRole ) && item["level"] EQ "editor" ) {
 					editorRole.addPermission( permission );
 					roleService.save( editorRole );
 				}

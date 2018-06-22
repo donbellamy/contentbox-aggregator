@@ -17,10 +17,10 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li class="active">
-								<a href="##portal_options" data-toggle="tab"><i class="fa fa-cog fa-lg"></i> Portal Options</a>
+								<a href="##portal_options" data-toggle="tab"><i class="fa fa-cog fa-lg"></i> Portal</a>
 							</li>
 							<li>
-								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing Options</a>
+								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing</a>
 							</li>
 							<li>
 								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> Global HTML</a>
