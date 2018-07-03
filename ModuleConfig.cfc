@@ -204,7 +204,7 @@ component {
 		for ( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
 			var args = duplicate( aggregatorRoutes[ x ] );
 			if ( structKeyExists( args, "handler" ) ) {
-				args.handler = "contentbox-rss-aggregator:#args.handler#";
+				args.handler = "contentbox-aggregator:#args.handler#";
 			}
 			ses.addRoute(argumentCollection=args);
 		}

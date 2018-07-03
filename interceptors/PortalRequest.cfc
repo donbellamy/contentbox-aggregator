@@ -9,7 +9,7 @@ component extends="coldbox.system.Interceptor" {
 	function preProcess( event, interceptData, buffer, rc, prc ) {
 
 		// Prepare UI if we are in the aggregator module
-		if ( reFindNoCase( "^contentbox-rss-aggregator", event.getCurrentEvent() ) ) {
+		if ( reFindNoCase( "^contentbox-aggregator", event.getCurrentEvent() ) ) {
 			CBHelper.prepareUIRequest();
 		// Return if in admin module
 		} else if ( reFindNoCase( "^contentbox-admin", event.getCurrentEvent() ) ) {
@@ -28,7 +28,7 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
-	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-rss-aggregator" {
+	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-aggregator" {
 
 		// Rules to turn off the admin bar
 		if(

@@ -2,13 +2,13 @@
 	"name":"RSS Aggregator",
 	"version":"1.0.0",
 	"author":"Perfect Code, LLC <info@perfectcode.com>",
-	"slug":"contentbox-rss-aggregator",
+	"slug":"contentbox-aggregator",
 	"type":"contentbox-modules",
-	"homepage":"https://github.com/donbellamy/contentbox-rss-aggregator",
-	"documentation":"https://github.com/donbellamy/contentbox-rss-aggregator",
+	"homepage":"https://github.com/donbellamy/contentbox-aggregator",
+	"documentation":"https://github.com/donbellamy/contentbox-aggregator",
 	"repository":{
 		"type":"git",
-		"url":"https://github.com/donbellamy/contentbox-rss-aggregator"
+		"url":"https://github.com/donbellamy/contentbox-aggregator"
 	},
 	"shortDescription":"",
 	"contributors":[

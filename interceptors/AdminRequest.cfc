@@ -16,7 +16,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.agEntryPoint = prc.agSettings.ag_portal_entrypoint;
 
 		// Admin entry point
-		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-rss-aggregator').entryPoint#";
+		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
 
 		// Dashboard
 		prc.xehTopContent = "#prc.agAdminEntryPoint#.dashboard.topcontent";

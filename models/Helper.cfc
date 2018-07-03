@@ -35,7 +35,7 @@ component accessors="true" singleton threadSafe {
 
 	boolean function isIndexView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.index" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.index" );
 	}
 
 	boolean function isSearchView() {
@@ -50,22 +50,22 @@ component accessors="true" singleton threadSafe {
 
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.archives" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.archives" );
 	}
 
 	boolean function isFeedsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feeds" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feeds" );
 	}
 
 	boolean function isFeedView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feed" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feed" );
 	}
 
 	boolean function isFeedItemView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-rss-aggregator:portal.feeditem" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feeditem" );
 	}
 
 	string function getSearchTerm() {
