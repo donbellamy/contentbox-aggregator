@@ -16,23 +16,31 @@
 				<div class="panel-body">
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
-							<li class="active">
-								<a href="##portal_options" data-toggle="tab"><i class="fa fa-cog fa-lg"></i> Portal</a>
+							<li role="presentation" class="active">
+								<a href="##portal_options" data-toggle="tab">
+									<i class="fa fa-newspaper-o fa-lg"></i> Portal
+								</a>
 							</li>
-							<li>
-								<a href="##importing_options" data-toggle="tab"><i class="fa fa-download fa-lg"></i> Importing</a>
+							<li role="presentation" >
+								<a href="##importing_options" data-toggle="tab">
+									<i class="fa fa-download fa-lg"></i> Importing
+								</a>
 							</li>
-							<li>
-								<a href="##global_html" data-toggle="tab"><i class="fa fa-globe fa-lg"></i> Global HTML</a>
+							<li role="presentation" >
+								<a href="##global_html" data-toggle="tab">
+									<i class="fa fa-globe fa-lg"></i> Global HTML
+								</a>
 							</li>
-							<li>
-								<a href="##rss_options" data-toggle="tab"><i class="fa fa-rss fa-lg"></i> RSS Feed</a>
+							<li role="presentation" >
+								<a href="##rss_options" data-toggle="tab">
+									<i class="fa fa-rss fa-lg"></i> RSS Feed
+								</a>
 							</li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="portal_options">
 								<fieldset>
-									<legend><i class="fa fa-cog fa-lg"></i> Portal Options</legend>
+									<legend><i class="fa fa-newspaper-o fa-lg"></i> Portal Options</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",

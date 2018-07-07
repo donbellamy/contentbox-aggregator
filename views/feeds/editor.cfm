@@ -40,6 +40,11 @@
 						</a>
 					</li>
 					<li role="presentation">
+						<a href="##portal" aria-controls="portal" role="tab" data-toggle="tab">
+							<i class="fa fa-newspaper-o"></i> Portal
+						</a>
+					</li>
+					<li role="presentation">
 						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
 							<i class="fa fa-download"></i> Importing
 						</a>
@@ -172,6 +177,8 @@
 							class="form-control"
 						)#
 					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="portal">
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
