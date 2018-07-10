@@ -73,6 +73,18 @@ component extends="contentHandler" {
 
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.linkOptions = [
+			{ name="Use the default setting", value="" },
+			{ name="Forward the user directly to the feed item.", value="forward" },
+			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
+			{ name="Display the entire feed item within the site.", value="display" }
+		];
+		prc.featuredImageOptions = [
+			{ name="Use the default setting", value="" },
+			{ name="Display the default featured image", value="default" },
+			{ name="Display the parent feed's featured image", value="feed" },
+			{ name="Do not display a featured image", value="none" }
+		];
 		prc.importImageOptions = [
 			{ name="Use the default setting", value="" },
 			{ name="Import images for this feed", value="true" },
@@ -82,12 +94,6 @@ component extends="contentHandler" {
 			{ name="Use the default setting", value="" },
 			{ name="Import featured images for this feed", value="true" },
 			{ name="Do not import featured images for this feed", value="false" }
-		];
-		prc.featuredImageOptions = [
-			{ name="Use the default setting", value="" },
-			{ name="Use the default image", value="default" },
-			{ name="Use this feed's featured image", value="feed" },
-			{ name="Do not display an image", value="none" }
 		];
 
 		if ( !structKeyExists( prc, "feed" ) ) {

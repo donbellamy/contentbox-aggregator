@@ -21,9 +21,9 @@ component extends="baseHandler" {
 		prc.authors = authorService.getAll( sortOrder="lastName" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.linkOptions = [
-			{ name="Forward the user directly to the feed item.",value="forward" },
-			{ name="Use an interstitial page before forwarding the user to the feed item.",value="interstitial" },
-			{ name="Display the entire feed item within the site.",value="display" }
+			{ name="Forward the user directly to the feed item.", value="forward" },
+			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
+			{ name="Display the entire feed item within the site.", value="display" }
 		];
 		prc.featuredImageOptions = [
 			{ name="Display the default featured image", value="default" },

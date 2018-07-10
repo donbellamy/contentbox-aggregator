@@ -24,6 +24,14 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
+	property name="linkBehavior"
+		notnull="false"
+		length="10";
+
+	property name="featuredImageBehavior"
+		notnull="false"
+		length="10";
+
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
@@ -79,10 +87,6 @@ component persistent="true"
 	property name="importFeaturedImages"
 		notnull="false"
 		ormtype="boolean";
-
-	property name="featuredImageBehavior"
-		notnull="false"
-		length="10";
 
 	/* *********************************************************************
 	**                            RELATIONSHIPS

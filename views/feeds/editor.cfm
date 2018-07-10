@@ -179,6 +179,47 @@
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="portal">
+					<fieldset>
+						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="linkBehavior",
+								content="Link Behavior:"
+							)#
+							<div class="controls">
+								<small>The default behavior when clicking on a feed item.</small>
+								#html.select(
+									name="linkBehavior",
+									options=prc.linkOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getLinkBehavior(),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="featuredImageBehavior",
+								content="Featured Image Behavior:"
+							)#
+							<div class="controls">
+								<small>
+									The default behavior when a feed item has no featured image.
+								</small>
+								#html.select(
+									name="featuredImageBehavior",
+									options=prc.featuredImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getFeaturedImageBehavior(),
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</fieldset>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
@@ -484,26 +525,6 @@
 									column="value",
 									nameColumn="name",
 									selectedValue=prc.feed.getImportImages(),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="featuredImageBehavior",
-								content="Featured Image Behavior:"
-							)#
-							<div class="controls">
-								<small>
-									The default behavior when a feed item has no featured image.
-								</small>
-								#html.select(
-									name="featuredImageBehavior",
-									options=prc.featuredImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getFeaturedImageBehavior(),
 									class="form-control"
 								)#
 							</div>
