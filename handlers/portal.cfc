@@ -521,11 +521,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// If loaded, else not found
 		if ( prc.feedItem.isLoaded() ) {
 
-			// Grab the feed
-			prc.feed = prc.feedItem.getFeed();
-
-			// Calculate behavior
-			prc.linkBehavior = len( prc.feed.getLinkBehavior() ) ? prc.feed.getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
+			// Calculate link behavior
+			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
 
 			// Turn off cache if forwarding user to feed item
 			if ( prc.linkBehavior == "forward" ) {
@@ -542,15 +539,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "slug", "" )
 			.paramValue( "format", "html" );
 
-		/*
-		var showUnpublished = false;
-		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
-			var showUnpublished = true;
-		}
-
-		prc.feedItem = feedItemService.findBySlug( rc.slug, showUnpublished );
-		*/
-
 		// If loaded, else not found
 		if ( prc.feedItem.isLoaded() ) {
 
@@ -560,11 +548,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
-			// Calculate behavior
-			var linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
-
 			// Disply feed item based on setting
-			switch( linkBehavior ) {
+			switch( prc.linkBehavior ) {
 
 				// Forward user to feed item
 				case "forward": {

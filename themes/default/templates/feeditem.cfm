@@ -24,7 +24,7 @@
 						<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a>
 					</cfif>
 					<cfif len( feedItem.getItemAuthor() ) && args.showAuthor >
-						<span class="text-muted">-</span>
+						<cfif args.showSource ><span class="text-muted">-</span></cfif>
 						<i class="fa fa-user"></i>
 						<a href="#ag.linkFeedAuthor( feedItem )#" title="#encodeForHTMLAttribute( feedItem.getItemAuthor() )#">#feedItem.getItemAuthor()#</a>
 					</cfif>

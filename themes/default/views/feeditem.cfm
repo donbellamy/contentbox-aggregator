@@ -1,3 +1,6 @@
+<cfparam name="args.showSource" default="true" />
+<cfparam name="args.showAuthor" default="true" />
+
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -38,10 +41,22 @@
 			#cb.event("aggregator_preFeedItemDisplay")#
 			<div class="post" id="post_#prc.feedItem.getContentID()#">
 				<div class="post-title">
-					<h2><a href="#ag.linkFeedItem(prc.feedItem)#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
+					<h2><a href="#ag.linkFeedItem( prc.feedItem )#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
 					<div class="row">
-						<div class="col-sm-7 pull-left"><span class="text-muted">Posted by</span> <i class="icon-user"></i> <a href="#ag.linkFeedAuthor( prc.feedItem )#">#prc.feedItem.getItemAuthor()#</a></div>
-						<div class="col-sm-5 pull-right text-right"><i class="fa fa-calendar"></i> #prc.feedItem.getDisplayPublishedDate()#</div>
+						<div class="col-sm-7 pull-left">
+							<cfif args.showSource >
+								<i class="fa fa-rss"></i>
+								<a href="#ag.linkFeed( prc.feedItem.getFeed() )#" title="#encodeForHTMLAttribute( prc.feeditem.getFeed().getTitle() )#">#prc.feeditem.getFeed().getTitle()#</a>
+							</cfif>
+							<cfif len( prc.feedItem.getItemAuthor() ) && args.showAuthor >
+								<cfif args.showSource ><span class="text-muted">-</span></cfif>
+								<i class="icon-user"></i>
+								<a href="#ag.linkFeedAuthor( prc.feedItem )#">#prc.feedItem.getItemAuthor()#</a>
+							</cfif>
+						</div>
+						<div class="col-sm-5 pull-right text-right">
+							<i class="fa fa-calendar"></i> #prc.feedItem.getDisplayPublishedDate()#
+						</div>
 					</div>
 					<div class="post-content">
 						#prc.feedItem.renderContent()#
