@@ -506,18 +506,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	function preFeedItem( event, action, eventArguments, rc, prc ) {
 
-		// Turn off cache if forwarding user to feed item
-		if ( prc.agSettings.ag_portal_item_link_behavior == "forward" ) {
-			rc.cbCache = true;
-		}
-
-	}
-
-	function feeditem( event, rc, prc ) {
-
 		// Set params
-		event.paramValue( "slug", "" )
-			.paramValue( "format", "html" );
+		event.paramValue( "slug", "" );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -531,15 +521,50 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// If loaded, else not found
 		if ( prc.feedItem.isLoaded() ) {
 
+			// Grab the feed
+			prc.feed = prc.feedItem.getFeed();
+
+			// Calculate behavior
+			prc.linkBehavior = len( prc.feed.getLinkBehavior() ) ? prc.feed.getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
+
+			// Turn off cache if forwarding user to feed item
+			if ( prc.linkBehavior == "forward" ) {
+				rc.cbCache = true;
+			}
+
+		}
+
+	}
+
+	function feeditem( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( "slug", "" )
+			.paramValue( "format", "html" );
+
+		/*
+		var showUnpublished = false;
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+			var showUnpublished = true;
+		}
+
+		prc.feedItem = feedItemService.findBySlug( rc.slug, showUnpublished );
+		*/
+
+		// If loaded, else not found
+		if ( prc.feedItem.isLoaded() ) {
+
 			// Record hit
 			feedItemService.updateHits( prc.feedItem.getContentID() );
 
 			// Announce event
 			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
 
+			// Calculate behavior
+			var linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
+
 			// Disply feed item based on setting
-			// TODO: Should take into account feed and feed item setting..
-			switch( prc.agSettings.ag_portal_item_link_behavior ) {
+			switch( linkBehavior ) {
 
 				// Forward user to feed item
 				case "forward": {
