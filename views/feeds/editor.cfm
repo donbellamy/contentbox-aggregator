@@ -220,6 +220,39 @@
 							</div>
 						</div>
 					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-code fa-lg"></i> HTML Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="htmlPrepend",
+								content="HTML Prepend:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="htmlPrepend",
+									bind=prc.feed,
+									rows="10",
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="htmlAppend",
+								content="HTML Append:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="htmlAppend",
+									bind=prc.feed,
+									rows="10",
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</fieldset>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >

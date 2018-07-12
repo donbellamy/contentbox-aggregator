@@ -60,6 +60,8 @@ component {
 			"ag_html_post_feeds_display" = "",
 			"ag_html_pre_feed_display" = "",
 			"ag_html_post_feed_display" = "",
+			"ag_html_pre_feeditem_display" = "",
+			"ag_html_post_feeditem_display" = "",
 			"ag_html_pre_archives_display" = "",
 			"ag_html_post_archives_display" = "",
 			"ag_html_pre_sidebar_display" = "",

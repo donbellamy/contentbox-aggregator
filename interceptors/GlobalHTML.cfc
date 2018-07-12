@@ -24,6 +24,14 @@ component extends="coldbox.system.Interceptor" {
 		appendToBuffer( getSettings( event ).ag_html_post_feed_display );
 	}
 
+	function aggregator_preFeedItemDisplay( event, interceptData ) {
+		appendToBuffer( getSettings( event ).ag_html_pre_feeditem_display );
+	}
+
+	function aggregator_postFeedItemDisplay( event, interceptData ) {
+		appendToBuffer( getSettings( event ).ag_html_post_feeditem_display );
+	}
+
 	function aggregator_preArchivesDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_archives_display );
 	}

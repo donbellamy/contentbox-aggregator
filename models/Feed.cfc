@@ -32,6 +32,14 @@ component persistent="true"
 		notnull="false"
 		length="10";
 
+	property name="htmlPrepend"
+		notnull="false"
+		ormtype="text";
+
+	property name="htmlAppend"
+		notnull="false"
+		ormtype="text";
+
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"

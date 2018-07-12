@@ -588,7 +588,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					}
 
 					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-						.setView( view="../themes/default/views/feeditem", module="contentbox-aggregator" );
+						.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
 
 					break;
 

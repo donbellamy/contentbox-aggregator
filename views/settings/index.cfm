@@ -755,6 +755,26 @@
 										groupWrapper="div class=form-group"
 									)#
 									#html.textarea(
+										name="ag_html_pre_feeditem_display",
+										label="Before Feed Item:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_pre_feeditem_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
+										name="ag_html_post_feeditem_display",
+										label="After Feed Item:",
+										rows="6",
+										class="form-control",
+										value=prc.agSettings.ag_html_post_feeditem_display,
+										wrapper="div class=controls",
+										labelClass="control-label",
+										groupWrapper="div class=form-group"
+									)#
+									#html.textarea(
 										name="ag_html_pre_archives_display",
 										label="Before Archives:",
 										rows="6",

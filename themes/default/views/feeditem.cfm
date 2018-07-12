@@ -38,7 +38,7 @@
 			</cfif>
 		</cfif>
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			#cb.event("aggregator_preFeedItemDisplay")#
+			#cb.event("aggregator_preFeedItemDisplay", { feedItem=prc.feedItem })#
 			<div class="post" id="post_#prc.feedItem.getContentID()#">
 				<div class="post-title">
 					<h2><a href="#ag.linkFeedItem( prc.feedItem )#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
@@ -70,7 +70,7 @@
 					</div>
 				</div>
 			</div>
-			#cb.event("aggregator_postFeedItemDisplay")#
+			#cb.event("aggregator_postFeedItemDisplay", { feedItem=prc.feedItem })#
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">
