@@ -221,35 +221,87 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-code fa-lg"></i> HTML Options</legend>
+						<legend><i class="fa fa-code fa-lg"></i> Item HTML</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
 								field="htmlPrepend",
-								content="HTML Prepend:"
+								content="Before Feed Item:"
 							)#
 							<div class="controls">
+								<small>
+									The following content will be added to the beginning of the feed item.
+								</small>
 								#html.textarea(
 									name="htmlPrepend",
 									bind=prc.feed,
-									rows="10",
+									rows="5",
 									class="form-control"
 								)#
+								<small>
+									Use the following placeholders to replace with the feed item details:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@site_url@</td>
+											</tr>
+											<tr>
+												<td title="The feed item title.">@feed_item_title@</td>
+												<td title="The local feed item URL.">@feed_item_url@</td>
+												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
+												<td title="The feed item imported date.">@feed_item_import_date@</td>
+											</tr>
+											<tr>
+												<td title="The feed item published date.">@feed_item_publish_date@</td>
+												<td title="The feed item author name.">@feed_item_author_name@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
 							</div>
 						</div>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
 								field="htmlAppend",
-								content="HTML Append:"
+								content="After Feed Item:"
 							)#
 							<div class="controls">
+								<small>
+									The following content will be added to the end of the feed item.
+								</small>
 								#html.textarea(
 									name="htmlAppend",
 									bind=prc.feed,
-									rows="10",
+									rows="5",
 									class="form-control"
 								)#
+								<small>
+									Use the following placeholders to replace with the feed item details:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@site_url@</td>
+											</tr>
+											<tr>
+												<td title="The feed item title.">@feed_item_title@</td>
+												<td title="The local feed item URL.">@feed_item_url@</td>
+												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
+												<td title="The feed item imported date.">@feed_item_import_date@</td>
+											</tr>
+											<tr>
+												<td title="The feed item published date.">@feed_item_publish_date@</td>
+												<td title="The feed item author name.">@feed_item_author_name@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
 							</div>
 						</div>
 					</fieldset>

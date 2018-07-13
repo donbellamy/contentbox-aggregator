@@ -76,7 +76,7 @@ component extends="coldbox.system.Interceptor" {
 			"feed_item_import_date" = arguments.feedItem.getDisplayCreatedDate(),
 			"feed_item_publish_date" = arguments.feedItem.getDisplayPublishedDate(),
 			"feed_item_author_name" = arguments.feedItem.getItemAuthor()
-		}
+		};
 
 		// Search and replace tokens
 		for ( var key IN tokens ) {
