@@ -45,6 +45,11 @@
 						</a>
 					</li>
 					<li role="presentation">
+						<a href="##global_html" aria-controls="global_html" role="tab" data-toggle="tab">
+							<i class="fa fa-globe"></i> Global HTML
+						</a>
+					</li>
+					<li role="presentation">
 						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
 							<i class="fa fa-download"></i> Importing
 						</a>
@@ -63,7 +68,7 @@
 						<cfif prc.feed.hasFeedImport() >
 							<li role="presentation">
 								<a href="##imports" aria-controls="imports" role="tab" data-toggle="tab">
-									<i class="fa fa-rss"></i> Feed Imports
+									<i class="fa fa-rss"></i> Imports
 								</a>
 							</li>
 						</cfif>
@@ -221,7 +226,8 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-code fa-lg"></i> Item HTML</legend>
+						<legend><i class="fa fa-code fa-lg"></i> HTML Snippets</legend>
+						<p>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -305,6 +311,8 @@
 							</div>
 						</div>
 					</fieldset>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="global_html">
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
