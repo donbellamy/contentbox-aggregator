@@ -231,7 +231,7 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="htmlPrepend",
+								field="preFeedItemDisplay",
 								content="Before Feed Item:"
 							)#
 							<div class="controls">
@@ -239,7 +239,7 @@
 									The following content will be added to the beginning of the feed item.
 								</small>
 								#html.textarea(
-									name="htmlPrepend",
+									name="preFeedItemDisplay",
 									bind=prc.feed,
 									rows="5",
 									class="form-control"
@@ -272,7 +272,7 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="htmlAppend",
+								field="postFeedItemDisplay",
 								content="After Feed Item:"
 							)#
 							<div class="controls">
@@ -280,7 +280,7 @@
 									The following content will be added to the end of the feed item.
 								</small>
 								#html.textarea(
-									name="htmlAppend",
+									name="postFeedItemDisplay",
 									bind=prc.feed,
 									rows="5",
 									class="form-control"

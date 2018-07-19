@@ -32,11 +32,19 @@ component persistent="true"
 		notnull="false"
 		length="10";
 
-	property name="htmlPrepend"
+	property name="preFeedDisplay"
 		notnull="false"
 		ormtype="text";
 
-	property name="htmlAppend"
+	property name="postFeedDisplay"
+		notnull="false"
+		ormtype="text";
+
+	property name="preFeedItemDisplay"
+		notnull="false"
+		ormtype="text";
+
+	property name="postFeedItemDisplay"
 		notnull="false"
 		ormtype="text";
 
