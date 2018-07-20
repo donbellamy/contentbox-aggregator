@@ -226,8 +226,69 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-code fa-lg"></i> HTML Snippets</legend>
+						<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
+					</fieldset>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="global_html">
+					<fieldset>
+						<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
 						<p>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="preFeedDisplay",
+								content="Before Feed:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="preFeedDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									<strong>You may use the following placeholders in the feed snippet:</strong><br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="postFeedDisplay",
+								content="After Feed:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="postFeedDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									<strong>You may use the following placeholders in the feed snippet:</strong><br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
+							</div>
+						</div>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -235,24 +296,21 @@
 								content="Before Feed Item:"
 							)#
 							<div class="controls">
-								<small>
-									The following content will be added to the beginning of the feed item.
-								</small>
 								#html.textarea(
 									name="preFeedItemDisplay",
 									bind=prc.feed,
-									rows="5",
+									rows="6",
 									class="form-control"
 								)#
 								<small>
-									Use the following placeholders to replace with the feed item details:<br />
+									<strong>You may use the following placeholders in the feed item snippet:</strong><br />
 									<table width="100%">
 										<tbody>
 											<tr>
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
 											</tr>
 											<tr>
 												<td title="The feed item title.">@feed_item_title@</td>
@@ -276,24 +334,21 @@
 								content="After Feed Item:"
 							)#
 							<div class="controls">
-								<small>
-									The following content will be added to the end of the feed item.
-								</small>
 								#html.textarea(
 									name="postFeedItemDisplay",
 									bind=prc.feed,
-									rows="5",
+									rows="6",
 									class="form-control"
 								)#
 								<small>
-									Use the following placeholders to replace with the feed item details:<br />
+									<strong>You may use the following placeholders in the feed item snippet:</strong><br />
 									<table width="100%">
 										<tbody>
 											<tr>
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
 											</tr>
 											<tr>
 												<td title="The feed item title.">@feed_item_title@</td>
@@ -311,8 +366,6 @@
 							</div>
 						</div>
 					</fieldset>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="global_html">
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
