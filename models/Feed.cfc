@@ -32,6 +32,10 @@ component persistent="true"
 		notnull="false"
 		length="10";
 
+	property name="pagingMaxItems"
+		notnull="false"
+		ormtype="long";
+
 	property name="preFeedDisplay"
 		notnull="false"
 		ormtype="text";

@@ -45,13 +45,13 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##global_html" aria-controls="global_html" role="tab" data-toggle="tab">
-							<i class="fa fa-globe"></i> Global HTML
+						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
+							<i class="fa fa-download"></i> Importing
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
-							<i class="fa fa-download"></i> Importing
+						<a href="##global_html" aria-controls="global_html" role="tab" data-toggle="tab">
+							<i class="fa fa-globe"></i> Global HTML
 						</a>
 					</li>
 					<li role="presentation">
@@ -227,142 +227,22 @@
 					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
-					</fieldset>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="global_html">
-					<fieldset>
-						<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
-						<p>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="preFeedDisplay",
-								content="Before Feed:"
+								field="pagingMaxItems",
+								content="Max Feed Items:"
 							)#
 							<div class="controls">
-								#html.textarea(
-									name="preFeedDisplay",
-									bind=prc.feed,
-									rows="6",
-									class="form-control"
+								<small>The number of feed items displayed on the feed page before paging.</small>
+								#html.inputField(
+									name="pagingMaxItems",
+									type="number",
+									value=prc.feed.getPagingMaxItems(),
+									class="form-control counter",
+									placeholder="Use the default setting",
+									min="0"
 								)#
-								<small>
-									<strong>You may use the following placeholders in the feed snippet:</strong><br />
-									<table width="100%">
-										<tbody>
-											<tr>
-												<td title="The feed title.">@feed_title@</td>
-												<td title="The local feed URL.">@feed_url@</td>
-												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
-											</tr>
-										</tbody>
-									</table>
-								</small>
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="postFeedDisplay",
-								content="After Feed:"
-							)#
-							<div class="controls">
-								#html.textarea(
-									name="postFeedDisplay",
-									bind=prc.feed,
-									rows="6",
-									class="form-control"
-								)#
-								<small>
-									<strong>You may use the following placeholders in the feed snippet:</strong><br />
-									<table width="100%">
-										<tbody>
-											<tr>
-												<td title="The feed title.">@feed_title@</td>
-												<td title="The local feed URL.">@feed_url@</td>
-												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
-											</tr>
-										</tbody>
-									</table>
-								</small>
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="preFeedItemDisplay",
-								content="Before Feed Item:"
-							)#
-							<div class="controls">
-								#html.textarea(
-									name="preFeedItemDisplay",
-									bind=prc.feed,
-									rows="6",
-									class="form-control"
-								)#
-								<small>
-									<strong>You may use the following placeholders in the feed item snippet:</strong><br />
-									<table width="100%">
-										<tbody>
-											<tr>
-												<td title="The feed title.">@feed_title@</td>
-												<td title="The local feed URL.">@feed_url@</td>
-												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
-											</tr>
-											<tr>
-												<td title="The feed item title.">@feed_item_title@</td>
-												<td title="The local feed item URL.">@feed_item_url@</td>
-												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
-												<td title="The feed item imported date.">@feed_item_import_date@</td>
-											</tr>
-											<tr>
-												<td title="The feed item published date.">@feed_item_publish_date@</td>
-												<td title="The feed item author name.">@feed_item_author_name@</td>
-											</tr>
-										</tbody>
-									</table>
-								</small>
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="postFeedItemDisplay",
-								content="After Feed Item:"
-							)#
-							<div class="controls">
-								#html.textarea(
-									name="postFeedItemDisplay",
-									bind=prc.feed,
-									rows="6",
-									class="form-control"
-								)#
-								<small>
-									<strong>You may use the following placeholders in the feed item snippet:</strong><br />
-									<table width="100%">
-										<tbody>
-											<tr>
-												<td title="The feed title.">@feed_title@</td>
-												<td title="The local feed URL.">@feed_url@</td>
-												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
-											</tr>
-											<tr>
-												<td title="The feed item title.">@feed_item_title@</td>
-												<td title="The local feed item URL.">@feed_item_url@</td>
-												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
-												<td title="The feed item imported date.">@feed_item_import_date@</td>
-											</tr>
-											<tr>
-												<td title="The feed item published date.">@feed_item_publish_date@</td>
-												<td title="The feed item author name.">@feed_item_author_name@</td>
-											</tr>
-										</tbody>
-									</table>
-								</small>
 							</div>
 						</div>
 					</fieldset>
@@ -673,6 +553,144 @@
 									selectedValue=prc.feed.getImportImages(),
 									class="form-control"
 								)#
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="global_html">
+					<fieldset>
+						<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
+						<p>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="preFeedDisplay",
+								content="Before Feed:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="preFeedDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									You may use the following placeholders in the feed snippet:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="postFeedDisplay",
+								content="After Feed:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="postFeedDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									You may use the following placeholders in the feed snippet:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="preFeedItemDisplay",
+								content="Before Feed Item:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="preFeedItemDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									You may use the following placeholders in the feed item snippet:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+											<tr>
+												<td title="The feed item title.">@feed_item_title@</td>
+												<td title="The local feed item URL.">@feed_item_url@</td>
+												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
+												<td title="The feed item imported date.">@feed_item_import_date@</td>
+											</tr>
+											<tr>
+												<td title="The feed item published date.">@feed_item_publish_date@</td>
+												<td title="The feed item author name.">@feed_item_author_name@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="postFeedItemDisplay",
+								content="After Feed Item:"
+							)#
+							<div class="controls">
+								#html.textarea(
+									name="postFeedItemDisplay",
+									bind=prc.feed,
+									rows="6",
+									class="form-control"
+								)#
+								<small>
+									You may use the following placeholders in the feed item snippet:<br />
+									<table width="100%">
+										<tbody>
+											<tr>
+												<td title="The feed title.">@feed_title@</td>
+												<td title="The local feed URL.">@feed_url@</td>
+												<td title="The remote rss feed URL.">@feed_rss_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+											</tr>
+											<tr>
+												<td title="The feed item title.">@feed_item_title@</td>
+												<td title="The local feed item URL.">@feed_item_url@</td>
+												<td title="The remote original feed item URL.">@feed_item_original_url@</td>
+												<td title="The feed item imported date.">@feed_item_import_date@</td>
+											</tr>
+											<tr>
+												<td title="The feed item published date.">@feed_item_publish_date@</td>
+												<td title="The feed item author name.">@feed_item_author_name@</td>
+											</tr>
+										</tbody>
+									</table>
+								</small>
 							</div>
 						</div>
 					</fieldset>

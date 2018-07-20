@@ -449,7 +449,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = helper.linkFeed( prc.feed ) & "?page=@page@";
 
@@ -463,7 +463,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var results = feedItemService.getPublishedFeedItems(
 				feed=prc.feed.getContentID(),
 				author=rc.author,
-				max=prc.agSettings.ag_portal_paging_max_items,
+				max=val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items,
 				offset=prc.pagingBoundaries.startRow - 1
 			);
 			prc.feedItems = results.feedItems;
