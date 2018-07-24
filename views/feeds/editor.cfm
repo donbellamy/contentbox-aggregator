@@ -211,9 +211,7 @@
 								content="Featured Image Behavior:"
 							)#
 							<div class="controls">
-								<small>
-									The default behavior when a feed item has no featured image.
-								</small>
+								<small>The default behavior when a feed item has no featured image.</small>
 								#html.select(
 									name="featuredImageBehavior",
 									options=prc.featuredImageOptions,
@@ -240,7 +238,7 @@
 									type="number",
 									value=prc.feed.getPagingMaxItems(),
 									class="form-control counter",
-									placeholder="Use the default setting",
+									placeholder="Use the default setting - #prc.agSettings.ag_portal_paging_max_items#",
 									min="0"
 								)#
 							</div>
@@ -363,7 +361,7 @@
 								<small>The status used for imported feed items.</small>
 								#html.select(
 									name="itemStatus",
-									options=[{name="Use the default setting",value=""},{name="Draft",value="draft"},{name="Published",value="published"}],
+									options=prc.itemStatuses,
 									column="value",
 									nameColumn="name",
 									selectedValue=prc.feed.getItemStatus(),
@@ -381,7 +379,7 @@
 								<small>The value used as the published date for imported feed items.</small>
 								#html.select(
 									name="ItemPubDate",
-									options=[{name="Use the default setting",value=""},{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+									options=prc.itemPubDates,
 									column="value",
 									nameColumn="name",
 									selectedValue=prc.feed.getItemPubDate(),

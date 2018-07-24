@@ -74,27 +74,55 @@ component extends="contentHandler" {
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.categories = categoryService.getAll( sortOrder="category" );
 		prc.linkOptions = [
-			{ name="Use the default setting", value="" },
 			{ name="Forward the user directly to the feed item.", value="forward" },
 			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
 			{ name="Display the entire feed item within the site.", value="display" }
 		];
+		arrayPrepend( prc.linkOptions, {
+			name="Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_portal_item_link_behavior; } ) ].name#",
+			value=""
+		});
 		prc.featuredImageOptions = [
-			{ name="Use the default setting", value="" },
-			{ name="Display the default featured image", value="default" },
-			{ name="Display the parent feed's featured image", value="feed" },
-			{ name="Do not display a featured image", value="none" }
+			{ name="Display the default featured image.", value="default" },
+			{ name="Display the parent feed's featured image.", value="feed" },
+			{ name="Do not display a featured image.", value="none" }
 		];
-		prc.importImageOptions = [
-			{ name="Use the default setting", value="" },
-			{ name="Import images for this feed", value="true" },
-			{ name="Do not import images for this feed", value="false" }
+		arrayPrepend( prc.featuredImageOptions, {
+			name="Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_portal_item_featured_image_behavior; } ) ].name#",
+			value=""
+		});
+		prc.itemStatuses = [
+			{ name="Draft", value="draft" },
+			{ name="Published", value="published" }
 		];
+		arrayPrepend( prc.itemStatuses, {
+			name="Use the default setting - #prc.itemStatuses[ arrayFind( prc.itemStatuses, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_status; } ) ].name#",
+			value=""
+		});
+		prc.itemPubDates = [
+			{ name="Original published date", value="original" },
+			{ name="Imported date", value="imported" }
+		];
+		arrayPrepend( prc.itemPubDates, {
+			name="Use the default setting - #prc.itemPubDates[ arrayFind( prc.itemPubDates, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_pub_date; } ) ].name#",
+			value=""
+		});
 		prc.importFeaturedImageOptions = [
-			{ name="Use the default setting", value="" },
-			{ name="Import featured images for this feed", value="true" },
-			{ name="Do not import featured images for this feed", value="false" }
+			{ name="Import featured images for this feed.", value="true" },
+			{ name="Do not import featured images for this feed.", value="false" }
 		];
+		arrayPrepend( prc.importFeaturedImageOptions, {
+			name="Use the default setting - #prc.importFeaturedImageOptions[ arrayFind( prc.importFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_featured_image_enable; } ) ].name#",
+			value=""
+		});
+		prc.importImageOptions = [
+			{ name="Import images for this feed.", value="true" },
+			{ name="Do not import images for this feed.", value="false" }
+		];
+		arrayPrepend( prc.importImageOptions, {
+			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_image_import_enable; } ) ].name#",
+			value=""
+		});
 
 		if ( !structKeyExists( prc, "feed" ) ) {
 			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
