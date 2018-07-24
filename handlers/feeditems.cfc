@@ -131,11 +131,13 @@ component extends="contentHandler" {
 			return editor( argumentCollection=arguments );
 		}
 
-		prc.feedItem.addNewContentVersion(
-			content=rc.content,
-			changelog=rc.changelog,
-			author=prc.oCurrentAuthor
-		);
+		if ( compare( prc.feedItem.getContent(), rc.content ) != 0 ) {
+			prc.feedItem.addNewContentVersion(
+				content=rc.content,
+				changelog=rc.changelog,
+				author=prc.oCurrentAuthor
+			);
+		}
 
 		var categories = [];
 		if ( len( trim( rc.newCategories ) ) ) {
