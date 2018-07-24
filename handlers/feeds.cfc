@@ -200,10 +200,6 @@ component extends="contentHandler" {
 
 		var errors = prc.feed.validate();
 
-		if ( !len( trim( rc.content ) ) ) {
-			arrayAppend( errors, "Please enter a description." );
-		}
-
 		if ( arrayLen( errors ) ) {
 			cbMessagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
@@ -215,12 +211,13 @@ component extends="contentHandler" {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
 
-		// TODO: check if content is different?
-		prc.feed.addNewContentVersion(
-			content=rc.content,
-			changelog=rc.changelog,
-			author=prc.oCurrentAuthor
-		);
+		if ( compare( prc.feed.getContent(), rc.content ) != 0 ) {
+			prc.feed.addNewContentVersion(
+				content=rc.content,
+				changelog=rc.changelog,
+				author=prc.oCurrentAuthor
+			);
+		}
 
 		var categories = [];
 		if ( len( trim( rc.newCategories ) ) ) {

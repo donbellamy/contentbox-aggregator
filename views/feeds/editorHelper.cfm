@@ -1,10 +1,8 @@
 <cfoutput>
 #renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
 <script>
-var feedSaveUrl = "#event.buildLink( prc.xehFeedSave )#";
 $( document ).ready( function() {
-	var $feedForm = $("##feedForm");
-	setupEditors( $feedForm, true, feedSaveUrl );
+	setupFeedForm();
 	$("##validateFeed").click(function() {
 		var feedUrl = $("##feedUrl").val();
 		if ( isUrlValid( feedUrl ) ) {
@@ -33,6 +31,98 @@ $( document ).ready( function() {
 	$("##contentToolBar .pull-right").hide();
 	$("##versionsPager .buttonBar .btn-default").hide();
 });
+function setupFeedForm() {
+
+	// Setup global editor elements
+	$targetEditorForm = $("##feedForm");
+	$targetEditorSaveURL = "#event.buildLink( prc.xehFeedSave )#";
+	$uploaderBarLoader = $targetEditorForm.find("##uploadBarLoader");
+	$uploaderBarStatus = $targetEditorForm.find("##uploadBarLoaderStatus");
+	$excerpt = $targetEditorForm.find("##excerpt");
+	$content = $targetEditorForm.find("##content");
+	$isPublished = $targetEditorForm.find("##isPublished");
+	$contentID = $targetEditorForm.find("##contentID");
+	$changelog = $targetEditorForm.find("##changelog");
+	$slug = $targetEditorForm.find("##slug");
+	$publishingBar = $targetEditorForm.find("##publishingBar");
+	$actionBar = $targetEditorForm.find("##actionBar");
+	$publishButton = $targetEditorForm.find("##publishButton");
+	$withExcerpt = false;
+	$wasSubmitted = false;
+
+	// Startup the choosen editor via driver CFC
+	$cbEditorStartup();
+
+	// Activate date pickers
+	$("[type=date]").datepicker( { format: "yyyy-mm-dd" } );
+	$(".datepicker").datepicker( { format: "yyyy-mm-dd" } );
+
+	// Activate Form Validators
+	$targetEditorForm.validate( {
+		ignore: "content",
+		submitHandler: function( form ) {
+			// Update Editor Content
+			try{
+				updateEditorContent();
+			} catch( err ){
+				console.log( err );
+			};
+			// Enable slug for saving.
+			$slug.prop( "disabled", false );
+			// Disable Publish Buttons
+			$publishButton.prop( "disabled", true );
+			// Submit
+			form.submit();
+		}
+	});
+
+	// Changelog mandatory?
+	if( $cbEditorConfig.changelogMandatory ){
+		$changelog.attr( "required", $cbEditorConfig.changelogMandatory );
+	}
+
+	// Activate blur slugify on titles
+	var $title = $targetEditorForm.find( "##title" );
+	// set up live event for title, do nothing if slug is locked..
+	$title.on( "blur", function(){
+		if( !$slug.prop( "disabled" ) ){
+			createPermalink( $title.val() );
+		}
+	} );
+
+	// Activate permalink blur
+	$slug.on( "blur",function(){
+		if( !$( this ).prop( "disabled" ) ){
+			permalinkUniqueCheck();
+		}
+	} );
+
+	// Editor dirty checks
+	window.onbeforeunload = askLeaveConfirmation;
+
+	// counters
+	$("##htmlKeywords").keyup(function(){
+		$("##html_keywords_count").html( $("##htmlKeywords").val().length );
+	} );
+	$("##htmlDescription").keyup(function(){
+		$("##html_description_count").html( $("##htmlDescription").val().length );
+	} );
+
+	// setup clockpickers
+	$('.clockpicker').clockpicker();
+
+	// setup autosave
+	autoSave( $content, $contentID, "contentAutoSave" );
+
+	// Collapse navigation for better editing experience
+	var bodyEl = $('##container');
+	collapseNav = true;
+	if( collapseNav && !$( bodyEl ).hasClass("sidebar-mini") ){
+		$("body").removeClass("off-canvas-open");
+		$( bodyEl ).toggleClass("sidebar-mini");
+	}
+
+}
 function importFeed() {
 	var $feedForm = $("##feedForm");
 	$feedForm.attr("action","#event.buildLink( prc.xehFeedImport )#").submit();
@@ -47,7 +137,7 @@ function removeImport( feedImportID ) {
 		function( data ) {
 			closeConfirmations();
 			if( !data.ERROR ){
-				$( '##import_row_' + feedImportID ).fadeOut().remove();
+				$( "##import_row_" + feedImportID ).fadeOut().remove();
 				adminNotifier( "info", data.MESSAGES, 10000 );
 			} else {
 				adminNotifier( "error", data.MESSAGES, 10000 );
