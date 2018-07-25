@@ -1,5 +1,7 @@
 component extends="contentHandler" {
 
+	property name="entryService" inject="entryService@cb";
+
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
@@ -61,8 +63,9 @@ component extends="contentHandler" {
 
 	function editor( event, rc, prc ) {
 
-		prc.ckHelper = ckHelper;
+		event.paramValue( "contentID", 0 );
 
+		prc.ckHelper = ckHelper;
 		prc.markups = editorService.getRegisteredMarkups();
 		prc.editors = editorService.getRegisteredEditorsMap();
 		prc.defaultMarkup = prc.oCurrentAuthor.getPreference( "markup", editorService.getDefaultMarkup() );
@@ -281,6 +284,45 @@ component extends="contentHandler" {
 		prc.feedItem  = feedItemService.get( rc.contentID, false );
 
 		event.setView( view="feeditems/import", layout="ajax" );
+
+	}
+
+	function saveEntry( event, rc, prc ) {
+
+		event.paramValue( "contentID", 0 );
+
+		var feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
+
+		if ( feedItem.isLoaded() ) {
+
+			var entry = entryService.new();
+
+			entry.setTitle( feedItem.getTitle() );
+			entry.setSlug( htmlHelper.slugify( feedItem.getTitle() ) );
+			entry.setExcerpt( feedItem.getExcerpt() );
+			entry.setCreator( prc.oCurrentAuthor );
+
+			entry.prepareForClone(
+				author = prc.oCurrentAuthor,
+				original = feedItem,
+				originalService = feedItemService,
+				publish = false,
+				originalSlugRoot = feedItem.getSlug(),
+				newSlugRoot = entry.getSlug()
+			);
+
+			// TODO: Related content here
+
+			entryService.saveEntry( entry );
+
+			cbMessageBox.info( "Feed Item saved as Entry!" );
+			setNextEvent( prc.xehEntries );
+
+		} else {
+
+			setNextEvent( prc.xehFeedItems );
+
+		}
 
 	}
 

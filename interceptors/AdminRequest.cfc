@@ -4,7 +4,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="settingService" inject="settingService@cb";
 	property name="helper" inject="helper@aggregator";
 
-	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin"  {
+	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin" {
 
 		// Helper
 		prc.agHelper = helper;
@@ -49,6 +49,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedItemRemove = "#prc.agAdminEntryPoint#.feeditems.remove";
 		prc.xehFeedItemResetHits = "#prc.agAdminEntryPoint#.feeditems.resetHits";
 		prc.xehFeedItemImportView = "#prc.agAdminEntryPoint#.feeditems.viewImport";
+		prc.xehFeedItemEntry = "#prc.agAdminEntryPoint#.feeditems.saveEntry";
 
 		// Settings
 		prc.xehAggregatorSettings = "#prc.agAdminEntryPoint#.settings";

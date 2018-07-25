@@ -14,6 +14,7 @@
 		<li><a href="javascript:quickSave()"><i class="fa fa-save"></i> Quick Save</a></li>
 		<li><a href="#prc.agHelper.linkFeedItem( prc.feedItem )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
 		<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#prc.feedItem.getContentID()#');"><i class="fa fa-rss"></i> View Import</a></li>
+		<li><a href="#event.buildLink(prc.xehFeedItemEntry)#/contentID/#prc.feedItem.getContentID()#"><i class="fa fa-copy"></i> Copy as Entry</a></li>
 	</ul>
 </div>
 #html.startForm(
