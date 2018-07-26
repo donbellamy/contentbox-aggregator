@@ -49,6 +49,7 @@
 											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
 											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
 											<li><a href="javascript:categoryChooser();"><i class="fa fa-tags"></i> Assign Categories</a></li>
+											<li><a href="javascript:saveAsEntry();"><i class="fa fa-copy"></i> Save as Entry</a></li>
 										</cfif>
 										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>

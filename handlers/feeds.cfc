@@ -263,14 +263,14 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( isNull( feed ) ) {
-					arrayAppend( messages, "Invalid feed selected: #contentID#." );
-				} else {
+				if ( feed.isLoaded() ) {
 					var title = feed.getTitle();
 					announceInterception( "aggregator_preFeedRemove", { feed=feed } );
 					feedService.deleteContent( feed );
 					announceInterception( "aggregator_postFeedRemove", { contentID=contentID } );
 					arrayAppend( messages, "Feed '#title#' deleted." );
+				} else {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				}
 			}
 			cbMessagebox.info( messageArray=messages );
@@ -308,14 +308,14 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( isNull( feed ) ) {
-					arrayAppend( messages, "Invalid feed selected: #contentID#." );
-				} else {
+				if ( feed.isLoaded() ) {
 					if ( feed.hasStats() ) {
 						feed.getStats().setHits( 0 );
 						feedService.save( feed );
 					}
 					arrayAppend( messages, "Hits reset for '#feed.getTitle()#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				}
 			}
 			cbMessagebox.info( messageArray=messages );
@@ -356,11 +356,11 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID IN rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( isNull( feed ) ) {
-					arrayAppend( messages, "Invalid feed selected: #contentID#." );
-				} else {
+				if ( feed.isLoaded() ) {
 					feedImportService.import( feed, prc.oCurrentAuthor );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				}
 			}
 			announceInterception( "aggregator_postFeedImports" );
@@ -389,14 +389,11 @@ component extends="contentHandler" {
 
 		var results = { "ERROR" = false, "MESSAGES" = "" };
 
-		// TODO: Test across app, the get function where I am using !isNull()
 		prc.feedImport  = feedImportService.get( rc.feedImportID, false );
 
 		if ( !isNull( prc.feedImport ) ) {
 
-			// TODO: Announce?
 			feedImportService.deleteByID( rc.feedImportID );
-			// TODO: Announce?
 			results.messages = "Feed import removed!";
 
 		} else {

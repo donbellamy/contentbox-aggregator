@@ -122,6 +122,14 @@ function resetHits( contentID ) {
 	$contentForm.submit();
 }
 
+function saveAsEntry( contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemEntry )#" );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
+
 function contentPaginate( page ) {
 	contentLoad({
 		search : $("##search").val(),

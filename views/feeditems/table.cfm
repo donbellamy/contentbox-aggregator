@@ -72,6 +72,7 @@
 								<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 								<li><a href="javascript:categoryChooser('#feedItem.getContentID()#');"><i class="fa fa-tags fa-lg"></i> Assign Categories</a></li>
+								<li><a href="javascript:saveAsEntry('#feedItem.getContentID()#');"><i class="fa fa-copy fa-lg"></i> Save as Entry</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
 							<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#feedItem.getContentID()#');"><i class="fa fa-rss fa-lg"></i> View Import</a>

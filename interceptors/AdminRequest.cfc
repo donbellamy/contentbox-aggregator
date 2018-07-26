@@ -49,7 +49,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedItemRemove = "#prc.agAdminEntryPoint#.feeditems.remove";
 		prc.xehFeedItemResetHits = "#prc.agAdminEntryPoint#.feeditems.resetHits";
 		prc.xehFeedItemImportView = "#prc.agAdminEntryPoint#.feeditems.viewImport";
-		prc.xehFeedItemEntry = "#prc.agAdminEntryPoint#.feeditems.saveEntry";
+		prc.xehFeedItemEntry = "#prc.agAdminEntryPoint#.feeditems.saveAsEntry";
 
 		// Settings
 		prc.xehAggregatorSettings = "#prc.agAdminEntryPoint#.settings";
@@ -64,12 +64,24 @@ component extends="coldbox.system.Interceptor" {
 
 		// Add portal link, new feed and clear cache to nav bar
 		if ( !event.isAjax() && rc.format EQ "html" ) {
-			html.$htmlhead("<script>$(function() {$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});</script>");
+			html.$htmlhead("<script>
+				$(function() {
+					$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');
+				});
+			</script>");
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
-				html.$htmlhead("<script>$(function() {$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});</script>");
+				html.$htmlhead("<script>
+					$(function() {
+						$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');
+					});
+				</script>");
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
-				html.$htmlhead("<script>$(function() {$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>')});</script>");
+				html.$htmlhead("<script>
+					$(function() {
+						$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>');
+					});
+				</script>");
 			}
 		}
 
@@ -103,9 +115,37 @@ component extends="coldbox.system.Interceptor" {
 		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestSnapshot" ) {
 			html.$htmlhead('<script>
 				$(function() {
-					$( "##topcontent table:first tbody" ).load( "#event.buildLink( prc.xehTopContent )#" );
-					$( "##topcontent table:last tbody" ).load( "#event.buildLink( prc.xehTopCommented )#" );
-					$( "##content div" ).load( "#event.buildLink( prc.xehContentCounts )#" );
+					$("##topcontent table:first tbody").load( "#event.buildLink( prc.xehTopContent )#" );
+					$("##topcontent table:last tbody").load( "#event.buildLink( prc.xehTopCommented )#" );
+					$("##content div").load( "#event.buildLink( prc.xehContentCounts )#" );
+				});
+			</script>');
+		}
+
+		if ( event.getCurrentEvent() EQ "contentbox-admin:content.showRelatedContentSelector" ) {
+			html.$htmlhead('<script>
+				$(function() {
+					$("##contentContainer ul.nav-tabs").append(''<li><a href="##FeedItem" data-toggle=tab"><i class="fa fa-rss icon-small" title=FeedItem"></i> FeedItem</a></li>'');
+					$("##contentContainer div.tab-content").append(''<div class="tab-pane fade" id="FeedItem"></div>'');
+					$("##contentSearch").keyup(
+						_.debounce(
+							function(){
+								var $this = $(this);
+								var clearIt = ( $this.val().length > 0 ? false : true );
+								var params = { search: $this.val(), clear: clearIt };
+								loadContentTypeTab( "FeedItem", params );
+							},
+							300
+						)
+					);
+					function waitForIt() {
+						if ( typeof loadContentTypeTab !== "undefined" ) {
+							loadContentTypeTab( "FeedItem", {} )
+						} else {
+							setTimeout(waitForIt,250);
+						}
+					}
+					waitForIt();
 				});
 			</script>');
 		}

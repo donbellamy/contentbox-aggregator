@@ -4,7 +4,7 @@
 var feedItemSaveUrl = "#event.buildLink( prc.xehFeedItemSave )#";
 $( document ).ready( function() {
 	var $feedItemForm = $("##feedItemForm");
-	setupEditors( $feedItemForm, true, feedItemSaveUrl );
+	setupEditors( $feedItemForm, false, feedItemSaveUrl );
 	$("##contentToolBar .pull-right").hide();
 	$("##versionsPager .buttonBar .btn-default").hide();
 });

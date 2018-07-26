@@ -187,12 +187,12 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( isNull( feedItem ) ) {
-					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
-				} else {
+				if ( feedItem.isLoaded() ) {
 					feedItem.removeAllCategories().setCategories( categories );
 					feedItemService.save( feedItem );
 					arrayAppend( messages, "Categories saved for '#feedItem.getTitle()#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
 			}
 			cbMessagebox.info( messageArray=messages );
@@ -213,14 +213,14 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( isNull( feedItem ) ) {
-					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
-				} else {
+				if ( feedItem.isLoaded() ) {
 					var title = feedItem.getTitle();
 					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
 					feedItemService.deleteContent( feedItem );
 					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
 					arrayAppend( messages, "Feed item '#title#' deleted." );
+				} else {
+					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
 			}
 			cbMessagebox.info( messageArray=messages );
@@ -258,14 +258,14 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( isNull( feedItem ) ) {
-					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
-				} else {
+				if ( feedItem.isLoaded() ) {
 					if ( feedItem.hasStats() ) {
 						feedItem.getStats().setHits( 0 );
 						feedItemService.save( feedItem );
 					}
 					arrayAppend( messages, "Hits reset for '#feedItem.getTitle()#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
 			}
 			cbMessagebox.info( messageArray=messages );
@@ -287,41 +287,41 @@ component extends="contentHandler" {
 
 	}
 
-	function saveEntry( event, rc, prc ) {
+	function saveAsEntry( event, rc, prc ) {
 
-		event.paramValue( "contentID", 0 );
+		event.paramValue( "contentID", "" );
 
-		var feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
-
-		if ( feedItem.isLoaded() ) {
-
-			var entry = entryService.new();
-
-			entry.setTitle( feedItem.getTitle() );
-			entry.setSlug( htmlHelper.slugify( feedItem.getTitle() ) );
-			entry.setExcerpt( feedItem.getExcerpt() );
-			entry.setCreator( prc.oCurrentAuthor );
-
-			entry.prepareForClone(
-				author = prc.oCurrentAuthor,
-				original = feedItem,
-				originalService = feedItemService,
-				publish = false,
-				originalSlugRoot = feedItem.getSlug(),
-				newSlugRoot = entry.getSlug()
-			);
-
-			// TODO: Related content here
-
-			entryService.saveEntry( entry );
-
-			cbMessageBox.info( "Feed Item saved as Entry!" );
-			setNextEvent( prc.xehEntries );
-
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feedItem = feedItemService.get( contentID );
+				if ( feedItem.isLoaded() ) {
+					var entry = entryService.new();
+					entry.setTitle( feedItem.getTitle() );
+					entry.setSlug( htmlHelper.slugify( feedItem.getTitle() ) );
+					entry.setExcerpt( feedItem.getExcerpt() );
+					entry.setCreator( prc.oCurrentAuthor );
+					entry.prepareForClone(
+						author = prc.oCurrentAuthor,
+						original = feedItem,
+						originalService = feedItemService,
+						publish = false,
+						originalSlugRoot = feedItem.getSlug(),
+						newSlugRoot = entry.getSlug()
+					);
+					entry.inflateRelatedContent( feedItem.getContentID() );
+					entryService.saveEntry( entry );
+					arrayAppend( messages, "Feed item '#feedItem.getTitle()#' saved as Entry." );
+				} else {
+					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
+				}
+			}
+			cbMessagebox.info( messageArray=messages );
+			setNextEvent( event=prc.xehEntries, persistStruct=getFilters( rc ) );
 		} else {
-
-			setNextEvent( prc.xehFeedItems );
-
+			cbMessagebox.warn( "No feed items selected!" );
+			setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
 		}
 
 	}
