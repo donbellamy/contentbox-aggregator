@@ -5,6 +5,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="settingService" inject="settingService@cb";
 
 	function aggregator_preFeedItemRemove( event, interceptData ) {
+		// TODO: Change to check if any other content is using this, a related entry could be using the image
 		var feedItem = arguments.interceptData.feedItem;
 		var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( feedItem.getPublishedDate(), "yyyy\mm\" );
 		var images = directoryList( path=directoryPath, filter="#feedItem.getSlug()#_*" );

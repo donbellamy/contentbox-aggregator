@@ -65,18 +65,24 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", 0 );
 
+		if ( !structKeyExists( prc, "feedItem" ) ) {
+			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
+		}
+
 		prc.ckHelper = ckHelper;
 		prc.markups = editorService.getRegisteredMarkups();
 		prc.editors = editorService.getRegisteredEditorsMap();
 		prc.defaultMarkup = prc.oCurrentAuthor.getPreference( "markup", editorService.getDefaultMarkup() );
 		prc.defaultEditor = getUserDefaultEditor( prc.oCurrentAuthor );
 		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
+		prc.relatedContent = prc.feedItem.hasRelatedContent() ? prc.feedItem.getRelatedContent() : [];
+		prc.linkedContent = prc.feedItem.hasLinkedContent() ? prc.feedItem.getLinkedContent() : [];
+		prc.relatedContentIDs = prc.feedItem.getRelatedContentIDs();
+		prc.xehRelatedContentSelector = "#prc.cbAdminEntryPoint#.content.relatedContentSelector";
+		prc.xehShowRelatedContentSelector = "#prc.cbAdminEntryPoint#.content.showRelatedContentSelector";
+		prc.xehBreakContentLink = "#prc.cbAdminEntryPoint#.content.breakContentLink";
 
 		prc.categories = categoryService.getAll( sortOrder="category" );
-
-		if ( !structKeyExists( prc, "feedItem" ) ) {
-			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
-		}
 
 		// We dont support creating feed items
 		if ( !prc.feedItem.isLoaded() ) {
@@ -103,6 +109,8 @@ component extends="contentHandler" {
 		event.paramValue( "expireDate", "" );
 		event.paramValue( "expireTime", "" );
 		event.paramValue( "changelog", "" );
+		// Related content
+		event.paramValue( "relatedContentIDs", "" );
 		// Categories
 		event.paramValue( "newCategories", "" );
 
@@ -148,6 +156,7 @@ component extends="contentHandler" {
 		}
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feedItem.removeAllCategories().setCategories( categories );
+		prc.feedItem.inflateRelatedContent( rc.relatedContentIDs );
 
 		announceInterception( "aggregator_preFeedItemSave", {
 			feedItem=prc.feedItem,

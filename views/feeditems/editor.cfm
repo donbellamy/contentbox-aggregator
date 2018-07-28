@@ -187,6 +187,36 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##relatedcontent">
+									<i class="fa fa-sitemap fa-lg"></i> Related Content
+								</a>
+							</h4>
+						</div>
+						<div id="relatedcontent" class="panel-collapse collapse">
+							<div class="panel-body">
+								<cfset rcArgs = { relatedContent=prc.relatedContent } />
+								#renderView( view="_tags/relatedContent", args=rcArgs, module="contentbox-admin" )#
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##linkedcontent">
+									<i class="fa fa-link fa-lg"></i> Linked Content
+								</a>
+							</h4>
+						</div>
+						<div id="linkedcontent" class="panel-collapse collapse">
+							<div class="panel-body">
+								<cfset rcArgs = { linkedContent=prc.linkedContent, contentType=prc.feedItem.getContentType() } />
+								#renderView( view="_tags/linkedContent", args=rcArgs, module="contentbox-admin" )#
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
 								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="##accordion" href="##categories">
 									<i class="fa fa-tags fa-lg"></i> Categories
 								</a>

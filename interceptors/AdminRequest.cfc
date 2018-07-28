@@ -122,6 +122,7 @@ component extends="coldbox.system.Interceptor" {
 			</script>');
 		}
 
+		// Add feed items to related content selector
 		if ( event.getCurrentEvent() EQ "contentbox-admin:content.showRelatedContentSelector" ) {
 			html.$htmlhead('<script>
 				$(function() {
@@ -150,6 +151,18 @@ component extends="coldbox.system.Interceptor" {
 			</script>');
 		}
 
+		// TODO: related content styles on blog/page/feed item -> figure out how to tell when on feed item editor
+		html.$htmlhead('<script>alert("#event.getCurrentRoutedNamespace()#");</script>');
+
+		/*
+
+		if ( event.getCurrentEvent() EQ "contentbox-admin:entries.editor" ||
+			event.getCurrentEvent() EQ "contentbox-admin:pages.editor"
+			event.getCurrentEvent() EQ "contentbox-admin:entries.editor" ) {
+
+		}
+
+		*/
 	}
 
 }
