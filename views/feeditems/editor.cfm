@@ -103,7 +103,9 @@
 					#prc.versionsViewlet#
 				</div>
 			</div>
+			#announceInterception( "aggregator_feedItemEditorInBody" )#
 		</div>
+		#announceInterception( "aggregator_feedItemEditorFooter" )#
 	</div>
 	<div class="col-md-4" id="main-content-sidebar">
 		<div class="panel panel-primary">
@@ -282,9 +284,12 @@
 							</div>
 						</div>
 					</div>
+					#announceInterception( "aggregator_feedItemEditorSidebarAccordion" )#
 				</div>
+				#announceInterception( "aggregator_feedItemEditorSidebar" )#
 			</div>
 		</div>
+		#announceInterception( "aggregator_feedItemEditorSidebarFooter" )#
 	</div>
 </div>
 #html.endForm()#

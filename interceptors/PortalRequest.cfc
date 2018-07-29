@@ -108,6 +108,11 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-ui"{
+		// announce event
+		announceInterception( "cbui_postRequest" );
+	}
+
 	function afterInstanceCreation( event, interceptData, buffer ) {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
 			var prc = event.getCollection( private=true );

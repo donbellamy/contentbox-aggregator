@@ -112,11 +112,17 @@ component {
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([
 				"aggregator_preSettingsSave","aggregator_postSettingsSave",
+				"aggregator_feedEditorInBody","aggregator_feedEditorFooter",
+				"aggregator_feedEditorSidebarAccordion","aggregator_feedEditorSidebar",
+				"aggregator_feedEditorSidebarFooter",
 				"aggregator_preFeedSave","aggregator_postFeedSave",
 				"aggregator_preFeedRemove","aggregator_postFeedRemove",
 				"aggregator_onFeedStatusUpdate","aggregator_onFeedStateUpdate",
 				"aggregator_preFeedImport","aggregator_postFeedImport",
 				"aggregator_postFeedImports",
+				"aggregator_feedItemEditorInBody","aggregator_feedItemEditorFooter",
+				"aggregator_feedItemEditorSidebarAccordion","aggregator_feedItemEditorSidebar",
+				"aggregator_feedItemEditorSidebarFooter",
 				"aggregator_preFeedItemSave","aggregator_postFeedItemSave",
 				"aggregator_preFeedItemRemove","aggregator_postFeedItemRemove",
 				"aggregator_onFeedItemStatusUpdate",

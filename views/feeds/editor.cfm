@@ -771,7 +771,9 @@
 					</cfif>
 				</cfif>
 			</div>
+			#announceInterception( "aggregator_feedEditorInBody" )#
 		</div>
+		#announceInterception( "aggregator_feedEditorFooter" )#
 	</div>
 	<div class="col-md-4" id="main-content-sidebar">
 		<div class="panel panel-primary">
@@ -975,9 +977,12 @@
 							</div>
 						</div>
 					</div>
+					#announceInterception( "aggregator_feedEditorSidebarAccordion" )#
 				</div>
+				#announceInterception( "aggregator_feedEditorSidebar" )#
 			</div>
 		</div>
+		#announceInterception( "aggregator_feedEditorSidebarFooter" )#
 	</div>
 </div>
 #html.endForm()#

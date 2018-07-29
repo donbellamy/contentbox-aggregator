@@ -151,18 +151,52 @@ component extends="coldbox.system.Interceptor" {
 			</script>');
 		}
 
-		// TODO: related content styles on blog/page/feed item -> figure out how to tell when on feed item editor
-		html.$htmlhead('<script>alert("#event.getCurrentRoutedNamespace()#");</script>');
+	}
 
-		/*
+	function aggregator_feedItemEditorSidebarFooter() {
+		appendToBuffer( getRelatedContentIconScript() );
+	}
 
-		if ( event.getCurrentEvent() EQ "contentbox-admin:entries.editor" ||
-			event.getCurrentEvent() EQ "contentbox-admin:pages.editor"
-			event.getCurrentEvent() EQ "contentbox-admin:entries.editor" ) {
+	function cbadmin_pageEditorSidebarFooter() {
+		appendToBuffer( getRelatedContentIconScript() );
+	}
 
-		}
+	function cbadmin_entryEditorSidebarFooter() {
+		appendToBuffer( getRelatedContentIconScript() );
+	}
 
-		*/
+	/************************************** PRIVATE *********************************************/
+
+	private function getRelatedContentIconScript() {
+		return '<script>
+			$(function() {
+				$("##relatedContent-items tr td:first-child, ##linkedContent-items tr td:first-child").each(function(){
+					var $this = $(this);
+					// No child so assume it is a feed item - TODO: need to modify cb code to add a content type class
+					if ( $this.children().length == 0 ) {
+						$this.append(''<i class="fa fa-rss icon-small" title="FeedItem"></i>'');
+					}
+				});
+			});
+			function getIconByContentType( type ) {
+				var icon = "";
+				switch( type ) {
+					case "Page":
+						icon = ''<i class="fa fa-file icon-small" title="Page"></i>'';
+						break;
+					case "Entry":
+						icon = ''<i class="fa fa-quote-left icon-small" title="Entry"></i>'';
+						break;
+					case "ContentStore":
+						icon = ''<i class="fa fa-hdd-o icon-small" title="ContentStore"></i>'';
+						break;
+					case "FeedItem":
+						icon = ''<i class="fa fa-rss icon-small" title="FeedItem"></i>'';
+						break;
+				}
+				return icon;
+			}
+		</script>';
 	}
 
 }
