@@ -163,6 +163,18 @@ component accessors="true" singleton threadSafe {
 		}
 	}
 
+	array function getCurrentRelatedContent() {
+		var relatedContent = cb.getCurrentRelatedContent();
+		if ( !arrayLen( relatedContent ) ) {
+			if ( isFeedView() && getCurrentFeed().hasRelatedContent() ) {
+				relatedContent = getCurrentFeed().getRelatedContent();
+			} else if ( isFeedItemView() && getCurrentFeedItem().hasRelatedContent() ) {
+				relatedContent = getCurrentFeedItem().getRelatedContent();
+			}
+		}
+		return relatedContent;
+	}
+
 	/************************************** Link Methods *********************************************/
 
 	string function linkPortal( boolean ssl=cb.getRequestContext().isSSL() ) {
