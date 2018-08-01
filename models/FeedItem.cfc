@@ -52,6 +52,7 @@ component persistent="true"
 	**							CONSTRAINTS
 	********************************************************************* */
 
+	// TODO: Update
 	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["author"] = { required=false, size="1..255" };

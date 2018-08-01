@@ -3,7 +3,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	RelatedContent function init() {
 		setName( "Related Content" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feed item archives." );
+		setDescription( "A widget that displays a list of related content." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "sitemap" );

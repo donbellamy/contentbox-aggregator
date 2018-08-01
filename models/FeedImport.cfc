@@ -50,6 +50,11 @@ component persistent="true"
 		lazy="true"
 		fetch="join";
 
+	/* *********************************************************************
+	**                            CONSTRAINTS
+	********************************************************************* */
+	// TODO: constraints
+
 	FeedImport function init() {
 		importedDate = now();
 		importedCount = 0;

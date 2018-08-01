@@ -512,6 +512,11 @@
 						</div>
 					</fieldset>
 					<fieldset>
+						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+						<div class="form-group">
+						</div>
+					</fieldset>
+					<fieldset>
 						<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
 						<div class="form-group">
 							#html.label(

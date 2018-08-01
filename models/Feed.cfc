@@ -76,6 +76,18 @@ component persistent="true"
 		notnull="false"
 		length="10";
 
+	property name="maxAge"
+		notnull="false"
+		ormtype="long";
+
+	property name="maxAgeUnit"
+		notnull="false"
+		length="10";
+
+	property name="maxItems"
+		notnull="false"
+		ormtype="long";
+
 	property name="matchAnyFilter"
 		notnull="false"
 		length="255";
@@ -88,17 +100,9 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	property name="maxAge"
+	property name="taxonomies"
 		notnull="false"
-		ormtype="long";
-
-	property name="maxAgeUnit"
-		notnull="false"
-		length="10";
-
-	property name="maxItems"
-		notnull="false"
-		ormtype="long";
+		ormtype="text";
 
 	property name="importImages"
 		notnull="false"
@@ -137,6 +141,7 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
+	// TODO: Update this
 	this.constraints["siteUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["tagLine"] = { required=false, size="1..255" };
@@ -150,7 +155,7 @@ component persistent="true"
 	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
 	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
 	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
-	this.constraints["featuredImageBehavior"] = { required=true, regex="(default|feed|none)" };
+	this.constraints["featuredImageBehavior"] = { required=false, regex="(default|feed|none)" };
 
 	Feed function init() {
 		super.init();
