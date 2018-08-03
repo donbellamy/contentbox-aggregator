@@ -17,12 +17,12 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li role="presentation" class="active">
-								<a href="##portal_options" data-toggle="tab">
+								<a href="##portal" data-toggle="tab">
 									<i class="fa fa-newspaper-o fa-lg"></i> Portal
 								</a>
 							</li>
 							<li role="presentation" >
-								<a href="##importing_options" data-toggle="tab">
+								<a href="##importing" data-toggle="tab">
 									<i class="fa fa-download fa-lg"></i> Importing
 								</a>
 							</li>
@@ -32,13 +32,13 @@
 								</a>
 							</li>
 							<li role="presentation" >
-								<a href="##rss_options" data-toggle="tab">
+								<a href="##rss" data-toggle="tab">
 									<i class="fa fa-rss fa-lg"></i> RSS Feed
 								</a>
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="portal_options">
+							<div class="tab-pane active" id="portal">
 								<fieldset>
 									<legend><i class="fa fa-newspaper-o fa-lg"></i> Portal Options</legend>
 									<div class="form-group">
@@ -306,7 +306,7 @@
 									</div>
 								</fieldset>
 							</div>
-							<div class="tab-pane" id="importing_options">
+							<div class="tab-pane" id="importing">
 								<fieldset>
 									<legend><i class="fa fa-download fa-lg"></i> Importing Options</legend>
 									<div class="form-group">
@@ -579,6 +579,25 @@
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+									<div id="taxonomies">
+										<div>
+											<button id="addTaxonomy" class="btn btn-sm btn-primary" title="Add Taxonomy" onclick="return false;">
+												<i class="fa fa-plus"></i> Add
+											</button>
+											<button id="removeAll" class="btn btn-sm btn-danger" title="Remove all Taxonomies" onclick="return false;">
+												<i class="fa fa-trash-o"></i> Remove All
+											</button>
+										</div>
+										<cfloop array="#prc.agSettings.ag_importing_taxonomies#" index="taxonomy">
+											<div class="form-group">
+											</div>
+										</cfloop>
+									</div>
+									<div id="taxonomyTemplate" style="display:none;">
+										<div class="form-group">
+											template
+										</div>
+									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
@@ -819,7 +838,7 @@
 									)#
 								</fieldset>
 							</div>
-							<div class="tab-pane" id="rss_options">
+							<div class="tab-pane" id="rss">
 								<fieldset>
 									<legend><i class="fa fa-rss fa-lg"></i> RSS Feed Options</legend>
 									<div class="form-group">

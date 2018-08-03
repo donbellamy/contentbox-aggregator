@@ -34,6 +34,12 @@ $( document ).ready( function() {
 	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
+	$("##addTaxonomy").click(function(){
+		$("##taxonomies").append( $("##taxonomyTemplate").html() );
+	});
+	$("##removeAll").click(function(){
+		$("##taxonomies .form-group").remove();
+	});
 });
 function loadAssetChooser( callback, w, h ){
 	openRemoteModal(

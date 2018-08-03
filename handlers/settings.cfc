@@ -1,6 +1,7 @@
 component extends="baseHandler" {
 
 	property name="authorService" inject="authorService@cb";
+	property name="categoryService" inject="categoryService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="helper" inject="helper@aggregator";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
@@ -19,6 +20,7 @@ component extends="baseHandler" {
 			{ name="Once a Month", value="monthly" }
 		];
 		prc.authors = authorService.getAll( sortOrder="lastName" );
+		prc.categories = categoryService.getAll( sortOrder="category" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.linkOptions = [
 			{ name="Forward the user directly to the feed item.", value="forward" },
