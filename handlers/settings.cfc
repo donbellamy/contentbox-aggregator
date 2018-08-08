@@ -33,6 +33,10 @@ component extends="baseHandler" {
 			{ name="Do not display a featured image.", value="none" }
 		];
 		prc.cacheNames = cachebox.getCacheNames();
+		prc.matchOptions = [
+			{ name="Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value="any" },
+			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" }
+		];
 		markdownEditor.loadAssets();
 
 		event.setView( "settings/index" );
@@ -40,6 +44,9 @@ component extends="baseHandler" {
 	}
 
 	function save( event, rc, prc ) {
+
+writedump(rc);
+abort;
 
 		announceInterception( "aggregator_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
 

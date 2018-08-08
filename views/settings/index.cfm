@@ -177,6 +177,35 @@
 											)#
 										</div>
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_item_featured_image_default",
+											content="Default Featured Image:"
+										)#
+										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
+										<div class="controls text-center">
+											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
+											<div class="<cfif !len( prc.agSettings.ag_portal_item_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
+												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
+												#html.hiddenField(
+													name="ag_portal_item_featured_image_default",
+													value=prc.agSettings.ag_portal_item_featured_image_default
+												)#
+												#html.hiddenField(
+													name="ag_portal_item_featured_image_default_url",
+													value=prc.agSettings.ag_portal_item_featured_image_default_url
+												)#
+												<div class="margin10">
+													<cfif len( prc.agSettings.ag_portal_item_featured_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_portal_item_featured_image_default_url#" class="img-thumbnail" height="75" />
+													<cfelse>
+														<img id="default_image_preview" class="img-thumbnail" height="75" />
+													</cfif>
+												</div>
+											</div>
+										</div>
+									</div>
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
@@ -578,28 +607,6 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
-									<div id="taxonomies">
-										<div>
-											<button id="addTaxonomy" class="btn btn-sm btn-primary" title="Add Taxonomy" onclick="return false;">
-												<i class="fa fa-plus"></i> Add
-											</button>
-											<button id="removeAll" class="btn btn-sm btn-danger" title="Remove all Taxonomies" onclick="return false;">
-												<i class="fa fa-trash-o"></i> Remove All
-											</button>
-										</div>
-										<cfloop array="#prc.agSettings.ag_importing_taxonomies#" index="taxonomy">
-											<div class="form-group">
-											</div>
-										</cfloop>
-									</div>
-									<div id="taxonomyTemplate" style="display:none;">
-										<div class="form-group">
-											template
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
 									<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
 									<div class="form-group">
 										#html.label(
@@ -681,34 +688,22 @@
 											)#
 										</div>
 									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_importing_featured_image_default",
-											content="Default Featured Image:"
-										)#
-										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
-										<div class="controls text-center">
-											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_importing_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
-												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
-												#html.hiddenField(
-													name="ag_importing_featured_image_default",
-													value=prc.agSettings.ag_importing_featured_image_default
-												)#
-												#html.hiddenField(
-													name="ag_importing_featured_image_default_url",
-													value=prc.agSettings.ag_importing_featured_image_default_url
-												)#
-												<div class="margin10">
-													<cfif len( prc.agSettings.ag_importing_featured_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_importing_featured_image_default_url#" class="img-thumbnail" height="75" />
-													<cfelse>
-														<img id="default_image_preview" class="img-thumbnail" height="75" />
-													</cfif>
-												</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+									<div id="taxonomies">
+										<cfloop array="#prc.agSettings.ag_importing_taxonomies#" index="taxonomy">
+											<div class="taxonomy">
 											</div>
-										</div>
+										</cfloop>
+									</div>
+									<div>
+										<button id="addTaxonomy" class="btn btn-sm btn-primary" onclick="return false;">
+											<i class="fa fa-plus"></i> Add
+										</button>
+										<button id="removeAll" class="btn btn-sm btn-danger" onclick="return false;">
+											<i class="fa fa-trash-o"></i> Remove All
+										</button>
 									</div>
 								</fieldset>
 							</div>
@@ -1074,6 +1069,62 @@
 				</div>
 			</div>
 		#html.endForm()#
+	</div>
+</div>
+<div id="taxonomyTemplate" style="display:none;">
+	<div class="taxonomy">
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.categories[]",
+				content="Categories:"
+			)#
+			<div class="controls">
+				<small>Assign the following categories to feed items when they match the behavior below.</small><br/>
+				#html.select(
+					name="ag_importing_taxonomies.templateIndex.categories[]",
+					options=prc.categories,
+					column="categoryID",
+					nameColumn="category",
+					class="form-control input-sm multiselecttemplateIndex",
+					multiple="true"
+				)#
+			</div>
+		</div>
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.behavior",
+				content="Match Behavior:"
+			)#
+			<div class="controls">
+				<small>Use the following behavior when assigning categories.</small>
+				#html.select(
+					name="ag_importing_taxonomies.templateIndex.behavior",
+					options=prc.matchOptions,
+					column="value",
+					nameColumn="name",
+					class="form-control input-sm"
+				)#
+			</div>
+		</div>
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.keywords",
+				content="Keywords:"
+			)#
+			<div class="controls">
+				<small>Use the following words/phrases to assign the above categories.</small>
+				#html.textArea(
+					name="ag_importing_taxonomies.templateIndex.keywords",
+					rows="2",
+					class="form-control",
+					placeholder="Comma delimited list of words or phrases",
+					maxlength="255"
+				)#
+			</div>
+		</div>
 	</div>
 </div>
 </cfoutput>

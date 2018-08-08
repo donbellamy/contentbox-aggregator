@@ -1,4 +1,6 @@
 <cfoutput>
+<script type="text/javascript" src="#prc.agRoot#/includes/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="#prc.agRoot#/includes/css/bootstrap-multiselect.css" type="text/css"/>
 <style>
 .CodeMirror, .CodeMirror-scroll {
 	height: 200px;
@@ -34,11 +36,22 @@ $( document ).ready( function() {
 	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
-	$("##addTaxonomy").click(function(){
-		$("##taxonomies").append( $("##taxonomyTemplate").html() );
+	$("##addTaxonomy").click(function() {
+		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1;
+		var template = $("##taxonomyTemplate").html().replace(/templateIndex/g, templateIndex);
+		$("##taxonomies").append( template );
+		$(".multiselect" + templateIndex).multiselect({
+			nonSelectedText: "Choose Categories",
+			numberDisplayed: 0,
+			buttonWidth: "100%"
+		});
 	});
-	$("##removeAll").click(function(){
+	$("##removeAll").click(function() {
 		$("##taxonomies .form-group").remove();
+	});
+	$(".multiselect").multiselect({
+		nonSelectedText: "Choose Categories",
+		numberDisplayed: 0
 	});
 });
 function loadAssetChooser( callback, w, h ){
@@ -50,16 +63,16 @@ function loadAssetChooser( callback, w, h ){
 	);
 }
 function defaultImageCallback( filePath, fileURL, fileType ){
-	if( $( "##ag_importing_featured_image_default" ).val().length ){ cancelDefaultImage(); }
+	if( $( "##ag_portal_item_featured_image_default" ).val().length ){ cancelDefaultImage(); }
 	$( "##default_image_controls" ).toggleClass( "hide" );
-	$( "##ag_importing_featured_image_default" ).val( filePath );
-	$( "##ag_importing_featured_image_default_url" ).val( fileURL );
+	$( "##ag_portal_item_featured_image_default" ).val( filePath );
+	$( "##ag_portal_item_featured_image_default_url" ).val( fileURL );
 	$( "##default_image_preview" ).attr( "src", fileURL );
 	closeRemoteModal();
 }
 function cancelDefaultImage(){
-	$( "##ag_importing_featured_image_default" ).val( "" );
-	$( "##ag_importing_featured_image_default_url" ).val( "" );
+	$( "##ag_portal_item_featured_image_default" ).val( "" );
+	$( "##ag_portal_item_featured_image_default_url" ).val( "" );
 	$( "##default_image_preview" ).attr( "src", "" );
 	$( "##default_image_controls" ).toggleClass( "hide" );
 }

@@ -9,6 +9,9 @@ component extends="coldbox.system.Interceptor" {
 		// Helper
 		prc.agHelper = helper;
 
+		// Module root
+		prc.agRoot = getContextRoot() & event.getModuleRoot( "contentbox-aggregator" );
+
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 

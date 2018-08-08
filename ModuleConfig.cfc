@@ -24,6 +24,8 @@ component {
 			"ag_portal_feeds_title" = "Feeds",
 			"ag_portal_item_link_behavior" = "forward",
 			"ag_portal_item_featured_image_behavior" = "default",
+			"ag_portal_item_featured_image_default" = "",
+			"ag_portal_item_featured_image_default_url" = "",
 			"ag_portal_paging_max_items" = "20",
 			"ag_portal_paging_max_feeds" = "20",
 			"ag_portal_cache_enable" = "true",
@@ -46,13 +48,20 @@ component {
 			"ag_importing_match_any_filter" = "",
 			"ag_importing_match_all_filter" = "",
 			"ag_importing_match_none_filter" = "",
-			"ag_importing_taxonomies" = [],
 			"ag_importing_featured_image_enable" = "true",
 			"ag_importing_image_import_enable" = "false",
 			"ag_importing_image_minimum_width" = "100",
 			"ag_importing_image_minimum_height" = "100",
-			"ag_importing_featured_image_default" = "",
-			"ag_importing_featured_image_default_url" = "",
+			"ag_importing_taxonomies" = [],
+			/*
+				[
+					{
+						"keywords": "test,test1,test2",
+						"behavior": "any",
+						"categories": [1,2,3]
+					}
+				]
+			*/
 
 			// Global html
 			"ag_html_pre_index_display" = "",

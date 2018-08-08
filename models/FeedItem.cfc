@@ -135,7 +135,7 @@ component persistent="true"
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
 			} else if ( behavior == "default" ) {
-				return settings.ag_importing_featured_image_default_url;
+				return settings.ag_portal_item_featured_image_default_url;
 			} else {
 				return "";
 			}
