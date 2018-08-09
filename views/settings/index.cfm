@@ -102,7 +102,7 @@
 												name="ag_portal_description",
 												value=prc.agSettings.ag_portal_description,
 												rows=3,
-												class="form-control mde"
+												class="form-control"
 											)#
 										</div>
 									</div>
@@ -546,12 +546,12 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_match_any_filter",
-											content="Contains any of these words/phrases:"
+											content="Contains any of these kewords:"
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that contain any of these words/phrases in the title or body will be imported.
-												Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
+												Only feed items that contain any of these kewords in the title or body will be imported.
+												Existing feed items that do not contain any of these kewords in the title or body will be deleted.
 											</small>
 											#html.textArea(
 												name="ag_importing_match_any_filter",
@@ -567,12 +567,12 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_match_all_filter",
-											content="Contains all of these words/phrases:"
+											content="Contains all of these kewords:"
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that contain all of these words/phrases in the title or body will be imported.
-												Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
+												Only feed items that contain all of these kewords in the title or body will be imported.
+												Existing feed items that do not contain all of these kewords in the title or body will be deleted.
 											</small>
 											#html.textArea(
 												name="ag_importing_match_all_filter",
@@ -588,12 +588,12 @@
 										#html.label(
 											class="control-label",
 											field="ag_importing_match_none_filter",
-											content="Contains none of these words/phrases:"
+											content="Contains none of these kewords:"
 										)#
 										<div class="controls">
 											<small>
-												Only feed items that do not contain any of these words/phrases in the title or body will be imported.
-												Existing feed items that contain any of these words/phrases in the title or body will be deleted.
+												Only feed items that do not contain any of these kewords in the title or body will be imported.
+												Existing feed items that contain any of these kewords in the title or body will be deleted.
 											</small>
 											#html.textArea(
 												name="ag_importing_match_none_filter",
@@ -692,9 +692,73 @@
 								<fieldset>
 									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
 									<div id="taxonomies">
-										<cfloop array="#prc.agSettings.ag_importing_taxonomies#" index="taxonomy">
+										<cfloop from="1" to="#arrayLen( prc.agSettings.ag_importing_taxonomies )#" index="idx">
+											<cfset taxonomy = prc.agSettings.ag_importing_taxonomies[idx] />
 											<div class="taxonomy">
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="ag_importing_taxonomies.#idx#.categories",
+														content="Categories:"
+													)#
+													<div class="controls">
+														<small>Assign the following categories to feed items using the matching method and keywords below.</small>
+														<div class="input-group">
+															#html.select(
+																name="ag_importing_taxonomies.#idx#.categories",
+																options=prc.categories,
+																column="categoryID",
+																nameColumn="category",
+																selectedValue=taxonomy.categories,
+																class="form-control input-sm multiselect",
+																style="margin-bottom:0px;",
+																multiple="true"
+															)#
+															<a title="Remove Taxonomy" class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
+																<i class="fa fa-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="ag_importing_taxonomies.#idx#.method",
+														content="Matching Method:"
+													)#
+													<div class="controls">
+														<small>Use the following method when matching feed items to the above categories.</small>
+														#html.select(
+															name="ag_importing_taxonomies.#idx#.method",
+															options=prc.matchOptions,
+															column="value",
+															nameColumn="name",
+															selectedValue=taxonomy.method,
+															class="form-control input-sm"
+														)#
+													</div>
+												</div>
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="ag_importing_taxonomies.#idx#.keywords",
+														content="Keywords:"
+													)#
+													<div class="controls">
+														<small>Use the following keywords when matching feed items to the above categories.</small>
+														#html.textArea(
+															name="ag_importing_taxonomies.#idx#.keywords",
+															value=taxonomy.keywords,
+															rows="2",
+															class="form-control",
+															placeholder="Comma delimited list of words or phrases",
+															maxlength="255"
+														)#
+													</div>
+												</div>
+												<hr />
 											</div>
+
 										</cfloop>
 									</div>
 									<div>
@@ -1076,13 +1140,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.categories[]",
+				field="ag_importing_taxonomies.templateIndex.categories",
 				content="Categories:"
 			)#
 			<div class="controls">
-				<small>Assign the following categories to feed items when they match the behavior below.</small><br/>
+				<small>Assign the following categories to feed items using the matching method and keywords below.</small><br/>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.categories[]",
+					name="ag_importing_taxonomies.templateIndex.categories",
 					options=prc.categories,
 					column="categoryID",
 					nameColumn="category",
@@ -1094,13 +1158,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.behavior",
-				content="Match Behavior:"
+				field="ag_importing_taxonomies.templateIndex.method",
+				content="Matching Method:"
 			)#
 			<div class="controls">
-				<small>Use the following behavior when assigning categories.</small>
+				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.behavior",
+					name="ag_importing_taxonomies.templateIndex.method",
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
@@ -1115,7 +1179,7 @@
 				content="Keywords:"
 			)#
 			<div class="controls">
-				<small>Use the following words/phrases to assign the above categories.</small>
+				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
 					name="ag_importing_taxonomies.templateIndex.keywords",
 					rows="2",
@@ -1125,6 +1189,7 @@
 				)#
 			</div>
 		</div>
+		<hr />
 	</div>
 </div>
 </cfoutput>

@@ -45,10 +45,17 @@ component extends="baseHandler" {
 
 	function save( event, rc, prc ) {
 
-writedump(rc);
-abort;
-
 		announceInterception( "aggregator_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
+
+		if ( structKeyExists( rc, "ag_importing_taxonomies" ) ) {
+			var taxonomies = [];
+			for ( var item IN structKeyArray( rc.ag_importing_taxonomies ) ) {
+				if ( structKeyExists( rc.ag_importing_taxonomies[item], "categories" ) && len( trim( rc.ag_importing_taxonomies[item].keywords ) ) ) {
+					arrayAppend( taxonomies, rc.ag_importing_taxonomies[item] );
+				}
+			}
+			rc.ag_importing_taxonomies = taxonomies;
+		}
 
 		for ( var key IN rc ) {
 			if ( structKeyExists( prc.agSettings, key ) ) {
@@ -184,6 +191,8 @@ abort;
 		prc.agSettings.ag_html_post_feeds_display = trim( prc.agSettings.ag_html_post_feeds_display );
 		prc.agSettings.ag_html_pre_feed_display = trim( prc.agSettings.ag_html_pre_feed_display );
 		prc.agSettings.ag_html_post_feed_display = trim( prc.agSettings.ag_html_post_feed_display );
+		prc.agSettings.ag_html_pre_feedItem_display = trim( prc.agSettings.ag_html_pre_feedItem_display );
+		prc.agSettings.ag_html_post_feedItem_display = trim( prc.agSettings.ag_html_post_feedItem_display );
 		prc.agSettings.ag_html_pre_archives_display = trim( prc.agSettings.ag_html_pre_archives_display );
 		prc.agSettings.ag_html_post_archives_display = trim( prc.agSettings.ag_html_post_archives_display );
 		prc.agSettings.ag_html_pre_sidebar_display = trim( prc.agSettings.ag_html_pre_sidebar_display );

@@ -6,6 +6,9 @@
 	height: 200px;
 	min-height: 200px;
 }
+.multiselect.btn {
+	margin-bottom: 0 !important;
+}
 </style>
 <script>
 $( document ).ready( function() {
@@ -13,18 +16,6 @@ $( document ).ready( function() {
 	$("input.slider").on( "slide", function( slideEvt ) {
 		$( "##" + slideEvt.target.id + "_label" ).text( slideEvt.value );
 	});
-	var mdEditors =  {};
-	$( ".mde" ).each( function(){
-		mdEditors[ $( this ).prop( "id" ) ] = new SimpleMDE( {
-			element 		: this,
-			autosave 		: { enabled : false },
-			promptURLs 		: true,
-			tabSize 		: 2,
-			forceSync 		: true,
-			placeholder 	: 'Type here...',
-			spellChecker 	: false
-		} );
-	} );
 	$("##ag_importing_import_interval").on("change",function(){
 		if ( $(this).val() == "" ) {
 			$("##ag_importing_import_start_date").val("");
@@ -33,11 +24,12 @@ $( document ).ready( function() {
 	});
 	$(".datepicker").datepicker( { format: "mm/dd/yy" } );
 	$(".clockpicker").clockpicker( { twelvehour: true } );
-	$(".counter").on( "change", function() {
+	$(".counter").on( "change", function(){
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
-	$("##addTaxonomy").click(function() {
-		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1;
+	var numRemoved = 0;
+	$("##addTaxonomy").click(function(){
+		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1 + numRemoved;
 		var template = $("##taxonomyTemplate").html().replace(/templateIndex/g, templateIndex);
 		$("##taxonomies").append( template );
 		$(".multiselect" + templateIndex).multiselect({
@@ -46,12 +38,20 @@ $( document ).ready( function() {
 			buttonWidth: "100%"
 		});
 	});
-	$("##removeAll").click(function() {
-		$("##taxonomies .form-group").remove();
+	$("##removeAll").click(function(){
+		$("##taxonomies .taxonomy").remove();
+	});
+	$(".removeTaxonomy").click(function(){
+		if ( confirm("Are you sure you want to remove this taxonomy?") ) {
+			$(this).closest(".taxonomy").remove();
+			numRemoved++;
+		}
+		return false;
 	});
 	$(".multiselect").multiselect({
 		nonSelectedText: "Choose Categories",
-		numberDisplayed: 0
+		numberDisplayed: 0,
+		buttonWidth: "100%"
 	});
 });
 function loadAssetChooser( callback, w, h ){

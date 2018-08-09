@@ -53,15 +53,6 @@ component {
 			"ag_importing_image_minimum_width" = "100",
 			"ag_importing_image_minimum_height" = "100",
 			"ag_importing_taxonomies" = [],
-			/*
-				[
-					{
-						"keywords": "test,test1,test2",
-						"behavior": "any",
-						"categories": [1,2,3]
-					}
-				]
-			*/
 
 			// Global html
 			"ag_html_pre_index_display" = "",
@@ -129,7 +120,7 @@ component {
 				"aggregator_preFeedRemove","aggregator_postFeedRemove",
 				"aggregator_onFeedStatusUpdate","aggregator_onFeedStateUpdate",
 				"aggregator_preFeedImport","aggregator_postFeedImport",
-				"aggregator_postFeedImports",
+				"aggregator_preFeedImports","aggregator_postFeedImports",
 				"aggregator_feedItemEditorInBody","aggregator_feedItemEditorFooter",
 				"aggregator_feedItemEditorSidebarAccordion","aggregator_feedItemEditorSidebar",
 				"aggregator_feedItemEditorSidebarFooter",

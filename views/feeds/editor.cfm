@@ -451,12 +451,12 @@
 							#html.label(
 								class="control-label",
 								field="matchAnyFilter",
-								content="Contains any of these words/phrases:"
+								content="Contains any of these kewords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain any of these words/phrases in the title or body will be imported.
-									Existing feed items that do not contain any of these words/phrases in the title or body will be deleted.
+									Only feed items that contain any of these kewords in the title or body will be imported.
+									Existing feed items that do not contain any of these kewords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchAnyFilter",
@@ -472,12 +472,12 @@
 							#html.label(
 								class="control-label",
 								field="matchAllFilter",
-								content="Contains all of these words/phrases:"
+								content="Contains all of these kewords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain all of these words/phrases in the title or body will be imported.
-									Existing feed items that do not contain all of these words/phrases in the title or body will be deleted.
+									Only feed items that contain all of these kewords in the title or body will be imported.
+									Existing feed items that do not contain all of these kewords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchAllFilter",
@@ -493,12 +493,12 @@
 							#html.label(
 								class="control-label",
 								field="matchNoneFilter",
-								content="Contains none of these words/phrases:"
+								content="Contains none of these kewords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that do not contain any of these words/phrases in the title or body will be imported.
-									Existing feed items that contain any of these words/phrases in the title or body will be deleted.
+									Only feed items that do not contain any of these kewords in the title or body will be imported.
+									Existing feed items that contain any of these kewords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchNoneFilter",
@@ -509,11 +509,6 @@
 									maxlength="255"
 								)#
 							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
-						<div class="form-group">
 						</div>
 					</fieldset>
 					<fieldset>
@@ -557,6 +552,11 @@
 									class="form-control"
 								)#
 							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+						<div id="taxonomies">
 						</div>
 					</fieldset>
 				</div>
@@ -991,4 +991,61 @@
 	</div>
 </div>
 #html.endForm()#
+<div id="taxonomyTemplate" style="display:none;">
+	<div class="taxonomy">
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.categories",
+				content="Categories:"
+			)#
+			<div class="controls">
+				<small>Assign the following categories to feed items using the matching method and keywords below.</small><br/>
+				#html.select(
+					name="ag_importing_taxonomies.templateIndex.categories",
+					options=prc.categories,
+					column="categoryID",
+					nameColumn="category",
+					class="form-control input-sm multiselecttemplateIndex",
+					multiple="true"
+				)#
+			</div>
+		</div>
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.method",
+				content="Matching Method:"
+			)#
+			<div class="controls">
+				<small>Use the following method when matching feed items to the above categories.</small>
+				#html.select(
+					name="ag_importing_taxonomies.templateIndex.method",
+					options=prc.matchOptions,
+					column="value",
+					nameColumn="name",
+					class="form-control input-sm"
+				)#
+			</div>
+		</div>
+		<div class="form-group">
+			#html.label(
+				class="control-label",
+				field="ag_importing_taxonomies.templateIndex.keywords",
+				content="Keywords:"
+			)#
+			<div class="controls">
+				<small>Use the following keywords when matching feed items to the above categories.</small>
+				#html.textArea(
+					name="ag_importing_taxonomies.templateIndex.keywords",
+					rows="2",
+					class="form-control",
+					placeholder="Comma delimited list of words or phrases",
+					maxlength="255"
+				)#
+			</div>
+		</div>
+		<hr />
+	</div>
+</div>
 </cfoutput>

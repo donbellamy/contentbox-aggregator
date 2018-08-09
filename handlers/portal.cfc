@@ -619,6 +619,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set timeout
 			setting requestTimeout="999999";
 
+			// Pre feed imports
+			announceInterception( "aggregator_preFeedImports" );
+
 			// Import feeds
 			feedImportService.import();
 

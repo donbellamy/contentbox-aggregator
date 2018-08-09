@@ -1,5 +1,12 @@
 <cfoutput>
 #renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
+<script type="text/javascript" src="#prc.agRoot#/includes/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="#prc.agRoot#/includes/css/bootstrap-multiselect.css" type="text/css"/>
+<style>
+.multiselect.btn {
+	margin-bottom: 0 !important;
+}
+</style>
 <script>
 $( document ).ready( function() {
 	setupFeedForm();

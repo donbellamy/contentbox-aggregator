@@ -103,6 +103,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 								// Doesn't exist, so try and import
 								if ( !itemExists ) {
 
+									// TODO: Move out to interceptor
 									// Check keyword filters
 									var passesFilters = true;
 									var itemText = item.title & " " & item.body;
@@ -138,6 +139,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										}
 									}
 
+									// TODO: Move out to interceptor
 									// Import only if item passes the filters
 									if ( passesFilters ) {
 
@@ -419,6 +421,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 					}
 
+					// TODO: Move out to interceptor
 					// Check maxItems
 					if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
 						var feedItems = feed.getFeedItems();
