@@ -691,6 +691,7 @@
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+									<p><small>Taxonomies are used to automatically assign categories to feed items based upon matching keywords.</small></p>
 									<div id="taxonomies">
 										<cfloop from="1" to="#arrayLen( prc.agSettings.ag_importing_taxonomies )#" index="idx">
 											<cfset taxonomy = prc.agSettings.ag_importing_taxonomies[idx] />
@@ -758,7 +759,6 @@
 												</div>
 												<hr />
 											</div>
-
 										</cfloop>
 									</div>
 									<div>

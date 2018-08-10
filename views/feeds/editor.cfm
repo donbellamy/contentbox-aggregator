@@ -556,7 +556,83 @@
 					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+						<p><small>Taxonomies are used to automatically assign categories to feed items based upon matching keywords.  The taxonomies defined here will be used in addition to taxonomies defined in the general settings.</small></p>
 						<div id="taxonomies">
+							<cfloop from="1" to="#arrayLen( prc.feed.getTaxonomies() )#" index="idx">
+								<cfset taxonomy = prc.feed.getTaxonomies()[idx] />
+								<div class="taxonomy">
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="taxonomies.#idx#.categories",
+											content="Categories:"
+										)#
+										<div class="controls">
+											<small>Assign the following categories to feed items using the matching method and keywords below.</small>
+											<div class="input-group">
+												#html.select(
+													name="taxonomies.#idx#.categories",
+													options=prc.categories,
+													column="categoryID",
+													nameColumn="category",
+													selectedValue=taxonomy.categories,
+													class="form-control input-sm multiselect",
+													style="margin-bottom:0px;",
+													multiple="true"
+												)#
+												<a title="Remove Taxonomy" class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
+													<i class="fa fa-trash-o"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="taxonomies.#idx#.method",
+											content="Matching Method:"
+										)#
+										<div class="controls">
+											<small>Use the following method when matching feed items to the above categories.</small>
+											#html.select(
+												name="taxonomies.#idx#.method",
+												options=prc.matchOptions,
+												column="value",
+												nameColumn="name",
+												selectedValue=taxonomy.method,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="taxonomies.#idx#.keywords",
+											content="Keywords:"
+										)#
+										<div class="controls">
+											<small>Use the following keywords when matching feed items to the above categories.</small>
+											#html.textArea(
+												name="taxonomies.#idx#.keywords",
+												value=taxonomy.keywords,
+												rows="2",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+									<hr />
+								</div>
+							</cfloop>
+						</div>
+						<div>
+							<button id="addTaxonomy" class="btn btn-sm btn-primary" onclick="return false;">
+								<i class="fa fa-plus"></i> Add
+							</button>
+							<button id="removeAll" class="btn btn-sm btn-danger" onclick="return false;">
+								<i class="fa fa-trash-o"></i> Remove All
+							</button>
 						</div>
 					</fieldset>
 				</div>
@@ -996,13 +1072,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.categories",
+				field="taxonomies.templateIndex.categories",
 				content="Categories:"
 			)#
 			<div class="controls">
 				<small>Assign the following categories to feed items using the matching method and keywords below.</small><br/>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.categories",
+					name="taxonomies.templateIndex.categories",
 					options=prc.categories,
 					column="categoryID",
 					nameColumn="category",
@@ -1014,13 +1090,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.method",
+				field="taxonomies.templateIndex.method",
 				content="Matching Method:"
 			)#
 			<div class="controls">
 				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.method",
+					name="taxonomies.templateIndex.method",
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
@@ -1031,13 +1107,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.keywords",
+				field="taxonomies.templateIndex.keywords",
 				content="Keywords:"
 			)#
 			<div class="controls">
 				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
-					name="ag_importing_taxonomies.templateIndex.keywords",
+					name="taxonomies.templateIndex.keywords",
 					rows="2",
 					class="form-control",
 					placeholder="Comma delimited list of words or phrases",

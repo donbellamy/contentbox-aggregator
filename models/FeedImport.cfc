@@ -26,6 +26,7 @@ component persistent="true"
 		notnull="true"
 		ormtype="long";
 
+	// TODO: create get/set functions
 	property name="metaInfo"
 		notnull="true"
 		ormtype="text";

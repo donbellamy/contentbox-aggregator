@@ -96,6 +96,7 @@ component extends="contentHandler" {
 
 	function save( event, rc, prc ) {
 
+		// TODO: validate against latest schema
 		// Editor
 		event.paramValue( "contentID", 0 );
 		event.paramValue( "contentType", "Feed" );

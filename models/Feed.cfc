@@ -36,22 +36,6 @@ component persistent="true"
 		notnull="false"
 		ormtype="long";
 
-	property name="preFeedDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="postFeedDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="preFeedItemDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="postFeedItemDisplay"
-		notnull="false"
-		ormtype="text";
-
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
@@ -100,17 +84,33 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	property name="taxonomies"
+	property name="importFeaturedImages"
 		notnull="false"
-		ormtype="text";
+		ormtype="boolean";
 
 	property name="importImages"
 		notnull="false"
 		ormtype="boolean";
 
-	property name="importFeaturedImages"
+	property name="taxonomies"
 		notnull="false"
-		ormtype="boolean";
+		ormtype="text";
+
+	property name="preFeedDisplay"
+		notnull="false"
+		ormtype="text";
+
+	property name="postFeedDisplay"
+		notnull="false"
+		ormtype="text";
+
+	property name="preFeedItemDisplay"
+		notnull="false"
+		ormtype="text";
+
+	property name="postFeedItemDisplay"
+		notnull="false"
+		ormtype="text";
 
 	/* *********************************************************************
 	**                            RELATIONSHIPS
@@ -165,7 +165,20 @@ component persistent="true"
 		createdDate = now();
 		contentType = "Feed";
 		feedImports = [];
+		setTaxonomies([]);
 		return this;
+	}
+
+	Feed function setTaxonomies( required any taxonomies ) {
+		if ( isArray( arguments.taxonomies ) ) {
+			arguments.taxonomies = serializeJSON( arguments.taxonomies );
+		}
+		variables.taxonomies = arguments.taxonomies;
+		return this;
+	}
+
+	array function getTaxonomies() {
+		return ( !isNull( taxonomies ) && isJSON( taxonomies ) ) ? deserializeJSON( taxonomies ) : [];
 	}
 
 	array function getFeedItems() {
@@ -310,10 +323,11 @@ component persistent="true"
 		matchAllFilter = trim( left( matchAllFilter, 255 ) );
 		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
-		if( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
-		if( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
 		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
 		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
+		if( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
+		if( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
+
 
 		return errors;
 

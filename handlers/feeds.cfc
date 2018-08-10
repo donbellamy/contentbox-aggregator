@@ -123,6 +123,10 @@ component extends="contentHandler" {
 			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_image_import_enable; } ) ].name#",
 			value=""
 		});
+		prc.matchOptions = [
+			{ name="Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value="any" },
+			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" }
+		];
 
 		if ( !structKeyExists( prc, "feed" ) ) {
 			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
@@ -142,28 +146,38 @@ component extends="contentHandler" {
 		// Editor
 		event.paramValue( "contentID", 0 );
 		event.paramValue( "contentType", "Feed" );
+		event.paramValue( "title", "" );
+		event.paramValue( "slug", "" );
 		event.paramValue( "siteUrl", "" );
 		event.paramValue( "feedUrl", "" );
-		event.paramValue( "title", "" );
 		event.paramValue( "tagLine", "" );
-		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
+		// Portal
+		event.paramValue( "linkBehavior", "" );
+		event.paramValue( "featuredImageBehavior", "" );
+		event.paramValue( "pagingMaxItems", "" );
 		// Importing
 		event.paramValue( "isActive", true );
-		event.paramValue( "itemStatus", "published" );
 		event.paramValue( "startDate", "" );
 		event.paramValue( "startTime", "" );
 		event.paramValue( "stopDate", "" );
 		event.paramValue( "stopTime", "" );
-		event.paramValue( "matchAnyFilter", "" );
-		event.paramValue( "matchAllFilter", "" );
-		event.paramValue( "matchNoneFilter", "" );
+		event.paramValue( "itemStatus", "" );
+		event.paramValue( "ItemPubDate", "" );
 		event.paramValue( "maxAge", "" );
 		event.paramValue( "maxAgeUnit", "" );
 		event.paramValue( "maxItems", "" );
-		event.paramValue( "importImages", "" );
+		event.paramValue( "matchAnyFilter", "" );
+		event.paramValue( "matchAllFilter", "" );
+		event.paramValue( "matchNoneFilter", "" );
 		event.paramValue( "importFeaturedImages", "" );
-		event.paramValue( "featuredImageBehavior", "" );
+		event.paramValue( "importImages", "" );
+		event.paramValue( "taxonomies", {} );
+		// HTML
+		event.paramValue( "preFeedDisplay", "" );
+		event.paramValue( "postFeedDisplay", "" );
+		event.paramValue( "preFeedItemDisplay", "" );
+		event.paramValue( "postFeedItemDisplay", "" );
 		// SEO
 		event.paramValue( "htmlTitle", "" );
 		event.paramValue( "htmlKeywords", "" );
@@ -178,6 +192,15 @@ component extends="contentHandler" {
 		// Categories
 		event.paramValue( "newCategories", "" );
 
+		// Taxonomies
+		var taxonomies = [];
+		for ( var item IN structKeyArray( rc.taxonomies ) ) {
+			if ( structKeyExists( rc.taxonomies[item], "categories" ) && len( trim( rc.taxonomies[item].keywords ) ) ) {
+				arrayAppend( taxonomies, rc.taxonomies[item] );
+			}
+		}
+		rc.taxonomies = taxonomies;
+
 		if ( NOT len( rc.publishedDate ) ) {
 			rc.publishedDate = dateFormat( now() );
 		}
@@ -190,6 +213,7 @@ component extends="contentHandler" {
 
 		prc.feed = feedService.get( rc.contentID );
 		var originalSlug = prc.feed.getSlug();
+		var originalTaxonomies = prc.feed.getTaxonomies();
 		var wasPaused = !prc.feed.canImport();
 
 		populateModel( prc.feed )
@@ -229,7 +253,8 @@ component extends="contentHandler" {
 		announceInterception( "aggregator_preFeedSave", {
 			feed=prc.feed,
 			isNew=isNew,
-			originalSlug=originalSlug
+			originalSlug=originalSlug,
+			originalTaxonomies=originalTaxonomies
 		});
 
 		feedService.save( prc.feed );
@@ -241,7 +266,8 @@ component extends="contentHandler" {
 		announceInterception( "aggregator_postFeedSave", {
 			feed=prc.feed,
 			isNew=isNew,
-			originalSlug=originalSlug
+			originalSlug=originalSlug,
+			originalTaxonomies=originalTaxonomies
 		});
 
 		if ( event.isAjax() ) {

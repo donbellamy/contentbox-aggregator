@@ -146,8 +146,9 @@ component {
 		interceptors = [
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.FeedItemTaxonomies", name="feedItemTaxonomies@aggregator" },
 			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },

@@ -37,6 +37,35 @@ $( document ).ready( function() {
 	});
 	$("##contentToolBar .pull-right").hide();
 	$("##versionsPager .buttonBar .btn-default").hide();
+	var numRemoved = 0;
+	$("##addTaxonomy").click(function(){
+		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1 + numRemoved;
+		var template = $("##taxonomyTemplate").html().replace(/templateIndex/g, templateIndex);
+		$("##taxonomies").append( template );
+		$(".multiselect" + templateIndex).multiselect({
+			nonSelectedText: "Choose Categories",
+			numberDisplayed: 0,
+			buttonWidth: "100%"
+		});
+	});
+	$("##removeAll").click(function(){
+		if ( confirm("Are you sure you want to remove all taxonomies?") ) {
+			$("##taxonomies .taxonomy").remove();
+		}
+		return false;
+	});
+	$(".removeTaxonomy").click(function(){
+		if ( confirm("Are you sure you want to remove this taxonomy?") ) {
+			$(this).closest(".taxonomy").remove();
+			numRemoved++;
+		}
+		return false;
+	});
+	$(".multiselect").multiselect({
+		nonSelectedText: "Choose Categories",
+		numberDisplayed: 0,
+		buttonWidth: "100%"
+	});
 });
 function setupFeedForm() {
 

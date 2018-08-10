@@ -39,7 +39,10 @@ $( document ).ready( function() {
 		});
 	});
 	$("##removeAll").click(function(){
-		$("##taxonomies .taxonomy").remove();
+		if ( confirm("Are you sure you want to remove all taxonomies?") ) {
+			$("##taxonomies .taxonomy").remove();
+		}
+		return false;
 	});
 	$(".removeTaxonomy").click(function(){
 		if ( confirm("Are you sure you want to remove this taxonomy?") ) {
