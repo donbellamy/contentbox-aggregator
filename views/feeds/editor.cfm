@@ -822,17 +822,18 @@
 										<th width="160" class="text-center">Date</th>
 										<th width="130" class="text-center">Item Count</th>
 										<th width="130" class="text-center">Imported Count</th>
+										<th width="130" class="text-center">Failed</th>
 										<th class="text-left">Imported By</th>
 										<th width="100" class="text-center">Actions</th>
 									</tr>
 								</thead>
 								<tbody>
 									<cfloop array="#prc.feed.getFeedImports()#" index="feedImport">
-										<tr>
-										<tr id="import_row_#feedImport.getFeedImportID()#" data-feedImportID="#feedImport.getFeedImportID()#">
+										<tr id="import_row_#feedImport.getFeedImportID()#" data-feedImportID="#feedImport.getFeedImportID()#"<cfif feedImport.failed() > class="danger" title="A fatal error occurred."</cfif>>
 											<td class="text-center">#feedImport.getDisplayImportedDate()#</td>
 											<td class="text-center">#feedImport.getItemCount()#</td>
 											<td class="text-center">#feedImport.getImportedCount()#</td>
+											<td class="text-center">#YesNoFormat(feedImport.failed())#</td>
 											<td><a href="mailto:#feedImport.getImporter().getEmail()#">#feedImport.getImporter().getName()#</a></td>
 											<td class="text-center">
 												<a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feedImport.getFeedImportID()#');" title="View Feed Import">

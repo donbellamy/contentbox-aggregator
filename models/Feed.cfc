@@ -137,6 +137,10 @@ component persistent="true"
 		formula="select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID"
 		default="";
 
+	property name="isFailing"
+		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
+		default="";
+
 	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
@@ -199,6 +203,10 @@ component persistent="true"
 
 	boolean function autoPublishItems() {
 		return getItemStatus() EQ "published";
+	}
+
+	boolean function isFailing() {
+		return getIsFailing();
 	}
 
 	Feed function addStartTime( required string hour, required string minute ) {
@@ -307,6 +315,7 @@ component persistent="true"
 
 	}
 
+	// TODO: Update this
 	array function validate() {
 
 		var errors = [];

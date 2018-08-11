@@ -33,15 +33,6 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup();
 	}
 
-	/* TODO: post feed import should handle all this as well, pull out off import routine
-	function aggregator_postFeedImport( event, interceptData ) {
-		var feed = arguments.interceptData.feed;
-		doKeywordCleanup( feed );
-		doAgeCleanup( feed );
-		doMaxItemCleanup( feed );
-	}
-	*/
-
 	/************************************** PRIVATE *********************************************/
 
 	private function doKeywordCleanup( any feed ) {

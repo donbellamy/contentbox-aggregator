@@ -17,7 +17,9 @@
 	<tbody>
 		<cfloop array="#prc.feeds#" index="feed">
 			<tr data-contentID="#feed.getContentID()#"
-				<cfif feed.isExpired() >
+				<cfif feed.isFailing() >
+					class="danger" title="A fatal error occurred during the last import attempt."
+				<cfelseif feed.isExpired() >
 					class="danger"
 				<cfelseif feed.isPublishedInFuture() >
 					class="success"

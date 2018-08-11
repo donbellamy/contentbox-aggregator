@@ -45,7 +45,7 @@ component extends="baseHandler" {
 
 	function save( event, rc, prc ) {
 
-		announceInterception( "aggregator_preSettingsSave", { oldSettings=prc.agSettings, newSettings=rc } );
+		var oldSettings = duplicate( prc.agSettings );
 
 		if ( structKeyExists( rc, "ag_importing_taxonomies" ) ) {
 			var taxonomies = [];
@@ -55,6 +55,8 @@ component extends="baseHandler" {
 				}
 			}
 			rc.ag_importing_taxonomies = taxonomies;
+		} else {
+			rc.ag_importing_taxonomies = [];
 		}
 
 		for ( var key IN rc ) {
@@ -62,6 +64,11 @@ component extends="baseHandler" {
 				prc.agSettings[ key ] = rc[ key ];
 			}
 		}
+
+		announceInterception( "aggregator_preSettingsSave", {
+			oldSettings=oldSettings,
+			newSettings=prc.agSettings
+		});
 
 		var errors = validateSettings( prc );
 		if ( arrayLen( errors ) ) {
@@ -99,12 +106,17 @@ component extends="baseHandler" {
 		}
 		ses.setRoutes( routes );
 
-		announceInterception( "aggregator_postSettingsSave" );
+		announceInterception( "aggregator_postSettingsSave", {
+			oldSettings=oldSettings,
+			newSettings=prc.agSettings
+		}, true );
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehAggregatorSettings );
 
 	}
+
+	/************************************** PRIVATE *********************************************/
 
 	private function validateSettings( prc ) {
 

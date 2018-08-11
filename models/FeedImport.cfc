@@ -26,6 +26,12 @@ component persistent="true"
 		notnull="true"
 		ormtype="long";
 
+	property name="importFailed"
+		notnull="true"
+		ormtype="boolean"
+		default="false"
+		index="idx_importFailed";
+
 	// TODO: create get/set functions
 	property name="metaInfo"
 		notnull="true"
@@ -64,7 +70,15 @@ component persistent="true"
 
 	numeric function getItemCount() {
 		var import = deserializeJSON( getMetaInfo() );
-		return arrayLen( import.items );
+		if ( isStruct( import ) && structKeyExists( import, "items" ) ) {
+			return arrayLen( import.items );
+		} else {
+			return 0;
+		}
+	}
+
+	boolean function failed() {
+		return getImportFailed();
 	}
 
 	string function getDisplayImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {

@@ -268,7 +268,7 @@ component extends="contentHandler" {
 			isNew=isNew,
 			originalSlug=originalSlug,
 			originalTaxonomies=originalTaxonomies
-		});
+		}, true );
 
 		if ( event.isAjax() ) {
 			var rData = { "CONTENTID" = prc.feed.getContentID() };
