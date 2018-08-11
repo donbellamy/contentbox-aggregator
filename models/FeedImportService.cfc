@@ -449,17 +449,17 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						log.error( "Error importing feed '#feed.getTitle()#'.", e );
 					}
 
-					// Try to save the error to import history
+					// Save the error as a ffeed import
 					try {
 						var feedImport = new();
 						feedImport.setFeed( feed );
 						feedImport.setImporter( arguments.author );
 						feedImport.setImportedCount( 0 );
-						feedImport.setIsError( true );
+						feedImport.setImportFailed( true );
 						feedImport.setMetaInfo( serializeJSON( e ) );
 						save( feedImport );
-					} catch (any e ) {
-
+					} catch ( any e ) {
+						log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );
 					}
 
 				}

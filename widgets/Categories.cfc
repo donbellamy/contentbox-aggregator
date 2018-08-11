@@ -17,6 +17,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 	* @titleLevel.label Title Level
 	* @titleLevel.hint The H{level} to use.
 	* @titleLevel.options 1,2,3,4,5
+	* @category.label Category
+	* @category.hint The list of categories to filter on.
+	* @category.multiOptionsUDF getAllCategories
 	* @useDropdown.label Use Dropdown?
 	* @useDropdown.hint Display as a dropdown or a list, default is list.
 	* @showItemCount.label Show Item Count?
@@ -25,6 +28,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
+		string category="",
 		boolean useDropdown=false,
 		boolean showItemCount=true
 	) {
@@ -43,10 +47,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 			}
 			// Dropdown
 			if( arguments.useDropdown ){
-				writeoutput( buildDropDown( categories, arguments.showItemCount ) );
+				writeoutput( buildDropDown( categories, arguments.showItemCount, arguments.category ) );
 			// List
 			} else {
-				writeoutput( buildList( categories, arguments.showItemCount ) );
+				writeoutput( buildList( categories, arguments.showItemCount, arguments.category ) );
 			}
 		}
 
@@ -54,7 +58,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildDropDown( categories, showItemCount ) {
+	private function buildDropDown( categories, showItemCount, categoryFilter ) {
 
 		// Set return string
 		var string = "";
@@ -66,7 +70,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 			// Select options
 			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
 				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true ).count;
-				if ( feedItemCount ) {
+				var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
+				if ( feedItemCount && showCategory ) {
 					writeOutput('<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
 					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
 					writeOutput('</option>');
@@ -80,7 +85,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildList( categories, showItemCount ) {
+	private function buildList( categories, showItemCount, categoryFilter ) {
 
 		// Set return string
 		var string = "";
@@ -92,7 +97,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 			// List items
 			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
 				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true ).count;
-				if ( feedItemCount ) {
+				var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
+				if ( feedItemCount && showCategory ) {
 					writeOutput('<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
 					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
 					writeOutput('</a></li>');
@@ -104,6 +110,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		return string;
 
+	}
+
+	array function getAllCategories() cbIgnore {
+		return categoryService.getAllNames();
 	}
 
 }
