@@ -7,7 +7,7 @@
 			<h4>Imported on: #prc.feedImport.getDisplayImportedDate()#</h4>
 		</div>
 		<div class="modal-body">
-			<cfdump var="#deserializeJSON( prc.feedImport.getMetaInfo() )#" />
+			<cfdump var="#prc.feedImport.getMetaInfo()#" />
 		</div>
 		<div class="modal-footer">
 			<button class="btn" onclick="closeRemoteModal();">Close</button>

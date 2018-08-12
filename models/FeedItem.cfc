@@ -29,7 +29,6 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	// TODO: get/set functions
 	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
@@ -66,7 +65,20 @@ component persistent="true"
 		renderedExcerpt = "";
 		createdDate = now();
 		contentType = "FeedItem";
+		setMetaInfo({});
 		return this;
+	}
+
+	FeedItem function setMetaInfo( required any metaInfo ) {
+		if ( isStruct( arguments.metaInfo ) ) {
+			arguments.metaInfo = serializeJSON( arguments.metaInfo );
+		}
+		variables.metaInfo = arguments.metaInfo;
+		return this;
+	}
+
+	array function getMetaInfo() {
+		return ( !isNull( metaInfo ) && isJSON( metaInfo ) ) ? deserializeJSON( metaInfo ) : {};
 	}
 
 	Feed function getFeed() {

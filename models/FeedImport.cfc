@@ -32,7 +32,6 @@ component persistent="true"
 		default="false"
 		index="idx_importFailed";
 
-	// TODO: create get/set functions
 	property name="metaInfo"
 		notnull="true"
 		ormtype="text";
@@ -65,11 +64,24 @@ component persistent="true"
 	FeedImport function init() {
 		importedDate = now();
 		importedCount = 0;
+		setMetaInfo({});
 		return this;
 	}
 
+	FeedImport function setMetaInfo( required any metaInfo ) {
+		if ( isStruct( arguments.metaInfo ) ) {
+			arguments.metaInfo = serializeJSON( arguments.metaInfo );
+		}
+		variables.metaInfo = arguments.metaInfo;
+		return this;
+	}
+
+	struct function getMetaInfo() {
+		return ( !isNull( metaInfo ) && isJSON( metaInfo ) ) ? deserializeJSON( metaInfo ) : {};
+	}
+
 	numeric function getItemCount() {
-		var import = deserializeJSON( getMetaInfo() );
+		var import = getMetaInfo();
 		if ( isStruct( import ) && structKeyExists( import, "items" ) ) {
 			return arrayLen( import.items );
 		} else {

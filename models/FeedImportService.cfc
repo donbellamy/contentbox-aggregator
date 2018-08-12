@@ -184,7 +184,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												if ( len( trim( item.author ) ) ) {
 													feedItem.setItemAuthor( item.author );
 												}
-												feedItem.setMetaInfo( serializeJSON( item ) );
+												feedItem.setMetaInfo( item );
 
 												// BaseContent properties
 												feedItem.setParent( feed );
@@ -440,7 +440,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					feedImport.setFeed( feed );
 					feedImport.setImporter( arguments.author );
 					feedImport.setImportedCount( itemCount );
-					feedImport.setMetaInfo( serializeJSON( remoteFeed ) );
+					feedImport.setMetaInfo( remoteFeed );
 					save( feedImport );
 
 				} catch ( any e ) {
@@ -456,7 +456,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						feedImport.setImporter( arguments.author );
 						feedImport.setImportedCount( 0 );
 						feedImport.setImportFailed( true );
-						feedImport.setMetaInfo( serializeJSON( e ) );
+						feedImport.setMetaInfo( e );
 						save( feedImport );
 					} catch ( any e ) {
 						log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );
