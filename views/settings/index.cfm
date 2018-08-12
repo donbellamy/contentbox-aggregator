@@ -715,7 +715,7 @@
 																style="margin-bottom:0px;",
 																multiple="true"
 															)#
-															<a title="Remove Taxonomy" class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
+															<a class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
 																<i class="fa fa-trash-o"></i>
 															</a>
 														</div>

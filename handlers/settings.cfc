@@ -109,7 +109,7 @@ component extends="baseHandler" {
 		announceInterception( "aggregator_postSettingsSave", {
 			oldSettings=oldSettings,
 			newSettings=prc.agSettings
-		}, true );
+		});
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehAggregatorSettings );

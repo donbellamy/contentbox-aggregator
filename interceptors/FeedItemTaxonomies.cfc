@@ -4,12 +4,11 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 
-	/*
-	TODO: put in import routine
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
+		var taxonomies = feed.getTaxonomies();
+		applyTaxonomies( taxonomies, feed );
 	}
-	*/
 
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
@@ -52,6 +51,7 @@ component extends="coldbox.system.Interceptor" {
 
 					// Query on keywords
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
+					// TODO: where c.categoryID not in ( categoryIds )
 					var params = { parent=feed };
 					var count = 1;
 					for ( var keyword IN keywords ) {
