@@ -63,8 +63,13 @@ function contentFilter() {
 }
 
 function contentShowAll() {
-	resetFilter();
-	contentLoad( { showAll: true } );
+	contentLoad({
+		search : $("##search").val(),
+		feed : $("##feed").val(),
+		category : $("##category").val(),
+		status : $("##status").val(),
+		showAll : true
+	});
 }
 
 function resetFilter( reload ){
