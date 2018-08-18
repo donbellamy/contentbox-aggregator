@@ -31,9 +31,7 @@ component extends="ContentService" singleton {
 
 		if ( arguments.state NEQ "any" ) {
 			if ( arguments.state EQ "failing" ) {
-				// TODO: Fix, this doesnt work...
-				c.isTrue("isFailing");
-				//c.eq( "isFailing", javaCast( "boolean", true ) );
+				c.createAlias( "feedImports", "fi" ).isTrue("fi.importFailed");
 			} else {
 				c.eq( "isActive", javaCast( "boolean", arguments.state ) );
 			}

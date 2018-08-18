@@ -87,7 +87,7 @@
 									<option value="any"<cfif rc.state EQ "any" > selected="selected"</cfif>>Any State</option>
 									<option value="true"<cfif rc.state EQ "true" > selected="selected"</cfif>>Active</option>
 									<option value="false"<cfif rc.state EQ "false" > selected="selected"</cfif>>Paused</option>
-									<option value="false"<cfif rc.state EQ "failing" > selected="selected"</cfif>>Failing</option>
+									<option value="failing"<cfif rc.state EQ "failing" > selected="selected"</cfif>>Failing</option>
 								</select>
 							</div>
 						</div>
