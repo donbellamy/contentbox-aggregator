@@ -139,7 +139,7 @@ component persistent="true"
 
 	property name="isFailing"
 		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
-		default="";
+		default="false";
 
 	/* *********************************************************************
 	**                            CONSTRAINTS

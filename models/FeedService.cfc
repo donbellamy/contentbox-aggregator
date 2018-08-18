@@ -30,7 +30,13 @@ component extends="ContentService" singleton {
 		}
 
 		if ( arguments.state NEQ "any" ) {
-			c.eq( "isActive", javaCast( "boolean", arguments.state ) );
+			if ( arguments.state EQ "failing" ) {
+				// TODO: Fix, this doesnt work...
+				c.isTrue("isFailing");
+				//c.eq( "isFailing", javaCast( "boolean", true ) );
+			} else {
+				c.eq( "isActive", javaCast( "boolean", arguments.state ) );
+			}
 		}
 
 		if ( arguments.category NEQ "all" ) {

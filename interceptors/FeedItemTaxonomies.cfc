@@ -31,6 +31,8 @@ component extends="coldbox.system.Interceptor" {
 
 	private function applyTaxonomies( required array taxonomies, any feed ) {
 
+		// TODO: add date to this so we arent querying all items every time...
+
 		if ( structKeyExists( arguments, "feed" ) ) {
 			var feeds = [ arguments.feed ];
 		} else {
