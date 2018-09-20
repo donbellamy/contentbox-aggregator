@@ -271,7 +271,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											log.info("Feed item ('#uniqueId#') saved for feed '#feed.getTitle()#'.");
 										}
 
-									} catch( any e ) {
+									} catch ( any e ) {
 
 										// Log the error
 										if ( log.canError() ) {
@@ -283,8 +283,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														fileDelete( imagePath );
 													}
 												}
-												// Delete directory if empty
-												deleteDirectoryIfEmpty( directoryPath );
+												// Delete directory if empty and defined
+												if ( isDefined("directoryPath") ) {
+													deleteDirectoryIfEmpty( directoryPath );
+												}
 											}
 										}
 
