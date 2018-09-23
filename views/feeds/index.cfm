@@ -120,6 +120,7 @@
 				</div>
 			</div>
 		</div>
+		#renderview( view="sidebar/help", module="contentbox-aggregator" )#
 	</div>
 </div>
 </cfoutput>

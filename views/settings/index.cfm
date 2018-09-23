@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-9">
 		#getModel( "messagebox@cbMessagebox" ).renderit()#
 		#html.startForm( name="settingsForm", action="#prc.xehAggregatorSettingsSave#", novalidate="novalidate" )#
 			#html.anchor( name="top" )#
@@ -1133,6 +1133,9 @@
 				</div>
 			</div>
 		#html.endForm()#
+	</div>
+	<div class="col-md-3">
+		#renderview( view="sidebar/help", module="contentbox-aggregator" )#
 	</div>
 </div>
 <div id="taxonomyTemplate" style="display:none;">

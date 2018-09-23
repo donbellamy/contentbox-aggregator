@@ -1064,6 +1064,7 @@
 				#announceInterception( "aggregator_feedEditorSidebar" )#
 			</div>
 		</div>
+		#renderview( view="sidebar/help", module="contentbox-aggregator" )#
 		#announceInterception( "aggregator_feedEditorSidebarFooter" )#
 	</div>
 </div>

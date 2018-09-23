@@ -112,6 +112,7 @@
 				</div>
 			</div>
 		</div>
+		#renderview( view="sidebar/help", module="contentbox-aggregator" )#
 	</div>
 </div>
 <cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
