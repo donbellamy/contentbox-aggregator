@@ -1,5 +1,10 @@
+/**
+* Feed items handler
+* @author Don Bellamy <don@perfectcode.com>
+*/
 component extends="contentHandler" {
 
+	// Dependencies
 	property name="entryService" inject="entryService@cb";
 
 	function preHandler( event, action, eventArguments, rc, prc ) {

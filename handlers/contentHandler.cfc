@@ -1,5 +1,10 @@
+/**
+* Content handler
+* @author Don Bellamy <don@perfectcode.com>
+*/
 component extends="baseHandler" {
 
+	// Dependencies
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="categoryService" inject="categoryService@cb";
@@ -8,18 +13,28 @@ component extends="baseHandler" {
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="ckHelper" inject="CKHelper@contentbox-ckeditor";
 
+	// Pre handler
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
 
+	/**
+	* Remotely slugify the value of rc.slug
+	*/
 	function slugify( event, rc, prc ) {
+
+		event.paramValue( "slug", "" );
 
 		event.renderData( data=trim( htmlHelper.slugify( rc.slug ) ), type="plain" );
 
 	}
 
+	/**
+	* Get the user's default editor
+	* @author The author object
+	*/
 	private function getUserDefaultEditor( required author ) {
 
 		var userEditor = arguments.author.getPreference( "editor", editorService.getDefaultEditor() );
