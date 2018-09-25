@@ -1,7 +1,15 @@
+/**
+ * Feeds handler
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="contentHandler" {
 
+	// Dependencies
 	property name="feedImportService" inject="feedImportService@aggregator";
 
+	/**
+	 * Pre handler
+	 */
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
@@ -16,6 +24,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed index
+	 */
 	function index( event, rc, prc ) {
 
 		event.paramValue( "page", 1 );
@@ -31,6 +42,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed table
+	 */
 	function table( event, rc, prc ) {
 
 		event.paramValue( "page", 1 );
@@ -61,6 +75,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed editor
+	 */
 	function editor( event, rc, prc ) {
 
 		prc.ckHelper = ckHelper;
@@ -141,6 +158,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Save feed
+	 */
 	function save( event, rc, prc ) {
 
 		// Editor
@@ -280,6 +300,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Remove feed
+	 */
 	function remove( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -308,6 +331,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Update feed status
+	 */
 	function updateStatus( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -325,6 +351,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Resets feed hits
+	 */
 	function resetHits( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -370,6 +399,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Imports the selected feeds
+	 */
 	function import( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -399,23 +431,29 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Displays a feed import record
+	 */
 	function viewImport( event, rc, prc ) {
 
 		event.paramValue( "feedImportID", "" );
 
-		prc.feedImport  = feedImportService.get( rc.feedImportID, false );
+		prc.feedImport = feedImportService.get( rc.feedImportID, false );
 
 		event.setView( view="feeds/import", layout="ajax" );
 
 	}
 
+	/**
+	 * Removes a feed import record
+	 */
 	function removeImport( event, rc, prc ) {
 
 		event.paramValue( "feedImportID", "" );
 
 		var results = { "ERROR" = false, "MESSAGES" = "" };
 
-		prc.feedImport  = feedImportService.get( rc.feedImportID, false );
+		prc.feedImport = feedImportService.get( rc.feedImportID, false );
 
 		if ( !isNull( prc.feedImport ) ) {
 
@@ -433,6 +471,10 @@ component extends="contentHandler" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	* Creates the table filters struct
+	* @returns struct
+	*/
 	private struct function getFilters( rc ) {
 
 		var filters = {};

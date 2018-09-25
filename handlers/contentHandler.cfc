@@ -1,7 +1,7 @@
 /**
-* Content handler
-* @author Don Bellamy <don@perfectcode.com>
-*/
+ * Content handler
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="baseHandler" {
 
 	// Dependencies
@@ -13,16 +13,19 @@ component extends="baseHandler" {
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="ckHelper" inject="CKHelper@contentbox-ckeditor";
 
-	// Pre handler
+	/**
+	 * Pre handler
+	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
+		// Exit handler
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 
 	}
 
 	/**
-	* Remotely slugify the value of rc.slug
-	*/
+	 * Remotely slugify the value of rc.slug
+	 */
 	function slugify( event, rc, prc ) {
 
 		event.paramValue( "slug", "" );
@@ -32,9 +35,9 @@ component extends="baseHandler" {
 	}
 
 	/**
-	* Get the user's default editor
-	* @author The author object
-	*/
+	 * Get the user's default editor
+	 * @author The author object
+	 */
 	private function getUserDefaultEditor( required author ) {
 
 		var userEditor = arguments.author.getPreference( "editor", editorService.getDefaultEditor() );

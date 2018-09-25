@@ -1,5 +1,10 @@
+/**
+ * Settings handler
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="baseHandler" {
 
+	// Dependencies
 	property name="authorService" inject="authorService@cb";
 	property name="categoryService" inject="categoryService@cb";
 	property name="themeService" inject="themeService@cb";

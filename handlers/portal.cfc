@@ -1,5 +1,10 @@
+/**
+ * Portal handler
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
+	// Dependencies
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
@@ -11,6 +16,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,onError,notFound";
 
+	/**
+	 * Pre handler
+	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		// Maintenance mode?
@@ -38,6 +46,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Around handler
+	 */
 	function aroundHandler( event, targetAction, eventArguments, rc, prc ) {
 
 		// Set params
@@ -194,6 +205,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display portal index
+	 */
 	function index( event, rc, prc ) {
 
 		// Set params
@@ -262,6 +276,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display portal archive
+	 */
 	function archives( event, rc, prc ) {
 
 		// Set params
@@ -344,6 +361,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display rss feed
+	 */
 	function rss( event, rc, prc ) {
 
 		// RSS enabled?
@@ -373,6 +393,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display list of feeds
+	 */
 	function feeds( event, rc, prc ) {
 
 		// Set params
@@ -415,6 +438,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display feed
+	 */
 	function feed( event, rc, prc ) {
 
 		// Set params
@@ -504,6 +530,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Pre feed item
+	 */
 	function preFeedItem( event, action, eventArguments, rc, prc ) {
 
 		// Set params
@@ -533,6 +562,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Display feed item
+	 */
 	function feeditem( event, rc, prc ) {
 
 		// Set params

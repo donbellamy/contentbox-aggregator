@@ -1,7 +1,7 @@
 /**
-* Admin dashboard handler
-* @author Don Bellamy <don@perfectcode.com>
-*/
+ * Admin dashboard handler.  Extends and adds feed and feed item data to the admin dashboard.
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="baseHandler" {
 
 	// Dependencies
@@ -13,8 +13,8 @@ component extends="baseHandler" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 
 	/**
-	* Clear portal cache from admin menu
-	*/
+	 * Clear portal cache
+	 */
 	function clearCache( event, rc, prc ) {
 		announceInterception("aggregator_onClearCache");
 		if( event.isAjax() ) {
@@ -25,24 +25,24 @@ component extends="baseHandler" {
 	}
 
 	/**
-	* Render top content on admin dashboard
-	*/
+	 * Display top content
+	 */
 	function topContent( event, rc, prc ) {
 		prc.topContent = contentService.getTopVisitedContent();
 		event.setView( view="dashboard/topContent", layout="ajax" );
 	}
 
 	/**
-	* Render top commented on admin dashboard
-	*/
+	 * Display top commented
+	 */
 	function topCommented( event, rc, prc ) {
 		prc.topCommented = contentService.getTopCommentedContent();
 		event.setView( view="dashboard/topCommented", layout="ajax" );
 	}
 
 	/**
-	* Render content counts on admin dashboard
-	*/
+	 * Display content counts
+	 */
 	function contentCounts( event, rc, prc ) {
 		prc.entriesCount = entryService.count();
 		prc.pagesCount = pageService.count();

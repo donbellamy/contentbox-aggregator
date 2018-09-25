@@ -7,12 +7,17 @@ component extends="contentHandler" {
 	// Dependencies
 	property name="entryService" inject="entryService@cb";
 
+	/**
+	 * Pre handler
+	 */
 	function preHandler( event, action, eventArguments, rc, prc ) {
 
 		super.preHandler( argumentCollection=arguments );
 
+		// Exit handler
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
 
+		// Check permission
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
 			cbMessagebox.error( "You do not have permission to access feed items." );
 			setNextEvent( prc.cbAdminEntryPoint );
@@ -21,6 +26,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed item index
+	 */
 	function index( event, rc, prc ) {
 
 		event.paramValue( "page", 1 );
@@ -37,6 +45,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed item table
+	 */
 	function table( event, rc, prc ) {
 
 		event.paramValue( "page", 1 );
@@ -66,6 +77,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Display feed item editor
+	 */
 	function editor( event, rc, prc ) {
 
 		event.paramValue( "contentID", 0 );
@@ -99,6 +113,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Save feed item
+	 */
 	function save( event, rc, prc ) {
 
 		// TODO: validate against latest schema
@@ -127,7 +144,7 @@ component extends="contentHandler" {
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) ) {
-			rc.isPublished 	= "false";
+			rc.isPublished = "false";
 		}
 
 		prc.feedItem = feedItemService.get( rc.contentID );
@@ -186,6 +203,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Save categories
+	 */
 	function saveCategories( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -219,6 +239,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Remove feed item
+	 */
 	function remove( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -247,6 +270,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Update feed item status
+	 */
 	function updateStatus( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -264,6 +290,9 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Resets feed item hits
+	 */
 	function resetHits( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -292,16 +321,22 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Displays a feed item import record
+	 */
 	function viewImport( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
 
-		prc.feedItem  = feedItemService.get( rc.contentID, false );
+		prc.feedItem = feedItemService.get( rc.contentID, false );
 
 		event.setView( view="feeditems/import", layout="ajax" );
 
 	}
 
+	/**
+	 * Saves a feed item as a blog entry
+	 */
 	function saveAsEntry( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
@@ -343,6 +378,10 @@ component extends="contentHandler" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Creates the table filters struct
+	 * @returns struct
+	 */
 	private struct function getFilters( rc ) {
 
 		var filters = {};
