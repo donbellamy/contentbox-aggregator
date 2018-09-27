@@ -11,6 +11,9 @@ component extends="baseHandler" {
 	property name="helper" inject="helper@aggregator";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
 
+	/**
+	 * Display settings form
+	 */
 	function index( event, rc, prc ) {
 
 		prc.intervals = [
@@ -48,6 +51,9 @@ component extends="baseHandler" {
 
 	}
 
+	/**
+	 * Save settings
+	 */
 	function save( event, rc, prc ) {
 
 		var oldSettings = duplicate( prc.agSettings );
@@ -123,6 +129,9 @@ component extends="baseHandler" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Validate settings
+	 */
 	private function validateSettings( prc ) {
 
 		var errors = [];

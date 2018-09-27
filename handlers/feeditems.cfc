@@ -38,6 +38,7 @@ component extends="contentHandler" {
 		event.paramValue( "status", "any" );
 		event.paramValue( "showAll", false );
 
+		// Grab feeds and categories
 		prc.feeds = feedService.getAll( sortOrder="title" );
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
@@ -57,10 +58,12 @@ component extends="contentHandler" {
 		event.paramValue( "status", "any" );
 		event.paramValue( "showAll", false );
 
+		// Paging
 		prc.oPaging = getModel("paging@aggregator");
 		prc.paging = prc.oPaging.getBoundaries();
 		prc.pagingLink = "javascript:contentPaginate(@page@)";
 
+		// Grab results
 		var results = feedItemService.search(
 			search=rc.search,
 			feed=rc.feed,
@@ -69,7 +72,6 @@ component extends="contentHandler" {
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
-
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
@@ -84,24 +86,31 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", 0 );
 
+		// Grab the feed item
 		if ( !structKeyExists( prc, "feedItem" ) ) {
 			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
 		}
 
+		// Editor settings
 		prc.ckHelper = ckHelper;
 		prc.markups = editorService.getRegisteredMarkups();
 		prc.editors = editorService.getRegisteredEditorsMap();
 		prc.defaultMarkup = prc.oCurrentAuthor.getPreference( "markup", editorService.getDefaultMarkup() );
 		prc.defaultEditor = getUserDefaultEditor( prc.oCurrentAuthor );
 		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
+
+		// Related/Linked content
 		prc.relatedContent = prc.feedItem.hasRelatedContent() ? prc.feedItem.getRelatedContent() : [];
 		prc.linkedContent = prc.feedItem.hasLinkedContent() ? prc.feedItem.getLinkedContent() : [];
 		prc.relatedContentIDs = prc.feedItem.getRelatedContentIDs();
+
+		// Categories
+		prc.categories = categoryService.getAll( sortOrder="category" );
+
+		// Exit handlers
 		prc.xehRelatedContentSelector = "#prc.cbAdminEntryPoint#.content.relatedContentSelector";
 		prc.xehShowRelatedContentSelector = "#prc.cbAdminEntryPoint#.content.showRelatedContentSelector";
 		prc.xehBreakContentLink = "#prc.cbAdminEntryPoint#.content.breakContentLink";
-
-		prc.categories = categoryService.getAll( sortOrder="category" );
 
 		// We dont support creating feed items
 		if ( !prc.feedItem.isLoaded() ) {
@@ -125,6 +134,7 @@ component extends="contentHandler" {
 		event.paramValue( "title", "" );
 		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
+
 		// Publishing
 		event.paramValue( "isPublished", true );
 		event.paramValue( "publishedDate", now() );
@@ -132,8 +142,10 @@ component extends="contentHandler" {
 		event.paramValue( "expireDate", "" );
 		event.paramValue( "expireTime", "" );
 		event.paramValue( "changelog", "" );
+
 		// Related content
 		event.paramValue( "relatedContentIDs", "" );
+
 		// Categories
 		event.paramValue( "newCategories", "" );
 
@@ -143,28 +155,31 @@ component extends="contentHandler" {
 
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
+		// Check permission
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) ) {
 			rc.isPublished = "false";
 		}
 
+		// Grab the feed item
 		prc.feedItem = feedItemService.get( rc.contentID );
 		var originalSlug = prc.feedItem.getSlug();
 
+		// Populate feed item
 		populateModel( prc.feedItem )
 			.addJoinedPublishedtime( rc.publishedTime )
 			.addJoinedExpiredTime( rc.expireTime );
 
+		// Validate feed item
 		var errors = prc.feedItem.validate();
-
 		if ( !len( trim( rc.content ) ) ) {
 			arrayAppend( errors, "Please enter some content." );
 		}
-
 		if ( arrayLen( errors ) ) {
 			cbMessagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
 
+		// Add new content version if needed
 		if ( compare( prc.feedItem.getContent(), rc.content ) != 0 ) {
 			prc.feedItem.addNewContentVersion(
 				content=rc.content,
@@ -173,6 +188,7 @@ component extends="contentHandler" {
 			);
 		}
 
+		// Categories
 		var categories = [];
 		if ( len( trim( rc.newCategories ) ) ) {
 			categories = categoryService.createCategories( trim( rc.newCategories ) );

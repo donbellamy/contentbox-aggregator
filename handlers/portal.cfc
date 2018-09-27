@@ -640,6 +640,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * Feed import routine
+	 */
 	function import( event, rc, prc ) {
 
 		// Secret key in settings
@@ -673,9 +676,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	}
 
+	/**
+	 * On error
+	 */
 	function onError( event, rc, prc, faultAction, exception, eventArguments ) {
 
-		// Excceptions
+		// Exceptions
 		prc.faultAction = arguments.faultAction;
 		prc.exception = arguments.exception;
 
@@ -696,6 +702,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Display page not found error
+	 */
 	private function notFound( event, rc, prc ) {
 
 		// Grab page and url
