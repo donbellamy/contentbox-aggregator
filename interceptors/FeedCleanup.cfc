@@ -1,5 +1,12 @@
+/**
+ * Feed cleanup interceptor
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	/**
+	 * Delete featured image before a feed is deleted
+	 */
 	function aggregator_preFeedRemove( event, interceptData ) {
 		// TODO: make sure no other content is using this
 		var feed = arguments.interceptData.feed;

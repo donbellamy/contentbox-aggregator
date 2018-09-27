@@ -1,9 +1,17 @@
+/**
+ * Admin request interceptor
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	// Dependencies
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="settingService" inject="settingService@cb";
 	property name="helper" inject="helper@aggregator";
 
+	/**
+	 * Pre process
+	 */
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin" {
 
 		// Helper
@@ -60,6 +68,9 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 * Post render
+	 */
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
 		// Param format
@@ -156,20 +167,33 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 * Display related content icons on feed item editor
+	 */
 	function aggregator_feedItemEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );
 	}
 
+	/**
+	 * Display related content icons on page editor
+	 */
 	function cbadmin_pageEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );
 	}
 
+	/**
+	 * Display related content icons on entry editor
+	 */
 	function cbadmin_entryEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );
 	}
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Gets the related content icon script
+	 * @returns string
+	 */
 	private function getRelatedContentIconScript() {
 		return '<script>
 			$(function() {

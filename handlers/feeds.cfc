@@ -14,10 +14,12 @@ component extends="contentHandler" {
 
 		super.preHandler( argumentCollection=arguments );
 
+		// Exit handler
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
 
+		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
-			cbMessagebox.error( "You do not have permission to access feeds." );
+			cbMessagebox.error( "You do not have permission to access the aggregator feeds." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
@@ -36,6 +38,7 @@ component extends="contentHandler" {
 		event.paramValue( "status", "any" );
 		event.paramValue( "showAll", false );
 
+		// Grab categories
 		prc.categories = categoryService.getAll( sortOrder="category" );
 
 		event.setView( "feeds/index" );
@@ -54,10 +57,12 @@ component extends="contentHandler" {
 		event.paramValue( "status", "any" );
 		event.paramValue( "showAll", false );
 
+		// Paging
 		prc.oPaging = getModel("paging@aggregator");
 		prc.paging = prc.oPaging.getBoundaries();
 		prc.pagingLink = "javascript:contentPaginate(@page@)";
 
+		// Grab results
 		var results = feedService.search(
 			search=rc.search,
 			state=rc.state,
@@ -67,7 +72,6 @@ component extends="contentHandler" {
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
-
 		prc.feeds = results.feeds;
 		prc.itemCount = results.count;
 
@@ -80,14 +84,22 @@ component extends="contentHandler" {
 	 */
 	function editor( event, rc, prc ) {
 
-		prc.ckHelper = ckHelper;
+		event.paramValue( "contentID", 0 );
 
+		// Grab the feed
+		if ( !structKeyExists( prc, "feed" ) ) {
+			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
+		}
+
+		// Editor settings
+		prc.ckHelper = ckHelper;
 		prc.markups = editorService.getRegisteredMarkups();
 		prc.editors = editorService.getRegisteredEditorsMap();
 		prc.defaultMarkup = prc.oCurrentAuthor.getPreference( "markup", editorService.getDefaultMarkup() );
 		prc.defaultEditor = getUserDefaultEditor( prc.oCurrentAuthor );
 		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
 
+		// Lookups
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.categories = categoryService.getAll( sortOrder="category" );
 		prc.linkOptions = [
@@ -145,10 +157,7 @@ component extends="contentHandler" {
 			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" }
 		];
 
-		if ( !structKeyExists( prc, "feed" ) ) {
-			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
-		}
-
+		// Grab feed items and versions
 		if ( prc.feed.isLoaded() ) {
 			prc.feedItems = feedItemService.search( feed=prc.feed.getContentID(), max=5 ).feedItems;
 			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
@@ -172,10 +181,12 @@ component extends="contentHandler" {
 		event.paramValue( "feedUrl", "" );
 		event.paramValue( "tagLine", "" );
 		event.paramValue( "content", "" );
+
 		// Portal
 		event.paramValue( "linkBehavior", "" );
 		event.paramValue( "featuredImageBehavior", "" );
 		event.paramValue( "pagingMaxItems", "" );
+
 		// Importing
 		event.paramValue( "isActive", true );
 		event.paramValue( "startDate", "" );
@@ -193,15 +204,18 @@ component extends="contentHandler" {
 		event.paramValue( "importFeaturedImages", "" );
 		event.paramValue( "importImages", "" );
 		event.paramValue( "taxonomies", {} );
+
 		// HTML
 		event.paramValue( "preFeedDisplay", "" );
 		event.paramValue( "postFeedDisplay", "" );
 		event.paramValue( "preFeedItemDisplay", "" );
 		event.paramValue( "postFeedItemDisplay", "" );
+
 		// SEO
 		event.paramValue( "htmlTitle", "" );
 		event.paramValue( "htmlKeywords", "" );
 		event.paramValue( "htmlDescription", "" );
+
 		// Publishing
 		event.paramValue( "isPublished", true );
 		event.paramValue( "publishedDate", now() );
@@ -209,6 +223,7 @@ component extends="contentHandler" {
 		event.paramValue( "expireDate", "" );
 		event.paramValue( "expireTime", "" );
 		event.paramValue( "changelog", "" );
+
 		// Categories
 		event.paramValue( "newCategories", "" );
 
@@ -221,40 +236,46 @@ component extends="contentHandler" {
 		}
 		rc.taxonomies = taxonomies;
 
+		// Published date
 		if ( NOT len( rc.publishedDate ) ) {
 			rc.publishedDate = dateFormat( now() );
 		}
 
+		// Slug
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
+		// Check permission
 		if( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) ) {
 			rc.isPublished 	= "false";
 		}
 
+		// Grab the feed
 		prc.feed = feedService.get( rc.contentID );
 		var originalSlug = prc.feed.getSlug();
 		var originalTaxonomies = prc.feed.getTaxonomies();
 		var wasPaused = !prc.feed.canImport();
 
+		// Populate feed
 		populateModel( prc.feed )
 			.addJoinedPublishedtime( rc.publishedTime )
 			.addJoinedExpiredTime( rc.expireTime )
 			.addJoinedStartTime( rc.startTime )
 			.addJoinedStopTime( rc.stopTime );
 
+		// Validate feed
 		var errors = prc.feed.validate();
-
 		if ( arrayLen( errors ) ) {
 			cbMessagebox.warn( messageArray=errors );
 			return editor( argumentCollection=arguments );
 		}
 
+		// Check if new
 		var isNew = ( NOT prc.feed.isLoaded() );
-
 		if ( isNew ) {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
 
+		// Add new content version if needed
 		if ( compare( prc.feed.getContent(), rc.content ) != 0 ) {
 			prc.feed.addNewContentVersion(
 				content=rc.content,
@@ -263,6 +284,7 @@ component extends="contentHandler" {
 			);
 		}
 
+		// Categories
 		var categories = [];
 		if ( len( trim( rc.newCategories ) ) ) {
 			categories = categoryService.createCategories( trim( rc.newCategories ) );
@@ -277,8 +299,10 @@ component extends="contentHandler" {
 			originalTaxonomies=originalTaxonomies
 		});
 
+		// Save feed
 		feedService.save( prc.feed );
 
+		// Import feed if needed
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}
@@ -307,6 +331,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		// Remove selected feed
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -339,6 +364,7 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentStatus", "draft" );
 
+		// Update selected feed status
 		if ( len( rc.contentID ) ) {
 			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "aggregator_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
@@ -352,12 +378,13 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Resets feed hits
+	 * Reset feed hits
 	 */
 	function resetHits( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
 
+		// Reset selected feed hits
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -382,11 +409,15 @@ component extends="contentHandler" {
 
 	}
 
+	/**
+	 * Reset feed import state
+	 */
 	function state( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentState", "pause" );
 
+		// Reset selected feed state
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
 			announceInterception( "aggregator_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
@@ -400,7 +431,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Imports the selected feeds
+	 * Import selected feeds
 	 */
 	function import( event, rc, prc ) {
 
@@ -409,6 +440,7 @@ component extends="contentHandler" {
 		// Set timeout
 		setting requestTimeout="999999";
 
+		// Import selected feed
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -432,7 +464,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Displays a feed import record
+	 * Display feed import record
 	 */
 	function viewImport( event, rc, prc ) {
 
@@ -445,7 +477,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Removes a feed import record
+	 * Remove feed import record
 	 */
 	function removeImport( event, rc, prc ) {
 
@@ -472,9 +504,9 @@ component extends="contentHandler" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	* Creates the table filters struct
-	* @returns struct
-	*/
+	 * Creates the table filters struct
+	 * @returns struct
+	 */
 	private struct function getFilters( rc ) {
 
 		var filters = {};

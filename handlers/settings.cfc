@@ -12,10 +12,25 @@ component extends="baseHandler" {
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
 
 	/**
+	 * Pre handler
+	 */
+	function preHandler( event, action, eventArguments, rc, prc ) {
+
+		// Check permissions
+		if ( !prc.oCurrentAuthor.checkPermission( "AGGREGATOR_SETTINGS" ) ) {
+			cbMessagebox.error( "You do not have permission to access the aggregator settings." );
+			setNextEvent( prc.cbAdminEntryPoint );
+			return;
+		}
+
+	}
+
+	/**
 	 * Display settings form
 	 */
 	function index( event, rc, prc ) {
 
+		// Lookups
 		prc.intervals = [
 			{ name="Never", value="" },
 			{ name="Every 15 Minutes", value="900" },
@@ -56,8 +71,10 @@ component extends="baseHandler" {
 	 */
 	function save( event, rc, prc ) {
 
+		// Old settings
 		var oldSettings = duplicate( prc.agSettings );
 
+		// Taxonomies
 		if ( structKeyExists( rc, "ag_importing_taxonomies" ) ) {
 			var taxonomies = [];
 			for ( var item IN structKeyArray( rc.ag_importing_taxonomies ) ) {
@@ -70,6 +87,7 @@ component extends="baseHandler" {
 			rc.ag_importing_taxonomies = [];
 		}
 
+		// Set settings struct
 		for ( var key IN rc ) {
 			if ( structKeyExists( prc.agSettings, key ) ) {
 				prc.agSettings[ key ] = rc[ key ];
@@ -81,16 +99,19 @@ component extends="baseHandler" {
 			newSettings=prc.agSettings
 		});
 
+		// Validate settings
 		var errors = validateSettings( prc );
 		if ( arrayLen( errors ) ) {
 			cbMessagebox.warn( messageArray=errors );
 			return index( argumentCollection=arguments );
 		}
 
+		// Save settings
 		var setting = settingService.findWhere( { name="aggregator" } );
 		setting.setValue( serializeJSON( prc.agSettings ) );
 		settingService.save( setting );
 
+		// Clear cache
 		settingService.flushSettingsCache();
 
 		// Import scheduled task
@@ -131,6 +152,7 @@ component extends="baseHandler" {
 
 	/**
 	 * Validate settings
+	 * @returns array
 	 */
 	private function validateSettings( prc ) {
 

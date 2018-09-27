@@ -1,7 +1,7 @@
 /**
-* Feed items handler
-* @author Don Bellamy <don@perfectcode.com>
-*/
+ * Feed items handler
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="contentHandler" {
 
 	// Dependencies
@@ -17,9 +17,9 @@ component extends="contentHandler" {
 		// Exit handler
 		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
 
-		// Check permission
+		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
-			cbMessagebox.error( "You do not have permission to access feed items." );
+			cbMessagebox.error( "You do not have permission to access the aggregator feed items." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
@@ -149,10 +149,12 @@ component extends="contentHandler" {
 		// Categories
 		event.paramValue( "newCategories", "" );
 
+		// Published date
 		if ( NOT len( rc.publishedDate ) ) {
 			rc.publishedDate = dateFormat( now() );
 		}
 
+		// Slug
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
 		// Check permission
@@ -202,6 +204,7 @@ component extends="contentHandler" {
 			originalSlug=originalSlug
 		});
 
+		// Save feed item
 		feedItemService.save( prc.feedItem );
 
 		announceInterception( "aggregator_postFeedItemSave", {
@@ -227,12 +230,14 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 		event.paramValue( "newCategories", "" );
 
+		// Check and create categories if needed
 		var categories = [];
 		if ( len( trim( rc.newCategories ) ) ) {
 			categories = categoryService.createCategories( trim( rc.newCategories ) );
 		}
 		categories.addAll( categoryService.inflateCategories( rc ) );
 
+		// Save feed item categories
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -262,6 +267,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		// Remove selected feed item
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -294,6 +300,7 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 		event.paramValue( "contentStatus", "draft" );
 
+		// Update selected feed item status
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "aggregator_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
@@ -313,6 +320,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		// Reset selected feed item hits
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
@@ -357,6 +365,7 @@ component extends="contentHandler" {
 
 		event.paramValue( "contentID", "" );
 
+		// Save selected feed item as entry
 		if ( len( rc.contentID ) ) {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
