@@ -10,7 +10,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="helper" inject="helper@aggregator";
 
 	/**
-	 * Pre process
+	 * Fired on pre process during contentbox admin requests only
 	 */
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin" {
 
@@ -28,6 +28,8 @@ component extends="coldbox.system.Interceptor" {
 
 		// Admin entry point
 		prc.agAdminEntryPoint = "#getModuleConfig('contentbox-admin').entryPoint#.module.#getModuleConfig('contentbox-aggregator').entryPoint#";
+
+		/************************************** NAVIGATION EXIT HANDLERS *********************************************/
 
 		// Dashboard
 		prc.xehTopContent = "#prc.agAdminEntryPoint#.dashboard.topcontent";
@@ -69,7 +71,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 * Post render
+	 * Fired on post render during contentbox admin requests only
 	 */
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
@@ -168,21 +170,21 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 * Display related content icons on feed item editor
+	 * Fired after feed item editor sidebar is rendered
 	 */
 	function aggregator_feedItemEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );
 	}
 
 	/**
-	 * Display related content icons on page editor
+	 * Fired after page editor sidebar is rendered
 	 */
 	function cbadmin_pageEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );
 	}
 
 	/**
-	 * Display related content icons on entry editor
+	 * Fired after entry editor sidebar is rendered
 	 */
 	function cbadmin_entryEditorSidebarFooter() {
 		appendToBuffer( getRelatedContentIconScript() );

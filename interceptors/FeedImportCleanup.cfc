@@ -10,7 +10,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="feedImportService" inject="feedImportService@aggregator";
 
 	/**
-	 * Clean up old import records after feed import
+	 * Fired after feed import
 	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
@@ -18,7 +18,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 * Clean up old import records after settings save
+	 * Fired after settings save
 	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
 		doFeedImportCleanup();

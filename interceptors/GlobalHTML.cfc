@@ -1,69 +1,116 @@
+/**
+ * Global HTML
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	// Dependencies
 	property name="helper" inject="helper@aggregator";
 
+	/**
+	 *
+	 */
 	function aggregator_preIndexDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_index_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postIndexDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_index_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_preFeedsDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_feeds_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postFeedsDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_feeds_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_preFeedDisplay( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var html = len( feed.getPreFeedDisplay() ) ? feed.getPreFeedDisplay() : getSettings( event ).ag_html_pre_feed_display;
 		appendToBuffer( parseFeedTokens( feed, html ) );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postFeedDisplay( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var html = len( feed.getPostFeedDisplay() ) ? feed.getPostFeedDisplay() : getSettings( event ).ag_html_post_feed_display;
 		appendToBuffer( parseFeedTokens( feed, html ) );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_preFeedItemDisplay( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
 		var html = len( feedItem.getFeed().getPreFeedItemDisplay() ) ? feedItem.getFeed().getPreFeedItemDisplay() : getSettings( event ).ag_html_pre_feeditem_display;
 		appendToBuffer( parseFeedItemTokens( feedItem, html ) );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postFeedItemDisplay( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
 		var html = len( feedItem.getFeed().getPostFeedItemDisplay() ) ? feedItem.getFeed().getPostFeedItemDisplay() : getSettings( event ).ag_html_post_feeditem_display;
 		appendToBuffer( parseFeedItemTokens( feedItem, html ) );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_preArchivesDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_archives_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postArchivesDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_archives_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_preSideBarDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_sidebar_display );
 	}
 
+	/**
+	 *
+	 */
 	function aggregator_postSideBarDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_sidebar_display );
 	}
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 *
+	 */
 	private function getSettings( event ) {
 		return event.getValue( name="agSettings", private=true );
 	}
 
+	/**
+	 *
+	 */
 	private function parseFeedTokens( required Feed feed, required string html ) {
 
 		// Set vars
@@ -85,6 +132,9 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 *
+	 */
 	private function parseFeedItemTokens( required FeedItem feedItem, required string html ) {
 
 		// Set vars

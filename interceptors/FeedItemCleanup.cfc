@@ -1,11 +1,20 @@
+/**
+ * Feed item cleanup interceptor
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	// Dependencies
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 
+	/**
+	 * Fired before feed item delete
+	 */
 	function aggregator_preFeedItemRemove( event, interceptData ) {
 		// TODO: Change to check if any other content is using this, a related entry could be using the image
+		// TODO: Should this fire after deletion?
 		var feedItem = arguments.interceptData.feedItem;
 		var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( feedItem.getPublishedDate(), "yyyy\mm\" );
 		var images = directoryList( path=directoryPath, filter="#feedItem.getSlug()#_*" );
@@ -20,6 +29,9 @@ component extends="coldbox.system.Interceptor" {
 		}
 	}
 
+	/**
+	 * Fired after feed import
+	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doKeywordCleanup( feed );
@@ -27,6 +39,9 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup( feed );
 	}
 
+	/**
+	 * Fired after feed save
+	 */
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		doKeywordCleanup( feed );
@@ -34,6 +49,9 @@ component extends="coldbox.system.Interceptor" {
 		doMaxItemCleanup( feed );
 	}
 
+	/**
+	 * Fired after settings save
+	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
 		doKeywordCleanup();
 		doAgeCleanup();
@@ -42,6 +60,10 @@ component extends="coldbox.system.Interceptor" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Removes feed items using feed or global keyword filters
+	 * @feed any
+	 */
 	private function doKeywordCleanup( any feed ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -132,6 +154,10 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 * Removes feed items using feed or global max age settings
+	 * @feed any
+	 */
 	private function doAgeCleanup( any feed ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -185,6 +211,10 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 * Removes feed items using feed or global max item settings
+	 * @feed any
+	 */
 	private function doMaxItemCleanup( any feed ) {
 
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );

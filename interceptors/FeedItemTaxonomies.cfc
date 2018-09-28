@@ -1,15 +1,26 @@
+/**
+ * Feed item taxonomies
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	// Dependencies
 	property name="categoryService" inject="categoryService@cb";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 
+	/**
+	 * Fired after feed import
+	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var taxonomies = feed.getTaxonomies();
 		applyTaxonomies( taxonomies, feed );
 	}
 
+	/**
+	 * Fired after feed save
+	 */
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var taxonomies = feed.getTaxonomies();
@@ -19,6 +30,9 @@ component extends="coldbox.system.Interceptor" {
 		}
 	}
 
+	/**
+	 * Fired after settings save
+	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
 		var taxonomies = arguments.interceptData.newSettings.ag_importing_taxonomies;
 		var originalTaxonomies = arguments.interceptData.oldSettings.ag_importing_taxonomies;
@@ -29,6 +43,11 @@ component extends="coldbox.system.Interceptor" {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Applies taxonomies to the feed
+	 * @taxonomies array
+	 * @feed any
+	 */
 	private function applyTaxonomies( required array taxonomies, any feed ) {
 
 		// TODO: add date to this so we arent querying all items every time...

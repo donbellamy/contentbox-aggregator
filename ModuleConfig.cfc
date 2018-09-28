@@ -1,5 +1,10 @@
+/**
+ * RSS Aggregator Module Config
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component {
 
+	// Module properties
 	this.title = "RSS Aggregator";
 	this.author = "Perfect Code, LLC";
 	this.webURL = "https://perfectcode.com";
@@ -11,8 +16,12 @@ component {
 	this.cfMapping = "aggregator";
 	this.dependencies = ["cbjsoup"];
 
+	/**
+	 * Configure module properties
+	 */
 	function configure() {
 
+		// Settings
 		settings = {
 
 			// Portal
@@ -84,6 +93,7 @@ component {
 
 		};
 
+		// Permissions
 		permissions = [
 			{ permission="FEEDS_ADMIN", description="Ability to manage feeds", level="admin" },
 			{ permission="FEEDS_EDITOR", description="Ability to manage feeds but not publish them", level="editor" },
@@ -93,10 +103,12 @@ component {
 			{ permission="AGGREGATOR_SETTINGS", description="Ability to manage the rss aggregator module settings", level="admin" }
 		];
 
+		// Default routes
 		routes = [
 			{ pattern="/:handler/:action?" }
 		];
 
+		// Aggregator portal routes
 		aggregatorRoutes = [
 			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator" },
 			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
@@ -110,6 +122,7 @@ component {
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
 		];
 
+		// Interception points
 		interceptorSettings = {
 			customInterceptionPoints = arrayToList([
 				"aggregator_preSettingsSave","aggregator_postSettingsSave",
@@ -143,6 +156,7 @@ component {
 			])
 		};
 
+		// Interceptors
 		interceptors = [
 			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
@@ -155,6 +169,7 @@ component {
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
 		];
 
+		// Bindings
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
@@ -164,6 +179,9 @@ component {
 
 	}
 
+	/**
+	 * Fired when module is loaded
+	 */
 	function onLoad() {
 
 		// Add menus
@@ -221,6 +239,9 @@ component {
 
 	}
 
+	/**
+	 * Fired when module is unloaded
+	 */
 	function onUnload() {
 
 		// Remove menus
@@ -233,6 +254,9 @@ component {
 
 	}
 
+	/**
+	 * Fired when module is activated
+	 */
 	function onActivate() {
 
 		// Save settings
@@ -279,6 +303,9 @@ component {
 
 	}
 
+	/**
+	 * Fired when module is deactivated
+	 */
 	function onDeactivate() {
 
 		// Delete settings
