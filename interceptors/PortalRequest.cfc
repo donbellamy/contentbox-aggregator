@@ -1,11 +1,19 @@
+/**
+ * Portal request interceptor
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="coldbox.system.Interceptor" {
 
+	// Dependencies
 	property name="settingService" inject="settingService@cb";
 	property name="contentService" inject="contentService@cb";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="helper" inject="helper@aggregator";
 	property name="html" inject="HTMLHelper@coldbox";
 
+	/**
+	 * Fired on pre process during contentbox public requests only
+	 */
 	function preProcess( event, interceptData, buffer, rc, prc ) {
 
 		// Prepare UI if we are in the aggregator module
@@ -34,6 +42,9 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
+	/**
+	 * Fired on post render during aggregator requests only
+	 */
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-aggregator" {
 
 		// Rules to turn off the admin bar
@@ -114,11 +125,9 @@ component extends="coldbox.system.Interceptor" {
 
 	}
 
-	function postProcess( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-ui"{
-		// announce event
-		announceInterception( "cbui_postRequest" );
-	}
-
+	/**
+	 * Renderer helper injection
+	 */
 	function afterInstanceCreation( event, interceptData, buffer ) {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
 			var prc = event.getCollection( private=true );
@@ -128,6 +137,11 @@ component extends="coldbox.system.Interceptor" {
 		}
 	}
 
+	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Injects the ag helper
+	 */
 	private function $aginject() {
 		variables.ag = this.ag;
 	}

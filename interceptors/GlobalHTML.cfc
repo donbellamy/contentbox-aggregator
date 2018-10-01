@@ -1,5 +1,5 @@
 /**
- * Global HTML
+ * Global HTML interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="coldbox.system.Interceptor" {
@@ -8,35 +8,35 @@ component extends="coldbox.system.Interceptor" {
 	property name="helper" inject="helper@aggregator";
 
 	/**
-	 *
+	 * Fired before portal index display
 	 */
 	function aggregator_preIndexDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_index_display );
 	}
 
 	/**
-	 *
+	 * Fired after portal index display
 	 */
 	function aggregator_postIndexDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_index_display );
 	}
 
 	/**
-	 *
+	 * Fired before feeds display
 	 */
 	function aggregator_preFeedsDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_feeds_display );
 	}
 
 	/**
-	 *
+	 * Fired after feeds display
 	 */
 	function aggregator_postFeedsDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_feeds_display );
 	}
 
 	/**
-	 *
+	 * Fired before feed display
 	 */
 	function aggregator_preFeedDisplay( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
@@ -45,7 +45,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 *
+	 * Fired after feed display
 	 */
 	function aggregator_postFeedDisplay( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
@@ -54,7 +54,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 *
+	 * Fired before feed item display
 	 */
 	function aggregator_preFeedItemDisplay( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
@@ -63,7 +63,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 *
+	 * Fired after feeed item display
 	 */
 	function aggregator_postFeedItemDisplay( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
@@ -72,28 +72,28 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 *
+	 * Fired before archives display
 	 */
 	function aggregator_preArchivesDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_archives_display );
 	}
 
 	/**
-	 *
+	 * Fired after archives display
 	 */
 	function aggregator_postArchivesDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_archives_display );
 	}
 
 	/**
-	 *
+	 * Fired before sidebar display
 	 */
 	function aggregator_preSideBarDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_pre_sidebar_display );
 	}
 
 	/**
-	 *
+	 * Fired after sidebar display
 	 */
 	function aggregator_postSideBarDisplay( event, interceptData ) {
 		appendToBuffer( getSettings( event ).ag_html_post_sidebar_display );
@@ -102,14 +102,18 @@ component extends="coldbox.system.Interceptor" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 *
+	 * Grabs the aggregator settings
+	 * @returns struct
 	 */
 	private function getSettings( event ) {
 		return event.getValue( name="agSettings", private=true );
 	}
 
 	/**
-	 *
+	 * Parses the feed tokiens
+	 * @feed The feed to use
+	 * @html The html to parse
+	 * @returns string
 	 */
 	private function parseFeedTokens( required Feed feed, required string html ) {
 
@@ -133,7 +137,10 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 *
+	 * Parses the feed item tokens
+	 * @feedItem The feed item to use
+	 * @html The html to parse
+	 * @returns string
 	 */
 	private function parseFeedItemTokens( required FeedItem feedItem, required string html ) {
 
