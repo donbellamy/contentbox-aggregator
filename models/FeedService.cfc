@@ -1,15 +1,22 @@
+/**
+ * The feed service
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="ContentService" singleton {
 
+	/**
+	 * Constructor
+	 */
 	FeedService function init() {
 
-		super.init( entityName="cbFeed", useQueryCaching=true );
+		super.init( entityName="cbFeed" );
 
 		return this;
 
 	}
 
 	struct function search(
-		string search="",
+		string searchTerm="",
 		string state="any",
 		string category="all",
 		string status="any",
@@ -21,12 +28,12 @@ component extends="ContentService" singleton {
 		var results = {};
 		var c = newCriteria();
 
-		if ( len( trim( arguments.search ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
+		if ( len( trim( arguments.searchTerm ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
 			c.createAlias( "activeContent", "ac" );
 		}
 
-		if ( len( trim( arguments.search ) ) ) {
-			c.or( c.restrictions.like( "title", "%#arguments.search#%" ), c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
+		if ( len( trim( arguments.searchTerm ) ) ) {
+			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ), c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
 		}
 
 		if ( arguments.state NEQ "any" ) {

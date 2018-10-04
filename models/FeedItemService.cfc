@@ -1,15 +1,34 @@
+/**
+ * The feed item service
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="ContentService" singleton {
 
+	/**
+	 * Constructor
+	 */
 	FeedItemService function init() {
 
-		super.init( entityName="cbFeedItem", useQueryCaching=true );
+		super.init( entityName="cbFeedItem" );
 
 		return this;
 
 	}
 
+	/**
+	 * Returns a struct of feeditems and count based upon the passed parameters
+	 * @searchTerm The search term to filter on
+	 * @feed The feed to filter on, defaults to "all"
+	 * @category The category to filter on, defaults to "all"
+	 * @status The status to filter on, defaults to "any"
+	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
+	 * @max The maximum number of feed items to return
+	 * @offset The offset of the pagination
+	 *
+	 * @return struct - {feedItems,count}
+	 */
 	struct function search(
-		string search="",
+		string searchTerm="",
 		string feed="all",
 		string category="all",
 		string status="any",
@@ -18,15 +37,16 @@ component extends="ContentService" singleton {
 		numeric offset=0,
 	) {
 
+		// Vars
 		var results = {};
 		var c = newCriteria();
 
-		if ( len( trim( arguments.search ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
+		if ( len( trim( arguments.searchTerm ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
 			c.createAlias( "activeContent", "ac" );
 		}
 
-		if ( len( trim( arguments.search ) ) ) {
-			c.or( c.restrictions.like( "title", "%#arguments.search#%" ), c.restrictions.like( "ac.content", "%#arguments.search#%" ) );
+		if ( len( trim( arguments.searchTerm ) ) ) {
+			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ), c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
 		}
 
 		if ( arguments.feed NEQ "all" ) {
@@ -66,6 +86,19 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 * Returns a struct of published feeditems and count based upon the passed parameters
+	 * @searchTerm The search term to filter on
+	 * @category The category to filter on
+	 * @author The author to filter on
+	 * @feed The feed to filter on
+	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
+	 * @countOnly When true will only return count of feed items found
+	 * @max The maximum number of feed items to return
+	 * @offset The offset of the pagination
+	 *
+	 * @return struct - {feedItems,count}
+	 */
 	struct function getPublishedFeedItems(
 		string searchTerm="",
 		string category="",
@@ -77,6 +110,7 @@ component extends="ContentService" singleton {
 		numeric offset=0
 	) {
 
+		// Vars
 		var results = {};
 		var c = newCriteria();
 
@@ -130,6 +164,9 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 *
+	 */
 	function getArchiveReport() {
 
 		// Set hql
@@ -153,6 +190,9 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 *
+	 */
 	function getPublishedFeedItemsByDate(
 		numeric year=0,
 		numeric month=0,
@@ -216,6 +256,9 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 *
+	 */
 	FeedItemService function bulkPublishStatus( required string contentID, required string status ) {
 
 		var publish = false;

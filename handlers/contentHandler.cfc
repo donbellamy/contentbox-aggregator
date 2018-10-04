@@ -37,6 +37,7 @@ component extends="baseHandler" {
 	/**
 	 * Get the user's default editor
 	 * @author The author object
+	 * @return The default editor
 	 */
 	private function getUserDefaultEditor( required author ) {
 

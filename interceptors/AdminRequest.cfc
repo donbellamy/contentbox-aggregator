@@ -194,9 +194,9 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Gets the related content icon script
-	 * @returns string
+	 * @return The related content icon script
 	 */
-	private function getRelatedContentIconScript() {
+	private string function getRelatedContentIconScript() {
 		return '<script>
 			$(function() {
 				$("##relatedContent-items tr td:first-child, ##linkedContent-items tr td:first-child").each(function(){

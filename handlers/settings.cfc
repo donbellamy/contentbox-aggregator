@@ -151,10 +151,10 @@ component extends="baseHandler" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Validate settings
-	 * @returns array
+	 * Validate the settings
+	 * @return An array of errors or an empty array if none are present
 	 */
-	private function validateSettings( prc ) {
+	private array function validateSettings( prc ) {
 
 		var errors = [];
 

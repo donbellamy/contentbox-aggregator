@@ -103,9 +103,9 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Grabs the aggregator settings
-	 * @returns struct
+	 * @return The aggregator settings
 	 */
-	private function getSettings( event ) {
+	private struct function getSettings( event ) {
 		return event.getValue( name="agSettings", private=true );
 	}
 
@@ -113,9 +113,9 @@ component extends="coldbox.system.Interceptor" {
 	 * Parses the feed tokiens
 	 * @feed The feed to use
 	 * @html The html to parse
-	 * @returns string
+	 * @return The parsed html
 	 */
-	private function parseFeedTokens( required Feed feed, required string html ) {
+	private string function parseFeedTokens( required Feed feed, required string html ) {
 
 		// Set vars
 		var tokenMarker = "@";
@@ -140,9 +140,9 @@ component extends="coldbox.system.Interceptor" {
 	 * Parses the feed item tokens
 	 * @feedItem The feed item to use
 	 * @html The html to parse
-	 * @returns string
+	 * @return The parsed html
 	 */
-	private function parseFeedItemTokens( required FeedItem feedItem, required string html ) {
+	private string function parseFeedItemTokens( required FeedItem feedItem, required string html ) {
 
 		// Set vars
 		var tokenMarker = "@";

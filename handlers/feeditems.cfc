@@ -65,7 +65,7 @@ component extends="contentHandler" {
 
 		// Grab results
 		var results = feedItemService.search(
-			search=rc.search,
+			searchTerm=rc.search,
 			feed=rc.feed,
 			category=rc.category,
 			status=rc.status,
@@ -404,13 +404,14 @@ component extends="contentHandler" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Creates the table filters struct
-	 * @returns struct
+	 * Creates the feed item filter struct
+	 * @return The the feed item filter struct
 	 */
 	private struct function getFilters( rc ) {
 
 		var filters = {};
 
+		// Check for filters and add to struct
 		if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
 		if ( structKeyExists( rc, "search" ) ) filters.search = rc.search;
 		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
