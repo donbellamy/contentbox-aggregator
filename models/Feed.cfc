@@ -1,3 +1,8 @@
+/**
+ * ContentBox RSS Aggregator
+ * Feed Model
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component persistent="true"
 	entityname="cbFeed"
 	table="cb_feed"
@@ -161,6 +166,10 @@ component persistent="true"
 	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
 	this.constraints["featuredImageBehavior"] = { required=false, regex="(default|feed|none)" };
 
+	/**
+	 * Constructor
+	 * @return The feed
+	 */
 	Feed function init() {
 		super.init();
 		allowComments = false;
@@ -173,6 +182,11 @@ component persistent="true"
 		return this;
 	}
 
+	/**
+	 * Sets the taxomomies property
+	 * @taxonomies An array of taxonomies to set on the feed
+	 * @return The feed
+	 */
 	Feed function setTaxonomies( required any taxonomies ) {
 		if ( isArray( arguments.taxonomies ) ) {
 			arguments.taxonomies = serializeJSON( arguments.taxonomies );
@@ -181,34 +195,68 @@ component persistent="true"
 		return this;
 	}
 
+	/**
+	 * Grabs the feed taxonomies
+	 * @return An array of taxonomies if defined
+	 */
 	array function getTaxonomies() {
 		return ( !isNull( taxonomies ) && isJSON( taxonomies ) ) ? deserializeJSON( taxonomies ) : [];
 	}
 
+	/**
+	 * Grabs the feed items
+	 * @return An array of feed items if defined
+	 */
 	array function getFeedItems() {
 		return getChildren();
 	}
 
+	/**
+	 * Checks if the feed has a feed item
+	 * @return True if the feed has any feed items, false if not
+	 */
 	boolean function hasFeedItem() {
 		return hasChild();
 	}
 
+	/**
+	 * Grabs the number of feed items
+	 * @return The number of feed items
+	 */
 	numeric function getNumberOfFeedItems() {
 		return getNumberOfChildren();
 	}
 
+	/**
+	 * Checks to see if feed can import
+	 * @return True if the feed can import, false if not
+	 */
 	boolean function canImport() {
 		return getIsActive() && ( !isDate( getStartDate() ) || getStartDate() LTE now() ) && ( !isDate( getStopDate() ) || getStopDate() GTE now() );
 	}
 
+	/**
+	 * Checks to see if feed items should be published when importing
+	 * @return True if feed items should be published, false if not
+	 */
 	boolean function autoPublishItems() {
 		return getItemStatus() EQ "published";
 	}
 
+	/**
+	 * Checks to see if the feed import routine is currently failing
+	 * @return True if imports are failing, false if not
+	 */
 	boolean function isFailing() {
 		return getIsFailing();
 	}
 
+	/**
+	 * Adds a timestamp to the start date property
+	 * @hour The hour value of the timestamp
+	 * @minute The minute value of the timestamp
+	 * @return The feed
+	 */
 	Feed function addStartTime( required string hour, required string minute ) {
 		if ( isDate( getStartDate() ) ) {
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
@@ -219,6 +267,9 @@ component persistent="true"
 		return this;
 	}
 
+	/**
+	 *
+	 */
 	Feed function addJoinedStartTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
 		if( arrayLen( splitTime ) == 2 ) {
@@ -228,6 +279,9 @@ component persistent="true"
 		}
 	}
 
+	/**
+	 *
+	 */
 	string function getStartDateForEditor( boolean showTime=false ) {
 		var sDate = getStartDate();
 		if ( isNull( sDate ) ) { sDate = ""; }
@@ -238,6 +292,12 @@ component persistent="true"
 		return fDate;
 	}
 
+	/**
+	 * Adds a timestamp to the stop date property
+	 * @hour The hour value of the timestamp
+	 * @minute The minute value of the timestamp
+	 * @return The feed
+	 */
 	Feed function addStopTime( required string hour, required string minute ) {
 		if ( isDate( getStopDate() ) ) {
 			if ( !len( arguments.hour ) ) arguments.hour = "0";
@@ -248,6 +308,9 @@ component persistent="true"
 		return this;
 	}
 
+	/**
+	 *
+	 */
 	Feed function addJoinedStopTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
 		if( arrayLen( splitTime ) == 2 ) {
@@ -257,6 +320,9 @@ component persistent="true"
 		}
 	}
 
+	/**
+	 *
+	 */
 	string function getStopDateForEditor( boolean showTime=false ) {
 		var sDate = getStopDate();
 		if ( isNull( sDate ) ) { sDate = ""; }
@@ -267,11 +333,17 @@ component persistent="true"
 		return fDate;
 	}
 
+	/**
+	 *
+	 */
 	string function getDisplayLastImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
 		var lastImportedDate = getLastImportedDate();
 		return dateFormat( lastImportedDate, arguments.dateFormat ) & " " & timeFormat( lastImportedDate, arguments.timeFormat );
 	}
 
+	/**
+	 *
+	 */
 	struct function getResponseMemento(
 		required array slugCache=[],
 		boolean showAuthor=false,
@@ -315,8 +387,12 @@ component persistent="true"
 
 	}
 
-	// TODO: Update this
+	/**
+	 *
+	 */
 	array function validate() {
+
+		// TODO: Update this
 
 		var errors = [];
 
@@ -336,7 +412,6 @@ component persistent="true"
 		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
 		if( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
 		if( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
-
 
 		return errors;
 

@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * Related Content Widget
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="aggregator.models.BaseWidget" singleton {
 
+	// Widget properties
 	RelatedContent function init() {
 		setName( "Related Content" );
 		setVersion( "1.0" );
@@ -12,16 +18,17 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @title.label Title
-	* @title.hint An optional title to display using an H tag.
-	* @titleLevel.label Title Level
-	* @titleLevel.hint The H{level} to use.
-	* @titleLevel.options 1,2,3,4,5
-	* @useDropdown.label Use Dropdown?
-	* @useDropdown.hint Display as a dropdown or a list, default is list.
-	* @emptyMessage.label Empty Message
-	* @emptyMessage.hint Message to show when no related content is found.
-	*/
+	 * Renders the related content widget
+	 * @title.label Title
+	 * @title.hint An optional title to display using an H tag.
+	 * @titleLevel.label Title Level
+	 * @titleLevel.hint The H{level} to use.
+	 * @titleLevel.options 1,2,3,4,5
+	 * @useDropdown.label Use Dropdown?
+	 * @useDropdown.hint Display as a dropdown or a list, default is list.
+	 * @emptyMessage.label Empty Message
+	 * @emptyMessage.hint Message to show when no related content is found.
+	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
@@ -62,7 +69,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildDropDown( required array relatedContent ) {
+	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Builds the drop down menu
+	 */
+	private string function buildDropDown( required array relatedContent ) {
 
 		// Set return string
 		var string = "";
@@ -86,7 +98,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildList( required array relatedContent ) {
+	/**
+	 * Builds the list menu
+	 */
+	private string function buildList( required array relatedContent ) {
 
 		// Set return string
 		var string = "";

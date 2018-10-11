@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * Portal Widget
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="aggregator.models.BaseWidget" singleton {
 
+	// Widget properties
 	Portal function init() {
 		setName( "Portal" );
 		setVersion( "1.0" );
@@ -12,23 +18,24 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @max.label Maximum Items
-	* @max.hint The number of feed items to display.
-	* @max.options 1,5,10,15,20,25,50,100
-	* @feed.label Feed
-	* @feed.hint The feed to filter on.
-	* @feed.optionsUDF getFeedSlugs
-	* @category.label Category
-	* @category.hint The list of categories to filter on.
-	* @category.multiOptionsUDF getAllCategories
-	* @searchTerm.label Search Term
-	* @searchTerm.hint The search term to filter on.
-	* @sortOrder.label Sort Order
-	* @sortOrder.hint How to order the results, defaults to date published from the feed.
-	* @sortOrder.options Most Recent,Most Popular
-	* @openNewWindow.label Open In New Window?
-	* @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	*/
+	 * Renders the portal widget
+	 * @max.label Maximum Items
+	 * @max.hint The number of feed items to display.
+	 * @max.options 1,5,10,15,20,25,50,100
+	 * @feed.label Feed
+	 * @feed.hint The feed to filter on.
+	 * @feed.optionsUDF getFeedSlugs
+	 * @category.label Category
+	 * @category.hint The list of categories to filter on.
+	 * @category.multiOptionsUDF getAllCategories
+	 * @searchTerm.label Search Term
+	 * @searchTerm.hint The search term to filter on.
+	 * @sortOrder.label Sort Order
+	 * @sortOrder.hint How to order the results, defaults to date published from the feed.
+	 * @sortOrder.options Most Recent,Most Popular
+	 * @openNewWindow.label Open In New Window?
+	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
+	 */
 	string function renderIt(
 		numeric max = 10,
 		string feed = "",
@@ -86,16 +93,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 			args = args
 		);
 
-	}
-
-	array function getFeedSlugs() cbIgnore {
-		var slugs = feedService.getAllFlatSlugs();
-		arrayPrepend( slugs, "" );
-		return slugs;
-	}
-
-	array function getAllCategories() cbIgnore {
-		return categoryService.getAllNames();
 	}
 
 }

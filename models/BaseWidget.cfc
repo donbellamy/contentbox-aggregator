@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * The base widget class for aggregator widgets
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -8,5 +9,21 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="ag" inject="helper@aggregator";
+
+	/**
+	 * Grabs the feed slugs
+	 */
+	array function getFeedSlugs() cbIgnore {
+		var slugs = feedService.getAllFlatSlugs();
+		arrayPrepend( slugs, "" );
+		return slugs;
+	}
+
+	/**
+	 * Grabs the categories
+	 */
+	array function getAllCategories() cbIgnore {
+		return categoryService.getAllNames();
+	}
 
 }

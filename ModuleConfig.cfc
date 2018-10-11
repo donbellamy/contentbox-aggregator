@@ -1,5 +1,6 @@
 /**
- * RSS Aggregator Module Config
+ * ContentBox RSS Aggregator
+ * Module Config
  * @author Don Bellamy <don@perfectcode.com>
  */
 component {

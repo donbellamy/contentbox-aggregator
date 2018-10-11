@@ -1,3 +1,8 @@
+/**
+ * ContentBox RSS Aggregator
+ * Feed Import Model
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component persistent="true"
 	entityname="cbFeedImport"
 	table="cb_feedimport"

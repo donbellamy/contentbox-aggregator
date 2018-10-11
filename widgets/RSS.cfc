@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * RSS Widget
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="aggregator.models.BaseWidget" singleton {
 
+	// Widget properties
 	RSS function init() {
 		setName( "Portal RSS" );
 		setVersion( "1.0" );
@@ -12,12 +18,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @title.label Title
-	* @title.hint An optional title to display using an H tag.
-	* @titleLevel.label Title Level
-	* @titleLevel.hint The H{level} to use.
-	* @titleLevel.options 1,2,3,4,5
-	*/
+	 * Renders the rss widget
+	 * @title.label Title
+	 * @title.hint An optional title to display using an H tag.
+	 * @titleLevel.label Title Level
+	 * @titleLevel.hint The H{level} to use.
+	 * @titleLevel.options 1,2,3,4,5
+	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2

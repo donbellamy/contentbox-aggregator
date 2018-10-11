@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * The base content service
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -19,7 +20,7 @@ component extends="contentbox.models.content.ContentService" singleton {
 
 	/**
 	 * Save the content
-	 * @param entity The entity to save
+	 * @param The entity to save
 	 * @transactional Use transactions or not, defaults to true
 	 * @return ContentService
 	 */

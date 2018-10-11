@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * Archives Widget
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="aggregator.models.BaseWidget" singleton {
 
+	// Widget properties
 	Archives function init() {
 		setName( "Feed Item Archives" );
 		setVersion( "1.0" );
@@ -12,16 +18,18 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @title.label Title
-	* @title.hint An optional title to display using an H tag.
-	* @titleLevel.label Title Level
-	* @titleLevel.hint The H{level} to use.
-	* @titleLevel.options 1,2,3,4,5
-	* @useDropdown.label Use Dropdown?
-	* @useDropdown.hint Display as a dropdown or a list, default is list.
-	* @showItemCount.label Show Item Count?
-	* @showItemCount.hint Show item counts or not, default is true.
-	*/
+	 * Renders the feed item archives widget
+	 * @title.label Title
+	 * @title.hint An optional title to display using an H tag.
+	 * @titleLevel.label Title Level
+	 * @titleLevel.hint The H{level} to use.
+	 * @titleLevel.options 1,2,3,4,5
+	 * @useDropdown.label Use Dropdown?
+	 * @useDropdown.hint Display as a dropdown or a list, default is list.
+	 * @showItemCount.label Show Item Count?
+	 * @showItemCount.hint Show item counts or not, default is true.
+	 * @return The feed item archives widget html
+	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
@@ -54,7 +62,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildDropDown( archives, showItemCount ) {
+	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Builds the drop down menu
+	 * @return The drop down menu html
+	 */
+	private string function buildDropDown( archives, showItemCount ) {
 
 		// Set return string
 		var string = "";
@@ -78,7 +92,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildList( archives, showItemCount ) {
+	/**
+	 * Builds the list menu
+	 * @return The list menu html
+	 */
+	private string function buildList( archives, showItemCount ) {
 
 		// Set return html
 		var string = "";

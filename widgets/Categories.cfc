@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * Categories Widget
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="aggregator.models.BaseWidget" singleton {
 
+	// Widget properties
 	Categories function init() {
 		setName( "Feed Item Categories" );
 		setVersion( "1.0" );
@@ -12,19 +18,20 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	* @title.label Title
-	* @title.hint An optional title to display using an H tag.
-	* @titleLevel.label Title Level
-	* @titleLevel.hint The H{level} to use.
-	* @titleLevel.options 1,2,3,4,5
-	* @category.label Category
-	* @category.hint The list of categories to filter on.
-	* @category.multiOptionsUDF getAllCategories
-	* @useDropdown.label Use Dropdown?
-	* @useDropdown.hint Display as a dropdown or a list, default is list.
-	* @showItemCount.label Show Item Count?
-	* @showItemCount.hint Show item counts or not, default is true.
-	*/
+	 * Renders the feed item categories widget
+	 * @title.label Title
+	 * @title.hint An optional title to display using an H tag.
+	 * @titleLevel.label Title Level
+	 * @titleLevel.hint The H{level} to use.
+	 * @titleLevel.options 1,2,3,4,5
+	 * @category.label Category
+	 * @category.hint The list of categories to filter on.
+	 * @category.multiOptionsUDF getAllCategories
+	 * @useDropdown.label Use Dropdown?
+	 * @useDropdown.hint Display as a dropdown or a list, default is list.
+	 * @showItemCount.label Show Item Count?
+	 * @showItemCount.hint Show item counts or not, default is true.
+	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
@@ -58,7 +65,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildDropDown( categories, showItemCount, categoryFilter ) {
+	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Builds the drop down menu
+	 */
+	private string function buildDropDown( categories, showItemCount, categoryFilter ) {
 
 		// Set return string
 		var string = "";
@@ -85,7 +97,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	}
 
-	private function buildList( categories, showItemCount, categoryFilter ) {
+	/**
+	 * Builds the list menu
+	 */
+	private string function buildList( categories, showItemCount, categoryFilter ) {
 
 		// Set return string
 		var string = "";
@@ -110,10 +125,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		return string;
 
-	}
-
-	array function getAllCategories() cbIgnore {
-		return categoryService.getAllNames();
 	}
 
 }
