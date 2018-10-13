@@ -127,11 +127,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				if ( structKeyExists( prc, "feed" ) ) {
 					xmlRootName = "feed";
 					results = prc.feed.getResponseMemento();
-					var feedItems = [];
-					for ( var feedItem in prc.feedItems ) {
-						feedItems.append( feedItem.getResponseMemento() );
-					}
-					results["feedItems"] = feedItems;
 				} else if ( structKeyExists( prc, "feedItems" ) ) {
 					xmlRootName = "feeditems"
 					for ( var feedItem IN prc.feedItems ) {

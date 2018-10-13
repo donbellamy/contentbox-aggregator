@@ -196,15 +196,15 @@ component persistent="true"
 	}
 
 	/**
-	 * Grabs the feed taxonomies
+	 * Gets the taxonomies property
 	 * @return An array of taxonomies if defined
 	 */
 	array function getTaxonomies() {
-		return ( !isNull( taxonomies ) && isJSON( taxonomies ) ) ? deserializeJSON( taxonomies ) : [];
+		return ( !isNull( variables.taxonomies ) && isJSON( variables.taxonomies ) ) ? deserializeJSON( variables.taxonomies ) : [];
 	}
 
 	/**
-	 * Grabs the feed items
+	 * Gets the feed items
 	 * @return An array of feed items if defined
 	 */
 	array function getFeedItems() {
@@ -220,7 +220,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Grabs the number of feed items
+	 * Gets the number of feed items
 	 * @return The number of feed items
 	 */
 	numeric function getNumberOfFeedItems() {
@@ -228,7 +228,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Checks to see if feed can import
+	 * Checks to see if the feed can import
 	 * @return True if the feed can import, false if not
 	 */
 	boolean function canImport() {
@@ -252,7 +252,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Adds a timestamp to the start date property
+	 * Adds a timestamp to the start date property using separate hour and minute values
 	 * @hour The hour value of the timestamp
 	 * @minute The minute value of the timestamp
 	 * @return The feed
@@ -268,7 +268,9 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Adds a timestamp to the start date property using a timestring value
+	 * @timeString The timestamp to use with the format hh:mm
+	 * @return The feed
 	 */
 	Feed function addJoinedStartTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
@@ -280,7 +282,9 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Gets the formatted start date
+	 * @showTime Whether or not to include the time in the formatted start date
+	 * @return The formatted start date
 	 */
 	string function getStartDateForEditor( boolean showTime=false ) {
 		var sDate = getStartDate();
@@ -309,7 +313,9 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Adds a timestamp to the stop date property using a timestring value
+	 * @timeString The timestamp to use with the format hh:mm
+	 * @return The feed
 	 */
 	Feed function addJoinedStopTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
@@ -321,7 +327,9 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Gets the formatted stop date
+	 * @showTime Whether or not to include the time in the formatted stop date
+	 * @return The formatted start date
 	 */
 	string function getStopDateForEditor( boolean showTime=false ) {
 		var sDate = getStopDate();
@@ -334,7 +342,10 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Gets the formatted last imported date
+	 * @dateFormat The dateformat to use
+	 * @timeFormat The timeformat to use
+	 * @return The formatted last imported date
 	 */
 	string function getDisplayLastImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
 		var lastImportedDate = getLastImportedDate();
@@ -342,23 +353,27 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Gets a flat representation of the feed for UI response format which restricts the data displayed
+	 * @showAuthor Whether or not to include the feed author
+	 * @showCategories Whether or not to include the categories
+	 * @showFeedItems Whether or not to include the feed items
+	 * @return A structure containing the feed properties
 	 */
 	struct function getResponseMemento(
-		required array slugCache=[],
-		boolean showAuthor=false,
-		boolean showComments=false,
-		boolean showCustomFields=false,
-		boolean showContentVersions=false,
-		boolean showParent=false,
-		boolean showChildren=false,
+		boolean showAuthor=true,
 		boolean showCategories=true,
-		boolean showRelatedContent=false,
-		boolean showStats=false,
-		boolean showCommentSubscriptions=false,
-		excludes="activeContent,linkedContent,commentSubscriptions,isDeleted,allowComments"
+		boolean showFeedItems=true
 	) {
 
+		// Set base content arguments defaults unrelated to feeds
+		arguments.slugCache = [];
+		arguments.showComments = false;
+		arguments.showCustomFields = false;
+		arguments.showParent = false;
+		arguments.showChildren = false;
+		arguments.showRelatedContent = false;
+
+		// Grab the base content memento
 		var result 	= super.getResponseMemento( argumentCollection=arguments );
 
 		result["siteUrl"] = getSiteUrl();
@@ -366,6 +381,23 @@ component persistent="true"
 		result["tagLine"] = getTagLine();
 		result["lastImportedDate"] = getDisplayLastImportedDate();
 		result["isActive"] = canImport();
+
+		if ( arguments.showFeedItems && hasFeedItem() ) {
+			result["feedItems"] = [];
+			for ( var item IN variables.children ) {
+				arrayAppend(
+					result["feedItems"],
+					{
+						"slug" = item.getSlug(),
+						"title" = item.getTitle()
+					}
+				);
+			}
+		} else if ( arguments.showFeedItems ) {
+			result["feedItems"] = [];
+		}
+
+		// TODO: Go over fields and add missing ones
 
 		/*
 		"startDate"
@@ -388,7 +420,8 @@ component persistent="true"
 	}
 
 	/**
-	 *
+	 * Validates the feed item
+	 * @return An array of errors or an empty array if no error is found
 	 */
 	array function validate() {
 
