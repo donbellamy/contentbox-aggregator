@@ -1,11 +1,13 @@
 /**
- * The feed item service
+ * ContentBox RSS Aggregator
+ * FeedItem Service
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="ContentService" singleton {
 
 	/**
 	 * Constructor
+	 * @return FeedItemService
 	 */
 	FeedItemService function init() {
 
@@ -24,7 +26,6 @@ component extends="ContentService" singleton {
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
-	 *
 	 * @return struct - {feedItems,count}
 	 */
 	struct function search(
@@ -96,7 +97,6 @@ component extends="ContentService" singleton {
 	 * @countOnly When true will only return count of feed items found
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
-	 *
 	 * @return struct - {feedItems,count}
 	 */
 	struct function getPublishedFeedItems(
@@ -167,7 +167,7 @@ component extends="ContentService" singleton {
 	/**
 	 *
 	 */
-	function getArchiveReport() {
+	array function getArchiveReport() {
 
 		// Set hql
 		var hql = "SELECT new map( count(*) AS count, YEAR(fi.publishedDate) AS year, MONTH(fi.publishedDate) AS month )
@@ -193,7 +193,7 @@ component extends="ContentService" singleton {
 	/**
 	 *
 	 */
-	function getPublishedFeedItemsByDate(
+	array function getPublishedFeedItemsByDate(
 		numeric year=0,
 		numeric month=0,
 		numeric day=0,

@@ -1,6 +1,6 @@
 /**
  * ContentBox RSS Aggregator
- * The base content service
+ * Content Service
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="contentbox.models.content.ContentService" singleton {

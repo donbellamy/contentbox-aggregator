@@ -1,3 +1,8 @@
+/**
+ * ContentBox RSS Aggregator
+ * FeedItem Model
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component persistent="true"
 	entityname="cbFeedItem"
 	table="cb_feeditem"
@@ -9,7 +14,7 @@ component persistent="true"
 	discriminatorValue="FeedItem" {
 
 	/* *********************************************************************
-	**							PROPERTIES
+	**                            PROPERTIES
 	********************************************************************* */
 
 	property name="excerpt"
@@ -34,7 +39,7 @@ component persistent="true"
 		ormtype="text";
 
 	/* *********************************************************************
-	**							DI INJECTIONS
+	**                            DI INJECTIONS
 	********************************************************************* */
 
 	property name="settingService"
@@ -42,14 +47,14 @@ component persistent="true"
 		persistent="false";
 
 	/* *********************************************************************
-	**							NON PERSISTED PROPERTIES
+	**                            NON PERSISTED PROPERTIES
 	********************************************************************* */
 
 	property name="renderedExcerpt"
 		persistent="false";
 
 	/* *********************************************************************
-	**							CONSTRAINTS
+	**                            CONSTRAINTS
 	********************************************************************* */
 
 	// TODO: Update
@@ -57,6 +62,10 @@ component persistent="true"
 	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["author"] = { required=false, size="1..255" };
 
+	/**
+	 * Constructor
+	 * @return FeedItem
+	 */
 	FeedItem function init() {
 		super.init();
 		allowComments = false;
@@ -69,26 +78,47 @@ component persistent="true"
 		return this;
 	}
 
+	/**
+	 * Sets the meta info property
+	 * @metaInfo A structure of meta data to set on the feed item
+	 * @return FeedItem
+	 */
 	FeedItem function setMetaInfo( required any metaInfo ) {
 		if ( isStruct( arguments.metaInfo ) ) {
 			arguments.metaInfo = serializeJSON( arguments.metaInfo );
 		}
-		variables.metaInfo = arguments.metaInfo;
+		metaInfo = arguments.metaInfo;
 		return this;
 	}
 
-	array function getMetaInfo() {
+	/**
+	 * Gets the meta info property
+	 * @return A structure of meta data
+	 */
+	struct function getMetaInfo() {
 		return ( !isNull( metaInfo ) && isJSON( metaInfo ) ) ? deserializeJSON( metaInfo ) : {};
 	}
 
+	/**
+	 * Gets the parent feed
+	 * @return Feed
+	 */
 	Feed function getFeed() {
 		return getParent();
 	}
 
+	/**
+	 * Checks to see if the feed item has an excerpt
+	 * @return True if an excerpt exists, false if not
+	 */
 	boolean function hasExcerpt() {
 		return len( trim( getExcerpt() ) );
 	}
 
+	/**
+	 * Renders the feed item excerpt
+	 * @return The rendered excerpt
+	 */
 	string function renderExcerpt() {
 
 		if ( len( getExcerpt() ) AND NOT len( renderedExcerpt ) ) {
@@ -98,6 +128,7 @@ component persistent="true"
 					builder = b,
 					content	= this
 				};
+				// TODO: Check this, may want to use an aggregator event
 				interceptorService.processState( "cb_onContentRendering", iData );
 				renderedExcerpt = b.toString();
 			}
@@ -107,36 +138,51 @@ component persistent="true"
 
 	}
 
+	/**
+	 * Gets a flat representation of the feed item for UI response format which restricts the data displayed
+	 * @showCategories Whether or not to include the categories
+	 * @showFeed Whether or not to include the feed
+	 * @excludes A list of properties to exclude
+	 * @return A structure containing the feed item properties
+	 */
 	struct function getResponseMemento(
-		required array slugCache=[],
-		boolean showAuthor=false,
-		boolean showComments=false,
-		boolean showCustomFields=false,
-		boolean showContentVersions=false,
-		boolean showParent=false,
-		boolean showChildren=false,
 		boolean showCategories=true,
-		boolean showRelatedContent=false,
-		boolean showStats=false,
-		boolean showCommentSubscriptions=false,
-		excludes="activeContent,linkedContent,commentSubscriptions,isDeleted,allowComments,HTMLTitle,HTMLDescription,HTMLKeywords"
+		boolean showFeed=true,
+		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
 	) {
 
+		// Set base content arguments defaults unrelated to feed items
+		arguments.slugCache = [];
+		arguments.showAuthor=false;
+		arguments.showComments = false;
+		arguments.showCustomFields = false;
+		arguments.showParent = false;
+		arguments.showChildren = false;
+		arguments.showRelatedContent = false;
+
+		// Grab the base content memento
 		var result 	= super.getResponseMemento( argumentCollection=arguments );
 
+		// Set feed item properties
 		result["excerpt"] = renderExcerpt();
 		result["uniqueId"] = getUniqueId();
 		result["itemUrl"] = getItemUrl();
 		result["itemAuthor"] = getItemAuthor();
-		result["feed"] = {
-			"slug" = getParent().getSlug(),
-			"title" = getParent().getTitle()
-		};
+		if ( arguments.showFeed ) {
+			result["feed"] = {
+				"slug" = getParent().getSlug(),
+				"title" = getParent().getTitle()
+			};
+		}
 
 		return result;
 
 	}
 
+	/**
+	 * Gets the url of the featured image
+	 * @return The url of the feautred image
+	 */
 	string function getImageUrl() {
 
 		if ( len( getFeaturedImageUrl() ) ) {
@@ -156,17 +202,34 @@ component persistent="true"
 
 	}
 
+	/**
+	 * Gets the shortened and cleaned version of the excerpt taken from the feed item body
+	 * @count The number of characters to include in the excerpt
+	 * @excerptEnding The characters to display at the end of the excerpt
+	 * @return The generated content excerpt
+	 */
 	string function getContentExcerpt( numeric count=500, string excerptEnding="..." ) {
 
+		// Remove html from content
 		var content = reReplaceNoCase( getContent(), "<[^>]*>", "", "ALL" );
+
+		// Trim the content
 		content = trim( left( content, arguments.count ) );
+
+		// Add the content ending
 		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
 
 		return "<p>" & content & "</p>";
 
 	}
 
+	/**
+	 * Validates the feed item
+	 * @return An array of errors or an empty array if no error is found
+	 */
 	array function validate() {
+
+		// TODO: Update this
 
 		var errors = [];
 

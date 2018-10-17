@@ -168,7 +168,7 @@ component persistent="true"
 
 	/**
 	 * Constructor
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function init() {
 		super.init();
@@ -185,13 +185,13 @@ component persistent="true"
 	/**
 	 * Sets the taxomomies property
 	 * @taxonomies An array of taxonomies to set on the feed
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function setTaxonomies( required any taxonomies ) {
 		if ( isArray( arguments.taxonomies ) ) {
 			arguments.taxonomies = serializeJSON( arguments.taxonomies );
 		}
-		variables.taxonomies = arguments.taxonomies;
+		taxonomies = arguments.taxonomies;
 		return this;
 	}
 
@@ -200,7 +200,7 @@ component persistent="true"
 	 * @return An array of taxonomies if defined
 	 */
 	array function getTaxonomies() {
-		return ( !isNull( variables.taxonomies ) && isJSON( variables.taxonomies ) ) ? deserializeJSON( variables.taxonomies ) : [];
+		return ( !isNull( taxonomies ) && isJSON( taxonomies ) ) ? deserializeJSON( taxonomies ) : [];
 	}
 
 	/**
@@ -255,7 +255,7 @@ component persistent="true"
 	 * Adds a timestamp to the start date property using separate hour and minute values
 	 * @hour The hour value of the timestamp
 	 * @minute The minute value of the timestamp
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function addStartTime( required string hour, required string minute ) {
 		if ( isDate( getStartDate() ) ) {
@@ -270,7 +270,7 @@ component persistent="true"
 	/**
 	 * Adds a timestamp to the start date property using a timestring value
 	 * @timeString The timestamp to use with the format hh:mm
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function addJoinedStartTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
@@ -300,7 +300,7 @@ component persistent="true"
 	 * Adds a timestamp to the stop date property
 	 * @hour The hour value of the timestamp
 	 * @minute The minute value of the timestamp
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function addStopTime( required string hour, required string minute ) {
 		if ( isDate( getStopDate() ) ) {
@@ -315,7 +315,7 @@ component persistent="true"
 	/**
 	 * Adds a timestamp to the stop date property using a timestring value
 	 * @timeString The timestamp to use with the format hh:mm
-	 * @return The feed
+	 * @return Feed
 	 */
 	Feed function addJoinedStopTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
@@ -357,12 +357,14 @@ component persistent="true"
 	 * @showAuthor Whether or not to include the feed author
 	 * @showCategories Whether or not to include the categories
 	 * @showFeedItems Whether or not to include the feed items
+	 * @excludes A list of properties to exclude
 	 * @return A structure containing the feed properties
 	 */
 	struct function getResponseMemento(
 		boolean showAuthor=true,
 		boolean showCategories=true,
-		boolean showFeedItems=true
+		boolean showFeedItems=true,
+		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
 	) {
 
 		// Set base content arguments defaults unrelated to feeds
@@ -376,6 +378,7 @@ component persistent="true"
 		// Grab the base content memento
 		var result 	= super.getResponseMemento( argumentCollection=arguments );
 
+		// Set feed properties
 		result["siteUrl"] = getSiteUrl();
 		result["feedUrl"] = getFeedUrl();
 		result["tagLine"] = getTagLine();
@@ -384,7 +387,7 @@ component persistent="true"
 
 		if ( arguments.showFeedItems && hasFeedItem() ) {
 			result["feedItems"] = [];
-			for ( var item IN variables.children ) {
+			for ( var item IN children ) {
 				arrayAppend(
 					result["feedItems"],
 					{
@@ -420,7 +423,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Validates the feed item
+	 * Validates the feed
 	 * @return An array of errors or an empty array if no error is found
 	 */
 	array function validate() {

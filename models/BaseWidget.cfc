@@ -1,6 +1,6 @@
 /**
  * ContentBox RSS Aggregator
- * The base widget class for aggregator widgets
+ * BaseWidget Model
  * @author Don Bellamy <don@perfectcode.com>
  */
 component accessors="true" extends="contentbox.models.ui.BaseWidget" {
@@ -12,6 +12,7 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 
 	/**
 	 * Grabs the feed slugs
+	 * @return An array of all feed slugs
 	 */
 	array function getFeedSlugs() cbIgnore {
 		var slugs = feedService.getAllFlatSlugs();
@@ -21,6 +22,7 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 
 	/**
 	 * Grabs the categories
+	 * @return An array of category names
 	 */
 	array function getAllCategories() cbIgnore {
 		return categoryService.getAllNames();

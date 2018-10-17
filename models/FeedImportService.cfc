@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * FeedImport Service
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component extends="cborm.models.VirtualEntityService" singleton {
 
+	// Dependencies
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
@@ -12,6 +18,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="jsoup" inject="jsoup@cbjsoup";
 	property name="log" inject="logbox:logger:{this}";
 
+	/**
+	 * Constructor
+	 * @return FeedImportService
+	 */
 	FeedImportService function init() {
 
 		super.init( entityName="cbFeedImport", useQueryCaching=true );
@@ -21,10 +31,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	}
 
 	/**
-	* Stuff goes here
-	* @feed More stuff goes here
-	* @author And even more stuff goes here
-	*/
+	 * The main feed import routine
+	 * @feed The feed to import, if one is not passed then all feeds that are active will be will be imported
+	 * @author The author to use when importing
+	 * @return FeedImportService
+	 */
 	FeedImportService function import( any feed, any author ) {
 
 		// Grab the settings
@@ -365,6 +376,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	}
 
+	/**
+	 * Deletes the directory path only if it is empty
+	 * @directoryPath The directory path to delete
+	 * @return FeedImportService
+	 */
 	private function deleteDirectoryIfEmpty( required string directoryPath ) {
 		var files = directoryList( arguments.directoryPath );
 		if ( !arrayLen( files ) ) {
