@@ -419,7 +419,7 @@ component extends="contentHandler" {
 
 		// Reset selected feed state
 		if ( len( rc.contentID ) ) {
-			feedService.bulkActiveState( contentID=rc.contentID, status=rc.contentState );
+			feedService.bulkActiveState( contentID=rc.contentID, state=rc.contentState );
 			announceInterception( "aggregator_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
 			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
 		} else {

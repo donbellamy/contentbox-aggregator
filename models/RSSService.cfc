@@ -1,5 +1,11 @@
+/**
+ * ContentBox RSS Aggregator
+ * RSS Service
+ * @author Don Bellamy <don@perfectcode.com>
+ */
 component singleton {
 
+	// Dependencies
 	property name="cachebox" inject="cachebox";
 	property name="feedGenerator" inject="feedGenerator@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
@@ -7,10 +13,20 @@ component singleton {
 	property name="helper" inject="helper@aggregator";
 	property name="settingService" inject="settingService@cb";
 
+	/**
+	 * Constructor
+	 * @return RSSServicce
+	 */
 	RSSService function init() {
 		return this;
 	}
 
+	/**
+	 * Gets the feed items feed from cache or build
+	 * @category The category slug to filter on
+	 * @slug The feed slug to filter on
+	 * @return The feed xml string
+	 */
 	string function getRSS( string category="", string slug="" ) {
 
 		// Set vars
@@ -41,6 +57,12 @@ component singleton {
 
 	/************************************** PRIVATE *********************************************/
 
+	/**
+	 * Builds the feed items feed
+	 * @category The category slug to filter on
+	 * @slug The feed slug to filter on
+	 * @return The feed xml string
+	 */
 	private string function buildFeed( string category="", string slug="" ) {
 
 		// Set vars
@@ -98,7 +120,6 @@ component singleton {
 		}
 		feedStruct.pubDate = now();
 		feedStruct.lastBuildDate = now();
-
 		feedStruct.items = items;
 
 		// Return the generated the feed

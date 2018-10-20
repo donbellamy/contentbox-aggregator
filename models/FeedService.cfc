@@ -1,11 +1,13 @@
 /**
- * The feed service
+ * ContentBox RSS Aggregator
+ * Feed Service
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="ContentService" singleton {
 
 	/**
 	 * Constructor
+	 * @return FeedService
 	 */
 	FeedService function init() {
 
@@ -15,6 +17,17 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 * Returns a struct of feeds and count based upon the passed parameters
+	 * @searchTerm The search term to filter on
+	 * @state The state to filter on, defaults to "any"
+	 * @category The category to filter on, defaults to "all"
+	 * @status The status to filter on, defaults to "any"
+	 * @sortOrder The field to sort the results on, defaults to "title"
+	 * @max The maximum number of feeds to return
+	 * @offset The offset of the pagination
+	 * @return struct - {feeds,count}
+	 */
 	struct function search(
 		string searchTerm="",
 		string state="any",
@@ -25,6 +38,7 @@ component extends="ContentService" singleton {
 		numeric offset=0
 	) {
 
+		// Vars
 		var results = {};
 		var c = newCriteria();
 
@@ -64,6 +78,7 @@ component extends="ContentService" singleton {
 			}
 		}
 
+		// Get the results
 		results.count = c.count( "contentID" );
 		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
 			offset=arguments.offset,
@@ -76,12 +91,23 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 * Returns a struct of published feeds and count based upon the passed parameters
+	 * @max The maximum number of feeds to return
+	 * @offset The offset of the pagination
+	 * @return struct - {feeds,count}
+	 */
 	struct function getPublishedFeeds( numeric max=0, numeric offset=0 ) {
 		return search( status="published", max=arguments.max, offset=arguments.offset );
 	}
 
+	/**
+	 * Gets the feeds that are enabled for import
+	 * @return An array of feeds
+	 */
 	array function getFeedsForImport() {
 
+		// Grab the active feeds
 		var hql = "SELECT f FROM cbFeed f
 			WHERE f.isActive = true
 			AND ( f.startDate IS NULL OR f.startDate >= :now )
@@ -92,16 +118,24 @@ component extends="ContentService" singleton {
 
 	}
 
-	FeedService function bulkActiveState( required any contentID, required string status ) {
+	/**
+	 * Sets the import state on multiple feeds
+	 * @contentID The contentID(s) to set the state on
+	 * @status The state to set on the feed(s)
+	 * @return FeedService
+	 */
+	FeedService function bulkActiveState( required any contentID, required string state ) {
 
+		// Set active state
 		var active = false;
-
-		if( arguments.status EQ "active" ) {
+		if ( arguments.state EQ "active" ) {
 			active = true;
 		}
 
+		// Grab the feeds
 		var feeds = getAll( id=arguments.contentID );
 
+		// Set the state
 		if ( arrayLen( feeds ) ) {
 			for ( var x=1; x LTE arrayLen( feeds ); x++ ) {
 				feeds[ x ].setisActive( active );

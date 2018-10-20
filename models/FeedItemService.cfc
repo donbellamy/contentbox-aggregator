@@ -165,7 +165,8 @@ component extends="ContentService" singleton {
 	}
 
 	/**
-	 *
+	 * Gets the archive report by date and number of feed items
+	 * @return An array of month and feed item counts per month
 	 */
 	array function getArchiveReport() {
 
@@ -191,9 +192,15 @@ component extends="ContentService" singleton {
 	}
 
 	/**
-	 *
+	 * Returns a struct of published feeditems and count based upon the passed date
+	 * @year The year to filter on
+	 * @month The month to filter on
+	 * @day The day to filter on
+	 * @max The maximum number of feed items to return
+	 * @offset The offset of the pagination
+	 * @return struct - {feedItems,count}
 	 */
-	array function getPublishedFeedItemsByDate(
+	struct function getPublishedFeedItemsByDate(
 		numeric year=0,
 		numeric month=0,
 		numeric day=0,
@@ -257,7 +264,10 @@ component extends="ContentService" singleton {
 	}
 
 	/**
-	 *
+	 * Sets the publish status on multiple feed items
+	 * @contentID The contentID(s) to set the status on
+	 * @status The status to set on the feed items
+	 * @return FeedItemService
 	 */
 	FeedItemService function bulkPublishStatus( required string contentID, required string status ) {
 
@@ -277,6 +287,7 @@ component extends="ContentService" singleton {
 		saveAll( contentObjects );
 
 		return this;
+
 	}
 
 }

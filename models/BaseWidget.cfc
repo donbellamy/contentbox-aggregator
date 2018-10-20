@@ -22,7 +22,7 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 
 	/**
 	 * Grabs the categories
-	 * @return An array of category names
+	 * @return An array of all category names
 	 */
 	array function getAllCategories() cbIgnore {
 		return categoryService.getAllNames();
