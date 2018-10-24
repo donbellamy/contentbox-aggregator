@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Feed item cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -62,7 +63,7 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Removes feed items using feed or global keyword filters
-	 * @feed any
+	 * @feed The feed to clean up
 	 */
 	private function doKeywordCleanup( any feed ) {
 
@@ -156,7 +157,7 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Removes feed items using feed or global max age settings
-	 * @feed any
+	 * @feed The feed to clean up
 	 */
 	private function doAgeCleanup( any feed ) {
 
@@ -213,7 +214,7 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Removes feed items using feed or global max item settings
-	 * @feed any
+	 * @feed The feed to clean up
 	 */
 	private function doMaxItemCleanup( any feed ) {
 

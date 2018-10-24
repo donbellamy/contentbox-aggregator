@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return RSS
+	 */
 	RSS function init() {
 		setName( "Portal RSS" );
 		setVersion( "1.0" );

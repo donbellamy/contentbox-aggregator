@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Settings handler
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -26,7 +27,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Display settings form
+	 * Displays the settings form
 	 */
 	function index( event, rc, prc ) {
 
@@ -67,7 +68,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Save settings
+	 * Saves the settings
 	 */
 	function save( event, rc, prc ) {
 
@@ -151,7 +152,7 @@ component extends="baseHandler" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Validate the settings
+	 * Validates the settings
 	 * @return An array of errors or an empty array if none are present
 	 */
 	private array function validateSettings( prc ) {

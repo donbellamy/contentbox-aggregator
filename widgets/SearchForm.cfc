@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return SearchForm
+	 */
 	SearchForm function init() {
 		setName( "Feed Item Search Form" );
 		setVersion( "1.0" );

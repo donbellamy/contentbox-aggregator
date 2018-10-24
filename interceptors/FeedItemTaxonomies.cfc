@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Feed item taxonomies
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -44,9 +45,9 @@ component extends="coldbox.system.Interceptor" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Applies taxonomies to the feed
-	 * @taxonomies array
-	 * @feed any
+	 * Applies taxonomies to the feed items
+	 * @taxonomies An array of taxonomies to apply to the feed items
+	 * @feed The feed to use when applying the taxonomies
 	 */
 	private function applyTaxonomies( required array taxonomies, any feed ) {
 

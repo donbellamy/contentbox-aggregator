@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Feeds handler
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -27,7 +28,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed index
+	 * Displays the feed index
 	 */
 	function index( event, rc, prc ) {
 
@@ -46,7 +47,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed table
+	 * Displays the feed table
 	 */
 	function table( event, rc, prc ) {
 
@@ -80,7 +81,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed editor
+	 * Displays the feed editor
 	 */
 	function editor( event, rc, prc ) {
 
@@ -168,7 +169,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Save feed
+	 * Saves feed
 	 */
 	function save( event, rc, prc ) {
 
@@ -325,7 +326,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Remove feed
+	 * Removes feed
 	 */
 	function remove( event, rc, prc ) {
 
@@ -357,7 +358,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Update feed status
+	 * Updates feed status
 	 */
 	function updateStatus( event, rc, prc ) {
 
@@ -378,7 +379,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Reset feed hits
+	 * Resets feed hits
 	 */
 	function resetHits( event, rc, prc ) {
 
@@ -410,7 +411,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Reset feed import state
+	 * Resets feed import state
 	 */
 	function state( event, rc, prc ) {
 
@@ -431,7 +432,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Import selected feeds
+	 * Imports selected feeds
 	 */
 	function import( event, rc, prc ) {
 
@@ -464,7 +465,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed import record
+	 * Displays the feed import record
 	 */
 	function viewImport( event, rc, prc ) {
 
@@ -477,7 +478,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Remove feed import record
+	 * Removes the feed import record
 	 */
 	function removeImport( event, rc, prc ) {
 

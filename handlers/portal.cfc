@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Portal handler
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -201,7 +202,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display portal index
+	 * Displays the portal index
 	 */
 	function index( event, rc, prc ) {
 
@@ -272,7 +273,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display portal archive
+	 * Displays the portal archive
 	 */
 	function archives( event, rc, prc ) {
 
@@ -357,7 +358,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display rss feed
+	 * Displays the rss feed
 	 */
 	function rss( event, rc, prc ) {
 
@@ -389,7 +390,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display list of feeds
+	 * Displays the list of feeds
 	 */
 	function feeds( event, rc, prc ) {
 
@@ -434,7 +435,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display feed
+	 * Displays the feed
 	 */
 	function feed( event, rc, prc ) {
 
@@ -558,7 +559,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Display feed item
+	 * Displays the feed item
 	 */
 	function feeditem( event, rc, prc ) {
 
@@ -636,7 +637,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Feed import routine
+	 * The feed import routine
 	 */
 	function import( event, rc, prc ) {
 
@@ -698,7 +699,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Display page not found error
+	 * Displays page not found error
 	 */
 	private function notFound( event, rc, prc ) {
 

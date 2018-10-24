@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Content handler
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -24,7 +25,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Remotely slugify the value of rc.slug
+	 * Slugify the value of rc.slug
 	 */
 	function slugify( event, rc, prc ) {
 
@@ -34,8 +35,10 @@ component extends="baseHandler" {
 
 	}
 
+	/************************************** PRIVATE *********************************************/
+
 	/**
-	 * Get the user's default editor
+	 * Gets the user's default editor
 	 * @author The author object
 	 * @return The default editor
 	 */

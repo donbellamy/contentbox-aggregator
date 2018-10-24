@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Portal cache cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -76,8 +77,9 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Clears the portal content cache
+	 * @return PortalCacheCleanup
 	 */
-	private function doCacheCleanup() {
+	private PortalCacheCleanup function doCacheCleanup() {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );

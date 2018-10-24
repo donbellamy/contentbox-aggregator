@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * RSS cache cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -54,8 +55,9 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Clears the rss cache
+	 * @return RSSCacheCleanup
 	 */
-	private function doCacheCleanup() {
+	private RSSCacheCleanup function doCacheCleanup() {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );

@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return Portal
+	 */
 	Portal function init() {
 		setName( "Portal" );
 		setVersion( "1.0" );

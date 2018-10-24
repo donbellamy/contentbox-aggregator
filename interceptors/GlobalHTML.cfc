@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Global HTML interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -110,7 +111,7 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	/**
-	 * Parses the feed tokiens
+	 * Parses the feed tokens
 	 * @feed The feed to use
 	 * @html The html to parse
 	 * @return The parsed html

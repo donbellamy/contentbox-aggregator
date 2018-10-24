@@ -1,5 +1,7 @@
 /**
- * Admin dashboard handler.  Extends and adds feed and feed item data to the admin dashboard.
+ * ContentBox RSS Aggregator
+ * Admin dashboard handler
+ * Extends and adds feed and feed item data to the admin dashboard
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="baseHandler" {
@@ -13,7 +15,7 @@ component extends="baseHandler" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 
 	/**
-	 * Clear portal cache
+	 * Clears portal cache
 	 */
 	function clearCache( event, rc, prc ) {
 		announceInterception("aggregator_onClearCache");
@@ -25,7 +27,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Display top content
+	 * Displays top content
 	 */
 	function topContent( event, rc, prc ) {
 		prc.topContent = contentService.getTopVisitedContent();
@@ -33,7 +35,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Display top commented
+	 * Displays top commented
 	 */
 	function topCommented( event, rc, prc ) {
 		prc.topCommented = contentService.getTopCommentedContent();
@@ -41,7 +43,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Display content counts
+	 * Displays content counts
 	 */
 	function contentCounts( event, rc, prc ) {
 		prc.entriesCount = entryService.count();

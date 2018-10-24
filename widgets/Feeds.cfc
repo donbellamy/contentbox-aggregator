@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return Feeds
+	 */
 	Feeds function init() {
 		setName( "Feeds" );
 		setVersion( "1.0" );

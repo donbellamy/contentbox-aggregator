@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Feed import cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -28,7 +29,7 @@ component extends="coldbox.system.Interceptor" {
 
 	/**
 	 * Delete old import records based upon global setting
-	 * @feed any
+	 * @feed The feed to clean up
 	 */
 	private function doFeedImportCleanup( any feed ) {
 

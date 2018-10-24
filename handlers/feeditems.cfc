@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Feed items handler
  * @author Don Bellamy <don@perfectcode.com>
  */
@@ -27,7 +28,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed item index
+	 * Displays the feed item index
 	 */
 	function index( event, rc, prc ) {
 
@@ -47,7 +48,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed item table
+	 * Displays the feed item table
 	 */
 	function table( event, rc, prc ) {
 
@@ -80,7 +81,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Display feed item editor
+	 * Displays the feed item editor
 	 */
 	function editor( event, rc, prc ) {
 
@@ -123,7 +124,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Save feed item
+	 * Savess the feed item
 	 */
 	function save( event, rc, prc ) {
 
@@ -223,7 +224,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Save categories
+	 * Saves the categories
 	 */
 	function saveCategories( event, rc, prc ) {
 
@@ -261,7 +262,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Remove feed item
+	 * Removes feed item
 	 */
 	function remove( event, rc, prc ) {
 
@@ -293,7 +294,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Update feed item status
+	 * Updates feed item status
 	 */
 	function updateStatus( event, rc, prc ) {
 

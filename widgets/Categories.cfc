@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return Categories
+	 */
 	Categories function init() {
 		setName( "Feed Item Categories" );
 		setVersion( "1.0" );

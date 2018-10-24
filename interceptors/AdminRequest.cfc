@@ -1,4 +1,5 @@
 /**
+ * ContentBox RSS Aggregator
  * Admin request interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */

@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return Archives
+	 */
 	Archives function init() {
 		setName( "Feed Item Archives" );
 		setVersion( "1.0" );

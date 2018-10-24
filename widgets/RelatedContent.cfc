@@ -5,7 +5,10 @@
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
-	// Widget properties
+	/**
+	 * Constructor, sets widget properties
+	 * @return RelatedContent
+	 */
 	RelatedContent function init() {
 		setName( "Related Content" );
 		setVersion( "1.0" );
