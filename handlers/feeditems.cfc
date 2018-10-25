@@ -128,13 +128,13 @@ component extends="contentHandler" {
 	 */
 	function save( event, rc, prc ) {
 
-		// TODO: validate against latest schema
 		// Editor
 		event.paramValue( "contentID", 0 );
-		event.paramValue( "contentType", "Feed" );
+		event.paramValue( "contentType", "FeedItem" );
 		event.paramValue( "title", "" );
 		event.paramValue( "slug", "" );
 		event.paramValue( "content", "" );
+		event.paramValue( "excerpt", "" );
 
 		// Publishing
 		event.paramValue( "isPublished", true );

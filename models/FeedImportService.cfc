@@ -370,6 +370,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 			}
 
+		} else {
+
+			if ( log.canInfo() ) {
+				log.info("Invalid author passed to import routine.");
+			}
+
 		}
 
 		return this;

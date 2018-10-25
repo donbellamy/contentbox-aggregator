@@ -202,7 +202,7 @@ component extends="coldbox.system.Interceptor" {
 			$(function() {
 				$("##relatedContent-items tr td:first-child, ##linkedContent-items tr td:first-child").each(function(){
 					var $this = $(this);
-					// No child so assume it is a feed item - TODO: need to modify cb code to add a content type class
+					// No child so assume it is a feed item
 					if ( $this.children().length == 0 ) {
 						$this.append(''<i class="fa fa-rss icon-small" title="FeedItem"></i>'');
 					}

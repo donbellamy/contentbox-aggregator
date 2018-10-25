@@ -12,17 +12,15 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="rssService" inject="rssService@aggregator";
 	property name="helper" inject="helper@aggregator";
 
-	// TODO: test unneeded functions here now that we are inheriting from cb
-
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,onError,notFound";
 
 	/**
-	 * Pre handler
+	 * Pre handler - Unable to call super.preHandler() due to page override on portal home
 	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
-		// Maintenance mode?
+		// Are we in maintenance mode?
 		if ( prc.cbSettings.cb_site_maintenance ) {
 			if ( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
 				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );
@@ -637,7 +635,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * The feed import routine
+	 * Runs the feed import routine
 	 */
 	function import( event, rc, prc ) {
 
@@ -673,7 +671,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * On error
+	 * Displays a friendly error message
 	 */
 	function onError( event, rc, prc, faultAction, exception, eventArguments ) {
 

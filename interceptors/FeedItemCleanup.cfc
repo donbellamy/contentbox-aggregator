@@ -14,14 +14,12 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired before feed item delete
 	 */
 	function aggregator_preFeedItemRemove( event, interceptData ) {
-		// TODO: Change to check if any other content is using this, a related entry could be using the image
-		// TODO: Should this fire after deletion?
 		var feedItem = arguments.interceptData.feedItem;
 		var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( feedItem.getPublishedDate(), "yyyy\mm\" );
 		var images = directoryList( path=directoryPath, filter="#feedItem.getSlug()#_*" );
-		for ( var image IN images ) {
-			if ( fileExists( image ) ) {
-				try { fileDelete( image ); } catch( any e ) {}
+		for ( var imagePath IN images ) {
+			if ( fileExists( imagePath ) && !feedService.isImageInUse( imagePath ) ) {
+				try { fileDelete( imagePath ); } catch( any e ) {}
 			}
 		}
 		var files = directoryList( directoryPath );
