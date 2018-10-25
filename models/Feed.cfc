@@ -31,7 +31,7 @@ component persistent="true"
 
 	property name="linkBehavior"
 		notnull="false"
-		length="10";
+		length="15";
 
 	property name="featuredImageBehavior"
 		notnull="false"

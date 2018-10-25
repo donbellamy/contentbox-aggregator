@@ -8,8 +8,6 @@
 <meta name="generator" content="ContentBox powered by ColdBox" />
 <meta name="robots" content="index,follow" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--- TODO: there is an issue here - meta tags not using defaults when home page uses the portal layout --->
-<!--- TODO: switch to using ag helper --->
 <meta name="description" content="#cb.getContentDescription()#" />
 <meta name="keywords" content="#cb.getContentKeywords()#" />
 

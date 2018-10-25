@@ -1,4 +1,5 @@
-<cfparam name="args.openNewWindow" default="false" /> <!--- TODO: Should only be true if using interstitial --->
+<cfset linkBehavior = len( feedItem.getFeed().getLinkBehavior() ) ? feedItem.getFeed().getLinkBehavior() : ag.setting("ag_portal_item_link_behavior") />
+<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="true" />
 <cfparam name="args.showExcerpt" default="true" />
