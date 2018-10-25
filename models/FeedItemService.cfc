@@ -279,8 +279,6 @@ component extends="ContentService" singleton {
 		var contentObjects = getAll( id=arguments.contentID );
 
 		for ( var x=1; x LTE arrayLen( contentObjects ); x++ ) {
-			// NOTE - Need to preserve published date for feed items when bulk updating
-			//contentObjects[x].setpublishedDate( now() );
 			contentObjects[x].setisPublished( publish );
 		}
 

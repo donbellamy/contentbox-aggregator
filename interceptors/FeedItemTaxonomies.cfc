@@ -51,8 +51,6 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	private function applyTaxonomies( required array taxonomies, any feed ) {
 
-		// TODO: add date to this so we arent querying all items every time...
-
 		if ( structKeyExists( arguments, "feed" ) ) {
 			var feeds = [ arguments.feed ];
 		} else {
@@ -72,14 +70,15 @@ component extends="coldbox.system.Interceptor" {
 				if ( arrayLen( categoryIds ) && arrayLen( keywords ) ) {
 
 					// Query on keywords
-					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
-					// TODO: where c.categoryID not in ( categoryIds )
+					var hql = "SELECT fi FROM cbFeedItem fi JOIN fi.activeContent ac
+						WHERE fi.parent = :parent
+						AND ( ";
 					var params = { parent=feed };
 					var count = 1;
 					for ( var keyword IN keywords ) {
-						hql &= "( fi.title like :keyword#count# or ac.content like :keyword#count# )";
+						hql &= "( fi.title LIKE :keyword#count# OR ac.content LIKE :keyword#count# )";
 						params["keyword#count#"] = "%#trim(keyword)#%";
-						if ( arrayLen( keywords ) GT count ) hql &= ( taxonomy.method == "all" ? " and " : " or " );
+						if ( arrayLen( keywords ) GT count ) hql &= ( taxonomy.method == "all" ? " AND " : " OR " );
 						count++;
 					}
 					hql &= " )";
@@ -106,7 +105,9 @@ component extends="coldbox.system.Interceptor" {
 								if ( !feedItem.hasCategories( category ) ) {
 									feedItem.addCategories( category );
 									feedItemService.save( feedItem );
-									// TODO: log info
+									if ( log.canInfo() ) {
+										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+									}
 								}
 
 							}

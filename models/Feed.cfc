@@ -150,21 +150,22 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
-	// TODO: Update this
 	this.constraints["siteUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["tagLine"] = { required=false, size="1..255" };
+	this.constraints["linkBehavior"] = { required=false, regex="(forward|interstitial|display)" };
+	this.constraints["featuredImageBehavior"] = { required=false, regex="(default|feed|none)" };
+	this.constraints["pagingMaxItems"] = { required=false, type="numeric" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
-	this.constraints["itemStatus"] = { required=true, regex="(draft|published)" };
-	this.constraints["ItemPubDate"] = { required=true, regex="(original|imported)" };
+	this.constraints["itemStatus"] = { required=false, regex="(draft|published)" };
+	this.constraints["itemPubDate"] = { required=false, regex="(original|imported)" }
 	this.constraints["maxAge"] = { required=false, type="numeric" };
 	this.constraints["maxAgeUnit"] = { required=false, regex="(days|weeks|months|years)" };
 	this.constraints["maxItems"] = { required=false, type="numeric" };
 	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
 	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
 	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
-	this.constraints["featuredImageBehavior"] = { required=false, regex="(default|feed|none)" };
 
 	/**
 	 * Constructor
@@ -191,7 +192,7 @@ component persistent="true"
 		if ( isArray( arguments.taxonomies ) ) {
 			arguments.taxonomies = serializeJSON( arguments.taxonomies );
 		}
-		taxonomies = arguments.taxonomies;
+		variables.taxonomies = arguments.taxonomies;
 		return this;
 	}
 
@@ -200,7 +201,7 @@ component persistent="true"
 	 * @return An array of taxonomies if defined
 	 */
 	array function getTaxonomies() {
-		return ( !isNull( taxonomies ) && isJSON( taxonomies ) ) ? deserializeJSON( taxonomies ) : [];
+		return ( !isNull( variables.taxonomies ) && isJSON( variables.taxonomies ) ) ? deserializeJSON( variables.taxonomies ) : [];
 	}
 
 	/**
@@ -400,24 +401,6 @@ component persistent="true"
 			result["feedItems"] = [];
 		}
 
-		// TODO: Go over fields and add missing ones
-
-		/*
-		"startDate"
-		"stopDate"
-		"itemStatus"
-		"ItemPubDate"
-		"matchAnyFilter"
-		"matchAllFilter"
-		"matchNoneFilter"
-		"maxAge"
-		"maxAgeUnit"
-		"maxItems"
-		"importImages"
-		"importFeaturedImages"
-		"featuredImageBehavior"
-		*/
-
 		return result;
 
 	}
@@ -428,15 +411,12 @@ component persistent="true"
 	 */
 	array function validate() {
 
-		// TODO: Update this
-
 		var errors = [];
 
 		HTMLKeyWords = trim( left( HTMLKeywords, 160 ) );
 		HTMLDescription = trim( left( HTMLDescription, 160 ) );
 		title = trim( left( title, 200 ) );
 		slug = trim( left( slug, 200 ) );
-
 		siteUrl = trim( left( siteUrl, 255 ) );
 		feedUrl = trim( left( feedUrl, 255 ) );
 		tagLine = trim( left( tagLine, 255 ) );

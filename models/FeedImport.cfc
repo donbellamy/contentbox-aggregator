@@ -64,8 +64,11 @@ component persistent="true"
 	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
-	// TODO: constraints
 
+	this.constraints = {
+		"importedDate" = { required=true, type="date" },
+		"importedCount" = { required=true, type="numeric" }
+	};
 
 	/**
 	 * Constructor

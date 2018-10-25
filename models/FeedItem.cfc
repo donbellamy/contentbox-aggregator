@@ -60,7 +60,6 @@ component persistent="true"
 	this.constraints["uniqueId"] = { required=true, size="1..255" };
 	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["itemAuthor"] = { required=false, size="1..255" };
-	this.constraints["metaInfo"] = { required=false };
 
 	/**
 	 * Constructor
@@ -87,7 +86,7 @@ component persistent="true"
 		if ( isStruct( arguments.metaInfo ) ) {
 			arguments.metaInfo = serializeJSON( arguments.metaInfo );
 		}
-		metaInfo = arguments.metaInfo;
+		variables.metaInfo = arguments.metaInfo;
 		return this;
 	}
 
@@ -96,7 +95,7 @@ component persistent="true"
 	 * @return A structure of meta data
 	 */
 	struct function getMetaInfo() {
-		return ( !isNull( metaInfo ) && isJSON( metaInfo ) ) ? deserializeJSON( metaInfo ) : {};
+		return ( !isNull( variables.metaInfo ) && isJSON( variables.metaInfo ) ) ? deserializeJSON( variables.metaInfo ) : {};
 	}
 
 	/**
@@ -128,7 +127,6 @@ component persistent="true"
 					builder = b,
 					content	= this
 				};
-				// TODO: Check this, may want to use an aggregator event
 				interceptorService.processState( "cb_onContentRendering", iData );
 				renderedExcerpt = b.toString();
 			}
@@ -228,8 +226,6 @@ component persistent="true"
 	 * @return An array of errors or an empty array if no error is found
 	 */
 	array function validate() {
-
-		// TODO: Update this
 
 		var errors = [];
 
