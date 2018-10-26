@@ -465,6 +465,30 @@ component extends="contentHandler" {
 	}
 
 	/**
+	 * Imports all feeds
+	 */
+	function importAll( event, rc, prc ) {
+
+		// Set timeout
+		setting requestTimeout="999999";
+
+		// Grab the feeds
+		var feeds = feedService.getAll( sortOrder="title" );
+		var messages = [];
+
+		// Import feeds
+		for ( var feed IN feeds ) {
+			feedImportService.import( feed, prc.oCurrentAuthor );
+			arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+		}
+		announceInterception( "aggregator_postFeedImports" );
+		cbMessagebox.info( messageArray=messages );
+
+		setNextEvent( prc.xehFeeds );
+
+	}
+
+	/**
 	 * Displays the feed import record
 	 */
 	function viewImport( event, rc, prc ) {

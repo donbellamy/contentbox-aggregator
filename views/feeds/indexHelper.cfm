@@ -144,6 +144,10 @@ function importFeed( contentID ) {
 	$contentForm.submit();
 }
 
+function importAll() {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedImportAll )#" ).submit();
+}
+
 function contentPaginate( page ) {
 	contentLoad( {
 		search : $("##search").val(),
