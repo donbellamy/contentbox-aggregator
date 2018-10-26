@@ -613,24 +613,69 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function timeAgo( required date time ) {
 
-		var diff = dateDiff( "s", arguments.time, now() );
+		// Strings
+		var strings = {
+			"seconds" = "less than a minute ago",
+			"minute" = "about a minute ago",
+			"minutes" = "%d minutes ago",
+			"hour" = "about an hour ago",
+			"hours" = "%d hours ago",
+			"day" = "about a day ago",
+			"days" = "%d days ago",
+			"week" = "about a week ago",
+			"weeks" = "%d weeks ago",
+			"month" = "about a month ago",
+			"months" = "%d months ago",
+			"year" = "about a year ago",
+			"years" = "%d years ago"
+		};
 
-		// x minutes ago
-		if ( diff LT 3600 ) {
-			var minutes = round( diff / 60 );
-			if ( minutes == 1 ) return "1 minute ago";
-			else return minutes & " minutes ago";
-		// x hours ago
-		} else if ( diff LT ( 3600 * 24 ) ) {
-			var hours = round( diff / 3600 );
-			if ( hours == 1 ) return "1 hour ago";
-			else return hours & " hours ago";
-		// older than 24 hours, just return the time
-		// TODO: Lets go out a bit further - yesterday, two days ago, three days ago, etc....
-		// Maybe make it an option?
+		// Time differences
+		var seconds = dateDiff( "s", arguments.time, now() );
+		var minutes = seconds / 60;
+		var hours = minutes / 60;
+		var days = hours / 24;
+		var weeks = days / 7;
+		var years = days / 365;
+
+		// Set the fuzzy timestamp
+		var timestamp = "";
+		// Less than a minute
+		if ( seconds LT 45 ) {
+			timestamp = strings["seconds"];
+		// A minute
+		} else if ( seconds LT 90 ) {
+			timestamp = strings["minute"];
+		// X minutes
+		} else if ( minutes < 45 ) {
+			timestamp = replace( strings["minutes"], "%d", round( minutes ) );
+		// An hour
+		} else if ( minutes LT 90 ) {
+			timestamp = strings["hour"];
+		// X hours
+		} else if ( hours LT 24 ) {
+			timestamp = replace( strings["hours"], "%d", round( hours ) );
+		// A day
+		} else if ( hours LT 36 ) {
+			timestamp = strings["day"];
+		// X days
+		} else if ( days LT 7 ) {
+			timestamp = replace( strings["days"], "%d", round( days ) );
+		// A week
+		} else if ( days LT 11 ) {
+			timestamp = strings["week"];
+		// X weeks
+		} else if ( weeks LT 4 ) {
+			timestamp = replace( strings["weeks"], "%d", round( weeks ) );
+		// A month
+		} else if ( weeks LT 6 ) {
+			timestamp = strings["month"];
+		// Over a month old, so return the actual date
 		} else {
-			return arguments.time;
+			timestamp = arguments.time;
 		}
+
+		return timestamp;
 
 	}
 
