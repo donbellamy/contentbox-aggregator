@@ -1,0 +1,8869 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Feed</title>
+	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>RSS Aggregator v1.0.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?aggregator/models/Feed.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ Feed</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntityMethods
+      <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.content.BaseContent
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.Feed
+</pre>
+
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>ContentBox RSS Aggregator
+Feed Model</p>
+</div>
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				discriminatorvalue
+				
+				: Feed
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				entityname
+				
+				: cbFeed
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				cacheuse
+				
+				: read-write
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				joincolumn
+				
+				: contentID
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				table
+				
+				: cb_feed
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized
+				
+				: false
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				cachename
+				
+				: cbFeed
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				batchsize
+				
+				: 25
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors
+				
+				: false
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent
+				
+				: true
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				author
+				
+				: Don Bellamy <don@perfectcode.com>
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="property_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="5">
+			<strong>Property Summary</strong>
+		</th>
+	</tr>
+	<tr class="info">
+		<th align="left">
+			<strong>type</strong>
+		</th>
+		<th align="left">
+			<strong>property</strong>
+		</th>
+		<th align="left">
+			<strong>default</strong>
+		</th>
+		<th align="left">
+			<strong>serializable</strong>
+		</th>
+		<th align="left">
+			<strong>required</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#featuredImageBehavior()">featuredImageBehavior</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 10</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#feedImports()">feedImports</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">inverse = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = one-to-many</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">cascade = all-delete-orphan</li>
+				
+			
+				
+				<li class="label label-default label-annotations">orderby = importedDate DESC</li>
+				
+			
+				
+				<li class="label label-default label-annotations">batchsize = 25</li>
+				
+			
+				
+				<li class="label label-default label-annotations">singularname = FeedImport</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = FeedImport</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = extra</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#feedUrl()">feedUrl</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#importFeaturedImages()">importFeaturedImages</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#importImages()">importImages</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#isActive()">isActive</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_isActive</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>true</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#isFailing()">isFailing</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>false</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#ItemPubDate()">ItemPubDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 10</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#itemStatus()">itemStatus</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 10</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#lastImportedDate()">lastImportedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#linkBehavior()">linkBehavior</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 15</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#matchAllFilter()">matchAllFilter</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#matchAnyFilter()">matchAnyFilter</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#matchNoneFilter()">matchNoneFilter</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#maxAge()">maxAge</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = long</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#maxAgeUnit()">maxAgeUnit</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 10</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#maxItems()">maxItems</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = long</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#pagingMaxItems()">pagingMaxItems</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = long</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#postFeedDisplay()">postFeedDisplay</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#postFeedItemDisplay()">postFeedItemDisplay</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#preFeedDisplay()">preFeedDisplay</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#preFeedItemDisplay()">preFeedItemDisplay</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#siteUrl()">siteUrl</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#startDate()">startDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_startDate</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#stopDate()">stopDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_stopDate</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#tagLine()">tagLine</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#taxonomies()">taxonomies</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	</tr>
+</table>
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="Feed.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#addFeedImport()">addFeedImport</A></strong>(any FeedImport)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#addJoinedStartTime()">addJoinedStartTime</A></strong>(string timeString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a timestamp to the start date property using a timestring value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#addJoinedStopTime()">addJoinedStopTime</A></strong>(string timeString)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a timestamp to the stop date property using a timestring value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#addStartTime()">addStartTime</A></strong>(string hour, string minute)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a timestamp to the start date property using separate hour and minute values.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#addStopTime()">addStopTime</A></strong>(string hour, string minute)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a timestamp to the stop date property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#autoPublishItems()">autoPublishItems</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if feed items should be published when importing.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#canImport()">canImport</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed can import.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getDisplayLastImportedDate()">getDisplayLastImportedDate</A></strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted last imported date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getFeaturedImageBehavior()">getFeaturedImageBehavior</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getFeedImports()">getFeedImports</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getFeedItems()">getFeedItems</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getFeedUrl()">getFeedUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getImportFeaturedImages()">getImportFeaturedImages</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getImportImages()">getImportImages</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getIsActive()">getIsActive</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getIsFailing()">getIsFailing</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getItemPubDate()">getItemPubDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getItemStatus()">getItemStatus</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getLastImportedDate()">getLastImportedDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getLinkBehavior()">getLinkBehavior</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMatchAllFilter()">getMatchAllFilter</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMatchAnyFilter()">getMatchAnyFilter</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMatchNoneFilter()">getMatchNoneFilter</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMaxAge()">getMaxAge</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMaxAgeUnit()">getMaxAgeUnit</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMaxItems()">getMaxItems</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getNumberOfFeedItems()">getNumberOfFeedItems</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the number of feed items.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getPagingMaxItems()">getPagingMaxItems</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getPostFeedDisplay()">getPostFeedDisplay</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getPostFeedItemDisplay()">getPostFeedItemDisplay</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getPreFeedDisplay()">getPreFeedDisplay</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getPreFeedItemDisplay()">getPreFeedItemDisplay</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getResponseMemento()">getResponseMemento</A></strong>([boolean showAuthor='true'], [boolean showCategories='true'], [boolean showFeedItems='true'], [string excludes='allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a flat representation of the feed for UI response format which restricts the data displayed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getSiteUrl()">getSiteUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getStartDate()">getStartDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getStartDateForEditor()">getStartDateForEditor</A></strong>([boolean showTime='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted start date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getStopDate()">getStopDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getStopDateForEditor()">getStopDateForEditor</A></strong>([boolean showTime='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted stop date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getTagLine()">getTagLine</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getTaxonomies()">getTaxonomies</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the taxonomies property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#hasFeedImport()">hasFeedImport</A></strong>([any FeedImport])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#hasFeedItem()">hasFeedItem</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the feed has a feed item.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#isFailing()">isFailing</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed import routine is currently failing.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#removeFeedImport()">removeFeedImport</A></strong>(any FeedImport)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setFeaturedImageBehavior()">setFeaturedImageBehavior</A></strong>(any featuredImageBehavior)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setFeedImports()">setFeedImports</A></strong>(array feedImports)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setFeedUrl()">setFeedUrl</A></strong>(any feedUrl)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setImportFeaturedImages()">setImportFeaturedImages</A></strong>(any importFeaturedImages)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setImportImages()">setImportImages</A></strong>(any importImages)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setIsActive()">setIsActive</A></strong>(any isActive)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setIsFailing()">setIsFailing</A></strong>(any isFailing)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setItemPubDate()">setItemPubDate</A></strong>(any ItemPubDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setItemStatus()">setItemStatus</A></strong>(any itemStatus)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setLastImportedDate()">setLastImportedDate</A></strong>(any lastImportedDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setLinkBehavior()">setLinkBehavior</A></strong>(any linkBehavior)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMatchAllFilter()">setMatchAllFilter</A></strong>(any matchAllFilter)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMatchAnyFilter()">setMatchAnyFilter</A></strong>(any matchAnyFilter)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMatchNoneFilter()">setMatchNoneFilter</A></strong>(any matchNoneFilter)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMaxAge()">setMaxAge</A></strong>(any maxAge)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMaxAgeUnit()">setMaxAgeUnit</A></strong>(any maxAgeUnit)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setMaxItems()">setMaxItems</A></strong>(any maxItems)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setPagingMaxItems()">setPagingMaxItems</A></strong>(any pagingMaxItems)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setPostFeedDisplay()">setPostFeedDisplay</A></strong>(any postFeedDisplay)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setPostFeedItemDisplay()">setPostFeedItemDisplay</A></strong>(any postFeedItemDisplay)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setPreFeedDisplay()">setPreFeedDisplay</A></strong>(any preFeedDisplay)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setPreFeedItemDisplay()">setPreFeedItemDisplay</A></strong>(any preFeedItemDisplay)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setSiteUrl()">setSiteUrl</A></strong>(any siteUrl)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setStartDate()">setStartDate</A></strong>(any startDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setStopDate()">setStopDate</A></strong>(any stopDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setTagLine()">setTagLine</A></strong>(any tagLine)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setTaxonomies()">setTaxonomies</A></strong>(any taxonomies)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the taxomomies property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#validate()">validate</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the feed.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.content.BaseContent"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.content.BaseContent</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/content/BaseContent.html#addActiveContent()">addActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addCategories()">addCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#addChild()">addChild</a>, <a href="../../contentbox/models/content/BaseContent.html#addComment()">addComment</a>, <a href="../../contentbox/models/content/BaseContent.html#addCommentSubscription()">addCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#addContentVersion()">addContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addCustomField()">addCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#addExpiredTime()">addExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedExpiredTime()">addJoinedExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedPublishedTime()">addJoinedPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addLinkedContent()">addLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addNewContentVersion()">addNewContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addPublishedTime()">addPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addRelatedContent()">addRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#buildContentCacheKey()">buildContentCacheKey</a>, <a href="../../contentbox/models/content/BaseContent.html#canCacheContent()">canCacheContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getActiveContent()">getActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getAllowComments()">getAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthor()">getAuthor</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorEmail()">getAuthorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorName()">getAuthorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCache()">getCache</a>, <a href="../../contentbox/models/content/BaseContent.html#getCachebox()">getCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLastAccessTimeout()">getCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLayout()">getCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheTimeout()">getCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategories()">getCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoriesList()">getCategoriesList</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoryService()">getCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#getChildren()">getChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getComments()">getComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getCommentSubscriptions()">getCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContent()">getContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentID()">getContentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentService()">getContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentType()">getContentType</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersions()">getContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersionService()">getContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreator()">getCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorEmail()">getCreatorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorName()">getCreatorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomField()">getCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFields()">getCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldsAsStruct()">getCustomFieldsAsStruct</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldService()">getCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayExpireDate()">getDisplayExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayPublishedDate()">getDisplayPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDate()">getExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDateForEditor()">getExpireDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImage()">getFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImageURL()">getFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLDescription()">getHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLKeywords()">getHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLTitle()">getHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#getI18n()">getI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#getInterceptorService()">getInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsPublished()">getIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#getLinkedContent()">getLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getMarkup()">getMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#getMemento()">getMemento</a>, <a href="../../contentbox/models/content/BaseContent.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfActiveVersions()">getNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfApprovedComments()">getNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfChildren()">getNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfComments()">getNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfHits()">getNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfVersions()">getNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getParent()">getParent</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentID()">getParentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentName()">getParentName</a>, <a href="../../contentbox/models/content/BaseContent.html#getPasswordProtection()">getPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDate()">getPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDateForEditor()">getPublishedDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getRecursiveSlug()">getRecursiveSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContent()">getRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContentIDs()">getRelatedContentIDs</a>, <a href="../../contentbox/models/content/BaseContent.html#getRenderedContent()">getRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getSettingService()">getSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#getShowInSearch()">getShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#getSlug()">getSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getStats()">getStats</a>, <a href="../../contentbox/models/content/BaseContent.html#getTitle()">getTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContent()">hasActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContentSet()">hasActiveContentSet</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCategories()">hasCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#hasChild()">hasChild</a>, <a href="../../contentbox/models/content/BaseContent.html#hasComment()">hasComment</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCommentSubscription()">hasCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#hasContentVersion()">hasContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCreator()">hasCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCustomField()">hasCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#hasLinkedContent()">hasLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasParent()">hasParent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasRelatedContent()">hasRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasStats()">hasStats</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateCustomFields()">inflateCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateRelatedContent()">inflateRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#isContentPublished()">isContentPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#isExpired()">isExpired</a>, <a href="../../contentbox/models/content/BaseContent.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/content/BaseContent.html#isPasswordProtected()">isPasswordProtected</a>, <a href="../../contentbox/models/content/BaseContent.html#isPublishedInFuture()">isPublishedInFuture</a>, <a href="../../contentbox/models/content/BaseContent.html#maxContentVersionChecks()">maxContentVersionChecks</a>, <a href="../../contentbox/models/content/BaseContent.html#prepareForClone()">prepareForClone</a>, <a href="../../contentbox/models/content/BaseContent.html#removeActiveContent()">removeActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllCategories()">removeAllCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllLinkedContent()">removeAllLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCategories()">removeCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeChild()">removeChild</a>, <a href="../../contentbox/models/content/BaseContent.html#removeComment()">removeComment</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCommentSubscription()">removeCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#removeContentVersion()">removeContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCustomField()">removeCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#removeLinkedContent()">removeLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeRelatedContent()">removeRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContent()">renderContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContentSilent()">renderContentSilent</a>, <a href="../../contentbox/models/content/BaseContent.html#setActiveContent()">setActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setAllowComments()">setAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCache()">setCache</a>, <a href="../../contentbox/models/content/BaseContent.html#setCachebox()">setCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLastAccessTimeout()">setCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLayout()">setCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheTimeout()">setCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategories()">setCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategoryService()">setCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#setChildren()">setChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setComments()">setComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCommentSubscriptions()">setCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentService()">setContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersions()">setContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersionService()">setContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreator()">setCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFields()">setCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFieldService()">setCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#setExpireDate()">setExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImage()">setFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImageURL()">setFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLDescription()">setHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLKeywords()">setHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLTitle()">setHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#setI18n()">setI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#setInterceptorService()">setInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsPublished()">setIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#setLinkedContent()">setLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setMarkup()">setMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#setModifiedDate()">setModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfActiveVersions()">setNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfApprovedComments()">setNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfChildren()">setNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfComments()">setNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfHits()">setNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfVersions()">setNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setParent()">setParent</a>, <a href="../../contentbox/models/content/BaseContent.html#setPasswordProtection()">setPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#setPublishedDate()">setPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setRelatedContent()">setRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setRenderedContent()">setRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setSettingService()">setSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#setShowInSearch()">setShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#setSlug()">setSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#setStats()">setStats</a>, <a href="../../contentbox/models/content/BaseContent.html#setTitle()">setTitle</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntityMethods"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntityMethods</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntityMethods.html#getBaseMemento()">getBaseMemento</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayCreatedDate()">getDisplayCreatedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayModifiedDate()">getDisplayModifiedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preInsert()">preInsert</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preUpdate()">preUpdate</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>Constructor</p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+	<a name="property_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Property Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	
+		
+		<a name="featuredImageBehavior()"><!-- --></a>
+		<h3>featuredImageBehavior</h3>
+
+		<kbd>
+			property any
+			<strong>featuredImageBehavior</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 10</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="feedImports()"><!-- --></a>
+		<h3>feedImports</h3>
+
+		<kbd>
+			property array
+			<strong>feedImports</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>inverse</code> - true</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - one-to-many</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>cascade</code> - all-delete-orphan</dd>
+			
+		
+			
+			<dd><code>orderby</code> - importedDate DESC</dd>
+			
+		
+			
+			<dd><code>batchsize</code> - 25</dd>
+			
+		
+			
+			<dd><code>singularname</code> - FeedImport</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - FeedImport</dd>
+			
+		
+			
+			<dd><code>lazy</code> - extra</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="feedUrl()"><!-- --></a>
+		<h3>feedUrl</h3>
+
+		<kbd>
+			property any
+			<strong>feedUrl</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="importFeaturedImages()"><!-- --></a>
+		<h3>importFeaturedImages</h3>
+
+		<kbd>
+			property any
+			<strong>importFeaturedImages</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="importImages()"><!-- --></a>
+		<h3>importImages</h3>
+
+		<kbd>
+			property any
+			<strong>importImages</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="isActive()"><!-- --></a>
+		<h3>isActive</h3>
+
+		<kbd>
+			property any
+			<strong>isActive</strong>
+			
+			= [true]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_isActive</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="isFailing()"><!-- --></a>
+		<h3>isFailing</h3>
+
+		<kbd>
+			property any
+			<strong>isFailing</strong>
+			
+			= [false]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="ItemPubDate()"><!-- --></a>
+		<h3>ItemPubDate</h3>
+
+		<kbd>
+			property any
+			<strong>ItemPubDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 10</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="itemStatus()"><!-- --></a>
+		<h3>itemStatus</h3>
+
+		<kbd>
+			property any
+			<strong>itemStatus</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 10</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="lastImportedDate()"><!-- --></a>
+		<h3>lastImportedDate</h3>
+
+		<kbd>
+			property any
+			<strong>lastImportedDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="linkBehavior()"><!-- --></a>
+		<h3>linkBehavior</h3>
+
+		<kbd>
+			property any
+			<strong>linkBehavior</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 15</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="matchAllFilter()"><!-- --></a>
+		<h3>matchAllFilter</h3>
+
+		<kbd>
+			property any
+			<strong>matchAllFilter</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="matchAnyFilter()"><!-- --></a>
+		<h3>matchAnyFilter</h3>
+
+		<kbd>
+			property any
+			<strong>matchAnyFilter</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="matchNoneFilter()"><!-- --></a>
+		<h3>matchNoneFilter</h3>
+
+		<kbd>
+			property any
+			<strong>matchNoneFilter</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="maxAge()"><!-- --></a>
+		<h3>maxAge</h3>
+
+		<kbd>
+			property any
+			<strong>maxAge</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - long</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="maxAgeUnit()"><!-- --></a>
+		<h3>maxAgeUnit</h3>
+
+		<kbd>
+			property any
+			<strong>maxAgeUnit</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 10</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="maxItems()"><!-- --></a>
+		<h3>maxItems</h3>
+
+		<kbd>
+			property any
+			<strong>maxItems</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - long</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="pagingMaxItems()"><!-- --></a>
+		<h3>pagingMaxItems</h3>
+
+		<kbd>
+			property any
+			<strong>pagingMaxItems</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - long</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="postFeedDisplay()"><!-- --></a>
+		<h3>postFeedDisplay</h3>
+
+		<kbd>
+			property any
+			<strong>postFeedDisplay</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="postFeedItemDisplay()"><!-- --></a>
+		<h3>postFeedItemDisplay</h3>
+
+		<kbd>
+			property any
+			<strong>postFeedItemDisplay</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="preFeedDisplay()"><!-- --></a>
+		<h3>preFeedDisplay</h3>
+
+		<kbd>
+			property any
+			<strong>preFeedDisplay</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="preFeedItemDisplay()"><!-- --></a>
+		<h3>preFeedItemDisplay</h3>
+
+		<kbd>
+			property any
+			<strong>preFeedItemDisplay</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="siteUrl()"><!-- --></a>
+		<h3>siteUrl</h3>
+
+		<kbd>
+			property any
+			<strong>siteUrl</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="startDate()"><!-- --></a>
+		<h3>startDate</h3>
+
+		<kbd>
+			property any
+			<strong>startDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_startDate</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="stopDate()"><!-- --></a>
+		<h3>stopDate</h3>
+
+		<kbd>
+			property any
+			<strong>stopDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_stopDate</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="tagLine()"><!-- --></a>
+		<h3>tagLine</h3>
+
+		<kbd>
+			property any
+			<strong>tagLine</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="taxonomies()"><!-- --></a>
+		<h3>taxonomies</h3>
+
+		<kbd>
+			property any
+			<strong>taxonomies</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="addFeedImport()"><!-- --></a>
+	<h3>
+		addFeedImport
+		
+	</h3>
+
+	<kbd>public any <strong>addFeedImport</strong>(any FeedImport)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>FeedImport</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addJoinedStartTime()"><!-- --></a>
+	<h3>
+		addJoinedStartTime
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>addJoinedStartTime</strong>(string timeString)</kbd>
+
+	<br><br>
+
+	
+		<p>Adds a timestamp to the start date property using a timestring value</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>timeString</code> - The timestamp to use with the format hh:mm</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Feed</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addJoinedStopTime()"><!-- --></a>
+	<h3>
+		addJoinedStopTime
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>addJoinedStopTime</strong>(string timeString)</kbd>
+
+	<br><br>
+
+	
+		<p>Adds a timestamp to the stop date property using a timestring value</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>timeString</code> - The timestamp to use with the format hh:mm</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Feed</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addStartTime()"><!-- --></a>
+	<h3>
+		addStartTime
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>addStartTime</strong>(string hour, string minute)</kbd>
+
+	<br><br>
+
+	
+		<p>Adds a timestamp to the start date property using separate hour and minute values</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>hour</code> - The hour value of the timestamp</dd>
+		
+		<dd><code>minute</code> - The minute value of the timestamp</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Feed</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addStopTime()"><!-- --></a>
+	<h3>
+		addStopTime
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>addStopTime</strong>(string hour, string minute)</kbd>
+
+	<br><br>
+
+	
+		<p>Adds a timestamp to the stop date property</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>hour</code> - The hour value of the timestamp</dd>
+		
+		<dd><code>minute</code> - The minute value of the timestamp</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Feed</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="autoPublishItems()"><!-- --></a>
+	<h3>
+		autoPublishItems
+		
+	</h3>
+
+	<kbd>public boolean <strong>autoPublishItems</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if feed items should be published when importing</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if feed items should be published, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="canImport()"><!-- --></a>
+	<h3>
+		canImport
+		
+	</h3>
+
+	<kbd>public boolean <strong>canImport</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the feed can import</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the feed can import, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getDisplayLastImportedDate()"><!-- --></a>
+	<h3>
+		getDisplayLastImportedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getDisplayLastImportedDate</strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the formatted last imported date</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>dateFormat</code> - The dateformat to use</dd>
+		
+		<dd><code>timeFormat</code> - The timeformat to use</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The formatted last imported date</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeaturedImageBehavior()"><!-- --></a>
+	<h3>
+		getFeaturedImageBehavior
+		
+	</h3>
+
+	<kbd>public string <strong>getFeaturedImageBehavior</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedImports()"><!-- --></a>
+	<h3>
+		getFeedImports
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedImports</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedItems()"><!-- --></a>
+	<h3>
+		getFeedItems
+		
+	</h3>
+
+	<kbd>public array <strong>getFeedItems</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed items</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>An array of feed items if defined</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedUrl()"><!-- --></a>
+	<h3>
+		getFeedUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getImportFeaturedImages()"><!-- --></a>
+	<h3>
+		getImportFeaturedImages
+		
+	</h3>
+
+	<kbd>public string <strong>getImportFeaturedImages</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getImportImages()"><!-- --></a>
+	<h3>
+		getImportImages
+		
+	</h3>
+
+	<kbd>public string <strong>getImportImages</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getIsActive()"><!-- --></a>
+	<h3>
+		getIsActive
+		
+	</h3>
+
+	<kbd>public string <strong>getIsActive</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getIsFailing()"><!-- --></a>
+	<h3>
+		getIsFailing
+		
+	</h3>
+
+	<kbd>public string <strong>getIsFailing</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getItemPubDate()"><!-- --></a>
+	<h3>
+		getItemPubDate
+		
+	</h3>
+
+	<kbd>public string <strong>getItemPubDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getItemStatus()"><!-- --></a>
+	<h3>
+		getItemStatus
+		
+	</h3>
+
+	<kbd>public string <strong>getItemStatus</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getLastImportedDate()"><!-- --></a>
+	<h3>
+		getLastImportedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getLastImportedDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getLinkBehavior()"><!-- --></a>
+	<h3>
+		getLinkBehavior
+		
+	</h3>
+
+	<kbd>public string <strong>getLinkBehavior</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMatchAllFilter()"><!-- --></a>
+	<h3>
+		getMatchAllFilter
+		
+	</h3>
+
+	<kbd>public string <strong>getMatchAllFilter</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMatchAnyFilter()"><!-- --></a>
+	<h3>
+		getMatchAnyFilter
+		
+	</h3>
+
+	<kbd>public string <strong>getMatchAnyFilter</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMatchNoneFilter()"><!-- --></a>
+	<h3>
+		getMatchNoneFilter
+		
+	</h3>
+
+	<kbd>public string <strong>getMatchNoneFilter</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMaxAge()"><!-- --></a>
+	<h3>
+		getMaxAge
+		
+	</h3>
+
+	<kbd>public string <strong>getMaxAge</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMaxAgeUnit()"><!-- --></a>
+	<h3>
+		getMaxAgeUnit
+		
+	</h3>
+
+	<kbd>public string <strong>getMaxAgeUnit</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMaxItems()"><!-- --></a>
+	<h3>
+		getMaxItems
+		
+	</h3>
+
+	<kbd>public string <strong>getMaxItems</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getNumberOfFeedItems()"><!-- --></a>
+	<h3>
+		getNumberOfFeedItems
+		
+	</h3>
+
+	<kbd>public numeric <strong>getNumberOfFeedItems</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the number of feed items</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The number of feed items</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPagingMaxItems()"><!-- --></a>
+	<h3>
+		getPagingMaxItems
+		
+	</h3>
+
+	<kbd>public string <strong>getPagingMaxItems</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPostFeedDisplay()"><!-- --></a>
+	<h3>
+		getPostFeedDisplay
+		
+	</h3>
+
+	<kbd>public string <strong>getPostFeedDisplay</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPostFeedItemDisplay()"><!-- --></a>
+	<h3>
+		getPostFeedItemDisplay
+		
+	</h3>
+
+	<kbd>public string <strong>getPostFeedItemDisplay</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPreFeedDisplay()"><!-- --></a>
+	<h3>
+		getPreFeedDisplay
+		
+	</h3>
+
+	<kbd>public string <strong>getPreFeedDisplay</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPreFeedItemDisplay()"><!-- --></a>
+	<h3>
+		getPreFeedItemDisplay
+		
+	</h3>
+
+	<kbd>public string <strong>getPreFeedItemDisplay</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getResponseMemento()"><!-- --></a>
+	<h3>
+		getResponseMemento
+		
+	</h3>
+
+	<kbd>public struct <strong>getResponseMemento</strong>([boolean showAuthor='true'], [boolean showCategories='true'], [boolean showFeedItems='true'], [string excludes='allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets a flat representation of the feed for UI response format which restricts the data displayed</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/BaseContent.html#getResponseMemento()">getResponseMemento</a></code>
+			in class
+			<code>
+				contentbox.models.content.BaseContent
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>showAuthor</code> - Whether or not to include the feed author</dd>
+		
+		<dd><code>showCategories</code> - Whether or not to include the categories</dd>
+		
+		<dd><code>showFeedItems</code> - Whether or not to include the feed items</dd>
+		
+		<dd><code>excludes</code> - A list of properties to exclude</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>A structure containing the feed properties</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getSiteUrl()"><!-- --></a>
+	<h3>
+		getSiteUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getSiteUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStartDate()"><!-- --></a>
+	<h3>
+		getStartDate
+		
+	</h3>
+
+	<kbd>public string <strong>getStartDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStartDateForEditor()"><!-- --></a>
+	<h3>
+		getStartDateForEditor
+		
+	</h3>
+
+	<kbd>public string <strong>getStartDateForEditor</strong>([boolean showTime='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the formatted start date</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>showTime</code> - Whether or not to include the time in the formatted start date</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The formatted start date</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStopDate()"><!-- --></a>
+	<h3>
+		getStopDate
+		
+	</h3>
+
+	<kbd>public string <strong>getStopDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStopDateForEditor()"><!-- --></a>
+	<h3>
+		getStopDateForEditor
+		
+	</h3>
+
+	<kbd>public string <strong>getStopDateForEditor</strong>([boolean showTime='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the formatted stop date</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>showTime</code> - Whether or not to include the time in the formatted stop date</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The formatted start date</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTagLine()"><!-- --></a>
+	<h3>
+		getTagLine
+		
+	</h3>
+
+	<kbd>public string <strong>getTagLine</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTaxonomies()"><!-- --></a>
+	<h3>
+		getTaxonomies
+		
+	</h3>
+
+	<kbd>public array <strong>getTaxonomies</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the taxonomies property</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>An array of taxonomies if defined</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasFeedImport()"><!-- --></a>
+	<h3>
+		hasFeedImport
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasFeedImport</strong>([any FeedImport])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>FeedImport</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasFeedItem()"><!-- --></a>
+	<h3>
+		hasFeedItem
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasFeedItem</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks if the feed has a feed item</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the feed has any feed items, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFailing()"><!-- --></a>
+	<h3>
+		isFailing
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFailing</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the feed import routine is currently failing</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if imports are failing, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="removeFeedImport()"><!-- --></a>
+	<h3>
+		removeFeedImport
+		
+	</h3>
+
+	<kbd>public boolean <strong>removeFeedImport</strong>(any FeedImport)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>FeedImport</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFeaturedImageBehavior()"><!-- --></a>
+	<h3>
+		setFeaturedImageBehavior
+		
+	</h3>
+
+	<kbd>public any <strong>setFeaturedImageBehavior</strong>(any featuredImageBehavior)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>featuredImageBehavior</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFeedImports()"><!-- --></a>
+	<h3>
+		setFeedImports
+		
+	</h3>
+
+	<kbd>public any <strong>setFeedImports</strong>(array feedImports)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedImports</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFeedUrl()"><!-- --></a>
+	<h3>
+		setFeedUrl
+		
+	</h3>
+
+	<kbd>public any <strong>setFeedUrl</strong>(any feedUrl)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedUrl</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setImportFeaturedImages()"><!-- --></a>
+	<h3>
+		setImportFeaturedImages
+		
+	</h3>
+
+	<kbd>public any <strong>setImportFeaturedImages</strong>(any importFeaturedImages)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importFeaturedImages</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setImportImages()"><!-- --></a>
+	<h3>
+		setImportImages
+		
+	</h3>
+
+	<kbd>public any <strong>setImportImages</strong>(any importImages)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importImages</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setIsActive()"><!-- --></a>
+	<h3>
+		setIsActive
+		
+	</h3>
+
+	<kbd>public any <strong>setIsActive</strong>(any isActive)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>isActive</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setIsFailing()"><!-- --></a>
+	<h3>
+		setIsFailing
+		
+	</h3>
+
+	<kbd>public any <strong>setIsFailing</strong>(any isFailing)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>isFailing</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setItemPubDate()"><!-- --></a>
+	<h3>
+		setItemPubDate
+		
+	</h3>
+
+	<kbd>public any <strong>setItemPubDate</strong>(any ItemPubDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ItemPubDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setItemStatus()"><!-- --></a>
+	<h3>
+		setItemStatus
+		
+	</h3>
+
+	<kbd>public any <strong>setItemStatus</strong>(any itemStatus)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>itemStatus</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setLastImportedDate()"><!-- --></a>
+	<h3>
+		setLastImportedDate
+		
+	</h3>
+
+	<kbd>public any <strong>setLastImportedDate</strong>(any lastImportedDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>lastImportedDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setLinkBehavior()"><!-- --></a>
+	<h3>
+		setLinkBehavior
+		
+	</h3>
+
+	<kbd>public any <strong>setLinkBehavior</strong>(any linkBehavior)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>linkBehavior</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMatchAllFilter()"><!-- --></a>
+	<h3>
+		setMatchAllFilter
+		
+	</h3>
+
+	<kbd>public any <strong>setMatchAllFilter</strong>(any matchAllFilter)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>matchAllFilter</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMatchAnyFilter()"><!-- --></a>
+	<h3>
+		setMatchAnyFilter
+		
+	</h3>
+
+	<kbd>public any <strong>setMatchAnyFilter</strong>(any matchAnyFilter)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>matchAnyFilter</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMatchNoneFilter()"><!-- --></a>
+	<h3>
+		setMatchNoneFilter
+		
+	</h3>
+
+	<kbd>public any <strong>setMatchNoneFilter</strong>(any matchNoneFilter)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>matchNoneFilter</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMaxAge()"><!-- --></a>
+	<h3>
+		setMaxAge
+		
+	</h3>
+
+	<kbd>public any <strong>setMaxAge</strong>(any maxAge)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>maxAge</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMaxAgeUnit()"><!-- --></a>
+	<h3>
+		setMaxAgeUnit
+		
+	</h3>
+
+	<kbd>public any <strong>setMaxAgeUnit</strong>(any maxAgeUnit)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>maxAgeUnit</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMaxItems()"><!-- --></a>
+	<h3>
+		setMaxItems
+		
+	</h3>
+
+	<kbd>public any <strong>setMaxItems</strong>(any maxItems)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>maxItems</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPagingMaxItems()"><!-- --></a>
+	<h3>
+		setPagingMaxItems
+		
+	</h3>
+
+	<kbd>public any <strong>setPagingMaxItems</strong>(any pagingMaxItems)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>pagingMaxItems</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPostFeedDisplay()"><!-- --></a>
+	<h3>
+		setPostFeedDisplay
+		
+	</h3>
+
+	<kbd>public any <strong>setPostFeedDisplay</strong>(any postFeedDisplay)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>postFeedDisplay</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPostFeedItemDisplay()"><!-- --></a>
+	<h3>
+		setPostFeedItemDisplay
+		
+	</h3>
+
+	<kbd>public any <strong>setPostFeedItemDisplay</strong>(any postFeedItemDisplay)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>postFeedItemDisplay</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPreFeedDisplay()"><!-- --></a>
+	<h3>
+		setPreFeedDisplay
+		
+	</h3>
+
+	<kbd>public any <strong>setPreFeedDisplay</strong>(any preFeedDisplay)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>preFeedDisplay</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setPreFeedItemDisplay()"><!-- --></a>
+	<h3>
+		setPreFeedItemDisplay
+		
+	</h3>
+
+	<kbd>public any <strong>setPreFeedItemDisplay</strong>(any preFeedItemDisplay)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>preFeedItemDisplay</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setSiteUrl()"><!-- --></a>
+	<h3>
+		setSiteUrl
+		
+	</h3>
+
+	<kbd>public any <strong>setSiteUrl</strong>(any siteUrl)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>siteUrl</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setStartDate()"><!-- --></a>
+	<h3>
+		setStartDate
+		
+	</h3>
+
+	<kbd>public any <strong>setStartDate</strong>(any startDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>startDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setStopDate()"><!-- --></a>
+	<h3>
+		setStopDate
+		
+	</h3>
+
+	<kbd>public any <strong>setStopDate</strong>(any stopDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>stopDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setTagLine()"><!-- --></a>
+	<h3>
+		setTagLine
+		
+	</h3>
+
+	<kbd>public any <strong>setTagLine</strong>(any tagLine)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>tagLine</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setTaxonomies()"><!-- --></a>
+	<h3>
+		setTaxonomies
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>setTaxonomies</strong>(any taxonomies)</kbd>
+
+	<br><br>
+
+	
+		<p>Sets the taxomomies property</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>taxonomies</code> - An array of taxonomies to set on the feed</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Feed</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="validate()"><!-- --></a>
+	<h3>
+		validate
+		
+	</h3>
+
+	<kbd>public array <strong>validate</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Validates the feed</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>An array of errors or an empty array if no error is found</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

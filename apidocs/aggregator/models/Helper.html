@@ -1,0 +1,3194 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Helper</title>
+	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>RSS Aggregator v1.0.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?aggregator/models/Helper.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
+</div>
+
+<h2>
+
+
+Class
+
+ Helper</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre style="background:white">lucee.Component
+    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.Helper
+</pre>
+
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>ContentBox RSS Aggregator
+Aggregator Helper</p>
+</div>
+
+
+<!-- Clas Attributes -->
+<div class="panel panel-info">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				threadsafe
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				singleton
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized
+				
+				: false
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors
+				
+				: true
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent
+				
+				: false
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				author
+				
+				: Don Bellamy <don@perfectcode.com>
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="property_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="5">
+			<strong>Property Summary</strong>
+		</th>
+	</tr>
+	<tr class="info">
+		<th align="left">
+			<strong>type</strong>
+		</th>
+		<th align="left">
+			<strong>property</strong>
+		</th>
+		<th align="left">
+			<strong>default</strong>
+		</th>
+		<th align="left">
+			<strong>serializable</strong>
+		</th>
+		<th align="left">
+			<strong>required</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#cb()">cb</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = cbhelper@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#controller()">controller</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = coldbox</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	</tr>
+</table>
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="Helper.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#breadCrumbs()">breadCrumbs</A></strong>([string separator='>'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the breadcrumb html for the portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCb()">getCb</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getController()">getController</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentArchiveDate()">getCurrentArchiveDate</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the archive date if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>aggregator.models.Category</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentCategory()">getCurrentCategory</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the category if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a></code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentFeed()">getCurrentFeed</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a></code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentFeedItem()">getCurrentFeedItem</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentFeedItems()">getCurrentFeedItems</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item collection if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentFeeds()">getCurrentFeeds</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed collection if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentFormattedArchiveDate()">getCurrentFormattedArchiveDate</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted archive date if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentRelatedContent()">getCurrentRelatedContent</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the related content if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getPortalEntryPoint()">getPortalEntryPoint</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the portal entry point.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getSearchTerm()">getSearchTerm</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the search term if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isArchivesView()">isArchivesView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isCategoryView()">isCategoryView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isFeedItemView()">isFeedItemView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isFeedsView()">isFeedsView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isFeedView()">isFeedView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isIndexView()">isIndexView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isSearchView()">isSearchView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals portal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkArchive()">linkArchive</A></strong>([string year=''], [string month=''], [string day=''], [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the archive link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkCategory()">linkCategory</A></strong>([any category=''], [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the category link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkContent()">linkContent</A></strong>(any content, [boolean ssl='[runtime expression]'], [any format='html'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the content link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkExport()">linkExport</A></strong>(string format, [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the content export link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeed()">linkFeed</A></strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, [boolean ssl='[runtime expression]'], [string format='html'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedAuthor()">linkFeedAuthor</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed author link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedForm()">linkFeedForm</A></strong>([any feed], [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed form link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedItemForm()">linkFeedItemForm</A></strong>([any feedItem], [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item form link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedItemsAdmin()">linkFeedItemsAdmin</A></strong>(numeric contentID, [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items admin link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedRSS()">linkFeedRSS</A></strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed rss link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeeds()">linkFeeds</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkImport()">linkImport</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the import link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkPortal()">linkPortal</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the portal link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkRSS()">linkRSS</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the rss link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#mainView()">mainView</A></strong>([struct args='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the main view of the current event.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#quickCategoryLinks()">quickCategoryLinks</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the category links for a feed item.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#quickFeedItems()">quickFeedItems</A></strong>([string template='feeditem'], [string collectionAs='feeditem'], [struct args='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed items list.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#quickFeeds()">quickFeeds</A></strong>([string template='feed'], [string collectionAs='feed'], [struct args='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feeds list.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#quickPaging()">quickPaging</A></strong>([numeric maxRows], [string type='items'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the paging links.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#setCb()">setCb</A></strong>(any cb)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#setController()">setController</A></strong>(any controller)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#setting()">setting</A></strong>(any key, [any value])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets an aggregator setting value by key or by default value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#timeAgo()">timeAgo</A></strong>(date time)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a fuzzy timestamp of the provided date/time.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_lucee.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>lucee.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>Constructor</p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+	<a name="property_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Property Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	
+		
+		<a name="cb()"><!-- --></a>
+		<h3>cb</h3>
+
+		<kbd>
+			property any
+			<strong>cb</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - cbhelper@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="controller()"><!-- --></a>
+		<h3>controller</h3>
+
+		<kbd>
+			property any
+			<strong>controller</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - coldbox</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="breadCrumbs()"><!-- --></a>
+	<h3>
+		breadCrumbs
+		
+	</h3>
+
+	<kbd>public string <strong>breadCrumbs</strong>([string separator='>'])</kbd>
+
+	<br><br>
+
+	
+		<p>Creates the breadcrumb html for the portal</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>separator</code> - Breadcrumb separator, defaults to ">"</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The breadcrumb html</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCb()"><!-- --></a>
+	<h3>
+		getCb
+		
+	</h3>
+
+	<kbd>public string <strong>getCb</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getController()"><!-- --></a>
+	<h3>
+		getController
+		
+	</h3>
+
+	<kbd>public string <strong>getController</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentArchiveDate()"><!-- --></a>
+	<h3>
+		getCurrentArchiveDate
+		
+	</h3>
+
+	<kbd>public string <strong>getCurrentArchiveDate</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the archive date if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The archive date if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentCategory()"><!-- --></a>
+	<h3>
+		getCurrentCategory
+		
+	</h3>
+
+	<kbd>public aggregator.models.Category <strong>getCurrentCategory</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the category if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The category if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentFeed()"><!-- --></a>
+	<h3>
+		getCurrentFeed
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> <strong>getCurrentFeed</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentFeedItem()"><!-- --></a>
+	<h3>
+		getCurrentFeedItem
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> <strong>getCurrentFeedItem</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed item if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentFeedItems()"><!-- --></a>
+	<h3>
+		getCurrentFeedItems
+		
+	</h3>
+
+	<kbd>public array <strong>getCurrentFeedItems</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed item collection if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item collection if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentFeeds()"><!-- --></a>
+	<h3>
+		getCurrentFeeds
+		
+	</h3>
+
+	<kbd>public array <strong>getCurrentFeeds</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed collection if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed collection if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentFormattedArchiveDate()"><!-- --></a>
+	<h3>
+		getCurrentFormattedArchiveDate
+		
+	</h3>
+
+	<kbd>public string <strong>getCurrentFormattedArchiveDate</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the formatted archive date if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The formatted archive date if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCurrentRelatedContent()"><!-- --></a>
+	<h3>
+		getCurrentRelatedContent
+		
+	</h3>
+
+	<kbd>public array <strong>getCurrentRelatedContent</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the related content if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The related content if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPortalEntryPoint()"><!-- --></a>
+	<h3>
+		getPortalEntryPoint
+		
+	</h3>
+
+	<kbd>public string <strong>getPortalEntryPoint</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the portal entry point</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The portal entry point</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getSearchTerm()"><!-- --></a>
+	<h3>
+		getSearchTerm
+		
+	</h3>
+
+	<kbd>public string <strong>getSearchTerm</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the search term if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The search term if it exists, an empty string if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isArchivesView()"><!-- --></a>
+	<h3>
+		isArchivesView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isArchivesView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals portal.archives</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.archives, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isCategoryView()"><!-- --></a>
+	<h3>
+		isCategoryView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isCategoryView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if if the current event equals portal.index and a category is present</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.index and a category is present, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFeedItemView()"><!-- --></a>
+	<h3>
+		isFeedItemView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedItemView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals portal.feeditem</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.feeditem, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFeedsView()"><!-- --></a>
+	<h3>
+		isFeedsView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedsView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals portal.feeds</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.feeds, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFeedView()"><!-- --></a>
+	<h3>
+		isFeedView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals portal.feed</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.feed, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isIndexView()"><!-- --></a>
+	<h3>
+		isIndexView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isIndexView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals portal.index</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.index, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isSearchView()"><!-- --></a>
+	<h3>
+		isSearchView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isSearchView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if if the current event equals portal.index and a search term is present</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals portal.index and a search term is present, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkArchive()"><!-- --></a>
+	<h3>
+		linkArchive
+		
+	</h3>
+
+	<kbd>public string <strong>linkArchive</strong>([string year=''], [string month=''], [string day=''], [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the archive link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>year</code> - The year to filter on</dd>
+		
+		<dd><code>month</code> - The month to filter on</dd>
+		
+		<dd><code>day</code> - The day to filter on</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The archive link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkCategory()"><!-- --></a>
+	<h3>
+		linkCategory
+		
+	</h3>
+
+	<kbd>public string <strong>linkCategory</strong>([any category=''], [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the category link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>category</code> - The category to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The category link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkContent()"><!-- --></a>
+	<h3>
+		linkContent
+		
+	</h3>
+
+	<kbd>public string <strong>linkContent</strong>(any content, [boolean ssl='[runtime expression]'], [any format='html'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the content link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>content</code> - The content to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		<dd><code>format</code> - The format to link to, defaults to html</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The content link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkExport()"><!-- --></a>
+	<h3>
+		linkExport
+		
+	</h3>
+
+	<kbd>public string <strong>linkExport</strong>(string format, [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the content export link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>format</code> - The format to use, defaults to html</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The export link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeed()"><!-- --></a>
+	<h3>
+		linkFeed
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeed</strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, [boolean ssl='[runtime expression]'], [string format='html'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feed</code> - The feed to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		<dd><code>format</code> - The format to link to, defaults to html</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedAuthor()"><!-- --></a>
+	<h3>
+		linkFeedAuthor
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedAuthor</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed author link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedItem</code> - The feed item to use</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed author link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedForm()"><!-- --></a>
+	<h3>
+		linkFeedForm
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedForm</strong>([any feed], [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed form link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feed</code> - The feed to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed form link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedItem()"><!-- --></a>
+	<h3>
+		linkFeedItem
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedItem</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed item link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedItem</code> - The feed item to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		<dd><code>format</code> - The format to link to, defaults to html</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedItemForm()"><!-- --></a>
+	<h3>
+		linkFeedItemForm
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedItemForm</strong>([any feedItem], [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed item form link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedItem</code></dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item form link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedItemsAdmin()"><!-- --></a>
+	<h3>
+		linkFeedItemsAdmin
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedItemsAdmin</strong>(numeric contentID, [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed items admin link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>contentID</code> - The feed contentID to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed items admin link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedRSS()"><!-- --></a>
+	<h3>
+		linkFeedRSS
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedRSS</strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed rss link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feed</code> - The feed to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed rss link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeeds()"><!-- --></a>
+	<h3>
+		linkFeeds
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeeds</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feeds link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feeds link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkImport()"><!-- --></a>
+	<h3>
+		linkImport
+		
+	</h3>
+
+	<kbd>public string <strong>linkImport</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the import link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The immport link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkPortal()"><!-- --></a>
+	<h3>
+		linkPortal
+		
+	</h3>
+
+	<kbd>public string <strong>linkPortal</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the portal link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The portal link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkRSS()"><!-- --></a>
+	<h3>
+		linkRSS
+		
+	</h3>
+
+	<kbd>public string <strong>linkRSS</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the rss link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The rss link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="mainView()"><!-- --></a>
+	<h3>
+		mainView
+		
+	</h3>
+
+	<kbd>public any <strong>mainView</strong>([struct args='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Renders the main view of the current event</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>args</code> - A structure of arguments to pass to the view</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="quickCategoryLinks()"><!-- --></a>
+	<h3>
+		quickCategoryLinks
+		
+	</h3>
+
+	<kbd>public string <strong>quickCategoryLinks</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem)</kbd>
+
+	<br><br>
+
+	
+		<p>Creates the category links for a feed item</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedItem</code> - The feed item to create the category links</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The category links html</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="quickFeedItems()"><!-- --></a>
+	<h3>
+		quickFeedItems
+		
+	</h3>
+
+	<kbd>public string <strong>quickFeedItems</strong>([string template='feeditem'], [string collectionAs='feeditem'], [struct args='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Renders the feed items list</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>template</code> - The theme template used to render the feed items, defaults to "feeditem"</dd>
+		
+		<dd><code>collectionAs</code> - The variable name used in the template for each feed item, defaults to "feeditem"</dd>
+		
+		<dd><code>args</code> - A structure of arguments to pass to the template</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed items list html</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="quickFeeds()"><!-- --></a>
+	<h3>
+		quickFeeds
+		
+	</h3>
+
+	<kbd>public string <strong>quickFeeds</strong>([string template='feed'], [string collectionAs='feed'], [struct args='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Renders the feeds list</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>template</code> - The theme template used to render the feeds, defaults to "feed"</dd>
+		
+		<dd><code>collectionAs</code> - The variable name used in the template for each feed, defaults to "feed"</dd>
+		
+		<dd><code>args</code> - A structure of arguments to pass to the template</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feeds list html</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="quickPaging()"><!-- --></a>
+	<h3>
+		quickPaging
+		
+	</h3>
+
+	<kbd>public string <strong>quickPaging</strong>([numeric maxRows], [string type='items'])</kbd>
+
+	<br><br>
+
+	
+		<p>Renders the paging links</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>maxRows</code> - The maximum number of rows to return</dd>
+		
+		<dd><code>type</code> - The content type label to use, defaults to "items"</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The paging links html</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setCb()"><!-- --></a>
+	<h3>
+		setCb
+		
+	</h3>
+
+	<kbd>public any <strong>setCb</strong>(any cb)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>cb</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setController()"><!-- --></a>
+	<h3>
+		setController
+		
+	</h3>
+
+	<kbd>public any <strong>setController</strong>(any controller)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>controller</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setting()"><!-- --></a>
+	<h3>
+		setting
+		
+	</h3>
+
+	<kbd>public string <strong>setting</strong>(any key, [any value])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets an aggregator setting value by key or by default value</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>key</code> - The setting key to get</dd>
+		
+		<dd><code>value</code> - The default value to return if not found</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The setting value or default value if found</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="timeAgo()"><!-- --></a>
+	<h3>
+		timeAgo
+		
+	</h3>
+
+	<kbd>public string <strong>timeAgo</strong>(date time)</kbd>
+
+	<br><br>
+
+	
+		<p>Returns a fuzzy timestamp of the provided date/time</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>time</code> - The date/time value to use when creating the fuzzy timestamp</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The fuzzy timestamp, or passed date/time if older than 24 hours</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

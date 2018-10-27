@@ -14,7 +14,7 @@ component {
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
-	this.cfMapping = "aggregator";
+	this.cfmapping = "aggregator";
 	this.dependencies = ["cbjsoup"];
 
 	/**

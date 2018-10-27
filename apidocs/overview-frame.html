@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>	overview </title>
+	<meta name="keywords" content="overview">
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<link rel="stylesheet" href="jstree/themes/default/style.min.css" />
+</head>
+
+<body>
+	<h3><strong>RSS Aggregator v1.0.0</strong></h3>
+
+	
+	<input type="text" id="classSearch" placeholder="Search..."><br><br>
+	
+	<div id="classTree">
+		<ul>
+			
+			<li data-jstree='{ "type" : "package" }' linkhref="aggregator/package-summary.html" searchlist="aggregator" thissort="1">aggregator<ul><li data-jstree='{ "type" : "component" }' linkhref="aggregator/ModuleConfig.html" searchlist="aggregator.ModuleConfig" thissort="2">ModuleConfig</li><li data-jstree='{ "type" : "package" }' linkhref="aggregator/handlers/package-summary.html" searchlist="handlers" thissort="1">handlers<ul><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/baseHandler.html" searchlist="aggregator.handlers.baseHandler" thissort="2">baseHandler</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/feeditems.html" searchlist="aggregator.handlers.feeditems" thissort="2">feeditems</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/settings.html" searchlist="aggregator.handlers.settings" thissort="2">settings</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/feeds.html" searchlist="aggregator.handlers.feeds" thissort="2">feeds</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/dashboard.html" searchlist="aggregator.handlers.dashboard" thissort="2">dashboard</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/contentHandler.html" searchlist="aggregator.handlers.contentHandler" thissort="2">contentHandler</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/handlers/portal.html" searchlist="aggregator.handlers.portal" thissort="2">portal</li></ul></li><li data-jstree='{ "type" : "package" }' linkhref="aggregator/widgets/package-summary.html" searchlist="widgets" thissort="1">widgets<ul><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/RelatedContent.html" searchlist="aggregator.widgets.RelatedContent" thissort="2">RelatedContent</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/FeedItems.html" searchlist="aggregator.widgets.FeedItems" thissort="2">FeedItems</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/Categories.html" searchlist="aggregator.widgets.Categories" thissort="2">Categories</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/Feeds.html" searchlist="aggregator.widgets.Feeds" thissort="2">Feeds</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/Archives.html" searchlist="aggregator.widgets.Archives" thissort="2">Archives</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/SearchForm.html" searchlist="aggregator.widgets.SearchForm" thissort="2">SearchForm</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/RSS.html" searchlist="aggregator.widgets.RSS" thissort="2">RSS</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/widgets/Portal.html" searchlist="aggregator.widgets.Portal" thissort="2">Portal</li></ul></li><li data-jstree='{ "type" : "package" }' linkhref="aggregator/interceptors/package-summary.html" searchlist="interceptors" thissort="1">interceptors<ul><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/AdminRequest.html" searchlist="aggregator.interceptors.AdminRequest" thissort="2">AdminRequest</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/PortalRequest.html" searchlist="aggregator.interceptors.PortalRequest" thissort="2">PortalRequest</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/PortalCacheCleanup.html" searchlist="aggregator.interceptors.PortalCacheCleanup" thissort="2">PortalCacheCleanup</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/GlobalHTML.html" searchlist="aggregator.interceptors.GlobalHTML" thissort="2">GlobalHTML</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/RSSCacheCleanup.html" searchlist="aggregator.interceptors.RSSCacheCleanup" thissort="2">RSSCacheCleanup</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/FeedCleanup.html" searchlist="aggregator.interceptors.FeedCleanup" thissort="2">FeedCleanup</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/FeedItemTaxonomies.html" searchlist="aggregator.interceptors.FeedItemTaxonomies" thissort="2">FeedItemTaxonomies</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/FeedImportCleanup.html" searchlist="aggregator.interceptors.FeedImportCleanup" thissort="2">FeedImportCleanup</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/interceptors/FeedItemCleanup.html" searchlist="aggregator.interceptors.FeedItemCleanup" thissort="2">FeedItemCleanup</li></ul></li><li data-jstree='{ "type" : "package" }' linkhref="aggregator/models/package-summary.html" searchlist="models" thissort="1">models<ul><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/Helper.html" searchlist="aggregator.models.Helper" thissort="2">Helper</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/FeedService.html" searchlist="aggregator.models.FeedService" thissort="2">FeedService</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/ContentService.html" searchlist="aggregator.models.ContentService" thissort="2">ContentService</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/FeedItemService.html" searchlist="aggregator.models.FeedItemService" thissort="2">FeedItemService</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/FeedItem.html" searchlist="aggregator.models.FeedItem" thissort="2">FeedItem</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/RSSService.html" searchlist="aggregator.models.RSSService" thissort="2">RSSService</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/FeedImport.html" searchlist="aggregator.models.FeedImport" thissort="2">FeedImport</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/BaseWidget.html" searchlist="aggregator.models.BaseWidget" thissort="2">BaseWidget</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/Paging.html" searchlist="aggregator.models.Paging" thissort="2">Paging</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/FeedImportService.html" searchlist="aggregator.models.FeedImportService" thissort="2">FeedImportService</li><li data-jstree='{ "type" : "component" }' linkhref="aggregator/models/Feed.html" searchlist="aggregator.models.Feed" thissort="2">Feed</li></ul></li></ul></li>
+		</ul>
+	</div>
+	
+	<script src="jstree/jstree.min.js"></script>
+	<script language="javascript">
+		$(function () { 
+			// Initialize tree
+			$('#classTree')
+				.jstree({
+					// Shortcut types to control icons
+				    "types" : {
+				      "package" : {
+				        "icon" : "glyphicon glyphicon-folder-open"
+				      },
+				      "component" : {
+				        "icon" : "glyphicon glyphicon-file"
+				      },
+				      "interface" : {
+				        "icon" : "glyphicon glyphicon-info-sign"
+				      }
+				    },
+				    // Smart search callback to do lookups on full class name and aliases 
+				    "search" : {
+				    	"show_only_matches" : true,
+				    	"search_callback" : function( q, node ) {
+				    		q = q.toUpperCase();
+				    		var searchArray = node.li_attr.searchlist.split(',');
+				    		var isClass = node.li_attr.thissort != 1;
+				    		for( var i in searchArray ) {
+				    			var item = searchArray[ i ];
+				    			// classes must be a super set of the search string, but packages are reversed
+				    			// This is so "testbox" AND "run" highlight when you serach for "testbox run"
+				    			if( ( isClass && item.toUpperCase().indexOf( q ) > -1 )
+				    				|| ( !isClass && q.indexOf( item.toUpperCase() ) > -1 ) ) {
+				    				return true;
+				    			}
+				    		}
+				    		return false;
+				    	}
+				    },
+				    // Custom sorting to force packages to the top
+				    "sort" : function( id1, id2 ) {
+				    			var node1 = this.get_node( id1 );
+				    			var node2 = this.get_node( id2 );
+				    			// Concat sort to name and use that
+					    		var node1String = node1.li_attr.thissort + node1.text;
+					    		var node2String = node2.li_attr.thissort + node2.text;
+					    		
+								return ( node1String > node2String ? 1 : -1);						
+				    },
+				    "plugins" : [ "types", "search", "sort" ]
+				  })
+				.on("changed.jstree", function (e, data) {
+					var obj = data.instance.get_node(data.selected[0]).li_attr;
+					if( obj.linkhref ) {
+						window.parent.frames['classFrame'].location.href = obj.linkhref;					
+					}
+			});
+			
+			// Bind search to text box
+			var to = false;
+			$('#classSearch').keyup(function () {
+				if(to) { clearTimeout(to); }
+				to = setTimeout(function () {
+					var v = $('#classSearch').val();
+					$('#classTree').jstree(true).search(v);
+				}, 250);
+			});
+			
+		 });
+	</script>
+</body>
+</html>
+
