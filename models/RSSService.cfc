@@ -10,8 +10,8 @@ component singleton {
 	property name="feedGenerator" inject="feedGenerator@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
-	property name="helper" inject="helper@aggregator";
 	property name="settingService" inject="settingService@cb";
+	property name="agHelper" inject="helper@aggregator";
 
 	/**
 	 * Constructor
@@ -90,14 +90,14 @@ component singleton {
 			if ( settings.ag_rss_content_enable ) {
 				querySetCell( items, "content_encoded", "<![CDATA[" & item.renderContent() & "]]>" );
 			}
-			querySetCell( items, "link", helper.linkFeedItem( item ) );
+			querySetCell( items, "link", agHelper.linkFeedItem( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
 			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & item.getItemAuthor() & "]]>" );
 			if ( item.hasCategories() ) {
 				querySetCell( items, "category_tag", item.getCategoriesList() );
 			}
 			querySetCell( items, "guid_permalink", false );
-			querySetCell( items, "guid_string", helper.linkFeedItem( item ) );
+			querySetCell( items, "guid_string", agHelper.linkFeedItem( item ) );
 			querySetCell( items, "source_title", item.getFeed().getTitle() );
 			querySetCell( items, "source_url", item.getFeed().getFeedUrl() );
 		}
@@ -107,11 +107,11 @@ component singleton {
 			var feed = feedService.findBySlug( arguments.slug );
 			feedStruct.title = feed.getTitle();
 			feedStruct.description = feed.getTagLine();
-			feedStruct.link = helper.linkFeed( feed );
+			feedStruct.link = agHelper.linkFeed( feed );
 		} else {
 			feedStruct.title = settings.ag_rss_title;
 			feedStruct.description = settings.ag_rss_description;
-			feedStruct.link = helper.linkPortal();
+			feedStruct.link = agHelper.linkPortal();
 		}
 		feedStruct.generator = settings.ag_rss_generator;
 		feedStruct.copyright = settings.ag_rss_copyright;

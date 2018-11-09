@@ -9,8 +9,8 @@ component extends="coldbox.system.Interceptor" {
 	property name="settingService" inject="settingService@cb";
 	property name="contentService" inject="contentService@cb";
 	property name="cbHelper" inject="CBHelper@cb";
-	property name="helper" inject="helper@aggregator";
 	property name="html" inject="HTMLHelper@coldbox";
+	property name="agHelper" inject="helper@aggregator";
 
 	/**
 	 * Fired on pre process during contentbox public requests only
@@ -19,14 +19,14 @@ component extends="coldbox.system.Interceptor" {
 
 		// Prepare UI if we are in the aggregator module
 		if ( reFindNoCase( "^contentbox-aggregator", event.getCurrentEvent() ) ) {
-			CBHelper.prepareUIRequest();
+			cbHelper.prepareUIRequest();
 		// Return if in admin module
 		} else if ( reFindNoCase( "^contentbox-admin", event.getCurrentEvent() ) ) {
 			return;
 		}
 
 		// Helper
-		prc.agHelper = helper;
+		prc.agHelper = agHelper;
 
 		// Module root
 		prc.agRoot = getContextRoot() & event.getModuleRoot( "contentbox-aggregator" );
@@ -96,11 +96,11 @@ component extends="coldbox.system.Interceptor" {
 		// Check for feed
 		if ( structKeyExists( prc, "feed" ) ) {
 			args.oContent = prc.feed;
-			args.linkEdit = helper.linkFeedForm( prc.feed );
+			args.linkEdit = agHelper.linkFeedForm( prc.feed );
 		// Check for feed item
 		} else if ( structKeyExists( prc, "feedItem" ) ) {
 			args.oContent = prc.feedItem;
-			args.linkEdit = helper.linkFeedItemForm( prc.feedItem );
+			args.linkEdit = agHelper.linkFeedItemForm( prc.feedItem );
 		}
 
 		// Render the admin bar
@@ -132,7 +132,7 @@ component extends="coldbox.system.Interceptor" {
 	function afterInstanceCreation( event, interceptData, buffer ) {
 		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
 			var prc = event.getCollection( private=true );
-			arguments.interceptData.target.ag = helper;
+			arguments.interceptData.target.ag = agHelper;
 			arguments.interceptData.target.$agInject = variables.$agInject;
 			arguments.interceptData.target.$agInject();
 		}

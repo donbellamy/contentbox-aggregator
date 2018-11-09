@@ -8,7 +8,7 @@ component extends="coldbox.system.Interceptor" {
 	// Dependencies
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="settingService" inject="settingService@cb";
-	property name="helper" inject="helper@aggregator";
+	property name="agHelper" inject="helper@aggregator";
 
 	/**
 	 * Fired on pre process during contentbox admin requests only
@@ -16,7 +16,7 @@ component extends="coldbox.system.Interceptor" {
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin" {
 
 		// Helper
-		prc.agHelper = helper;
+		prc.agHelper = agHelper;
 
 		// Module root
 		prc.agRoot = getContextRoot() & event.getModuleRoot( "contentbox-aggregator" );
@@ -84,13 +84,13 @@ component extends="coldbox.system.Interceptor" {
 		if ( !event.isAjax() && rc.format EQ "html" ) {
 			html.$htmlhead("<script>
 				$(function() {
-					$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#helper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');
+					$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#agHelper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');
 				});
 			</script>");
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
 				html.$htmlhead("<script>
 					$(function() {
-						$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#helper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');
+						$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');
 					});
 				</script>");
 			}
@@ -115,14 +115,14 @@ component extends="coldbox.system.Interceptor" {
 						var contentID = url.substring( url.lastIndexOf("/") + 1 );
 						if ( contentType == "FeedItem" ) {
 							$titleLink.attr("title","Edit Feed Item");
-							$titleLink.attr("href", "#helper.linkFeedItemForm()#/contentID/" + contentID);
+							$titleLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
 							$actionLink.attr("title","Edit Feed Item");
-							$actionLink.attr("href", "#helper.linkFeedItemForm()#/contentID/" + contentID);
+							$actionLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
 						} else if ( contentType == "Feed" ) {
 							$titleLink.attr("title","Edit Feed");
-							$titleLink.attr("href", "#helper.linkFeedForm()#/contentID/" + contentID);
+							$titleLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
 							$actionLink.attr("title","Edit Feed");
-							$actionLink.attr("href", "#helper.linkFeedForm()#/contentID/" + contentID);
+							$actionLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
 						}
 					});
 				});

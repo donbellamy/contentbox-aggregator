@@ -6,7 +6,7 @@
 component extends="coldbox.system.Interceptor" {
 
 	// Dependencies
-	property name="helper" inject="helper@aggregator";
+	property name="agHelper" inject="helper@aggregator";
 
 	/**
 	 * Fired before portal index display
@@ -122,7 +122,7 @@ component extends="coldbox.system.Interceptor" {
 		var tokenMarker = "@";
 		var tokens = {
 			"feed_title" = arguments.feed.getTitle(),
-			"feed_url" = helper.linkFeed( arguments.feed ),
+			"feed_url" = agHelper.linkFeed( arguments.feed ),
 			"feed_rss_url" = arguments.feed.getFeedUrl(),
 			"feed_site_url" = arguments.feed.getSiteUrl()
 		};
@@ -149,7 +149,7 @@ component extends="coldbox.system.Interceptor" {
 		var tokenMarker = "@";
 		var tokens = {
 			"feed_item_title" = arguments.feedItem.getTitle(),
-			"feed_item_url" = helper.linkFeedItem( arguments.feedItem ),
+			"feed_item_url" = agHelper.linkFeedItem( arguments.feedItem ),
 			"feed_item_original_url" = arguments.feedItem.getItemUrl(),
 			"feed_item_import_date" = arguments.feedItem.getDisplayCreatedDate(),
 			"feed_item_publish_date" = arguments.feedItem.getDisplayPublishedDate(),
