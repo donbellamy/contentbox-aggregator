@@ -144,9 +144,7 @@
 											field="ag_portal_display_entries",
 											content="Display Blog Entries:"
 										)#
-										<div>
-											<small>If enabled, all blog entries will be also displayed in the feed item index.</small>
-										</div>
+										<p><small>If enabled, all blog entries will be also displayed in the feed item index and any feed item that has a related blog entry will not be displayed.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_display_entries_toggle",
@@ -281,7 +279,7 @@
 											field="ag_portal_cache_enable",
 											content="Enable Portal Caching:"
 										)#
-										<div><small>If enabled, portal content will be cached once it has been translated and rendered.</small></div>
+										<p><small>If enabled, portal content will be cached once it has been translated and rendered.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_cache_enable_toggle",
@@ -635,9 +633,7 @@
 											field="ag_importing_featured_image_enable",
 											content="Import Featured Images:"
 										)#
-										<div>
-											<small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small>
-										</div>
+										<p><small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_importing_featured_image_enable_toggle",
@@ -656,9 +652,7 @@
 											field="ag_importing_image_import_enable",
 											content="Import All Images:"
 										)#
-										<div>
-											<small>If enabled, all images will be saved locally for each feed item when imported.</small>
-										</div>
+										<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_importing_image_import_enable_toggle",
@@ -1050,7 +1044,7 @@
 											field="ag_rss_content_enable",
 											content="Include Item Content:"
 										)#
-										<div><small>If enabled, the feed item content as well as description will be included in the rss feed.</small></div>
+										<p><small>If enabled, the feed item content as well as description will be included in the rss feed.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_rss_content_enable_toggle",
