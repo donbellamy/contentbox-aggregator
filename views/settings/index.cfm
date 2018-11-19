@@ -129,12 +129,33 @@
 											content="Feeds Page Title:"
 										)#
 										<div class="controls">
-											<small>The title used for the feeds page.</small>
+											<small>The title used for the feeds list page.</small>
 											#html.textField(
 												name="ag_portal_feeds_title",
 												value=prc.agSettings.ag_portal_feeds_title,
 												class="form-control",
 												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_portal_display_entries",
+											content="Display Blog Entries:"
+										)#
+										<div>
+											<small>If enabled, all blog entries will be also displayed in the feed item index.</small>
+										</div>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_portal_display_entries_toggle",
+												data={ toggle: 'toggle', match: 'ag_portal_display_entries' },
+												checked=prc.agSettings.ag_portal_display_entries
+											)#
+											#html.hiddenField(
+												name="ag_portal_display_entries",
+												value=prc.agSettings.ag_portal_display_entries
 											)#
 										</div>
 									</div>

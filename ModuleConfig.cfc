@@ -32,6 +32,7 @@ component {
 			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
 			"ag_portal_feeds_title" = "Feeds",
+			"ag_portal_display_entries" = "false",
 			"ag_portal_item_link_behavior" = "forward",
 			"ag_portal_item_featured_image_behavior" = "default",
 			"ag_portal_item_featured_image_default" = "",
