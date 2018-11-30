@@ -254,6 +254,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			max=prc.agSettings.ag_portal_paging_max_items,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
+
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 

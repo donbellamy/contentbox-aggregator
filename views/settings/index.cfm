@@ -144,7 +144,7 @@
 											field="ag_portal_display_entries",
 											content="Display Blog Entries:"
 										)#
-										<p><small>If enabled, all blog entries will be also displayed in the feed item index and any feed item that has a related blog entry will not be displayed.</small></p>
+										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="ag_portal_display_entries_toggle",
