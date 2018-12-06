@@ -247,7 +247,7 @@ component extends="contentHandler" {
 
 		// Check permission
 		if( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) ) {
-			rc.isPublished 	= "false";
+			rc.isPublished = "false";
 		}
 
 		// Grab the feed

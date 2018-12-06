@@ -363,8 +363,9 @@ component accessors="true" singleton threadSafe {
 	 * @format The format to link to, defaults to html
 	 * @return The feed item link
 	 */
-	string function linkFeedItem( required FeedItem feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
-		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
+	string function linkFeedItem( required any feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
+		if ( arguments.feedItem.getContentType() == "Entry" ) return cb.linkEntry( arguments.feedItem );
+		else return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
 	/**
@@ -609,7 +610,7 @@ component accessors="true" singleton threadSafe {
 	/**
 	 * Returns a fuzzy timestamp of the provided date/time
 	 * @time The date/time value to use when creating the fuzzy timestamp
-	 * @return The fuzzy timestamp, or passed date/time if older than 24 hours
+	 * @return The fuzzy timestamp, or passed date/time if older than a month
 	 */
 	string function timeAgo( required date time ) {
 

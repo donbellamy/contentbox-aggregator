@@ -159,7 +159,7 @@ component persistent="true"
 		arguments.showRelatedContent = false;
 
 		// Grab the base content memento
-		var result 	= super.getResponseMemento( argumentCollection=arguments );
+		var result = super.getResponseMemento( argumentCollection=arguments );
 
 		// Set feed item properties
 		result["excerpt"] = renderExcerpt();
@@ -179,7 +179,7 @@ component persistent="true"
 
 	/**
 	 * Gets the url of the featured image
-	 * @return The url of the feautred image
+	 * @return The url of the featured image
 	 */
 	string function getImageUrl() {
 

@@ -5,6 +5,9 @@
  */
 component extends="ContentService" singleton {
 
+	// Dependencies
+	property name="contentService" inject="contentService@cb";
+
 	/**
 	 * Constructor
 	 * @return FeedItemService
@@ -112,6 +115,41 @@ component extends="ContentService" singleton {
 
 		// Vars
 		var results = {};
+		var params = {};
+		params["now"] = now();
+
+		var hql = "FROM cbContent cb
+			WHERE cb.isPublished = true
+			AND cb.publishedDate <= :now
+			AND ( cb.expireDate IS NULL OR cb.expireDate >= :now )
+			AND ( ( cb.contentType = 'FeedItem') OR ( cb.contentType = 'Entry' ) )
+			ORDER BY cb.publishedDate DESC";
+
+		// ENtry dooes not have parent, so is null and entry, not null aand feed item
+		/* AND cb.parent.isPublished = true
+					AND cb.parent.publishedDate <= :now
+					AND ( cb.parent.expireDate IS NULL OR cb.parent.expireDate >= :now ) */
+
+		// Get the count
+		results.count = executeQuery(
+			query="select count(*) #hql#",
+			params=params,
+			max=1,
+			asQuery=false
+		)[1];
+
+		results.feedItems = executeQuery(
+			query=hql,
+			params=params,
+			max=10,
+			asQuery=false
+		);
+
+		return results;
+
+		/*
+		// Vars
+		var results = {};
 		var c = newCriteria();
 
 		// Only published feed items and parent feed must also be published
@@ -161,6 +199,7 @@ component extends="ContentService" singleton {
 		}
 
 		return results;
+		*/
 
 	}
 
@@ -239,9 +278,9 @@ component extends="ContentService" singleton {
 			hql &= " AND DAY(fi.publishedDate ) = :day";
 		}
 
-		// Count
+		// Get the count
 		results.count = executeQuery(
-			query="select count( * ) #hql#",
+			query="select count(*) #hql#",
 			params=params,
 			max=1,
 			asQuery=false

@@ -377,7 +377,7 @@ component persistent="true"
 		arguments.showRelatedContent = false;
 
 		// Grab the base content memento
-		var result 	= super.getResponseMemento( argumentCollection=arguments );
+		var result = super.getResponseMemento( argumentCollection=arguments );
 
 		// Set feed properties
 		result["siteUrl"] = getSiteUrl();

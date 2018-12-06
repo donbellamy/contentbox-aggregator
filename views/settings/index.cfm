@@ -236,7 +236,7 @@
 										<div class="controls">
 											<small>The number of feed items displayed on the main portal page and feed page before paging.</small><br />
 											<strong class="margin10">10</strong>
-											<input 	type="text"
+											<input type="text"
 												id="ag_portal_paging_max_items"
 												name="ag_portal_paging_max_items"
 												class="slider"
@@ -257,7 +257,7 @@
 										<div class="controls">
 											<small>The number of feeds displayed on the feeds page before paging..</small><br />
 											<strong class="margin10">10</strong>
-											<input 	type="text"
+											<input type="text"
 												id="ag_portal_paging_max_feeds"
 												name="ag_portal_paging_max_feeds"
 												class="slider"
@@ -338,7 +338,7 @@
 										<div class="controls">
 											<small>The number of idle minutes allowed for cached portal content to live. Usually this is less than the timeout you selected above</small><br/>
 											<strong class="margin10">5</strong>
-											<input 	type="text"
+											<input type="text"
 												id="ag_portal_cache_timeout_idle"
 												name="ag_portal_cache_timeout_idle"
 												class="slider"
@@ -1025,7 +1025,7 @@
 										<div class="controls">
 											<small>The number of items to show in the rss feed.</small><br/>
 											<strong class="margin10">10</strong>
-											<input 	type="text"
+											<input type="text"
 												id="ag_rss_max_items"
 												name="ag_rss_max_items"
 												class="slider"
@@ -1124,7 +1124,7 @@
 										<div class="controls">
 											<small>The number of idle minutes allowed for cached RSS feeds to live. Usually this is less than the timeout you selected above</small><br/>
 											<strong class="margin10">5</strong>
-											<input 	type="text"
+											<input type="text"
 												id="ag_rss_cache_timeout_idle"
 												name="ag_rss_cache_timeout_idle"
 												class="slider"

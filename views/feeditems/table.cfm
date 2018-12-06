@@ -51,7 +51,7 @@
 				</td>
 				<td class="text-center"><span class="badge badge-info">#feedItem.getNumberOfHits()#</span></td>
 				<td class="text-center">
-					<a 	class="btn btn-sm btn-info popovers" data-contentID="#feedItem.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
+					<a class="btn btn-sm btn-info popovers" data-contentID="#feedItem.getContentID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>
 					<div id="infoPanel_#feedItem.getContentID()#" class="hide">
 						<i class="fa fa-user"></i>
 						Imported by: <a href="mailto:#feedItem.getCreatorEmail()#">#feedItem.getCreatorName()#</a> on
