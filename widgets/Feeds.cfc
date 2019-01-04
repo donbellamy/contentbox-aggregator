@@ -27,11 +27,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.label Title Level
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
+	 * @return The feeds widget html
 	 */
 	string function renderIt(
 		string title="",
-		numeric titleLevel=2
-	) {
+		numeric titleLevel=2 ) {
 
 		// Grab the results
 		var results = feedService.search(

@@ -35,8 +35,7 @@ component extends="ContentService" singleton {
 		string status="any",
 		string sortOrder="title ASC",
 		numeric max=0,
-		numeric offset=0
-	) {
+		numeric offset=0 ) {
 
 		// Vars
 		var results = {};

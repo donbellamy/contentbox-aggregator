@@ -31,17 +31,19 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @useDropdown.hint Display as a dropdown or a list, default is list.
 	 * @showItemCount.label Show Item Count?
 	 * @showItemCount.hint Show item counts or not, default is true.
+	 * @includeEntries.label Include Entries?
+	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
 	 * @return The feed item archives widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		boolean useDropdown=false,
-		boolean showItemCount=true
-	) {
+		boolean showItemCount=true,
+		boolean includeEntries=ag.setting("ag_portal_display_entries") ) {
 
 		// Grab the archives
-		var archives = feedItemService.getArchiveReport();
+		var archives = feedItemService.getArchiveReport( arguments.includeEntries );
 
 		// Set return string
 		var string = "";

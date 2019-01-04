@@ -38,15 +38,18 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
+	 * @includeEntries.label Include Entries?
+	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
+	 * @return The portal widget html
 	 */
 	string function renderIt(
-		numeric max = 10,
-		string feed = "",
-		string category = "",
-		string searchTerm = "",
-		string sortOrder = "Most Recent",
-		boolean openNewWindow = false
-	) {
+		numeric max=10,
+		string feed="",
+		string category="",
+		string searchTerm="",
+		string sortOrder="Most Recent",
+		boolean openNewWindow=false,
+		boolean includeEntries=ag.setting("ag_portal_display_entries")  ) {
 
 		// Sort order
 		switch ( arguments.sortOrder ) {
@@ -79,7 +82,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 			feed = arguments.feed,
 			sortOrder = arguments.sortOrder,
 			max = arguments.max,
-			offset = prc.pagingBoundaries.startRow - 1
+			offset = prc.pagingBoundaries.startRow - 1,
+			includeEntries=arguments.includeEntries
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;

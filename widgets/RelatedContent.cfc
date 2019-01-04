@@ -31,13 +31,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @useDropdown.hint Display as a dropdown or a list, default is list.
 	 * @emptyMessage.label Empty Message
 	 * @emptyMessage.hint Message to show when no related content is found.
+	 * @return The related content widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		boolean useDropdown=false,
-		string emptyMessage="Sorry, no related content was found.",
-	) {
+		string emptyMessage="Sorry, no related content was found." ) {
 
 		// Grab the related content
 		var relatedContent = ag.getCurrentRelatedContent();

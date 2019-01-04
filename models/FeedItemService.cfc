@@ -5,9 +5,6 @@
  */
 component extends="ContentService" singleton {
 
-	// Dependencies
-	property name="contentService" inject="contentService@cb";
-
 	/**
 	 * Constructor
 	 * @return FeedItemService
@@ -22,67 +19,128 @@ component extends="ContentService" singleton {
 
 	/**
 	 * Returns a struct of feeditems and count based upon the passed parameters
+	 * @includeEntries Whether or not to include entries in the feed item results
+	 * @status The status to filter on, defaults to "all"
 	 * @searchTerm The search term to filter on
-	 * @feed The feed to filter on, defaults to "all"
 	 * @category The category to filter on, defaults to "all"
-	 * @status The status to filter on, defaults to "any"
+	 * @feed The feed to filter on, defaults to "all"
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
 	 * @return struct - {feedItems,count}
 	 */
-	struct function search(
+	struct function getFeedItems(
+		boolean includeEntries=false,
+		string status="",
 		string searchTerm="",
-		string feed="all",
-		string category="all",
-		string status="any",
+		string category="",
+		string author="",
+		string feed="",
 		string sortOrder="publishedDate DESC",
+		boolean countOnly=false,
 		numeric max=0,
-		numeric offset=0,
-	) {
+		numeric offset=0 ) {
 
-		// Vars
+		// Set vars
 		var results = {};
-		var c = newCriteria();
+		var params = {};
 
-		if ( len( trim( arguments.searchTerm ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
-			c.createAlias( "activeContent", "ac" );
+		// Check for author
+		if ( len( trim( arguments.author ) ) ) {
+			arguments.includeEntries = false;
 		}
 
+		// Select hql
+		var selectHql = ( arguments.includeEntries ? "FROM cbContent AS cb" : "FROM cbFeedItem AS cb" );
+
+		// Where hql
+		var whereHql = " WHERE cb.contentType = 'FeedItem'";
+		if ( arguments.includeEntries ) {
+			whereHql = " WHERE ( cb.contentType = 'FeedItem' OR cb.contentType = 'Entry' )";
+		}
+
+		// Join parent (feed) table if published or feed is passed
+		if ( arguments.status == "published" || ( len( trim( arguments.feed ) ) ) ) {
+			selectHql &= " LEFT JOIN cb.parent AS p";
+		}
+
+		// Check status
+		if ( len( trim( arguments.status ) ) ) {
+			if ( arguments.status == "published" ) {
+				whereHql &= " AND cb.isPublished = true AND cb.publishedDate <= :now AND ( cb.expireDate IS NULL OR cb.expireDate >= :now )";
+				whereHql &= " AND ( ( cb.contentType = 'FeedItem' AND p.isPublished = true AND p.publishedDate <= :now AND ( p.expireDate IS NULL OR p.expireDate >= :now ) )";
+				if ( arguments.includeEntries ) {
+					whereHql &= " OR ( cb.contentType = 'Entry' )";
+				}
+				whereHql &= " )";
+				params["now"] = now();
+			} else if ( arguments.status == "expired" ) {
+				whereHql &= " AND cb.isPublished = true AND cb.expireDate <= :now";
+				params["now"] = now();
+			} else {
+				whereHql &= " AND cb.isPublished = false";
+			}
+		}
+
+		// Check search term
 		if ( len( trim( arguments.searchTerm ) ) ) {
-			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ), c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
+			selectHql &= " JOIN cb.activeContent AS ac";
+			whereHql &= " AND ( cb.title LIKE :searchTerm OR ac.content LIKE :searchTerm )";
+			params["searchTerm"] = trim( arguments.searchTerm );
 		}
 
-		if ( arguments.feed NEQ "all" ) {
-			c.eq( "parent.contentID", javaCast( "int", arguments.feed ) );
-		}
-
-		if ( arguments.category NEQ "all" ) {
-			if( arguments.category EQ "none" ) {
-				c.isEmpty( "categories" );
+		// Check category
+		if ( isNumeric( arguments.category ) ) {
+			selectHql &= " JOIN cb.categories AS cats";
+			whereHql &= " AND cats.categoryID = :category";
+			params["category"] = javaCast( "int", arguments.category );
+		} else if ( len( trim( arguments.category ) ) ) {
+			if( arguments.category == "none" ) {
+				selectHql &= " LEFT JOIN cb.categories AS cats";
+				whereHql &= " AND cats.categoryID = NULL";
 			} else {
-				c.createAlias( "categories", "cats" ).isIn( "cats.categoryID", javaCast( "java.lang.Integer[]", [ arguments.category ] ) );
+				selectHql &= " JOIN cb.categories AS cats";
+				whereHql &= " AND cats.slug = :category";
+				params["category"] = trim( arguments.category );
 			}
 		}
 
-		if ( arguments.status NEQ "any" ) {
-			if ( arguments.status EQ "published" ) {
-				c.isTrue("isPublished")
-					.isLT( "publishedDate", now() )
-					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
-			} else if ( arguments.status EQ "expired" ) {
-				c.isTrue("isPublished").isLT( "expireDate", now() );
-			} else {
-				c.isFalse("isPublished");
-			}
+		// Check author
+		if ( len( trim( arguments.author ) ) ) {
+			whereHql &= " AND cb.itemAuthor = :author";
+			params["author"] = trim( arguments.author );
 		}
 
-		// Get the results
-		results.count = c.count( "contentID" );
-		results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
-			offset=arguments.offset,
+		// Check feed
+		if ( isNumeric( arguments.feed ) ) {
+			whereHql &= " AND p.contentID = :feed";
+			params["feed"] = javaCast( "int", arguments.feed );
+		} else if ( len( trim( arguments.feed ) ) ) {
+			//c.eq( "p.slug", "#arguments.feed#" );
+			whereHql &= " AND p.slug = :feed";
+			params["feed"] = arguments.feed;
+		}
+
+		// Sort order
+		var orderHql = " ORDER BY cb.#arguments.sortOrder#";
+
+		// Set hql
+		var hql = selectHql & whereHql & orderHql
+
+		// Get the feed item count
+		results.count = executeQuery(
+			query="SELECT COUNT(*) #hql#",
+			params=params,
+			max=1,
+			asQuery=false
+		)[1];
+
+		// Grab the feed items
+		results.feedItems = executeQuery(
+			query="SELECT cb #hql#",
+			params=params,
 			max=arguments.max,
-			sortOrder=arguments.sortOrder,
+			offset=arguments.offset,
 			asQuery=false
 		);
 
@@ -92,17 +150,17 @@ component extends="ContentService" singleton {
 
 	/**
 	 * Returns a struct of published feeditems and count based upon the passed parameters
+	 * @includeEntries Whether or not to include entries in the feed item results
 	 * @searchTerm The search term to filter on
-	 * @category The category to filter on
-	 * @author The author to filter on
-	 * @feed The feed to filter on
+	 * @category The category to filter on, defaults to "all"
+	 * @feed The feed to filter on, defaults to "all"
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
-	 * @countOnly When true will only return count of feed items found
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
 	 * @return struct - {feedItems,count}
 	 */
 	struct function getPublishedFeedItems(
+		boolean includeEntries=false,
 		string searchTerm="",
 		string category="",
 		string author="",
@@ -110,96 +168,9 @@ component extends="ContentService" singleton {
 		string sortOrder="publishedDate DESC",
 		boolean countOnly=false,
 		numeric max=0,
-		numeric offset=0
-	) {
+		numeric offset=0 ) {
 
-		// Vars
-		var results = {};
-		var params = {};
-		params["now"] = now();
-
-		var hql = "FROM cbContent cb
-			WHERE cb.isPublished = true
-			AND cb.publishedDate <= :now
-			AND ( cb.expireDate IS NULL OR cb.expireDate >= :now )
-			AND ( ( cb.contentType = 'FeedItem') OR ( cb.contentType = 'Entry' ) )
-			ORDER BY cb.publishedDate DESC";
-
-		// ENtry dooes not have parent, so is null and entry, not null aand feed item
-		/* AND cb.parent.isPublished = true
-					AND cb.parent.publishedDate <= :now
-					AND ( cb.parent.expireDate IS NULL OR cb.parent.expireDate >= :now ) */
-
-		// Get the count
-		results.count = executeQuery(
-			query="select count(*) #hql#",
-			params=params,
-			max=1,
-			asQuery=false
-		)[1];
-
-		results.feedItems = executeQuery(
-			query=hql,
-			params=params,
-			max=10,
-			asQuery=false
-		);
-
-		return results;
-
-		/*
-		// Vars
-		var results = {};
-		var c = newCriteria();
-
-		// Only published feed items and parent feed must also be published
-		c.isTrue( "isPublished" )
-			.isLT( "publishedDate", now() )
-			.or( c.restrictions.isNull( "expireDate" ), c.restrictions.isGT( "expireDate", now() ) );
-		c.createAlias( "parent", "p" )
-			.isTrue( "p.isPublished" )
-			.isLT( "p.publishedDate", now() )
-			.or( c.restrictions.isNull( "p.expireDate" ), c.restrictions.isGT( "p.expireDate", now() ) );
-
-		// Search filter
-		if ( len( trim( arguments.searchTerm ) ) ) {
-			c.createAlias( "activeContent", "ac" );
-			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ),
-				  c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
-		}
-
-		// Category filter
-		if ( len( trim( arguments.category ) ) ) {
-			c.createAlias( "categories", "cats" ).isIn( "cats.slug", listToArray( arguments.category ) );
-		}
-
-		// Author filter
-		if ( len( trim( arguments.author ) ) ) {
-			c.eq( "itemAuthor", "#arguments.author#" );
-		}
-
-		// Feed filter
-		if ( isNumeric( arguments.feed ) ) {
-			c.eq( "p.contentID", javaCast( "int", arguments.feed ) );
-		} else if ( len( trim( arguments.feed ) ) ) {
-			c.eq( "p.slug", "#arguments.feed#" );
-		}
-
-		// Get the results
-		results.count = c.count( "contentID" );
-		if ( arguments.countOnly ) {
-			results.feedItems = [];
-		} else {
-			results.feedItems = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
-				offset=arguments.offset,
-				max=arguments.max,
-				sortOrder=arguments.sortOrder,
-				asQuery=false
-			);
-		}
-
-		return results;
-		*/
+		return getFeedItems( argumentCollection=arguments, status="published" );
 
 	}
 
@@ -207,9 +178,24 @@ component extends="ContentService" singleton {
 	 * Gets the archive report by date and number of feed items
 	 * @return An array of month and feed item counts per month
 	 */
-	array function getArchiveReport() {
+	array function getArchiveReport( boolean includeEntries=false ) {
 
 		// Set hql
+		var hql = "SELECT new map( count(*) AS count, YEAR(cb.publishedDate) AS year, MONTH(cb.publishedDate) AS month )";
+		if ( arguments.includeEntries ) {
+			hql &= " FROM cbContent AS cb LEFT JOIN cb.parent AS p WHERE ( cb.contentType = 'FeedItem' OR cb.contentType = 'Entry' )";
+		} else {
+			hql &= " FROM cbFeedItem AS cb LEFT JOIN cb.parent AS p WHERE cb.contentType = 'FeedItem'";
+		}
+		hql &= " AND cb.isPublished = true AND cb.publishedDate <= :now AND ( cb.expireDate IS NULL OR cb.expireDate >= :now )";
+		hql &= " AND ( ( cb.contentType = 'FeedItem' AND p.isPublished = true AND p.publishedDate <= :now AND ( p.expireDate IS NULL OR p.expireDate >= :now ) )";
+		if ( arguments.includeEntries ) {
+			hql &= " OR ( cb.contentType = 'Entry' )";
+		}
+		hql &= " )";
+		hql &= "GROUP BY YEAR(cb.publishedDate), MONTH(cb.publishedDate) ORDER BY 2 DESC, 3 DESC";
+
+		/*
 		var hql = "SELECT new map( count(*) AS count, YEAR(fi.publishedDate) AS year, MONTH(fi.publishedDate) AS month )
 				FROM cbFeedItem fi
 				WHERE fi.isPublished = true
@@ -220,6 +206,7 @@ component extends="ContentService" singleton {
 					AND ( fi.parent.expireDate IS NULL OR fi.parent.expireDate >= :now )
 				GROUP BY YEAR(fi.publishedDate), MONTH(fi.publishedDate)
 				ORDER BY 2 DESC, 3 DESC";
+		*/
 
 		// Set params
 		var params = {};
@@ -240,12 +227,14 @@ component extends="ContentService" singleton {
 	 * @return struct - {feedItems,count}
 	 */
 	struct function getPublishedFeedItemsByDate(
+		boolean includeEntries=false,
 		numeric year=0,
 		numeric month=0,
 		numeric day=0,
 		numeric max=0,
-		numeric offset=0
-	) {
+		numeric offset=0 ) {
+
+		// TODO: Include entries
 
 		var results = {};
 
@@ -311,7 +300,7 @@ component extends="ContentService" singleton {
 	FeedItemService function bulkPublishStatus( required string contentID, required string status ) {
 
 		var publish = false;
-		if ( arguments.status EQ "publish" ) {
+		if ( arguments.status == "publish" ) {
 			publish = true;
 		}
 

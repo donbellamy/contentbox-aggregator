@@ -22,9 +22,9 @@ function contentLoad( criteria ) {
 	if ( criteria == undefined ) { criteria = {}; }
 	if ( !( "page" in criteria) ) { criteria.page = 1; }
 	if ( !( "search" in criteria) ) { criteria.search = ""; }
-	if ( !( "feed" in criteria) ) { criteria.feed = "all"; }
-	if ( !( "category" in criteria) ) { criteria.category = "all"; }
-	if ( !( "status" in criteria) ) { criteria.status = "any"; }
+	if ( !( "feed" in criteria) ) { criteria.feed = ""; }
+	if ( !( "category" in criteria) ) { criteria.category = ""; }
+	if ( !( "status" in criteria) ) { criteria.status = ""; }
 	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
 
 	$tableContainer.css( "opacity", .60 );
@@ -46,7 +46,7 @@ function contentLoad( criteria ) {
 }
 
 function contentFilter() {
-	if ( $("##feed").val() != "all" || $("##category").val() != "all" || $("##status").val() != "any" ) {
+	if ( $("##feed").val() != "" || $("##category").val() != "" || $("##status").val() != "" ) {
 		$("##filterBox").addClass("selected");
 	} else {
 		$("##filterBox").removeClass("selected");
@@ -77,12 +77,12 @@ function resetFilter( reload ){
 		contentLoad();
 	}
 	$("##search").val("");
-	$("##feedFilter").val("all");
-	$("##categoryFilter").val("all");
-	$("##statusFilter").val("any");
-	$("##feed").val("all");
-	$("##category").val("all");
-	$("##status").val("any");
+	$("##feedFilter").val("");
+	$("##categoryFilter").val("");
+	$("##statusFilter").val("");
+	$("##feed").val("");
+	$("##category").val("");
+	$("##status").val("");
 	$("##filterBox").removeClass("selected");
 }
 

@@ -34,9 +34,9 @@ component extends="contentHandler" {
 
 		event.paramValue( "page", 1 );
 		event.paramValue( "search", "" );
-		event.paramValue( "feed", "all" );
-		event.paramValue( "category", "all" );
-		event.paramValue( "status", "any" );
+		event.paramValue( "feed", "" );
+		event.paramValue( "category", "" );
+		event.paramValue( "status", "" );
 		event.paramValue( "showAll", false );
 
 		// Grab feeds and categories
@@ -54,9 +54,9 @@ component extends="contentHandler" {
 
 		event.paramValue( "page", 1 );
 		event.paramValue( "search", "" );
-		event.paramValue( "feed", "all" );
-		event.paramValue( "category", "all" );
-		event.paramValue( "status", "any" );
+		event.paramValue( "feed", "" );
+		event.paramValue( "category", "" );
+		event.paramValue( "status", "" );
 		event.paramValue( "showAll", false );
 
 		// Paging
@@ -65,11 +65,11 @@ component extends="contentHandler" {
 		prc.pagingLink = "javascript:contentPaginate(@page@)";
 
 		// Grab results
-		var results = feedItemService.search(
-			searchTerm=rc.search,
-			feed=rc.feed,
-			category=rc.category,
+		var results = feedItemService.getFeedItems(
 			status=rc.status,
+			searchTerm=rc.search,
+			category=rc.category,
+			feed=rc.feed,
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);

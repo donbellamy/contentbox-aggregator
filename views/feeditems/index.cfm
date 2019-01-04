@@ -77,7 +77,7 @@
 						<div class="form-group">
 							<label for="creator" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">
-								<option value="all"<cfif rc.feed EQ "all" > selected="selected"</cfif>>All Feeds</option>
+								<option value=""<cfif !len( rc.feed ) > selected="selected"</cfif>>All Feeds</option>
 								<cfloop array="#prc.feeds#" index="feed">
 									<option value="#feed.getContentID()#"<cfif rc.feed EQ feed.getContentID() > selected="selected"</cfif>>#feed.getTitle()#</option>
 								</cfloop>
@@ -87,7 +87,7 @@
 							<label for="category" class="control-label">Categories:</label>
 							<div class="controls">
 								<select name="category" id="category" class="form-control input-sm valid">
-									<option value="all"<cfif rc.category EQ "all" > selected="selected"</cfif>>All Categories</option>
+									<option value=""<cfif !len( rc.category ) > selected="selected"</cfif>>All Categories</option>
 									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
 									<cfloop array="#prc.categories#" index="category">
 										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
@@ -99,7 +99,7 @@
 							<label for="status" class="control-label">Status:</label>
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
-									<option value="any"<cfif rc.status EQ "any" > selected="selected"</cfif>>Any Status</option>
+									<option value=""<cfif !len( rc.status ) > selected="selected"</cfif>>Any Status</option>
 									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
 									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
 									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
