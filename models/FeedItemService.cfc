@@ -24,6 +24,9 @@ component extends="ContentService" singleton {
 	 * @searchTerm The search term to filter on
 	 * @category The category to filter on, defaults to "all"
 	 * @feed The feed to filter on, defaults to "all"
+	 * @year The year to filter on
+	 * @month The month to filter on
+	 * @day The day to filter on
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
@@ -36,6 +39,9 @@ component extends="ContentService" singleton {
 		string category="",
 		string author="",
 		string feed="",
+		numeric year=0,
+		numeric month=0,
+		numeric day=0,
 		string sortOrder="publishedDate DESC",
 		boolean countOnly=false,
 		numeric max=0,
@@ -116,9 +122,26 @@ component extends="ContentService" singleton {
 			whereHql &= " AND p.contentID = :feed";
 			params["feed"] = javaCast( "int", arguments.feed );
 		} else if ( len( trim( arguments.feed ) ) ) {
-			//c.eq( "p.slug", "#arguments.feed#" );
 			whereHql &= " AND p.slug = :feed";
 			params["feed"] = arguments.feed;
+		}
+
+		// Year
+		if ( val( arguments.year ) ){
+			whereHql &= " AND YEAR( cb.publishedDate ) = :year";
+			params["year"] = arguments.year;
+		}
+
+		// Month
+		if ( val( arguments.month ) ){
+			whereHql &= " AND MONTH( cb.publishedDate ) = :month";
+			params["month"] = arguments.month;
+		}
+
+		// Day
+		if ( val( arguments.day ) ){
+			whereHql &= " AND DAY( cb.publishedDate ) = :day";
+			params["day"] = arguments.day;
 		}
 
 		// Sort order
@@ -154,6 +177,9 @@ component extends="ContentService" singleton {
 	 * @searchTerm The search term to filter on
 	 * @category The category to filter on, defaults to "all"
 	 * @feed The feed to filter on, defaults to "all"
+	 * @year The year to filter on
+	 * @month The month to filter on
+	 * @day The day to filter on
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
@@ -165,6 +191,9 @@ component extends="ContentService" singleton {
 		string category="",
 		string author="",
 		string feed="",
+		numeric year=0,
+		numeric month=0,
+		numeric day=0,
 		string sortOrder="publishedDate DESC",
 		boolean countOnly=false,
 		numeric max=0,
@@ -176,6 +205,7 @@ component extends="ContentService" singleton {
 
 	/**
 	 * Gets the archive report by date and number of feed items
+	 * @includeEntries Whether or not to include entries in the feed item results
 	 * @return An array of month and feed item counts per month
 	 */
 	array function getArchiveReport( boolean includeEntries=false ) {
@@ -195,19 +225,6 @@ component extends="ContentService" singleton {
 		hql &= " )";
 		hql &= "GROUP BY YEAR(cb.publishedDate), MONTH(cb.publishedDate) ORDER BY 2 DESC, 3 DESC";
 
-		/*
-		var hql = "SELECT new map( count(*) AS count, YEAR(fi.publishedDate) AS year, MONTH(fi.publishedDate) AS month )
-				FROM cbFeedItem fi
-				WHERE fi.isPublished = true
-					AND fi.publishedDate <= :now
-					AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
-					AND fi.parent.isPublished = true
-					AND fi.parent.publishedDate <= :now
-					AND ( fi.parent.expireDate IS NULL OR fi.parent.expireDate >= :now )
-				GROUP BY YEAR(fi.publishedDate), MONTH(fi.publishedDate)
-				ORDER BY 2 DESC, 3 DESC";
-		*/
-
 		// Set params
 		var params = {};
 		params[ "now" ] = now();
@@ -219,6 +236,7 @@ component extends="ContentService" singleton {
 
 	/**
 	 * Returns a struct of published feeditems and count based upon the passed date
+	 * @includeEntries Whether or not to include entries in the feed item results
 	 * @year The year to filter on
 	 * @month The month to filter on
 	 * @day The day to filter on
@@ -232,62 +250,9 @@ component extends="ContentService" singleton {
 		numeric month=0,
 		numeric day=0,
 		numeric max=0,
-		numeric offset=0 ) {
+		numeric offset=0  ) {
 
-		// TODO: Include entries
-
-		var results = {};
-
-		// Set hql
-		var hql = "FROM cbFeedItem fi
-			WHERE fi.isPublished = true
-				AND fi.publishedDate <= :now
-				AND ( fi.expireDate IS NULL OR fi.expireDate >= :now )
-				AND fi.parent.isPublished = true
-				AND fi.parent.publishedDate <= :now
-				AND ( fi.parent.expireDate IS NULL OR fi.parent.expireDate >= :now )";
-		var params = {};
-		params[ "now" ] = now();
-
-		// Year
-		if( val( arguments.year ) ){
-			params["year"] = arguments.year;
-			hql &= " AND YEAR(fi.publishedDate) = :year";
-		}
-
-		// Month
-		if( val( arguments.month ) ){
-			params["month"] = arguments.month;
-			hql &= " AND MONTH(fi.publishedDate) = :month";
-		}
-
-		// Day
-		if( val( arguments.day ) ){
-			params["day"] = arguments.day;
-			hql &= " AND DAY(fi.publishedDate ) = :day";
-		}
-
-		// Get the count
-		results.count = executeQuery(
-			query="select count(*) #hql#",
-			params=params,
-			max=1,
-			asQuery=false
-		)[1];
-
-		// Order by
-		hql &= " ORDER BY fi.publishedDate DESC";
-
-		// Get the results
-		results.feedItems = executeQuery(
-			query=hql,
-			params=params,
-			max=arguments.max,
-			offset=arguments.offset,
-			asQuery=false
-		);
-
-		return results;
+		return getPublishedFeedItems( argumentCollection=arguments );
 
 	}
 

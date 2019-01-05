@@ -101,7 +101,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 				if ( arguments.openNewWindow ) {
 					target = "_blank";
 				}
-				writeOutput('<li class="feedItems"><a href="#ag.linkFeedItem( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
+				writeOutput('<li class="feedItems"><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
 			// List end
 			writeOutput( "</ul>" );
 		}

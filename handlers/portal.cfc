@@ -252,7 +252,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			searchTerm=rc.q,
 			category=rc.category,
 			max=prc.agSettings.ag_portal_paging_max_items,
-			offset=prc.pagingBoundaries.startRow - 1
+			offset=prc.pagingBoundaries.startRow - 1,
+			includeEntries=prc.agSettings.ag_portal_display_entries
 		);
 
 		prc.feedItems = results.feedItems;
@@ -323,7 +324,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				month=rc.month,
 				day=rc.day,
 				max=prc.agSettings.ag_portal_paging_max_items,
-				offset=prc.pagingBoundaries.startRow - 1
+				offset=prc.pagingBoundaries.startRow - 1,
+				includeEntries=prc.agSettings.ag_portal_display_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -485,7 +487,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				feed=prc.feed.getContentID(),
 				author=rc.author,
 				max=val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items,
-				offset=prc.pagingBoundaries.startRow - 1
+				offset=prc.pagingBoundaries.startRow - 1,
+				includeEntries=false
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;

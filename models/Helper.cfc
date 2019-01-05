@@ -364,13 +364,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed item link
 	 */
 	string function linkFeedItem( required any feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
-		try {
-		if ( arguments.feedItem.getContentType() == "Entry" ) return cb.linkEntry( arguments.feedItem );
-		else return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
-		} catch(any e) {
-			writedump(var=arguments.feedItem);
-			abort;
-		}
+		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
 	/**

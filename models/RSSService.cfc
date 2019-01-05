@@ -12,6 +12,7 @@ component singleton {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="agHelper" inject="helper@aggregator";
+	property name="cbHelper" inject="cbHelper@cb";
 
 	/**
 	 * Constructor
@@ -23,11 +24,14 @@ component singleton {
 
 	/**
 	 * Gets the feed items feed from cache or build
+	 * @includeEntries Whether or not to include entries in the rss feed
 	 * @category The category slug to filter on
 	 * @slug The feed slug to filter on
 	 * @return The feed xml string
 	 */
-	string function getRSS( string category="", string slug="" ) {
+	string function getRSS(
+		string category="",
+		string slug="" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -63,7 +67,9 @@ component singleton {
 	 * @slug The feed slug to filter on
 	 * @return The feed xml string
 	 */
-	private string function buildFeed( string category="", string slug="" ) {
+	private string function buildFeed(
+		string category="",
+		string slug="" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting("aggregator") );
@@ -73,7 +79,8 @@ component singleton {
 		var results = feedItemService.getPublishedFeedItems(
 			category=arguments.category,
 			feed=arguments.slug,
-			max=settings.ag_rss_max_items
+			max=settings.ag_rss_max_items,
+			includeEntries=settings.ag_portal_display_entries
 		);
 		var feedItems = results.feedItems;
 		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url");
@@ -82,24 +89,29 @@ component singleton {
 		for ( var item IN feedItems ) {
 			queryAddRow( items, 1 );
 			querySetCell( items, "title", item.getTitle() );
-			var description = item.getContentExcerpt();
+			var description = "";
 			if ( item.hasExcerpt() ) {
 				description = item.renderExcerpt();
+			} else if ( item.getContentType() == "FeedItem"  ) {
+				description = item.getContentExcerpt();
 			}
-			querySetCell( items, "description", "<![CDATA[" & description & "]]>" );
+			if ( len( description ) ) {
+				querySetCell( items, "description", "<![CDATA[" & description & "]]>" );
+			}
 			if ( settings.ag_rss_content_enable ) {
 				querySetCell( items, "content_encoded", "<![CDATA[" & item.renderContent() & "]]>" );
 			}
-			querySetCell( items, "link", agHelper.linkFeedItem( item ) );
+			querySetCell( items, "link", agHelper.linkContent( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
-			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & item.getItemAuthor() & "]]>" );
+			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & ( item.getContentType() EQ "FeedItem" ? item.getItemAuthor() : item.getAuthorName() ) & "]]>" );
+
 			if ( item.hasCategories() ) {
 				querySetCell( items, "category_tag", item.getCategoriesList() );
 			}
 			querySetCell( items, "guid_permalink", false );
-			querySetCell( items, "guid_string", agHelper.linkFeedItem( item ) );
-			querySetCell( items, "source_title", item.getFeed().getTitle() );
-			querySetCell( items, "source_url", item.getFeed().getFeedUrl() );
+			querySetCell( items, "guid_string", agHelper.linkContent( item ) );
+			querySetCell( items, "source_title", item.getContentType() EQ "FeedItem" ? item.getFeed().getTitle() : cbHelper.siteName() );
+			querySetCell( items, "source_url", item.getContentType() EQ "FeedItem" ? item.getFeed().getFeedUrl() : cbHelper.linkRSS() );
 		}
 
 		// Populate the feedStruct
