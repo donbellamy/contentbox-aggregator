@@ -73,6 +73,30 @@ component extends="coldbox.system.Interceptor" {
 		doCacheCleanup();
 	}
 
+	/**
+	 * Fired after entry save
+	 */
+	function cbadmin_postEntrySave( event, interceptData ) {
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+	}
+
+	/**
+	 * Fired after entry delete
+	 */
+	function cbadmin_postEntryRemove( event, interceptData ) {
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+	}
+
+	/**
+	 * Fired after entry status update
+	 */
+	function cbadmin_onEntryStatusUpdate( event, interceptData ) {
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+	}
+
 	/************************************** PRIVATE *********************************************/
 
 	/**
