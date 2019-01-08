@@ -160,7 +160,7 @@ component extends="contentHandler" {
 
 		// Grab feed items and versions
 		if ( prc.feed.isLoaded() ) {
-			prc.feedItems = feedItemService.search( feed=prc.feed.getContentID(), max=5 ).feedItems;
+			prc.feedItems = feedItemService.getFeedItems( feed=prc.feed.getContentID(), max=5 ).feedItems;
 			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
 		}
 
