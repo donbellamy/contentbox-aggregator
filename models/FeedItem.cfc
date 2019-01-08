@@ -232,8 +232,8 @@ component persistent="true"
 		title = trim( left( title, 200 ) );
 		slug = trim( left( slug, 200 ) );
 
-		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
-		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
+		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
 
 		return errors;
 

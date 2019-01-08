@@ -34,9 +34,9 @@ component extends="contentHandler" {
 
 		event.paramValue( "page", 1 );
 		event.paramValue( "search", "" );
-		event.paramValue( "state", "any" );
-		event.paramValue( "category", "all" );
-		event.paramValue( "status", "any" );
+		event.paramValue( "state", "" );
+		event.paramValue( "category", "" );
+		event.paramValue( "status", "" );
 		event.paramValue( "showAll", false );
 
 		// Grab categories
@@ -53,9 +53,9 @@ component extends="contentHandler" {
 
 		event.paramValue( "page", 1 );
 		event.paramValue( "search", "" );
-		event.paramValue( "state", "any" );
-		event.paramValue( "category", "all" );
-		event.paramValue( "status", "any" );
+		event.paramValue( "state", "" );
+		event.paramValue( "category", "" );
+		event.paramValue( "status", "" );
 		event.paramValue( "showAll", false );
 
 		// Paging
@@ -64,7 +64,7 @@ component extends="contentHandler" {
 		prc.pagingLink = "javascript:contentPaginate(@page@)";
 
 		// Grab results
-		var results = feedService.search(
+		var results = feedService.getFeeds(
 			searchTerm=rc.search,
 			state=rc.state,
 			category=rc.category,
@@ -246,7 +246,7 @@ component extends="contentHandler" {
 		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
 		// Check permission
-		if( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) ) {
+		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) ) {
 			rc.isPublished = "false";
 		}
 

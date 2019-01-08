@@ -101,7 +101,7 @@ component extends="ContentService" singleton {
 			whereHql &= " AND cats.categoryID = :category";
 			params["category"] = javaCast( "int", arguments.category );
 		} else if ( len( trim( arguments.category ) ) ) {
-			if( arguments.category == "none" ) {
+			if ( arguments.category == "none" ) {
 				selectHql &= " LEFT JOIN cb.categories AS cats";
 				whereHql &= " AND cats.categoryID = NULL";
 			} else {
@@ -126,20 +126,20 @@ component extends="ContentService" singleton {
 			params["feed"] = arguments.feed;
 		}
 
-		// Year
-		if ( val( arguments.year ) ){
+		// Check year
+		if ( val( arguments.year ) ) {
 			whereHql &= " AND YEAR( cb.publishedDate ) = :year";
 			params["year"] = arguments.year;
 		}
 
-		// Month
-		if ( val( arguments.month ) ){
+		// Check month
+		if ( val( arguments.month ) ) {
 			whereHql &= " AND MONTH( cb.publishedDate ) = :month";
 			params["month"] = arguments.month;
 		}
 
-		// Day
-		if ( val( arguments.day ) ){
+		// Check day
+		if ( val( arguments.day ) ) {
 			whereHql &= " AND DAY( cb.publishedDate ) = :day";
 			params["day"] = arguments.day;
 		}
@@ -158,14 +158,19 @@ component extends="ContentService" singleton {
 			asQuery=false
 		)[1];
 
+		// Check count only
+		if ( arguments.countOnly ) {
+			results.feedItems = [];
 		// Grab the feed items
-		results.feedItems = executeQuery(
-			query="SELECT cb #hql#",
-			params=params,
-			max=arguments.max,
-			offset=arguments.offset,
-			asQuery=false
-		);
+		} else {
+			results.feedItems = executeQuery(
+				query="SELECT cb #hql#",
+				params=params,
+				max=arguments.max,
+				offset=arguments.offset,
+				asQuery=false
+			);
+		}
 
 		return results;
 

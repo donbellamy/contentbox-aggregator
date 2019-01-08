@@ -22,9 +22,9 @@ function contentLoad( criteria ) {
 	if ( criteria == undefined ) { criteria = {}; }
 	if ( !( "page" in criteria) ) { criteria.page = 1; }
 	if ( !( "search" in criteria) ) { criteria.search = ""; }
-	if ( !( "state" in criteria) ) { criteria.state = "any"; }
-	if ( !( "category" in criteria) ) { criteria.category = "all"; }
-	if ( !( "status" in criteria) ) { criteria.status = "any"; }
+	if ( !( "state" in criteria) ) { criteria.state = ""; }
+	if ( !( "category" in criteria) ) { criteria.category = ""; }
+	if ( !( "status" in criteria) ) { criteria.status = ""; }
 	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
 
 	$tableContainer.css( "opacity", .60 );
@@ -46,7 +46,7 @@ function contentLoad( criteria ) {
 }
 
 function contentFilter() {
-	if ( $("##state").val() != "any" || $("##category").val() != "all" || $("##status").val() != "any" ) {
+	if ( $("##state").val() != "" || $("##category").val() != "" || $("##status").val() != "" ) {
 		$("##filterBox").addClass("selected");
 	} else {
 		$("##filterBox").removeClass("selected");
@@ -72,17 +72,17 @@ function contentShowAll() {
 	});
 }
 
-function resetFilter( reload ){
+function resetFilter( reload ) {
 	if ( reload ) {
 		contentLoad();
 	}
 	$("##search").val("");
-	$("##stateFilter").val("any");
-	$("##categoryFilter").val("all");
-	$("##statusFilter").val("any");
-	$("##state").val("any");
-	$("##category").val("all");
-	$("##status").val("any");
+	$("##stateFilter").val("");
+	$("##categoryFilter").val("");
+	$("##statusFilter").val("");
+	$("##state").val("");
+	$("##category").val("");
+	$("##status").val("");
 	$("##filterBox").removeClass("selected");
 }
 

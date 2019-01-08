@@ -54,7 +54,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			// Check for content
 			if ( arrayLen( relatedContent ) ) {
 				// Dropdown
-				if( arguments.useDropdown ){
+				if ( arguments.useDropdown ) {
 					writeoutput( buildDropDown( relatedContent ) );
 				// List
 				} else {
@@ -62,7 +62,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 				}
 			} else {
 				writeoutput( "<p>#arguments.emptyMessage#</p>" );
-				if( cb.isPreview() ) {
+				if ( cb.isPreview() ) {
 					writeoutput( "<small>NOTE: Related content may not appear in preview mode!</small>" );
 				}
 			}
@@ -87,8 +87,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 			// Select start
 			writeOutput('<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>');
 			// Select options
-			for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ){
-				if( relatedContent[x].isContentPublished() ){
+			for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
+				if ( relatedContent[x].isContentPublished() ) {
 					writeoutput('<option value="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#');
 					writeoutput('</option>');
 				}

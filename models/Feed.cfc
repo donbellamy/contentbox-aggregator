@@ -275,7 +275,7 @@ component persistent="true"
 	 */
 	Feed function addJoinedStartTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
-		if( arrayLen( splitTime ) == 2 ) {
+		if ( arrayLen( splitTime ) == 2 ) {
 			return addStartTime( splitTime[ 1 ], splitTime[ 2 ] );
 		} else {
 			return this;
@@ -320,7 +320,7 @@ component persistent="true"
 	 */
 	Feed function addJoinedStopTime( required string timeString ) {
 		var splitTime = listToArray( arguments.timeString, ":" );
-		if( arrayLen( splitTime ) == 2 ) {
+		if ( arrayLen( splitTime ) == 2 ) {
 			return addStopTime( splitTime[ 1 ], splitTime[ 2 ] );
 		} else {
 			return this;
@@ -424,10 +424,10 @@ component persistent="true"
 		matchAllFilter = trim( left( matchAllFilter, 255 ) );
 		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
-		if( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
-		if( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
-		if( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
-		if( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
+		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
+		if ( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
+		if ( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
 
 		return errors;
 

@@ -39,7 +39,7 @@
 		delay: 1000,
 		timeout: 5000
 	};
-	(function(){
+	(function() {
 		function redirect() {
 			setTimeout( doRedirect, conf.delay );
 			setTimeout( displayMessage, conf.timeout );

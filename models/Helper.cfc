@@ -27,7 +27,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function setting( required key, value ) {
 		var prc = cb.getPrivateRequestCollection();
-		if ( structKeyExists( prc.agSettings, arguments.key ) ){
+		if ( structKeyExists( prc.agSettings, arguments.key ) ) {
 			return prc.agSettings[ key ];
 		}
 		if ( structKeyExists( arguments, "value" ) ) {
@@ -489,7 +489,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function quickPaging( numeric maxRows, string type="items" ) {
 		var prc = cb.getPrivateRequestCollection();
-		if( NOT structKeyExists( prc,"oPaging" ) ) {
+		if ( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(
 				message = "Paging object is not in the collection",
 				detail = "This probably means you are trying to use the paging object in an non-index page.",

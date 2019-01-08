@@ -42,7 +42,7 @@ component singleton {
 		// Check cache
 		if ( settings.ag_rss_cache_enable ) {
 			rssFeed = cache.get( cacheKey );
-			if ( !isNull( rssFeed ) ){
+			if ( !isNull( rssFeed ) ) {
 				return rssFeed;
 			}
 		}

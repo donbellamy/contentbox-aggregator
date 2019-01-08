@@ -28,28 +28,32 @@ component extends="ContentService" singleton {
 	 * @offset The offset of the pagination
 	 * @return struct - {feeds,count}
 	 */
-	struct function search(
+	struct function getFeeds(
 		string searchTerm="",
-		string state="any",
-		string category="all",
-		string status="any",
+		string state="",
+		string category="",
+		string status="",
 		string sortOrder="title ASC",
+		boolean countOnly=false,
 		numeric max=0,
 		numeric offset=0 ) {
 
-		// Vars
+		// Set vars
 		var results = {};
 		var c = newCriteria();
 
+		// Check search term or sort
 		if ( len( trim( arguments.searchTerm ) ) || findNoCase( "modifiedDate", arguments.sortOrder ) ) {
 			c.createAlias( "activeContent", "ac" );
 		}
 
+		// Check search term
 		if ( len( trim( arguments.searchTerm ) ) ) {
 			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ), c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
 		}
 
-		if ( arguments.state NEQ "any" ) {
+		// Check state
+		if ( len( trim( arguments.state ) ) ) {
 			if ( arguments.state EQ "failing" ) {
 				c.createAlias( "feedImports", "fi" ).isTrue( "fi.importFailed" );
 			} else {
@@ -57,15 +61,20 @@ component extends="ContentService" singleton {
 			}
 		}
 
-		if ( arguments.category NEQ "all" ) {
-			if( arguments.category EQ "none" ) {
+		// Check category
+		if ( isNumeric( arguments.category ) ) {
+			c.createAlias( "categories", "cats" ).isIn( "cats.categoryID", javaCast( "java.lang.Integer[]", [ arguments.category ] ) );
+		} else if ( len( trim( arguments.category ) ) ) {
+			if ( arguments.category == "none" ) {
 				c.isEmpty( "categories" );
 			} else {
-				c.createAlias( "categories", "cats" ).isIn( "cats.categoryID", javaCast( "java.lang.Integer[]", [ arguments.category ] ) );
+				c.createAlias( "categories", "cats" ).eq( "cats.slug", trim( arguments.category ) );
 			}
+
 		}
 
-		if ( arguments.status NEQ "any" ) {
+		// Check status
+		if ( len( trim( arguments.status ) ) ) {
 			if ( arguments.status EQ "published" ) {
 				c.isTrue("isPublished")
 					.isLT( "publishedDate", now() )
@@ -77,14 +86,21 @@ component extends="ContentService" singleton {
 			}
 		}
 
-		// Get the results
+		// Get the feed count
 		results.count = c.count( "contentID" );
-		results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
-			offset=arguments.offset,
-			max=arguments.max,
-			sortOrder=arguments.sortOrder,
-			asQuery=false
-		);
+
+		// Check count only
+		if ( arguments.countOnly ) {
+			results.feeds = [];
+		// Grab the feed items
+		} else {
+			results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
+				offset=arguments.offset,
+				max=arguments.max,
+				sortOrder=arguments.sortOrder,
+				asQuery=false
+			);
+		}
 
 		return results;
 
@@ -97,7 +113,7 @@ component extends="ContentService" singleton {
 	 * @return struct - {feeds,count}
 	 */
 	struct function getPublishedFeeds( numeric max=0, numeric offset=0 ) {
-		return search( status="published", max=arguments.max, offset=arguments.offset );
+		return getFeeds( argumentCollection=arguments, status="published" );
 	}
 
 	/**

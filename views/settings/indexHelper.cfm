@@ -16,7 +16,7 @@ $( document ).ready( function() {
 	$("input.slider").on( "slide", function( slideEvt ) {
 		$( "##" + slideEvt.target.id + "_label" ).text( slideEvt.value );
 	});
-	$("##ag_importing_import_interval").on("change",function(){
+	$("##ag_importing_import_interval").on("change",function() {
 		if ( $(this).val() == "" ) {
 			$("##ag_importing_import_start_date").val("");
 			$("##ag_importing_import_start_time").val("");
@@ -24,11 +24,11 @@ $( document ).ready( function() {
 	});
 	$(".datepicker").datepicker( { format: "mm/dd/yy" } );
 	$(".clockpicker").clockpicker( { twelvehour: true } );
-	$(".counter").on( "change", function(){
+	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});
 	var numRemoved = 0;
-	$("##addTaxonomy").click(function(){
+	$("##addTaxonomy").click(function() {
 		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1 + numRemoved;
 		var template = $("##taxonomyTemplate").html().replace(/templateIndex/g, templateIndex);
 		$("##taxonomies").append( template );
@@ -38,13 +38,13 @@ $( document ).ready( function() {
 			buttonWidth: "100%"
 		});
 	});
-	$("##removeAll").click(function(){
+	$("##removeAll").click(function() {
 		if ( confirm("Are you sure you want to remove all taxonomies?") ) {
 			$("##taxonomies .taxonomy").remove();
 		}
 		return false;
 	});
-	$(".removeTaxonomy").click(function(){
+	$(".removeTaxonomy").click(function() {
 		if ( confirm("Are you sure you want to remove this taxonomy?") ) {
 			$(this).closest(".taxonomy").remove();
 			numRemoved++;
@@ -57,7 +57,7 @@ $( document ).ready( function() {
 		buttonWidth: "100%"
 	});
 });
-function loadAssetChooser( callback, w, h ){
+function loadAssetChooser( callback, w, h ) {
 	openRemoteModal(
 		"#event.buildLink( prc.cbAdminEntryPoint )#/ckFileBrowser/assetChooser?callback=" + callback,
 		{},
@@ -65,15 +65,15 @@ function loadAssetChooser( callback, w, h ){
 		h
 	);
 }
-function defaultImageCallback( filePath, fileURL, fileType ){
-	if( $( "##ag_portal_item_featured_image_default" ).val().length ){ cancelDefaultImage(); }
+function defaultImageCallback( filePath, fileURL, fileType ) {
+	if ( $( "##ag_portal_item_featured_image_default" ).val().length ) { cancelDefaultImage(); }
 	$( "##default_image_controls" ).toggleClass( "hide" );
 	$( "##ag_portal_item_featured_image_default" ).val( filePath );
 	$( "##ag_portal_item_featured_image_default_url" ).val( fileURL );
 	$( "##default_image_preview" ).attr( "src", fileURL );
 	closeRemoteModal();
 }
-function cancelDefaultImage(){
+function cancelDefaultImage() {
 	$( "##ag_portal_item_featured_image_default" ).val( "" );
 	$( "##ag_portal_item_featured_image_default_url" ).val( "" );
 	$( "##default_image_preview" ).attr( "src", "" );

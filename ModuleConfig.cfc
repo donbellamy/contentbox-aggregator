@@ -231,7 +231,7 @@ component {
 		} else {
 			ses.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
 		}
-		for ( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ){
+		for ( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ) {
 			var args = duplicate( aggregatorRoutes[ x ] );
 			if ( structKeyExists( args, "handler" ) ) {
 				args.handler = "contentbox-aggregator:#args.handler#";
@@ -313,7 +313,7 @@ component {
 		// Delete settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
-		if( !isNull( setting ) ){
+		if ( !isNull( setting ) ) {
 			settingService.delete( setting );
 		}
 		settingService.flushSettingsCache();

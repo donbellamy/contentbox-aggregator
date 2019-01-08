@@ -22,7 +22,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Are we in maintenance mode?
 		if ( prc.cbSettings.cb_site_maintenance ) {
-			if ( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" )  ){
+			if ( prc.oCurrentAuthor.isLoggedIn() && prc.oCurrentAuthor.checkPermission( "MAINTENANCE_MODE_VIEWER" ) ) {
 				addAsset( "#prc.cbRoot#/includes/js/maintenance.js" );
 			} else {
 				event.overrideEvent( "contentbox-ui:page.maintenance" );
@@ -448,7 +448,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Check if author is viewing
 		var showUnpublished = false;
-		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
 			var showUnpublished = true;
 		}
 
@@ -538,7 +538,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Check if author is viewing
 		var showUnpublished = false;
-		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
 			var showUnpublished = true;
 		}
 

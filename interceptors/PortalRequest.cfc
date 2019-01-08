@@ -49,7 +49,7 @@ component extends="coldbox.system.Interceptor" {
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-aggregator" {
 
 		// Rules to turn off the admin bar
-		if(
+		if (
 			// Disabled SiteBar Setting
 			!prc.cbSettings.cb_site_adminbar
 			||
@@ -67,7 +67,7 @@ component extends="coldbox.system.Interceptor" {
 			||
 			// Permissions
 			!prc.oCurrentAuthor.checkPermission( "CONTENTBOX_ADMIN,FEEDS_ADMIN,FEEDS_EDITOR" )
-		){
+		) {
 			return;
 		}
 
@@ -79,7 +79,7 @@ component extends="coldbox.system.Interceptor" {
 		};
 
 		// Check for cache
-		if( structKeyExists( prc, "contentCacheData" ) ) {
+		if ( structKeyExists( prc, "contentCacheData" ) ) {
 			if ( prc.contentCacheData.contentType NEQ "text/html" ) {
 				return;
 			}
@@ -130,7 +130,7 @@ component extends="coldbox.system.Interceptor" {
 	 * Renderer helper injection
 	 */
 	function afterInstanceCreation( event, interceptData, buffer ) {
-		if( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
+		if ( isInstanceOf( arguments.interceptData.target, "coldbox.system.web.Renderer" ) ) {
 			var prc = event.getCollection( private=true );
 			arguments.interceptData.target.ag = agHelper;
 			arguments.interceptData.target.$agInject = variables.$agInject;

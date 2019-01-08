@@ -107,7 +107,7 @@ component extends="coldbox.system.Interceptor" {
 		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestsystemedits" ) {
 			html.$htmlhead('<script>
 				$(function() {
-					$("table[id*=''contentTable''] tbody tr").each(function(){
+					$("table[id*=''contentTable''] tbody tr").each(function() {
 						var $titleLink = $(this).find("td:first a");
 						var $actionLink = $(this).find("td:last a");
 						var contentType = $(this).find("td:first span").text();
@@ -148,7 +148,7 @@ component extends="coldbox.system.Interceptor" {
 					$("##contentContainer div.tab-content").append(''<div class="tab-pane fade" id="FeedItem"></div>'');
 					$("##contentSearch").keyup(
 						_.debounce(
-							function(){
+							function() {
 								var $this = $(this);
 								var clearIt = ( $this.val().length > 0 ? false : true );
 								var params = { search: $this.val(), clear: clearIt };
@@ -201,7 +201,7 @@ component extends="coldbox.system.Interceptor" {
 	private string function getRelatedContentIconScript() {
 		return '<script>
 			$(function() {
-				$("##relatedContent-items tr td:first-child, ##linkedContent-items tr td:first-child").each(function(){
+				$("##relatedContent-items tr td:first-child, ##linkedContent-items tr td:first-child").each(function() {
 					var $this = $(this);
 					// No child so assume it is a feed item
 					if ( $this.children().length == 0 ) {

@@ -38,7 +38,7 @@ $( document ).ready( function() {
 	$("##contentToolBar .pull-right").hide();
 	$("##versionsPager .buttonBar .btn-default").hide();
 	var numRemoved = 0;
-	$("##addTaxonomy").click(function(){
+	$("##addTaxonomy").click(function() {
 		var templateIndex = $("##taxonomies").children(".taxonomy").size() + 1 + numRemoved;
 		var template = $("##taxonomyTemplate").html().replace(/templateIndex/g, templateIndex);
 		$("##taxonomies").append( template );
@@ -48,13 +48,13 @@ $( document ).ready( function() {
 			buttonWidth: "100%"
 		});
 	});
-	$("##removeAll").click(function(){
+	$("##removeAll").click(function() {
 		if ( confirm("Are you sure you want to remove all taxonomies?") ) {
 			$("##taxonomies .taxonomy").remove();
 		}
 		return false;
 	});
-	$(".removeTaxonomy").click(function(){
+	$(".removeTaxonomy").click(function() {
 		if ( confirm("Are you sure you want to remove this taxonomy?") ) {
 			$(this).closest(".taxonomy").remove();
 			numRemoved++;
@@ -100,7 +100,7 @@ function setupFeedForm() {
 			// Update Editor Content
 			try{
 				updateEditorContent();
-			} catch( err ){
+			} catch( err ) {
 				console.log( err );
 			};
 			// Enable slug for saving.
@@ -113,22 +113,22 @@ function setupFeedForm() {
 	});
 
 	// Changelog mandatory?
-	if( $cbEditorConfig.changelogMandatory ){
+	if ( $cbEditorConfig.changelogMandatory ) {
 		$changelog.attr( "required", $cbEditorConfig.changelogMandatory );
 	}
 
 	// Activate blur slugify on titles
 	var $title = $targetEditorForm.find( "##title" );
 	// set up live event for title, do nothing if slug is locked..
-	$title.on( "blur", function(){
-		if( !$slug.prop( "disabled" ) ){
+	$title.on( "blur", function() {
+		if ( !$slug.prop( "disabled" ) ) {
 			createPermalink( $title.val() );
 		}
 	} );
 
 	// Activate permalink blur
-	$slug.on( "blur",function(){
-		if( !$( this ).prop( "disabled" ) ){
+	$slug.on( "blur",function() {
+		if ( !$( this ).prop( "disabled" ) ) {
 			permalinkUniqueCheck();
 		}
 	} );
@@ -137,10 +137,10 @@ function setupFeedForm() {
 	window.onbeforeunload = askLeaveConfirmation;
 
 	// counters
-	$("##htmlKeywords").keyup(function(){
+	$("##htmlKeywords").keyup(function() {
 		$("##html_keywords_count").html( $("##htmlKeywords").val().length );
 	} );
-	$("##htmlDescription").keyup(function(){
+	$("##htmlDescription").keyup(function() {
 		$("##html_description_count").html( $("##htmlDescription").val().length );
 	} );
 
@@ -153,7 +153,7 @@ function setupFeedForm() {
 	// Collapse navigation for better editing experience
 	var bodyEl = $('##container');
 	collapseNav = true;
-	if( collapseNav && !$( bodyEl ).hasClass("sidebar-mini") ){
+	if ( collapseNav && !$( bodyEl ).hasClass("sidebar-mini") ) {
 		$("body").removeClass("off-canvas-open");
 		$( bodyEl ).toggleClass("sidebar-mini");
 	}
@@ -172,7 +172,7 @@ function removeImport( feedImportID ) {
 		{ feedImportID : feedImportID },
 		function( data ) {
 			closeConfirmations();
-			if( !data.ERROR ){
+			if ( !data.ERROR ) {
 				$( "##import_row_" + feedImportID ).fadeOut().remove();
 				adminNotifier( "info", data.MESSAGES, 10000 );
 			} else {

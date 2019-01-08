@@ -59,7 +59,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
 			}
 			// Dropdown
-			if( arguments.useDropdown ){
+			if ( arguments.useDropdown ) {
 				writeoutput( buildDropDown( categories, arguments.showItemCount, arguments.category, arguments.includeEntries ) );
 			// List
 			} else {

@@ -19,7 +19,7 @@ component extends="baseHandler" {
 	 */
 	function clearCache( event, rc, prc ) {
 		announceInterception("aggregator_onClearCache");
-		if( event.isAjax() ) {
+		if ( event.isAjax() ) {
 			event.renderData( type="json", data={ error = false, executed = true } );
 		} else {
 			setNextEvent( prc.xehDashboard );

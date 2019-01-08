@@ -72,7 +72,7 @@ function contentShowAll() {
 	});
 }
 
-function resetFilter( reload ){
+function resetFilter( reload ) {
 	if ( reload ) {
 		contentLoad();
 	}
@@ -169,7 +169,7 @@ function categoryChooser( contentID ) {
 	// Assign categories
 	$categoriesDialog.find("##categoriesSubmit").click( function() {
 		$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemCategories )#" );
-		$("input[type='checkbox'][name*='category_']:checked").each(function(){
+		$("input[type='checkbox'][name*='category_']:checked").each(function() {
 			$contentForm.append( $("<input type='hidden' name='" + $(this).attr("name") + "' value='" + $(this).val() + "'/>" ) );
 		});
 		$contentForm.append( $("<input type='hidden' name='newCategories' value='" + $("input[name='newCategories']").val() + "'/>") );

@@ -31,7 +31,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	string function renderIt(
 		string title="",
-		numeric titleLevel=2 ){
+		numeric titleLevel=2 ) {
 
 		// Set return string
 		var string = "";
