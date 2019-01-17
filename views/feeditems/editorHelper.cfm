@@ -1,5 +1,5 @@
 <cfoutput>
-#renderExternalView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
+#renderView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
 <script>
 var feedItemSaveUrl = "#event.buildLink( prc.xehFeedItemSave )#";
 $( document ).ready( function() {

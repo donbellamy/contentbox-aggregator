@@ -82,91 +82,73 @@ component extends="coldbox.system.Interceptor" {
 
 		// Add portal link, new feed and clear cache to nav bar
 		if ( !event.isAjax() && rc.format EQ "html" ) {
-			html.$htmlhead("<script>
-				$(function() {
-					$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#agHelper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');
-				});
-			</script>");
+			html.addJSContent("$(function(){$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#agHelper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');});",true);
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
-				html.$htmlhead("<script>
-					$(function() {
-						$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');
-					});
-				</script>");
+				html.addJSContent("$(function() {$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});",true);
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
-				html.$htmlhead("<script>
-					$(function() {
-						$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>');
-					});
-				</script>");
+				html.addJSContent("$(function() {$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>');});",true);
 			}
 		}
 
 		// Fix dashbaord content links
 		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestsystemedits" ) {
-			html.$htmlhead('<script>
-				$(function() {
-					$("table[id*=''contentTable''] tbody tr").each(function() {
-						var $titleLink = $(this).find("td:first a");
-						var $actionLink = $(this).find("td:last a");
-						var contentType = $(this).find("td:first span").text();
-						var url = $titleLink.attr("href");
-						var contentID = url.substring( url.lastIndexOf("/") + 1 );
-						if ( contentType == "FeedItem" ) {
-							$titleLink.attr("title","Edit Feed Item");
-							$titleLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
-							$actionLink.attr("title","Edit Feed Item");
-							$actionLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
-						} else if ( contentType == "Feed" ) {
-							$titleLink.attr("title","Edit Feed");
-							$titleLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
-							$actionLink.attr("title","Edit Feed");
-							$actionLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
-						}
-					});
+			html.addJSContent('$(function() {
+				$("table[id*=''contentTable''] tbody tr").each(function() {
+					var $titleLink = $(this).find("td:first a");
+					var $actionLink = $(this).find("td:last a");
+					var contentType = $(this).find("td:first span").text();
+					var url = $titleLink.attr("href");
+					var contentID = url.substring( url.lastIndexOf("/") + 1 );
+					if ( contentType == "FeedItem" ) {
+						$titleLink.attr("title","Edit Feed Item");
+						$titleLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
+						$actionLink.attr("title","Edit Feed Item");
+						$actionLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
+					} else if ( contentType == "Feed" ) {
+						$titleLink.attr("title","Edit Feed");
+						$titleLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
+						$actionLink.attr("title","Edit Feed");
+						$actionLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
+					}
 				});
-			</script>');
+			});',true);
 		}
 
 		// Fix top hit links, top commented links and add content counts
 		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestSnapshot" ) {
-			html.$htmlhead('<script>
-				$(function() {
-					$("##topcontent table:first tbody").load( "#event.buildLink( prc.xehTopContent )#" );
-					$("##topcontent table:last tbody").load( "#event.buildLink( prc.xehTopCommented )#" );
-					$("##content div").load( "#event.buildLink( prc.xehContentCounts )#" );
-				});
-			</script>');
+			html.addJSContent('$(function() {
+				$("##topcontent table:first tbody").load( "#event.buildLink( prc.xehTopContent )#" );
+				$("##topcontent table:last tbody").load( "#event.buildLink( prc.xehTopCommented )#" );
+				$("##content div").load( "#event.buildLink( prc.xehContentCounts )#" );
+			});',true);
 		}
 
 		// Add feed items to related content selector
 		if ( event.getCurrentEvent() EQ "contentbox-admin:content.showRelatedContentSelector" ) {
-			html.$htmlhead('<script>
-				$(function() {
-					$("##contentContainer ul.nav-tabs").append(''<li><a href="##FeedItem" data-toggle=tab"><i class="fa fa-rss icon-small" title=FeedItem"></i> FeedItem</a></li>'');
-					$("##contentContainer div.tab-content").append(''<div class="tab-pane fade" id="FeedItem"></div>'');
-					$("##contentSearch").keyup(
-						_.debounce(
-							function() {
-								var $this = $(this);
-								var clearIt = ( $this.val().length > 0 ? false : true );
-								var params = { search: $this.val(), clear: clearIt };
-								loadContentTypeTab( "FeedItem", params );
-							},
-							300
-						)
-					);
-					function waitForIt() {
-						if ( typeof loadContentTypeTab !== "undefined" ) {
-							loadContentTypeTab( "FeedItem", {} )
-						} else {
-							setTimeout(waitForIt,250);
-						}
+			html.addJSContent('$(function() {
+				$("##contentContainer ul.nav-tabs").append(''<li><a href="##FeedItem" data-toggle=tab"><i class="fa fa-rss icon-small" title=FeedItem"></i> FeedItem</a></li>'');
+				$("##contentContainer div.tab-content").append(''<div class="tab-pane fade" id="FeedItem"></div>'');
+				$("##contentSearch").keyup(
+					_.debounce(
+						function() {
+							var $this = $(this);
+							var clearIt = ( $this.val().length > 0 ? false : true );
+							var params = { search: $this.val(), clear: clearIt };
+							loadContentTypeTab( "FeedItem", params );
+						},
+						300
+					)
+				);
+				function waitForIt() {
+					if ( typeof loadContentTypeTab !== "undefined" ) {
+						loadContentTypeTab( "FeedItem", {} )
+					} else {
+						setTimeout(waitForIt,250);
 					}
-					waitForIt();
-				});
-			</script>');
+				}
+				waitForIt();
+			});',true);
 		}
 
 	}

@@ -121,8 +121,8 @@ component extends="coldbox.system.Interceptor" {
 			adminBar &= "<script>$('<a href=""#event.buildLink( event.getCurrentRoutedURL() )#?cbCache=true"" class=""button button-admin clear-cache"">Clear Cache</a>').insertBefore('##cb-admin-bar-actions .button-admin');</script>";
 		}
 
-		// Add to html
-		html.$htmlhead( adminBar );
+		// Add to html head
+		cfhtmlhead( text=adminBar );
 
 	}
 
