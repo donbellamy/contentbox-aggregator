@@ -360,7 +360,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						feedImport.setMetaInfo( e );
 						save( feedImport );
 					} catch ( any e ) {
-						log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );
+						if ( log.canError() ) {
+							log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );
+						}
 					}
 
 				}
