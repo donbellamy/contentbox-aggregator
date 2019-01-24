@@ -358,6 +358,28 @@ component extends="contentHandler" {
 	}
 
 	/**
+	 * View feed
+	 */
+	function view( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+
+		if ( val( rc.contentID ) ) {
+			var feed = feedService.get( rc.contentID );
+			if ( feed.isLoaded() ) {
+				location( url=prc.agHelper.linkFeed( feed ), addToken=false );
+			} else {
+				cbMessagebox.info( "Invalid feed selected: #contentID#." );
+			}
+		} else {
+			cbMessagebox.warn( "No feeds selected!" );
+		}
+
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+
+	}
+
+	/**
 	 * Updates feed status
 	 */
 	function updateStatus( event, rc, prc ) {

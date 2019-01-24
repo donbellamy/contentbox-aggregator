@@ -294,6 +294,28 @@ component extends="contentHandler" {
 	}
 
 	/**
+	 * View feed item
+	 */
+	function view( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+
+		if ( val( rc.contentID ) ) {
+			var feedItem = feedItemService.get( contentID );
+			if ( feedItem.isLoaded() ) {
+				location( url=prc.agHelper.linkFeedItem( feedItem ), addToken=false );
+			} else {
+				cbMessagebox.info( "Invalid feed item selected: #contentID#." );
+			}
+		} else {
+			cbMessagebox.warn( "No feed items selected!" );
+		}
+
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc )  );
+
+	}
+
+	/**
 	 * Updates feed item status
 	 */
 	function updateStatus( event, rc, prc ) {

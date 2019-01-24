@@ -92,24 +92,33 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Fix dashbaord content links
-		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestsystemedits" ) {
+		if ( event.getCurrentEvent() == "contentbox-admin:dashboard.latestsystemedits" ||
+			event.getCurrentEvent() == "contentbox-admin:dashboard.futurePublishedContent" ||
+			event.getCurrentEvent() == "contentbox-admin:dashboard.expiredContent" ||
+			event.getCurrentEvent() == "contentbox-admin:dashboard.latestUserDrafts"
+		 ) {
 			html.addJSContent('$(function() {
 				$("table[id*=''contentTable''] tbody tr").each(function() {
 					var $titleLink = $(this).find("td:first a");
 					var $actionLink = $(this).find("td:last a");
+					var $icon =  $(this).find("td:last a i");
 					var contentType = $(this).find("td:first span").text();
 					var url = $titleLink.attr("href");
 					var contentID = url.substring( url.lastIndexOf("/") + 1 );
 					if ( contentType == "FeedItem" ) {
-						$titleLink.attr("title","Edit Feed Item");
+						$titleLink.attr("title","Edit FeedItem");
 						$titleLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
-						$actionLink.attr("title","Edit Feed Item");
-						$actionLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
+						$actionLink.attr("title","View in Site").attr("target","_blank");
+						$actionLink.removeClass("btn-primary").addClass("btn-info");
+						$actionLink.attr("href", "#agHelper.linkFeedItemsAdmin()#/view/contentID/" + contentID);
+						$icon.removeClass("fa-edit").addClass("fa-eye");
 					} else if ( contentType == "Feed" ) {
 						$titleLink.attr("title","Edit Feed");
 						$titleLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
-						$actionLink.attr("title","Edit Feed");
-						$actionLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
+						$actionLink.attr("title","View in Site").attr("target","_blank");
+						$actionLink.removeClass("btn-primary").addClass("btn-info");
+						$actionLink.attr("href", "#agHelper.linkFeedsAdmin()#/view/contentID/" + contentID);
+						$icon.removeClass("fa-edit").addClass("fa-eye");
 					}
 				});
 			});',true);

@@ -357,13 +357,22 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Gets the feeds admin link
+	 * @ssl Whether or not to use ssl
+	 * @return The feeds admin link
+	 */
+	string function linkFeedsAdmin( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds";
+	}
+
+	/**
 	 * Gets the feed item link
 	 * @feedItem The feed item to link to
 	 * @ssl Whether or not to use ssl
 	 * @format The format to link to, defaults to html
 	 * @return The feed item link
 	 */
-	string function linkFeedItem( required any feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
+	string function linkFeedItem( required FeedItem feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
 		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
 	}
 
@@ -374,21 +383,25 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed item form link
 	 */
 	string function linkFeedItemForm( any feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		var link = cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor";
 		if ( structKeyExists( arguments, "feedItem" ) ) {
-			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor/contentID/" & arguments.feedItem.getContentID();
-		} else {
-			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor";
+			link &= "/contentID/" & arguments.feedItem.getContentID();
 		}
+		return link;
 	}
 
 	/**
 	 * Gets the feed items admin link
-	 * @contentID The feed contentID to link to
+	 * @contentID The feed contentID to link to if provided
 	 * @ssl Whether or not to use ssl
 	 * @return The feed items admin link
 	 */
-	string function linkFeedItemsAdmin( required numeric contentID, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems?feed=" & arguments.contentID;
+	string function linkFeedItemsAdmin( any contentID, boolean ssl=cb.getRequestContext().isSSL() ) {
+		var link = cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems";
+		if ( structKeyExists( arguments, "contentID" ) && isNumeric( arguments.contentID ) ) {
+			link &= "?feed=" & arguments.contentID;
+		}
+		return link;
 	}
 
 	/**
