@@ -125,7 +125,7 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Fix top hit links, top commented links and add content counts
-		if ( event.getCurrentEvent() EQ "contentbox-admin:dashboard.latestSnapshot" ) {
+		if ( event.getCurrentEvent() == "contentbox-admin:dashboard.latestSnapshot" ) {
 			html.addJSContent('$(function() {
 				$("##topcontent table:first tbody").load( "#event.buildLink( prc.xehTopContent )#" );
 				$("##topcontent table:last tbody").load( "#event.buildLink( prc.xehTopCommented )#" );
@@ -134,7 +134,7 @@ component extends="coldbox.system.Interceptor" {
 		}
 
 		// Add feed items to related content selector
-		if ( event.getCurrentEvent() EQ "contentbox-admin:content.showRelatedContentSelector" ) {
+		if ( event.getCurrentEvent() == "contentbox-admin:content.showRelatedContentSelector" ) {
 			html.addJSContent('$(function() {
 				$("##contentContainer ul.nav-tabs").append(''<li><a href="##FeedItem" data-toggle=tab"><i class="fa fa-rss icon-small" title=FeedItem"></i> FeedItem</a></li>'');
 				$("##contentContainer div.tab-content").append(''<div class="tab-pane fade" id="FeedItem"></div>'');
@@ -165,22 +165,22 @@ component extends="coldbox.system.Interceptor" {
 	/**
 	 * Fired after feed item editor sidebar is rendered
 	 */
-	function aggregator_feedItemEditorSidebarFooter() {
-		appendToBuffer( getRelatedContentIconScript() );
+	function aggregator_feedItemEditorSidebarFooter( event, interceptData, buffer ) {
+		arguments.buffer.append( getRelatedContentIconScript() );
 	}
 
 	/**
 	 * Fired after page editor sidebar is rendered
 	 */
-	function cbadmin_pageEditorSidebarFooter() {
-		appendToBuffer( getRelatedContentIconScript() );
+	function cbadmin_pageEditorSidebarFooter( event, interceptData, buffer ) {
+		arguments.buffer.append( getRelatedContentIconScript() );
 	}
 
 	/**
 	 * Fired after entry editor sidebar is rendered
 	 */
-	function cbadmin_entryEditorSidebarFooter() {
-		appendToBuffer( getRelatedContentIconScript() );
+	function cbadmin_entryEditorSidebarFooter( event, interceptData, buffer ) {
+		arguments.buffer.append( getRelatedContentIconScript() );
 	}
 
 	/************************************** PRIVATE *********************************************/
