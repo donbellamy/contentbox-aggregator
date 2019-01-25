@@ -327,7 +327,7 @@ Portal Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Portal.html#renderIt()">renderIt</A></strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])
+			<strong><a href="Portal.html#renderIt()">renderIt</A></strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the portal widget.
@@ -1149,7 +1149,7 @@ Portal Widget</p>
 				
 
 				
-					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getDatasource()">getDatasource</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
+					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#relocate()">relocate</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
 				
 			</td>
 		</tr>
@@ -1237,7 +1237,7 @@ Portal Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -1283,9 +1283,16 @@ Portal Widget</p>
 		
 		<dd><code>openNewWindow</code> - Open feed items in a new window (tab), default is false.</dd>
 		
+		<dd><code>includeEntries</code> - Include entries in the item count or not, defaults to the global setting.</dd>
+		
 		</dl>
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The portal widget html</dd>
+		</dl>
 	
 
 	

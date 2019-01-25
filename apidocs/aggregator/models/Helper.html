@@ -881,7 +881,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkFeedItemsAdmin()">linkFeedItemsAdmin</A></strong>(numeric contentID, [boolean ssl='[runtime expression]'])
+			<strong><a href="Helper.html#linkFeedItemsAdmin()">linkFeedItemsAdmin</A></strong>([any contentID], [boolean ssl='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items admin link.
@@ -915,6 +915,21 @@ Aggregator Helper</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedsAdmin()">linkFeedsAdmin</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds admin link.
 			
 		</td>
 	</tr>
@@ -2506,7 +2521,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>linkFeedItemsAdmin</strong>(numeric contentID, [boolean ssl='[runtime expression]'])</kbd>
+	<kbd>public string <strong>linkFeedItemsAdmin</strong>([any contentID], [boolean ssl='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -2528,7 +2543,7 @@ Aggregator Helper</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>contentID</code> - The feed contentID to link to</dd>
+		<dd><code>contentID</code> - The feed contentID to link to if provided</dd>
 		
 		<dd><code>ssl</code> - Whether or not to use ssl</dd>
 		
@@ -2633,6 +2648,52 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The feeds link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkFeedsAdmin()"><!-- --></a>
+	<h3>
+		linkFeedsAdmin
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedsAdmin</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feeds admin link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feeds admin link</dd>
 		</dl>
 	
 
@@ -3177,7 +3238,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>The fuzzy timestamp, or passed date/time if older than 24 hours</dd>
+			<dd>The fuzzy timestamp, or passed date/time if older than a month</dd>
 		</dl>
 	
 

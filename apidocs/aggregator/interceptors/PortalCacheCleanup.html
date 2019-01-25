@@ -614,6 +614,51 @@ Portal cache cleanup interceptor</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="PortalCacheCleanup.html#cbadmin_onEntryStatusUpdate()">cbadmin_onEntryStatusUpdate</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after entry status update.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="PortalCacheCleanup.html#cbadmin_postEntryRemove()">cbadmin_postEntryRemove</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after entry delete.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="PortalCacheCleanup.html#cbadmin_postEntrySave()">cbadmin_postEntrySave</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after entry save.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>private&nbsp;<a href="../../aggregator/interceptors/PortalCacheCleanup.html" title="class in aggregator.interceptors">PortalCacheCleanup</a></code>
 		</td>
 		<td>
@@ -1167,7 +1212,7 @@ Portal cache cleanup interceptor</p>
 				
 
 				
-					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getDatasource()">getDatasource</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
+					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#relocate()">relocate</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
 				
 			</td>
 		</tr>
@@ -1738,6 +1783,135 @@ Portal cache cleanup interceptor</p>
 
 	
 		<p>Fired after settings save</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cbadmin_onEntryStatusUpdate()"><!-- --></a>
+	<h3>
+		cbadmin_onEntryStatusUpdate
+		
+	</h3>
+
+	<kbd>public any <strong>cbadmin_onEntryStatusUpdate</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired after entry status update</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cbadmin_postEntryRemove()"><!-- --></a>
+	<h3>
+		cbadmin_postEntryRemove
+		
+	</h3>
+
+	<kbd>public any <strong>cbadmin_postEntryRemove</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired after entry delete</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cbadmin_postEntrySave()"><!-- --></a>
+	<h3>
+		cbadmin_postEntrySave
+		
+	</h3>
+
+	<kbd>public any <strong>cbadmin_postEntrySave</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired after entry save</p>
 	
 
 	

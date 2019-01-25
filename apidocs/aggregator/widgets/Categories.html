@@ -327,7 +327,7 @@ Categories Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#buildDropDown()">buildDropDown</A></strong>([any categories], [any showItemCount], [any categoryFilter])
+			<strong><a href="Categories.html#buildDropDown()">buildDropDown</A></strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the drop down menu.
@@ -342,7 +342,7 @@ Categories Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#buildList()">buildList</A></strong>([any categories], [any showItemCount], [any categoryFilter])
+			<strong><a href="Categories.html#buildList()">buildList</A></strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the list menu.
@@ -357,7 +357,7 @@ Categories Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'])
+			<strong><a href="Categories.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed item categories widget.
@@ -1179,7 +1179,7 @@ Categories Widget</p>
 				
 
 				
-					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getDatasource()">getDatasource</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
+					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#relocate()">relocate</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
 				
 			</td>
 		</tr>
@@ -1267,7 +1267,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildDropDown</strong>([any categories], [any showItemCount], [any categoryFilter])</kbd>
+	<kbd>private string <strong>buildDropDown</strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])</kbd>
 
 	<br><br>
 
@@ -1295,6 +1295,8 @@ Categories Widget</p>
 		
 		<dd><code>categoryFilter</code></dd>
 		
+		<dd><code>includeEntries</code></dd>
+		
 		</dl>
 	
 
@@ -1312,7 +1314,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildList</strong>([any categories], [any showItemCount], [any categoryFilter])</kbd>
+	<kbd>private string <strong>buildList</strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])</kbd>
 
 	<br><br>
 
@@ -1340,6 +1342,8 @@ Categories Widget</p>
 		
 		<dd><code>categoryFilter</code></dd>
 		
+		<dd><code>includeEntries</code></dd>
+		
 		</dl>
 	
 
@@ -1357,7 +1361,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -1401,9 +1405,16 @@ Categories Widget</p>
 		
 		<dd><code>showItemCount</code> - Show item counts or not, default is true.</dd>
 		
+		<dd><code>includeEntries</code> - Include entries in the item count or not, defaults to the global setting.</dd>
+		
 		</dl>
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item categories widget html</dd>
+		</dl>
 	
 
 	

@@ -351,7 +351,7 @@ FeedItem Service</p>
 			<code>array</code>
 		</td>
 		<td>
-			<strong><a href="FeedItemService.html#getArchiveReport()">getArchiveReport</A></strong>()
+			<strong><a href="FeedItemService.html#getArchiveReport()">getArchiveReport</A></strong>([boolean includeEntries='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the archive report by date and number of feed items.
@@ -366,7 +366,22 @@ FeedItem Service</p>
 			<code>struct</code>
 		</td>
 		<td>
-			<strong><a href="FeedItemService.html#getPublishedFeedItems()">getPublishedFeedItems</A></strong>([string searchTerm=''], [string category=''], [string author=''], [string feed=''], [string sortOrder='publishedDate DESC'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
+			<strong><a href="FeedItemService.html#getFeedItems()">getFeedItems</A></strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of feeditems and count based upon the passed parameters.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemService.html#getPublishedFeedItems()">getPublishedFeedItems</A></strong>([boolean includeEntries='false'], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string sortOrder='publishedDate DESC'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of published feeditems and count based upon the passed parameters.
@@ -381,25 +396,10 @@ FeedItem Service</p>
 			<code>struct</code>
 		</td>
 		<td>
-			<strong><a href="FeedItemService.html#getPublishedFeedItemsByDate()">getPublishedFeedItemsByDate</A></strong>([numeric year='0'], [numeric month='0'], [numeric day='0'], [numeric max='0'], [numeric offset='0'])
+			<strong><a href="FeedItemService.html#getPublishedFeedItemsByDate()">getPublishedFeedItemsByDate</A></strong>([boolean includeEntries='false'], [numeric year='0'], [numeric month='0'], [numeric day='0'], [numeric max='0'], [numeric offset='0'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of published feeditems and count based upon the passed date.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>struct</code>
-		</td>
-		<td>
-			<strong><a href="FeedItemService.html#search()">search</A></strong>([string searchTerm=''], [string feed='all'], [string category='all'], [string status='any'], [string sortOrder='publishedDate DESC'], [numeric max='0'], [numeric offset='0'])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of feeditems and count based upon the passed parameters.
 			
 		</td>
 	</tr>
@@ -1680,7 +1680,7 @@ FeedItem Service</p>
 		
 	</h3>
 
-	<kbd>public array <strong>getArchiveReport</strong>()</kbd>
+	<kbd>public array <strong>getArchiveReport</strong>([boolean includeEntries='false'])</kbd>
 
 	<br><br>
 
@@ -1699,11 +1699,90 @@ FeedItem Service</p>
 	
 
 	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>includeEntries</code> - Whether or not to include entries in the feed item results</dd>
+		
+		</dl>
+	
 
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>An array of month and feed item counts per month</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedItems()"><!-- --></a>
+	<h3>
+		getFeedItems
+		
+	</h3>
+
+	<kbd>public struct <strong>getFeedItems</strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
+
+	<br><br>
+
+	
+		<p>Returns a struct of feeditems and count based upon the passed parameters</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>includeEntries</code> - Whether or not to include entries in the feed item results</dd>
+		
+		<dd><code>status</code> - The status to filter on, defaults to "all"</dd>
+		
+		<dd><code>searchTerm</code> - The search term to filter on</dd>
+		
+		<dd><code>category</code> - The category to filter on, defaults to "all"</dd>
+		
+		<dd><code>author</code></dd>
+		
+		<dd><code>feed</code> - The feed to filter on, defaults to "all"</dd>
+		
+		<dd><code>year</code> - The year to filter on</dd>
+		
+		<dd><code>month</code> - The month to filter on</dd>
+		
+		<dd><code>day</code> - The day to filter on</dd>
+		
+		<dd><code>sortOrder</code> - The field to sort the results on, defaults to "publishedDate"</dd>
+		
+		<dd><code>searchActiveContent</code></dd>
+		
+		<dd><code>countOnly</code></dd>
+		
+		<dd><code>max</code> - The maximum number of feed items to return</dd>
+		
+		<dd><code>offset</code> - The offset of the pagination</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>struct - {feedItems,count}</dd>
 		</dl>
 	
 
@@ -1719,7 +1798,7 @@ FeedItem Service</p>
 		
 	</h3>
 
-	<kbd>public struct <strong>getPublishedFeedItems</strong>([string searchTerm=''], [string category=''], [string author=''], [string feed=''], [string sortOrder='publishedDate DESC'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
+	<kbd>public struct <strong>getPublishedFeedItems</strong>([boolean includeEntries='false'], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string sortOrder='publishedDate DESC'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
 
 	<br><br>
 
@@ -1741,17 +1820,25 @@ FeedItem Service</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
+		<dd><code>includeEntries</code> - Whether or not to include entries in the feed item results</dd>
+		
 		<dd><code>searchTerm</code> - The search term to filter on</dd>
 		
-		<dd><code>category</code> - The category to filter on</dd>
+		<dd><code>category</code> - The category to filter on, defaults to "all"</dd>
 		
-		<dd><code>author</code> - The author to filter on</dd>
+		<dd><code>author</code></dd>
 		
-		<dd><code>feed</code> - The feed to filter on</dd>
+		<dd><code>feed</code> - The feed to filter on, defaults to "all"</dd>
+		
+		<dd><code>year</code> - The year to filter on</dd>
+		
+		<dd><code>month</code> - The month to filter on</dd>
+		
+		<dd><code>day</code> - The day to filter on</dd>
 		
 		<dd><code>sortOrder</code> - The field to sort the results on, defaults to "publishedDate"</dd>
 		
-		<dd><code>countOnly</code> - When true will only return count of feed items found</dd>
+		<dd><code>countOnly</code></dd>
 		
 		<dd><code>max</code> - The maximum number of feed items to return</dd>
 		
@@ -1779,7 +1866,7 @@ FeedItem Service</p>
 		
 	</h3>
 
-	<kbd>public struct <strong>getPublishedFeedItemsByDate</strong>([numeric year='0'], [numeric month='0'], [numeric day='0'], [numeric max='0'], [numeric offset='0'])</kbd>
+	<kbd>public struct <strong>getPublishedFeedItemsByDate</strong>([boolean includeEntries='false'], [numeric year='0'], [numeric month='0'], [numeric day='0'], [numeric max='0'], [numeric offset='0'])</kbd>
 
 	<br><br>
 
@@ -1801,69 +1888,13 @@ FeedItem Service</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
+		<dd><code>includeEntries</code> - Whether or not to include entries in the feed item results</dd>
+		
 		<dd><code>year</code> - The year to filter on</dd>
 		
 		<dd><code>month</code> - The month to filter on</dd>
 		
 		<dd><code>day</code> - The day to filter on</dd>
-		
-		<dd><code>max</code> - The maximum number of feed items to return</dd>
-		
-		<dd><code>offset</code> - The offset of the pagination</dd>
-		
-		</dl>
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>struct - {feedItems,count}</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="search()"><!-- --></a>
-	<h3>
-		search
-		
-	</h3>
-
-	<kbd>public struct <strong>search</strong>([string searchTerm=''], [string feed='all'], [string category='all'], [string status='any'], [string sortOrder='publishedDate DESC'], [numeric max='0'], [numeric offset='0'])</kbd>
-
-	<br><br>
-
-	
-		<p>Returns a struct of feeditems and count based upon the passed parameters</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>searchTerm</code> - The search term to filter on</dd>
-		
-		<dd><code>feed</code> - The feed to filter on, defaults to "all"</dd>
-		
-		<dd><code>category</code> - The category to filter on, defaults to "all"</dd>
-		
-		<dd><code>status</code> - The status to filter on, defaults to "any"</dd>
-		
-		<dd><code>sortOrder</code> - The field to sort the results on, defaults to "publishedDate"</dd>
 		
 		<dd><code>max</code> - The maximum number of feed items to return</dd>
 		

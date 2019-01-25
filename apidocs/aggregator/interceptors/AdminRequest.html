@@ -482,7 +482,7 @@ Admin request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="AdminRequest.html#aggregator_feedItemEditorSidebarFooter()">aggregator_feedItemEditorSidebarFooter</A></strong>()
+			<strong><a href="AdminRequest.html#aggregator_feedItemEditorSidebarFooter()">aggregator_feedItemEditorSidebarFooter</A></strong>([any event], [any interceptData], [any buffer])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after feed item editor sidebar is rendered.
@@ -497,7 +497,7 @@ Admin request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="AdminRequest.html#cbadmin_entryEditorSidebarFooter()">cbadmin_entryEditorSidebarFooter</A></strong>()
+			<strong><a href="AdminRequest.html#cbadmin_entryEditorSidebarFooter()">cbadmin_entryEditorSidebarFooter</A></strong>([any event], [any interceptData], [any buffer])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after entry editor sidebar is rendered.
@@ -512,7 +512,7 @@ Admin request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="AdminRequest.html#cbadmin_pageEditorSidebarFooter()">cbadmin_pageEditorSidebarFooter</A></strong>()
+			<strong><a href="AdminRequest.html#cbadmin_pageEditorSidebarFooter()">cbadmin_pageEditorSidebarFooter</A></strong>([any event], [any interceptData], [any buffer])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after page editor sidebar is rendered.
@@ -1107,7 +1107,7 @@ Admin request interceptor</p>
 				
 
 				
-					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getDatasource()">getDatasource</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
+					<a href="../../coldbox/system/FrameworkSupertype.html#addAsset()">addAsset</a>, <a href="../../coldbox/system/FrameworkSupertype.html#announceInterception()">announceInterception</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getCache()">getCache</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getController()">getController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInstance()">getInstance</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getInterceptor()">getInterceptor</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModel()">getModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleConfig()">getModuleConfig</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getModuleSettings()">getModuleSettings</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getMyPlugin()">getMyPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getPlugin()">getPlugin</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRenderer()">getRenderer</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestCollection()">getRequestCollection</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getRequestContext()">getRequestContext</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSetting()">getSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#getSettingStructure()">getSettingStructure</a>, <a href="../../coldbox/system/FrameworkSupertype.html#includeUDF()">includeUDF</a>, <a href="../../coldbox/system/FrameworkSupertype.html#loadApplicationHelpers()">loadApplicationHelpers</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateDirectoryPath()">locateDirectoryPath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#locateFilePath()">locateFilePath</a>, <a href="../../coldbox/system/FrameworkSupertype.html#persistVariables()">persistVariables</a>, <a href="../../coldbox/system/FrameworkSupertype.html#populateModel()">populateModel</a>, <a href="../../coldbox/system/FrameworkSupertype.html#relocate()">relocate</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderExternalView()">renderExternalView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderLayout()">renderLayout</a>, <a href="../../coldbox/system/FrameworkSupertype.html#renderView()">renderView</a>, <a href="../../coldbox/system/FrameworkSupertype.html#runEvent()">runEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setController()">setController</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setNextEvent()">setNextEvent</a>, <a href="../../coldbox/system/FrameworkSupertype.html#setSetting()">setSetting</a>, <a href="../../coldbox/system/FrameworkSupertype.html#settingExists()">settingExists</a>
 				
 			</td>
 		</tr>
@@ -1328,7 +1328,7 @@ Admin request interceptor</p>
 		
 	</h3>
 
-	<kbd>public any <strong>aggregator_feedItemEditorSidebarFooter</strong>()</kbd>
+	<kbd>public any <strong>aggregator_feedItemEditorSidebarFooter</strong>([any event], [any interceptData], [any buffer])</kbd>
 
 	<br><br>
 
@@ -1347,6 +1347,17 @@ Admin request interceptor</p>
 	
 
 	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		<dd><code>buffer</code></dd>
+		
+		</dl>
+	
 
 	
 
@@ -1362,7 +1373,7 @@ Admin request interceptor</p>
 		
 	</h3>
 
-	<kbd>public any <strong>cbadmin_entryEditorSidebarFooter</strong>()</kbd>
+	<kbd>public any <strong>cbadmin_entryEditorSidebarFooter</strong>([any event], [any interceptData], [any buffer])</kbd>
 
 	<br><br>
 
@@ -1381,6 +1392,17 @@ Admin request interceptor</p>
 	
 
 	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		<dd><code>buffer</code></dd>
+		
+		</dl>
+	
 
 	
 
@@ -1396,7 +1418,7 @@ Admin request interceptor</p>
 		
 	</h3>
 
-	<kbd>public any <strong>cbadmin_pageEditorSidebarFooter</strong>()</kbd>
+	<kbd>public any <strong>cbadmin_pageEditorSidebarFooter</strong>([any event], [any interceptData], [any buffer])</kbd>
 
 	<br><br>
 
@@ -1414,6 +1436,17 @@ Admin request interceptor</p>
 	
 	
 
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		<dd><code>buffer</code></dd>
+		
+		</dl>
 	
 
 	
