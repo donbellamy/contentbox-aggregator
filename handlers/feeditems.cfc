@@ -244,7 +244,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( feedItem.isLoaded() ) {
+				if ( !isNull( feedItem ) ) {
 					feedItem.removeAllCategories().setCategories( categories );
 					feedItemService.save( feedItem );
 					arrayAppend( messages, "Categories saved for '#feedItem.getTitle()#'." );
@@ -274,7 +274,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( feedItem.isLoaded() ) {
+				if ( !isNull( feedItem ) ) {
 					var title = feedItem.getTitle();
 					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
 					feedItemService.deleteContent( feedItem );
@@ -301,11 +301,11 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 
 		if ( val( rc.contentID ) ) {
-			var feedItem = feedItemService.get( contentID );
-			if ( feedItem.isLoaded() ) {
+			var feedItem = feedItemService.get( rc.contentID );
+			if ( !isNull( feedItem ) ) {
 				location( url=prc.agHelper.linkFeedItem( feedItem ), addToken=false );
 			} else {
-				cbMessagebox.info( "Invalid feed item selected: #contentID#." );
+				cbMessagebox.info( "Invalid feed item selected: #rc.contentID#." );
 			}
 		} else {
 			cbMessagebox.warn( "No feed items selected!" );
@@ -349,7 +349,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( feedItem.isLoaded() ) {
+				if ( !isNull( feedItem ) ) {
 					if ( feedItem.hasStats() ) {
 						feedItem.getStats().setHits( 0 );
 						feedItemService.save( feedItem );
@@ -394,7 +394,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID );
-				if ( feedItem.isLoaded() ) {
+				if ( !isNull( feedItem ) ) {
 					var entry = entryService.new();
 					entry.setTitle( feedItem.getTitle() );
 					entry.setSlug( htmlHelper.slugify( feedItem.getTitle() ) );

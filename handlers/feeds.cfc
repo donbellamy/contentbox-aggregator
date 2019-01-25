@@ -338,7 +338,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( feed.isLoaded() ) {
+				if ( !isNull( feed ) ) {
 					var title = feed.getTitle();
 					announceInterception( "aggregator_preFeedRemove", { feed=feed } );
 					feedService.deleteContent( feed );
@@ -366,7 +366,7 @@ component extends="contentHandler" {
 
 		if ( val( rc.contentID ) ) {
 			var feed = feedService.get( rc.contentID );
-			if ( feed.isLoaded() ) {
+			if ( !isNull( feed ) ) {
 				location( url=prc.agHelper.linkFeed( feed ), addToken=false );
 			} else {
 				cbMessagebox.info( "Invalid feed selected: #contentID#." );
@@ -413,7 +413,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( feed.isLoaded() ) {
+				if ( !isNull( feed ) ) {
 					if ( feed.hasStats() ) {
 						feed.getStats().setHits( 0 );
 						feedService.save( feed );
@@ -469,7 +469,7 @@ component extends="contentHandler" {
 			var messages = [];
 			for ( var contentID IN rc.contentID ) {
 				var feed = feedService.get( contentID );
-				if ( feed.isLoaded() ) {
+				if ( !isNull( feed ) ) {
 					feedImportService.import( feed, prc.oCurrentAuthor );
 					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 				} else {
