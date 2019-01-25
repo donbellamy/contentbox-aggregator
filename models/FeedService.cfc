@@ -67,7 +67,7 @@ component extends="ContentService" singleton {
 		// Check state
 		if ( len( trim( arguments.state ) ) ) {
 			if ( arguments.state EQ "failing" ) {
-				c.createAlias( "feedImports", "fi" ).isTrue( "fi.importFailed" );
+				c.eq( "isFailing", "1" );
 			} else {
 				c.eq( "isActive", javaCast( "boolean", arguments.state ) );
 			}
