@@ -34,6 +34,7 @@ component extends="ContentService" singleton {
 		string category="",
 		string status="",
 		string sortOrder="title ASC",
+		boolean searchActiveContent=true,
 		boolean countOnly=false,
 		numeric max=0,
 		numeric offset=0 ) {
@@ -49,7 +50,18 @@ component extends="ContentService" singleton {
 
 		// Check search term
 		if ( len( trim( arguments.searchTerm ) ) ) {
-			c.or( c.restrictions.like( "title", "%#arguments.searchTerm#%" ), c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" ) );
+			if ( arguments.searchActiveContent ) {
+				c.or(
+					c.restrictions.like( "title", "%#arguments.searchTerm#%" ),
+					c.restrictions.like( "slug", "%#arguments.searchTerm#%" ),
+					c.restrictions.like( "ac.content", "%#arguments.searchTerm#%" )
+				);
+			} else {
+				c.or(
+					c.restrictions.like( "title", "%#arguments.searchTerm#%" ),
+					c.restrictions.like( "slug", "%#arguments.searchTerm#%" )
+				);
+			}
 		}
 
 		// Check state

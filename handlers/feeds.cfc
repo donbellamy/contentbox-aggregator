@@ -66,6 +66,7 @@ component extends="contentHandler" {
 		// Grab results
 		var results = feedService.getFeeds(
 			searchTerm=rc.search,
+			searchActiveContent=false,
 			state=rc.state,
 			category=rc.category,
 			status=rc.status,

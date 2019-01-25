@@ -68,6 +68,7 @@ component extends="contentHandler" {
 		var results = feedItemService.getFeedItems(
 			status=rc.status,
 			searchTerm=rc.search,
+			searchActiveContent=false,
 			category=rc.category,
 			feed=rc.feed,
 			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),

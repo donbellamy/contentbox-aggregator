@@ -43,6 +43,7 @@ component extends="ContentService" singleton {
 		numeric month=0,
 		numeric day=0,
 		string sortOrder="publishedDate DESC",
+		boolean searchActiveContent=true,
 		boolean countOnly=false,
 		numeric max=0,
 		numeric offset=0 ) {
@@ -90,9 +91,13 @@ component extends="ContentService" singleton {
 
 		// Check search term
 		if ( len( trim( arguments.searchTerm ) ) ) {
-			selectHql &= " JOIN cb.activeContent AS ac";
-			whereHql &= " AND ( cb.title LIKE :searchTerm OR ac.content LIKE :searchTerm )";
-			params["searchTerm"] = trim( arguments.searchTerm );
+			if ( arguments.searchActiveContent ) {
+				selectHql &= " JOIN cb.activeContent AS ac";
+				whereHql &= " AND ( cb.title LIKE :searchTerm OR cb.slug LIKE :searchTerm OR ac.content LIKE :searchTerm )";
+			} else {
+				whereHql &= " AND ( cb.title LIKE :searchTerm OR cb.slug LIKE :searchTerm )";
+			}
+			params["searchTerm"] = "%" & trim( arguments.searchTerm ) & "%";
 		}
 
 		// Check category
