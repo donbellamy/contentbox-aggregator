@@ -33,8 +33,6 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
-		doKeywordCleanup( feed );
-		doAgeCleanup( feed );
 		doMaxItemCleanup( feed );
 	}
 
@@ -82,9 +80,9 @@ component extends="coldbox.system.Interceptor" {
 			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
 
 			// Filter out if any filters exist
-			if ( len( matchAnyFilter ) || len( matchAllFilter ) || len( matchNoneFilter ) ) {
+			if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {
 
-				if ( len( matchAnyFilter ) ) {
+				if ( arrayLen( matchAnyFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
 					var params = { parent=feed };
 					var count = 1;
@@ -105,7 +103,7 @@ component extends="coldbox.system.Interceptor" {
 					}
 				}
 
-				if ( len( matchAllFilter ) ) {
+				if ( arrayLen( matchAllFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
 					var params = { parent=feed };
 					var count = 1;
@@ -126,7 +124,7 @@ component extends="coldbox.system.Interceptor" {
 					}
 				}
 
-				if ( len( matchNoneFilter ) ) {
+				if ( arrayLen( matchNoneFilter ) ) {
 					var hql = "select fi from cbFeedItem fi join fi.activeContent ac where fi.parent = :parent and ( ";
 					var params = { parent=feed };
 					var count = 1;

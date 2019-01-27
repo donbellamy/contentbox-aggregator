@@ -706,7 +706,7 @@
 								</fieldset>
 								<fieldset>
 									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
-									<p><small>Taxonomies are used to automatically assign categories to feed items based upon matching keywords.</small></p>
+									<p><small>Taxonomies are used to automatically assign categories to feed items.</small></p>
 									<div id="taxonomies">
 										<cfloop from="1" to="#arrayLen( prc.agSettings.ag_importing_taxonomies )#" index="idx">
 											<cfset taxonomy = prc.agSettings.ag_importing_taxonomies[idx] />
@@ -718,7 +718,7 @@
 														content="Categories:"
 													)#
 													<div class="controls">
-														<small>Assign the following categories to feed items using the matching method and keywords below.</small>
+														<small>Assign the following categories to feed items using the matching method below.</small>
 														<div class="input-group">
 															#html.select(
 																name="ag_importing_taxonomies.#idx#.categories",
@@ -750,7 +750,7 @@
 															column="value",
 															nameColumn="name",
 															selectedValue=taxonomy.method,
-															class="form-control input-sm"
+															class="form-control input-sm input-methods"
 														)#
 													</div>
 												</div>
@@ -766,7 +766,7 @@
 															name="ag_importing_taxonomies.#idx#.keywords",
 															value=taxonomy.keywords,
 															rows="2",
-															class="form-control",
+															class="form-control input-keywords",
 															placeholder="Comma delimited list of words or phrases",
 															maxlength="255"
 														)#
@@ -1162,7 +1162,7 @@
 				content="Categories:"
 			)#
 			<div class="controls">
-				<small>Assign the following categories to feed items using the matching method and keywords below.</small><br/>
+				<small>Assign the following categories to feed items using the matching method below.</small><br/>
 				#html.select(
 					name="ag_importing_taxonomies.templateIndex.categories",
 					options=prc.categories,
@@ -1186,7 +1186,7 @@
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
-					class="form-control input-sm"
+					class="form-control input-sm input-methods"
 				)#
 			</div>
 		</div>
@@ -1201,7 +1201,7 @@
 				#html.textArea(
 					name="ag_importing_taxonomies.templateIndex.keywords",
 					rows="2",
-					class="form-control",
+					class="form-control input-keywords",
 					placeholder="Comma delimited list of words or phrases",
 					maxlength="255"
 				)#

@@ -156,7 +156,8 @@ component extends="contentHandler" {
 		});
 		prc.matchOptions = [
 			{ name="Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value="any" },
-			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" }
+			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" },
+			{ name="Assign the categories above to all feed items ignoring any of the words/phrases below.", value="none" }
 		];
 
 		// Grab feed items and versions
@@ -232,7 +233,9 @@ component extends="contentHandler" {
 		// Taxonomies
 		var taxonomies = [];
 		for ( var item IN structKeyArray( rc.taxonomies ) ) {
-			if ( structKeyExists( rc.taxonomies[item], "categories" ) && len( trim( rc.taxonomies[item].keywords ) ) ) {
+			if ( structKeyExists( rc.taxonomies[item], "categories" ) &&
+				( len( trim( rc.taxonomies[item].keywords ) ) || rc.taxonomies[item].method == "none"  )
+			) {
 				arrayAppend( taxonomies, rc.taxonomies[item] );
 			}
 		}

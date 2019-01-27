@@ -66,8 +66,8 @@ component extends="coldbox.system.Interceptor" {
 				var categoryIds = listToArray( taxonomy.categories );
 				var keywords = listToArray( taxonomy.keywords );
 
-				// Check for categories and keywords
-				if ( arrayLen( categoryIds ) && arrayLen( keywords ) ) {
+				// Check for categories and keywords, method equals all or any
+				if ( arrayLen( categoryIds ) && arrayLen( keywords ) && taxonomy.method != "none" ) {
 
 					// Query on keywords
 					var hql = "SELECT fi FROM cbFeedItem fi JOIN fi.activeContent ac
@@ -85,6 +85,42 @@ component extends="coldbox.system.Interceptor" {
 
 					// Get feedItems
 					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+
+					// Check results
+					if ( arrayLen( feedItems ) ) {
+
+						// Create the categories
+						var categories = [];
+						for ( var categoryId IN categoryIds ) {
+							arrayAppend( categories, categoryService.get( categoryId ) );
+						}
+
+						// Loop over feed items
+						for ( var feedItem IN feedItems ) {
+
+							// Loop over categories
+							for ( var category IN categories ) {
+
+								// Add category
+								if ( !feedItem.hasCategories( category ) ) {
+									feedItem.addCategories( category );
+									feedItemService.save( feedItem );
+									if ( log.canInfo() ) {
+										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+									}
+								}
+
+							}
+
+						}
+
+					}
+
+				// Assign categories to all feed items
+				} else if ( arrayLen( categoryIds ) && taxonomy.method == "none" ) {
+
+					// Get feedItems
+					var feedItems = feed.getFeedItems();
 
 					// Check results
 					if ( arrayLen( feedItems ) ) {

@@ -556,7 +556,7 @@
 					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
-						<p><small>Taxonomies are used to automatically assign categories to feed items based upon matching keywords.  The taxonomies defined here will be used in addition to taxonomies defined in the general settings.</small></p>
+						<p><small>Taxonomies are used to automatically assign categories to feed items.  The taxonomies defined here will be used in addition to taxonomies defined in the general settings.</small></p>
 						<div id="taxonomies">
 							<cfloop from="1" to="#arrayLen( prc.feed.getTaxonomies() )#" index="idx">
 								<cfset taxonomy = prc.feed.getTaxonomies()[idx] />
@@ -568,7 +568,7 @@
 											content="Categories:"
 										)#
 										<div class="controls">
-											<small>Assign the following categories to feed items using the matching method and keywords below.</small>
+											<small>Assign the following categories to feed items using the matching method below.</small>
 											<div class="input-group">
 												#html.select(
 													name="taxonomies.#idx#.categories",
@@ -600,7 +600,7 @@
 												column="value",
 												nameColumn="name",
 												selectedValue=taxonomy.method,
-												class="form-control input-sm"
+												class="form-control input-sm input-methods"
 											)#
 										</div>
 									</div>
@@ -616,7 +616,7 @@
 												name="taxonomies.#idx#.keywords",
 												value=taxonomy.keywords,
 												rows="2",
-												class="form-control",
+												class="form-control input-keywords",
 												placeholder="Comma delimited list of words or phrases",
 												maxlength="255"
 											)#
@@ -1078,7 +1078,7 @@
 				content="Categories:"
 			)#
 			<div class="controls">
-				<small>Assign the following categories to feed items using the matching method and keywords below.</small><br/>
+				<small>Assign the following categories to feed items using the matching method below.</small><br/>
 				#html.select(
 					name="taxonomies.templateIndex.categories",
 					options=prc.categories,
@@ -1102,7 +1102,7 @@
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
-					class="form-control input-sm"
+					class="form-control input-sm input-methods"
 				)#
 			</div>
 		</div>
@@ -1117,7 +1117,7 @@
 				#html.textArea(
 					name="taxonomies.templateIndex.keywords",
 					rows="2",
-					class="form-control",
+					class="form-control input-keywords",
 					placeholder="Comma delimited list of words or phrases",
 					maxlength="255"
 				)#
