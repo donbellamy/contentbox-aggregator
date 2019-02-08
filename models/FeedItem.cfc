@@ -120,7 +120,7 @@ component persistent="true"
 	 */
 	string function renderExcerpt() {
 
-		if ( len( getExcerpt() ) AND NOT len( renderedExcerpt ) ) {
+		if ( hasExcerpt() AND NOT len( renderedExcerpt ) ) {
 			lock name="contentbox.excerptrendering.#getContentID()#" type="exclusive" throwontimeout="true" timeout="10" {
 				var b = createObject( "java","java.lang.StringBuilder" ).init( getExcerpt() );
 				var iData = {
@@ -217,6 +217,7 @@ component persistent="true"
 		// Add the content ending
 		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
 
+		// TODO: Fix this ---> paragraphFormat()
 		return "<p>" & content & "</p>";
 
 	}

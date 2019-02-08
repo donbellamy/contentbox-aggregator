@@ -164,6 +164,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												// Are we importing images?
 												if ( importImages || importFeaturedImages ) {
 
+													// TODO: Check attachments first and set featured image from that
+													// TODO: If an attachment is valid, only import body images if importall is flagged
+
 													// Set array to hold all image paths
 													var imagePaths = [];
 
