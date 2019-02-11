@@ -17,10 +17,6 @@ component persistent="true"
 	**                            PROPERTIES
 	********************************************************************* */
 
-	property name="siteUrl"
-		notnull="true"
-		length="255";
-
 	property name="feedUrl"
 		notnull="true"
 		length="255";
@@ -138,7 +134,7 @@ component persistent="true"
 	**                            CALCULATED FIELDS
 	********************************************************************* */
 
-	property name="lastImportedDate"
+	property name="importedDate"
 		formula="select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID"
 		default="";
 
@@ -146,11 +142,14 @@ component persistent="true"
 		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
+	property name="latestImport"
+		formula="select fi.metaInfo from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID and fi.importFailed = 0 )"
+		default="{}";
+
 	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
 
-	this.constraints["siteUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["tagLine"] = { required=false, size="1..255" };
 	this.constraints["linkBehavior"] = { required=false, regex="(forward|interstitial|display)" };
@@ -180,6 +179,7 @@ component persistent="true"
 		contentType = "Feed";
 		feedImports = [];
 		setTaxonomies([]);
+		siteUrl = "";
 		return this;
 	}
 
@@ -202,6 +202,17 @@ component persistent="true"
 	 */
 	array function getTaxonomies() {
 		return ( !isNull( variables.taxonomies ) && isJSON( variables.taxonomies ) ) ? deserializeJSON( variables.taxonomies ) : [];
+	}
+
+	/**
+	 * Gets the site url from the latest feed import
+	 * @return The siteUrl if defined, the feed url if not
+	 */
+	string function getSiteUrl() {
+		if ( !len( siteUrl ) ) {
+			siteUrl = getFeedUrl();
+		}
+		return siteUrl;
 	}
 
 	/**
@@ -348,9 +359,9 @@ component persistent="true"
 	 * @timeFormat The timeformat to use
 	 * @return The formatted last imported date
 	 */
-	string function getDisplayLastImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
-		var lastImportedDate = getLastImportedDate();
-		return dateFormat( lastImportedDate, arguments.dateFormat ) & " " & timeFormat( lastImportedDate, arguments.timeFormat );
+	string function getDisplayImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
+		var importedDate = getImportedDate();
+		return dateFormat( importedDate, arguments.dateFormat ) & " " & timeFormat( importedDate, arguments.timeFormat );
 	}
 
 	/**
@@ -383,7 +394,7 @@ component persistent="true"
 		result["siteUrl"] = getSiteUrl();
 		result["feedUrl"] = getFeedUrl();
 		result["tagLine"] = getTagLine();
-		result["lastImportedDate"] = getDisplayLastImportedDate();
+		result["importedDate"] = getDisplayImportedDate();
 		result["isActive"] = canImport();
 
 		if ( arguments.showFeedItems && hasFeedItem() ) {
@@ -417,7 +428,6 @@ component persistent="true"
 		HTMLDescription = trim( left( HTMLDescription, 160 ) );
 		title = trim( left( title, 200 ) );
 		slug = trim( left( slug, 200 ) );
-		siteUrl = trim( left( siteUrl, 255 ) );
 		feedUrl = trim( left( feedUrl, 255 ) );
 		tagLine = trim( left( tagLine, 255 ) );
 		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
@@ -426,7 +436,6 @@ component persistent="true"
 
 		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
 		if ( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
-		if ( !len( siteUrl ) ) { arrayAppend( errors, "Site URL is required" ); }
 		if ( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
 
 		return errors;

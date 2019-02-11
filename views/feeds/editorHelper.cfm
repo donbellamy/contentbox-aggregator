@@ -21,17 +21,6 @@ $( document ).ready( function() {
 			}
 		}
 	});
-	$("##openSiteUrl").click(function() {
-		var siteUrl = $("##siteUrl").val();
-		if ( isUrlValid( siteUrl ) ) {
-			var win = window.open( siteUrl, "_blank" );
-			if ( win ) {
-				win.focus();
-			} else {
-				alert("Popup blocked.");
-			}
-		}
-	});
 	$(".counter").on( "change", function() {
 		if ( $(this).val() == 0 ) $(this).val("");
 	});

@@ -180,7 +180,6 @@ component extends="contentHandler" {
 		event.paramValue( "contentType", "Feed" );
 		event.paramValue( "title", "" );
 		event.paramValue( "slug", "" );
-		event.paramValue( "siteUrl", "" );
 		event.paramValue( "feedUrl", "" );
 		event.paramValue( "tagLine", "" );
 		event.paramValue( "content", "" );

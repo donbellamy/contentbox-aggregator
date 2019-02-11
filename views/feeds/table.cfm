@@ -67,8 +67,8 @@
 					<div id="infoPanel_#feed.getContentID()#" class="hide">
 						<i class="fa fa-rss"></i>
 						Last imported:
-						<cfif isDate( feed.getLastImportedDate() ) >
-							#feed.getDisplayLastImportedDate()#
+						<cfif isDate( feed.getImportedDate() ) >
+							#feed.getDisplayImportedDate()#
 						<cfelse>
 							Never imported
 						</cfif>

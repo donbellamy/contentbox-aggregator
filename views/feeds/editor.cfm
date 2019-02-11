@@ -113,31 +113,6 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="siteUrl" class="control-label">
-							Site URL:
-						</label>
-						<div class="controls">
-							<small>
-								The URL of the site providing the feed.
-								Be sure to include the <code>http(s)://</code> prefix in the url.
-							</small>
-							<div class="input-group">
-								#html.inputfield(
-									type="url",
-									name="siteUrl",
-									bind=prc.feed,
-									maxlength="255",
-									required="true",
-									title="The site url for this feed",
-									class="form-control"
-								)#
-								<a id="openSiteUrl" title="Open Site URL" class="input-group-addon" href="javascript:void(0);" data-original-title="Open Site URL" data-container="body">
-									<i class="fa fa-external-link"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
 						<label for="feedUrl" class="control-label">
 							Feed URL:
 						</label>
@@ -880,8 +855,8 @@
 										<tr>
 											<th class="col-md-4">Last Imported:</th>
 											<td class="col-md-8">
-												<cfif isDate( prc.feed.getLastImportedDate() ) >
-													#prc.feed.getDisplayLastImportedDate()#
+												<cfif isDate( prc.feed.getImportedDate() ) >
+													#prc.feed.getDisplayImportedDate()#
 												<cfelse>
 													Never imported
 												</cfif>

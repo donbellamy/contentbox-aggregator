@@ -64,6 +64,7 @@ component extends="ContentService" singleton {
 		var whereHql = " WHERE cb.contentType = 'FeedItem'";
 		if ( arguments.includeEntries ) {
 			whereHql = " WHERE ( cb.contentType = 'FeedItem' OR cb.contentType = 'Entry' )";
+			// TODO: if entries are included, do not include the related feeditem to an entry if one exists (dont want dupes)
 		}
 
 		// Join parent (feed) table if published or feed is passed
