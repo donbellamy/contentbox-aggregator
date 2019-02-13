@@ -144,7 +144,7 @@ component persistent="true"
 
 	property name="latestImport"
 		formula="select fi.metaInfo from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID and fi.importFailed = 0 )"
-		default="{}";
+		default="";
 
 	/* *********************************************************************
 	**                            CONSTRAINTS
@@ -179,7 +179,6 @@ component persistent="true"
 		contentType = "Feed";
 		feedImports = [];
 		setTaxonomies([]);
-		siteUrl = "";
 		return this;
 	}
 
@@ -209,8 +208,12 @@ component persistent="true"
 	 * @return The siteUrl if defined, the feed url if not
 	 */
 	string function getSiteUrl() {
-		if ( !len( siteUrl ) ) {
-			siteUrl = getFeedUrl();
+		var siteUrl = getFeedUrl();
+		var latestImport = deserializeJSON( getLatestImport() );
+		if ( isStruct( latestImport )
+			&& structKeyExists( latestImport, "websiteurl" )
+			&& len( latestImport["websiteurl"] ) ) {
+			siteUrl = latestImport["websiteurl"];
 		}
 		return siteUrl;
 	}
