@@ -142,9 +142,11 @@ component persistent="true"
 		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
+	/*
 	property name="latestImport"
 		formula="select fi.metaInfo from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID and fi.importFailed = 0 )"
 		default="";
+	*/
 
 	/* *********************************************************************
 	**                            CONSTRAINTS
@@ -209,12 +211,17 @@ component persistent="true"
 	 */
 	string function getSiteUrl() {
 		var siteUrl = getFeedUrl();
+		if ( arrayLen( getFeedImports() ) ) {
+
+		}
+		/*
 		var latestImport = deserializeJSON( getLatestImport() );
 		if ( isStruct( latestImport )
 			&& structKeyExists( latestImport, "websiteurl" )
 			&& len( latestImport["websiteurl"] ) ) {
 			siteUrl = latestImport["websiteurl"];
 		}
+		*/
 		return siteUrl;
 	}
 

@@ -579,6 +579,61 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#importedDate()">importedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#importFeaturedImages()">importFeaturedImages</A></strong>
 			<br>
 			
@@ -904,61 +959,6 @@ Feed Model</p>
 			
 				
 				<li class="label label-default label-annotations">length = 10</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#lastImportedDate()">lastImportedDate</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
 				
 			
 				
@@ -1700,65 +1700,6 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#siteUrl()">siteUrl</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">notnull = true</li>
-				
-			
-				
-				<li class="label label-default label-annotations">length = 255</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
 			<strong><a href="Feed.html#startDate()">startDate</A></strong>
 			<br>
 			
@@ -2149,7 +2090,7 @@ Feed Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#getDisplayLastImportedDate()">getDisplayLastImportedDate</A></strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])
+			<strong><a href="Feed.html#getDisplayImportedDate()">getDisplayImportedDate</A></strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted last imported date.
@@ -2206,6 +2147,19 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#getFeedUrl()">getFeedUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getImportedDate()">getImportedDate</A></strong>()
 			<br>
 			
 		</td>
@@ -2284,19 +2238,6 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#getItemStatus()">getItemStatus</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#getLastImportedDate()">getLastImportedDate</A></strong>()
 			<br>
 			
 		</td>
@@ -2498,6 +2439,8 @@ Feed Model</p>
 			<strong><a href="Feed.html#getSiteUrl()">getSiteUrl</A></strong>()
 			<br>
 			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the site url from the latest feed import.
+			
 		</td>
 	</tr>
 	
@@ -2687,6 +2630,19 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#setImportedDate()">setImportedDate</A></strong>(any importedDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#setImportFeaturedImages()">setImportFeaturedImages</A></strong>(any importFeaturedImages)
 			<br>
 			
@@ -2753,19 +2709,6 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#setItemStatus()">setItemStatus</A></strong>(any itemStatus)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#setLastImportedDate()">setLastImportedDate</A></strong>(any lastImportedDate)
 			<br>
 			
 		</td>
@@ -2922,19 +2865,6 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#setPreFeedItemDisplay()">setPreFeedItemDisplay</A></strong>(any preFeedItemDisplay)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#setSiteUrl()">setSiteUrl</A></strong>(any siteUrl)
 			<br>
 			
 		</td>
@@ -4872,6 +4802,54 @@ Feed Model</p>
 		<hr>
 	
 		
+		<a name="importedDate()"><!-- --></a>
+		<h3>importedDate</h3>
+
+		<kbd>
+			property any
+			<strong>importedDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="importFeaturedImages()"><!-- --></a>
 		<h3>importFeaturedImages</h3>
 
@@ -5173,54 +5151,6 @@ Feed Model</p>
 		
 			
 			<dd><code>length</code> - 10</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="lastImportedDate()"><!-- --></a>
-		<h3>lastImportedDate</h3>
-
-		<kbd>
-			property any
-			<strong>lastImportedDate</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>formula</code> - select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
 			
 		
 			
@@ -5860,58 +5790,6 @@ Feed Model</p>
 		<hr>
 	
 		
-		<a name="siteUrl()"><!-- --></a>
-		<h3>siteUrl</h3>
-
-		<kbd>
-			property any
-			<strong>siteUrl</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>notnull</code> - true</dd>
-			
-		
-			
-			<dd><code>length</code> - 255</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
 		<a name="startDate()"><!-- --></a>
 		<h3>startDate</h3>
 
@@ -6454,13 +6332,13 @@ Feed Model</p>
 	<hr>
 
 	
-	<a name="getDisplayLastImportedDate()"><!-- --></a>
+	<a name="getDisplayImportedDate()"><!-- --></a>
 	<h3>
-		getDisplayLastImportedDate
+		getDisplayImportedDate
 		
 	</h3>
 
-	<kbd>public string <strong>getDisplayLastImportedDate</strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])</kbd>
+	<kbd>public string <strong>getDisplayImportedDate</strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])</kbd>
 
 	<br><br>
 
@@ -6612,6 +6490,38 @@ Feed Model</p>
 	</h3>
 
 	<kbd>public string <strong>getFeedUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getImportedDate()"><!-- --></a>
+	<h3>
+		getImportedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getImportedDate</strong>()</kbd>
 
 	<br><br>
 
@@ -6804,38 +6714,6 @@ Feed Model</p>
 	</h3>
 
 	<kbd>public string <strong>getItemStatus</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getLastImportedDate()"><!-- --></a>
-	<h3>
-		getLastImportedDate
-		
-	</h3>
-
-	<kbd>public string <strong>getLastImportedDate</strong>()</kbd>
 
 	<br><br>
 
@@ -7359,6 +7237,8 @@ Feed Model</p>
 	<br><br>
 
 	
+		<p>Gets the site url from the latest feed import</p>
+	
 
 	
 
@@ -7372,6 +7252,11 @@ Feed Model</p>
 
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The siteUrl if defined, the feed url if not</dd>
+		</dl>
 	
 
 	
@@ -7880,6 +7765,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="setImportedDate()"><!-- --></a>
+	<h3>
+		setImportedDate
+		
+	</h3>
+
+	<kbd>public any <strong>setImportedDate</strong>(any importedDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importedDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="setImportFeaturedImages()"><!-- --></a>
 	<h3>
 		setImportFeaturedImages
@@ -8102,45 +8026,6 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>itemStatus</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setLastImportedDate()"><!-- --></a>
-	<h3>
-		setLastImportedDate
-		
-	</h3>
-
-	<kbd>public any <strong>setLastImportedDate</strong>(any lastImportedDate)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>lastImportedDate</code></dd>
 		
 		</dl>
 	
@@ -8609,45 +8494,6 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>preFeedItemDisplay</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setSiteUrl()"><!-- --></a>
-	<h3>
-		setSiteUrl
-		
-	</h3>
-
-	<kbd>public any <strong>setSiteUrl</strong>(any siteUrl)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>siteUrl</code></dd>
 		
 		</dl>
 	

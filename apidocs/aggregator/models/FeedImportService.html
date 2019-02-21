@@ -951,7 +951,37 @@ FeedImport Service</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;any</code>
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#checkAgeFilter()">checkAgeFilter</A></strong>(struct item, <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if an item passes the age filter.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#checkKeywordFilters()">checkKeywordFilters</A></strong>(struct item, <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if an item passes the keyword filters.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;<a href="../../aggregator/models/FeedImportService.html" title="class in aggregator.models">FeedImportService</a></code>
 		</td>
 		<td>
 			<strong><a href="FeedImportService.html#deleteDirectoryIfEmpty()">deleteDirectoryIfEmpty</A></strong>(string directoryPath)
@@ -2425,13 +2455,109 @@ FeedImport Service</p>
 
 
 	
+	<a name="checkAgeFilter()"><!-- --></a>
+	<h3>
+		checkAgeFilter
+		
+	</h3>
+
+	<kbd>private boolean <strong>checkAgeFilter</strong>(struct item, <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed)</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if an item passes the age filter</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		<dd><code>feed</code> - The feed we are importing</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the item passes the age filter</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="checkKeywordFilters()"><!-- --></a>
+	<h3>
+		checkKeywordFilters
+		
+	</h3>
+
+	<kbd>private boolean <strong>checkKeywordFilters</strong>(struct item, <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed)</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if an item passes the keyword filters</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		<dd><code>feed</code> - The feed we are importing</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the item passes the keyword filters</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="deleteDirectoryIfEmpty()"><!-- --></a>
 	<h3>
 		deleteDirectoryIfEmpty
 		
 	</h3>
 
-	<kbd>private any <strong>deleteDirectoryIfEmpty</strong>(string directoryPath)</kbd>
+	<kbd>private <a href="../../aggregator/models/FeedImportService.html" title="class in aggregator.models">FeedImportService</a> <strong>deleteDirectoryIfEmpty</strong>(string directoryPath)</kbd>
 
 	<br><br>
 
