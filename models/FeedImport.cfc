@@ -116,6 +116,14 @@ component persistent="true"
 	}
 
 	/**
+	 * Gets the website url
+	 * @return The website url
+	 */
+	string function getWebsiteUrl() {
+
+	}
+
+	/**
 	 * Checks to see if the feed import failed
 	 * @return True if the import failed, false if it succeeded
 	 */
