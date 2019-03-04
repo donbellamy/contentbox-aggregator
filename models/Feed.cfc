@@ -142,12 +142,6 @@ component persistent="true"
 		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
-	/*
-	property name="latestImport"
-		formula="select fi.metaInfo from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID and fi.importFailed = 0 )"
-		default="";
-	*/
-
 	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
@@ -206,22 +200,27 @@ component persistent="true"
 	}
 
 	/**
+	 * Gets the latest feed import
+	 * @return The latest feed import if exists, null if not
+	 */
+	any function getLatestFeedImport() {
+		var feedImport = javaCast( "null", "" );
+		if ( arrayLen( getFeedImports() ) ) {
+			feedImport = getFeedImports()[1];
+		}
+		return feedImport;
+	}
+
+	/**
 	 * Gets the site url from the latest feed import
 	 * @return The siteUrl if defined, the feed url if not
 	 */
-	string function getSiteUrl() {
+	string function getWebsiteUrl() {
 		var siteUrl = getFeedUrl();
-		if ( arrayLen( getFeedImports() ) ) {
-
+		var feedImport = getLatestFeedImport();
+		if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
+			siteUrl = feedImport.getWebsiteUrl();
 		}
-		/*
-		var latestImport = deserializeJSON( getLatestImport() );
-		if ( isStruct( latestImport )
-			&& structKeyExists( latestImport, "websiteurl" )
-			&& len( latestImport["websiteurl"] ) ) {
-			siteUrl = latestImport["websiteurl"];
-		}
-		*/
 		return siteUrl;
 	}
 
@@ -403,7 +402,7 @@ component persistent="true"
 		var result = super.getResponseMemento( argumentCollection=arguments );
 
 		// Set feed properties
-		result["siteUrl"] = getSiteUrl();
+		result["websiteUrl"] = getWebsiteUrl();
 		result["feedUrl"] = getFeedUrl();
 		result["tagLine"] = getTagLine();
 		result["importedDate"] = getDisplayImportedDate();

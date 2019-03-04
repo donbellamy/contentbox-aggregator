@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-sm-7 pull-left">
 				<i class="fa fa-external-link"></i>
-				<a href="#feed.getSiteUrl()#" target="_blank" title="#encodeForHtmlAttribute( feed.getTitle() )#">#feed.getSiteUrl()#</a>
+				<a href="#feed.getWebsiteUrl()#" target="_blank" title="#encodeForHtmlAttribute( feed.getTitle() )#">#feed.getWebsiteUrl()#</a>
 			</div>
 			<div class="col-sm-5 pull-right text-right">
 				<i class="fa fa-rss"></i>

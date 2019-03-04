@@ -92,7 +92,9 @@
 								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-eye fa-lg"></i> Open In Site</a></li>
-							<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getContentID()#');"><i class="fa fa-rss fa-lg"></i> View Import</a>
+							<cfif feed.hasFeedImport() >
+								<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getLatestFeedImport().getFeedImportID()#');"><i class="fa fa-rss fa-lg"></i> View Import</a>
+							</cfif>
 						</ul>
 					</div>
 				</td>

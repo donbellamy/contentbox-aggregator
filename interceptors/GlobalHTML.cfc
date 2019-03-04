@@ -124,7 +124,7 @@ component extends="coldbox.system.Interceptor" {
 			"feed_title" = arguments.feed.getTitle(),
 			"feed_url" = agHelper.linkFeed( arguments.feed ),
 			"feed_rss_url" = arguments.feed.getFeedUrl(),
-			"feed_site_url" = arguments.feed.getSiteUrl()
+			"feed_website_url" = arguments.feed.getWebsiteUrl()
 		};
 
 		// Search and replace tokens

@@ -120,7 +120,12 @@ component persistent="true"
 	 * @return The website url
 	 */
 	string function getWebsiteUrl() {
-
+		var import = getMetaInfo();
+		if ( isStruct( import ) && structKeyExists( import, "websiteurl" ) ) {
+			return import["websiteurl"];
+		} else {
+			return "";
+		}
 	}
 
 	/**

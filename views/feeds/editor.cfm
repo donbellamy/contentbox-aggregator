@@ -636,7 +636,7 @@
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_website_url@</td>
 											</tr>
 										</tbody>
 									</table>
@@ -664,7 +664,7 @@
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_website_url@</td>
 											</tr>
 										</tbody>
 									</table>
@@ -692,7 +692,7 @@
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_website_url@</td>
 											</tr>
 											<tr>
 												<td title="The feed item title.">@feed_item_title@</td>
@@ -730,7 +730,7 @@
 												<td title="The feed title.">@feed_title@</td>
 												<td title="The local feed URL.">@feed_url@</td>
 												<td title="The remote rss feed URL.">@feed_rss_url@</td>
-												<td title="The URL of the website providing the feed.">@feed_site_url@</td>
+												<td title="The URL of the website providing the feed.">@feed_website_url@</td>
 											</tr>
 											<tr>
 												<td title="The feed item title.">@feed_item_title@</td>
