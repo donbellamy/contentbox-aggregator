@@ -1,6 +1,6 @@
-# ContentBox RSS Aggregator
+# ContentBox RSS Aggregator Module
 
-This module allows you to automatically import RSS feeds and display them in your ContentBox site.
+This module allows you to automatically import RSS feeds as content items and display them in your ContentBox site.
 
 ## System Requirements
 

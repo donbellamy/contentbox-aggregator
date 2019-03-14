@@ -217,7 +217,7 @@ component persistent="true"
 		// Add the content ending
 		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
 
-		// TODO: Fix this ---> paragraphFormat()
+		// Add paragraph tags and return
 		return "<p>" & content & "</p>";
 
 	}
