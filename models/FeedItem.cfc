@@ -181,10 +181,10 @@ component persistent="true"
 	 * Gets the url of the featured image
 	 * @return The url of the featured image
 	 */
-	string function getImageUrl() {
+	string function getFeaturedImageUrl() {
 
-		if ( len( getFeaturedImageUrl() ) ) {
-			return getFeaturedImageUrl();
+		if ( len( super.getFeaturedImageUrl() ) ) {
+			return super.getFeaturedImageUrl();
 		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();

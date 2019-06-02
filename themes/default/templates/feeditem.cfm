@@ -71,8 +71,8 @@
 		</cfif>
 	</div>
 	<cfif args.showExcerpt >
+		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<cfif contentType EQ "Entry" >
-			<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 			<div class="post-content row">
 				<cfif len( imageUrl ) >
 					<div class="col-sm-3">
@@ -97,7 +97,6 @@
 				</div>
 			</div>
 		<cfelse>
-			<cfset imageUrl = feedItem.getImageUrl() />
 			<div class="post-content row">
 				<cfif len( imageUrl ) >
 					<div class="col-sm-3">

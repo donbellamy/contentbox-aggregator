@@ -62,6 +62,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		if ( !isNull( arguments.author ) ) {
 
 			// Loop over feeds
+			// TODO: thread these here?  or in handler calling ?
+			// feeds.each( function( feed ){}, true ); ? - test it, may fix issues with interceptors
 			for ( var feed IN feeds ) {
 
 				// Announce interception
