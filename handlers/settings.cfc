@@ -15,7 +15,7 @@ component extends="baseHandler" {
 	/**
 	 * Pre handler
 	 */
-	function preHandler( event, action, eventArguments, rc, prc ) {
+	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "AGGREGATOR_SETTINGS" ) ) {

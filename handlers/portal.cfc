@@ -48,7 +48,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	/**
 	 * Around handler
 	 */
-	function aroundHandler( event, targetAction, eventArguments, rc, prc ) {
+	function aroundHandler( event, rc, prc, targetAction, eventArguments ) {
 
 		// Set params
 		event.paramValue( "format", "html" );
@@ -531,7 +531,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	/**
 	 * Pre feed item
 	 */
-	function preFeedItem( event, action, eventArguments, rc, prc ) {
+	function preFeedItem( event, rc, prc, action, eventArguments ) {
 
 		// Set params
 		event.paramValue( "slug", "" );
@@ -584,8 +584,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				// Forward user to feed item
 				case "forward": {
 
-					location( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
-
+					relocate( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
 					break;
 
 				}

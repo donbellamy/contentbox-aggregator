@@ -11,7 +11,7 @@ component extends="contentHandler" {
 	/**
 	 * Pre handler
 	 */
-	function preHandler( event, action, eventArguments, rc, prc ) {
+	function preHandler( event, rc, prc, action, eventArguments ) {
 
 		super.preHandler( argumentCollection=arguments );
 
