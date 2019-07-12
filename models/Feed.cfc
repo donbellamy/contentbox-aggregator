@@ -124,7 +124,7 @@ component persistent="true"
 		type="array"
 		lazy="extra"
 		batchsize="25"
-		orderby="importedDate DESC"
+		orderby="feedImportID DESC"
 		cfc="FeedImport"
 		fkcolumn="FK_feedID"
 		inverse="true"
@@ -139,7 +139,7 @@ component persistent="true"
 		default="";
 
 	property name="isFailing"
-		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )"
+		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
 	/* *********************************************************************

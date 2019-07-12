@@ -79,7 +79,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 						// Grab item settings
 						var itemStatus = len( feed.getItemStatus() ) ? feed.getItemStatus() : settings.ag_importing_item_status;
-						var ItemPubDate = len( feed.getItemPubDate() ) ? feed.getItemPubDate() : settings.ag_importing_item_pub_date;
+						var itemPubDate = len( feed.getItemPubDate() ) ? feed.getItemPubDate() : settings.ag_importing_item_pub_date;
 
 						// Grab image settings
 						var importImages = len( feed.getImportImages() ) ? feed.getImportImages() : settings.ag_importing_image_import_enable;
@@ -113,10 +113,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 									if ( passesKeywordFilters ) {
 
 										// Set published and updated dates
-										if ( !isDate( item.datePublished ) || ItemPubDate == "imported" ) {
+										if ( !isDate( item.datePublished ) || itemPubDate == "imported" ) {
 											item.datePublished = now();
 										}
-										if ( !isDate( item.dateUpdated ) || ItemPubDate == "imported" ) {
+										if ( !isDate( item.dateUpdated ) || itemPubDate == "imported" ) {
 											item.dateUpdated = item.datePublished;
 										}
 
@@ -379,6 +379,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					feedImport.setMetaInfo( remoteFeed );
 					save( feedImport );
 
+					// Let's sleep for a second
+					sleep(1000);
+
 				} catch ( any e ) {
 
 					if ( log.canError() ) {
@@ -387,12 +390,21 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 					// Save the error as a feed import
 					try {
+
+						var metaInfo = { "error" = e };
+						if ( isDefined( "feedItem" ) ) {
+							metaInfo["feedItem"] = feedItem;
+						}
+
+						writedump(metaInfo);
+						abort;
+
 						var feedImport = new();
 						feedImport.setFeed( feed );
 						feedImport.setImporter( arguments.author );
 						feedImport.setImportedCount( 0 );
 						feedImport.setImportFailed( true );
-						feedImport.setMetaInfo( e );
+						feedImport.setMetaInfo( metaInfo );
 						save( feedImport );
 					} catch ( any e ) {
 						if ( log.canError() ) {
