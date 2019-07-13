@@ -391,13 +391,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Save the error as a feed import
 					try {
 
-						var metaInfo = { "error" = e };
+						var metaInfo = { "Error" = e };
 						if ( isDefined( "feedItem" ) ) {
-							metaInfo["feedItem"] = feedItem;
+							metaInfo["FeedItem"] = feedItem.getMemento();
 						}
-
-						writedump(metaInfo);
-						abort;
 
 						var feedImport = new();
 						feedImport.setFeed( feed );

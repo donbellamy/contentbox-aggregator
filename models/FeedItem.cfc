@@ -137,43 +137,24 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets a flat representation of the feed item for UI response format which restricts the data displayed
-	 * @showCategories Whether or not to include the categories
-	 * @showFeed Whether or not to include the feed
-	 * @excludes A list of properties to exclude
-	 * @return A structure containing the feed item properties
+	 * Gets the shortened and cleaned version of the excerpt taken from the feed item body
+	 * @count The number of characters to include in the excerpt
+	 * @excerptEnding The characters to display at the end of the excerpt
+	 * @return The generated content excerpt
 	 */
-	struct function getResponseMemento(
-		boolean showCategories=true,
-		boolean showFeed=true,
-		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
-	) {
+	string function getContentExcerpt( numeric count=500, string excerptEnding="..." ) {
 
-		// Set base content arguments defaults unrelated to feed items
-		arguments.slugCache = [];
-		arguments.showAuthor=false;
-		arguments.showComments = false;
-		arguments.showCustomFields = false;
-		arguments.showParent = false;
-		arguments.showChildren = false;
-		arguments.showRelatedContent = false;
+		// Remove html from content
+		var content = reReplaceNoCase( getContent(), "<[^>]*>", "", "ALL" );
 
-		// Grab the base content memento
-		var result = super.getResponseMemento( argumentCollection=arguments );
+		// Trim the content
+		content = trim( left( content, arguments.count ) );
 
-		// Set feed item properties
-		result["excerpt"] = renderExcerpt();
-		result["uniqueId"] = getUniqueId();
-		result["itemUrl"] = getItemUrl();
-		result["itemAuthor"] = getItemAuthor();
-		if ( arguments.showFeed ) {
-			result["feed"] = {
-				"slug" = getParent().getSlug(),
-				"title" = getParent().getTitle()
-			};
-		}
+		// Add the content ending
+		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
 
-		return result;
+		// Add paragraph tags and return
+		return "<p>" & content & "</p>";
 
 	}
 
@@ -201,26 +182,118 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets the shortened and cleaned version of the excerpt taken from the feed item body
-	 * @count The number of characters to include in the excerpt
-	 * @excerptEnding The characters to display at the end of the excerpt
-	 * @return The generated content excerpt
+	 * Gets a flat representation of the feed item for UI response format which restricts the data displayed
+	 * @showCategories Whether or not to include the categories
+	 * @showFeed Whether or not to include the feed
+	 * @excludes A list of properties to exclude
+	 * @return A structure containing the feed item properties
 	 */
-	string function getContentExcerpt( numeric count=500, string excerptEnding="..." ) {
+	struct function getResponseMemento(
+		boolean showCategories=true,
+		boolean showFeed=true,
+		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
+	) {
 
-		// Remove html from content
-		var content = reReplaceNoCase( getContent(), "<[^>]*>", "", "ALL" );
+		// Set base content arguments defaults unrelated to feed items
+		arguments.slugCache = [];
+		arguments.showAuthor=false;
+		arguments.showComments = false;
+		arguments.showCustomFields = false;
+		arguments.showParent = false;
+		arguments.showChildren = false;
+		arguments.showRelatedContent = false;
 
-		// Trim the content
-		content = trim( left( content, arguments.count ) );
+		// Included properties
+		arguments.properties = [
+			"uniqueId",
+			"itemUrl",
+			"itemAuthor"
+		];
 
-		// Add the content ending
-		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
+		// Grab the base content response memento
+		var result = super.getResponseMemento( argumentCollection=arguments );
 
-		// Add paragraph tags and return
-		return "<p>" & content & "</p>";
+		// Set feed item properties
+		result["excerpt"] = renderExcerpt();
+
+		// Set feed property if needed
+		if ( arguments.showFeed ) {
+			result["feed"] = {
+				"slug" = getParent().getSlug(),
+				"title" = getParent().getTitle()
+			};
+		} else {
+			result["feed"] = {};
+		}
+
+		return result;
 
 	}
+
+	/*
+	 * Gets a flat representation of the feed item
+	 */
+	struct function getMemento() {
+
+		// Set base content arguments defaults unrelated to feed items
+		arguments.slugCache = [];
+		arguments.showAuthor=false;
+		arguments.showComments = false;
+		arguments.showCustomFields = false;
+		arguments.showParent = false;
+		arguments.showChildren = false;
+		arguments.showRelatedContent = false;
+
+		// Included properties
+		arguments.properties = [
+			"uniqueId",
+			"itemUrl",
+			"itemAuthor"
+		];
+
+		// Grab the base content memento
+		var result = super.getMemento( argumentCollection=arguments );
+
+		return result;
+
+	}
+
+	/**
+	* Get a flat representation of this entry
+	* @slugCache Cache of slugs to prevent infinite recursions
+	* @counter
+	* @showAuthor Show author in memento or not
+	* @showComments Show comments in memento or not
+	* @showCustomFields Show comments in memento or not
+	* @showContentVersions Show content versions in memento or not
+	* @showParent Show parent in memento or not
+	* @showChildren Show children in memento or not
+	* @showCategories Show categories in memento or not
+	* @showRelatedContent Show related Content in memento or not
+	* @showStats Show stats in memento or not
+	*/
+	/*
+	function getMemento(
+		required array slugCache=[],
+		counter=0,
+		boolean showAuthor=true,
+		boolean showComments=true,
+		boolean showCustomFields=true,
+		boolean showContentVersions=true,
+		boolean showParent=true,
+		boolean showChildren=true,
+		boolean showCategories=true,
+		boolean showRelatedContent=true,
+		boolean showStats=true
+	){
+		// Local Memento Properties
+		var result 	= super.getMemento( argumentCollection=arguments );
+
+		result[ "excerpt" ] = variables.excerpt;
+
+		return result;
+	}
+	*/
 
 	/**
 	 * Validates the feed item

@@ -398,16 +398,21 @@ component persistent="true"
 		arguments.showChildren = false;
 		arguments.showRelatedContent = false;
 
-		// Grab the base content memento
+		// Included properties
+		arguments.properties = [
+			"feedUrl",
+			"tagLine"
+		];
+
+		// Grab the base content response memento
 		var result = super.getResponseMemento( argumentCollection=arguments );
 
 		// Set feed properties
 		result["websiteUrl"] = getWebsiteUrl();
-		result["feedUrl"] = getFeedUrl();
-		result["tagLine"] = getTagLine();
 		result["importedDate"] = getDisplayImportedDate();
 		result["isActive"] = canImport();
 
+		// Set feed items if needed
 		if ( arguments.showFeedItems && hasFeedItem() ) {
 			result["feedItems"] = [];
 			for ( var item IN children ) {
@@ -424,6 +429,18 @@ component persistent="true"
 		}
 
 		return result;
+
+	}
+
+	/*
+	 *
+	 */
+	struct function getMemento() {
+
+		// Grab the base content memento
+		var memento = super.getMemento();
+
+		return memento;
 
 	}
 
