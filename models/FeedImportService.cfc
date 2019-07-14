@@ -403,6 +403,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						feedImport.setImportFailed( true );
 						feedImport.setMetaInfo( metaInfo );
 						save( feedImport );
+
 					} catch ( any e ) {
 						if ( log.canError() ) {
 							log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );

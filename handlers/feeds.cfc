@@ -93,9 +93,6 @@ component extends="contentHandler" {
 			prc.feed = feedService.get( event.getValue( "contentID", 0 ) );
 		}
 
-		writedump(prc.feed.getMemento());
-		abort;
-
 		// Editor settings
 		prc.ckHelper = ckHelper;
 		prc.markups = editorService.getRegisteredMarkups();

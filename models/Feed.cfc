@@ -428,8 +428,19 @@ component persistent="true"
 
 	}
 
-	/*
+	/**
 	 * Gets a flat representation of the feed
+	 * @slugCache A cache of slugs to prevent infinite recursions
+	 * @showAuthor Whether or not to include the author
+	 * @showComments Whether or not to include the comments
+	 * @showCustomFields Whether or not to include the custom fields
+	 * @showContentVersions Whether or not to include the content versions
+	 * @showParent Whether or not to include the parent
+	 * @showChildren Whether or not to include the children
+	 * @showCategories Whether or not to include the categories
+	 * @showRelatedContent Whether or not to include the related content
+	 * @showStats Whether or not to include the stats
+	 * @return A structure containing the feed properties
 	 */
 	struct function getMemento(
 		required array slugCache=[],
@@ -447,7 +458,26 @@ component persistent="true"
 		// Included properties
 		arguments.properties = [
 			"feedUrl",
-			"tagLine"
+			"tagLine",
+			"linkBehavior",
+			"featuredImageBehavior",
+			"pagingMaxItems",
+			"startDate",
+			"stopDate",
+			"itemStatus",
+			"ItemPubDate",
+			"maxAge",
+			"maxAgeUnit",
+			"maxItems",
+			"matchAnyFilter",
+			"matchAllFilter",
+			"matchNoneFilter",
+			"importFeaturedImages",
+			"importImages",
+			"preFeedDisplay",
+			"postFeedDisplay",
+			"preFeedItemDisplay",
+			"postFeedItemDisplay"
 		];
 
 		// Grab the base content memento
@@ -457,6 +487,7 @@ component persistent="true"
 		result["websiteUrl"] = getWebsiteUrl();
 		result["importedDate"] = getDisplayImportedDate();
 		result["isActive"] = canImport();
+		result["taxonomies"] = getTaxonomies();
 		result["feedItems"] = [];
 		if ( hasFeedItem() ) {
 			for ( var item IN children ) {
