@@ -183,25 +183,26 @@ component persistent="true"
 
 	/**
 	 * Gets a flat representation of the feed item for UI response format which restricts the data displayed
+	 * @slugCache A cache of slugs to prevent infinite recursions
+	 * @showAuthor Whether or not to include the author
+	 * @showComments Whether or not to include the comments
+	 * @showCustomFields Whether or not to include the custom fields
+	 * @showParent Whether or not to include the parent
+	 * @showChildren Whether or not to include the children
 	 * @showCategories Whether or not to include the categories
-	 * @showFeed Whether or not to include the feed
-	 * @excludes A list of properties to exclude
+	 * @showRelatedContent Whether or not to include the related content
 	 * @return A structure containing the feed item properties
 	 */
 	struct function getResponseMemento(
+		required array slugCache=[],
+		boolean showAuthor=false,
+		boolean showComments=false,
+		boolean showCustomFields=false,
+		boolean showParent=false,
+		boolean showChildren=false,
 		boolean showCategories=true,
-		boolean showFeed=true,
-		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
+		boolean showRelatedContent=false
 	) {
-
-		// Set base content arguments defaults unrelated to feed items
-		arguments.slugCache = [];
-		arguments.showAuthor=false;
-		arguments.showComments = false;
-		arguments.showCustomFields = false;
-		arguments.showParent = false;
-		arguments.showChildren = false;
-		arguments.showRelatedContent = false;
 
 		// Included properties
 		arguments.properties = [
@@ -213,87 +214,66 @@ component persistent="true"
 		// Grab the base content response memento
 		var result = super.getResponseMemento( argumentCollection=arguments );
 
-		// Set feed item properties
+		// Set custom properties
 		result["excerpt"] = renderExcerpt();
-
-		// Set feed property if needed
-		if ( arguments.showFeed ) {
-			result["feed"] = {
-				"slug" = getParent().getSlug(),
-				"title" = getParent().getTitle()
-			};
-		} else {
-			result["feed"] = {};
-		}
-
-		return result;
-
-	}
-
-	/*
-	 * Gets a flat representation of the feed item
-	 */
-	struct function getMemento() {
-
-		// Set base content arguments defaults unrelated to feed items
-		arguments.slugCache = [];
-		arguments.showAuthor=false;
-		arguments.showComments = false;
-		arguments.showCustomFields = false;
-		arguments.showParent = false;
-		arguments.showChildren = false;
-		arguments.showRelatedContent = false;
-
-		// Included properties
-		arguments.properties = [
-			"uniqueId",
-			"itemUrl",
-			"itemAuthor"
-		];
-
-		// Grab the base content memento
-		var result = super.getMemento( argumentCollection=arguments );
+		result["feed"] = {
+			"slug" = getFeed().getSlug(),
+			"title" = getFeed().getTitle()
+		};
 
 		return result;
 
 	}
 
 	/**
-	* Get a flat representation of this entry
-	* @slugCache Cache of slugs to prevent infinite recursions
-	* @counter
-	* @showAuthor Show author in memento or not
-	* @showComments Show comments in memento or not
-	* @showCustomFields Show comments in memento or not
-	* @showContentVersions Show content versions in memento or not
-	* @showParent Show parent in memento or not
-	* @showChildren Show children in memento or not
-	* @showCategories Show categories in memento or not
-	* @showRelatedContent Show related Content in memento or not
-	* @showStats Show stats in memento or not
-	*/
-	/*
-	function getMemento(
+	 * Gets a flat representation of the feed item
+	 * @slugCache A cache of slugs to prevent infinite recursions
+	 * @showAuthor Whether or not to include the author
+	 * @showComments Whether or not to include the comments
+	 * @showCustomFields Whether or not to include the custom fields
+	 * @showContentVersions Whether or not to include the content versions
+	 * @showParent Whether or not to include the parent
+	 * @showChildren Whether or not to include the children
+	 * @showCategories Whether or not to include the categories
+	 * @showRelatedContent Whether or not to include the related content
+	 * @showStats Whether or not to include the stats
+	 * @return A structure containing the feed item properties
+	 */
+	struct function getMemento(
 		required array slugCache=[],
-		counter=0,
 		boolean showAuthor=true,
 		boolean showComments=true,
 		boolean showCustomFields=true,
 		boolean showContentVersions=true,
-		boolean showParent=true,
+		boolean showParent=false,
 		boolean showChildren=true,
 		boolean showCategories=true,
 		boolean showRelatedContent=true,
 		boolean showStats=true
-	){
-		// Local Memento Properties
-		var result 	= super.getMemento( argumentCollection=arguments );
+	) {
 
-		result[ "excerpt" ] = variables.excerpt;
+		// Included properties
+		arguments.properties = [
+			"uniqueId",
+			"itemUrl",
+			"itemAuthor",
+			"excerpt"
+		];
+
+		// Grab the base content memento
+		var result = super.getMemento( argumentCollection=arguments );
+
+		// Set custom properties
+		result["feed"] = {
+			"contentID" = getFeed().getContentID(),
+			"slug" = getFeed().getSlug(),
+			"title" = getFeed().getTitle()
+		};
+		result["metaInfo"] = getMetaInfo();
 
 		return result;
+
 	}
-	*/
 
 	/**
 	 * Validates the feed item

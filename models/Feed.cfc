@@ -377,26 +377,26 @@ component persistent="true"
 
 	/**
 	 * Gets a flat representation of the feed for UI response format which restricts the data displayed
-	 * @showAuthor Whether or not to include the feed author
+	 * @slugCache A cache of slugs to prevent infinite recursions
+	 * @showAuthor Whether or not to include the author
+	 * @showComments Whether or not to include the comments
+	 * @showCustomFields Whether or not to include the custom fields
+	 * @showParent Whether or not to include the parent
+	 * @showChildren Whether or not to include the children
 	 * @showCategories Whether or not to include the categories
-	 * @showFeedItems Whether or not to include the feed items
-	 * @excludes A list of properties to exclude
+	 * @showRelatedContent Whether or not to include the related content
 	 * @return A structure containing the feed properties
 	 */
 	struct function getResponseMemento(
+		required array slugCache=[],
 		boolean showAuthor=true,
+		boolean showComments=false,
+		boolean showCustomFields=false,
+		boolean showParent=false,
+		boolean showChildren=false,
 		boolean showCategories=true,
-		boolean showFeedItems=true,
-		string excludes="allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords"
+		boolean showRelatedContent=false
 	) {
-
-		// Set base content arguments defaults unrelated to feeds
-		arguments.slugCache = [];
-		arguments.showComments = false;
-		arguments.showCustomFields = false;
-		arguments.showParent = false;
-		arguments.showChildren = false;
-		arguments.showRelatedContent = false;
 
 		// Included properties
 		arguments.properties = [
@@ -407,14 +407,12 @@ component persistent="true"
 		// Grab the base content response memento
 		var result = super.getResponseMemento( argumentCollection=arguments );
 
-		// Set feed properties
+		// Set custom properties
 		result["websiteUrl"] = getWebsiteUrl();
 		result["importedDate"] = getDisplayImportedDate();
 		result["isActive"] = canImport();
-
-		// Set feed items if needed
-		if ( arguments.showFeedItems && hasFeedItem() ) {
-			result["feedItems"] = [];
+		result["feedItems"] = [];
+		if ( hasFeedItem() ) {
 			for ( var item IN children ) {
 				arrayAppend(
 					result["feedItems"],
@@ -424,8 +422,6 @@ component persistent="true"
 					}
 				);
 			}
-		} else if ( arguments.showFeedItems ) {
-			result["feedItems"] = [];
 		}
 
 		return result;
@@ -433,14 +429,42 @@ component persistent="true"
 	}
 
 	/*
-	 *
+	 * Gets a flat representation of the feed
 	 */
-	struct function getMemento() {
+	struct function getMemento(
+		required array slugCache=[],
+		boolean showAuthor=true,
+		boolean showComments=true,
+		boolean showCustomFields=true,
+		boolean showContentVersions=true,
+		boolean showParent=true,
+		boolean showChildren=false,
+		boolean showCategories=true,
+		boolean showRelatedContent=true,
+		boolean showStats=true
+	) {
+
+		// Included properties
+		arguments.properties = [
+			"feedUrl",
+			"tagLine"
+		];
 
 		// Grab the base content memento
-		var memento = super.getMemento();
+		var result = super.getMemento( argumentCollection=arguments );
 
-		return memento;
+		// Set custom properties
+		result["websiteUrl"] = getWebsiteUrl();
+		result["importedDate"] = getDisplayImportedDate();
+		result["isActive"] = canImport();
+		result["feedItems"] = [];
+		if ( hasFeedItem() ) {
+			for ( var item IN children ) {
+				arrayAppend( result["feedItems"], item.getMemento() );
+			}
+		}
+
+		return result;
 
 	}
 
