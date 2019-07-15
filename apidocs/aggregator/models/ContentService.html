@@ -410,6 +410,231 @@ Content Service</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#bulkPublishStatus()">bulkPublishStatus</A></strong>(any contentID, any status)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bulk Publish Status Updates.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#clearAllCaches()">clearAllCaches</A></strong>([boolean async='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all content caches.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#clearAllPageWrapperCaches()">clearAllPageWrapperCaches</A></strong>([boolean async='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all page wrapper caches.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#clearAllSitemapCaches()">clearAllSitemapCaches</A></strong>([boolean async='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all sitemap caches.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#clearPageWrapper()">clearPageWrapper</A></strong>(any slug, [boolean async='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear a page wrapper cache.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#clearPageWrapperCaches()">clearPageWrapperCaches</A></strong>(any slug, [boolean async='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all page wrapper caches.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/ContentService.html" title="class in aggregator.models">ContentService</a></code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#deleteContent()">deleteContent</A></strong>(any content)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete a content object safely via hierarchies.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#findBySlug()">findBySlug</A></strong>(any slug, boolean showUnpublished='false')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find a published content object by slug and published unpublished flags, if not found it returns.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#findExpiredContent()">findExpiredContent</A></strong>([any author], [numeric max='0'], [numeric offset='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get all the expired content in the system by filters.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#findFuturePublishedContent()">findFuturePublishedContent</A></strong>([any author], [numeric max='0'], [numeric offset='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get all the future published content in the system by filters.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#findPublishedContent()">findPublishedContent</A></strong>([numeric max='0'], [numeric offset='0'], [any searchTerm=''], [any category=''], [boolean asQuery='false'], [string sortOrder='publishedDate DESC'], [any parent], [boolean showInMenu], [any slugPrefix=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find published content objects.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getAllFlatContent()">getAllFlatContent</A></strong>([any sortOrder='title asc'], [boolean isPublished], [boolean showInSearch])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of [contentID, title, slug, createdDate, modifiedDate, featuredImageURL] structures of all the content in the system.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getAllFlatSlugs()">getAllFlatSlugs</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of slugs of all the content objects in the system.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getAllForExport()">getAllForExport</A></strong>([any inData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get all content for export as flat data.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getIDBySlug()">getIDBySlug</A></strong>(any slug)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get an id from a slug of a content object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
@@ -417,6 +642,51 @@ Content Service</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the relative image url from the absolute iamge path.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getLatestEdits()">getLatestEdits</A></strong>([any author], [boolean isPublished], [numeric max='25'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get latest edits according to criteria.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getTopCommentedContent()">getTopCommentedContent</A></strong>([numeric max='5'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the top commented content entries.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getTopVisitedContent()">getTopVisitedContent</A></strong>([numeric max='5'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the top visited content entries.
 			
 		</td>
 	</tr>
@@ -440,6 +710,66 @@ Content Service</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#getUniqueSlugHash()">getUniqueSlugHash</A></strong>(string slug)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a unique slug hash.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#importFromData()">importFromData</A></strong>(any importData, [boolean override='false'], any importLog)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import data from an array of structures of content or just one structure of a content entry.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#importFromFile()">importFromFile</A></strong>(any importFile, [boolean override='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Import data from a ContentBox JSON file.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#inflateFromStruct()">inflateFromStruct</A></strong>(any contentData, any importLog, [any parent], [struct newContent='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inflate a content object from a ContentBox JSON structure.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>boolean</code>
 		</td>
 		<td>
@@ -455,6 +785,21 @@ Content Service</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#isSlugUnique()">isSlugUnique</A></strong>(any slug, [any contentID=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify an incoming slug is unique or not.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code><a href="../../aggregator/models/ContentService.html" title="class in aggregator.models">ContentService</a></code>
 		</td>
 		<td>
@@ -462,6 +807,36 @@ Content Service</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves the content.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#searchContent()">searchContent</A></strong>([any searchTerm=''], [numeric max='0'], [numeric offset='0'], [boolean asQuery='false'], [any sortOrder='publishedDate DESC'], [any isPublished='true'], [boolean searchActiveContent='true'], [string contentTypes=''], [any excludeIDs=''], [boolean showInSearch])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Searches published content with cool paramters, remember published content only.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../aggregator/models/ContentService.html" title="class in aggregator.models">ContentService</a></code>
+		</td>
+		<td>
+			<strong><a href="ContentService.html#updateHits()">updateHits</A></strong>(any contentID, [boolean async='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update a content's hits with some async flava.
 			
 		</td>
 	</tr>
@@ -492,197 +867,10 @@ Content Service</p>
 				
 					
 					
-					
-					
-					
-					
 				
 					
 					
-					
-						
-					
-					
-					
-					
 				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
 					
 					
 				
@@ -691,34 +879,73 @@ Content Service</p>
 				
 					
 					
-					
-						
-					
-					
+				
 					
 					
 				
 					
 					
-					
-						
-					
-					
+				
 					
 					
 				
 					
 					
+				
 					
-						
+					
+				
 					
 					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
 					
 					
 				
 
 				
-					<a href="../../contentbox/models/content/ContentService.html#bulkPublishStatus()">bulkPublishStatus</a>, <a href="../../contentbox/models/content/ContentService.html#clearAllCaches()">clearAllCaches</a>, <a href="../../contentbox/models/content/ContentService.html#clearAllPageWrapperCaches()">clearAllPageWrapperCaches</a>, <a href="../../contentbox/models/content/ContentService.html#clearAllSitemapCaches()">clearAllSitemapCaches</a>, <a href="../../contentbox/models/content/ContentService.html#clearPageWrapper()">clearPageWrapper</a>, <a href="../../contentbox/models/content/ContentService.html#clearPageWrapperCaches()">clearPageWrapperCaches</a>, <a href="../../contentbox/models/content/ContentService.html#deleteContent()">deleteContent</a>, <a href="../../contentbox/models/content/ContentService.html#findBySlug()">findBySlug</a>, <a href="../../contentbox/models/content/ContentService.html#findExpiredContent()">findExpiredContent</a>, <a href="../../contentbox/models/content/ContentService.html#findFuturePublishedContent()">findFuturePublishedContent</a>, <a href="../../contentbox/models/content/ContentService.html#findPublishedContent()">findPublishedContent</a>, <a href="../../contentbox/models/content/ContentService.html#getAllFlatContent()">getAllFlatContent</a>, <a href="../../contentbox/models/content/ContentService.html#getAllFlatSlugs()">getAllFlatSlugs</a>, <a href="../../contentbox/models/content/ContentService.html#getAllForExport()">getAllForExport</a>, <a href="../../contentbox/models/content/ContentService.html#getIDBySlug()">getIDBySlug</a>, <a href="../../contentbox/models/content/ContentService.html#getLatestEdits()">getLatestEdits</a>, <a href="../../contentbox/models/content/ContentService.html#getTopCommentedContent()">getTopCommentedContent</a>, <a href="../../contentbox/models/content/ContentService.html#getTopVisitedContent()">getTopVisitedContent</a>, <a href="../../contentbox/models/content/ContentService.html#getUniqueSlugHash()">getUniqueSlugHash</a>, <a href="../../contentbox/models/content/ContentService.html#importFromData()">importFromData</a>, <a href="../../contentbox/models/content/ContentService.html#importFromFile()">importFromFile</a>, <a href="../../contentbox/models/content/ContentService.html#inflateFromStruct()">inflateFromStruct</a>, <a href="../../contentbox/models/content/ContentService.html#isSlugUnique()">isSlugUnique</a>, <a href="../../contentbox/models/content/ContentService.html#searchContent()">searchContent</a>, <a href="../../contentbox/models/content/ContentService.html#updateHits()">updateHits</a>
+					<span class="label label-warning"><em>None</em></span>
 				
 			</td>
 		</tr>
@@ -1686,6 +1913,836 @@ Content Service</p>
 
 
 	
+	<a name="bulkPublishStatus()"><!-- --></a>
+	<h3>
+		bulkPublishStatus
+		
+	</h3>
+
+	<kbd>public any <strong>bulkPublishStatus</strong>(any contentID, any status)</kbd>
+
+	<br><br>
+
+	
+		<p>Bulk Publish Status Updates</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#bulkPublishStatus()">bulkPublishStatus</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>contentID</code> - The list or array of ID's to bulk update</dd>
+		
+		<dd><code>status</code> - The status either 'publish' or 'draft'</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clearAllCaches()"><!-- --></a>
+	<h3>
+		clearAllCaches
+		
+	</h3>
+
+	<kbd>public any <strong>clearAllCaches</strong>([boolean async='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Clear all content caches</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#clearAllCaches()">clearAllCaches</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>async</code> - Run it asynchronously or not, defaults to false</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clearAllPageWrapperCaches()"><!-- --></a>
+	<h3>
+		clearAllPageWrapperCaches
+		
+	</h3>
+
+	<kbd>public any <strong>clearAllPageWrapperCaches</strong>([boolean async='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Clear all page wrapper caches</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#clearAllPageWrapperCaches()">clearAllPageWrapperCaches</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>async</code> - Run it asynchronously or not, defaults to false</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clearAllSitemapCaches()"><!-- --></a>
+	<h3>
+		clearAllSitemapCaches
+		
+	</h3>
+
+	<kbd>public any <strong>clearAllSitemapCaches</strong>([boolean async='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Clear all sitemap caches</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#clearAllSitemapCaches()">clearAllSitemapCaches</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>async</code> - Run it asynchronously or not, defaults to false</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clearPageWrapper()"><!-- --></a>
+	<h3>
+		clearPageWrapper
+		
+	</h3>
+
+	<kbd>public any <strong>clearPageWrapper</strong>(any slug, [boolean async='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Clear a page wrapper cache</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#clearPageWrapper()">clearPageWrapper</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug to clean</dd>
+		
+		<dd><code>async</code> - Run it asynchronously or not, defaults to false</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="clearPageWrapperCaches()"><!-- --></a>
+	<h3>
+		clearPageWrapperCaches
+		
+	</h3>
+
+	<kbd>public any <strong>clearPageWrapperCaches</strong>(any slug, [boolean async='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Clear all page wrapper caches</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#clearPageWrapperCaches()">clearPageWrapperCaches</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug partial to clean on</dd>
+		
+		<dd><code>async</code> - Run it asynchronously or not, defaults to false</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deleteContent()"><!-- --></a>
+	<h3>
+		deleteContent
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/ContentService.html" title="class in aggregator.models">ContentService</a> <strong>deleteContent</strong>(any content)</kbd>
+
+	<br><br>
+
+	
+		<p>Delete a content object safely via hierarchies</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#deleteContent()">deleteContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>content</code> - the Content object to delete</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findBySlug()"><!-- --></a>
+	<h3>
+		findBySlug
+		
+	</h3>
+
+	<kbd>public any <strong>findBySlug</strong>(any slug, boolean showUnpublished='false')</kbd>
+
+	<br><br>
+
+	
+		<p>Find a published content object by slug and published unpublished flags, if not found it returns
+a new content object</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#findBySlug()">findBySlug</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug to search</dd>
+		
+		<dd><code>showUnpublished</code> - To also show unpublished content, defaults to false.</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findExpiredContent()"><!-- --></a>
+	<h3>
+		findExpiredContent
+		
+	</h3>
+
+	<kbd>public array <strong>findExpiredContent</strong>([any author], [numeric max='0'], [numeric offset='0'])</kbd>
+
+	<br><br>
+
+	
+		<p>Get all the expired content in the system by filters</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#findExpiredContent()">findExpiredContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>author</code> - The author filtering if passed.</dd>
+		
+		<dd><code>max</code> - The maximum number of records to return</dd>
+		
+		<dd><code>offset</code> - The pagination offset</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findFuturePublishedContent()"><!-- --></a>
+	<h3>
+		findFuturePublishedContent
+		
+	</h3>
+
+	<kbd>public array <strong>findFuturePublishedContent</strong>([any author], [numeric max='0'], [numeric offset='0'])</kbd>
+
+	<br><br>
+
+	
+		<p>Get all the future published content in the system by filters</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#findFuturePublishedContent()">findFuturePublishedContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>author</code> - The author filtering if passed.</dd>
+		
+		<dd><code>max</code> - The maximum number of records to return</dd>
+		
+		<dd><code>offset</code> - The pagination offset</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="findPublishedContent()"><!-- --></a>
+	<h3>
+		findPublishedContent
+		
+	</h3>
+
+	<kbd>public any <strong>findPublishedContent</strong>([numeric max='0'], [numeric offset='0'], [any searchTerm=''], [any category=''], [boolean asQuery='false'], [string sortOrder='publishedDate DESC'], [any parent], [boolean showInMenu], [any slugPrefix=''])</kbd>
+
+	<br><br>
+
+	
+		<p>Find published content objects</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#findPublishedContent()">findPublishedContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>max</code> - The maximum number of records to paginate</dd>
+		
+		<dd><code>offset</code> - The offset in the pagination</dd>
+		
+		<dd><code>searchTerm</code> - The search term to search</dd>
+		
+		<dd><code>category</code> - The category to filter the content on</dd>
+		
+		<dd><code>asQuery</code> - Return as query or array of objects, defaults to array of objects</dd>
+		
+		<dd><code>sortOrder</code> - how we need to sort the results</dd>
+		
+		<dd><code>parent</code> - The parentID or parent entity to filter on, don't pass or pass an empty value to ignore, defaults to 'all'</dd>
+		
+		<dd><code>showInMenu</code> - Whether to filter with the show in menu bit or not</dd>
+		
+		<dd><code>slugPrefix</code> - If passed, this will do a hierarchical search according to this slug prefix. Remember that all hierarchical content's slug field contains its hierarchy: /products/awesome/product1. This prefix will be appended with a `/`</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>struct as { count, content }</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getAllFlatContent()"><!-- --></a>
+	<h3>
+		getAllFlatContent
+		
+	</h3>
+
+	<kbd>public array <strong>getAllFlatContent</strong>([any sortOrder='title asc'], [boolean isPublished], [boolean showInSearch])</kbd>
+
+	<br><br>
+
+	
+		<p>Returns an array of [contentID, title, slug, createdDate, modifiedDate, featuredImageURL] structures of all the content in the system</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getAllFlatContent()">getAllFlatContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>sortOrder</code> - The sort ordering of the results</dd>
+		
+		<dd><code>isPublished</code> - Show all content or true/false published content</dd>
+		
+		<dd><code>showInSearch</code> - Show all content or true/false showInSearch flag</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getAllFlatSlugs()"><!-- --></a>
+	<h3>
+		getAllFlatSlugs
+		
+	</h3>
+
+	<kbd>public array <strong>getAllFlatSlugs</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Returns an array of slugs of all the content objects in the system.</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getAllFlatSlugs()">getAllFlatSlugs</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getAllForExport()"><!-- --></a>
+	<h3>
+		getAllForExport
+		
+	</h3>
+
+	<kbd>public array <strong>getAllForExport</strong>([any inData])</kbd>
+
+	<br><br>
+
+	
+		<p>Get all content for export as flat data</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getAllForExport()">getAllForExport</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>inData</code> - The data to use for exporting, usually concrete implementtions can override this.</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getIDBySlug()"><!-- --></a>
+	<h3>
+		getIDBySlug
+		
+	</h3>
+
+	<kbd>public any <strong>getIDBySlug</strong>(any slug)</kbd>
+
+	<br><br>
+
+	
+		<p>Get an id from a slug of a content object</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getIDBySlug()">getIDBySlug</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug to search an ID for.</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getImageUrlFromPath()"><!-- --></a>
 	<h3>
 		getImageUrlFromPath
@@ -1724,6 +2781,169 @@ Content Service</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The relative image url</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getLatestEdits()"><!-- --></a>
+	<h3>
+		getLatestEdits
+		
+	</h3>
+
+	<kbd>public array <strong>getLatestEdits</strong>([any author], [boolean isPublished], [numeric max='25'])</kbd>
+
+	<br><br>
+
+	
+		<p>Get latest edits according to criteria</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getLatestEdits()">getLatestEdits</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>author</code> - The author object to use for retrieval</dd>
+		
+		<dd><code>isPublished</code> - If passed, check if content is published or in draft mode. Else defaults to all states</dd>
+		
+		<dd><code>max</code> - The maximum number of records to return</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTopCommentedContent()"><!-- --></a>
+	<h3>
+		getTopCommentedContent
+		
+	</h3>
+
+	<kbd>public array <strong>getTopCommentedContent</strong>([numeric max='5'])</kbd>
+
+	<br><br>
+
+	
+		<p>Get the top commented content entries</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getTopCommentedContent()">getTopCommentedContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>max</code> - The maximum to retrieve, defaults to 5 entries</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTopVisitedContent()"><!-- --></a>
+	<h3>
+		getTopVisitedContent
+		
+	</h3>
+
+	<kbd>public array <strong>getTopVisitedContent</strong>([numeric max='5'])</kbd>
+
+	<br><br>
+
+	
+		<p>Get the top visited content entries</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getTopVisitedContent()">getTopVisitedContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>max</code> - The maximum to retrieve, defaults to 5 entries</dd>
+		
+		</dl>
+	
+
 	
 
 	
@@ -1778,6 +2998,230 @@ Content Service</p>
 	<hr>
 
 	
+	<a name="getUniqueSlugHash()"><!-- --></a>
+	<h3>
+		getUniqueSlugHash
+		
+	</h3>
+
+	<kbd>private any <strong>getUniqueSlugHash</strong>(string slug)</kbd>
+
+	<br><br>
+
+	
+		<p>Get a unique slug hash</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#getUniqueSlugHash()">getUniqueSlugHash</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug to unique it</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="importFromData()"><!-- --></a>
+	<h3>
+		importFromData
+		
+	</h3>
+
+	<kbd>public string <strong>importFromData</strong>(any importData, [boolean override='false'], any importLog)</kbd>
+
+	<br><br>
+
+	
+		<p>Import data from an array of structures of content or just one structure of a content entry</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#importFromData()">importFromData</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importData</code> - The data to import</dd>
+		
+		<dd><code>override</code> - Override records or not</dd>
+		
+		<dd><code>importLog</code> - The import log buffer</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="importFromFile()"><!-- --></a>
+	<h3>
+		importFromFile
+		
+	</h3>
+
+	<kbd>public string <strong>importFromFile</strong>(any importFile, [boolean override='false'])</kbd>
+
+	<br><br>
+
+	
+		<p>Import data from a ContentBox JSON file. Returns the import log</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#importFromFile()">importFromFile</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importFile</code> - The absolute file path to use for importing</dd>
+		
+		<dd><code>override</code> - Override records or not</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="inflateFromStruct()"><!-- --></a>
+	<h3>
+		inflateFromStruct
+		
+	</h3>
+
+	<kbd>public any <strong>inflateFromStruct</strong>(any contentData, any importLog, [any parent], [struct newContent='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Inflate a content object from a ContentBox JSON structure</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#inflateFromStruct()">inflateFromStruct</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>contentData</code> - The content structure inflated from JSON</dd>
+		
+		<dd><code>importLog</code> - The string builder import log</dd>
+		
+		<dd><code>parent</code> - If the inflated content object has a parent then it can be linked directly, no inflating necessary. Usually for recursions</dd>
+		
+		<dd><code>newContent</code> - Map of new content by slug; useful for avoiding new content collisions with recusive relationships</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="isImageInUse()"><!-- --></a>
 	<h3>
 		isImageInUse
@@ -1818,6 +3262,61 @@ Content Service</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if in use elsewhere, false if not</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isSlugUnique()"><!-- --></a>
+	<h3>
+		isSlugUnique
+		
+	</h3>
+
+	<kbd>public any <strong>isSlugUnique</strong>(any slug, [any contentID=''])</kbd>
+
+	<br><br>
+
+	
+		<p>Verify an incoming slug is unique or not</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#isSlugUnique()">isSlugUnique</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slug</code> - The slug to search for uniqueness</dd>
+		
+		<dd><code>contentID</code> - Limit the search to the passed contentID usually for updates</dd>
+		
+		</dl>
+	
+
 	
 
 	
@@ -1878,6 +3377,132 @@ Content Service</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>ContentService</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="searchContent()"><!-- --></a>
+	<h3>
+		searchContent
+		
+	</h3>
+
+	<kbd>public any <strong>searchContent</strong>([any searchTerm=''], [numeric max='0'], [numeric offset='0'], [boolean asQuery='false'], [any sortOrder='publishedDate DESC'], [any isPublished='true'], [boolean searchActiveContent='true'], [string contentTypes=''], [any excludeIDs=''], [boolean showInSearch])</kbd>
+
+	<br><br>
+
+	
+		<p>Searches published content with cool paramters, remember published content only</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#searchContent()">searchContent</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>searchTerm</code> - The search term to search</dd>
+		
+		<dd><code>max</code> - The maximum number of records to paginate</dd>
+		
+		<dd><code>offset</code> - The offset in the pagination</dd>
+		
+		<dd><code>asQuery</code> - Return as query or array of objects, defaults to array of objects</dd>
+		
+		<dd><code>sortOrder</code> - The sorting of the search results, defaults to publishedDate DESC</dd>
+		
+		<dd><code>isPublished</code> - Search for published, non-published or both content objects [true, false, 'all']</dd>
+		
+		<dd><code>searchActiveContent</code> - Search only content titles or both title and active content. Defaults to both.</dd>
+		
+		<dd><code>contentTypes</code> - Limit search to list of content types (comma-delimited). Leave blank to search all content types</dd>
+		
+		<dd><code>excludeIDs</code> - List of IDs to exclude from search</dd>
+		
+		<dd><code>showInSearch</code> - If true, it makes sure content has been stored as searchable, defaults to null, which means it searches no matter what this bit says</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="updateHits()"><!-- --></a>
+	<h3>
+		updateHits
+		
+	</h3>
+
+	<kbd>public <a href="../../aggregator/models/ContentService.html" title="class in aggregator.models">ContentService</a> <strong>updateHits</strong>(any contentID, [boolean async='true'])</kbd>
+
+	<br><br>
+
+	
+		<p>Update a content's hits with some async flava</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/ContentService.html#updateHits()">updateHits</a></code>
+			in class
+			<code>
+				contentbox.models.content.ContentService
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>contentID</code> - The content id to update</dd>
+		
+		<dd><code>async</code> - Async or not</dd>
+		
+		</dl>
+	
+
 	
 
 	

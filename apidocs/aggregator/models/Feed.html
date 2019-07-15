@@ -466,7 +466,7 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">orderby = importedDate DESC</li>
+				<li class="label label-default label-annotations">orderby = feedImportID DESC</li>
 				
 			
 				
@@ -838,7 +838,7 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">formula = select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )</li>
+				<li class="label label-default label-annotations">formula = select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</li>
 				
 			
 				
@@ -2353,6 +2353,21 @@ Feed Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getMemento()">getMemento</A></strong>(array slugCache='[runtime expression]', [boolean showAuthor='true'], [boolean showComments='true'], [boolean showCustomFields='true'], [boolean showContentVersions='true'], [boolean showParent='true'], [boolean showChildren='false'], [boolean showCategories='true'], [boolean showRelatedContent='true'], [boolean showStats='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a flat representation of the feed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>numeric</code>
 		</td>
 		<td>
@@ -2436,7 +2451,7 @@ Feed Model</p>
 			<code>struct</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#getResponseMemento()">getResponseMemento</A></strong>([boolean showAuthor='true'], [boolean showCategories='true'], [boolean showFeedItems='true'], [string excludes='allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords'])
+			<strong><a href="Feed.html#getResponseMemento()">getResponseMemento</A></strong>(array slugCache='[runtime expression]', [boolean showAuthor='true'], [boolean showComments='false'], [boolean showCustomFields='false'], [boolean showParent='false'], [boolean showChildren='false'], [boolean showCategories='true'], [boolean showRelatedContent='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a flat representation of the feed for UI response format which restricts the data displayed.
@@ -3527,12 +3542,6 @@ Feed Model</p>
 				
 					
 					
-					
-						
-					
-					
-					
-					
 				
 					
 					
@@ -4487,7 +4496,7 @@ Feed Model</p>
 				
 
 				
-					<a href="../../contentbox/models/content/BaseContent.html#addActiveContent()">addActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addCategories()">addCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#addChild()">addChild</a>, <a href="../../contentbox/models/content/BaseContent.html#addComment()">addComment</a>, <a href="../../contentbox/models/content/BaseContent.html#addCommentSubscription()">addCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#addContentVersion()">addContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addCustomField()">addCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#addExpiredTime()">addExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedExpiredTime()">addJoinedExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedPublishedTime()">addJoinedPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addLinkedContent()">addLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addNewContentVersion()">addNewContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addPublishedTime()">addPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addRelatedContent()">addRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#buildContentCacheKey()">buildContentCacheKey</a>, <a href="../../contentbox/models/content/BaseContent.html#canCacheContent()">canCacheContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getActiveContent()">getActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getAllowComments()">getAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthor()">getAuthor</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorEmail()">getAuthorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorName()">getAuthorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCache()">getCache</a>, <a href="../../contentbox/models/content/BaseContent.html#getCachebox()">getCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLastAccessTimeout()">getCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLayout()">getCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheTimeout()">getCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategories()">getCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoriesList()">getCategoriesList</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoryService()">getCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#getChildren()">getChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getComments()">getComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getCommentSubscriptions()">getCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContent()">getContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentID()">getContentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentService()">getContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentType()">getContentType</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersions()">getContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersionService()">getContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreator()">getCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorEmail()">getCreatorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorName()">getCreatorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomField()">getCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFields()">getCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldsAsStruct()">getCustomFieldsAsStruct</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldService()">getCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayExpireDate()">getDisplayExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayPublishedDate()">getDisplayPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDate()">getExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDateForEditor()">getExpireDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImage()">getFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImageURL()">getFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLDescription()">getHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLKeywords()">getHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLTitle()">getHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#getI18n()">getI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#getInterceptorService()">getInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsPublished()">getIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#getLinkedContent()">getLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getMarkup()">getMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#getMemento()">getMemento</a>, <a href="../../contentbox/models/content/BaseContent.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfActiveVersions()">getNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfApprovedComments()">getNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfChildren()">getNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfComments()">getNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfHits()">getNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfVersions()">getNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getParent()">getParent</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentID()">getParentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentName()">getParentName</a>, <a href="../../contentbox/models/content/BaseContent.html#getPasswordProtection()">getPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDate()">getPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDateForEditor()">getPublishedDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getRecursiveSlug()">getRecursiveSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContent()">getRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContentIDs()">getRelatedContentIDs</a>, <a href="../../contentbox/models/content/BaseContent.html#getRenderedContent()">getRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getSettingService()">getSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#getShowInSearch()">getShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#getSlug()">getSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getStats()">getStats</a>, <a href="../../contentbox/models/content/BaseContent.html#getTitle()">getTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContent()">hasActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContentSet()">hasActiveContentSet</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCategories()">hasCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#hasChild()">hasChild</a>, <a href="../../contentbox/models/content/BaseContent.html#hasComment()">hasComment</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCommentSubscription()">hasCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#hasContentVersion()">hasContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCreator()">hasCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCustomField()">hasCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#hasLinkedContent()">hasLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasParent()">hasParent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasRelatedContent()">hasRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasStats()">hasStats</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateCustomFields()">inflateCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateRelatedContent()">inflateRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#isContentPublished()">isContentPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#isExpired()">isExpired</a>, <a href="../../contentbox/models/content/BaseContent.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/content/BaseContent.html#isPasswordProtected()">isPasswordProtected</a>, <a href="../../contentbox/models/content/BaseContent.html#isPublishedInFuture()">isPublishedInFuture</a>, <a href="../../contentbox/models/content/BaseContent.html#maxContentVersionChecks()">maxContentVersionChecks</a>, <a href="../../contentbox/models/content/BaseContent.html#prepareForClone()">prepareForClone</a>, <a href="../../contentbox/models/content/BaseContent.html#removeActiveContent()">removeActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllCategories()">removeAllCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllLinkedContent()">removeAllLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCategories()">removeCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeChild()">removeChild</a>, <a href="../../contentbox/models/content/BaseContent.html#removeComment()">removeComment</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCommentSubscription()">removeCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#removeContentVersion()">removeContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCustomField()">removeCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#removeLinkedContent()">removeLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeRelatedContent()">removeRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContent()">renderContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContentSilent()">renderContentSilent</a>, <a href="../../contentbox/models/content/BaseContent.html#setActiveContent()">setActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setAllowComments()">setAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCache()">setCache</a>, <a href="../../contentbox/models/content/BaseContent.html#setCachebox()">setCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLastAccessTimeout()">setCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLayout()">setCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheTimeout()">setCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategories()">setCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategoryService()">setCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#setChildren()">setChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setComments()">setComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCommentSubscriptions()">setCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentService()">setContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersions()">setContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersionService()">setContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreator()">setCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFields()">setCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFieldService()">setCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#setExpireDate()">setExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImage()">setFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImageURL()">setFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLDescription()">setHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLKeywords()">setHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLTitle()">setHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#setI18n()">setI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#setInterceptorService()">setInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsPublished()">setIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#setLinkedContent()">setLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setMarkup()">setMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#setModifiedDate()">setModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfActiveVersions()">setNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfApprovedComments()">setNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfChildren()">setNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfComments()">setNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfHits()">setNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfVersions()">setNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setParent()">setParent</a>, <a href="../../contentbox/models/content/BaseContent.html#setPasswordProtection()">setPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#setPublishedDate()">setPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setRelatedContent()">setRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setRenderedContent()">setRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setSettingService()">setSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#setShowInSearch()">setShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#setSlug()">setSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#setStats()">setStats</a>, <a href="../../contentbox/models/content/BaseContent.html#setTitle()">setTitle</a>
+					<a href="../../contentbox/models/content/BaseContent.html#addActiveContent()">addActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addCategories()">addCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#addChild()">addChild</a>, <a href="../../contentbox/models/content/BaseContent.html#addComment()">addComment</a>, <a href="../../contentbox/models/content/BaseContent.html#addCommentSubscription()">addCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#addContentVersion()">addContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addCustomField()">addCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#addExpiredTime()">addExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedExpiredTime()">addJoinedExpiredTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addJoinedPublishedTime()">addJoinedPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addLinkedContent()">addLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#addNewContentVersion()">addNewContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#addPublishedTime()">addPublishedTime</a>, <a href="../../contentbox/models/content/BaseContent.html#addRelatedContent()">addRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#buildContentCacheKey()">buildContentCacheKey</a>, <a href="../../contentbox/models/content/BaseContent.html#canCacheContent()">canCacheContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getActiveContent()">getActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getAllowComments()">getAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthor()">getAuthor</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorEmail()">getAuthorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getAuthorName()">getAuthorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCache()">getCache</a>, <a href="../../contentbox/models/content/BaseContent.html#getCachebox()">getCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLastAccessTimeout()">getCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheLayout()">getCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCacheTimeout()">getCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategories()">getCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoriesList()">getCategoriesList</a>, <a href="../../contentbox/models/content/BaseContent.html#getCategoryService()">getCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#getChildren()">getChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getComments()">getComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getCommentSubscriptions()">getCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContent()">getContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentID()">getContentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentService()">getContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentType()">getContentType</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersions()">getContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getContentVersionService()">getContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreator()">getCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorEmail()">getCreatorEmail</a>, <a href="../../contentbox/models/content/BaseContent.html#getCreatorName()">getCreatorName</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomField()">getCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFields()">getCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldsAsStruct()">getCustomFieldsAsStruct</a>, <a href="../../contentbox/models/content/BaseContent.html#getCustomFieldService()">getCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayExpireDate()">getDisplayExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getDisplayPublishedDate()">getDisplayPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDate()">getExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getExpireDateForEditor()">getExpireDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImage()">getFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#getFeaturedImageURL()">getFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLDescription()">getHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLKeywords()">getHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#getHTMLTitle()">getHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#getI18n()">getI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#getInterceptorService()">getInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#getIsPublished()">getIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#getLinkedContent()">getLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getMarkup()">getMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfActiveVersions()">getNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfApprovedComments()">getNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfChildren()">getNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfComments()">getNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfHits()">getNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#getNumberOfVersions()">getNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#getParent()">getParent</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentID()">getParentID</a>, <a href="../../contentbox/models/content/BaseContent.html#getParentName()">getParentName</a>, <a href="../../contentbox/models/content/BaseContent.html#getPasswordProtection()">getPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDate()">getPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#getPublishedDateForEditor()">getPublishedDateForEditor</a>, <a href="../../contentbox/models/content/BaseContent.html#getRecursiveSlug()">getRecursiveSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContent()">getRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getRelatedContentIDs()">getRelatedContentIDs</a>, <a href="../../contentbox/models/content/BaseContent.html#getRenderedContent()">getRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#getSettingService()">getSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#getShowInSearch()">getShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#getSlug()">getSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#getStats()">getStats</a>, <a href="../../contentbox/models/content/BaseContent.html#getTitle()">getTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContent()">hasActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasActiveContentSet()">hasActiveContentSet</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCategories()">hasCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#hasChild()">hasChild</a>, <a href="../../contentbox/models/content/BaseContent.html#hasComment()">hasComment</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCommentSubscription()">hasCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#hasContentVersion()">hasContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCreator()">hasCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#hasCustomField()">hasCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#hasLinkedContent()">hasLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasParent()">hasParent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasRelatedContent()">hasRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#hasStats()">hasStats</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateCustomFields()">inflateCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#inflateRelatedContent()">inflateRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#isContentPublished()">isContentPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#isExpired()">isExpired</a>, <a href="../../contentbox/models/content/BaseContent.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/content/BaseContent.html#isPasswordProtected()">isPasswordProtected</a>, <a href="../../contentbox/models/content/BaseContent.html#isPublishedInFuture()">isPublishedInFuture</a>, <a href="../../contentbox/models/content/BaseContent.html#maxContentVersionChecks()">maxContentVersionChecks</a>, <a href="../../contentbox/models/content/BaseContent.html#prepareForClone()">prepareForClone</a>, <a href="../../contentbox/models/content/BaseContent.html#removeActiveContent()">removeActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllCategories()">removeAllCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeAllLinkedContent()">removeAllLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCategories()">removeCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#removeChild()">removeChild</a>, <a href="../../contentbox/models/content/BaseContent.html#removeComment()">removeComment</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCommentSubscription()">removeCommentSubscription</a>, <a href="../../contentbox/models/content/BaseContent.html#removeContentVersion()">removeContentVersion</a>, <a href="../../contentbox/models/content/BaseContent.html#removeCustomField()">removeCustomField</a>, <a href="../../contentbox/models/content/BaseContent.html#removeLinkedContent()">removeLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#removeRelatedContent()">removeRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContent()">renderContent</a>, <a href="../../contentbox/models/content/BaseContent.html#renderContentSilent()">renderContentSilent</a>, <a href="../../contentbox/models/content/BaseContent.html#setActiveContent()">setActiveContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setAllowComments()">setAllowComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCache()">setCache</a>, <a href="../../contentbox/models/content/BaseContent.html#setCachebox()">setCachebox</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLastAccessTimeout()">setCacheLastAccessTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheLayout()">setCacheLayout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCacheTimeout()">setCacheTimeout</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategories()">setCategories</a>, <a href="../../contentbox/models/content/BaseContent.html#setCategoryService()">setCategoryService</a>, <a href="../../contentbox/models/content/BaseContent.html#setChildren()">setChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setComments()">setComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setCommentSubscriptions()">setCommentSubscriptions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentService()">setContentService</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersions()">setContentVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setContentVersionService()">setContentVersionService</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setCreator()">setCreator</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFields()">setCustomFields</a>, <a href="../../contentbox/models/content/BaseContent.html#setCustomFieldService()">setCustomFieldService</a>, <a href="../../contentbox/models/content/BaseContent.html#setExpireDate()">setExpireDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImage()">setFeaturedImage</a>, <a href="../../contentbox/models/content/BaseContent.html#setFeaturedImageURL()">setFeaturedImageURL</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLDescription()">setHTMLDescription</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLKeywords()">setHTMLKeywords</a>, <a href="../../contentbox/models/content/BaseContent.html#setHTMLTitle()">setHTMLTitle</a>, <a href="../../contentbox/models/content/BaseContent.html#setI18n()">setI18n</a>, <a href="../../contentbox/models/content/BaseContent.html#setInterceptorService()">setInterceptorService</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/content/BaseContent.html#setIsPublished()">setIsPublished</a>, <a href="../../contentbox/models/content/BaseContent.html#setLinkedContent()">setLinkedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setMarkup()">setMarkup</a>, <a href="../../contentbox/models/content/BaseContent.html#setModifiedDate()">setModifiedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfActiveVersions()">setNumberOfActiveVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfApprovedComments()">setNumberOfApprovedComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfChildren()">setNumberOfChildren</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfComments()">setNumberOfComments</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfHits()">setNumberOfHits</a>, <a href="../../contentbox/models/content/BaseContent.html#setNumberOfVersions()">setNumberOfVersions</a>, <a href="../../contentbox/models/content/BaseContent.html#setParent()">setParent</a>, <a href="../../contentbox/models/content/BaseContent.html#setPasswordProtection()">setPasswordProtection</a>, <a href="../../contentbox/models/content/BaseContent.html#setPublishedDate()">setPublishedDate</a>, <a href="../../contentbox/models/content/BaseContent.html#setRelatedContent()">setRelatedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setRenderedContent()">setRenderedContent</a>, <a href="../../contentbox/models/content/BaseContent.html#setSettingService()">setSettingService</a>, <a href="../../contentbox/models/content/BaseContent.html#setShowInSearch()">setShowInSearch</a>, <a href="../../contentbox/models/content/BaseContent.html#setSlug()">setSlug</a>, <a href="../../contentbox/models/content/BaseContent.html#setStats()">setStats</a>, <a href="../../contentbox/models/content/BaseContent.html#setTitle()">setTitle</a>
 				
 			</td>
 		</tr>
@@ -4729,7 +4738,7 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>orderby</code> - importedDate DESC</dd>
+			<dd><code>orderby</code> - feedImportID DESC</dd>
 			
 		
 			
@@ -5061,7 +5070,7 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>formula</code> - select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.importedDate = ( select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID )</dd>
+			<dd><code>formula</code> - select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</dd>
 			
 		
 			
@@ -7017,6 +7026,82 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getMemento()"><!-- --></a>
+	<h3>
+		getMemento
+		
+	</h3>
+
+	<kbd>public struct <strong>getMemento</strong>(array slugCache='[runtime expression]', [boolean showAuthor='true'], [boolean showComments='true'], [boolean showCustomFields='true'], [boolean showContentVersions='true'], [boolean showParent='true'], [boolean showChildren='false'], [boolean showCategories='true'], [boolean showRelatedContent='true'], [boolean showStats='true'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets a flat representation of the feed</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/content/BaseContent.html#getMemento()">getMemento</a></code>
+			in class
+			<code>
+				contentbox.models.content.BaseContent
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>slugCache</code> - A cache of slugs to prevent infinite recursions</dd>
+		
+		<dd><code>showAuthor</code> - Whether or not to include the author</dd>
+		
+		<dd><code>showComments</code> - Whether or not to include the comments</dd>
+		
+		<dd><code>showCustomFields</code> - Whether or not to include the custom fields</dd>
+		
+		<dd><code>showContentVersions</code> - Whether or not to include the content versions</dd>
+		
+		<dd><code>showParent</code> - Whether or not to include the parent</dd>
+		
+		<dd><code>showChildren</code> - Whether or not to include the children</dd>
+		
+		<dd><code>showCategories</code> - Whether or not to include the categories</dd>
+		
+		<dd><code>showRelatedContent</code> - Whether or not to include the related content</dd>
+		
+		<dd><code>showStats</code> - Whether or not to include the stats</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>A structure containing the feed properties</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getNumberOfFeedItems()"><!-- --></a>
 	<h3>
 		getNumberOfFeedItems
@@ -7222,7 +7307,7 @@ Feed Model</p>
 		
 	</h3>
 
-	<kbd>public struct <strong>getResponseMemento</strong>([boolean showAuthor='true'], [boolean showCategories='true'], [boolean showFeedItems='true'], [string excludes='allowComments,isDeleted,HTMLTitle,HTMLDescription,HTMLKeywords'])</kbd>
+	<kbd>public struct <strong>getResponseMemento</strong>(array slugCache='[runtime expression]', [boolean showAuthor='true'], [boolean showComments='false'], [boolean showCustomFields='false'], [boolean showParent='false'], [boolean showChildren='false'], [boolean showCategories='true'], [boolean showRelatedContent='false'])</kbd>
 
 	<br><br>
 
@@ -7256,13 +7341,21 @@ Feed Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>showAuthor</code> - Whether or not to include the feed author</dd>
+		<dd><code>slugCache</code> - A cache of slugs to prevent infinite recursions</dd>
+		
+		<dd><code>showAuthor</code> - Whether or not to include the author</dd>
+		
+		<dd><code>showComments</code> - Whether or not to include the comments</dd>
+		
+		<dd><code>showCustomFields</code> - Whether or not to include the custom fields</dd>
+		
+		<dd><code>showParent</code> - Whether or not to include the parent</dd>
+		
+		<dd><code>showChildren</code> - Whether or not to include the children</dd>
 		
 		<dd><code>showCategories</code> - Whether or not to include the categories</dd>
 		
-		<dd><code>showFeedItems</code> - Whether or not to include the feed items</dd>
-		
-		<dd><code>excludes</code> - A list of properties to exclude</dd>
+		<dd><code>showRelatedContent</code> - Whether or not to include the related content</dd>
 		
 		</dl>
 	
