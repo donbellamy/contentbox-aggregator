@@ -45,15 +45,20 @@ component extends="coldbox.system.Interceptor" {
 		for ( var feed IN feeds ) {
 			var maxFeedImports = val( settings.ag_importing_max_feed_imports );
 			var feedImports = feed.getFeedImports();
+			var numberDeleted = 0;
 			if ( maxFeedImports && ( arrayLen( feedImports ) GT maxFeedImports ) ) {
 				var importsToDelete = arraySlice( feedImports, maxFeedImports + 1 );
 				for ( var feedImport IN importsToDelete ) {
 					var feedImportID = feedImport.getFeedImportID();
-					feedImportService.deleteByID( feedImportID );
+					feedImportService.deleteByID( id=feedImportID, flush=true );
 					if ( log.canInfo() ) {
 						log.info("Feed import ('#feedImportID#') deleted for feed '#feed.getTitle()#' using general setting for 'Import history limit'.");
 					}
+					numberDeleted++;
 				}
+			}
+			if ( log.canInfo() ) {
+				log.info("There were #numberDeleted# feed import(s) deleted for feed '#feed.getTitle()#' using general setting for 'Import history limit'.");
 			}
 		}
 

@@ -73,6 +73,9 @@ component extends="baseHandler" {
 	 */
 	function save( event, rc, prc ) {
 
+		// Set timeout
+		setting requestTimeout="999999";
+
 		// Old settings
 		var oldSettings = duplicate( prc.agSettings );
 

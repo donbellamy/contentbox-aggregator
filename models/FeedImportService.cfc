@@ -62,8 +62,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		if ( !isNull( arguments.author ) ) {
 
 			// Loop over feeds
-			// TODO: thread these here?  or in handler calling ?
-			// feeds.each( function( feed ){}, true ); ? - test it, may fix issues with interceptors
 			for ( var feed IN feeds ) {
 
 				// Announce interception
@@ -379,9 +377,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					feedImport.setMetaInfo( remoteFeed );
 					save( feedImport );
 
-					// Let's sleep for a second
-					sleep(1000);
-
 				} catch ( any e ) {
 
 					if ( log.canError() ) {
@@ -414,6 +409,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Announce interception
 				interceptorService.processState( "aggregator_postFeedImport", { feed=feed } );
+
+				// Let's sleep for five seconds (until I rewrite this)
+				sleep(5000);
 
 			}
 

@@ -86,10 +86,10 @@ component extends="coldbox.system.Interceptor" {
 				html.addJSContent("$(function(){$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});",true);
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
-				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>');});",true);
+				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portalpurge""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearPortalCache )#\' );"" class="""">Clear Portal Caches</a></li>');});",true);
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) ) {
-				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portal""><a href=""#event.buildlink( prc.xehFeedImportAll )#"" class="""">Import All Feeds</a></li>');});",true);
+				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""feedsimport""><a href=""#event.buildlink( prc.xehFeedImportAll )#"" class="""">Import All Feeds</a></li>');});",true);
 			}
 			html.addJSContent("$(function(){$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#agHelper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');$('[title]').tooltip(toolTipSettings);});",true);
 		}

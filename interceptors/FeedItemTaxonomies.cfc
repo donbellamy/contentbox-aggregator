@@ -60,6 +60,9 @@ component extends="coldbox.system.Interceptor" {
 		// Loop over feeds
 		for ( var feed IN feeds ) {
 
+			// Counter
+			var numberCategorized = 0;
+
 			// Loop over taxonomies
 			for ( var taxonomy IN arguments.taxonomies ) {
 
@@ -108,6 +111,7 @@ component extends="coldbox.system.Interceptor" {
 									if ( log.canInfo() ) {
 										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
 									}
+									numberCategorized++;
 								}
 
 							}
@@ -144,6 +148,7 @@ component extends="coldbox.system.Interceptor" {
 									if ( log.canInfo() ) {
 										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
 									}
+									numberCategorized++;
 								}
 
 							}
@@ -154,6 +159,10 @@ component extends="coldbox.system.Interceptor" {
 
 				}
 
+			}
+
+			if ( log.canInfo() ) {
+				log.info("There were #numberCategorized# feed item(s) categorized for feed '#feed.getTitle()#'");
 			}
 
 		}

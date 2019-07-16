@@ -74,6 +74,9 @@ component extends="coldbox.system.Interceptor" {
 		// Loop over feeds
 		for ( var feed IN feeds ) {
 
+			// Counter
+			var numberDeleted = 0;
+
 			// Keyword filters
 			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
 			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
@@ -100,6 +103,7 @@ component extends="coldbox.system.Interceptor" {
 						if ( log.canInfo() ) {
 							log.info("Feed item ('#uniqueId#') filtered out using match any filter '#arrayToList(matchAnyFilter)#' for feed '#feed.getTitle()#'");
 						}
+						numberDeleted++;
 					}
 				}
 
@@ -121,6 +125,7 @@ component extends="coldbox.system.Interceptor" {
 						if ( log.canInfo() ) {
 							log.info("Feed item ('#uniqueId#') filtered out using match all filter '#arrayToList(matchAllFilter)#' for feed '#feed.getTitle()#'");
 						}
+						numberDeleted++;
 					}
 				}
 
@@ -142,9 +147,14 @@ component extends="coldbox.system.Interceptor" {
 						if ( log.canInfo() ) {
 							log.info("Feed item ('#uniqueId#') filtered out using match none filter '#arrayToList(matchNoneFilter)#' for feed '#feed.getTitle()#'");
 						}
+						numberDeleted++;
 					}
 				}
 
+			}
+
+			if ( log.canInfo() ) {
+				log.info("There were #numberDeleted# feed item(s) filtered out by keywords for feed '#feed.getTitle()#'");
 			}
 
 		}
@@ -167,6 +177,9 @@ component extends="coldbox.system.Interceptor" {
 
 		// Loop over feeds
 		for ( var feed IN feeds ) {
+
+			// Counter
+			var numberDeleted = 0;
 
 			// Max age
 			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
@@ -200,8 +213,13 @@ component extends="coldbox.system.Interceptor" {
 					if ( log.canInfo() ) {
 						log.info("Feed item ('#uniqueId#') filtered out by age limit for feed '#feed.getTitle()#'");
 					}
+					numberDeleted++;
 				}
 
+			}
+
+			if ( log.canInfo() ) {
+				log.info("There were #numberDeleted# feed item(s) filtered out by age limit for feed '#feed.getTitle()#'");
 			}
 
 		}
@@ -225,6 +243,9 @@ component extends="coldbox.system.Interceptor" {
 		// Loop over feeds
 		for ( var feed IN feeds ) {
 
+			// Counter
+			var numberDeleted = 0;
+
 			// Max items
 			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_importing_max_items );
 			if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
@@ -236,7 +257,12 @@ component extends="coldbox.system.Interceptor" {
 					if ( log.canInfo() ) {
 						log.info("Feed item ('#uniqueId#') filtered out by item limit for feed '#feed.getTitle()#'");
 					}
+					numberDeleted++;
 				}
+			}
+
+			if ( log.canInfo() ) {
+				log.info("There were #numberDeleted# feed item(s) filtered out by item limit for feed '#feed.getTitle()#'");
 			}
 
 		}
