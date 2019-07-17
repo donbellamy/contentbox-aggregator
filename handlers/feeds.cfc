@@ -487,6 +487,7 @@ component extends="contentHandler" {
 			// Import feeds
 			announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 			for ( var feed IN feeds ) {
+				// Use cfhttp to do this?  Then we can use ajax to return things...
 				feedImportService.import( feed, prc.oCurrentAuthor );
 				arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 			}

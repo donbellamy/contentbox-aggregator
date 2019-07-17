@@ -40,23 +40,23 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Announce interception
-		interceptorService.processState( "aggregator_preFeedImport", { feed=feed } );
+		interceptorService.processState( "aggregator_preFeedImport", { feed=arguments.feed } );
 
 		try {
 
 			// Grab the remote feed
-			var remoteFeed = feedReader.retrieveFeed( feed.getFeedUrl() );
+			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
 			// Check for items in feed
 			if ( arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
-				var itemStatus = len( feed.getItemStatus() ) ? feed.getItemStatus() : settings.ag_importing_item_status;
-				var itemPubDate = len( feed.getItemPubDate() ) ? feed.getItemPubDate() : settings.ag_importing_item_pub_date;
+				var itemStatus = len( arguments.feed.getItemStatus() ) ? arguments.feed.getItemStatus() : settings.ag_importing_item_status;
+				var itemPubDate = len( arguments.feed.getItemPubDate() ) ? arguments.feed.getItemPubDate() : settings.ag_importing_item_pub_date;
 
 				// Grab image settings
-				var importImages = len( feed.getImportImages() ) ? feed.getImportImages() : settings.ag_importing_image_import_enable;
-				var importFeaturedImages = len( feed.getImportFeaturedImages() ) ? feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
+				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_importing_image_import_enable;
+				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
 
 				// Set an item counter
 				var itemCount = 0;
@@ -80,7 +80,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						if ( !itemExists ) {
 
 							// Check keywords
-							var passesKeywordFilters = checkKeywordFilters( item, feed );
+							var passesKeywordFilters = checkKeywordFilters( item, arguments.feed );
 
 							// Passes keywords
 							if ( passesKeywordFilters ) {
@@ -94,7 +94,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 								}
 
 								// Check age
-								var passesAgeFilter = checkAgeFilter( item, feed );
+								var passesAgeFilter = checkAgeFilter( item, arguments.feed );
 
 								// Passes age
 								if ( passesAgeFilter ) {
@@ -113,7 +113,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 										feedItem.setMetaInfo( item );
 
 										// BaseContent properties
-										feedItem.setParent( feed );
+										feedItem.setParent( arguments.feed );
 										feedItem.setTitle( item.title );
 										feedItem.setSlug( htmlHelper.slugify( item.title ) );
 										feedItem.setCreator( arguments.author );
@@ -269,14 +269,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 										// Log item saved
 										if ( log.canInfo() ) {
-											log.info("Feed item ('#uniqueId#') saved for feed '#feed.getTitle()#'.");
+											log.info("Feed item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
 										}
 
 									} catch ( any e ) {
 
 										// Log the error
 										if ( log.canError() ) {
-											log.error( "Error saving feed item ('#uniqueId#') for feed '#feed.getTitle()#'.", e );
+											log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 											// Delete any images
 											if ( importImages || importFeaturedImages ) {
 												for ( var imagePath IN imagePaths  ) {
@@ -297,7 +297,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 									// Log item filtered out by age
 									if ( log.canInfo() ) {
-										log.info("Feed item ('#uniqueId#') filtered out using age filtering for feed '#feed.getTitle()#'");
+										log.info("Feed item ('#uniqueId#') filtered out using age filtering for feed '#arguments.feed.getTitle()#'");
 									}
 
 								}
@@ -306,7 +306,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 								// Log item filtered out by keywords
 								if ( log.canInfo() ) {
-									log.info("Feed item ('#uniqueId#') filtered out using keyword filtering for feed '#feed.getTitle()#'");
+									log.info("Feed item ('#uniqueId#') filtered out using keyword filtering for feed '#arguments.feed.getTitle()#'");
 								}
 
 							}
@@ -315,7 +315,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 							// Log item exists
 							if ( log.canInfo() ) {
-								log.info("Feed item ('#uniqueId#') already exists for feed '#feed.getTitle()#'.");
+								log.info("Feed item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
 							}
 
 						}
@@ -324,7 +324,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 						// Log invalid item in feed
 						if ( log.canWarn() ) {
-							log.warn("Invalid feed item ('#uniqueId#') found for feed '#feed.getTitle()#'.");
+							log.warn("Invalid feed item ('#uniqueId#') found for feed '#arguments.feed.getTitle()#'.");
 						}
 
 					}
@@ -332,21 +332,21 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Log import
 				if ( log.canInfo() ) {
-					log.info("There were #itemCount# feed item(s) imported for feed '#feed.getTitle()#'.");
+					log.info("There were #itemCount# feed item(s) imported for feed '#arguments.feed.getTitle()#'.");
 				}
 
 			} else {
 
 				// Log empty feed
 				if ( log.canInfo() ) {
-					log.info("There were no feed items found for feed '#feed.getTitle()#'.");
+					log.info("There were no feed items found for feed '#arguments.feed.getTitle()#'.");
 				}
 
 			}
 
 			// Create feed import and save
 			var feedImport = new();
-			feedImport.setFeed( feed );
+			feedImport.setFeed( arguments.feed );
 			feedImport.setImporter( arguments.author );
 			feedImport.setImportedCount( itemCount );
 			feedImport.setMetaInfo( remoteFeed );
@@ -355,7 +355,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		} catch ( any e ) {
 
 			if ( log.canError() ) {
-				log.error( "Error importing feed '#feed.getTitle()#'.", e );
+				log.error( "Error importing feed '#arguments.feed.getTitle()#'.", e );
 			}
 
 			// Save the error as a feed import
@@ -376,14 +376,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 			} catch ( any e ) {
 				if ( log.canError() ) {
-					log.error( "Error saving failed feed import for '#feed.getTitle()#'.", e );
+					log.error( "Error saving failed feed import for '#arguments.feed.getTitle()#'.", e );
 				}
 			}
 
 		}
 
 		// Announce interception
-		interceptorService.processState( "aggregator_postFeedImport", { feed=feed } );
+		interceptorService.processState( "aggregator_postFeedImport", { feed=arguments.feed } );
 
 		// Lets sleep
 		sleep(5000);
