@@ -10,13 +10,15 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="rssService" inject="rssService@aggregator";
+	property name="authorService" inject="authorService@cb";
+	property name="roleService" inject="roleService@cb";
 	property name="agHelper" inject="helper@aggregator";
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,onError,notFound";
 
 	/**
-	 * Pre handler - Unable to call super.preHandler() due to page override on portal home
+	 * Pre handler
 	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
@@ -652,14 +654,27 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set timeout
 			setting requestTimeout="999999";
 
-			// Pre feed imports
-			announceInterception( "aggregator_preFeedImports" );
+			// Grab the feeds
+			var feeds = feedService.getFeedsForImport();
+
+			// Grab the author
+			if ( len( prc.agSettings.ag_importing_item_author ) ) {
+				var author = authorService.get( prc.agSettings.ag_importing_item_author );
+			} else if ( structKeyExists( prc, oCurrentAuthor ) ) {
+				var author = prc.oCurrentAuthor;
+			} else {
+				var adminRole = roleService.findWhere( { role="Administrator" } );
+				var author = authorService.findWhere( { role=adminRole } );
+			}
 
 			// Import feeds
-			feedImportService.import();
-
-			// Post feed imports
-			announceInterception( "aggregator_postFeedImports" );
+			if ( arrayLen( feeds ) && !isNull( author ) ) {
+				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
+				for ( var feed IN feeds ) {
+					feedImportService.import( feed, author );
+				}
+				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
+			}
 
 			// Relocate
 			setNextEvent( prc.xehPortalHome );

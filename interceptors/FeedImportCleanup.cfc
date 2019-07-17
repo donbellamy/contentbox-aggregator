@@ -50,7 +50,7 @@ component extends="coldbox.system.Interceptor" {
 				var importsToDelete = arraySlice( feedImports, maxFeedImports + 1 );
 				for ( var feedImport IN importsToDelete ) {
 					var feedImportID = feedImport.getFeedImportID();
-					feedImportService.deleteByID( id=feedImportID, flush=true );
+					feedImportService.deleteByID( feedImportID );
 					if ( log.canInfo() ) {
 						log.info("Feed import ('#feedImportID#') deleted for feed '#feed.getTitle()#' using general setting for 'Import history limit'.");
 					}

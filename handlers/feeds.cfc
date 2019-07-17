@@ -466,21 +466,33 @@ component extends="contentHandler" {
 		// Set timeout
 		setting requestTimeout="999999";
 
-		// Import selected feed
-		if ( len( rc.contentID ) ) {
-			rc.contentID = listToArray( rc.contentID );
-			var messages = [];
-			for ( var contentID IN rc.contentID ) {
+		// Set vars
+		var contentIDs = listToArray( rc.contentID );
+		var feeds = [];
+		var messages = [];
+
+		// Check content ids
+		if ( arrayLen( contentIDs ) ) {
+
+			// Put together feeds array
+			for ( var contentID IN contentIDs ) {
 				var feed = feedService.get( contentID );
 				if ( !isNull( feed ) ) {
-					feedImportService.import( feed, prc.oCurrentAuthor );
-					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+					arrayAppend( feeds, feed );
 				} else {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
 				}
 			}
-			announceInterception( "aggregator_postFeedImports" );
+
+			// Import feeds
+			announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
+			for ( var feed IN feeds ) {
+				feedImportService.import( feed, prc.oCurrentAuthor );
+				arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+			}
+			announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 			cbMessagebox.info( messageArray=messages );
+
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
@@ -501,12 +513,13 @@ component extends="contentHandler" {
 		var feeds = feedService.getAll( sortOrder="title" );
 		var messages = [];
 
-		// Import feeds
+		// Import all feeds
+		announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 		for ( var feed IN feeds ) {
 			feedImportService.import( feed, prc.oCurrentAuthor );
 			arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 		}
-		announceInterception( "aggregator_postFeedImports" );
+		announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 		cbMessagebox.info( messageArray=messages );
 
 		setNextEvent( prc.xehFeeds );
@@ -538,10 +551,8 @@ component extends="contentHandler" {
 		prc.feedImport = feedImportService.get( rc.feedImportID, false );
 
 		if ( !isNull( prc.feedImport ) ) {
-
 			feedImportService.deleteByID( rc.feedImportID );
 			results.messages = "Feed import removed!";
-
 		} else {
 			results.error = true;
 			results.messages = "Invalid feed import!";
