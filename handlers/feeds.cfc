@@ -467,15 +467,20 @@ component extends="contentHandler" {
 		setting requestTimeout="999999";
 
 		// Set vars
-		var contentIDs = listToArray( rc.contentID );
 		var feeds = [];
 		var messages = [];
 
 		// Check content ids
-		if ( arrayLen( contentIDs ) ) {
+		if ( len( rc.contentID ) ) {
+
+			var httpService = new http(method = "GET", charset = "utf-8", url = "http://local.prepping.com/news/importFeed" );
+			var result = httpService.send().getPrefix();
+			writeDump(result);
+			abort;
 
 			// Put together feeds array
-			for ( var contentID IN contentIDs ) {
+			rc.contentID = listToArray( rc.contentID );
+			for ( var contentID IN rc.contentID ) {
 				var feed = feedService.get( contentID );
 				if ( !isNull( feed ) ) {
 					arrayAppend( feeds, feed );
@@ -492,6 +497,7 @@ component extends="contentHandler" {
 				arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
 			}
 			announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
+
 			cbMessagebox.info( messageArray=messages );
 
 		} else {

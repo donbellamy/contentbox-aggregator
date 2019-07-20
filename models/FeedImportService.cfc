@@ -33,7 +33,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	 * The main feed import routine
 	 * @feed The feed to import
 	 * @author The author to use when importing
-	 * @return FeedImportService
+	 * @return FeedImportServicestop api.probono.controller.setNextEvent( event=any, queryString=any, addToken=true,false, persist=any, persistStruct={}, baseURL=any, postProcessExempt=true,false, URL=any, URI=any, statusCode=numeric )
 	 */
 	FeedImportService function import( required Feed feed, required Author author, boolean async=false ) {
 
@@ -386,7 +386,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		}
 */
 
-
 		return this;
 
 	}
@@ -399,14 +398,18 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Announce interception
-		interceptorService.processState( "aggregator_preFeedImport", { feed=arguments.feed }, true );
+		interceptorService.processState( "aggregator_preFeedImport", { feed=arguments.feed } );
 
 		try {
+
+			// Set an item counter
+			var itemCount = 0;
 
 			// Grab the remote feed
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
 			// Check for items in feed
+			/*
 			if ( arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
@@ -416,9 +419,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				// Grab image settings
 				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_importing_image_import_enable;
 				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
-
-				// Set an item counter
-				var itemCount = 0;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -702,6 +702,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				}
 
 			}
+			*/
 
 			// Create feed import and save
 			var feedImport = new();
@@ -726,7 +727,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				}
 
 				var feedImport = new();
-				feedImport.setFeed( feed );
+				feedImport.setFeed( arguments.feed );
 				feedImport.setImporter( arguments.author );
 				feedImport.setImportedCount( 0 );
 				feedImport.setImportFailed( true );
@@ -742,7 +743,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		}
 
 		// Announce interception
-		interceptorService.processState( "aggregator_postFeedImport", { feed=arguments.feed }, true );
+		interceptorService.processState( "aggregator_postFeedImport", { feed=arguments.feed } );
 
 		return true;
 

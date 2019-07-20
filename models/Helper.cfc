@@ -319,7 +319,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed link
 	 */
 	string function linkFeed( required Feed feed, boolean ssl=cb.getRequestContext().isSSL(), string format="html" ) {
-		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
+		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -373,7 +373,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed item link
 	 */
 	string function linkFeedItem( required FeedItem feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
-		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? arguments.format : "" );
+		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -420,6 +420,17 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function linkImport( boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkPortal( ssl=arguments.ssl ) & "/import?key=" & setting("ag_importing_secret_key");
+	}
+
+	/**
+	 * Gets the import feed link
+	 * @feed The feed to import
+	 * @author The author to use when importing
+	 * @ssl Whether or not to use ssl
+	 * @return The immport feed link
+	 */
+	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkPortal( ssl=arguments.ssl ) & "/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
 	}
 
 	/**

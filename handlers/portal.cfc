@@ -15,7 +15,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="agHelper" inject="helper@aggregator";
 
 	// Around handler exeptions
-	this.aroundhandler_except = "rss,import,onError,notFound";
+	this.aroundhandler_except = "rss,import,importFeed,onError,notFound";
 
 	/**
 	 * Pre handler
@@ -641,11 +641,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Runs the feed import routine
+	 * Runs the feed import routine for all feeds
 	 */
 	function import( event, rc, prc ) {
 
-		// Secret key in settings
+		// Set params
 		event.paramValue( name="key", value="" );
 
 		// Only import if the keys match
@@ -678,6 +678,34 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Relocate
 			setNextEvent( prc.xehPortalHome );
+
+		} else {
+
+			// Not found
+			notFound( argumentCollection=arguments );
+			return;
+
+		}
+
+	}
+
+	/**
+	 * Runs the feed import routine for a single feed
+	 */
+	function importFeed( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( name="key", value="" )
+			.paramValue( name="contentID", value="" )
+			.paramValue( name="authorID", value="" );
+
+		// Set format
+		rc.format = "json";
+
+		// Check key and contentID
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key && len( rc.contentID ) && len( rc.authorID ) ) {
+
+			event.renderData( type="json", data={ error = false, imported = true } );
 
 		} else {
 
