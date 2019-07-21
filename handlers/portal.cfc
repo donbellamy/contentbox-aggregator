@@ -671,7 +671,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			if ( arrayLen( feeds ) && !isNull( author ) ) {
 				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 				for ( var feed IN feeds ) {
-					feedImportService.import( feed, author );
+					var result = new http( method="get", url=agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
+					if ( result.status_code == "200" ) {
+
+					} else {}
+					writedump( result );
+					abort;
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 			}
@@ -699,13 +704,28 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( name="contentID", value="" )
 			.paramValue( name="authorID", value="" );
 
-		// Set format
-		rc.format = "json";
-
-		// Check key and contentID
+		// Check key, contentID and authorID
 		if ( rc.key EQ prc.agSettings.ag_importing_secret_key && len( rc.contentID ) && len( rc.authorID ) ) {
 
-			event.renderData( type="json", data={ error = false, imported = true } );
+			// Set format
+			rc.format = "json";
+
+			// Grab feed and author
+			var feed = feedService.get( rc.contentID );
+			var author = authorService.get( rc.authorID );
+
+			// Return data
+			var data = { "error"=false, "message"="" };
+
+			// Run the import routine and return json
+			if ( !isNull( feed ) && !isNull( author ) ) {
+				feedImportService.import( feed, author );
+				event.renderData( type="json", data=data );
+			} else {
+				data.error = true;
+				data.messages = ""
+				event.renderData( type="json", data=data );
+			}
 
 		} else {
 

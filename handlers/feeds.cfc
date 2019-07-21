@@ -473,11 +473,6 @@ component extends="contentHandler" {
 		// Check content ids
 		if ( len( rc.contentID ) ) {
 
-			var httpService = new http(method = "GET", charset = "utf-8", url = "http://local.prepping.com/news/importFeed" );
-			var result = httpService.send().getPrefix();
-			writeDump(result);
-			abort;
-
 			// Put together feeds array
 			rc.contentID = listToArray( rc.contentID );
 			for ( var contentID IN rc.contentID ) {
