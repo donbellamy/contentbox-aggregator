@@ -12,7 +12,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="rssService" inject="rssService@aggregator";
 	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
-	property name="agHelper" inject="helper@aggregator";
+	property name="agHelper" inject="helper@aggregator"; //TODO: remove and use prc.agHelper?
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,importFeed,onError,notFound";
@@ -641,7 +641,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Runs the feed import routine for all feeds
+	 * Runs the feed import routine for all active feeds
 	 */
 	function import( event, rc, prc ) {
 
@@ -667,24 +667,32 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				var author = authorService.findWhere( { role=adminRole } );
 			}
 
+			// Prepare return data
+			var data = { error=false, messages=[] }
+
 			// Import feeds
 			if ( arrayLen( feeds ) && !isNull( author ) ) {
 				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 				for ( var feed IN feeds ) {
-					var result = new http( method="get", url=agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
-					if ( result.status_code == "200" ) {
-
-					} else {
-
+					try {
+						var result = new http( method="get", url=agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
+						if ( result.status_code == "200" ) {
+							var returnData = deserializeJson( result.fileContent );
+							arrayAppend( data.messages, returnData.message );
+						} else {
+							data.error=true;
+							arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'." );
+						}
+					} catch( any e ) {
+						data.error=true;
+						arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
-					writedump(result);
-					abort;
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 			}
 
 			if ( event.isAjax() ) {
-				event.renderData( type="json", data={ error = false, executed = true } );
+				event.renderData( type="json", data=data );
 			} else {
 				setNextEvent( prc.xehPortalHome );
 			}
@@ -719,18 +727,27 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var feed = feedService.get( rc.contentID );
 			var author = authorService.get( rc.authorID );
 
-			// Return data
-			var data = { "error"=false, "messages"="" };
-
 			// Run the import routine and return json
 			if ( !isNull( feed ) && !isNull( author ) ) {
-				feedImportService.import( feed, author );
-				data.messages = "Feed '#feed.getTitle()#' imported."
-				event.renderData( type="json", data=data );
+
+				try {
+					feedImportService.import( feed, author );
+					event.renderData( type="json", data={
+						error=false,
+						message="Import routine ran for feed '#feed.getTitle()#'."
+					});
+				} catch( any e ) {
+					event.renderData( type="json", data={
+						error=true,
+						message="Error running import routine for '#feed.getTitle()#'." & " " & e.message & " " & e.detail
+					});
+				}
+
 			} else {
-				data.error = true;
-				data.messages = "Invalid feed and/or author passed to importFeed function."
-				event.renderData( type="json", data=data );
+				event.renderData( type="json", data={
+					error=true,
+					message="Invalid feed and/or author passed to importFeed function."
+				});
 			}
 
 		} else {

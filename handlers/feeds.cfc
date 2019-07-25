@@ -469,6 +469,7 @@ component extends="contentHandler" {
 		// Set vars
 		var feeds = [];
 		var messages = [];
+		var data = {};
 
 		// Check content ids
 		if ( len( rc.contentID ) ) {
@@ -485,13 +486,26 @@ component extends="contentHandler" {
 			}
 
 			// Import feeds
-			announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
-			for ( var feed IN feeds ) {
-				// Use cfhttp to do this?  Then we can use ajax to return things...
-				feedImportService.import( feed, prc.oCurrentAuthor );
-				arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+			if ( arrayLen( feeds ) ) {
+				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
+				for ( var feed IN feeds ) {
+					try {
+						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, prc.oCurrentAuthor ) ).send().getPrefix();
+						if ( result.status_code == "200" ) {
+							//var returnData = deserializeJson( result.fileContent );
+							//arrayAppend( data.messages, returnData.message );
+						} else {
+							//data.error=true;
+							//arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'." );
+						}
+					} catch( any e ) {
+						//data.error=true;
+						//arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
+					}
+					arrayAppend( messages, "Feed items imported for '#feed.getTitle()#'." );
+				}
+				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 			}
-			announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 
 			cbMessagebox.info( messageArray=messages );
 
@@ -499,6 +513,7 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
+		// TODO: add in ajax check
 		setNextEvent( prc.xehFeeds );
 
 	}
@@ -514,6 +529,7 @@ component extends="contentHandler" {
 		// Grab the feeds
 		var feeds = feedService.getAll( sortOrder="title" );
 		var messages = [];
+		var data = {};
 
 		// Import all feeds
 		announceInterception( "aggregator_preFeedImports", { feeds=feeds } );

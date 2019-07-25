@@ -52,7 +52,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
 			// Check for items in feed
-			/*
 			if ( arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
@@ -345,7 +344,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				}
 
 			}
-			*/
 
 			// Create feed import and save
 			var feedImport = new();
