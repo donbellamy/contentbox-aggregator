@@ -674,15 +674,20 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					var result = new http( method="get", url=agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
 					if ( result.status_code == "200" ) {
 
-					} else {}
-					writedump( result );
+					} else {
+
+					}
+					writedump(result);
 					abort;
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
 			}
 
-			// Relocate
-			setNextEvent( prc.xehPortalHome );
+			if ( event.isAjax() ) {
+				event.renderData( type="json", data={ error = false, executed = true } );
+			} else {
+				setNextEvent( prc.xehPortalHome );
+			}
 
 		} else {
 
@@ -715,15 +720,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var author = authorService.get( rc.authorID );
 
 			// Return data
-			var data = { "error"=false, "message"="" };
+			var data = { "error"=false, "messages"="" };
 
 			// Run the import routine and return json
 			if ( !isNull( feed ) && !isNull( author ) ) {
 				feedImportService.import( feed, author );
+				data.messages = "Feed '#feed.getTitle()#' imported."
 				event.renderData( type="json", data=data );
 			} else {
 				data.error = true;
-				data.messages = ""
+				data.messages = "Invalid feed and/or author passed to importFeed function."
 				event.renderData( type="json", data=data );
 			}
 
