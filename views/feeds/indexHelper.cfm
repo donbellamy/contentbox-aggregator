@@ -158,6 +158,39 @@ function contentPaginate( page ) {
 	} );
 }
 
+function categoryChooser( contentID ) {
+
+	// Set vars
+	var $categoriesDialog = $("##categoriesDialog");
+	var $categoriesForm = $("##categoriesForm");
+
+	// Check single selection
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+
+	// Open modal
+	openModal( $categoriesDialog );
+
+	// Cancel
+	$categoriesDialog.find("##categoriesClose").click( function() {
+		$("input[type='checkbox'][name*='category_']:checked").prop( "checked", false );
+		closeModal( $categoriesDialog );
+		return false;
+	});
+
+	// Assign categories
+	$categoriesDialog.find("##categoriesSubmit").click( function() {
+		$contentForm.attr( "action", "#event.buildlink( prc.xehFeedCategories )#" );
+		$("input[type='checkbox'][name*='category_']:checked").each(function() {
+			$contentForm.append( $("<input type='hidden' name='" + $(this).attr("name") + "' value='" + $(this).val() + "'/>" ) );
+		});
+		$contentForm.append( $("<input type='hidden' name='newCategories' value='" + $("input[name='newCategories']").val() + "'/>") );
+		$contentForm.submit();
+	});
+
+}
+
 $(document).ready( function() {
 	setupFeedView();
 	var criteria = {

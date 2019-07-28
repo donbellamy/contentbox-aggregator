@@ -116,6 +116,6 @@
 	</div>
 </div>
 <cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
-	#renderView( view="feeditems/categories" )#
+	#renderView( view="viewlets/categories" )#
 </cfif>
 </cfoutput>

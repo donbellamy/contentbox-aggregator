@@ -46,6 +46,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedState = "#prc.agAdminEntryPoint#.feeds.state";
 		prc.xehFeedEditor = "#prc.agAdminEntryPoint#.feeds.editor";
 		prc.xehFeedSave = "#prc.agAdminEntryPoint#.feeds.save";
+		prc.xehFeedCategories = "#prc.agAdminEntryPoint#.feeds.saveCategories";
 		prc.xehFeedRemove = "#prc.agAdminEntryPoint#.feeds.remove";
 		prc.xehFeedImport = "#prc.agAdminEntryPoint#.feeds.import";
 		prc.xehFeedImportAll = "#prc.agAdminEntryPoint#.feeds.importAll";

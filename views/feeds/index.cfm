@@ -49,17 +49,14 @@
 											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
 											<li><a href="javascript:changeState('pause');"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
 											<li><a href="javascript:changeState('active');"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
+											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
+											<li><a href="javascript:categoryChooser();"><i class="fa fa-tags"></i> Assign Categories</a></li>
 										</cfif>
 										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) >
 											<li><a href="javascript:importFeed();"><i class="fa fa-rss"></i> Import Selected</a></li>
-										</cfif>
-										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
-											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
-										</cfif>
-										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
-										<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) >
 											<li><a href="javascript:importAll();"><i class="fa fa-download"></i> Import All</a></li>
 										</cfif>
+										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>
 								<button class="btn btn-primary btn-sm" onclick="return to( '#event.buildLink( linkTo=prc.xehFeedEditor )#' )">Create Feed</button>
@@ -126,4 +123,7 @@
 		#renderview( view="sidebar/help", module="contentbox-aggregator" )#
 	</div>
 </div>
+<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
+	#renderView( view="viewlets/categories" )#
+</cfif>
 </cfoutput>

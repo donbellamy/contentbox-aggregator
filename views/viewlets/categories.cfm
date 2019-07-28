@@ -7,7 +7,7 @@
 				<h4 class="modal-title" id="categoriesTitle"><i class="fa fa-tags"></i> Assign Categories</h4>
 			</div>
 			<div class="modal-body">
-				#html.startForm( name="categoriesForm", action="#prc.xehFeedItemCategories#", class="form-vertical", role="form" )#
+				#html.startForm( name="categoriesForm", action="", class="form-vertical", role="form" )#
 					#html.hiddenField( name="contentID", value="" )#
 					<div id="categoriesChecks">
 						<cfloop from="1" to="#arrayLen( prc.categories )#" index="x">

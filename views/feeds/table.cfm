@@ -90,6 +90,7 @@
 								<li><a href="javascript:remove('#feed.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed?"><i id="delete_#feed.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
 								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
 								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
+								<li><a href="javascript:categoryChooser('#feed.getContentID()#');"><i class="fa fa-tags fa-lg"></i> Assign Categories</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
 							<cfif feed.hasFeedImport() >
