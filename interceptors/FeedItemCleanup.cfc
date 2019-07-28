@@ -41,6 +41,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
+		// TODO: old vs new
 		doKeywordCleanup( feed );
 		doAgeCleanup( feed );
 		doMaxItemCleanup( feed );
@@ -50,9 +51,25 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after settings save
 	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
-		doKeywordCleanup();
-		doAgeCleanup();
-		doMaxItemCleanup();
+		var oldSettings = arguments.interceptData.oldSettings;
+		var newSettings = arguments.interceptData.newSettings;
+		if (
+			oldSettings.ag_importing_match_any_filter != newSettings.ag_importing_match_any_filter ||
+			oldSettings.ag_importing_match_all_filter != newSettings.ag_importing_match_all_filter ||
+			oldSettings.ag_importing_match_none_filter != newSettings.ag_importing_match_none_filter
+		) {
+			doKeywordCleanup();
+		}
+		if (
+			val( oldSettings.ag_importing_max_age ) != val( newSettings.ag_importing_max_age ) ||
+			oldSettings.ag_importing_max_age_unit != newSettings.ag_importing_max_age_unit
+		 ) {
+			doAgeCleanup();
+		}
+		if ( val( oldSettings.ag_importing_max_items ) != val( newSettings.ag_importing_max_items ) ) {
+			doMaxItemCleanup();
+		}
+
 	}
 
 	/************************************** PRIVATE *********************************************/
@@ -78,9 +95,9 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Keyword filters
-			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
-			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
-			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
+			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : settings.ag_importing_match_any_filter );
+			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : settings.ag_importing_match_all_filter );
+			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : settings.ag_importing_match_none_filter );
 
 			// Filter out if any filters exist
 			if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {

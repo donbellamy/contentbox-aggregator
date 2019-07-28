@@ -10,7 +10,6 @@ component extends="baseHandler" {
 	property name="categoryService" inject="categoryService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
-	property name="agHelper" inject="helper@aggregator";
 
 	/**
 	 * Pre handler
@@ -126,7 +125,7 @@ component extends="baseHandler" {
 			cfschedule(
 				action="update",
 				task="aggregator-import",
-				url="#agHelper.linkImport()#",
+				url="#prc.agHelper.linkImport()#",
 				startDate=prc.agSettings.ag_importing_import_start_date,
 				startTime=prc.agSettings.ag_importing_import_start_time,
 				interval=prc.agSettings.ag_importing_import_interval

@@ -12,7 +12,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="rssService" inject="rssService@aggregator";
 	property name="authorService" inject="authorService@cb";
 	property name="roleService" inject="roleService@cb";
-	property name="agHelper" inject="helper@aggregator"; //TODO: remove and use prc.agHelper?
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,import,importFeed,onError,notFound";
@@ -229,7 +228,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = agHelper.linkPortal() & "?page=@page@";
+		prc.pagingLink = prc.agHelper.linkPortal() & "?page=@page@";
 
 		// Search
 		if ( len( trim( rc.q ) ) ) {
@@ -241,7 +240,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( len( trim( rc.category ) ) ) {
 			prc.category = categoryService.findBySlug( rc.category );
 			if ( !isNull( prc.category ) ) {
-				prc.pagingLink = agHelper.linkPortal() & "/category/#rc.category#/?page=@page@";
+				prc.pagingLink = prc.agHelper.linkPortal() & "/category/#rc.category#/?page=@page@";
 				title = " - " & prc.category.getCategory() & title;
 			} else {
 				notFound( argumentCollection=arguments );
@@ -318,7 +317,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
-			prc.pagingLink = agHelper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
+			prc.pagingLink = prc.agHelper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItemsByDate(
@@ -414,7 +413,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_feeds );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = agHelper.linkFeeds() & "?page=@page@";
+		prc.pagingLink = prc.agHelper.linkFeeds() & "?page=@page@";
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
@@ -476,7 +475,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
-			prc.pagingLink = agHelper.linkFeed( prc.feed ) & "?page=@page@";
+			prc.pagingLink = prc.agHelper.linkFeed( prc.feed ) & "?page=@page@";
 
 			// Author filter
 			if ( len( trim( rc.author ) ) ) {
@@ -675,7 +674,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 				for ( var feed IN feeds ) {
 					try {
-						var result = new http( method="get", url=agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
+						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
 						if ( result.status_code == "200" ) {
 							var returnData = deserializeJson( result.fileContent );
 							arrayAppend( data.messages, returnData.message );
