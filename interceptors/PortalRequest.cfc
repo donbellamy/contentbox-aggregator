@@ -7,7 +7,7 @@ component extends="coldbox.system.Interceptor" {
 
 	// Dependencies
 	property name="settingService" inject="settingService@cb";
-	property name="contentService" inject="contentService@cb";
+	property name="contentService" inject="contentService@aggregator";
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="agHelper" inject="helper@aggregator";

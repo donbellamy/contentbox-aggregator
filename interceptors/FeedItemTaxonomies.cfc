@@ -35,10 +35,10 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after settings save
 	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
-		var taxonomies = arguments.interceptData.newSettings.ag_importing_taxonomies;
-		var originalTaxonomies = arguments.interceptData.oldSettings.ag_importing_taxonomies;
-		if ( !taxonomies.equals( originalTaxonomies ) ) {
-			applyTaxonomies( taxonomies );
+		var oldSettings = arguments.interceptData.oldSettings;
+		var newSettings = arguments.interceptData.newSettings;
+		if ( !oldSettings.ag_importing_taxonomies.equals( newSettings.ag_importing_taxonomies ) ) {
+			applyTaxonomies( newSettings.ag_importing_taxonomies );
 		}
 	}
 

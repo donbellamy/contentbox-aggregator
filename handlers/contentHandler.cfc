@@ -6,6 +6,7 @@
 component extends="baseHandler" {
 
 	// Dependencies
+	property name="contentService" inject="contentService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="categoryService" inject="categoryService@cb";

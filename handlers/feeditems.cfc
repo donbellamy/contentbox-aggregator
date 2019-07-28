@@ -125,7 +125,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Savess the feed item
+	 * Saves the feed item
 	 */
 	function save( event, rc, prc ) {
 

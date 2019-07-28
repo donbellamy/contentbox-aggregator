@@ -6,6 +6,7 @@
 component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 	// Dependencies
+	property name="contentService" inject="contentService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";

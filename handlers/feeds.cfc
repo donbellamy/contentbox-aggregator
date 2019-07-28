@@ -329,6 +329,44 @@ component extends="contentHandler" {
 	}
 
 	/**
+	 * Saves the categories
+	 */
+	function saveCategories( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+		event.paramValue( "newCategories", "" );
+
+		// Check and create categories if needed
+		var categories = [];
+		if ( len( trim( rc.newCategories ) ) ) {
+			categories = categoryService.createCategories( trim( rc.newCategories ) );
+		}
+		categories.addAll( categoryService.inflateCategories( rc ) );
+
+		// Save feed item categories
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feed = feedService.get( contentID );
+				if ( !isNull( feed ) ) {
+					feed.removeAllCategories().setCategories( categories );
+					feedService.save( feed );
+					arrayAppend( messages, "Categories saved for '#feed.getTitle()#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+				}
+			}
+			cbMessagebox.info( messageArray=messages );
+		} else {
+			cbMessagebox.warn( "No feed selected!" );
+		}
+
+		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc ) );
+
+	}
+
+	/**
 	 * Removes feed
 	 */
 	function remove( event, rc, prc ) {

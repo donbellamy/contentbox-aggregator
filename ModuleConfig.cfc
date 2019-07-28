@@ -172,6 +172,7 @@ component {
 		];
 
 		// Bindings
+		binder.map("contentService@aggregator").to("#moduleMapping#.models.ContentService");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");

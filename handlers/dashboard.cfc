@@ -10,7 +10,7 @@ component extends="baseHandler" {
 	property name="entryService" inject="entryService@cb";
 	property name="pageService" inject="pageService@cb";
 	property name="categoryService" inject="categoryService@cb";
-	property name="contentService" inject="contentService@cb";
+	property name="contentService" inject="contentService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 

@@ -13,7 +13,7 @@ component extends="contentbox.models.content.ContentService" singleton {
 	 * @entityName The entity to bind this service to
 	 * @return ContentService
 	 */
-	ContentService function init( required string entityName ) {
+	ContentService function init( required string entityName="cbContent" ) {
 
 		super.init( argumentCollection=arguments );
 
