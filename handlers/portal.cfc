@@ -681,11 +681,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 							arrayAppend( data.messages, returnData.message );
 						} else {
 							data.error=true;
-							arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'." );
+							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
 						}
 					} catch( any e ) {
 						data.error=true;
-						arrayAppend( data.messages, "Error running import routine for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
+						arrayAppend( data.messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
@@ -729,20 +729,18 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Run the import routine and return json
 			if ( !isNull( feed ) && !isNull( author ) ) {
-
 				try {
 					feedImportService.import( feed, author );
 					event.renderData( type="json", data={
 						error=false,
-						message="Import routine ran for feed '#feed.getTitle()#'."
+						message="Feed items imported for '#feed.getTitle()#'."
 					});
 				} catch( any e ) {
 					event.renderData( type="json", data={
 						error=true,
-						message="Error running import routine for '#feed.getTitle()#'." & " " & e.message & " " & e.detail
+						message="Error importing feed items for '#feed.getTitle()#'." & " " & e.message & " " & e.detail
 					});
 				}
-
 			} else {
 				event.renderData( type="json", data={
 					error=true,

@@ -101,8 +101,8 @@ component extends="baseHandler" {
 		}
 
 		announceInterception( "aggregator_preSettingsSave", {
-			oldSettings=oldSettings,
-			newSettings=prc.agSettings
+			settings=prc.agSettings,
+			oldSettings=oldSettings
 		});
 
 		// Validate settings
@@ -145,8 +145,8 @@ component extends="baseHandler" {
 		ses.setRoutes( routes );
 
 		announceInterception( "aggregator_postSettingsSave", {
-			oldSettings=oldSettings,
-			newSettings=prc.agSettings
+			settings=prc.agSettings,
+			oldSettings=oldSettings
 		});
 
 		cbMessagebox.info( "Settings Updated!" );

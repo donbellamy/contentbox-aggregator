@@ -41,35 +41,47 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
-		// TODO: old vs new
-		doKeywordCleanup( feed );
-		doAgeCleanup( feed );
-		doMaxItemCleanup( feed );
+		var oldFeed = arguments.interceptData.oldFeed;
+		if (
+			feed.getMatchAnyFilter() != oldFeed.matchAnyFilter ||
+			feed.getMatchAllFilter() != oldFeed.matchAllFilter ||
+			feed.getMatchNoneFilter() != oldFeed.matchNoneFilter
+		) {
+			doKeywordCleanup( feed );
+		}
+		if (
+			val( feed.getMaxAge() ) != val( oldFeed.maxAge ) ||
+			feed.getMaxAgeUnit() != oldFeed.maxAgeUnit
+		) {
+			doAgeCleanup( feed );
+		}
+		if ( val( feed.getMaxItems() ) != val( oldFeed.maxItems ) ) {
+			doMaxItemCleanup( feed );
+		}
 	}
 
 	/**
 	 * Fired after settings save
 	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
+		var settings = arguments.interceptData.settings;
 		var oldSettings = arguments.interceptData.oldSettings;
-		var newSettings = arguments.interceptData.newSettings;
 		if (
-			oldSettings.ag_importing_match_any_filter != newSettings.ag_importing_match_any_filter ||
-			oldSettings.ag_importing_match_all_filter != newSettings.ag_importing_match_all_filter ||
-			oldSettings.ag_importing_match_none_filter != newSettings.ag_importing_match_none_filter
+			settings.ag_importing_match_any_filter != oldSettings.ag_importing_match_any_filter ||
+			settings.ag_importing_match_all_filter != oldSettings.ag_importing_match_all_filter ||
+			settings.ag_importing_match_none_filter != oldSettings.ag_importing_match_none_filter
 		) {
 			doKeywordCleanup();
 		}
 		if (
-			val( oldSettings.ag_importing_max_age ) != val( newSettings.ag_importing_max_age ) ||
-			oldSettings.ag_importing_max_age_unit != newSettings.ag_importing_max_age_unit
+			val( settings.ag_importing_max_age ) != val( oldSettings.ag_importing_max_age ) ||
+			settings.ag_importing_max_age_unit != oldSettings.ag_importing_max_age_unit
 		 ) {
 			doAgeCleanup();
 		}
-		if ( val( oldSettings.ag_importing_max_items ) != val( newSettings.ag_importing_max_items ) ) {
+		if ( val( settings.ag_importing_max_items ) != val( oldSettings.ag_importing_max_items ) ) {
 			doMaxItemCleanup();
 		}
-
 	}
 
 	/************************************** PRIVATE *********************************************/

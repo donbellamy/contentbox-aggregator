@@ -166,7 +166,9 @@ component extends="contentHandler" {
 
 		// Grab the feed item
 		prc.feedItem = feedItemService.get( rc.contentID );
-		var originalSlug = prc.feedItem.getSlug();
+
+		// Old feed item
+		var oldFeedItem = duplicate( prc.feedItem.getMemento() );
 
 		// Populate feed item
 		populateModel( prc.feedItem )
@@ -203,7 +205,7 @@ component extends="contentHandler" {
 
 		announceInterception( "aggregator_preFeedItemSave", {
 			feedItem=prc.feedItem,
-			originalSlug=originalSlug
+			oldFeedItem=oldFeedItem
 		});
 
 		// Save feed item
@@ -211,7 +213,7 @@ component extends="contentHandler" {
 
 		announceInterception( "aggregator_postFeedItemSave", {
 			feedItem=prc.feedItem,
-			originalSlug=originalSlug
+			oldFeedItem=oldFeedItem
 		});
 
 		if ( event.isAjax() ) {

@@ -22,9 +22,9 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after settings save
 	 */
 	function aggregator_postSettingsSave( event, interceptData ) {
+		var settings = arguments.interceptData.settings;
 		var oldSettings = arguments.interceptData.oldSettings;
-		var newSettings = arguments.interceptData.newSettings;
-		if ( val( oldSettings.ag_importing_max_feed_imports ) != val( newSettings.ag_importing_max_feed_imports ) ) {
+		if ( val( settings.ag_importing_max_feed_imports ) != val( oldSettings.ag_importing_max_feed_imports ) ) {
 			doFeedImportCleanup();
 		}
 	}
