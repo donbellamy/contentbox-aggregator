@@ -217,8 +217,8 @@ component extends="contentHandler" {
 		});
 
 		if ( event.isAjax() ) {
-			var rData = { "CONTENTID" = prc.feedItem.getContentID() };
-			event.renderData( type="json", data=rData );
+			var data = { "CONTENTID" = prc.feedItem.getContentID() };
+			event.renderData( type="json", data=data );
 		} else {
 			cbMessagebox.info( "Feed Item Saved!" );
 			setNextEvent( prc.xehFeedItems );

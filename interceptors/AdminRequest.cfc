@@ -67,6 +67,13 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedItemImportView = "#prc.agAdminEntryPoint#.feeditems.viewImport";
 		prc.xehFeedItemEntry = "#prc.agAdminEntryPoint#.feeditems.saveAsEntry";
 
+		// Blacklisted Items
+		prc.xehBlacklistedItems = "#prc.agAdminEntryPoint#.blacklisteditems";
+		prc.xehBlacklistedItemSearch = "#prc.agAdminEntryPoint#.blacklisteditems";
+		prc.xehBlacklistedItemTable = "#prc.agAdminEntryPoint#.blacklisteditems.table";
+		prc.xehBlacklistedItemSave = "#prc.agAdminEntryPoint#.blacklisteditems.save";
+		prc.xehBlacklistedItemRemove = "#prc.agAdminEntryPoint#.blacklisteditems.remove";
+
 		// Settings
 		prc.xehAggregatorSettings = "#prc.agAdminEntryPoint#.settings";
 		prc.xehAggregatorSettingsSave = "#prc.agAdminEntryPoint#.settings.save";

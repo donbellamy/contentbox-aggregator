@@ -175,6 +175,7 @@ component {
 		binder.map("contentService@aggregator").to("#moduleMapping#.models.ContentService");
 		binder.map("feedService@aggregator").to("#moduleMapping#.models.FeedService");
 		binder.map("feedItemService@aggregator").to("#moduleMapping#.models.FeedItemService");
+		binder.map("blacklistedItemService@aggregator").to("#moduleMapping#.models.BlacklistedItemService");
 		binder.map("feedImportService@aggregator").to("#moduleMapping#.models.FeedImportService");
 		binder.map("helper@aggregator").to("#moduleMapping#.models.Helper");
 		binder.map("paging@aggregator").to("#moduleMapping#.models.Paging");
@@ -205,6 +206,13 @@ component {
 			name="feeditems",
 			label="Feed Items",
 			href="#menuService.buildModuleLink('aggregator','feeditems')#",
+			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
+		);
+		menuService.addSubMenu(
+			topMenu="aggregator",
+			name="blacklisteditems",
+			label="Blacklisted Items",
+			href="#menuService.buildModuleLink('aggregator','blacklisteditems')#",
 			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
 		);
 		menuService.addSubMenu(

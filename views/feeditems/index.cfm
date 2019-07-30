@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="h1">
-			<i class="fa fa-rss fa-lg"></i>
+			<i class="fa fa-newspaper-o fa-lg"></i>
 			RSS Aggregator - Feed Items
 		</h1>
 	</div>
@@ -60,7 +60,7 @@
 				</div>
 				<div class="panel-body">
 					<div id="feedItemsTableContainer">
-						<p class="text-center"><i id="feedLoader" class="fa fa-spinner fa-spin fa-lg icon-4x"></i></p>
+						<p class="text-center"><i id="feedItemLoader" class="fa fa-spinner fa-spin fa-lg icon-4x"></i></p>
 					</div>
 				</div>
 			</div>

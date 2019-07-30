@@ -130,6 +130,19 @@ component persistent="true"
 		inverse="true"
 		cascade="all-delete-orphan";
 
+	// O2M -> Blacklisted items
+	property name="blacklistedItems"
+		singularName="BlacklistedItem"
+		fieldtype="one-to-many"
+		type="array"
+		lazy="extra"
+		batchsize="25"
+		orderby="blacklistedItemID DESC"
+		cfc="BlacklistedItem"
+		fkcolumn="FK_feedID"
+		inverse="true"
+		cascade="all-delete-orphan";
+
 	/* *********************************************************************
 	**                            CALCULATED FIELDS
 	********************************************************************* */
@@ -174,6 +187,7 @@ component persistent="true"
 		createdDate = now();
 		contentType = "Feed";
 		feedImports = [];
+		blacklistedItems = [];
 		setTaxonomies([]);
 		return this;
 	}

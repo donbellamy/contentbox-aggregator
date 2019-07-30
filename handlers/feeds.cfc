@@ -318,8 +318,8 @@ component extends="contentHandler" {
 		});
 
 		if ( event.isAjax() ) {
-			var rData = { "CONTENTID" = prc.feed.getContentID() };
-			event.renderData( type="json", data=rData );
+			var data = { "CONTENTID" = prc.feed.getContentID() };
+			event.renderData( type="json", data=data );
 		} else {
 			cbMessagebox.info( "Feed Saved!" );
 			setNextEvent( prc.xehFeeds );
@@ -533,7 +533,7 @@ component extends="contentHandler" {
 						} else {
 							arrayAppend( messages, "Error importing feed items for '#feed.getTitle()#'." );
 						}
-					} catch( any e ) {
+					} catch ( any e ) {
 						arrayAppend( messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
 				}
@@ -573,7 +573,7 @@ component extends="contentHandler" {
 				} else {
 					arrayAppend( messages, "Error importing feed items for '#feed.getTitle()#'." );
 				}
-			} catch( any e ) {
+			} catch ( any e ) {
 				arrayAppend( messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 			}
 		}
@@ -605,19 +605,21 @@ component extends="contentHandler" {
 
 		event.paramValue( "feedImportID", "" );
 
-		var results = { "ERROR" = false, "MESSAGES" = "" };
+		rc.format = "json";
+
+		var data = { "ERROR" = false, "MESSAGES" = "" };
 
 		prc.feedImport = feedImportService.get( rc.feedImportID, false );
 
 		if ( !isNull( prc.feedImport ) ) {
 			feedImportService.deleteByID( rc.feedImportID );
-			results.messages = "Feed import removed!";
+			data.messages = "Feed import removed!";
 		} else {
-			results.error = true;
-			results.messages = "Invalid feed import!";
+			data.error = true;
+			data.messages = "Invalid feed import!";
 		}
 
-		event.renderData( type="json", data=results );
+		event.renderData( type="json", data=data );
 
 	}
 

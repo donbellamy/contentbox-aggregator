@@ -683,7 +683,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 							data.error=true;
 							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
 						}
-					} catch( any e ) {
+					} catch ( any e ) {
 						data.error=true;
 						arrayAppend( data.messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
@@ -735,7 +735,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						error=false,
 						message="Feed items imported for '#feed.getTitle()#'."
 					});
-				} catch( any e ) {
+				} catch ( any e ) {
 					event.renderData( type="json", data={
 						error=true,
 						message="Error importing feed items for '#feed.getTitle()#'." & " " & e.message & " " & e.detail
