@@ -46,6 +46,7 @@
 										<li><a href="javascript:contentShowAll();"><i class="fa fa-list"></i> Show All</a></li>
 									</ul>
 								</div>
+								<button class="btn btn-primary btn-sm" onclick="return to( '#event.buildLink( linkTo=prc.xehBlacklistedItemEditor )#' )">Create Blacklisted Item</button>
 							</div>
 						</div>
 					</div>

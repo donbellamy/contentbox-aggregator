@@ -46,6 +46,12 @@ function activateInfoPanels() {
 function getInfoPanelContent( contentID ) {
 	return $( "##infoPanel_" + contentID ).html();
 }
+function remove( blacklistedItemID ) {
+	if ( blacklistedItemID != null ) {
+		checkByValue( "blacklistedItemID", blacklistedItemID );
+	}
+	$contentForm.submit();
+}
 $(document).ready( function() {
 	setupBlacklistItemView();
 	var criteria = {

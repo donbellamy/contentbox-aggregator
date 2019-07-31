@@ -24,7 +24,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Displays the blacklisted item index
+	 * Displays blacklisted item index
 	 */
 	function index( event, rc, prc ) {
 
@@ -41,7 +41,7 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Displays the feed item table
+	 * Displays blacklisted item table
 	 */
 	function table( event, rc, prc ) {
 
@@ -66,6 +66,49 @@ component extends="baseHandler" {
 		prc.itemCount = results.count;
 
 		event.setView( view="blacklisteditems/table", layout="ajax" );
+
+	}
+
+	/**
+	 * Displays blacklisted item editor
+	 */
+	function editor( event, rc, prc ) {
+
+		event.paramValue( "blacklistedItemID", 0 );
+
+		// Grab the blacklisted item
+		if ( !structKeyExists( prc, "blacklistedItem" ) ) {
+			prc.blacklistedItem = blacklistedItemService.get( rc.blacklistedItemID );
+		}
+
+		// Grab the feeds
+		prc.feeds = feedService.getAll( sortOrder="title" );
+
+		event.setView( "blacklisteditems/editor" );
+
+	}
+
+	/**
+	 * Saves blacklisted item
+	 */
+	function save( event, rc, prc ) {
+
+		if ( event.isAjax() ) {
+			var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
+			event.renderData( type="json", data=data );
+		} else {
+			cbMessagebox.info( "Blacklisted Item Saved!" );
+			setNextEvent( prc.xehBlacklistedItems );
+		}
+
+	}
+
+	/**
+	 * Removes blacklisted item
+	 */
+	function remove( event, rc, prc ) {
+
+		event.paramValue( "blacklistedItemID", "" );
 
 	}
 

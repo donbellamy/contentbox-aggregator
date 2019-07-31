@@ -28,7 +28,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Displays the feed item index
+	 * Displays feed item index
 	 */
 	function index( event, rc, prc ) {
 
@@ -48,7 +48,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Displays the feed item table
+	 * Displays feed item table
 	 */
 	function table( event, rc, prc ) {
 
@@ -82,7 +82,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Displays the feed item editor
+	 * Displays feed item editor
 	 */
 	function editor( event, rc, prc ) {
 
@@ -90,7 +90,7 @@ component extends="contentHandler" {
 
 		// Grab the feed item
 		if ( !structKeyExists( prc, "feedItem" ) ) {
-			prc.feedItem = feedItemService.get( event.getValue( "contentID", 0 ) );
+			prc.feedItem = feedItemService.get( rc.contentID ) );
 		}
 
 		// Editor settings
@@ -125,7 +125,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Saves the feed item
+	 * Saves feed item
 	 */
 	function save( event, rc, prc ) {
 
@@ -227,7 +227,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Saves the categories
+	 * Saves categories
 	 */
 	function saveCategories( event, rc, prc ) {
 
@@ -372,7 +372,7 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Displays a feed item import record
+	 * Displays feed item import record
 	 */
 	function viewImport( event, rc, prc ) {
 

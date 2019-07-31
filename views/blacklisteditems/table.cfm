@@ -3,7 +3,7 @@
 <table name="blacklistedItems" id="blacklistedItems" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'contentID')"/></th>
+			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'blacklistedItemID')"/></th>
 			<th>Name/URL</th>
 			<th width="150">Feed</th>
 			<th width="125">Created Date</th>
