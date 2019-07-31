@@ -9,6 +9,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="blacklistedItemService" inject="blacklistedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="moduleSettings" inject="coldbox:setting:modules";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
@@ -64,6 +65,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
+
+					// TODO: Check blacklist
 
 					// Create a unique id to track this item
 					var uniqueId = item.id;
@@ -261,6 +264,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											changelog="Item imported.",
 											author=arguments.author
 										);
+
+										// TODO: attach taxonomies from settings and feed
 
 										// Save item
 										feedItemService.save( feedItem );

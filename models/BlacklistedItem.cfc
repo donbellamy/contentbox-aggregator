@@ -29,6 +29,13 @@ component persistent="true"
 		length="255"
 		index="idx_itemUrl";
 
+	property name="createdDate"
+		type="date"
+		ormtype="timestamp"
+		notnull="true"
+		update="false"
+		index="idx_createdDate";
+
 	/* *********************************************************************
 	**                            RELATIONSHIPS
 	********************************************************************* */
@@ -55,7 +62,8 @@ component persistent="true"
 
 	this.constraints = {
 		"title" = { required = true, size = "1..255" },
-		"itemUrl" = { required = true, size = "1..255" }
+		"itemUrl" = { required=true, type="url", size="1..255" },
+		"createdDate" = { required=true, type="date" },
 	};
 
 	/**
@@ -63,7 +71,37 @@ component persistent="true"
 	 * @return BlacklistedItem
 	 */
 	BlacklistedItem function init() {
+		createdDate = now();
 		return this;
+	}
+
+	/**
+	 * Gets the formatted created date
+	 * @dateFormat The dateformat to use
+	 * @timeFormat The timeformat to use
+	 * @return The formatted created date
+	 */
+	string function getDisplayCreatedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
+		var createdDate = getCreatedDate();
+		return dateFormat( createdDate, arguments.dateFormat ) & " " & timeFormat( createdDate, arguments.timeFormat );
+	}
+
+	/**
+	 * Validates the blacklisted item
+	 * @return An array of errors or an empty array if no error is found
+	 */
+	array function validate() {
+
+		var errors = [];
+
+		title = trim( left( title, 255 ) );
+		itemUrl = trim( left( feedUrl, 255 ) );
+
+		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( itemUrl ) ) { arrayAppend( errors, "Item URL is required" ); }
+
+		return errors;
+
 	}
 
 }

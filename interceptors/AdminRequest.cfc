@@ -71,6 +71,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehBlacklistedItems = "#prc.agAdminEntryPoint#.blacklisteditems";
 		prc.xehBlacklistedItemSearch = "#prc.agAdminEntryPoint#.blacklisteditems";
 		prc.xehBlacklistedItemTable = "#prc.agAdminEntryPoint#.blacklisteditems.table";
+		prc.xehBlacklistedItemEditor = "#prc.agAdminEntryPoint#.blacklisteditems.editor";
 		prc.xehBlacklistedItemSave = "#prc.agAdminEntryPoint#.blacklisteditems.save";
 		prc.xehBlacklistedItemRemove = "#prc.agAdminEntryPoint#.blacklisteditems.remove";
 

@@ -75,7 +75,7 @@
 				<div id="filterBox">
 					#html.startForm( name="feedItemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
 						<div class="form-group">
-							<label for="creator" class="control-label">Feeds:</label>
+							<label for="feed" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">
 								<option value=""<cfif !len( rc.feed ) > selected="selected"</cfif>>All Feeds</option>
 								<cfloop array="#prc.feeds#" index="feed">

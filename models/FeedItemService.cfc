@@ -28,6 +28,8 @@ component extends="ContentService" singleton {
 	 * @month The month to filter on
 	 * @day The day to filter on
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
+	 * @searchActiveContent Whether or not to search active content
+	 * @countOnly Whether or not to return the count only
 	 * @max The maximum number of feed items to return
 	 * @offset The offset of the pagination
 	 * @return struct - {feedItems,count}

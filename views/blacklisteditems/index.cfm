@@ -51,8 +51,8 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<div id="feedItemsTableContainer">
-						<p class="text-center"><i id="feedLoader" class="fa fa-spinner fa-spin fa-lg icon-4x"></i></p>
+					<div id="blacklistedItemsTableContainer">
+						<p class="text-center"><i id="blacklistedItemLoader" class="fa fa-spinner fa-spin fa-lg icon-4x"></i></p>
 					</div>
 				</div>
 			</div>
@@ -65,9 +65,9 @@
 			</div>
 			<div class="panel-body">
 				<div id="filterBox">
-					#html.startForm( name="feedItemFilterForm", action=prc.xehFeedItemSearch, class="form-vertical", role="form" )#
+					#html.startForm( name="blacklistedItemFilterForm", action=prc.xehBlacklistedItemSearch, class="form-vertical", role="form" )#
 						<div class="form-group">
-							<label for="creator" class="control-label">Feeds:</label>
+							<label for="feed" class="control-label">Feeds:</label>
 							<select name="feed" id="feed" class="form-control input-sm">
 								<option value=""<cfif !len( rc.feed ) > selected="selected"</cfif>>All Feeds</option>
 								<cfloop array="#prc.feeds#" index="feed">

@@ -24,6 +24,8 @@ component extends="ContentService" singleton {
 	 * @category The category to filter on, defaults to "all"
 	 * @status The status to filter on, defaults to "any"
 	 * @sortOrder The field to sort the results on, defaults to "title"
+	 * @searchActiveContent Whether or not to search active content
+	 * @countOnly Whether or not to return the count only
 	 * @max The maximum number of feeds to return
 	 * @offset The offset of the pagination
 	 * @return struct - {feeds,count}
