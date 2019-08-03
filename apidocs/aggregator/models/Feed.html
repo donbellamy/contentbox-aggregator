@@ -371,6 +371,93 @@ Feed Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#blacklistedItems()">blacklistedItems</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">inverse = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = one-to-many</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">cascade = all-delete-orphan</li>
+				
+			
+				
+				<li class="label label-default label-annotations">orderby = blacklistedItemID DESC</li>
+				
+			
+				
+				<li class="label label-default label-annotations">batchsize = 25</li>
+				
+			
+				
+				<li class="label label-default label-annotations">singularname = BlacklistedItem</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = BlacklistedItem</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = extra</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
@@ -1987,6 +2074,19 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#addBlacklistedItem()">addBlacklistedItem</A></strong>(any BlacklistedItem)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#addFeedImport()">addFeedImport</A></strong>(any FeedImport)
 			<br>
 			
@@ -2079,6 +2179,19 @@ Feed Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed can import.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getBlacklistedItems()">getBlacklistedItems</A></strong>()
+			<br>
 			
 		</td>
 	</tr>
@@ -2565,6 +2678,19 @@ Feed Model</p>
 			<code>boolean</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#hasBlacklistedItem()">hasBlacklistedItem</A></strong>([any BlacklistedItem])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#hasFeedImport()">hasFeedImport</A></strong>([any FeedImport])
 			<br>
 			
@@ -2608,7 +2734,33 @@ Feed Model</p>
 			<code>boolean</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#removeBlacklistedItem()">removeBlacklistedItem</A></strong>(any BlacklistedItem)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#removeFeedImport()">removeFeedImport</A></strong>(any FeedImport)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setBlacklistedItems()">setBlacklistedItems</A></strong>(array blacklistedItems)
 			<br>
 			
 		</td>
@@ -4642,6 +4794,86 @@ Feed Model</p>
 
 	
 		
+		<a name="blacklistedItems()"><!-- --></a>
+		<h3>blacklistedItems</h3>
+
+		<kbd>
+			property array
+			<strong>blacklistedItems</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>inverse</code> - true</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - one-to-many</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>cascade</code> - all-delete-orphan</dd>
+			
+		
+			
+			<dd><code>orderby</code> - blacklistedItemID DESC</dd>
+			
+		
+			
+			<dd><code>batchsize</code> - 25</dd>
+			
+		
+			
+			<dd><code>singularname</code> - BlacklistedItem</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - BlacklistedItem</dd>
+			
+		
+			
+			<dd><code>lazy</code> - extra</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="featuredImageBehavior()"><!-- --></a>
 		<h3>featuredImageBehavior</h3>
 
@@ -6051,6 +6283,45 @@ Feed Model</p>
 
 
 	
+	<a name="addBlacklistedItem()"><!-- --></a>
+	<h3>
+		addBlacklistedItem
+		
+	</h3>
+
+	<kbd>public any <strong>addBlacklistedItem</strong>(any BlacklistedItem)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>BlacklistedItem</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="addFeedImport()"><!-- --></a>
 	<h3>
 		addFeedImport
@@ -6348,6 +6619,38 @@ Feed Model</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if the feed can import, false if not</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getBlacklistedItems()"><!-- --></a>
+	<h3>
+		getBlacklistedItems
+		
+	</h3>
+
+	<kbd>public string <strong>getBlacklistedItems</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
 	
 
 	
@@ -7639,6 +7942,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="hasBlacklistedItem()"><!-- --></a>
+	<h3>
+		hasBlacklistedItem
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasBlacklistedItem</strong>([any BlacklistedItem])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>BlacklistedItem</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="hasFeedImport()"><!-- --></a>
 	<h3>
 		hasFeedImport
@@ -7756,6 +8098,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="removeBlacklistedItem()"><!-- --></a>
+	<h3>
+		removeBlacklistedItem
+		
+	</h3>
+
+	<kbd>public boolean <strong>removeBlacklistedItem</strong>(any BlacklistedItem)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>BlacklistedItem</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="removeFeedImport()"><!-- --></a>
 	<h3>
 		removeFeedImport
@@ -7783,6 +8164,45 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>FeedImport</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setBlacklistedItems()"><!-- --></a>
+	<h3>
+		setBlacklistedItems
+		
+	</h3>
+
+	<kbd>public any <strong>setBlacklistedItems</strong>(array blacklistedItems)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>blacklistedItems</code></dd>
 		
 		</dl>
 	

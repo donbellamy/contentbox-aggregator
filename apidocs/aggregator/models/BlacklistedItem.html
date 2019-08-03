@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>portal</title>
-	<meta name="keywords" content="aggregator.handlers.concurrent.Callable interface">
+	<title>BlacklistedItem</title>
+	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/handlers/portal.html" target="_top">
+				<li><a href="../../index.html?aggregator/models/BlacklistedItem.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.handlers"><span class="label label-success">aggregator.handlers</span></a>
+	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- portal</h2>
+ BlacklistedItem</h2>
 
 
 
@@ -132,14 +132,6 @@ Class
 
 
 	
-		
-	
-	
-
-	
-		
-		
-			
 		
 	
 	
@@ -155,8 +147,7 @@ Class
 
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
-    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules.contentbox-ui.handlers.content
-      <img src="../../resources/inherit.gif" alt="extended by ">aggregator.handlers.portal
+    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BlacklistedItem
 </pre>
 
 
@@ -172,7 +163,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-Portal handler</p>
+BlacklistedItem Model</p>
 </div>
 
 
@@ -183,9 +174,42 @@ Portal handler</p>
 		
 		
 			
+			
+			<li class="label label-danger label-annotations">
+				entityname
+				
+				: cbBlacklistedItem
+				
+			</li>
+			&nbsp;
+			
 		
 			
 		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				cacheuse
+				
+				: read-write
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				table
+				
+				: cb_blacklisteditem
+				
+			</li>
+			&nbsp;
 			
 		
 			
@@ -201,6 +225,28 @@ Portal handler</p>
 		
 			
 		
+			
+			
+			<li class="label label-danger label-annotations">
+				cachename
+				
+				: cbBlacklistedItem
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				batchsize
+				
+				: 25
+				
+			</li>
+			&nbsp;
 			
 		
 			
@@ -225,7 +271,7 @@ Portal handler</p>
 			<li class="label label-danger label-annotations">
 				persistent
 				
-				: false
+				: true
 				
 			</li>
 			&nbsp;
@@ -288,7 +334,74 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#contentService()">contentService</A></strong>
+			<strong><a href="BlacklistedItem.html#blacklistedItemID()">blacklistedItemID</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = id</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">params = { allocationSize=1, sequence='blacklistedItemID_seq' }</li>
+				
+			
+				
+				<li class="label label-default label-annotations">generator = native</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">setter = no</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>date</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#createdDate()">createdDate</A></strong>
 			<br>
 			
 			<br><br>
@@ -309,7 +422,19 @@ Portal handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = contentService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">update = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_createdDate</li>
 				
 			
 				
@@ -343,7 +468,149 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#feedImportService()">feedImportService</A></strong>
+			<strong><a href="BlacklistedItem.html#creator()">creator</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = many-to-one</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fetch = join</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_authorID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = contentbox.models.security.Author</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = true</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#feed()">feed</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = many-to-one</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = Feed</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = true</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#itemUrl()">itemUrl</A></strong>
 			<br>
 			
 			<br><br>
@@ -364,7 +631,15 @@ Portal handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedImportService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_itemUrl</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 255</li>
 				
 			
 				
@@ -398,7 +673,7 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#feedItemService()">feedItemService</A></strong>
+			<strong><a href="BlacklistedItem.html#title()">title</A></strong>
 			<br>
 			
 			<br><br>
@@ -419,117 +694,11 @@ Portal handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = true</li>
 				
 			
 				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#feedService()">feedService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = feedService@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#rssService()">rssService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = rssService@aggregator</li>
+				<li class="label label-default label-annotations">length = 255</li>
 				
 			
 				
@@ -560,6 +729,29 @@ Portal handler</p>
 </table>
 
 
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="BlacklistedItem.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
+				
+			</td>
+		</tr>
+	</table>
 
 
 
@@ -580,13 +772,117 @@ Portal handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#archives()">archives</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#getBlacklistedItemID()">getBlacklistedItemID</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the portal archive.
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getCreatedDate()">getCreatedDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getCreator()">getCreator</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getDisplayCreatedDate()">getDisplayCreatedDate</A></strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted created date.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getFeed()">getFeed</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getItemUrl()">getItemUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#getTitle()">getTitle</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#hasCreator()">hasCreator</A></strong>([any creator])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#hasFeed()">hasFeed</A></strong>([any feed])
+			<br>
 			
 		</td>
 	</tr>
@@ -598,10 +894,8 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#aroundHandler()">aroundHandler</A></strong>([any event], [any rc], [any prc], [any targetAction], [any eventArguments])
+			<strong><a href="BlacklistedItem.html#setCreatedDate()">setCreatedDate</A></strong>(date createdDate)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Around handler.
 			
 		</td>
 	</tr>
@@ -613,10 +907,8 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#feed()">feed</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#setCreator()">setCreator</A></strong>(any creator)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed.
 			
 		</td>
 	</tr>
@@ -628,10 +920,8 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#feeditem()">feeditem</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#setFeed()">setFeed</A></strong>(any feed)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed item.
 			
 		</td>
 	</tr>
@@ -643,10 +933,8 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#feeds()">feeds</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#setItemUrl()">setItemUrl</A></strong>(any itemUrl)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the list of feeds.
 			
 		</td>
 	</tr>
@@ -658,10 +946,8 @@ Portal handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#index()">index</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#setTitle()">setTitle</A></strong>(any title)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the portal index.
 			
 		</td>
 	</tr>
@@ -670,73 +956,13 @@ Portal handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;any</code>
+			<code>array</code>
 		</td>
 		<td>
-			<strong><a href="portal.html#notFound()">notFound</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="BlacklistedItem.html#validate()">validate</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays page not found error.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#onError()">onError</A></strong>([any event], [any rc], [any prc], [any faultAction], [any exception], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays a friendly error message.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#preFeedItem()">preFeedItem</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre feed item.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#preHandler()">preHandler</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre handler.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="portal.html#rss()">rss</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the rss feed.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the blacklisted item.
 			
 		</td>
 	</tr>
@@ -747,98 +973,6 @@ Portal handler</p>
 
 <a name="inherited_methods"><!-- --></a>
 
-
-	
-
-	
-
-	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.modules.contentbox-ui.handlers.content"><!-- --></a>
-	<table class="table table-hover table-bordered">
-		<tr class="info">
-			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.modules.contentbox-ui.handlers.content</kbd></strong>
-			</th>
-		</tr>
-		<tr>
-			<td>
-				
-				
-				
-					
-					
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-
-				
-					<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#changeLang()">changeLang</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#maintenance()">maintenance</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#preview()">preview</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#previewSite()">previewSite</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#saveComment()">saveComment</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#validateCommentPost()">validateCommentPost</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#wrapContentAdvice()">wrapContentAdvice</a>
-				
-			</td>
-		</tr>
-	</table>
 
 	
 
@@ -870,6 +1004,28 @@ Portal handler</p>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>Constructor</p>
+	
+
+	
+	<hr>
+
 
 <!-- ============ PROPERTY DETAIL ========== -->
 
@@ -884,12 +1040,72 @@ Portal handler</p>
 
 	
 		
-		<a name="contentService()"><!-- --></a>
-		<h3>contentService</h3>
+		<a name="blacklistedItemID()"><!-- --></a>
+		<h3>blacklistedItemID</h3>
 
 		<kbd>
 			property any
-			<strong>contentService</strong>
+			<strong>blacklistedItemID</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - id</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>params</code> - { allocationSize=1, sequence='blacklistedItemID_seq' }</dd>
+			
+		
+			
+			<dd><code>generator</code> - native</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>setter</code> - no</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="createdDate()"><!-- --></a>
+		<h3>createdDate</h3>
+
+		<kbd>
+			property date
+			<strong>createdDate</strong>
 			
 		</kbd>
 
@@ -916,7 +1132,19 @@ Portal handler</p>
 			
 		
 			
-			<dd><code>inject</code> - contentService@aggregator</dd>
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>update</code> - false</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_createdDate</dd>
 			
 		
 			
@@ -932,12 +1160,140 @@ Portal handler</p>
 		<hr>
 	
 		
-		<a name="feedImportService()"><!-- --></a>
-		<h3>feedImportService</h3>
+		<a name="creator()"><!-- --></a>
+		<h3>creator</h3>
 
 		<kbd>
 			property any
-			<strong>feedImportService</strong>
+			<strong>creator</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - many-to-one</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>fetch</code> - join</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_authorID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - contentbox.models.security.Author</dd>
+			
+		
+			
+			<dd><code>lazy</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="feed()"><!-- --></a>
+		<h3>feed</h3>
+
+		<kbd>
+			property any
+			<strong>feed</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - many-to-one</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - Feed</dd>
+			
+		
+			
+			<dd><code>lazy</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="itemUrl()"><!-- --></a>
+		<h3>itemUrl</h3>
+
+		<kbd>
+			property any
+			<strong>itemUrl</strong>
 			
 		</kbd>
 
@@ -964,7 +1320,15 @@ Portal handler</p>
 			
 		
 			
-			<dd><code>inject</code> - feedImportService@aggregator</dd>
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_itemUrl</dd>
+			
+		
+			
+			<dd><code>length</code> - 255</dd>
 			
 		
 			
@@ -980,12 +1344,12 @@ Portal handler</p>
 		<hr>
 	
 		
-		<a name="feedItemService()"><!-- --></a>
-		<h3>feedItemService</h3>
+		<a name="title()"><!-- --></a>
+		<h3>title</h3>
 
 		<kbd>
 			property any
-			<strong>feedItemService</strong>
+			<strong>title</strong>
 			
 		</kbd>
 
@@ -1012,103 +1376,11 @@ Portal handler</p>
 			
 		
 			
-			<dd><code>inject</code> - feedItemService@aggregator</dd>
+			<dd><code>notnull</code> - true</dd>
 			
 		
 			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="feedService()"><!-- --></a>
-		<h3>feedService</h3>
-
-		<kbd>
-			property any
-			<strong>feedService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - feedService@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="rssService()"><!-- --></a>
-		<h3>rssService</h3>
-
-		<kbd>
-			property any
-			<strong>rssService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - rssService@aggregator</dd>
+			<dd><code>length</code> - 255</dd>
 			
 		
 			
@@ -1145,18 +1417,114 @@ Portal handler</p>
 
 
 	
-	<a name="archives()"><!-- --></a>
+	<a name="getBlacklistedItemID()"><!-- --></a>
 	<h3>
-		archives
+		getBlacklistedItemID
 		
 	</h3>
 
-	<kbd>public any <strong>archives</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public string <strong>getBlacklistedItemID</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Displays the portal archive</p>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCreatedDate()"><!-- --></a>
+	<h3>
+		getCreatedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getCreatedDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getCreator()"><!-- --></a>
+	<h3>
+		getCreator
+		
+	</h3>
+
+	<kbd>public string <strong>getCreator</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getDisplayCreatedDate()"><!-- --></a>
+	<h3>
+		getDisplayCreatedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getDisplayCreatedDate</strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the formatted created date</p>
 	
 
 	
@@ -1173,11 +1541,149 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
+		<dd><code>dateFormat</code> - The dateformat to use</dd>
 		
-		<dd><code>rc</code></dd>
+		<dd><code>timeFormat</code> - The timeformat to use</dd>
 		
-		<dd><code>prc</code></dd>
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The formatted created date</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeed()"><!-- --></a>
+	<h3>
+		getFeed
+		
+	</h3>
+
+	<kbd>public string <strong>getFeed</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getItemUrl()"><!-- --></a>
+	<h3>
+		getItemUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getItemUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTitle()"><!-- --></a>
+	<h3>
+		getTitle
+		
+	</h3>
+
+	<kbd>public string <strong>getTitle</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasCreator()"><!-- --></a>
+	<h3>
+		hasCreator
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasCreator</strong>([any creator])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>creator</code></dd>
 		
 		</dl>
 	
@@ -1190,18 +1696,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="aroundHandler()"><!-- --></a>
+	<a name="hasFeed()"><!-- --></a>
 	<h3>
-		aroundHandler
+		hasFeed
 		
 	</h3>
 
-	<kbd>public any <strong>aroundHandler</strong>([any event], [any rc], [any prc], [any targetAction], [any eventArguments])</kbd>
+	<kbd>public boolean <strong>hasFeed</strong>([any feed])</kbd>
 
 	<br><br>
 
-	
-		<p>Around handler</p>
 	
 
 	
@@ -1218,15 +1722,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>targetAction</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
+		<dd><code>feed</code></dd>
 		
 		</dl>
 	
@@ -1239,18 +1735,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="feed()"><!-- --></a>
+	<a name="setCreatedDate()"><!-- --></a>
 	<h3>
-		feed
+		setCreatedDate
 		
 	</h3>
 
-	<kbd>public any <strong>feed</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setCreatedDate</strong>(date createdDate)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays the feed</p>
 	
 
 	
@@ -1267,11 +1761,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>createdDate</code></dd>
 		
 		</dl>
 	
@@ -1284,18 +1774,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="feeditem()"><!-- --></a>
+	<a name="setCreator()"><!-- --></a>
 	<h3>
-		feeditem
+		setCreator
 		
 	</h3>
 
-	<kbd>public any <strong>feeditem</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setCreator</strong>(any creator)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays the feed item</p>
 	
 
 	
@@ -1312,11 +1800,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>creator</code></dd>
 		
 		</dl>
 	
@@ -1329,18 +1813,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="feeds()"><!-- --></a>
+	<a name="setFeed()"><!-- --></a>
 	<h3>
-		feeds
+		setFeed
 		
 	</h3>
 
-	<kbd>public any <strong>feeds</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setFeed</strong>(any feed)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays the list of feeds</p>
 	
 
 	
@@ -1357,11 +1839,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>feed</code></dd>
 		
 		</dl>
 	
@@ -1374,18 +1852,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="index()"><!-- --></a>
+	<a name="setItemUrl()"><!-- --></a>
 	<h3>
-		index
+		setItemUrl
 		
 	</h3>
 
-	<kbd>public any <strong>index</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setItemUrl</strong>(any itemUrl)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays the portal index</p>
 	
 
 	
@@ -1402,11 +1878,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>itemUrl</code></dd>
 		
 		</dl>
 	
@@ -1419,18 +1891,16 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="notFound()"><!-- --></a>
+	<a name="setTitle()"><!-- --></a>
 	<h3>
-		notFound
+		setTitle
 		
 	</h3>
 
-	<kbd>private any <strong>notFound</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setTitle</strong>(any title)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays page not found error</p>
 	
 
 	
@@ -1447,11 +1917,7 @@ Portal handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>title</code></dd>
 		
 		</dl>
 	
@@ -1464,18 +1930,18 @@ Portal handler</p>
 	<hr>
 
 	
-	<a name="onError()"><!-- --></a>
+	<a name="validate()"><!-- --></a>
 	<h3>
-		onError
+		validate
 		
 	</h3>
 
-	<kbd>public any <strong>onError</strong>([any event], [any rc], [any prc], [any faultAction], [any exception], [any eventArguments])</kbd>
+	<kbd>public array <strong>validate</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Displays a friendly error message</p>
+		<p>Validates the blacklisted item</p>
 	
 
 	
@@ -1487,193 +1953,14 @@ Portal handler</p>
 
 	
 	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#onError()">onError</a></code>
-			in class
-			<code>
-				contentbox.modules.contentbox-ui.handlers.content
-			</code>
-			</dd>
-		</dl>
+
 	
 
 	
 		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>faultAction</code></dd>
-		
-		<dd><code>exception</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
+			<dt><strong>Returns:</strong></dt>
+			<dd>An array of errors or an empty array if no error is found</dd>
 		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="preFeedItem()"><!-- --></a>
-	<h3>
-		preFeedItem
-		
-	</h3>
-
-	<kbd>public any <strong>preFeedItem</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Pre feed item</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>action</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="preHandler()"><!-- --></a>
-	<h3>
-		preHandler
-		
-	</h3>
-
-	<kbd>public any <strong>preHandler</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Pre handler</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#preHandler()">preHandler</a></code>
-			in class
-			<code>
-				contentbox.modules.contentbox-ui.handlers.content
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>action</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="rss()"><!-- --></a>
-	<h3>
-		rss
-		
-	</h3>
-
-	<kbd>public any <strong>rss</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the rss feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
 	
 
 	

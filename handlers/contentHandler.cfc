@@ -21,6 +21,8 @@ component extends="baseHandler" {
 	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
+		super.preHandler( argumentCollection=arguments );
+
 		// Exit handler
 		prc.xehSlugCheck = "#prc.cbAdminEntryPoint#.content.slugUnique";
 

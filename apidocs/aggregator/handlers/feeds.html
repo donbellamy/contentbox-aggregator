@@ -402,7 +402,7 @@ Feeds handler</p>
 			<strong><a href="feeds.html#editor()">editor</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed editor.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed editor.
 			
 		</td>
 	</tr>
@@ -432,7 +432,22 @@ Feeds handler</p>
 			<strong><a href="feeds.html#import()">import</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imports selected feeds.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main feed import routine.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="feeds.html#importActive()">importActive</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for all active feeds.
 			
 		</td>
 	</tr>
@@ -447,7 +462,22 @@ Feeds handler</p>
 			<strong><a href="feeds.html#importAll()">importAll</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imports all feeds.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for all feeds.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="feeds.html#importFeed()">importFeed</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for a single feed.
 			
 		</td>
 	</tr>
@@ -462,7 +492,7 @@ Feeds handler</p>
 			<strong><a href="feeds.html#index()">index</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed index.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed index.
 			
 		</td>
 	</tr>
@@ -507,7 +537,7 @@ Feeds handler</p>
 			<strong><a href="feeds.html#removeImport()">removeImport</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes the feed import record.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes feed import record.
 			
 		</td>
 	</tr>
@@ -549,6 +579,21 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="feeds.html#saveCategories()">saveCategories</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves categories.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="feeds.html#state()">state</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
@@ -567,7 +612,7 @@ Feeds handler</p>
 			<strong><a href="feeds.html#table()">table</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed table.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed table.
 			
 		</td>
 	</tr>
@@ -612,7 +657,7 @@ Feeds handler</p>
 			<strong><a href="feeds.html#viewImport()">viewImport</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed import record.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed import record.
 			
 		</td>
 	</tr>
@@ -743,6 +788,9 @@ Feeds handler</p>
 						
 					
 					
+					
+					
+				
 					
 					
 				
@@ -1423,7 +1471,7 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Displays the feed editor</p>
+		<p>Displays feed editor</p>
 	
 
 	
@@ -1514,7 +1562,52 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Imports selected feeds</p>
+		<p>The main feed import routine</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="importActive()"><!-- --></a>
+	<h3>
+		importActive
+		
+	</h3>
+
+	<kbd>public any <strong>importActive</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Runs the feed import routine for all active feeds</p>
 	
 
 	
@@ -1559,7 +1652,52 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Imports all feeds</p>
+		<p>Runs the feed import routine for all feeds</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="importFeed()"><!-- --></a>
+	<h3>
+		importFeed
+		
+	</h3>
+
+	<kbd>public any <strong>importFeed</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Runs the feed import routine for a single feed</p>
 	
 
 	
@@ -1604,7 +1742,7 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Displays the feed index</p>
+		<p>Displays feed index</p>
 	
 
 	
@@ -1755,7 +1893,7 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Removes the feed import record</p>
+		<p>Removes feed import record</p>
 	
 
 	
@@ -1879,6 +2017,51 @@ Feeds handler</p>
 	<hr>
 
 	
+	<a name="saveCategories()"><!-- --></a>
+	<h3>
+		saveCategories
+		
+	</h3>
+
+	<kbd>public any <strong>saveCategories</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Saves categories</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="state()"><!-- --></a>
 	<h3>
 		state
@@ -1935,7 +2118,7 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Displays the feed table</p>
+		<p>Displays feed table</p>
 	
 
 	
@@ -2070,7 +2253,7 @@ Feeds handler</p>
 	<br><br>
 
 	
-		<p>Displays the feed import record</p>
+		<p>Displays feed import record</p>
 	
 
 	

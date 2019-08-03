@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>PortalRequest</title>
-	<meta name="keywords" content="aggregator.interceptors.concurrent.Callable interface">
+	<title>blacklisteditems</title>
+	<meta name="keywords" content="aggregator.handlers.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/interceptors/PortalRequest.html" target="_top">
+				<li><a href="../../index.html?aggregator/handlers/blacklisteditems.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.interceptors"><span class="label label-success">aggregator.interceptors</span></a>
+	<a href="package-summary.html" title="Package: aggregator.handlers"><span class="label label-success">aggregator.handlers</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- PortalRequest</h2>
+ blacklisteditems</h2>
 
 
 
@@ -132,6 +132,22 @@ Class
 
 
 	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
 		
 	
 	
@@ -164,8 +180,10 @@ Class
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
     <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.FrameworkSupertype
-      <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.Interceptor
-        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.interceptors.PortalRequest
+      <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.EventHandler
+        <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules.contentbox-admin.handlers.baseHandler
+          <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules_user.contentbox-aggregator.handlers.baseHandler
+            <img src="../../resources/inherit.gif" alt="extended by ">aggregator.handlers.blacklisteditems
 </pre>
 
 
@@ -181,7 +199,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-Portal request interceptor</p>
+Blacklisted items handler</p>
 </div>
 
 
@@ -297,7 +315,7 @@ Portal request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#agHelper()">agHelper</A></strong>
+			<strong><a href="blacklisteditems.html#blacklistedItemService()">blacklistedItemService</A></strong>
 			<br>
 			
 			<br><br>
@@ -318,7 +336,7 @@ Portal request interceptor</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = helper@aggregator</li>
+				<li class="label label-default label-annotations">inject = blacklistedItemService@aggregator</li>
 				
 			
 				
@@ -352,7 +370,7 @@ Portal request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#cbHelper()">cbHelper</A></strong>
+			<strong><a href="blacklisteditems.html#feedService()">feedService</A></strong>
 			<br>
 			
 			<br><br>
@@ -373,172 +391,7 @@ Portal request interceptor</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = CBHelper@cb</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="PortalRequest.html#contentService()">contentService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = contentService@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="PortalRequest.html#html()">html</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = HTMLHelper@coldbox</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="PortalRequest.html#settingService()">settingService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = settingService@cb</li>
+				<li class="label label-default label-annotations">inject = feedService@aggregator</li>
 				
 			
 				
@@ -589,13 +442,13 @@ Portal request interceptor</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;any</code>
+			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#$aginject()">$aginject</A></strong>()
+			<strong><a href="blacklisteditems.html#editor()">editor</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Injects the ag helper.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays blacklisted item editor.
 			
 		</td>
 	</tr>
@@ -607,10 +460,10 @@ Portal request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#afterInstanceCreation()">afterInstanceCreation</A></strong>([any event], [any interceptData], [any buffer])
+			<strong><a href="blacklisteditems.html#index()">index</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renderer helper injection.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays blacklisted item index.
 			
 		</td>
 	</tr>
@@ -622,10 +475,10 @@ Portal request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#postRender()">postRender</A></strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])
+			<strong><a href="blacklisteditems.html#preHandler()">preHandler</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired on post render during aggregator requests only.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre handler.
 			
 		</td>
 	</tr>
@@ -637,10 +490,40 @@ Portal request interceptor</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="PortalRequest.html#preProcess()">preProcess</A></strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])
+			<strong><a href="blacklisteditems.html#remove()">remove</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired on pre process during contentbox public requests only.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes blacklisted item.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="blacklisteditems.html#save()">save</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves blacklisted item.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="blacklisteditems.html#table()">table</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays blacklisted item table.
 			
 		</td>
 	</tr>
@@ -657,11 +540,158 @@ Portal request interceptor</p>
 	
 
 	&nbsp;
-	<a name="methods_inherited_from_class_coldbox.system.Interceptor"><!-- --></a>
+	<a name="methods_inherited_from_class_contentbox.modules_user.contentbox-aggregator.handlers.baseHandler"><!-- --></a>
 	<table class="table table-hover table-bordered">
 		<tr class="info">
 			<th align="left">
-				<strong>Methods inherited from class <kbd>coldbox.system.Interceptor</kbd></strong>
+				<strong>Methods inherited from class <kbd>contentbox.modules_user.contentbox-aggregator.handlers.baseHandler</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#aroundHandler()">aroundHandler</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onAuthenticationFailure()">onAuthenticationFailure</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onAuthorizationFailure()">onAuthorizationFailure</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onError()">onError</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onExpectationFailed()">onExpectationFailed</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onInvalidHTTPMethod()">onInvalidHTTPMethod</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onMissingAction()">onMissingAction</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#routeNotFound()">routeNotFound</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.modules.contentbox-admin.handlers.baseHandler"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.modules.contentbox-admin.handlers.baseHandler</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+				
+
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_coldbox.system.EventHandler"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>coldbox.system.EventHandler</kbd></strong>
 			</th>
 		</tr>
 		<tr>
@@ -793,99 +823,9 @@ Portal request interceptor</p>
 					
 					
 				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
 
 				
-					<a href="../../coldbox/system/Interceptor.html#appendToBuffer()">appendToBuffer</a>, <a href="../../coldbox/system/Interceptor.html#clearBuffer()">clearBuffer</a>, <a href="../../coldbox/system/Interceptor.html#configure()">configure</a>, <a href="../../coldbox/system/Interceptor.html#getBufferObject()">getBufferObject</a>, <a href="../../coldbox/system/Interceptor.html#getBufferString()">getBufferString</a>, <a href="../../coldbox/system/Interceptor.html#getCachebox()">getCachebox</a>, <a href="../../coldbox/system/Interceptor.html#getFlash()">getFlash</a>, <a href="../../coldbox/system/Interceptor.html#getInterceptorService()">getInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#getLog()">getLog</a>, <a href="../../coldbox/system/Interceptor.html#getLogBox()">getLogBox</a>, <a href="../../coldbox/system/Interceptor.html#getProperties()">getProperties</a>, <a href="../../coldbox/system/Interceptor.html#getProperty()">getProperty</a>, <a href="../../coldbox/system/Interceptor.html#getWirebox()">getWirebox</a>, <a href="../../coldbox/system/Interceptor.html#init()">init</a>, <a href="../../coldbox/system/Interceptor.html#propertyExists()">propertyExists</a>, <a href="../../coldbox/system/Interceptor.html#setCachebox()">setCachebox</a>, <a href="../../coldbox/system/Interceptor.html#setFlash()">setFlash</a>, <a href="../../coldbox/system/Interceptor.html#setInterceptorService()">setInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#setLog()">setLog</a>, <a href="../../coldbox/system/Interceptor.html#setLogBox()">setLogBox</a>, <a href="../../coldbox/system/Interceptor.html#setProperties()">setProperties</a>, <a href="../../coldbox/system/Interceptor.html#setProperty()">setProperty</a>, <a href="../../coldbox/system/Interceptor.html#setWirebox()">setWirebox</a>, <a href="../../coldbox/system/Interceptor.html#unregister()">unregister</a>
+					<a href="../../coldbox/system/EventHandler.html#_actionExists()">_actionExists</a>, <a href="../../coldbox/system/EventHandler.html#_actionMetadata()">_actionMetadata</a>, <a href="../../coldbox/system/EventHandler.html#_privateInvoker()">_privateInvoker</a>, <a href="../../coldbox/system/EventHandler.html#getCachebox()">getCachebox</a>, <a href="../../coldbox/system/EventHandler.html#getFlash()">getFlash</a>, <a href="../../coldbox/system/EventHandler.html#getLog()">getLog</a>, <a href="../../coldbox/system/EventHandler.html#getLogBox()">getLogBox</a>, <a href="../../coldbox/system/EventHandler.html#getWirebox()">getWirebox</a>, <a href="../../coldbox/system/EventHandler.html#init()">init</a>, <a href="../../coldbox/system/EventHandler.html#setCachebox()">setCachebox</a>, <a href="../../coldbox/system/EventHandler.html#setFlash()">setFlash</a>, <a href="../../coldbox/system/EventHandler.html#setLog()">setLog</a>, <a href="../../coldbox/system/EventHandler.html#setLogBox()">setLogBox</a>, <a href="../../coldbox/system/EventHandler.html#setWirebox()">setWirebox</a>
 				
 			</td>
 		</tr>
@@ -1273,12 +1213,12 @@ Portal request interceptor</p>
 
 	
 		
-		<a name="agHelper()"><!-- --></a>
-		<h3>agHelper</h3>
+		<a name="blacklistedItemService()"><!-- --></a>
+		<h3>blacklistedItemService</h3>
 
 		<kbd>
 			property any
-			<strong>agHelper</strong>
+			<strong>blacklistedItemService</strong>
 			
 		</kbd>
 
@@ -1305,7 +1245,7 @@ Portal request interceptor</p>
 			
 		
 			
-			<dd><code>inject</code> - helper@aggregator</dd>
+			<dd><code>inject</code> - blacklistedItemService@aggregator</dd>
 			
 		
 			
@@ -1321,12 +1261,12 @@ Portal request interceptor</p>
 		<hr>
 	
 		
-		<a name="cbHelper()"><!-- --></a>
-		<h3>cbHelper</h3>
+		<a name="feedService()"><!-- --></a>
+		<h3>feedService</h3>
 
 		<kbd>
 			property any
-			<strong>cbHelper</strong>
+			<strong>feedService</strong>
 			
 		</kbd>
 
@@ -1353,151 +1293,7 @@ Portal request interceptor</p>
 			
 		
 			
-			<dd><code>inject</code> - CBHelper@cb</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="contentService()"><!-- --></a>
-		<h3>contentService</h3>
-
-		<kbd>
-			property any
-			<strong>contentService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - contentService@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="html()"><!-- --></a>
-		<h3>html</h3>
-
-		<kbd>
-			property any
-			<strong>html</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - HTMLHelper@coldbox</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="settingService()"><!-- --></a>
-		<h3>settingService</h3>
-
-		<kbd>
-			property any
-			<strong>settingService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - settingService@cb</dd>
+			<dd><code>inject</code> - feedService@aggregator</dd>
 			
 		
 			
@@ -1534,52 +1330,18 @@ Portal request interceptor</p>
 
 
 	
-	<a name="$aginject()"><!-- --></a>
+	<a name="editor()"><!-- --></a>
 	<h3>
-		$aginject
+		editor
 		
 	</h3>
 
-	<kbd>private any <strong>$aginject</strong>()</kbd>
+	<kbd>public any <strong>editor</strong>([any event], [any rc], [any prc])</kbd>
 
 	<br><br>
 
 	
-		<p>Injects the ag helper</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="afterInstanceCreation()"><!-- --></a>
-	<h3>
-		afterInstanceCreation
-		
-	</h3>
-
-	<kbd>public any <strong>afterInstanceCreation</strong>([any event], [any interceptData], [any buffer])</kbd>
-
-	<br><br>
-
-	
-		<p>Renderer helper injection</p>
+		<p>Displays blacklisted item editor</p>
 	
 
 	
@@ -1597,55 +1359,6 @@ Portal request interceptor</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>event</code></dd>
-		
-		<dd><code>interceptData</code></dd>
-		
-		<dd><code>buffer</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="postRender()"><!-- --></a>
-	<h3>
-		postRender
-		
-	</h3>
-
-	<kbd>public any <strong>postRender</strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Fired on post render during aggregator requests only</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>interceptData</code></dd>
-		
-		<dd><code>buffer</code></dd>
 		
 		<dd><code>rc</code></dd>
 		
@@ -1662,18 +1375,18 @@ Portal request interceptor</p>
 	<hr>
 
 	
-	<a name="preProcess()"><!-- --></a>
+	<a name="index()"><!-- --></a>
 	<h3>
-		preProcess
+		index
 		
 	</h3>
 
-	<kbd>public any <strong>preProcess</strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>index</strong>([any event], [any rc], [any prc])</kbd>
 
 	<br><br>
 
 	
-		<p>Fired on pre process during contentbox public requests only</p>
+		<p>Displays blacklisted item index</p>
 	
 
 	
@@ -1692,9 +1405,201 @@ Portal request interceptor</p>
 		
 		<dd><code>event</code></dd>
 		
-		<dd><code>interceptData</code></dd>
+		<dd><code>rc</code></dd>
 		
-		<dd><code>buffer</code></dd>
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="preHandler()"><!-- --></a>
+	<h3>
+		preHandler
+		
+	</h3>
+
+	<kbd>public any <strong>preHandler</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
+
+	<br><br>
+
+	
+		<p>Pre handler</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#preHandler()">preHandler</a></code>
+			in class
+			<code>
+				contentbox.modules_user.contentbox-aggregator.handlers.baseHandler
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		<dd><code>action</code></dd>
+		
+		<dd><code>eventArguments</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="remove()"><!-- --></a>
+	<h3>
+		remove
+		
+	</h3>
+
+	<kbd>public any <strong>remove</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Removes blacklisted item</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="save()"><!-- --></a>
+	<h3>
+		save
+		
+	</h3>
+
+	<kbd>public any <strong>save</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Saves blacklisted item</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="table()"><!-- --></a>
+	<h3>
+		table
+		
+	</h3>
+
+	<kbd>public any <strong>table</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Displays blacklisted item table</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
 		
 		<dd><code>rc</code></dd>
 		

@@ -16,6 +16,8 @@ component extends="baseHandler" {
 	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
+		super.preHandler( argumentCollection=arguments );
+
 		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "AGGREGATOR_SETTINGS" ) ) {
 			cbMessagebox.error( "You do not have permission to access the aggregator settings." );

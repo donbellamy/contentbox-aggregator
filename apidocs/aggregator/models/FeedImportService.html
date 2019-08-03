@@ -306,7 +306,7 @@ FeedImport Service</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedImportService.html#authorService()">authorService</A></strong>
+			<strong><a href="FeedImportService.html#blacklistedItemService()">blacklistedItemService</A></strong>
 			<br>
 			
 			<br><br>
@@ -327,7 +327,7 @@ FeedImport Service</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = authorService@cb</li>
+				<li class="label label-default label-annotations">inject = blacklistedItemService@aggregator</li>
 				
 			
 				
@@ -801,7 +801,7 @@ FeedImport Service</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedImportService.html#roleService()">roleService</A></strong>
+			<strong><a href="FeedImportService.html#settingService()">settingService</A></strong>
 			<br>
 			
 			<br><br>
@@ -822,7 +822,7 @@ FeedImport Service</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = roleService@cb</li>
+				<li class="label label-default label-annotations">inject = settingService@cb</li>
 				
 			
 				
@@ -856,7 +856,7 @@ FeedImport Service</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedImportService.html#settingService()">settingService</A></strong>
+			<strong><a href="FeedImportService.html#systemUtil()">systemUtil</A></strong>
 			<br>
 			
 			<br><br>
@@ -877,7 +877,7 @@ FeedImport Service</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = settingService@cb</li>
+				<li class="label label-default label-annotations">inject = systemUtil@cb</li>
 				
 			
 				
@@ -999,7 +999,7 @@ FeedImport Service</p>
 			<code><a href="../../aggregator/models/FeedImportService.html" title="class in aggregator.models">FeedImportService</a></code>
 		</td>
 		<td>
-			<strong><a href="FeedImportService.html#import()">import</A></strong>([any feed], [any author])
+			<strong><a href="FeedImportService.html#import()">import</A></strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, aggregator.models.Author author)
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main feed import routine.
@@ -1906,12 +1906,12 @@ FeedImport Service</p>
 
 	
 		
-		<a name="authorService()"><!-- --></a>
-		<h3>authorService</h3>
+		<a name="blacklistedItemService()"><!-- --></a>
+		<h3>blacklistedItemService</h3>
 
 		<kbd>
 			property any
-			<strong>authorService</strong>
+			<strong>blacklistedItemService</strong>
 			
 		</kbd>
 
@@ -1938,7 +1938,7 @@ FeedImport Service</p>
 			
 		
 			
-			<dd><code>inject</code> - authorService@cb</dd>
+			<dd><code>inject</code> - blacklistedItemService@aggregator</dd>
 			
 		
 			
@@ -2338,54 +2338,6 @@ FeedImport Service</p>
 		<hr>
 	
 		
-		<a name="roleService()"><!-- --></a>
-		<h3>roleService</h3>
-
-		<kbd>
-			property any
-			<strong>roleService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - roleService@cb</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
 		<a name="settingService()"><!-- --></a>
 		<h3>settingService</h3>
 
@@ -2419,6 +2371,54 @@ FeedImport Service</p>
 		
 			
 			<dd><code>inject</code> - settingService@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="systemUtil()"><!-- --></a>
+		<h3>systemUtil</h3>
+
+		<kbd>
+			property any
+			<strong>systemUtil</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - systemUtil@cb</dd>
 			
 		
 			
@@ -2603,7 +2603,7 @@ FeedImport Service</p>
 		
 	</h3>
 
-	<kbd>public <a href="../../aggregator/models/FeedImportService.html" title="class in aggregator.models">FeedImportService</a> <strong>import</strong>([any feed], [any author])</kbd>
+	<kbd>public <a href="../../aggregator/models/FeedImportService.html" title="class in aggregator.models">FeedImportService</a> <strong>import</strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, aggregator.models.Author author)</kbd>
 
 	<br><br>
 
@@ -2625,7 +2625,7 @@ FeedImport Service</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>feed</code> - The feed to import, if one is not passed then all feeds that are active will be will be imported</dd>
+		<dd><code>feed</code> - The feed to import</dd>
 		
 		<dd><code>author</code> - The author to use when importing</dd>
 		

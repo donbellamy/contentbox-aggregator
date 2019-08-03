@@ -941,10 +941,25 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkImport()">linkImport</A></strong>([boolean ssl='[runtime expression]'])
+			<strong><a href="Helper.html#linkImport()">linkImport</A></strong>([boolean ssl='[runtime expression]'], [boolean importAll='false'], [boolean importActive='false'])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the import link.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the module import link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkImportFeed()">linkImportFeed</A></strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, aggregator.models.Author author, [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the module import feed link.
 			
 		</td>
 	</tr>
@@ -2709,12 +2724,12 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>linkImport</strong>([boolean ssl='[runtime expression]'])</kbd>
+	<kbd>public string <strong>linkImport</strong>([boolean ssl='[runtime expression]'], [boolean importAll='false'], [boolean importActive='false'])</kbd>
 
 	<br><br>
 
 	
-		<p>Gets the import link</p>
+		<p>Gets the module import link</p>
 	
 
 	
@@ -2733,6 +2748,10 @@ Aggregator Helper</p>
 		
 		<dd><code>ssl</code> - Whether or not to use ssl</dd>
 		
+		<dd><code>importAll</code></dd>
+		
+		<dd><code>importActive</code></dd>
+		
 		</dl>
 	
 
@@ -2740,6 +2759,56 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The immport link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="linkImportFeed()"><!-- --></a>
+	<h3>
+		linkImportFeed
+		
+	</h3>
+
+	<kbd>public string <strong>linkImportFeed</strong>(<a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed, aggregator.models.Author author, [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the module import feed link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feed</code> - The feed to import</dd>
+		
+		<dd><code>author</code> - The author to use when importing</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The immport feed link</dd>
 		</dl>
 	
 
