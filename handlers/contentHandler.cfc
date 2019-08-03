@@ -11,6 +11,7 @@ component extends="baseHandler" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="categoryService" inject="categoryService@cb";
 	property name="authorService" inject="authorService@cb";
+	property name="roleService" inject="roleService@cb";
 	property name="editorService" inject="editorService@cb";
 	property name="htmlHelper" inject="HTMLHelper@coldbox";
 	property name="ckHelper" inject="CKHelper@contentbox-ckeditor";

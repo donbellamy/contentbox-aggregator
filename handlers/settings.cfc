@@ -125,7 +125,7 @@ component extends="baseHandler" {
 			cfschedule(
 				action="update",
 				task="aggregator-import",
-				url="#prc.agHelper.linkImport()#",
+				url="#prc.agHelper.linkImport(importActive=true)#",
 				startDate=prc.agSettings.ag_importing_import_start_date,
 				startTime=prc.agSettings.ag_importing_import_start_time,
 				interval=prc.agSettings.ag_importing_import_interval

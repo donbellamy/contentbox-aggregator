@@ -267,7 +267,8 @@ component accessors="true" singleton threadSafe {
 	 * @return The portal link
 	 */
 	string function linkPortal( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
+		//return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
+		return cb.linkHome( ssl=arguments.ssl ) & getPortalEntryPoint();
 	}
 
 	/**
@@ -414,26 +415,6 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
-	 * Gets the import link
-	 * @ssl Whether or not to use ssl
-	 * @return The immport link
-	 */
-	string function linkImport( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/import?key=" & setting("ag_importing_secret_key");
-	}
-
-	/**
-	 * Gets the import feed link
-	 * @feed The feed to import
-	 * @author The author to use when importing
-	 * @ssl Whether or not to use ssl
-	 * @return The immport feed link
-	 */
-	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
-	}
-
-	/**
 	 * Gets the content export link
 	 * @format The format to use, defaults to html
 	 * @ssl Whether or not to use ssl
@@ -474,6 +455,29 @@ component accessors="true" singleton threadSafe {
 				return linkFeedItem( arguments.content, arguments.ssl, arguments.format );
 				break;
 		}
+	}
+
+	/**
+	 * Gets the module import link
+	 * @ssl Whether or not to use ssl
+	 * @return The immport link
+	 */
+	string function linkImport( boolean ssl=cb.getRequestContext().isSSL(), boolean importAll=false, boolean importActive=false ) {
+		var link = cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("ag_importing_secret_key");
+		if ( arguments.importAll ) link &= "&importAll=true";
+		else if ( arguments.importActive ) link &= "&importActive=true";
+		return link;
+	}
+
+	/**
+	 * Gets the module import feed link
+	 * @feed The feed to import
+	 * @author The author to use when importing
+	 * @ssl Whether or not to use ssl
+	 * @return The immport feed link
+	 */
+	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
 	}
 
 	/************************************** Quick HTML *********************************************/

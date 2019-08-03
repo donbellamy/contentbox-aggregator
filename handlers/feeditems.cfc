@@ -15,15 +15,15 @@ component extends="contentHandler" {
 
 		super.preHandler( argumentCollection=arguments );
 
-		// Exit handler
-		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
-
 		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
 			cbMessagebox.error( "You do not have permission to access the aggregator feed items." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
+
+		// Exit handler
+		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeditems.slugify";
 
 	}
 
@@ -90,7 +90,7 @@ component extends="contentHandler" {
 
 		// Grab the feed item
 		if ( !structKeyExists( prc, "feedItem" ) ) {
-			prc.feedItem = feedItemService.get( rc.contentID ) );
+			prc.feedItem = feedItemService.get( rc.contentID );
 		}
 
 		// Editor settings

@@ -20,7 +20,7 @@
 					<a href="#event.buildLink( prc.xehBlacklistedItemEditor )#/blacklistedItemID/#blacklistedItem.getBlacklistedItemID()#" title="Edit Blacklisted Item">#blacklistedItem.getTitle()#</a>
 					<br/><small><i class="fa fa-external-link"></i> <a href="#blacklistedItem.getItemUrl()#" target="_blank">#blacklistedItem.getItemUrl()#</a></small>
 				</td>
-				<td><a href="#event.buildLink( prc.xehFeedEditor )#/blacklistedItemID/#blacklistedItem.getFeed().getContentID()#" title="Edit Feed">#blacklistedItem.getFeed().getTitle()#</a></td>
+				<td><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#blacklistedItem.getFeed().getContentID()#" title="Edit Feed">#blacklistedItem.getFeed().getTitle()#</a></td>
 				<td nowrap="nowrap">#blacklistedItem.getDisplayCreatedDate()#</td>
 				<td class="text-center">
 					<a class="btn btn-sm btn-info popovers" data-contentID="#blacklistedItem.getBlacklistedItemID()#" data-toggle="popover"><i class="fa fa-info-circle fa-lg"></i></a>

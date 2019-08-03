@@ -11,11 +11,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="rssService" inject="rssService@aggregator";
-	property name="authorService" inject="authorService@cb";
-	property name="roleService" inject="roleService@cb";
 
 	// Around handler exeptions
-	this.aroundhandler_except = "rss,import,importFeed,onError,notFound";
+	this.aroundhandler_except = "rss,onError,notFound";
 
 	/**
 	 * Pre handler
@@ -631,124 +629,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Announce event
 			announceInterception( "aggregator_onFeedItemNotFound", { slug=rc.slug } );
-
-			// Not found
-			notFound( argumentCollection=arguments );
-			return;
-
-		}
-
-	}
-
-	/**
-	 * Runs the feed import routine for all active feeds
-	 */
-	function import( event, rc, prc ) {
-
-		// Set params
-		event.paramValue( name="key", value="" );
-
-		// Only import if the keys match
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key ) {
-
-			// Set timeout
-			setting requestTimeout="999999";
-
-			// Grab the feeds
-			var feeds = feedService.getFeedsForImport();
-
-			// Grab the author
-			if ( len( prc.agSettings.ag_importing_item_author ) ) {
-				var author = authorService.get( prc.agSettings.ag_importing_item_author );
-			} else if ( structKeyExists( prc, oCurrentAuthor ) ) {
-				var author = prc.oCurrentAuthor;
-			} else {
-				var adminRole = roleService.findWhere( { role="Administrator" } );
-				var author = authorService.findWhere( { role=adminRole } );
-			}
-
-			// Prepare return data
-			var data = { error=false, messages=[] }
-
-			// Import feeds
-			if ( arrayLen( feeds ) && !isNull( author ) ) {
-				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
-				for ( var feed IN feeds ) {
-					try {
-						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
-						if ( result.status_code == "200" ) {
-							var returnData = deserializeJson( result.fileContent );
-							arrayAppend( data.messages, returnData.message );
-						} else {
-							data.error=true;
-							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
-						}
-					} catch ( any e ) {
-						data.error=true;
-						arrayAppend( data.messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
-					}
-				}
-				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
-			}
-
-			if ( event.isAjax() ) {
-				event.renderData( type="json", data=data );
-			} else {
-				setNextEvent( prc.xehPortalHome );
-			}
-
-		} else {
-
-			// Not found
-			notFound( argumentCollection=arguments );
-			return;
-
-		}
-
-	}
-
-	/**
-	 * Runs the feed import routine for a single feed
-	 */
-	function importFeed( event, rc, prc ) {
-
-		// Set params
-		event.paramValue( name="key", value="" )
-			.paramValue( name="contentID", value="" )
-			.paramValue( name="authorID", value="" );
-
-		// Check key, contentID and authorID
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key && len( rc.contentID ) && len( rc.authorID ) ) {
-
-			// Set format
-			rc.format = "json";
-
-			// Grab feed and author
-			var feed = feedService.get( rc.contentID );
-			var author = authorService.get( rc.authorID );
-
-			// Run the import routine and return json
-			if ( !isNull( feed ) && !isNull( author ) ) {
-				try {
-					feedImportService.import( feed, author );
-					event.renderData( type="json", data={
-						error=false,
-						message="Feed items imported for '#feed.getTitle()#'."
-					});
-				} catch ( any e ) {
-					event.renderData( type="json", data={
-						error=true,
-						message="Error importing feed items for '#feed.getTitle()#'." & " " & e.message & " " & e.detail
-					});
-				}
-			} else {
-				event.renderData( type="json", data={
-					error=true,
-					message="Invalid feed and/or author passed to importFeed function."
-				});
-			}
-
-		} else {
 
 			// Not found
 			notFound( argumentCollection=arguments );

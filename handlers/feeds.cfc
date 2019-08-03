@@ -8,6 +8,9 @@ component extends="contentHandler" {
 	// Dependencies
 	property name="feedImportService" inject="feedImportService@aggregator";
 
+	// Pre handler exeptions (to allow use on front end)
+	this.preHandler_except = "import,importFeed";
+
 	/**
 	 * Pre handler
 	 */
@@ -15,15 +18,15 @@ component extends="contentHandler" {
 
 		super.preHandler( argumentCollection=arguments );
 
-		// Exit handler
-		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
-
 		// Check permissions
-		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
+		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR,FEEDS_IMPORT" ) ) {
 			cbMessagebox.error( "You do not have permission to access the aggregator feeds." );
 			setNextEvent( prc.cbAdminEntryPoint );
 			return;
 		}
+
+		// Exit handler
+		prc.xehSlugify = "#prc.agAdminEntryPoint#.feeds.slugify";
 
 	}
 
@@ -494,95 +497,170 @@ component extends="contentHandler" {
 	}
 
 	/**
-	 * Imports selected feeds
+	 * The main feed import routine
 	 */
 	function import( event, rc, prc ) {
 
 		event.paramValue( "contentID", "" );
-
-		// Set timeout
-		setting requestTimeout="999999";
+		event.paramValue( "importAll", false );
+		event.paramValue( "importActive", false );
+		event.paramValue( "key", "" );
 
 		// Set vars
 		var feeds = [];
-		var messages = [];
+		var data = {
+			"error"=false,
+			"messages"=[]
+		};
 
-		// Check content ids
-		if ( len( rc.contentID ) ) {
+		// Are we in the admin?
+		var inAdmin = reFindNoCase( "^contentbox-admin", event.getCurrentEvent() );
 
-			// Put together feeds array
-			rc.contentID = listToArray( rc.contentID );
-			for ( var contentID IN rc.contentID ) {
-				var feed = feedService.get( contentID );
-				if ( !isNull( feed ) ) {
-					arrayAppend( feeds, feed );
-				} else {
-					arrayAppend( messages, "Invalid feed selected: #contentID#." );
+		// Check for key unless we are in the admin
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
+
+			// Set timeout
+			setting requestTimeout="999999";
+
+			// Grab the author
+			if ( inAdmin || ( structKeyExists( prc, "oCurrentAuthor" ) && prc.oCurrentAuthor.isLoaded() && prc.oCurrentAuthor.isLoggedIn() ) ) {
+				var author = prc.oCurrentAuthor;
+			} else if ( len( prc.agSettings.ag_importing_item_author ) ) {
+				var author = authorService.get( prc.agSettings.ag_importing_item_author );
+			} else {
+				var adminRole = roleService.findWhere( { role="Administrator" } );
+				var author = authorService.findWhere( { role=adminRole } );
+			}
+
+			// Grab the feeds
+			if ( len( rc.contentID ) ) {
+				rc.contentID = listToArray( rc.contentID );
+				for ( var contentID IN rc.contentID ) {
+					var feed = feedService.get( contentID );
+					if ( !isNull( feed ) ) {
+						arrayAppend( feeds, feed );
+					} else {
+						data.error = true;
+						arrayAppend( data.messages, "Invalid feed selected: #contentID#." );
+					}
 				}
+			} else if ( rc.importAll ) {
+				var feeds = feedService.getAll( sortOrder="title" );
+			} else if ( rc.importActive ) {
+				var feeds = feedService.getFeedsForImport();
 			}
 
 			// Import feeds
-			if ( arrayLen( feeds ) ) {
+			if ( arrayLen( feeds ) && !isNull( author ) ) {
 				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 				for ( var feed IN feeds ) {
 					try {
 						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, prc.oCurrentAuthor ) ).send().getPrefix();
-						if ( result.status_code == "200" ) {
+						if ( result.status_code == "200" && isJson( result.fileContent ) ) {
 							var returnData = deserializeJson( result.fileContent );
-							arrayAppend( messages, returnData.message );
+							arrayAppend( data.messages, returnData.message );
 						} else {
-							arrayAppend( messages, "Error importing feed items for '#feed.getTitle()#'." );
+							data.error = true;
+							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
 						}
 					} catch ( any e ) {
-						arrayAppend( messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
+						data.error = true;
+						arrayAppend( data.messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
+			} else {
+				data.error = true;
+				if ( !arrayLen( data.messages ) ) {
+					arrayAppend( data.messages, "No Feeds Selected!" );
+				}
 			}
-
-			cbMessagebox.info( messageArray=messages );
-
 		} else {
-			cbMessagebox.warn( "No feeds selected!" );
+			data.error = true;
+			arrayAppend( data.messages, "Invalid key passed to import function." );
 		}
 
-		setNextEvent( prc.xehFeeds );
+		// Set reponse
+		if ( event.isAjax() || !inAdmin ) {
+			rc.format = "json";
+			event.renderData( type="json", data=data );
+		} else {
+			if ( data.error ) {
+				cbMessagebox.error( messageArray=data.messages );
+			} else {
+				cbMessagebox.info( messageArray=data.messages );
+			}
+			setNextEvent( prc.xehFeeds );
+		}
 
 	}
 
 	/**
-	 * Imports all feeds
+	 * Runs the feed import routine for a single feed
+	 */
+	function importFeed( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( name="key", value="" );
+		event.paramValue( name="contentID", value="" );
+		event.paramValue( name="authorID", value="" );
+
+		// Set format
+		rc.format = "json";
+
+		// Set vars
+		var data = {
+			"error"=false,
+			"message"=""
+		};
+
+		// Check key, contentID and authorID
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key && len( rc.contentID ) && len( rc.authorID ) ) {
+
+			// Grab feed and author
+			var feed = feedService.get( rc.contentID );
+			var author = authorService.get( rc.authorID );
+
+			// Run the import routine
+			if ( !isNull( feed ) && !isNull( author ) ) {
+				try {
+					feedImportService.import( feed, author );
+					data.message = "Feed items imported for '#feed.getTitle()#'.";
+				} catch ( any e ) {
+					data.error = true;
+					data.message = "Error importing feed items for '#feed.getTitle()#'." & " " & e.message & " " & e.detail;
+				}
+			} else {
+				data.error = true;
+				data.message = "Invalid feed and/or author passed to importFeed function.";
+			}
+
+		} else {
+
+			data.error = true;
+			data.message = "Invalid key passed to importFeed function.";
+
+		}
+
+		// Set response
+		event.renderData( type="json", data=data );
+
+	}
+
+	/**
+	 * Runs the feed import routine for all feeds
 	 */
 	function importAll( event, rc, prc ) {
+		rc.importAll = true;
+		import( argumentCollection=arguments );
+	}
 
-		// Set timeout
-		setting requestTimeout="999999";
-
-		// Grab the feeds
-		var feeds = feedService.getAll( sortOrder="title" );
-		var messages = [];
-
-		// Import all feeds
-		announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
-		for ( var feed IN feeds ) {
-			try {
-				var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, prc.oCurrentAuthor ) ).send().getPrefix();
-				if ( result.status_code == "200" ) {
-					var returnData = deserializeJson( result.fileContent );
-					arrayAppend( messages, returnData.message );
-				} else {
-					arrayAppend( messages, "Error importing feed items for '#feed.getTitle()#'." );
-				}
-			} catch ( any e ) {
-				arrayAppend( messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
-			}
-		}
-		announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
-
-		cbMessagebox.info( messageArray=messages );
-
-		setNextEvent( prc.xehFeeds );
-
+	/**
+	 * Runs the feed import routine for all active feeds
+	 */
+	function importActive( event, rc, prc ) {
+		rc.importActive = true;
+		import( argumentCollection=arguments );
 	}
 
 	/**

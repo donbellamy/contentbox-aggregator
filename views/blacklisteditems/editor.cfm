@@ -57,6 +57,18 @@
 						labelClass="control-label",
 						groupWrapper="div class=form-group"
 					)#
+					#html.textfield(
+						label="URL:",
+						name="itemUrl",
+						bind=prc.blacklistedItem,
+						maxlength="250",
+						required="required",
+						title="The url for this blacklisted item",
+						class="form-control",
+						wrapper="div class=controls",
+						labelClass="control-label",
+						groupWrapper="div class=form-group"
+					)#
 				</div>
 			</div>
 		</div>

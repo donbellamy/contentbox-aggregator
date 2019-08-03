@@ -17,6 +17,6 @@ $(document).ready(function() {
 	activateConfirmations();
 	activateTooltips();
 	activateInfoPanels();
-} );
+});
 </script>
 </cfoutput>
