@@ -36,6 +36,34 @@ function contentLoad( criteria ) {
 		$(this).fadeIn("fast");
 	});
 }
+function contentFilter() {
+	if ( $("##feed").val() != "" ) {
+		$("##filterBox").addClass("selected");
+	} else {
+		$("##filterBox").removeClass("selected");
+	}
+	$("##feedFilter").val( $("##feed").val() );
+	contentLoad({
+		search : $("##search").val(),
+		feed : $("##feed").val()
+	});
+}
+function contentShowAll() {
+	contentLoad({
+		search : $("##search").val(),
+		feed : $("##feed").val(),
+		showAll : true
+	});
+}
+function resetFilter( reload ) {
+	if ( reload ) {
+		contentLoad();
+	}
+	$("##search").val("");
+	$("##feedFilter").val("");
+	$("##feed").val("");
+	$("##filterBox").removeClass("selected");
+}
 function activateInfoPanels() {
 	$(".popovers").popover({
 		html : true,
