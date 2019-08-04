@@ -76,7 +76,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
 						// Check if item is blacklisted
-						var itemBlacklisted = blacklistedItemService.newCriteria().isEq( "itemUrl", item.url ).count();
+						var itemBlacklisted = blacklistedItemService.newCriteria().isEq( "itemUrl", item.url ).eq( "feed.contentID", javaCast( "int", arguments.feed.getContentID() ) ).count();
 
 						// Not blacklisted
 						if ( !itemBlacklisted ) {
