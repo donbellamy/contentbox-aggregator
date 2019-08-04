@@ -310,6 +310,7 @@ component extends="contentHandler" {
 		feedService.save( prc.feed );
 
 		// Import feed if needed
+		// TODO: move to postfeedsave?
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}

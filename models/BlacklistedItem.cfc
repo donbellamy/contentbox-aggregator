@@ -26,7 +26,7 @@ component persistent="true"
 
 	property name="itemUrl"
 		notnull="true"
-		length="255"
+		length="510"
 		index="idx_itemUrl";
 
 	property name="createdDate"

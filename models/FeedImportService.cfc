@@ -66,8 +66,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
 
-					// TODO: Check blacklist
-
 					// Create a unique id to track this item
 					var uniqueId = item.id;
 					if ( !len( uniqueId ) ) {
@@ -77,251 +75,266 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Validate url, title and body
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
-						// Check if item already exists
-						var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
+						// Check if item is blacklisted
+						var itemBlacklisted = blacklistedItemService.newCriteria().isEq( "itemUrl", item.url ).count();
 
-						// Doesn't exist
-						if ( !itemExists ) {
+						// Not blacklisted
+						if ( !itemBlacklisted ) {
 
-							// Check keywords
-							var passesKeywordFilters = checkKeywordFilters( item, arguments.feed );
+							// Check if item already exists
+							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
 
-							// Passes keywords
-							if ( passesKeywordFilters ) {
+							// Doesn't exist
+							if ( !itemExists ) {
 
-								// Set published and updated dates
-								if ( !isDate( item.datePublished ) || itemPubDate == "imported" ) {
-									item.datePublished = now();
-								}
-								if ( !isDate( item.dateUpdated ) || itemPubDate == "imported" ) {
-									item.dateUpdated = item.datePublished;
-								}
+								// Check keywords
+								var passesKeywordFilters = checkKeywordFilters( item, arguments.feed );
 
-								// Check age
-								var passesAgeFilter = checkAgeFilter( item, arguments.feed );
+								// Passes keywords
+								if ( passesKeywordFilters ) {
 
-								// Passes age
-								if ( passesAgeFilter ) {
+									// Set published and updated dates
+									if ( !isDate( item.datePublished ) || itemPubDate == "imported" ) {
+										item.datePublished = now();
+									}
+									if ( !isDate( item.dateUpdated ) || itemPubDate == "imported" ) {
+										item.dateUpdated = item.datePublished;
+									}
 
-									try {
+									// Check age
+									var passesAgeFilter = checkAgeFilter( item, arguments.feed );
 
-										// Create feed item
-										var feedItem = feedItemService.new();
+									// Passes age
+									if ( passesAgeFilter ) {
 
-										// FeedItem properties
-										feedItem.setUniqueId( uniqueId );
-										feedItem.setItemUrl( item.url );
-										if ( len( trim( item.author ) ) ) {
-											feedItem.setItemAuthor( item.author );
-										}
-										feedItem.setMetaInfo( item );
+										try {
 
-										// BaseContent properties
-										feedItem.setParent( arguments.feed );
-										feedItem.setTitle( item.title );
-										feedItem.setSlug( htmlHelper.slugify( item.title ) );
-										feedItem.setCreator( arguments.author );
-										feedItem.setPublishedDate( item.datePublished );
-										feedItem.setModifiedDate( item.dateUpdated );
-										if ( itemStatus == "published" ) {
-											feedItem.setIsPublished( true );
-										} else {
-											feedItem.setIsPublished( false );
-										}
+											// Create feed item
+											var feedItem = feedItemService.new();
 
-										// Set whitelist
-										var whitelist = jsoup.getWhiteList();
-										// Add rel, target to a tag
-										whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
-										// Add iframe tag and attributes (youtube, etc.)
-										whitelist.addTags( javacast( "string[]", ["iframe"] ) );
-										whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
+											// FeedItem properties
+											feedItem.setUniqueId( uniqueId );
+											feedItem.setItemUrl( item.url );
+											if ( len( trim( item.author ) ) ) {
+												feedItem.setItemAuthor( item.author );
+											}
+											feedItem.setMetaInfo( item );
 
-										// Clean
-										var feedBody = jsoup.clean( item.body, whitelist );
-
-										// Are we importing images?
-										if ( importImages || importFeaturedImages ) {
-
-											// TODO: Check attachments first and set featured image from that
-											// TODO: If an attachment is valid, only import body images if importall is flagged
-
-											// Set array to hold all image paths
-											var imagePaths = [];
-
-											// Parse the html and get the images
-											var doc = jsoup.parseBodyFragment( feedBody );
-											var images = doc.getElementsByTag("img");
-
-											// Make sure we have some images
-											if ( arrayLen( images ) ) {
-
-												// Reset images array if only importing featured image
-												if ( !importImages && importFeaturedImages ) {
-													images = [ images[1] ];
-												}
-
-												// Loop over images
-												for ( var idx=1; idx LTE arrayLen( images ); idx++ ) {
-
-													try {
-
-														// Grab the image
-														var result = new http( url=images[idx].attr("src"), method="GET" ).send().getPrefix();
-
-														// Check for error and valid image
-														if ( result.status_code == "200" && listFindNoCase( "image/gif,image/jpeg,image/png", result.mimeType ) ) {
-
-															// Set the extension
-															var ext = "";
-															switch ( result.mimeType ) {
-																case "image/gif":
-																	ext = "gif";
-																	break;
-																case "image/jpeg":
-																	ext = "jpg";
-																	break;
-																default:
-																	ext = "png";
-															}
-
-															// Set the folder path and create if needed
-															var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
-															if ( !directoryExists( directoryPath ) ) {
-																directoryCreate( directoryPath );
-																if ( log.canInfo() ) {
-																	log.info("Created aggregator feeditems image folder - #directoryPath#.");
-																}
-															}
-
-															// Set image name and path (using _ to differentiate identical slugs)
-															var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
-															var imagePath = directoryPath & imageName;
-
-															// Save the image
-															fileWrite( imagePath, result.fileContent );
-
-															// Grab the image object
-															var img = imageRead( imagePath );
-
-															// Save the image if it is valid
-															if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
-																img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
-
-																// Set the image url
-																var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-																var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( item.datePublished, "yyyy/mm/" );
-																var imageUrl = folderUrl & imageName;
-
-																// Set featured image
-																if ( importFeaturedImages && !len( feedItem.getFeaturedImage() ) ) {
-																	feedItem.setFeaturedImage( imagePath );
-																	feedItem.setFeaturedImageUrl( imageUrl );
-																}
-
-																// Update image
-																images[idx].attr( "src", imageUrl );
-
-																// Add to image path array
-																arrayAppend( imagePaths, imagePath );
-
-															} else {
-
-																// Delete the image
-																fileDelete( imagePath );
-
-																// Delete directory if empty
-																deleteDirectoryIfEmpty( directoryPath );
-
-																if ( log.canInfo() ) {
-																	log.info("Invalid image size for feed item ('#uniqueId#').");
-																}
-
-															}
-
-														}
-
-													} catch( any e ) {
-
-														if ( log.canError() ) {
-															log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
-														}
-
-													}
-
-												}
-
-												// Reset the content
-												feedBody = doc.body().html();
-
+											// BaseContent properties
+											feedItem.setParent( arguments.feed );
+											feedItem.setTitle( item.title );
+											feedItem.setSlug( htmlHelper.slugify( item.title ) );
+											feedItem.setCreator( arguments.author );
+											feedItem.setPublishedDate( item.datePublished );
+											feedItem.setModifiedDate( item.dateUpdated );
+											if ( itemStatus == "published" ) {
+												feedItem.setIsPublished( true );
+											} else {
+												feedItem.setIsPublished( false );
 											}
 
-										}
+											// Set whitelist
+											var whitelist = jsoup.getWhiteList();
+											// Add rel, target to a tag
+											whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
+											// Add iframe tag and attributes (youtube, etc.)
+											whitelist.addTags( javacast( "string[]", ["iframe"] ) );
+											whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
 
-										// Add the content version
-										feedItem.addNewContentVersion(
-											content=feedBody,
-											changelog="Item imported.",
-											author=arguments.author
-										);
+											// Clean
+											var feedBody = jsoup.clean( item.body, whitelist );
 
-										// TODO: attach taxonomies from settings and feed
-
-										// Save item
-										feedItemService.save( feedItem );
-
-										// Increase item count
-										itemCount++;
-
-										// Log item saved
-										if ( log.canInfo() ) {
-											log.info("Feed item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
-										}
-
-									} catch ( any e ) {
-
-										// Log the error
-										if ( log.canError() ) {
-											log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
-											// Delete any images
+											// Are we importing images?
 											if ( importImages || importFeaturedImages ) {
-												for ( var imagePath IN imagePaths  ) {
-													if ( fileExists( imagePath ) ) {
-														fileDelete( imagePath );
+
+												// TODO: Check attachments first and set featured image from that
+												// TODO: If an attachment is valid, only import body images if importall is flagged
+
+												// Set array to hold all image paths
+												var imagePaths = [];
+
+												// Parse the html and get the images
+												var doc = jsoup.parseBodyFragment( feedBody );
+												var images = doc.getElementsByTag("img");
+
+												// Make sure we have some images
+												if ( arrayLen( images ) ) {
+
+													// Reset images array if only importing featured image
+													if ( !importImages && importFeaturedImages ) {
+														images = [ images[1] ];
+													}
+
+													// Loop over images
+													for ( var idx=1; idx LTE arrayLen( images ); idx++ ) {
+
+														try {
+
+															// Grab the image
+															var result = new http( url=images[idx].attr("src"), method="GET" ).send().getPrefix();
+
+															// Check for error and valid image
+															if ( result.status_code == "200" && listFindNoCase( "image/gif,image/jpeg,image/png", result.mimeType ) ) {
+
+																// Set the extension
+																var ext = "";
+																switch ( result.mimeType ) {
+																	case "image/gif":
+																		ext = "gif";
+																		break;
+																	case "image/jpeg":
+																		ext = "jpg";
+																		break;
+																	default:
+																		ext = "png";
+																}
+
+																// Set the folder path and create if needed
+																var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
+																if ( !directoryExists( directoryPath ) ) {
+																	directoryCreate( directoryPath );
+																	if ( log.canInfo() ) {
+																		log.info("Created aggregator feeditems image folder - #directoryPath#.");
+																	}
+																}
+
+																// Set image name and path (using _ to differentiate identical slugs)
+																var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
+																var imagePath = directoryPath & imageName;
+
+																// Save the image
+																fileWrite( imagePath, result.fileContent );
+
+																// Grab the image object
+																var img = imageRead( imagePath );
+
+																// Save the image if it is valid
+																if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
+																	img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
+
+																	// Set the image url
+																	var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+																	var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( item.datePublished, "yyyy/mm/" );
+																	var imageUrl = folderUrl & imageName;
+
+																	// Set featured image
+																	if ( importFeaturedImages && !len( feedItem.getFeaturedImage() ) ) {
+																		feedItem.setFeaturedImage( imagePath );
+																		feedItem.setFeaturedImageUrl( imageUrl );
+																	}
+
+																	// Update image
+																	images[idx].attr( "src", imageUrl );
+
+																	// Add to image path array
+																	arrayAppend( imagePaths, imagePath );
+
+																} else {
+
+																	// Delete the image
+																	fileDelete( imagePath );
+
+																	// Delete directory if empty
+																	deleteDirectoryIfEmpty( directoryPath );
+
+																	if ( log.canInfo() ) {
+																		log.info("Invalid image size for feed item ('#uniqueId#').");
+																	}
+
+																}
+
+															}
+
+														} catch( any e ) {
+
+															if ( log.canError() ) {
+																log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
+															}
+
+														}
+
+													}
+
+													// Reset the content
+													feedBody = doc.body().html();
+
+												}
+
+											}
+
+											// Add the content version
+											feedItem.addNewContentVersion(
+												content=feedBody,
+												changelog="Item imported.",
+												author=arguments.author
+											);
+
+											// TODO: attach taxonomies from settings and feed
+
+											// Save item
+											feedItemService.save( feedItem );
+
+											// Increase item count
+											itemCount++;
+
+											// Log item saved
+											if ( log.canInfo() ) {
+												log.info("Feed item ('#uniqueId#') saved for feed '#arguments.feed.getTitle()#'.");
+											}
+
+										} catch ( any e ) {
+
+											// Log the error
+											if ( log.canError() ) {
+												log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
+												// Delete any images
+												if ( importImages || importFeaturedImages ) {
+													for ( var imagePath IN imagePaths  ) {
+														if ( fileExists( imagePath ) ) {
+															fileDelete( imagePath );
+														}
+													}
+													// Delete directory if empty and defined
+													if ( isDefined("directoryPath") ) {
+														deleteDirectoryIfEmpty( directoryPath );
 													}
 												}
-												// Delete directory if empty and defined
-												if ( isDefined("directoryPath") ) {
-													deleteDirectoryIfEmpty( directoryPath );
-												}
 											}
+
+										}
+
+									} else {
+
+										// Log item filtered out by age
+										if ( log.canInfo() ) {
+											log.info("Feed item ('#uniqueId#') filtered out using age filtering for feed '#arguments.feed.getTitle()#'");
 										}
 
 									}
 
 								} else {
 
-									// Log item filtered out by age
+									// Log item filtered out by keywords
 									if ( log.canInfo() ) {
-										log.info("Feed item ('#uniqueId#') filtered out using age filtering for feed '#arguments.feed.getTitle()#'");
+										log.info("Feed item ('#uniqueId#') filtered out using keyword filtering for feed '#arguments.feed.getTitle()#'");
 									}
 
 								}
 
 							} else {
 
-								// Log item filtered out by keywords
+								// Log item exists
 								if ( log.canInfo() ) {
-									log.info("Feed item ('#uniqueId#') filtered out using keyword filtering for feed '#arguments.feed.getTitle()#'");
+									log.info("Feed item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
 								}
 
 							}
 
 						} else {
 
-							// Log item exists
+							// Log item blacklisted
 							if ( log.canInfo() ) {
-								log.info("Feed item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+								log.info("Feed item ('#uniqueId#') is blacklisted for feed '#arguments.feed.getTitle()#'.");
 							}
 
 						}

@@ -3,6 +3,11 @@
 function setupBlacklistItemView( settings ) {
 	$contentForm = $("##blacklistedItemForm");
 	$tableContainer = $("##blacklistedItemsTableContainer");
+	$blacklistedItemEditor = $("##blacklistedItemEditor");
+	$blacklistedItemEditor.validate();
+	$("##btnReset").click(function() {
+		$blacklistedItemEditor.find( "##blacklistedItemID" ).val("");
+	});
 	$("##search").keyup(
 		_.debounce(
 			function() {
@@ -51,6 +56,22 @@ function remove( blacklistedItemID ) {
 		checkByValue( "blacklistedItemID", blacklistedItemID );
 	}
 	$contentForm.submit();
+}
+function edit(blacklistedItemID,title,itemUrl,feedId) {
+	openModal( $( "##blacklistedItemEditorContainer" ) );
+	$blacklistedItemEditor.find( "##blacklistedItemID" ).val(blacklistedItemID);
+	$blacklistedItemEditor.find( "##title" ).val(title);
+	$blacklistedItemEditor.find( "##itemUrl" ).val(itemUrl);
+	$blacklistedItemEditor.find( "##feedId" ).val(feedId);
+	return false;
+}
+function create() {
+	openModal( $( "##blacklistedItemEditorContainer" ) );
+	$blacklistedItemEditor.find( "##blacklistedItemID" ).val("");
+	$blacklistedItemEditor.find( "##title" ).val("");
+	$blacklistedItemEditor.find( "##itemUrl" ).val("");
+	$blacklistedItemEditor.find( "##feedId" ).val("");
+	return false;
 }
 $(document).ready( function() {
 	setupBlacklistItemView();

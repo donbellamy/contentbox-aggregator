@@ -14,6 +14,8 @@ component extends="baseHandler" {
 	 */
 	function preHandler( event, rc, prc, action, eventArguments ) {
 
+		super.preHandler( argumentCollection=arguments );
+
 		// Check permissions
 		if ( !prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" ) ) {
 			cbMessagebox.error( "You do not have permission to access the aggregator blacklisted items." );
@@ -70,28 +72,30 @@ component extends="baseHandler" {
 	}
 
 	/**
-	 * Displays blacklisted item editor
-	 */
-	function editor( event, rc, prc ) {
-
-		event.paramValue( "blacklistedItemID", 0 );
-
-		// Grab the blacklisted item
-		if ( !structKeyExists( prc, "blacklistedItem" ) ) {
-			prc.blacklistedItem = blacklistedItemService.get( rc.blacklistedItemID );
-		}
-
-		// Grab the feeds
-		prc.feeds = feedService.getAll( sortOrder="title" );
-
-		event.setView( "blacklisteditems/editor" );
-
-	}
-
-	/**
 	 * Saves blacklisted item
 	 */
 	function save( event, rc, prc ) {
+
+		event.paramValue( "blacklistedItemID", 0 );
+		event.paramValue( "title", "" );
+		event.paramValue( "itemUrl", "" );
+		event.paramValue( "feedId", "" );
+
+		// Grab the feed
+		var blacklistedItem = blacklistedItemService.get( rc.blacklistedItemID );
+
+		// Populate item
+		populateModel( blacklistedItem );
+		blacklistedItem.setFeed( feedService.get( rc.feedId ) );
+		if ( !val(blacklistedItem.getBlacklistedItemID()) ) blacklistedItem.setCreator( prc.oCurrentAuthor );
+
+		announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+
+		// Save the item
+		blacklistedItemService.save( blacklistedItem );
+
+		// TODO: Tie into feeds, remove item if it exists?
+		announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
 
 		if ( event.isAjax() ) {
 			var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
@@ -109,6 +113,48 @@ component extends="baseHandler" {
 	function remove( event, rc, prc ) {
 
 		event.paramValue( "blacklistedItemID", "" );
+
+		// Remove selected feed
+		if ( len( rc.blacklistedItemID ) ) {
+			rc.blacklistedItemID = listToArray( rc.blacklistedItemID );
+			var messages = [];
+			for ( var blacklistedItemID in rc.blacklistedItemID ) {
+				var blacklistedItem = blacklistedItemService.get( blacklistedItemID );
+				if ( !isNull( blacklistedItem ) ) {
+					var title = blacklistedItem.getTitle();
+					announceInterception( "aggregator_preBlacklistedItemRemove", { blacklistedItem=blacklistedItem } );
+					blacklistedItemService.deleteByID( blacklistedItem.getBlacklistedItemID() );
+					announceInterception( "aggregator_postBlacklistedItemRemove", { blacklistedItemID=blacklistedItemID } );
+					arrayAppend( messages, "Blacklisted item '#title#' deleted." );
+				} else {
+					arrayAppend( messages, "Invalid blacklisted item selected: #blacklistedItemID#." );
+				}
+			}
+			cbMessagebox.info( messageArray=messages );
+		} else {
+			cbMessagebox.warn( "No blacklisted items selected!" );
+		}
+
+		setNextEvent( event=prc.xehBlacklistedItems, persistStruct=getFilters( rc )  );
+
+	}
+
+	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Creates the blacklisted item filter struct
+	 * @return The the blacklisted item filter struct
+	 */
+	private struct function getFilters( rc ) {
+
+		var filters = {};
+
+		// Check for filters and add to struct
+		if ( structKeyExists( rc, "page" ) ) filters.page = rc.page;
+		if ( structKeyExists( rc, "search" ) ) filters.search = rc.search;
+		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
+
+		return filters;
 
 	}
 
