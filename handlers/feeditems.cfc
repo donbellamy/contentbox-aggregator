@@ -246,7 +246,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feedItem = feedItemService.get( contentID );
+				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
 					feedItem.removeAllCategories().setCategories( categories );
 					feedItemService.save( feedItem );
@@ -276,7 +276,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feedItem = feedItemService.get( contentID );
+				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
 					var title = feedItem.getTitle();
 					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
@@ -304,7 +304,7 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 
 		if ( val( rc.contentID ) ) {
-			var feedItem = feedItemService.get( rc.contentID );
+			var feedItem = feedItemService.get( rc.contentID, false );
 			if ( !isNull( feedItem ) ) {
 				location( url=prc.agHelper.linkFeedItem( feedItem ), addToken=false );
 			} else {
@@ -351,7 +351,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feedItem = feedItemService.get( contentID );
+				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
 					if ( feedItem.hasStats() ) {
 						feedItem.getStats().setHits( 0 );
@@ -396,7 +396,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feedItem = feedItemService.get( contentID );
+				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
 					var entry = entryService.new();
 					entry.setTitle( feedItem.getTitle() );

@@ -150,11 +150,11 @@ component extends="contentHandler" {
 			value=""
 		});
 		prc.importImageOptions = [
-			{ name="Import images for this feed.", value="true" },
-			{ name="Do not import images for this feed.", value="false" }
+			{ name="Import all images for this feed.", value="true" },
+			{ name="Do not import all images for this feed.", value="false" }
 		];
 		arrayPrepend( prc.importImageOptions, {
-			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.ag_importing_all_image_import_enable; } ) ].name#",
+			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_all_images_enable; } ) ].name#",
 			value=""
 		});
 		prc.matchOptions = [
@@ -351,7 +351,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feed = feedService.get( contentID );
+				var feed = feedService.get( contentID, false );
 				if ( !isNull( feed ) ) {
 					feed.removeAllCategories().setCategories( categories );
 					feedService.save( feed );
@@ -381,7 +381,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feed = feedService.get( contentID );
+				var feed = feedService.get( contentID, false );
 				if ( !isNull( feed ) ) {
 					var title = feed.getTitle();
 					announceInterception( "aggregator_preFeedRemove", { feed=feed } );
@@ -409,7 +409,7 @@ component extends="contentHandler" {
 		event.paramValue( "contentID", "" );
 
 		if ( val( rc.contentID ) ) {
-			var feed = feedService.get( rc.contentID );
+			var feed = feedService.get( rc.contentID, false );
 			if ( !isNull( feed ) ) {
 				location( url=prc.agHelper.linkFeed( feed ), addToken=false );
 			} else {
@@ -456,7 +456,7 @@ component extends="contentHandler" {
 			rc.contentID = listToArray( rc.contentID );
 			var messages = [];
 			for ( var contentID in rc.contentID ) {
-				var feed = feedService.get( contentID );
+				var feed = feedService.get( contentID, false );
 				if ( !isNull( feed ) ) {
 					if ( feed.hasStats() ) {
 						feed.getStats().setHits( 0 );
@@ -537,7 +537,7 @@ component extends="contentHandler" {
 			if ( len( rc.contentID ) ) {
 				rc.contentID = listToArray( rc.contentID );
 				for ( var contentID IN rc.contentID ) {
-					var feed = feedService.get( contentID );
+					var feed = feedService.get( contentID, false );
 					if ( !isNull( feed ) ) {
 						arrayAppend( feeds, feed );
 					} else {
@@ -616,12 +616,15 @@ component extends="contentHandler" {
 			"message"=""
 		};
 
+		// Are we in the admin?
+		var inAdmin = reFindNoCase( "^contentbox-admin", event.getCurrentEvent() );
+
 		// Check key, contentID and authorID
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key && len( rc.contentID ) && len( rc.authorID ) ) {
+		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
 
 			// Grab feed and author
-			var feed = feedService.get( rc.contentID );
-			var author = authorService.get( rc.authorID );
+			var feed = feedService.get( rc.contentID, false );
+			var author = authorService.get( rc.authorID, false );
 
 			// Run the import routine
 			if ( !isNull( feed ) && !isNull( author ) ) {

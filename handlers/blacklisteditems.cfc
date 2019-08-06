@@ -119,7 +119,7 @@ component extends="baseHandler" {
 			rc.blacklistedItemID = listToArray( rc.blacklistedItemID );
 			var messages = [];
 			for ( var blacklistedItemID in rc.blacklistedItemID ) {
-				var blacklistedItem = blacklistedItemService.get( blacklistedItemID );
+				var blacklistedItem = blacklistedItemService.get( blacklistedItemID, false );
 				if ( !isNull( blacklistedItem ) ) {
 					var title = blacklistedItem.getTitle();
 					announceInterception( "aggregator_preBlacklistedItemRemove", { blacklistedItem=blacklistedItem } );

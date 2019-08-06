@@ -61,7 +61,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Grab image settings
 				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
-				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_image_import_enable;
+				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_images_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -133,7 +133,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												feedItem.setIsPublished( false );
 											}
 
-											// Set whitelist
+											// Set whitelist - TODO: Move to jsoup?
 											var whitelist = jsoup.getWhiteList();
 											// Add rel, target to a tag
 											whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
@@ -141,33 +141,98 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											whitelist.addTags( javacast( "string[]", ["iframe"] ) );
 											whitelist.addAttributes( "iframe", javacast( "string[]", ["src","width","height","frameborder","allow","allowfullscreen"] ) );
 
-											// Clean
+											// Clean the content
 											var feedBody = jsoup.clean( item.body, whitelist );
 
 											// Are we importing images?
 											if ( importFeaturedImages || importAllImages ) {
 
-												if ( structKeyExists( item, "attachment" ) ) {
+												// Set vars
+												var images = [];
+												var imagePaths = [];
+												var imageMimeTypes = "image/bmp,image/gif,image/x-icon,image/jpeg,image/png";
+
+												// Check for image attachments
+												if ( structKeyExists( item, "attachment" ) && arrayLen( item.attachment ) ) {
+													for ( var attachment IN item.attachment ) {
+														if (
+															(
+																( structKeyExists( attachment, "medium" ) && attachment.medium == "image" ) ||
+																( structKeyExists( attachment, "type" ) && attachment.type == "thumbnail" ) ||
+																( structKeyExists( attachment, "mimetype" ) && listFindNoCase( imageMimeTypes, attachment.mimetype ) )
+															) && ( structKeyExists( attachment, "url" ) && isValid( "url", attachment.url )
+															) && !arrayContains( images, attachment.url )
+														) {
+															arrayAppend( images, attachment.url );
+														}
+													}
+												}
+
+												// Parse the feed body and grab the images, dont add if it was an attachment too
+												var doc = jsoup.parseBodyFragment( feedBody );
+												var docImages = doc.getElementsByTag("img");
+												for ( var docImage IN docImages ) {
+													if ( isValid( "url", docImage.attr("src") ) && !arrayContains( images, docImage.attr("src") ) ) {
+														arrayAppend( images, docImage );
+													}
+												}
+
+												// Import the images
+												for ( var image IN images ) {
+
+													try {
+
+														// Grab the image url
+														var imageUrl = isSimpleValue( image ) ? image : image.attr("src");
+
+														// Grab the image
+														var result = new http( url=imageUrl, method="GET" ).send().getPrefix();
+
+														// Check for error and valid image
+														if ( result.status_code == "200" && listFindNoCase( imageMimeTypes, result.mimeType ) ) {
+
+															// Set the folder path and create if needed
+															var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
+															if ( !directoryExists( directoryPath ) ) {
+																directoryCreate( directoryPath );
+																if ( log.canInfo() ) {
+																	log.info("Created aggregator feeditems image folder - #directoryPath#.");
+																}
+															}
+
+															// Set the image extension
+															var ext = "";
+															switch ( result.mimeType ) {
+																case "image/bmp":
+																	ext = "bmp";
+																	break;
+																case "image/gif":
+																	ext = "gif";
+																	break;
+																case "image/x-icon":
+																	ext = "ico";
+																	break;
+																case "image/jpeg":
+																	ext = "jpg";
+																	break;
+																case "image/png":
+																	ext = "png";
+																	break;
+															}
+
+														}
+
+													} catch ( any e ) {
+
+														if ( log.canError() ) {
+															log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
+														}
+
+													}
 
 												}
 
-												// Import featured image first
-												// If attachment defined, use that for the featured image
-												// Import rest of images
-
-												// TODO: Check attachments first and set featured image from that
-												// TODO: If an attachment is valid, only import body images if importall is flagged
-
-												//if ( structKeyExists( item, "attachment" ) ) {}
-
-
 												/*
-												// Set array to hold all image paths
-												var imagePaths = [];
-
-												// Parse the html and get the images
-												var doc = jsoup.parseBodyFragment( feedBody );
-												var images = doc.getElementsByTag("img");
 
 												// Make sure we have some images
 												if ( arrayLen( images ) ) {
