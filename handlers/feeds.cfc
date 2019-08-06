@@ -150,11 +150,11 @@ component extends="contentHandler" {
 			value=""
 		});
 		prc.importImageOptions = [
-			{ name="Import images for this feed.", value="true" },
-			{ name="Do not import images for this feed.", value="false" }
+			{ name="Import all images for this feed.", value="true" },
+			{ name="Do not import all images for this feed.", value="false" }
 		];
 		arrayPrepend( prc.importImageOptions, {
-			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.ag_importing_all_image_import_enable; } ) ].name#",
+			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_all_images_enable; } ) ].name#",
 			value=""
 		});
 		prc.matchOptions = [

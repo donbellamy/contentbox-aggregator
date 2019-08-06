@@ -649,19 +649,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_importing_all_image_import_enable",
+											field="ag_importing_all_images_enable",
 											content="Import All Images:"
 										)#
 										<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_importing_all_image_import_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_importing_all_image_import_enable' },
-												checked=prc.ag_importing_all_image_import_enable
+												name="ag_importing_all_images_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_importing_all_images_enable' },
+												checked=prc.agSettings.ag_importing_all_images_enable
 											)#
 											#html.hiddenField(
-												name="ag_importing_all_image_import_enable",
-												value=prc.ag_importing_all_image_import_enable
+												name="ag_importing_all_images_enable",
+												value=prc.agSettings.ag_importing_all_images_enable
 											)#
 										</div>
 									</div>

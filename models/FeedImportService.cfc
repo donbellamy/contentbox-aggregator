@@ -61,7 +61,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 				// Grab image settings
 				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
-				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_image_import_enable;
+				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_images_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
