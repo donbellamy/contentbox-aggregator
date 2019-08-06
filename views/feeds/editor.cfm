@@ -511,7 +511,7 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="importImages",
+								field="importAllImages",
 								content="Import All Images:"
 							)#
 							<div class="controls">
@@ -519,11 +519,11 @@
 									If enabled, all images will be saved locally for each feed item when imported.
 								</small>
 								#html.select(
-									name="importImages",
+									name="importAllImages",
 									options=prc.importImageOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getImportImages(),
+									selectedValue=prc.feed.getImportAllImages(),
 									class="form-control"
 								)#
 							</div>

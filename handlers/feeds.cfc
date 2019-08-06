@@ -154,7 +154,7 @@ component extends="contentHandler" {
 			{ name="Do not import images for this feed.", value="false" }
 		];
 		arrayPrepend( prc.importImageOptions, {
-			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_image_import_enable; } ) ].name#",
+			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.ag_importing_all_image_import_enable; } ) ].name#",
 			value=""
 		});
 		prc.matchOptions = [
@@ -207,7 +207,7 @@ component extends="contentHandler" {
 		event.paramValue( "matchAllFilter", "" );
 		event.paramValue( "matchNoneFilter", "" );
 		event.paramValue( "importFeaturedImages", "" );
-		event.paramValue( "importImages", "" );
+		event.paramValue( "importAllImages", "" );
 		event.paramValue( "taxonomies", {} );
 
 		// HTML
@@ -556,7 +556,7 @@ component extends="contentHandler" {
 				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
 				for ( var feed IN feeds ) {
 					try {
-						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, prc.oCurrentAuthor ) ).send().getPrefix();
+						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
 						if ( result.status_code == "200" && isJson( result.fileContent ) ) {
 							var returnData = deserializeJson( result.fileContent );
 							arrayAppend( data.messages, returnData.message );
@@ -570,6 +570,7 @@ component extends="contentHandler" {
 					}
 				}
 				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
+				sleep(1000);
 			} else {
 				data.error = true;
 				if ( !arrayLen( data.messages ) ) {

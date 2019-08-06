@@ -89,7 +89,7 @@ component persistent="true"
 		notnull="false"
 		ormtype="boolean";
 
-	property name="importImages"
+	property name="importAllImages"
 		notnull="false"
 		ormtype="boolean";
 
@@ -487,7 +487,7 @@ component persistent="true"
 			"matchAllFilter",
 			"matchNoneFilter",
 			"importFeaturedImages",
-			"importImages",
+			"importAllImages",
 			"preFeedDisplay",
 			"postFeedDisplay",
 			"preFeedItemDisplay",

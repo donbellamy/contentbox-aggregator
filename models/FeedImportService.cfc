@@ -60,8 +60,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				var itemPubDate = len( arguments.feed.getItemPubDate() ) ? arguments.feed.getItemPubDate() : settings.ag_importing_item_pub_date;
 
 				// Grab image settings
-				var importImages = len( arguments.feed.getImportImages() ) ? arguments.feed.getImportImages() : settings.ag_importing_image_import_enable;
 				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
+				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_image_import_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -145,11 +145,23 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											var feedBody = jsoup.clean( item.body, whitelist );
 
 											// Are we importing images?
-											if ( importImages || importFeaturedImages ) {
+											if ( importFeaturedImages || importAllImages ) {
+
+												if ( structKeyExists( item, "attachment" ) ) {
+
+												}
+
+												// Import featured image first
+												// If attachment defined, use that for the featured image
+												// Import rest of images
 
 												// TODO: Check attachments first and set featured image from that
 												// TODO: If an attachment is valid, only import body images if importall is flagged
 
+												//if ( structKeyExists( item, "attachment" ) ) {}
+
+
+												/*
 												// Set array to hold all image paths
 												var imagePaths = [];
 
@@ -161,7 +173,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												if ( arrayLen( images ) ) {
 
 													// Reset images array if only importing featured image
-													if ( !importImages && importFeaturedImages ) {
+													if ( !importAllImages && importFeaturedImages ) {
 														images = [ images[1] ];
 													}
 
@@ -259,6 +271,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													feedBody = doc.body().html();
 
 												}
+												*/
 
 											}
 
@@ -288,7 +301,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											if ( log.canError() ) {
 												log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 												// Delete any images
-												if ( importImages || importFeaturedImages ) {
+												if ( importFeaturedImages || importAllImages ) {
 													for ( var imagePath IN imagePaths  ) {
 														if ( fileExists( imagePath ) ) {
 															fileDelete( imagePath );
