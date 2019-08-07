@@ -178,12 +178,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												}
 
 												// Import the images
-												for ( var image IN images ) {
+												for ( var idx=1; idx LTE arrayLen( images ); idx++ ) {
 
 													try {
 
 														// Grab the image url
-														var imageUrl = isSimpleValue( image ) ? image : image.attr("src");
+														var imageUrl = isSimpleValue( images[idx] ) ? images[idx] : images[idx].attr("src");
 
 														// Grab the image
 														var result = new http( url=imageUrl, method="GET" ).send().getPrefix();
@@ -220,6 +220,53 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																	break;
 															}
 
+															// Set image name and path ( idx used to number images for the feed item )
+															var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
+															var imagePath = directoryPath & imageName;
+
+															// Save the image
+															fileWrite( imagePath, result.fileContent );
+
+															// Grab the image object
+															var image = imageRead( imagePath );
+
+															// Save the image if it is valid
+															if ( image.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
+																image.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
+
+																// Set the image url
+																var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
+																var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( item.datePublished, "yyyy/mm/" );
+																var imageUrl = folderUrl & imageName;
+
+																// Set featured image if not already set
+																if ( importFeaturedImages && !len( feedItem.getFeaturedImage() ) ) {
+																	feedItem.setFeaturedImage( imagePath );
+																	feedItem.setFeaturedImageUrl( imageUrl );
+																}
+
+																// Update image src with new one unless an attachment
+																if ( !isSimpleValue( images[idx] ) ) {
+																	images[idx].attr( "src", imageUrl );
+																}
+
+																// Add to image path array
+																arrayAppend( imagePaths, imagePath );
+
+															} else {
+
+																// Delete the image
+																fileDelete( imagePath );
+
+																// Delete directory if empty
+																deleteDirectoryIfEmpty( directoryPath );
+
+																if ( log.canInfo() ) {
+																	log.info("Invalid image size for feed item ('#uniqueId#').");
+																}
+
+															}
+
 														}
 
 													} catch ( any e ) {
@@ -230,113 +277,15 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 													}
 
-												}
-
-												/*
-
-												// Make sure we have some images
-												if ( arrayLen( images ) ) {
-
-													// Reset images array if only importing featured image
-													if ( !importAllImages && importFeaturedImages ) {
-														images = [ images[1] ];
+													// Break if we are only importing featured images
+													if ( !importAllImages && len( feedItem.getFeaturedImage() ) ) {
+														break;
 													}
 
-													// Loop over images
-													for ( var idx=1; idx LTE arrayLen( images ); idx++ ) {
-
-														try {
-
-															// Grab the image
-															var result = new http( url=images[idx].attr("src"), method="GET" ).send().getPrefix();
-
-															// Check for error and valid image
-															if ( result.status_code == "200" && listFindNoCase( "image/gif,image/jpeg,image/png", result.mimeType ) ) {
-
-																// Set the extension
-																var ext = "";
-																switch ( result.mimeType ) {
-																	case "image/gif":
-																		ext = "gif";
-																		break;
-																	case "image/jpeg":
-																		ext = "jpg";
-																		break;
-																	default:
-																		ext = "png";
-																}
-
-																// Set the folder path and create if needed
-																var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
-																if ( !directoryExists( directoryPath ) ) {
-																	directoryCreate( directoryPath );
-																	if ( log.canInfo() ) {
-																		log.info("Created aggregator feeditems image folder - #directoryPath#.");
-																	}
-																}
-
-																// Set image name and path (using _ to differentiate identical slugs)
-																var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
-																var imagePath = directoryPath & imageName;
-
-																// Save the image
-																fileWrite( imagePath, result.fileContent );
-
-																// Grab the image object
-																var img = imageRead( imagePath );
-
-																// Save the image if it is valid
-																if ( img.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
-																	img.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
-
-																	// Set the image url
-																	var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
-																	var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( item.datePublished, "yyyy/mm/" );
-																	var imageUrl = folderUrl & imageName;
-
-																	// Set featured image
-																	if ( importFeaturedImages && !len( feedItem.getFeaturedImage() ) ) {
-																		feedItem.setFeaturedImage( imagePath );
-																		feedItem.setFeaturedImageUrl( imageUrl );
-																	}
-
-																	// Update image
-																	images[idx].attr( "src", imageUrl );
-
-																	// Add to image path array
-																	arrayAppend( imagePaths, imagePath );
-
-																} else {
-
-																	// Delete the image
-																	fileDelete( imagePath );
-
-																	// Delete directory if empty
-																	deleteDirectoryIfEmpty( directoryPath );
-
-																	if ( log.canInfo() ) {
-																		log.info("Invalid image size for feed item ('#uniqueId#').");
-																	}
-
-																}
-
-															}
-
-														} catch( any e ) {
-
-															if ( log.canError() ) {
-																log.error( "Error retrieving and saving image for feed item ('#uniqueId#').", e );
-															}
-
-														}
-
-													}
-
-													// Reset the content
-													feedBody = doc.body().html();
-
 												}
-												*/
+
+												// Reset the content
+												feedBody = doc.body().html();
 
 											}
 

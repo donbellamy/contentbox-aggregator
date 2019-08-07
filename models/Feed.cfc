@@ -218,11 +218,10 @@ component persistent="true"
 	 * @return The latest feed import if exists, null if not
 	 */
 	any function getLatestFeedImport() {
-		var feedImport = javaCast( "null", "" );
 		if ( arrayLen( getFeedImports() ) ) {
-			feedImport = getFeedImports()[1];
+			return getFeedImports()[1];
 		}
-		return feedImport;
+		return javaCast( "null", "" );
 	}
 
 	/**
@@ -230,12 +229,11 @@ component persistent="true"
 	 * @return The siteUrl if defined, the feed url if not
 	 */
 	string function getWebsiteUrl() {
-		var siteUrl = getFeedUrl();
 		var feedImport = getLatestFeedImport();
 		if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
-			siteUrl = feedImport.getWebsiteUrl();
+			return feedImport.getWebsiteUrl();
 		}
-		return siteUrl;
+		return getFeedUrl();
 	}
 
 	/**
