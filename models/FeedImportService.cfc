@@ -150,7 +150,13 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												// Set vars
 												var images = [];
 												var imagePaths = [];
-												var imageMimeTypes = "image/bmp,image/gif,image/x-icon,image/jpeg,image/png";
+												var mimeTypes = {
+													"image/bmp"="bmp",
+													"image/gif"="gif",
+													"image/x-icon"="ico",
+													"image/jpeg"="jpg",
+													"image/png"="png"
+												};
 
 												// Check for image attachments
 												if ( structKeyExists( item, "attachment" ) && arrayLen( item.attachment ) ) {
@@ -159,7 +165,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															(
 																( structKeyExists( attachment, "medium" ) && attachment.medium == "image" ) ||
 																( structKeyExists( attachment, "type" ) && attachment.type == "thumbnail" ) ||
-																( structKeyExists( attachment, "mimetype" ) && listFindNoCase( imageMimeTypes, attachment.mimetype ) )
+																( structKeyExists( attachment, "mimetype" ) && structKeyExists( mimeTypes, attachment.mimetype ) )
 															) && ( structKeyExists( attachment, "url" ) && isValid( "url", attachment.url )
 															) && !arrayContains( images, attachment.url )
 														) {
@@ -189,7 +195,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														var result = new http( url=imageUrl, method="GET" ).send().getPrefix();
 
 														// Check for error and valid image
-														if ( result.status_code == "200" && listFindNoCase( imageMimeTypes, result.mimeType ) ) {
+														if ( result.status_code == "200" && structKeyExists( mimeTypes, result.mimeType ) ) {
 
 															// Set the folder path and create if needed
 															var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
@@ -200,28 +206,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																}
 															}
 
-															// Set the image extension
-															var ext = "";
-															switch ( result.mimeType ) {
-																case "image/bmp":
-																	ext = "bmp";
-																	break;
-																case "image/gif":
-																	ext = "gif";
-																	break;
-																case "image/x-icon":
-																	ext = "ico";
-																	break;
-																case "image/jpeg":
-																	ext = "jpg";
-																	break;
-																case "image/png":
-																	ext = "png";
-																	break;
-															}
-
 															// Set image name and path ( idx used to number images for the feed item )
-															var imageName = feedItem.getSlug() & "_" & idx & "." & ext;
+															var imageName = feedItem.getSlug() & "_" & idx & "." & mimeTypes[result.mimeType];
 															var imagePath = directoryPath & imageName;
 
 															// Save the image

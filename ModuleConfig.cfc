@@ -270,13 +270,24 @@ component {
 	 */
 	function onActivate() {
 
-		// Save settings
+		// Save aggregator settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 		if ( isNull( setting ) ) {
 			var agSettings = settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } );
 			settingService.save( agSettings );
 		}
+
+		// Save search adapter setting
+		var setting = settingService.findWhere( criteria = { name="cb_search_adapter" } );
+		if ( isNull( setting ) ) {
+			setting = settingService.new( properties = { name="cb_search_adapter", value="#moduleMapping#.models.DBSearch" } );
+		} else {
+			setting.setValue( "#moduleMapping#.models.DBSearch" );
+		}
+		settingService.save( setting );
+
+		// Flush settings cache
 		settingService.flushSettingsCache();
 
 		// Save permissions
@@ -319,12 +330,23 @@ component {
 	 */
 	function onDeactivate() {
 
-		// Delete settings
+		// Delete aggregator settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 		if ( !isNull( setting ) ) {
 			settingService.delete( setting );
 		}
+
+		// Change search adapter settings back to default
+		var setting = settingService.findWhere( criteria = { name="cb_search_adapter" } );
+		if ( isNull( setting ) ) {
+			setting = settingService.new( properties = { name="cb_search_adapter", value="contentbox.models.search.DBSearch" } );
+		} else {
+			setting.setValue( "contentbox.models.search.DBSearch" );
+		}
+		settingService.save( setting );
+
+		// Flush settings cache
 		settingService.flushSettingsCache();
 
 		// Delete permissions

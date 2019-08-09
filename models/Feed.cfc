@@ -281,9 +281,10 @@ component persistent="true"
 	 * @return True if imports are failing, false if not
 	 */
 	boolean function isFailing() {
-		var failing = 0;
-		if ( !isNull( getIsFailing() ) ) failing = getIsFailing();
-		return failing;
+		if ( !isNull( getIsFailing() ) ) {
+			return getIsFailing();
+		}
+		return 0;
 	}
 
 	/**
