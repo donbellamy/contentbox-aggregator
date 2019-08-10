@@ -264,9 +264,11 @@
 									<a class="btn btn-primary" href="javascript:loadAssetChooser( 'featuredImageCallback' )">Select Image</a>
 									<div class="<cfif !len( prc.feedItem.getFeaturedImageURL() ) >hide</cfif> form-group" id="featuredImageControls">
 										<a class="btn btn-danger" href="javascript:cancelFeaturedImage()">Clear Image</a>
-										#html.hiddenField(
+										#html.textField(
 											name="featuredImage",
-											bind=prc.feedItem
+											bind=prc.feedItem,
+											class="form-control",
+											readonly=true
 										)#
 										#html.hiddenField(
 											name="featuredImageURL",
