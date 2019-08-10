@@ -14,7 +14,7 @@ component {
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
-	this.cfmapping = "aggregator";
+	this.cfmapping = "aggregator"; // TODO: change to contentbox-aggregator ??
 	this.dependencies = ["cbjsoup"];
 
 	/**

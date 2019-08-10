@@ -268,7 +268,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Set layout and view
 		event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/feedindex", module="contentbox" );
+			.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
 
 	}
 
@@ -346,7 +346,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set layout and view
 			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-				.setView( view="#prc.cbTheme#/views/feedarchives", module="contentbox" );
+				.setView( view="#prc.cbTheme#/views/feeditemarchives", module="contentbox" );
 
 		} else {
 
