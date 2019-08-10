@@ -104,6 +104,30 @@ component extends="coldbox.system.Interceptor" {
 			html.addJSContent("$(function(){$('div.user-nav ul li:first').after('<li data-placement=""right auto"" title=""Visit Portal""><a class=""btn btn-default options toggle"" href=""#agHelper.linkPortal()#"" target=""_blank""><i class=""fa fa-newspaper-o""></i></a></li>');$('[title]').tooltip(toolTipSettings);});",true);
 		}
 
+		// Fix global search
+		if ( event.getCurrentEvent() == "contentbox-admin:content.search" ) {
+			html.addJSContent('$(function(){
+				$("ul.list-group li").each(function() {
+					var contentType = $(this).find("span").text();
+					if ( contentType == "FeedItem" || contentType == "Feed" ) {
+						var $openLink = $(this).find("a:first");
+						var $editLink = $(this).find("a:last");
+						var url = $editLink.attr("href");
+						var contentID = url.substring( url.lastIndexOf("/") + 1 );
+						if ( contentType == "FeedItem" ) {
+							$openLink.attr("href", "#agHelper.linkFeedItemsAdmin()#/view/contentID/" + contentID);
+							$editLink.attr("title", "Edit FeedItem");
+							$editLink.attr("href", "#agHelper.linkFeedItemForm()#/contentID/" + contentID);
+						} else if ( contentType == "Feed" ) {
+							$openLink.attr("href", "#agHelper.linkFeedsAdmin()#/view/contentID/" + contentID);
+							$editLink.attr("title", "Edit Feed");
+							$editLink.attr("href", "#agHelper.linkFeedForm()#/contentID/" + contentID);
+						}
+					}
+				});
+			});',true);
+		}
+
 		// Fix dashbaord content links
 		if ( event.getCurrentEvent() == "contentbox-admin:dashboard.latestsystemedits" ||
 			event.getCurrentEvent() == "contentbox-admin:dashboard.futurePublishedContent" ||
