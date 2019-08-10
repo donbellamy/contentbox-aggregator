@@ -666,62 +666,7 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#importedDate()">importedDate</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#importFeaturedImages()">importFeaturedImages</A></strong>
+			<strong><a href="Feed.html#importAllImages()">importAllImages</A></strong>
 			<br>
 			
 			<br><br>
@@ -780,7 +725,62 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#importImages()">importImages</A></strong>
+			<strong><a href="Feed.html#importedDate()">importedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#importFeaturedImages()">importFeaturedImages</A></strong>
 			<br>
 			
 			<br><br>
@@ -2272,6 +2272,19 @@ Feed Model</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#getImportAllImages()">getImportAllImages</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#getImportedDate()">getImportedDate</A></strong>()
 			<br>
 			
@@ -2286,19 +2299,6 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#getImportFeaturedImages()">getImportFeaturedImages</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#getImportImages()">getImportImages</A></strong>()
 			<br>
 			
 		</td>
@@ -2812,6 +2812,19 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#setImportAllImages()">setImportAllImages</A></strong>(any importAllImages)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#setImportedDate()">setImportedDate</A></strong>(any importedDate)
 			<br>
 			
@@ -2826,19 +2839,6 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#setImportFeaturedImages()">setImportFeaturedImages</A></strong>(any importFeaturedImages)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="Feed.html#setImportImages()">setImportImages</A></strong>(any importImages)
 			<br>
 			
 		</td>
@@ -5058,6 +5058,58 @@ Feed Model</p>
 		<hr>
 	
 		
+		<a name="importAllImages()"><!-- --></a>
+		<h3>importAllImages</h3>
+
+		<kbd>
+			property any
+			<strong>importAllImages</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="importedDate()"><!-- --></a>
 		<h3>importedDate</h3>
 
@@ -5112,58 +5164,6 @@ Feed Model</p>
 		<kbd>
 			property any
 			<strong>importFeaturedImages</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>notnull</code> - false</dd>
-			
-		
-			
-			<dd><code>ormtype</code> - boolean</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="importImages()"><!-- --></a>
-		<h3>importImages</h3>
-
-		<kbd>
-			property any
-			<strong>importImages</strong>
 			
 		</kbd>
 
@@ -6842,6 +6842,38 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getImportAllImages()"><!-- --></a>
+	<h3>
+		getImportAllImages
+		
+	</h3>
+
+	<kbd>public string <strong>getImportAllImages</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getImportedDate()"><!-- --></a>
 	<h3>
 		getImportedDate
@@ -6881,38 +6913,6 @@ Feed Model</p>
 	</h3>
 
 	<kbd>public string <strong>getImportFeaturedImages</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getImportImages()"><!-- --></a>
-	<h3>
-		getImportImages
-		
-	</h3>
-
-	<kbd>public string <strong>getImportImages</strong>()</kbd>
 
 	<br><br>
 
@@ -8332,6 +8332,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="setImportAllImages()"><!-- --></a>
+	<h3>
+		setImportAllImages
+		
+	</h3>
+
+	<kbd>public any <strong>setImportAllImages</strong>(any importAllImages)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>importAllImages</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="setImportedDate()"><!-- --></a>
 	<h3>
 		setImportedDate
@@ -8398,45 +8437,6 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>importFeaturedImages</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setImportImages()"><!-- --></a>
-	<h3>
-		setImportImages
-		
-	</h3>
-
-	<kbd>public any <strong>setImportImages</strong>(any importImages)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>importImages</code></dd>
 		
 		</dl>
 	

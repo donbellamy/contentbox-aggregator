@@ -442,13 +442,13 @@ Blacklisted items handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>private&nbsp;struct</code>
 		</td>
 		<td>
-			<strong><a href="blacklisteditems.html#editor()">editor</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="blacklisteditems.html#getFilters()">getFilters</A></strong>([any rc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays blacklisted item editor.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the blacklisted item filter struct.
 			
 		</td>
 	</tr>
@@ -1330,18 +1330,18 @@ Blacklisted items handler</p>
 
 
 	
-	<a name="editor()"><!-- --></a>
+	<a name="getFilters()"><!-- --></a>
 	<h3>
-		editor
+		getFilters
 		
 	</h3>
 
-	<kbd>public any <strong>editor</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>private struct <strong>getFilters</strong>([any rc])</kbd>
 
 	<br><br>
 
 	
-		<p>Displays blacklisted item editor</p>
+		<p>Creates the blacklisted item filter struct</p>
 	
 
 	
@@ -1358,15 +1358,16 @@ Blacklisted items handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
 		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
 		
 		</dl>
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The the blacklisted item filter struct</dd>
+		</dl>
 	
 
 	

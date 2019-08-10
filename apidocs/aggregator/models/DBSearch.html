@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>BlacklistedItem</title>
+	<title>DBSearch</title>
 	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
 	<!-- common assets -->
 	
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/models/BlacklistedItem.html" target="_top">
+				<li><a href="../../index.html?aggregator/models/DBSearch.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- BlacklistedItem</h2>
+ DBSearch</h2>
 
 
 
@@ -147,12 +147,24 @@ Class
 
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
-    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BlacklistedItem
+    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.DBSearch
 </pre>
 
 
 
 	
+	
+		<div class="panel panel-default">
+			<div class="panel-heading"><strong>All Implemented Interfaces:</strong></div>
+  			<div class="panel-body">
+			
+			
+				
+				
+				contentbox.models.search.ISearchAdapter
+			
+			</div>
+		</div>
 	
 
 
@@ -163,7 +175,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-BlacklistedItem Model</p>
+DB Search Adapter to include feeds and feed items in results</p>
 </div>
 
 
@@ -174,42 +186,18 @@ BlacklistedItem Model</p>
 		
 		
 			
-			
-			<li class="label label-danger label-annotations">
-				entityname
-				
-				: cbBlacklistedItem
-				
-			</li>
-			&nbsp;
-			
-		
-			
-		
-			
 		
 			
 		
 			
 			
 			<li class="label label-danger label-annotations">
-				cacheuse
-				
-				: read-write
+				singleton
 				
 			</li>
 			&nbsp;
 			
 		
-			
-			
-			<li class="label label-danger label-annotations">
-				table
-				
-				: cb_blacklisteditem
-				
-			</li>
-			&nbsp;
 			
 		
 			
@@ -226,27 +214,7 @@ BlacklistedItem Model</p>
 			
 		
 			
-			
-			<li class="label label-danger label-annotations">
-				cachename
-				
-				: cbBlacklistedItem
-				
-			</li>
-			&nbsp;
-			
 		
-			
-		
-			
-			
-			<li class="label label-danger label-annotations">
-				batchsize
-				
-				: 25
-				
-			</li>
-			&nbsp;
 			
 		
 			
@@ -258,7 +226,7 @@ BlacklistedItem Model</p>
 			<li class="label label-danger label-annotations">
 				accessors
 				
-				: false
+				: true
 				
 			</li>
 			&nbsp;
@@ -271,7 +239,7 @@ BlacklistedItem Model</p>
 			<li class="label label-danger label-annotations">
 				persistent
 				
-				: true
+				: false
 				
 			</li>
 			&nbsp;
@@ -334,74 +302,7 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#blacklistedItemID()">blacklistedItemID</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">fieldtype = id</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">params = { allocationSize=1, sequence='blacklistedItemID_seq' }</li>
-				
-			
-				
-				<li class="label label-default label-annotations">generator = native</li>
-				
-			
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">setter = no</li>
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>date</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#createdDate()">createdDate</A></strong>
+			<strong><a href="DBSearch.html#cb()">cb</A></strong>
 			<br>
 			
 			<br><br>
@@ -422,19 +323,7 @@ BlacklistedItem Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">notnull = true</li>
-				
-			
-				
-				<li class="label label-default label-annotations">ormtype = timestamp</li>
-				
-			
-				
-				<li class="label label-default label-annotations">update = false</li>
-				
-			
-				
-				<li class="label label-default label-annotations">index = idx_createdDate</li>
+				<li class="label label-default label-annotations">inject = cbHelper@cb</li>
 				
 			
 				
@@ -468,149 +357,7 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#creator()">creator</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">fieldtype = many-to-one</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">fetch = join</li>
-				
-			
-				
-				<li class="label label-default label-annotations">notnull = true</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">fkcolumn = FK_authorID</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">cfc = contentbox.models.security.Author</li>
-				
-			
-				
-				<li class="label label-default label-annotations">lazy = true</li>
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#feed()">feed</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">fieldtype = many-to-one</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">fkcolumn = FK_feedID</li>
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">cfc = Feed</li>
-				
-			
-				
-				<li class="label label-default label-annotations">lazy = true</li>
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#itemUrl()">itemUrl</A></strong>
+			<strong><a href="DBSearch.html#contentService()">contentService</A></strong>
 			<br>
 			
 			<br><br>
@@ -631,15 +378,7 @@ BlacklistedItem Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">notnull = true</li>
-				
-			
-				
-				<li class="label label-default label-annotations">index = idx_itemUrl</li>
-				
-			
-				
-				<li class="label label-default label-annotations">length = 510</li>
+				<li class="label label-default label-annotations">inject = contentService@cb</li>
 				
 			
 				
@@ -673,7 +412,7 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#title()">title</A></strong>
+			<strong><a href="DBSearch.html#controller()">controller</A></strong>
 			<br>
 			
 			<br><br>
@@ -694,11 +433,62 @@ BlacklistedItem Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">notnull = true</li>
+				<li class="label label-default label-annotations">inject = coldbox</li>
 				
 			
 				
-				<li class="label label-default label-annotations">length = 255</li>
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="DBSearch.html#wirebox()">wirebox</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = wirebox</li>
 				
 			
 				
@@ -744,7 +534,7 @@ BlacklistedItem Model</p>
 		<tr>
 			
 			<td>
-				<strong><a href="BlacklistedItem.html#init()">init</A></strong>()
+				<strong><a href="DBSearch.html#init()">init</A></strong>()
 				<br>
 				
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
@@ -775,7 +565,7 @@ BlacklistedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getBlacklistedItemID()">getBlacklistedItemID</A></strong>()
+			<strong><a href="DBSearch.html#getCb()">getCb</A></strong>()
 			<br>
 			
 		</td>
@@ -788,7 +578,7 @@ BlacklistedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getCreatedDate()">getCreatedDate</A></strong>()
+			<strong><a href="DBSearch.html#getContentService()">getContentService</A></strong>()
 			<br>
 			
 		</td>
@@ -801,7 +591,7 @@ BlacklistedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getCreator()">getCreator</A></strong>()
+			<strong><a href="DBSearch.html#getController()">getController</A></strong>()
 			<br>
 			
 		</td>
@@ -814,22 +604,7 @@ BlacklistedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getDisplayCreatedDate()">getDisplayCreatedDate</A></strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the formatted created date.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#getFeed()">getFeed</A></strong>()
+			<strong><a href="DBSearch.html#getWirebox()">getWirebox</A></strong>()
 			<br>
 			
 		</td>
@@ -839,11 +614,13 @@ BlacklistedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>string</code>
+			<code>contentbox.models.search.ISearchAdapter</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getItemUrl()">getItemUrl</A></strong>()
+			<strong><a href="DBSearch.html#refresh()">refresh</A></strong>()
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If chosen to be implemented, it should refresh search indexes and collections.
 			
 		</td>
 	</tr>
@@ -852,11 +629,13 @@ BlacklistedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>string</code>
+			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getTitle()">getTitle</A></strong>()
+			<strong><a href="DBSearch.html#renderSearch()">renderSearch</A></strong>(string searchTerm, [numeric max='0'], [numeric offset='0'])
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Render the search results according to the adapter and return HTML.
 			
 		</td>
 	</tr>
@@ -865,11 +644,13 @@ BlacklistedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>boolean</code>
+			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#hasCreator()">hasCreator</A></strong>([any creator])
+			<strong><a href="DBSearch.html#renderSearchWithResults()">renderSearchWithResults</A></strong>(contentbox.models.search.SearchResults searchResults)
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Render the search results according the passed in search results object.
 			
 		</td>
 	</tr>
@@ -878,10 +659,25 @@ BlacklistedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>boolean</code>
+			<code>contentbox.models.search.SearchResults</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#hasFeed()">hasFeed</A></strong>([any feed])
+			<strong><a href="DBSearch.html#search()">search</A></strong>(string searchTerm, [numeric max='0'], [numeric offset='0'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search content and return an standardized ContentBox Results object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="DBSearch.html#setCb()">setCb</A></strong>(any cb)
 			<br>
 			
 		</td>
@@ -894,7 +690,7 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#setCreatedDate()">setCreatedDate</A></strong>(date createdDate)
+			<strong><a href="DBSearch.html#setContentService()">setContentService</A></strong>(any contentService)
 			<br>
 			
 		</td>
@@ -907,7 +703,7 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#setCreator()">setCreator</A></strong>(any creator)
+			<strong><a href="DBSearch.html#setController()">setController</A></strong>(any controller)
 			<br>
 			
 		</td>
@@ -920,49 +716,8 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#setFeed()">setFeed</A></strong>(any feed)
+			<strong><a href="DBSearch.html#setWirebox()">setWirebox</A></strong>(any wirebox)
 			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#setItemUrl()">setItemUrl</A></strong>(any itemUrl)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#setTitle()">setTitle</A></strong>(any title)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BlacklistedItem.html#validate()">validate</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the blacklisted item.
 			
 		</td>
 	</tr>
@@ -1040,72 +795,12 @@ BlacklistedItem Model</p>
 
 	
 		
-		<a name="blacklistedItemID()"><!-- --></a>
-		<h3>blacklistedItemID</h3>
+		<a name="cb()"><!-- --></a>
+		<h3>cb</h3>
 
 		<kbd>
 			property any
-			<strong>blacklistedItemID</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-			<dd><code>fieldtype</code> - id</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>params</code> - { allocationSize=1, sequence='blacklistedItemID_seq' }</dd>
-			
-		
-			
-			<dd><code>generator</code> - native</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-			
-			<dd><code>setter</code> - no</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="createdDate()"><!-- --></a>
-		<h3>createdDate</h3>
-
-		<kbd>
-			property date
-			<strong>createdDate</strong>
+			<strong>cb</strong>
 			
 		</kbd>
 
@@ -1132,19 +827,7 @@ BlacklistedItem Model</p>
 			
 		
 			
-			<dd><code>notnull</code> - true</dd>
-			
-		
-			
-			<dd><code>ormtype</code> - timestamp</dd>
-			
-		
-			
-			<dd><code>update</code> - false</dd>
-			
-		
-			
-			<dd><code>index</code> - idx_createdDate</dd>
+			<dd><code>inject</code> - cbHelper@cb</dd>
 			
 		
 			
@@ -1160,140 +843,12 @@ BlacklistedItem Model</p>
 		<hr>
 	
 		
-		<a name="creator()"><!-- --></a>
-		<h3>creator</h3>
+		<a name="contentService()"><!-- --></a>
+		<h3>contentService</h3>
 
 		<kbd>
 			property any
-			<strong>creator</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-			<dd><code>fieldtype</code> - many-to-one</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>fetch</code> - join</dd>
-			
-		
-			
-			<dd><code>notnull</code> - true</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>fkcolumn</code> - FK_authorID</dd>
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-			
-			<dd><code>cfc</code> - contentbox.models.security.Author</dd>
-			
-		
-			
-			<dd><code>lazy</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="feed()"><!-- --></a>
-		<h3>feed</h3>
-
-		<kbd>
-			property any
-			<strong>feed</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-			<dd><code>fieldtype</code> - many-to-one</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>fkcolumn</code> - FK_feedID</dd>
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-			
-			<dd><code>cfc</code> - Feed</dd>
-			
-		
-			
-			<dd><code>lazy</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="itemUrl()"><!-- --></a>
-		<h3>itemUrl</h3>
-
-		<kbd>
-			property any
-			<strong>itemUrl</strong>
+			<strong>contentService</strong>
 			
 		</kbd>
 
@@ -1320,15 +875,7 @@ BlacklistedItem Model</p>
 			
 		
 			
-			<dd><code>notnull</code> - true</dd>
-			
-		
-			
-			<dd><code>index</code> - idx_itemUrl</dd>
-			
-		
-			
-			<dd><code>length</code> - 510</dd>
+			<dd><code>inject</code> - contentService@cb</dd>
 			
 		
 			
@@ -1344,12 +891,12 @@ BlacklistedItem Model</p>
 		<hr>
 	
 		
-		<a name="title()"><!-- --></a>
-		<h3>title</h3>
+		<a name="controller()"><!-- --></a>
+		<h3>controller</h3>
 
 		<kbd>
 			property any
-			<strong>title</strong>
+			<strong>controller</strong>
 			
 		</kbd>
 
@@ -1376,11 +923,55 @@ BlacklistedItem Model</p>
 			
 		
 			
-			<dd><code>notnull</code> - true</dd>
+			<dd><code>inject</code> - coldbox</dd>
 			
 		
 			
-			<dd><code>length</code> - 255</dd>
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="wirebox()"><!-- --></a>
+		<h3>wirebox</h3>
+
+		<kbd>
+			property any
+			<strong>wirebox</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - wirebox</dd>
 			
 		
 			
@@ -1417,13 +1008,13 @@ BlacklistedItem Model</p>
 
 
 	
-	<a name="getBlacklistedItemID()"><!-- --></a>
+	<a name="getCb()"><!-- --></a>
 	<h3>
-		getBlacklistedItemID
+		getCb
 		
 	</h3>
 
-	<kbd>public string <strong>getBlacklistedItemID</strong>()</kbd>
+	<kbd>public string <strong>getCb</strong>()</kbd>
 
 	<br><br>
 
@@ -1449,13 +1040,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="getCreatedDate()"><!-- --></a>
+	<a name="getContentService()"><!-- --></a>
 	<h3>
-		getCreatedDate
+		getContentService
 		
 	</h3>
 
-	<kbd>public string <strong>getCreatedDate</strong>()</kbd>
+	<kbd>public string <strong>getContentService</strong>()</kbd>
 
 	<br><br>
 
@@ -1481,13 +1072,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="getCreator()"><!-- --></a>
+	<a name="getController()"><!-- --></a>
 	<h3>
-		getCreator
+		getController
 		
 	</h3>
 
-	<kbd>public string <strong>getCreator</strong>()</kbd>
+	<kbd>public string <strong>getController</strong>()</kbd>
 
 	<br><br>
 
@@ -1513,24 +1104,114 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="getDisplayCreatedDate()"><!-- --></a>
+	<a name="getWirebox()"><!-- --></a>
 	<h3>
-		getDisplayCreatedDate
+		getWirebox
 		
 	</h3>
 
-	<kbd>public string <strong>getDisplayCreatedDate</strong>([string dateFormat='dd mmm yyyy'], [string timeFormat='hh:mm tt'])</kbd>
+	<kbd>public string <strong>getWirebox</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Gets the formatted created date</p>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="refresh()"><!-- --></a>
+	<h3>
+		refresh
+		
+	</h3>
+
+	<kbd>public contentbox.models.search.ISearchAdapter <strong>refresh</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>If chosen to be implemented, it should refresh search indexes and collections</p>
 	
 
 	
 
 	
 		
+		
+			<dl>
+				<dt><strong>Specified by:</strong></dt>
+				<dd>
+				<code>
+				<a href="../../contentbox/models/search/ISearchAdapter.html#refresh()">refresh</a></code>
+				in interface
+				<code>
+					contentbox.models.search.ISearchAdapter
+				</code>
+				</dd>
+			</dl>
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="renderSearch()"><!-- --></a>
+	<h3>
+		renderSearch
+		
+	</h3>
+
+	<kbd>public any <strong>renderSearch</strong>(string searchTerm, [numeric max='0'], [numeric offset='0'])</kbd>
+
+	<br><br>
+
+	
+		<p>Render the search results according to the adapter and return HTML</p>
+	
+
+	
+
+	
+		
+		
+			<dl>
+				<dt><strong>Specified by:</strong></dt>
+				<dd>
+				<code>
+				<a href="../../contentbox/models/search/ISearchAdapter.html#renderSearch()">renderSearch</a></code>
+				in interface
+				<code>
+					contentbox.models.search.ISearchAdapter
+				</code>
+				</dd>
+			</dl>
 		
 	
 
@@ -1541,19 +1222,16 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>dateFormat</code> - The dateformat to use</dd>
+		<dd><code>searchTerm</code> - The search term to search on</dd>
 		
-		<dd><code>timeFormat</code> - The timeformat to use</dd>
+		<dd><code>max</code> - The max results to return if paging</dd>
+		
+		<dd><code>offset</code> - The offset to use in the search results if paging</dd>
 		
 		</dl>
 	
 
 	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>The formatted created date</dd>
-		</dl>
-	
 
 	
 
@@ -1561,48 +1239,18 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="getFeed()"><!-- --></a>
+	<a name="renderSearchWithResults()"><!-- --></a>
 	<h3>
-		getFeed
+		renderSearchWithResults
 		
 	</h3>
 
-	<kbd>public string <strong>getFeed</strong>()</kbd>
+	<kbd>public any <strong>renderSearchWithResults</strong>(contentbox.models.search.SearchResults searchResults)</kbd>
 
 	<br><br>
 
 	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getItemUrl()"><!-- --></a>
-	<h3>
-		getItemUrl
-		
-	</h3>
-
-	<kbd>public string <strong>getItemUrl</strong>()</kbd>
-
-	<br><br>
-
+		<p>Render the search results according the passed in search results object</p>
 	
 
 	
@@ -1610,69 +1258,17 @@ BlacklistedItem Model</p>
 	
 		
 		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getTitle()"><!-- --></a>
-	<h3>
-		getTitle
-		
-	</h3>
-
-	<kbd>public string <strong>getTitle</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="hasCreator()"><!-- --></a>
-	<h3>
-		hasCreator
-		
-	</h3>
-
-	<kbd>public boolean <strong>hasCreator</strong>([any creator])</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
+			<dl>
+				<dt><strong>Specified by:</strong></dt>
+				<dd>
+				<code>
+				<a href="../../contentbox/models/search/ISearchAdapter.html#renderSearchWithResults()">renderSearchWithResults</a></code>
+				in interface
+				<code>
+					contentbox.models.search.ISearchAdapter
+				</code>
+				</dd>
+			</dl>
 		
 	
 
@@ -1683,7 +1279,7 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>creator</code></dd>
+		<dd><code>searchResults</code> - The search results object</dd>
 		
 		</dl>
 	
@@ -1696,22 +1292,36 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="hasFeed()"><!-- --></a>
+	<a name="search()"><!-- --></a>
 	<h3>
-		hasFeed
+		search
 		
 	</h3>
 
-	<kbd>public boolean <strong>hasFeed</strong>([any feed])</kbd>
+	<kbd>public contentbox.models.search.SearchResults <strong>search</strong>(string searchTerm, [numeric max='0'], [numeric offset='0'])</kbd>
 
 	<br><br>
 
 	
+		<p>Search content and return an standardized ContentBox Results object.</p>
+	
 
 	
 
 	
 		
+		
+			<dl>
+				<dt><strong>Specified by:</strong></dt>
+				<dd>
+				<code>
+				<a href="../../contentbox/models/search/ISearchAdapter.html#search()">search</a></code>
+				in interface
+				<code>
+					contentbox.models.search.ISearchAdapter
+				</code>
+				</dd>
+			</dl>
 		
 	
 
@@ -1722,7 +1332,11 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>feed</code></dd>
+		<dd><code>searchTerm</code> - The search term to search on</dd>
+		
+		<dd><code>max</code> - The max results to return if paging</dd>
+		
+		<dd><code>offset</code> - The offset to use in the search results if paging</dd>
 		
 		</dl>
 	
@@ -1735,52 +1349,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="setCreatedDate()"><!-- --></a>
+	<a name="setCb()"><!-- --></a>
 	<h3>
-		setCreatedDate
+		setCb
 		
 	</h3>
 
-	<kbd>public any <strong>setCreatedDate</strong>(date createdDate)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>createdDate</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setCreator()"><!-- --></a>
-	<h3>
-		setCreator
-		
-	</h3>
-
-	<kbd>public any <strong>setCreator</strong>(any creator)</kbd>
+	<kbd>public any <strong>setCb</strong>(any cb)</kbd>
 
 	<br><br>
 
@@ -1800,7 +1375,7 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>creator</code></dd>
+		<dd><code>cb</code></dd>
 		
 		</dl>
 	
@@ -1813,13 +1388,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="setFeed()"><!-- --></a>
+	<a name="setContentService()"><!-- --></a>
 	<h3>
-		setFeed
+		setContentService
 		
 	</h3>
 
-	<kbd>public any <strong>setFeed</strong>(any feed)</kbd>
+	<kbd>public any <strong>setContentService</strong>(any contentService)</kbd>
 
 	<br><br>
 
@@ -1839,7 +1414,7 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>feed</code></dd>
+		<dd><code>contentService</code></dd>
 		
 		</dl>
 	
@@ -1852,13 +1427,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="setItemUrl()"><!-- --></a>
+	<a name="setController()"><!-- --></a>
 	<h3>
-		setItemUrl
+		setController
 		
 	</h3>
 
-	<kbd>public any <strong>setItemUrl</strong>(any itemUrl)</kbd>
+	<kbd>public any <strong>setController</strong>(any controller)</kbd>
 
 	<br><br>
 
@@ -1878,7 +1453,7 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>itemUrl</code></dd>
+		<dd><code>controller</code></dd>
 		
 		</dl>
 	
@@ -1891,13 +1466,13 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="setTitle()"><!-- --></a>
+	<a name="setWirebox()"><!-- --></a>
 	<h3>
-		setTitle
+		setWirebox
 		
 	</h3>
 
-	<kbd>public any <strong>setTitle</strong>(any title)</kbd>
+	<kbd>public any <strong>setWirebox</strong>(any wirebox)</kbd>
 
 	<br><br>
 
@@ -1917,50 +1492,11 @@ BlacklistedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>title</code></dd>
+		<dd><code>wirebox</code></dd>
 		
 		</dl>
 	
 
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="validate()"><!-- --></a>
-	<h3>
-		validate
-		
-	</h3>
-
-	<kbd>public array <strong>validate</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Validates the blacklisted item</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>An array of errors or an empty array if no error is found</dd>
-		</dl>
 	
 
 	
