@@ -94,7 +94,6 @@ component extends="baseHandler" {
 		// Save the item
 		blacklistedItemService.save( blacklistedItem );
 
-		// TODO: Tie into feeds, remove item if it exists?
 		announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
 
 		if ( event.isAjax() ) {

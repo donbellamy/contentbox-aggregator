@@ -60,6 +60,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedItemSearch = "#prc.agAdminEntryPoint#.feeditems";
 		prc.xehFeedItemTable = "#prc.agAdminEntryPoint#.feeditems.table";
 		prc.xehFeedItemStatus = "#prc.agAdminEntryPoint#.feeditems.updateStatus";
+		prc.xehFeedItemBlacklist = "#prc.agAdminEntryPoint#.feeditems.blacklist";
 		prc.xehFeedItemEditor = "#prc.agAdminEntryPoint#.feeditems.editor";
 		prc.xehFeedItemSave = "#prc.agAdminEntryPoint#.feeditems.save";
 		prc.xehFeedItemCategories = "#prc.agAdminEntryPoint#.feeditems.saveCategories";

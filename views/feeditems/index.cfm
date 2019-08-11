@@ -45,8 +45,16 @@
 													<i class="fa fa-trash-o"></i> Delete Selected
 												</a>
 											</li>
-											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-ban"></i> Draft Selected</a></li>
+											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-close"></i> Draft Selected</a></li>
 											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
+											<li>
+												<a href="javascript:blacklist();"
+													class="confirmIt"
+													data-title="Blacklist Selected Feed Items?"
+													data-message="This will delete the feed items and prevent them from being imported, are you sure?">
+													<i class="fa fa-ban"></i> Blacklist Selected
+												</a>
+											</li>
 											<li><a href="javascript:resetHits();"><i class="fa fa-refresh"></i> Reset Hits Selected</a></li>
 											<li><a href="javascript:categoryChooser();"><i class="fa fa-tags"></i> Assign Categories</a></li>
 											<li><a href="javascript:saveAsEntry();"><i class="fa fa-copy"></i> Save as Entry</a></li>

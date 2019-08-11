@@ -102,6 +102,13 @@ function changeStatus( status, contentID ) {
 	}
 	$contentForm.submit();
 }
+function blacklist( contentID ) {
+	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemBlacklist )#" );
+	if ( contentID != null ) {
+		checkByValue( "contentID", contentID );
+	}
+	$contentForm.submit();
+}
 function resetHits( contentID ) {
 	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedItemResetHits )#" );
 	if ( contentID != null ) {

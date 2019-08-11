@@ -32,7 +32,14 @@
 						<ul class="dropdown-menu text-left pull-right">
 							<li><a href="javascript:edit('#blacklistedItem.getBlacklistedItemID()#','#HTMLEditFormat( JSStringFormat( blacklistedItem.getTitle() ) )#','#HTMLEditFormat( JSStringFormat( blacklistedItem.getItemUrl() ) )#','#blacklistedItem.getFeed().getContentID()#');"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
 							<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
-								<li><a href="javascript:remove('#blacklistedItem.getBlacklistedItemID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Blacklisted Item?"><i id="delete_#blacklistedItem.getBlacklistedItemID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
+								<li>
+									<a href="javascript:remove('#blacklistedItem.getBlacklistedItemID()#')"
+										class="confirmIt"
+										data-title="<i class='fa fa-trash-o'></i> Delete Blacklisted Item?"
+										data-message="This will delete the blacklisted item, are you sure?">
+										<i id="delete_#blacklistedItem.getBlacklistedItemID()#" class="fa fa-trash-o fa-lg" ></i> Delete
+									</a>
+								</li>
 							</cfif>
 							<li><a href="#blacklistedItem.getItemUrl()#" target="_blank"><i class="fa fa-external-link fa-lg"></i> View Item</a></li>
 						</ul>

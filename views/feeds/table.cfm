@@ -87,15 +87,32 @@
 						<ul class="dropdown-menu text-left pull-right">
 							<li><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
 							<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
-								<li><a href="javascript:remove('#feed.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed?"><i id="delete_#feed.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
-								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
+								<li>
+									<a href="javascript:remove('#feed.getContentID()#')"
+										class="confirmIt"
+										data-title="<i class='fa fa-trash-o'></i> Delete Feed?"
+										data-message="This will delete the feed and all imported items, are you sure?">
+										<i id="delete_#feed.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete
+									</a>
+								</li>
+								<cfif feed.getIsPublished() >
+									<li><a href="javascript:changeStatus('draft','#feed.getContentID()#');"><i class="fa fa-close fa-lg"></i> Draft</a></li>
+								<cfelse>
+									<li><a href="javascript:changeStatus('publish','#feed.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
+								</cfif>
+								<cfif feed.getIsActive() >
+									<li><a href="javascript:changeState('pause','#feed.getContentID()#');"><i class="fa fa-pause-circle-o"></i> Pause</a></li>
+								<cfelse>
+									<li><a href="javascript:changeState('active','#feed.getContentID()#');"><i class="fa fa-play-circle-o"></i> Activate</a></li>
+								</cfif>
 								<li><a href="javascript:resetHits('#feed.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 								<li><a href="javascript:categoryChooser('#feed.getContentID()#');"><i class="fa fa-tags fa-lg"></i> Assign Categories</a></li>
+								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
 							</cfif>
-							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
 							<cfif feed.hasFeedImport() >
 								<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getLatestFeedImport().getFeedImportID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a>
 							</cfif>
+							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
 						</ul>
 					</div>
 				</td>

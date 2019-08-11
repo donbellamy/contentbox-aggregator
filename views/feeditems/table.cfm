@@ -67,15 +67,33 @@
 						<ul class="dropdown-menu text-left pull-right">
 							<li><a href="#event.buildLink( prc.xehFeedItemEditor )#/contentID/#feedItem.getContentID()#"><i class="fa fa-edit fa-lg"></i> Edit</a></li>
 							<cfif prc.oCurrentAuthor.checkPermission( "FEED_ITEMS_ADMIN" ) >
-								<li><a href="javascript:remove('#feedItem.getContentID()#')" class="confirmIt" data-title="<i class='fa fa-trash-o'></i> Delete Feed Item?"><i id="delete_#feedItem.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete</a></li>
-								<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-ban fa-lg"></i> Draft</a></li>
-								<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
+								<li>
+									<a href="javascript:remove('#feedItem.getContentID()#')"
+										class="confirmIt"
+										data-title="<i class='fa fa-trash-o'></i> Delete Feed Item?"
+										data-message="This will delete the feed item, are you sure?">
+										<i id="delete_#feedItem.getContentID()#" class="fa fa-trash-o fa-lg" ></i> Delete
+									</a>
+								</li>
+								<cfif feedItem.getIsPublished() >
+									<li><a href="javascript:changeStatus('draft','#feedItem.getContentID()#');"><i class="fa fa-close fa-lg"></i> Draft</a></li>
+								<cfelse>
+									<li><a href="javascript:changeStatus('publish','#feedItem.getContentID()#');"><i class="fa fa-check fa-lg"></i> Publish</a></li>
+								</cfif>
+								<li>
+									<a href="javascript:blacklist('#feedItem.getContentID()#');"
+										class="confirmIt"
+										data-title="<i class='fa fa-trash-o'></i> Blacklist Feed Item?"
+										data-message="This will delete the feed item and prevent it from being imported, are you sure?">
+										<i id="blacklist_#feedItem.getContentID()#" class="fa fa-ban fa-lg"></i> Blacklist
+									</a>
+								</li>
 								<li><a href="javascript:resetHits('#feedItem.getContentID()#')"><i class="fa fa-refresh fa-lg"></i> Reset Hits</a></li>
 								<li><a href="javascript:categoryChooser('#feedItem.getContentID()#');"><i class="fa fa-tags fa-lg"></i> Assign Categories</a></li>
 								<li><a href="javascript:saveAsEntry('#feedItem.getContentID()#');"><i class="fa fa-copy fa-lg"></i> Save as Entry</a></li>
 							</cfif>
+							<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#feedItem.getContentID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a></li>
 							<li><a href="#prc.agHelper.linkFeedItem( feedItem )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
-							<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedItemImportView)#/contentID/#feedItem.getContentID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a>
 						</ul>
 					</div>
 				</td>

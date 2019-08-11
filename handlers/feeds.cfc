@@ -435,7 +435,7 @@ component extends="contentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "aggregator_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
-			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentStatus#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feed#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentStatus#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
@@ -488,7 +488,7 @@ component extends="contentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, state=rc.contentState );
 			announceInterception( "aggregator_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
-			cbMessagebox.info( "#listLen( rc.contentID )# feeds were set to '#rc.contentState#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feed#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentState#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
 		}

@@ -6,6 +6,7 @@
 component extends="contentHandler" {
 
 	// Dependencies
+	property name="blacklistedItemService" inject="blacklistedItemService@aggregator";
 	property name="entryService" inject="entryService@cb";
 
 	/**
@@ -330,7 +331,49 @@ component extends="contentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
 			announceInterception( "aggregator_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
-			cbMessagebox.info( "#listLen( rc.contentID )# feed items were set to '#rc.contentStatus#'." );
+			cbMessagebox.info( "#listLen( rc.contentID )# feed item#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentStatus#'." );
+		} else {
+			cbMessagebox.warn( "No feed items selected!" );
+		}
+
+		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+
+	}
+
+	/**
+	 * Blacklists feed item
+	 */
+	function blacklist( event, rc, prc ) {
+
+		event.paramValue( "contentID", "" );
+
+		// Create blacklist item and delete feed item
+		if ( len( rc.contentID ) ) {
+			rc.contentID = listToArray( rc.contentID );
+			var messages = [];
+			for ( var contentID in rc.contentID ) {
+				var feedItem = feedItemService.get( contentID, false );
+				if ( !isNull( feedItem ) ) {
+					// Create and save the blacklisted item
+					var blacklistedItem = blacklistedItemService.new();
+					blacklistedItem.setTitle( feedItem.getTitle() );
+					blacklistedItem.setItemUrl( feedItem.getItemUrl() );
+					blacklistedItem.setFeed( feedItem.getFeed() );
+					blacklistedItem.setCreator( prc.oCurrentAuthor );
+					announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+					blacklistedItemService.save( blacklistedItem );
+					announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+					// Delete feed item
+					var title = feedItem.getTitle();
+					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
+					feedItemService.deleteContent( feedItem );
+					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
+					arrayAppend( messages, "Blacklisted item created from feed item '#title#'." );
+				} else {
+					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
+				}
+			}
+			cbMessagebox.info( messageArray=messages );
 		} else {
 			cbMessagebox.warn( "No feed items selected!" );
 		}

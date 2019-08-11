@@ -45,7 +45,7 @@
 													<i class="fa fa-trash-o"></i> Delete Selected
 												</a>
 											</li>
-											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-ban"></i> Draft Selected</a></li>
+											<li><a href="javascript:changeStatus('draft');"><i class="fa fa-close"></i> Draft Selected</a></li>
 											<li><a href="javascript:changeStatus('publish');"><i class="fa fa-check"></i> Publish Selected</a></li>
 											<li><a href="javascript:changeState('pause');"><i class="fa fa-pause-circle-o"></i> Pause Selected</a></li>
 											<li><a href="javascript:changeState('active');"><i class="fa fa-play-circle-o"></i> Activate Selected</a></li>
