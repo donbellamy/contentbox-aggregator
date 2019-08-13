@@ -361,6 +361,8 @@ component {
 		// Delete scheduled task (will delete if one exists)
 		cfschedule( action="delete", task="aggregator-import" );
 
+		// TODO: thre is a bug here when module is deactivated, the admin and portal request intercepters are still active?
+
 	}
 
 }

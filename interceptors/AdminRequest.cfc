@@ -88,6 +88,11 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
 
+		// Return if module is not activated
+		if ( 1 neq 2 ) {
+			return;
+		}
+
 		// Param format
 		event.paramValue( "format", "html" );
 

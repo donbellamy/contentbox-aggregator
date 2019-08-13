@@ -324,6 +324,61 @@ Feed items handler</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="feeditems.html#blacklistedItemService()">blacklistedItemService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = blacklistedItemService@aggregator</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="feeditems.html#entryService()">entryService</A></strong>
 			<br>
 			
@@ -391,6 +446,21 @@ Feed items handler</p>
 		</th>
 	</tr>
 
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="feeditems.html#blacklist()">blacklist</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blacklists feed item.
+			
+		</td>
+	</tr>
 	
 	
 	
@@ -1316,6 +1386,54 @@ Feed items handler</p>
 
 	
 		
+		<a name="blacklistedItemService()"><!-- --></a>
+		<h3>blacklistedItemService</h3>
+
+		<kbd>
+			property any
+			<strong>blacklistedItemService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - blacklistedItemService@aggregator</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="entryService()"><!-- --></a>
 		<h3>entryService</h3>
 
@@ -1383,6 +1501,51 @@ Feed items handler</p>
 	</tr>
 </table>
 
+
+	
+	<a name="blacklist()"><!-- --></a>
+	<h3>
+		blacklist
+		
+	</h3>
+
+	<kbd>public any <strong>blacklist</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Blacklists feed item</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
 
 	
 	<a name="editor()"><!-- --></a>
