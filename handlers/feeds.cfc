@@ -7,6 +7,7 @@ component extends="contentHandler" {
 
 	// Dependencies
 	property name="feedImportService" inject="feedImportService@aggregator";
+	property name="blacklistedItemService" inject="blacklistedItemService@aggregator";
 
 	// Pre handler exeptions (to allow use on front end)
 	this.preHandler_except = "import,importFeed";
@@ -249,7 +250,7 @@ component extends="contentHandler" {
 		}
 
 		// Slug
-		rc.slug =  htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
+		rc.slug = htmlHelper.slugify( len( rc.slug ) ? rc.slug : rc.title );
 
 		// Check permission
 		if ( !prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) ) {
@@ -703,6 +704,37 @@ component extends="contentHandler" {
 		}
 
 		event.renderData( type="json", data=data );
+
+	}
+
+	/**
+	 * Blacklists feed item from feed import
+	 */
+	function blacklist( event, rc, prc ) {
+
+		event.paramValue( "feedImportID", "" );
+
+		// Grab the feed import
+		var feedImport = feedImportService.get( rc.feedImportID, false );
+
+		if ( !isNull( feedImport ) && structKeyExists( feedImport.getMetaInfo(), "FeedItem" ) ) {
+			// Grab the feed item struct
+			var feedItem = feedImport.getMetaInfo().FeedItem;
+			// Create and save the blacklisted item
+			var blacklistedItem = blacklistedItemService.new();
+			blacklistedItem.setTitle( feedItem.title );
+			blacklistedItem.setItemUrl( feedItem.itemUrl );
+			blacklistedItem.setFeed( feedImport.getFeed() );
+			blacklistedItem.setCreator( prc.oCurrentAuthor );
+			announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+			blacklistedItemService.save( blacklistedItem );
+			announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+			cbMessagebox.info( "Blacklisted item '#feedItem.title#' created!<br/><br/>Click <a href='#event.buildLink(prc.xehFeedImport)#/contentID/#feedImport.getFeed().getContentID()#'>here</a> to import items for '#feedImport.getFeed().getTitle()#'." );
+		} else {
+			cbMessagebox.warn( "Invalid feed import and/or no feed item attached to feed import." );
+		}
+
+		setNextEvent( event=prc.xehFeeds );
 
 	}
 

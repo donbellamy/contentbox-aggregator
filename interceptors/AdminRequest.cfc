@@ -49,6 +49,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedSearch = "#prc.agAdminEntryPoint#.feeds";
 		prc.xehFeedTable = "#prc.agAdminEntryPoint#.feeds.table";
 		prc.xehFeedStatus = "#prc.agAdminEntryPoint#.feeds.updateStatus";
+		prc.xehFeedResetHits = "#prc.agAdminEntryPoint#.feeds.resetHits";
 		prc.xehFeedState = "#prc.agAdminEntryPoint#.feeds.state";
 		prc.xehFeedEditor = "#prc.agAdminEntryPoint#.feeds.editor";
 		prc.xehFeedSave = "#prc.agAdminEntryPoint#.feeds.save";
@@ -59,7 +60,7 @@ component extends="coldbox.system.Interceptor" {
 		prc.xehFeedImportActive = "#prc.agAdminEntryPoint#.feeds.importActive";
 		prc.xehFeedImportView = "#prc.agAdminEntryPoint#.feeds.viewImport";
 		prc.xehFeedImportRemove = "#prc.agAdminEntryPoint#.feeds.removeImport";
-		prc.xehFeedResetHits = "#prc.agAdminEntryPoint#.feeds.resetHits";
+		prc.xehFeedBlacklist = "#prc.agAdminEntryPoint#.feeds.blacklist";
 
 		// Feeditems
 		prc.xehFeedItems = "#prc.agAdminEntryPoint#.feeditems";
