@@ -9,11 +9,17 @@ component extends="coldbox.system.Interceptor" {
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="settingService" inject="settingService@cb";
 	property name="agHelper" inject="helper@aggregator";
+	property name="moduleService" inject="coldbox:moduleService";
 
 	/**
 	 * Fired on pre process during contentbox admin requests only
 	 */
 	function preProcess( event, interceptData, rc, prc ) eventPattern="^contentbox-admin" {
+
+		// Check that module is active
+		if ( !moduleService.isModuleRegistered("contentbox-aggregator") ) {
+			return;
+		}
 
 		// Helper
 		prc.agHelper = agHelper;
@@ -87,11 +93,6 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired on post render during contentbox admin requests only
 	 */
 	function postRender( event, interceptData, buffer, rc, prc ) eventPattern="^contentbox-admin" {
-
-		// Return if module is not activated
-		if ( 1 neq 2 ) {
-			return;
-		}
 
 		// Param format
 		event.paramValue( "format", "html" );

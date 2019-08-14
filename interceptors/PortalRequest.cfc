@@ -11,11 +11,17 @@ component extends="coldbox.system.Interceptor" {
 	property name="cbHelper" inject="CBHelper@cb";
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="agHelper" inject="helper@aggregator";
+	property name="moduleService" inject="coldbox:moduleService";
 
 	/**
 	 * Fired on pre process during contentbox public requests only
 	 */
 	function preProcess( event, interceptData, buffer, rc, prc ) {
+
+		// Check that module is active
+		if ( !moduleService.isModuleRegistered("contentbox-aggregator") ) {
+			return;
+		}
 
 		// Prepare UI if we are in the aggregator module
 		if ( reFindNoCase( "^contentbox-aggregator", event.getCurrentEvent() ) ) {
