@@ -354,6 +354,7 @@ component extends="contentHandler" {
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
+
 					// Create and save the blacklisted item
 					var blacklistedItem = blacklistedItemService.new();
 					blacklistedItem.setTitle( feedItem.getTitle() );
@@ -363,12 +364,14 @@ component extends="contentHandler" {
 					announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
 					blacklistedItemService.save( blacklistedItem );
 					announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+
 					// Delete feed item
 					var title = feedItem.getTitle();
 					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
 					feedItemService.deleteContent( feedItem );
 					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
 					arrayAppend( messages, "Blacklisted item created from feed item '#title#'." );
+
 				} else {
 					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
