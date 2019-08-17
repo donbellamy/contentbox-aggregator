@@ -22,6 +22,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Renders the portal widget
+	 * @title.label Title
+	 * @title.hint An optional title to display using an H tag.
+	 * @titleLevel.label Title Level
+	 * @titleLevel.hint The H{level} to use.
+	 * @titleLevel.options 1,2,3,4,5
 	 * @max.label Maximum Items
 	 * @max.hint The number of feed items to display.
 	 * @max.options 1,5,10,15,20,25,50,100
@@ -43,6 +48,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @return The portal widget html
 	 */
 	string function renderIt(
+		string title="",
+		numeric titleLevel=2,
 		numeric max=10,
 		string feed="",
 		string category="",
