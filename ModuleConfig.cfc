@@ -14,7 +14,7 @@ component {
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";
-	this.cfmapping = "aggregator"; // TODO: change to contentbox-aggregator ??
+	this.cfmapping = "aggregator";
 	this.dependencies = ["cbjsoup"];
 
 	/**
@@ -120,6 +120,22 @@ component {
 			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
 			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
 			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
+		];
+
+		// News page routes
+		newsRoutes = [
+			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator-news" },
+			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator-news" },
+			{ pattern="/rss/:category?", handler="portal", action="rss", namespace="aggregator-news" },
+			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator-news" },
+			{ pattern="/", handler="portal", action="index", namespace="aggregator-news" }
+		];
+
+		// Feeds page routes
+		feedsRoutes = [
+			{ pattern="/:slug/rss/:category?", handler="portal", action="rss", namespace="aggregator-feeds" },
+			{ pattern="/:slug", handler="portal", action="feed", namespace="aggregator-feeds" },
+			{ pattern="/", handler="portal", action="feeds", namespace="aggregator-feeds" }
 		];
 
 		// Interception points
@@ -228,40 +244,40 @@ component {
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
 		// Add routes
-		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
+		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var agEntryPoint = settings.ag_portal_entrypoint;
+		var agEntryPoint = settings.ag_portal_entrypoint; // ag_ui_news_entryPoint, ag_ui_feeds_entryPoint
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			agEntryPoint = agSettings.ag_portal_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
-			ses.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
+			routingService.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
+			routingService.addNamespace( pattern="#cbEntryPoint#/news", namespace="aggregator-news", append=false );
+			routingService.addNamespace( pattern="#cbEntryPoint#/feeds", namespace="aggregator-feeds", append=false );
 		} else {
-			ses.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
+			routingService.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
+			routingService.addNamespace( pattern="news", namespace="aggregator-news", append=false );
+			routingService.addNamespace( pattern="feeds", namespace="aggregator-feeds", append=false );
 		}
-		for ( var x=1; x LTE arrayLen( aggregatorRoutes ); x++ ) {
-			var args = duplicate( aggregatorRoutes[ x ] );
-			if ( structKeyExists( args, "handler" ) ) {
-				args.handler = "contentbox-aggregator:#args.handler#";
+		aggregatorRoutes.each( function( item ) {
+			if ( structKeyExists( item, "handler" ) ) {
+				item.handler = "contentbox-aggregator:#item.handler#";
 			}
-			ses.addRoute(argumentCollection=args);
-		}
-
-	}
-
-	/**
-	 * Fired when module is unloaded
-	 */
-	function onUnload() {
-
-		// Remove menus
-		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
-		menuService.removeTopMenu("aggregator");
-
-		// Remove routes
-		var ses = controller.getInterceptorService().getInterceptor( "SES", true );
-		ses.removeNamespaceRoutes("aggregator");
+			routingService.addRoute( argumentCollection=item );
+		});
+		newsRoutes.each( function( item ) {
+			if ( structKeyExists( item, "handler" ) ) {
+				item.handler = "contentbox-aggregator:#item.handler#";
+			}
+			routingService.addRoute( argumentCollection=item );
+		});
+		feedsRoutes.each( function( item ) {
+			if ( structKeyExists( item, "handler" ) ) {
+				item.handler = "contentbox-aggregator:#item.handler#";
+			}
+			routingService.addRoute( argumentCollection=item );
+		});
 
 	}
 
@@ -358,11 +374,30 @@ component {
 			}
 		}
 
+		// TODO: Change all layouts back to use pages, and remove any widgets???
+
 		// Delete scheduled task (will delete if one exists)
 		cfschedule( action="delete", task="aggregator-import" );
 
-		// TODO: thre is a bug here when module is deactivated, the admin and portal request intercepters are still active?
+	}
+
+	/**
+	 * Fired when module is unloaded
+	 */
+	function onUnload() {
+
+		// Remove menus
+		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
+		menuService.removeTopMenu("aggregator");
+
+		// Remove routes
+		var routingService = controller.getRoutingService();
+		routingService.removeNamespaceRoutes("aggregator");
+		routingService.removeNamespaceRoutes("aggregator-news");
+		routingService.removeNamespaceRoutes("aggregator-feeds");
 
 	}
+
+	// TODO: onDelete() ??
 
 }

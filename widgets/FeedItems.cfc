@@ -107,7 +107,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// List end
 		html &= "</ul>";
 
-		return string;
+		return html;
 
 	}
 

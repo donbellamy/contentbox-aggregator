@@ -12,6 +12,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="agHelper" inject="helper@aggregator";
 	property name="moduleService" inject="coldbox:moduleService";
+	property name="routingService" inject="coldbox:routingService";
 
 	/**
 	 * Fired on pre process during contentbox public requests only
@@ -46,6 +47,21 @@ component extends="coldbox.system.Interceptor" {
 		// Portal
 		prc.xehPortalHome = prc.agEntryPoint;
 		prc.xehPortalFeeds = "#prc.agEntryPoint#.feeds";
+
+		// event.getCurrentEvent() = contentbox-ui:page.index
+		// and rc.pageSlug = "news"
+		// then prepareui and override the event
+		// cbHelper.prepareUIRequest();
+		// event.overrideEvent( "contentbox-aggregator:portal.index" ); change to ui.index;
+		// In ui prehandler grab the page, notfound if dont exist
+		// AND/OR add the routes in moduleconfig?
+		// /#newsPageSlug#/:slug -> ui.feedItem
+		//writedump( var=prc,top=2 );
+		//writedump( var=rc,top=2 );
+		//var ses = controller.getInterceptorService().getInterceptor( "SES", true );
+		//writedump(ses);
+		//writedump(routingService.getRoutes());
+		//abort;
 
 	}
 

@@ -137,14 +137,15 @@ component extends="baseHandler" {
 		}
 
 		// Set portal entrypoint
-		var ses = getInterceptor("SES");
-		var routes = ses.getRoutes();
-		for ( var key IN routes ) {
-			if ( key.namespaceRouting EQ "aggregator" ) {
-				key.pattern = key.regexpattern = replace( prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
-			}
-		}
-		ses.setRoutes( routes );
+		var routingService = controller.getRoutingService();
+		routingService.setRoutes(
+			routingService.getRoutes().map( function( item ) {
+				if ( item.namespaceRouting EQ "aggregator" ) {
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
+				}
+				return item;
+			})
+		);
 
 		announceInterception( "aggregator_postSettingsSave", {
 			settings=prc.agSettings,

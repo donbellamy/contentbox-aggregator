@@ -41,26 +41,26 @@ component extends="aggregator.models.BaseWidget" singleton {
 			status="published"
 		);
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// List start
-			writeOutput('<ul id="feeds">');
-			// List items
-			for ( var x=1; x LTE results.count; x++ ) {
-				writeOutput('<li class="feeds"><a href="#ag.linkFeed( results.feeds[x] )#">#results.feeds[x].getTitle()#</a></li>');
-			}
-			// List end
-			writeOutput( "</ul>" );
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
 		}
 
-		return string;
+		// List start
+		html &= '<ul id="feeds">';
+
+		// List items
+		for ( var x=1; x LTE results.count; x++ ) {
+			html &= '<li class="feeds"><a href="#ag.linkFeed( results.feeds[x] )#">#results.feeds[x].getTitle()#</a></li>';
+		}
+
+		// List end
+		html &= "</ul>";
+
+		return html;
 
 	}
 
