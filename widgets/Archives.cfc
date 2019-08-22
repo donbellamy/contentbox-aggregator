@@ -45,25 +45,23 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the archives
 		var archives = feedItemService.getArchiveReport( arguments.includeEntries );
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// Dropdown
-			if ( arguments.useDropdown ) {
-				writeoutput( buildDropDown( archives, arguments.showItemCount ) );
-			// List
-			} else {
-				writeoutput( buildList( archives, arguments.showItemCount ) );
-			}
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
 		}
 
-		return string;
+		// Dropdown
+		if ( arguments.useDropdown ) {
+			html &= buildDropDown( archives, arguments.showItemCount );
+		// List
+		} else {
+			html &= buildList( archives, arguments.showItemCount );
+		}
+
+		return html;
 
 	}
 
@@ -75,25 +73,26 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	private string function buildDropDown( archives, showItemCount ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Select start
-			writeOutput('<select name="archives" id="archives" onchange="window.location=this.value" )><option value="##">Select Archive</option>');
-			// Select options
-			for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
-				var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
-				writeOutput('<option value="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#');
-				if ( arguments.showItemCount ) { writeOutput( " (#arguments.archives[x]['count']#)" ); }
-				writeOutput('</option>');
+		// Select start
+		html &= '<select name="archives" id="archives" onchange="window.location=this.value" )><option value="##">Select Archive</option>';
+
+		// Select options
+		for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
+			var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
+			html &= '<option value="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#';
+			if ( arguments.showItemCount ) {
+				html &= " (#arguments.archives[x]['count']#)";
 			}
-			// Select end
-			writeOutput( "</select>" );
+			html &= "</option>";
 		}
 
-		return string;
+		// Select end
+		html &= "</select>";
+
+		return html;
 
 	}
 
@@ -104,24 +103,25 @@ component extends="aggregator.models.BaseWidget" singleton {
 	private string function buildList( archives, showItemCount ) {
 
 		// Set return html
-		var string = "";
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// List start
-			writeOutput('<ul id="archives">');
-			// List items
-			for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
-				var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
-				writeOutput('<li class="archives"><a href="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#');
-				if ( arguments.showItemCount ) { writeOutput( " (#arguments.archives[x]['count']#)" ); }
-				writeOutput('</a></li>');
+		// List start
+		html &= '<ul id="archives">';
+
+		// List items
+		for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
+			var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
+			html &= '<li class="archives"><a href="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#';
+			if ( arguments.showItemCount ) {
+				html &= " (#arguments.archives[x]['count']#)";
 			}
-			// List end
-			writeOutput( "</ul>" );
+			html &= "</a></li>";
 		}
 
-		return string;
+		// List end
+		html &= "</ul>";
+
+		return html;
 
 	}
 

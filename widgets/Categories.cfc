@@ -49,25 +49,23 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the categories
 		var categories = categoryService.list( sortOrder="category", asQuery=false );
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// Dropdown
-			if ( arguments.useDropdown ) {
-				writeoutput( buildDropDown( categories, arguments.showItemCount, arguments.category, arguments.includeEntries ) );
-			// List
-			} else {
-				writeoutput( buildList( categories, arguments.showItemCount, arguments.category, arguments.includeEntries ) );
-			}
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
 		}
 
-		return string;
+		// Dropdown
+		if ( arguments.useDropdown ) {
+			html &= buildDropDown( categories, arguments.showItemCount, arguments.category, arguments.includeEntries );
+		// List
+		} else {
+			html &= buildList( categories, arguments.showItemCount, arguments.category, arguments.includeEntries );
+		}
+
+		return html;
 
 	}
 
@@ -78,28 +76,29 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	private string function buildDropDown( categories, showItemCount, categoryFilter, includeEntries ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Select start
-			writeOutput('<select name="categories" id="categories" onchange="window.location=this.value" )><option value="##">Select Category</option>');
+		// Select start
+		html &= '<select name="categories" id="categories" onchange="window.location=this.value" )><option value="##">Select Category</option>';
+
 			// Select options
-			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
-				var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
-				if ( feedItemCount && showCategory ) {
-					writeOutput('<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
-					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
-					writeOutput('</option>');
+		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
+			var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
+			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
+			if ( feedItemCount && showCategory ) {
+				html &= '<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
+				if ( arguments.showItemCount ) {
+					html &= " (#feedItemCount#)";
 				}
+				html &= "</option>";
 			}
-			// Select end
-			writeOutput( "</select>" );
 		}
 
-		return string;
+		// Select end
+		html &= "</select>";
+
+		return html;
 
 	}
 
@@ -108,28 +107,29 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	private string function buildList( categories, showItemCount, categoryFilter, includeEntries  ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// List start
-			writeOutput('<ul id="categories">');
-			// List items
-			for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-				var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
-				var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
-				if ( feedItemCount && showCategory ) {
-					writeOutput('<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#');
-					if ( arguments.showItemCount ) { writeOutput( " (#feedItemCount#)" ); }
-					writeOutput('</a></li>');
+		// List start
+		html &= '<ul id="categories">';
+
+		// List items
+		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
+			var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
+			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
+			if ( feedItemCount && showCategory ) {
+				html &= '<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
+				if ( arguments.showItemCount ) {
+					html &= " (#feedItemCount#)";
 				}
+				html &= "</a></li>";
 			}
-			// List end
-			writeOutput( "</ul>" );
 		}
 
-		return string;
+		// List end
+		html &= "</ul>";
+
+		return html;
 
 	}
 

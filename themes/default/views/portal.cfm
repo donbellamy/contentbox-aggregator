@@ -96,7 +96,7 @@
 			</cfif>
 		</div>
 		<cfif args.sidebar >
-			<div class="col-sm-3 sidenav">
+			<div class="col-sm-3" id="blog-sidenav">
 				#cb.quickView( view='_portalsidebar' )#
 			</div>
 		</cfif>

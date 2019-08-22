@@ -12,7 +12,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	Feeds function init() {
 		setName( "Feeds" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feeds." );
+		setDescription( "A widget that displays a list of feeds, similar to the portal list of feeds." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list" );
@@ -27,6 +27,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.label Title Level
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
+	 * @max.label Maximum Items
+	 * @max.hint The number of feed items to display.
+	 * @max.options 1,5,10,15,20,25,50,100
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
@@ -34,7 +37,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric titleLevel=2 ) {
 
 		// Grab the results
-		var results = feedService.search(
+		var results = feedService.getFeeds(
 			status="published"
 		);
 

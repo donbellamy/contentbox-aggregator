@@ -97,6 +97,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Set args
 		var args = {
+			title = arguments.title,
+			titleLevel = arguments.titleLevel,
 			openNewWindow = arguments.openNewWindow
 		};
 

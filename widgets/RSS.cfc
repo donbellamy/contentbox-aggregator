@@ -33,22 +33,18 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string title="",
 		numeric titleLevel=2 ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// RSS Link
-			writeOutput('<ul id="portalrss">');
-			writeOutput('<li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li>');
-			writeOutput('</ul>');
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
 		}
 
-		return string;
+		// RSS Link
+		html &= '<ul id="portalrss"><li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li></ul>';
+
+		return html;
 
 	}
 

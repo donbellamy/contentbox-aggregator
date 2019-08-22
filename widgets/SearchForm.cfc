@@ -33,9 +33,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string title="",
 		numeric titleLevel=2 ) {
 
-		// Set return string
-		var string = "";
-
 		// Grab the event
 		var event = getRequestContext();
 

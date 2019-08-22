@@ -84,27 +84,28 @@ component extends="aggregator.models.BaseWidget" singleton {
 			arguments.max = results.count;
 		}
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// List start
-			writeOutput('<ul id="feedItems">');
-			// List items
-			for ( var x=1; x LTE arguments.max; x++ ) {
-				var target = "_self";
-				if ( arguments.openNewWindow ) {
-					target = "_blank";
-				}
-				writeOutput('<li class="feedItems"><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>');			}
-			// List end
-			writeOutput( "</ul>" );
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
 		}
+
+		// List start
+		html &= '<ul id="feedItems">';
+
+		// List items
+		for ( var x=1; x LTE arguments.max; x++ ) {
+			var target = "_self";
+			if ( arguments.openNewWindow ) {
+				target = "_blank";
+			}
+			html &= '<li class="feedItems"><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>';
+		}
+
+		// List end
+		html &= "</ul>";
 
 		return string;
 

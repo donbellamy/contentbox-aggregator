@@ -42,33 +42,31 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Grab the related content
 		var relatedContent = ag.getCurrentRelatedContent();
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Title
-			if ( len( trim( arguments.title ) ) ) {
-				writeOutput( "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>" );
-			}
-			// Check for content
-			if ( arrayLen( relatedContent ) ) {
-				// Dropdown
-				if ( arguments.useDropdown ) {
-					writeoutput( buildDropDown( relatedContent ) );
-				// List
-				} else {
-					writeoutput( buildList( relatedContent ) );
-				}
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
+		}
+
+		// Check for content
+		if ( arrayLen( relatedContent ) ) {
+			// Dropdown
+			if ( arguments.useDropdown ) {
+				html &= buildDropDown( relatedContent );
+			// List
 			} else {
-				writeoutput( "<p>#arguments.emptyMessage#</p>" );
-				if ( cb.isPreview() ) {
-					writeoutput( "<small>NOTE: Related content may not appear in preview mode!</small>" );
-				}
+				html &= buildList( relatedContent );
+			}
+		} else {
+			html &= "<p>#arguments.emptyMessage#</p>";
+			if ( cb.isPreview() ) {
+				html &= "<small>NOTE: Related content may not appear in preview mode!</small>" ;
 			}
 		}
 
-		return string;
+		return html;
 
 	}
 
@@ -79,25 +77,23 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	private string function buildDropDown( required array relatedContent ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// Select start
-			writeOutput('<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>');
-			// Select options
-			for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
-				if ( relatedContent[x].isContentPublished() ) {
-					writeoutput('<option value="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#');
-					writeoutput('</option>');
-				}
+		// Select start
+		html &= '<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>');
+
+		// Select options
+		for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
+			if ( relatedContent[x].isContentPublished() ) {
+				html &= '<option value="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#</option>';
 			}
-			// Select end
-			writeOutput( "</select>" );
 		}
 
-		return string;
+		// Select end
+		html &= "</select>";
+
+		return html;
 
 	}
 
@@ -106,25 +102,23 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	private string function buildList( required array relatedContent ) {
 
-		// Set return string
-		var string = "";
+		// Set return html
+		var html = "";
 
-		// Generate html
-		saveContent variable="string" {
-			// List start
-			writeOutput('<ul id="relatedcontent">');
-			// List items
-			for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
-				if ( relatedContent[x].isContentPublished() ) {
-					writeOutput('<li class="relatedcontent"><a href="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#');
-					writeOutput('</a></li>');
-				}
+		// List start
+		html &= '<ul id="relatedcontent">';
+
+		// List items
+		for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
+			if ( relatedContent[x].isContentPublished() ) {
+				html &= '<li class="relatedcontent"><a href="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#</a></li>';
 			}
-			// List end
-			writeOutput( "</ul>" );
 		}
 
-		return string;
+		// List end
+		html &= "</ul>";
+
+		return html;
 
 	}
 
