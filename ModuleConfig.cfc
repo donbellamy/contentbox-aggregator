@@ -25,6 +25,10 @@ component {
 		// Settings
 		settings = {
 
+			// Site
+			"ag_site_news_entrypoint" = "news",
+			"ag_site_feeds_entrypoint" = "feeds",
+
 			// Portal
 			"ag_portal_name" = "News",
 			"ag_portal_tagline" = "The Latest News",
@@ -110,32 +114,16 @@ component {
 			{ pattern="/:handler/:action?" }
 		];
 
-		// Aggregator portal routes
-		aggregatorRoutes = [
-			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator" },
-			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator" },
-			{ pattern="/rss/:category?", handler="portal", action="rss", namespace="aggregator" },
-			{ pattern="/feeds/:slug/rss/:category?", handler="portal", action="rss", namespace="aggregator" },
-			{ pattern="/feeds/:slug", handler="portal", action="feed", namespace="aggregator" },
-			{ pattern="/feeds", handler="portal", action="feeds", namespace="aggregator" },
-			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator" },
-			{ pattern="/", handler="portal", action="index", namespace="aggregator" }
-		];
-
-		// News page routes
-		newsRoutes = [
-			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="portal", action="archives", namespace="aggregator-news" },
-			{ pattern="/category/:category", handler="portal", action="index", namespace="aggregator-news" },
-			{ pattern="/rss/:category?", handler="portal", action="rss", namespace="aggregator-news" },
-			{ pattern="/:slug", handler="portal", action="feeditem", namespace="aggregator-news" },
-			{ pattern="/", handler="portal", action="index", namespace="aggregator-news" }
-		];
-
-		// Feeds page routes
-		feedsRoutes = [
-			{ pattern="/:slug/rss/:category?", handler="portal", action="rss", namespace="aggregator-feeds" },
-			{ pattern="/:slug", handler="portal", action="feed", namespace="aggregator-feeds" },
-			{ pattern="/", handler="portal", action="feeds", namespace="aggregator-feeds" }
+		// Site routes
+		siteRoutes = [
+			{ pattern="/:slug/rss/:category?", handler="site", action="rss", namespace="aggregator-feeds" },
+			{ pattern="/:slug", handler="site", action="feed", namespace="aggregator-feeds" },
+			{ pattern="/", handler="site", action="feeds", namespace="aggregator-feeds" },
+			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="site", action="archives", namespace="aggregator-news" },
+			{ pattern="/category/:category", handler="site", action="index", namespace="aggregator-news" },
+			{ pattern="/rss/:category?", handler="site", action="rss", namespace="aggregator-news" },
+			{ pattern="/:slug", handler="site", action="feeditem", namespace="aggregator-news" },
+			{ pattern="/", handler="site", action="index", namespace="aggregator-news" }
 		];
 
 		// Interception points
@@ -243,36 +231,24 @@ component {
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
 		var setting = settingService.findWhere( criteria = { name="aggregator" } );
 
-		// Add routes
+		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var agEntryPoint = settings.ag_portal_entrypoint; // ag_ui_news_entryPoint, ag_ui_feeds_entryPoint
+		var newsEntryPoint = settings.ag_site_news_entrypoint;
+		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			agEntryPoint = agSettings.ag_portal_entrypoint;
+			newsEntryPoint = agSettings.ag_site_news_entrypoint;
+			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
-			routingService.addNamespace( pattern="#cbEntryPoint#/#agEntryPoint#", namespace="aggregator", append=false );
-			routingService.addNamespace( pattern="#cbEntryPoint#/news", namespace="aggregator-news", append=false );
-			routingService.addNamespace( pattern="#cbEntryPoint#/feeds", namespace="aggregator-feeds", append=false );
+			routingService.addNamespace( pattern="#cbEntryPoint#/#newsEntryPoint#", namespace="aggregator-news", append=false );
+			routingService.addNamespace( pattern="#cbEntryPoint#/#feedsEntryPoint#", namespace="aggregator-feeds", append=false );
 		} else {
-			routingService.addNamespace( pattern=agEntryPoint, namespace="aggregator", append=false );
-			routingService.addNamespace( pattern="news", namespace="aggregator-news", append=false );
-			routingService.addNamespace( pattern="feeds", namespace="aggregator-feeds", append=false );
+			routingService.addNamespace( pattern="#newsEntryPoint#", namespace="aggregator-news", append=false );
+			routingService.addNamespace( pattern="#feedsEntryPoint#", namespace="aggregator-feeds", append=false );
 		}
-		aggregatorRoutes.each( function( item ) {
-			if ( structKeyExists( item, "handler" ) ) {
-				item.handler = "contentbox-aggregator:#item.handler#";
-			}
-			routingService.addRoute( argumentCollection=item );
-		});
-		newsRoutes.each( function( item ) {
-			if ( structKeyExists( item, "handler" ) ) {
-				item.handler = "contentbox-aggregator:#item.handler#";
-			}
-			routingService.addRoute( argumentCollection=item );
-		});
-		feedsRoutes.each( function( item ) {
+		siteRoutes.each( function( item ) {
 			if ( structKeyExists( item, "handler" ) ) {
 				item.handler = "contentbox-aggregator:#item.handler#";
 			}
@@ -286,13 +262,8 @@ component {
 	 */
 	function onActivate() {
 
-		// Save aggregator settings
+		// Set vars
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
-		var setting = settingService.findWhere( criteria = { name="aggregator" } );
-		if ( isNull( setting ) ) {
-			var agSettings = settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } );
-			settingService.save( agSettings );
-		}
 
 		// Save search adapter setting
 		var setting = settingService.findWhere( criteria = { name="cb_search_adapter" } );
@@ -303,8 +274,62 @@ component {
 		}
 		settingService.save( setting );
 
+		// Save the aggregator settings if needed
+		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		if ( isNull( setting ) ) {
+			settingService.save( settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } ) );
+		}
+
 		// Flush settings cache
 		settingService.flushSettingsCache();
+
+		// Grab the settings
+		var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+
+		// Create pages if needed
+		var pageService = controller.getWireBox().getInstance("pageService@cb");
+		var authorService = controller.getWireBox().getInstance("authorService@cb");
+		var roleService = controller.getWireBox().getInstance("roleService@cb");
+		if ( len( agSettings.ag_importing_item_author ) ) {
+			var author = authorService.get( prc.agSettings.ag_importing_item_author );
+		} else {
+			var adminRole = roleService.findWhere( { role="Administrator" } );
+			var author = authorService.findWhere( { role=adminRole } );
+		}
+		var newsPage = pageService.findBySlug( agSettings.ag_site_news_entrypoint );
+		if ( newsPage.isLoaded() ) {
+			newsPage.setLayout( "portal" );
+			pageService.savePage( newsPage );
+		} else {
+			newsPage.setTitle( "News" );
+			newsPage.setSlug( agSettings.ag_site_news_entrypoint );
+			newsPage.setPublishedDate( now() );
+			newsPage.setCreator( author );
+			newsPage.setLayout( "portal" );
+			newsPage.addNewContentVersion(
+				content = "News page placeholder content.",
+				changelog = "Page created by ContentBox Aggregator Module.",
+				author = author
+			);
+			pageService.savePage( newsPage );
+		}
+		var feedsPage = pageService.findBySlug( agSettings.ag_site_feeds_entrypoint );
+		if ( feedsPage.isLoaded() ) {
+			feedsPage.setLayout("portal");
+			pageService.savePage( feedsPage );
+		} else {
+			feedsPage.setTitle( "Feeds" );
+			feedsPage.setSlug( agSettings.ag_site_feeds_entrypoint );
+			feedsPage.setPublishedDate( now() );
+			feedsPage.setCreator( author );
+			feedsPage.setLayout( "portal" );
+			feedsPage.addNewContentVersion(
+				content = "Feeds page placeholder content.",
+				changelog = "Page created by ContentBox Aggregator Module.",
+				author = author
+			);
+			pageService.savePage( feedsPage );
+		}
 
 		// Save permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
@@ -392,12 +417,14 @@ component {
 
 		// Remove routes
 		var routingService = controller.getRoutingService();
-		routingService.removeNamespaceRoutes("aggregator");
 		routingService.removeNamespaceRoutes("aggregator-news");
 		routingService.removeNamespaceRoutes("aggregator-feeds");
 
 	}
 
-	// TODO: onDelete() ??
+	/**
+	 * Fired when module is deleted
+	 */
+	function onDelete() {}
 
 }

@@ -1,6 +1,6 @@
 /**
  * ContentBox RSS Aggregator
- * Portal handler
+ * Site handler
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="contentbox.modules.contentbox-ui.handlers.content" {
