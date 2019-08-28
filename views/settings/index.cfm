@@ -17,8 +17,8 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li role="presentation" class="active">
-								<a href="##portal" data-toggle="tab">
-									<i class="fa fa-newspaper-o fa-lg"></i> Portal
+								<a href="##site" data-toggle="tab">
+									<i class="fa fa-cog fa-lg"></i> Site Options
 								</a>
 							</li>
 							<li role="presentation" >
@@ -38,70 +38,23 @@
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="portal">
+							<div class="tab-pane active" id="site">
 								<fieldset>
-									<legend><i class="fa fa-newspaper-o fa-lg"></i> Portal Options</legend>
+									<legend><i class="fa fa-cog fa-lg"></i> Site Options</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_name",
-											content="Portal Name:"
+											field="ag_site_news_entrypoint",
+											content="News Page:"
 										)#
 										<div class="controls">
-											<small>The name used for the portal.</small>
-											#html.textField(
-												name="ag_portal_name",
-												value=prc.agSettings.ag_portal_name,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_tagline",
-											content="Portal Tag Line:"
-										)#
-										<div class="controls">
-											<small>The tag line used for the portal.</small>
-											#html.textField(
-												name="ag_portal_tagline",
-												value=prc.agSettings.ag_portal_tagline,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_entrypoint",
-											content="Portal Entry Point:"
-										)#
-										<div class="controls">
-											<small>Choose the entry point in the URL to trigger the portal engine. The usual default entry point pattern is <strong>news</strong>. Do not use symbols or slashes (/ \)</small><br/>
-											<code>#prc.cbHelper.linkHome()#</code>
-											#html.textField(
-												name="ag_portal_entrypoint",
-												value=prc.agSettings.ag_portal_entrypoint,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_description",
-											content="Portal Description:"
-										)#
-										<div class="controls">
-											<small>The default description used in the meta tags of the portal.</small><br/>
-											#html.textarea(
-												name="ag_portal_description",
-												value=prc.agSettings.ag_portal_description,
-												rows=3,
+											<small>The page used in the site to display the imported feed items.</small>
+											#html.select(
+												name="ag_site_news_entrypoint",
+												options=prc.pages,
+												column="slug",
+												nameColumn="title",
+												selectedValue=prc.agSettings.ag_site_news_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -109,15 +62,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_keywords",
-											content="Portal Keywords:"
+											field="ag_site_feeds_entrypoint",
+											content="Feeds Page:"
 										)#
 										<div class="controls">
-											<small>The default keywords used in the meta tags of the portal.</small><br/>
-											#html.textarea(
-												name="ag_portal_keywords",
-												value=prc.agSettings.ag_portal_keywords,
-												rows=3,
+											<small>The page used in the site to display the list of feeds.</small>
+											#html.select(
+												name="ag_site_feeds_entrypoint",
+												options=prc.pages,
+												column="slug",
+												nameColumn="title",
+												selectedValue=prc.agSettings.ag_site_feeds_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -125,35 +80,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_feeds_title",
-											content="Feeds Page Title:"
-										)#
-										<div class="controls">
-											<small>The title used for the feeds list page.</small>
-											#html.textField(
-												name="ag_portal_feeds_title",
-												value=prc.agSettings.ag_portal_feeds_title,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_portal_display_entries",
+											field="ag_site_display_entries",
 											content="Display Blog Entries:"
 										)#
 										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_portal_display_entries_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_display_entries' },
-												checked=prc.agSettings.ag_portal_display_entries
+												name="ag_site_display_entries_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_display_entries' },
+												checked=prc.agSettings.ag_site_display_entries
 											)#
 											#html.hiddenField(
-												name="ag_portal_display_entries",
-												value=prc.agSettings.ag_portal_display_entries
+												name="ag_site_display_entries",
+												value=prc.agSettings.ag_site_display_entries
 											)#
 										</div>
 									</div>
@@ -163,17 +102,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_item_link_behavior",
+											field="ag_site_item_link_behavior",
 											content="Link Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
-												name="ag_portal_item_link_behavior",
+												name="ag_site_item_link_behavior",
 												options=prc.linkOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_portal_item_link_behavior,
+												selectedValue=prc.agSettings.ag_site_item_link_behavior,
 												class="form-control input-sm"
 											)#
 										</div>
@@ -181,17 +120,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_item_featured_image_behavior",
+											field="ag_site_item_featured_image_behavior",
 											content="Featured Image Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when a feed item does not have a featured image.</small>
 											#html.select(
-												name="ag_portal_item_featured_image_behavior",
+												name="ag_site_item_featured_image_behavior",
 												options=prc.featuredImageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_portal_item_featured_image_behavior,
+												selectedValue=prc.agSettings.ag_site_item_featured_image_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -199,25 +138,25 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_item_featured_image_default",
+											field="ag_site_item_featured_image_default",
 											content="Default Featured Image:"
 										)#
 										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_portal_item_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
+											<div class="<cfif !len( prc.agSettings.ag_site_item_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
 												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
 												#html.hiddenField(
-													name="ag_portal_item_featured_image_default",
-													value=prc.agSettings.ag_portal_item_featured_image_default
+													name="ag_site_item_featured_image_default",
+													value=prc.agSettings.ag_site_item_featured_image_default
 												)#
 												#html.hiddenField(
-													name="ag_portal_item_featured_image_default_url",
-													value=prc.agSettings.ag_portal_item_featured_image_default_url
+													name="ag_site_item_featured_image_default_url",
+													value=prc.agSettings.ag_site_item_featured_image_default_url
 												)#
 												<div class="margin10">
-													<cfif len( prc.agSettings.ag_portal_item_featured_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_portal_item_featured_image_default_url#" class="img-thumbnail" height="75" />
+													<cfif len( prc.agSettings.ag_site_item_featured_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_site_item_featured_image_default_url#" class="img-thumbnail" height="75" />
 													<cfelse>
 														<img id="default_image_preview" class="img-thumbnail" height="75" />
 													</cfif>
@@ -229,18 +168,18 @@
 								<fieldset>
 									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_paging_max_items">
+										<label class="control-label" for="ag_site_paging_max_items">
 											Max Feed Items:
-											<span class="badge badge-info" id="ag_portal_paging_max_items_label">#prc.agSettings.ag_portal_paging_max_items#</span>
+											<span class="badge badge-info" id="ag_site_paging_max_items_label">#prc.agSettings.ag_site_paging_max_items#</span>
 										</label>
 										<div class="controls">
-											<small>The number of feed items displayed on the main portal page and feed page before paging.</small><br />
+											<small>The number of feed items displayed on the news page and feed page before paging.</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
-												id="ag_portal_paging_max_items"
-												name="ag_portal_paging_max_items"
+												id="ag_site_paging_max_items"
+												name="ag_site_paging_max_items"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_paging_max_items#"
+												data-slider-value="#prc.agSettings.ag_site_paging_max_items#"
 												data-provide="slider"
 												data-slider-min="10"
 												data-slider-max="50"
@@ -250,18 +189,18 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_paging_max_feeds">
+										<label class="control-label" for="ag_site_paging_max_feeds">
 											Max Feeds:
-											<span class="badge badge-info" id="ag_portal_paging_max_feeds_label">#prc.agSettings.ag_portal_paging_max_feeds#</span>
+											<span class="badge badge-info" id="ag_site_paging_max_feeds_label">#prc.agSettings.ag_site_paging_max_feeds#</span>
 										</label>
 										<div class="controls">
 											<small>The number of feeds displayed on the feeds page before paging..</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
-												id="ag_portal_paging_max_feeds"
-												name="ag_portal_paging_max_feeds"
+												id="ag_site_paging_max_feeds"
+												name="ag_site_paging_max_feeds"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_paging_max_feeds#"
+												data-slider-value="#prc.agSettings.ag_site_paging_max_feeds#"
 												data-provide="slider"
 												data-slider-min="10"
 												data-slider-max="50"
@@ -272,55 +211,55 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-hdd-o fa-lg"></i> Portal Caching</legend>
+									<legend><i class="fa fa-hdd-o fa-lg"></i> Site Caching</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_cache_enable",
-											content="Enable Portal Caching:"
+											field="ag_site_cache_enable",
+											content="Enable Site Caching:"
 										)#
-										<p><small>If enabled, portal content will be cached once it has been translated and rendered.</small></p>
+										<p><small>If enabled, site content will be cached once it has been translated and rendered.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_portal_cache_enable_toggle",
-												data={ toggle: 'toggle', match: 'ag_portal_cache_enable' },
-												checked=prc.agSettings.ag_portal_cache_enable
+												name="ag_site_cache_enable_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_cache_enable' },
+												checked=prc.agSettings.ag_site_cache_enable
 											)#
 											#html.hiddenField(
-												name="ag_portal_cache_enable",
-												value=prc.agSettings.ag_portal_cache_enable
+												name="ag_site_cache_enable",
+												value=prc.agSettings.ag_site_cache_enable
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_portal_cache_name",
-											content="Portal Cache Provider:"
+											field="ag_site_cache_name",
+											content="Site Cache Provider:"
 										)#
 										<div class="controls">
-											<small>Choose the CacheBox provider to cache portal content into.</small><br/>
+											<small>Choose the CacheBox provider to cache site content into.</small><br/>
 											#html.select(
-												name="ag_portal_cache_name",
+												name="ag_site_cache_name",
 												options=prc.cacheNames,
-												selectedValue=prc.agSettings.ag_portal_cache_name,
+												selectedValue=prc.agSettings.ag_site_cache_name,
 												class="form-control"
 											)#
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_cache_timeout">
-											Portal Cache Timeouts:
-											<span class="badge badge-info" id="ag_portal_cache_timeout_label">#prc.agSettings.ag_portal_cache_timeout#</span>
+										<label class="control-label" for="ag_site_cache_timeout">
+											Site Cache Timeouts:
+											<span class="badge badge-info" id="ag_site_cache_timeout_label">#prc.agSettings.ag_site_cache_timeout#</span>
 										</label>
 										<div class="controls">
-											<small>The number of minutes portal content is cached for.</small><br/>
+											<small>The number of minutes site content is cached for.</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
-												id="ag_portal_cache_timeout"
-												name="ag_portal_cache_timeout"
+												id="ag_site_cache_timeout"
+												name="ag_site_cache_timeout"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_cache_timeout#"
+												data-slider-value="#prc.agSettings.ag_site_cache_timeout#"
 												data-provide="slider"
 												data-slider-min="5"
 												data-slider-max="1440"
@@ -331,18 +270,18 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="ag_portal_cache_timeout_idle">
-											Portal Cache Idle Timeouts:
-											<span class="badge badge-info" id="ag_portal_cache_timeout_idle_label">#prc.agSettings.ag_portal_cache_timeout_idle#</span>
+										<label class="control-label" for="ag_site_cache_timeout_idle">
+											Site Cache Idle Timeouts:
+											<span class="badge badge-info" id="ag_site_cache_timeout_idle_label">#prc.agSettings.ag_site_cache_timeout_idle#</span>
 										</label>
 										<div class="controls">
-											<small>The number of idle minutes allowed for cached portal content to live. Usually this is less than the timeout you selected above</small><br/>
+											<small>The number of idle minutes allowed for cached site content to live. Usually this is less than the timeout you selected above</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
-												id="ag_portal_cache_timeout_idle"
-												name="ag_portal_cache_timeout_idle"
+												id="ag_site_cache_timeout_idle"
+												name="ag_site_cache_timeout_idle"
 												class="slider"
-												data-slider-value="#prc.agSettings.ag_portal_cache_timeout_idle#"
+												data-slider-value="#prc.agSettings.ag_site_cache_timeout_idle#"
 												data-provide="slider"
 												data-slider-min="5"
 												data-slider-max="1440"
@@ -792,7 +731,7 @@
 									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 									#html.textarea(
 										name="ag_html_pre_index_display",
-										label="Before Portal Index:",
+										label="Before News Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_pre_index_display,
@@ -802,7 +741,7 @@
 									)#
 									#html.textarea(
 										name="ag_html_post_index_display",
-										label="After Portal Index:",
+										label="After News Index:",
 										rows="6",
 										class="form-control",
 										value=prc.agSettings.ag_html_post_index_display,

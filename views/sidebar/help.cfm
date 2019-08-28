@@ -5,7 +5,7 @@
 	</div>
 	<div class="panel-body">
 		<p>
-			<strong>Perfect Code, LLC</strong> is the company behind the ContentBox RSS Aggregator.
+			<strong>Perfect Code, LLC</strong> is the company behind this module.
 			<a href="mailto:support@perfectcode.com">Contact us</a> if you have any questions and/or issues.
 		</p>
 		<h4>Links</h3>

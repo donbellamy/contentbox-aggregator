@@ -43,12 +43,19 @@ component accessors="true" singleton threadSafe {
 	/************************************** Root Methods *********************************************/
 
 	/**
-	 * Gets the portal entry point
-	 * @return The portal entry point
+	 * Gets the news entry point
+	 * @return The news entry point
 	 */
-	string function getPortalEntryPoint() {
-		var prc = cb.getPrivateRequestCollection();
-		return prc.agEntryPoint;
+	string function getNewsEntryPoint() {
+		return setting("ag_site_news_entrypoint");
+	}
+
+	/**
+	 * Gets the feeds entry point
+	 * @return The feeds entry point
+	 */
+	string function getFeedsEntryPoint() {
+		return setting("ag_site_feeds_entrypoint");
 	}
 
 	/************************************** Context Methods *********************************************/
@@ -262,13 +269,21 @@ component accessors="true" singleton threadSafe {
 	/************************************** Link Methods *********************************************/
 
 	/**
-	 * Gets the portal link
+	 * Gets the news link
 	 * @ssl Whether or not to use ssl
-	 * @return The portal link
+	 * @return The news link
 	 */
-	string function linkPortal( boolean ssl=cb.getRequestContext().isSSL() ) {
-		//return cb.getRequestContext().buildLink( linkto=len( cb.siteRoot() ) ? cb.siteRoot() & "." & getPortalEntryPoint() : getPortalEntryPoint(), ssl=arguments.ssl );
-		return cb.linkHome( ssl=arguments.ssl ) & getPortalEntryPoint();
+	string function linkNews( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkHome( ssl=arguments.ssl ) & getNewsEntryPoint();
+	}
+
+	/**
+	 * Gets the feeds link
+	 * @ssl Whether or not to use ssl
+	 * @return The feeds link
+	 */
+	string function linkFeeds( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkHome( ssl=arguments.ssl ) & getFeedsEntryPoint();
 	}
 
 	/**
@@ -284,7 +299,7 @@ component accessors="true" singleton threadSafe {
 		} else {
 			slug = category.getSlug();
 		}
-		return linkPortal( ssl=arguments.ssl ) & "/category/" & slug;
+		return linkNews( ssl=arguments.ssl ) & "/category/" & slug;
 	}
 
 	/**
@@ -296,20 +311,11 @@ component accessors="true" singleton threadSafe {
 	 * @return The archive link
 	 */
 	string function linkArchive( string year="", string month="", string day="", boolean ssl=cb.getRequestContext().isSSL() ) {
-		var link = linkPortal( ssl=arguments.ssl ) & "/archives";
+		var link = linkNews( ssl=arguments.ssl ) & "/archives";
 		if ( val( arguments.year ) ) { link &= "/#arguments.year#"; }
 		if ( val( arguments.month ) ) { link &= "/#arguments.month#"; }
 		if ( val( arguments.day ) ) { link &= "/#arguments.day#"; }
 		return link;
-	}
-
-	/**
-	 * Gets the feeds link
-	 * @ssl Whether or not to use ssl
-	 * @return The feeds link
-	 */
-	string function linkFeeds( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/feeds";
 	}
 
 	/**
@@ -320,7 +326,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed link
 	 */
 	string function linkFeed( required Feed feed, boolean ssl=cb.getRequestContext().isSSL(), string format="html" ) {
-		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+		return linkFeeds( ssl=arguments.ssl ) & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -330,7 +336,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed rss link
 	 */
 	string function linkFeedRSS( required Feed feed, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/feeds/" & arguments.feed.getSlug() & "/rss";
+		return linkFeeds( ssl=arguments.ssl ) & arguments.feed.getSlug() & "/rss";
 	}
 
 	/**
@@ -344,6 +350,15 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Gets the feeds admin link
+	 * @ssl Whether or not to use ssl
+	 * @return The feeds admin link
+	 */
+	string function linkFeedsAdmin( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds";
+	}
+
+	/**
 	 * Gets the feed form link
 	 * @feed The feed to link to
 	 * @ssl Whether or not to use ssl
@@ -351,19 +366,10 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function linkFeedForm( any feed, boolean ssl=cb.getRequestContext().isSSL() ) {
 		if ( structKeyExists( arguments, "feed" ) ) {
-			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds/editor/contentID/" & arguments.feed.getContentID();
+			return linkFeedsAdmin( ssl=arguments.ssl ) & "/editor/contentID/" & arguments.feed.getContentID();
 		} else {
-			return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds/editor";
+			return linkFeedsAdmin( ssl=arguments.ssl ) & "/editor";
 		}
-	}
-
-	/**
-	 * Gets the feeds admin link
-	 * @ssl Whether or not to use ssl
-	 * @return The feeds admin link
-	 */
-	string function linkFeedsAdmin( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeds";
 	}
 
 	/**
@@ -374,21 +380,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed item link
 	 */
 	string function linkFeedItem( required FeedItem feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html"  ) {
-		return linkPortal( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
-	}
-
-	/**
-	 * Gets the feed item form link
-	 * @feed The feed item to link to
-	 * @ssl Whether or not to use ssl
-	 * @return The feed item form link
-	 */
-	string function linkFeedItemForm( any feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
-		var link = cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems/editor";
-		if ( structKeyExists( arguments, "feedItem" ) ) {
-			link &= "/contentID/" & arguments.feedItem.getContentID();
-		}
-		return link;
+		return linkNews( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -406,12 +398,26 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Gets the feed item form link
+	 * @feed The feed item to link to
+	 * @ssl Whether or not to use ssl
+	 * @return The feed item form link
+	 */
+	string function linkFeedItemForm( any feedItem, boolean ssl=cb.getRequestContext().isSSL() ) {
+		var link = linkFeedItemsAdmin( ssl=arguments.ssl ) & "/editor";
+		if ( structKeyExists( arguments, "feedItem" ) ) {
+			link &= "/contentID/" & arguments.feedItem.getContentID();
+		}
+		return link;
+	}
+
+	/**
 	 * Gets the rss link
 	 * @ssl Whether or not to use ssl
 	 * @return The rss link
 	 */
 	string function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkPortal( ssl=arguments.ssl ) & "/rss";
+		return linkNews( ssl=arguments.ssl ) & "/rss";
 	}
 
 	/**
@@ -463,7 +469,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport link
 	 */
 	string function linkImport( boolean ssl=cb.getRequestContext().isSSL(), boolean importAll=false, boolean importActive=false ) {
-		var link = cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("ag_importing_secret_key");
+		var link = linkFeedItemsAdmin( ssl=arguments.ssl ) & "/import?key=" & setting("ag_importing_secret_key");
 		if ( arguments.importAll ) link &= "&importAll=true";
 		else if ( arguments.importActive ) link &= "&importActive=true";
 		return link;
@@ -477,7 +483,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport feed link
 	 */
 	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
+		return linkFeedItemsAdmin( ssl=arguments.ssl ) & "/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
 	}
 
 	/************************************** Quick HTML *********************************************/
@@ -593,15 +599,16 @@ component accessors="true" singleton threadSafe {
 	/************************************** MENUS *********************************************/
 
 	/**
-	 * Creates the breadcrumb html for the portal
+	 * Creates the breadcrumb html for the site
 	 * @separator Breadcrumb separator, defaults to ">"
 	 * @return The breadcrumb html
 	 */
 	string function breadCrumbs( string separator=">" ) {
-		var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_name")#</a> ';
+		var bc = "#arguments.separator#";
+		//var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_name")#</a> ';
 		if ( isSearchView() ) {
 			var searchTerm = getSearchTerm();
-			bc &= '#arguments.separator# <a href="#linkPortal()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+			//bc &= '#arguments.separator# <a href="#linkPortal()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
 		}
 		if ( isCategoryView() ) {
 			var category = getCurrentCategory();

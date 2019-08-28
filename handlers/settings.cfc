@@ -8,6 +8,7 @@ component extends="baseHandler" {
 	// Dependencies
 	property name="authorService" inject="authorService@cb";
 	property name="categoryService" inject="categoryService@cb";
+	property name="pageService" inject="pageService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
 
@@ -33,6 +34,7 @@ component extends="baseHandler" {
 	function index( event, rc, prc ) {
 
 		// Lookups
+		prc.pages = pageService.getAllFlatPages();
 		prc.intervals = [
 			{ name="Never", value="" },
 			{ name="Every 15 Minutes", value="900" },
@@ -49,6 +51,7 @@ component extends="baseHandler" {
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.linkOptions = [
 			{ name="Forward the user directly to the feed item.", value="forward" },
+			{ name="Link the user directly to the feed item.", value="link" },
 			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
 			{ name="Display the entire feed item within the site.", value="display" }
 		];
@@ -140,8 +143,11 @@ component extends="baseHandler" {
 		var routingService = controller.getRoutingService();
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
-				if ( item.namespaceRouting EQ "aggregator" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_portal_entrypoint, "/", "-", "all" ) & "/";
+				if ( item.namespaceRouting EQ "aggregator-news" ) {
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_news_entrypoint, "/", "-", "all" ) & "/";
+				}
+				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
 			})
@@ -167,35 +173,30 @@ component extends="baseHandler" {
 
 		var errors = [];
 
-		// Portal settings
-		if ( !len( trim( prc.agSettings.ag_portal_name ) ) ) {
-			arrayAppend( errors, "A valid portal name is required." );
+		// Site settings
+		if ( !len( trim( prc.agSettings.ag_site_news_entrypoint ) ) ) {
+			arrayAppend( errors, "A news page is required." );
 		} else {
-			prc.agSettings.ag_portal_name = trim( prc.agSettings.ag_portal_name );
+			prc.agSettings.ag_site_news_entrypoint = trim( prc.agSettings.ag_site_news_entrypoint );
 		}
-		prc.agSettings.ag_portal_tagline = trim( prc.agSettings.ag_portal_tagline );
-		if ( !len( trim( prc.agSettings.ag_portal_entrypoint ) ) ) {
-			arrayAppend( errors, "A valid portal entry point is required." );
+		if ( !len( trim( prc.agSettings.ag_site_feeds_entrypoint ) ) ) {
+			arrayAppend( errors, "A feeds page is required." );
 		} else {
-			prc.agSettings.ag_portal_entrypoint = trim( prc.agSettings.ag_portal_entrypoint );
+			prc.agSettings.ag_site_feeds_entrypoint = trim( prc.agSettings.ag_site_feeds_entrypoint );
 		}
-		prc.agSettings.ag_portal_description = trim( prc.agSettings.ag_portal_description );
-		prc.agSettings.ag_portal_keywords = trim( prc.agSettings.ag_portal_keywords );
-		if ( !len( trim( prc.agSettings.ag_portal_feeds_title ) ) ) {
-			arrayAppend( errors, "A valid feeds page title is required." );
-		} else {
-			prc.agSettings.ag_portal_feeds_title = trim( prc.agSettings.ag_portal_feeds_title );
+		if ( prc.agSettings.ag_site_news_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
+			arrayAppend( errors, "The news and feeds pages must be different." );
 		}
-		if ( !val( prc.agSettings.ag_portal_paging_max_items ) ) {
+		if ( !val( prc.agSettings.ag_site_paging_max_items ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );
 		}
-		if ( !val( prc.agSettings.ag_portal_paging_max_feeds ) ) {
+		if ( !val( prc.agSettings.ag_site_paging_max_feeds ) ) {
 			arrayAppend( errors, "A valid max feeds value is required." );
 		}
-		if ( !val( prc.agSettings.ag_portal_cache_timeout ) ) {
+		if ( !val( prc.agSettings.ag_site_cache_timeout ) ) {
 			arrayAppend( errors, "A valid portal cache timeout is required." );
 		}
-		if ( !val( prc.agSettings.ag_portal_cache_timeout_idle ) ) {
+		if ( !val( prc.agSettings.ag_site_cache_timeout_idle ) ) {
 			arrayAppend( errors, "A valid portal cache idle timeout is required." );
 		}
 

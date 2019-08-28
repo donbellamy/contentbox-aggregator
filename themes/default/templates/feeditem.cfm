@@ -3,7 +3,7 @@
 	<cfset linkBehavior =
 		len( feedItem.getFeed().getLinkBehavior() ) ?
 		feedItem.getFeed().getLinkBehavior() :
-		ag.setting("ag_portal_item_link_behavior") />
+		ag.setting("ag_site_item_link_behavior") />
 	<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 </cfif>
 <cfparam name="args.showSource" default="true" />

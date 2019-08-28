@@ -1,6 +1,6 @@
 /**
  * ContentBox RSS Aggregator
- * Portal request interceptor
+ * Site request interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="coldbox.system.Interceptor" {
@@ -41,12 +41,9 @@ component extends="coldbox.system.Interceptor" {
 		// Settings
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
-		// Entry point
-		prc.agEntryPoint = prc.agSettings.ag_portal_entrypoint;
-
-		// Portal
-		prc.xehPortalHome = prc.agEntryPoint;
-		prc.xehPortalFeeds = "#prc.agEntryPoint#.feeds";
+		// Site
+		prc.xehNewsHome = "#prc.agSettings.ag_site_news_entrypoint#";
+		prc.xehFeedsHome = "#prc.agSettings.ag_site_feeds_entrypoint#";
 
 	}
 

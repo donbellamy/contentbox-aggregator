@@ -66,16 +66,16 @@ function loadAssetChooser( callback, w, h ) {
 	);
 }
 function defaultImageCallback( filePath, fileURL, fileType ) {
-	if ( $( "##ag_portal_item_featured_image_default" ).val().length ) { cancelDefaultImage(); }
+	if ( $( "##ag_site_item_featured_image_default" ).val().length ) { cancelDefaultImage(); }
 	$( "##default_image_controls" ).toggleClass( "hide" );
-	$( "##ag_portal_item_featured_image_default" ).val( filePath );
-	$( "##ag_portal_item_featured_image_default_url" ).val( fileURL );
+	$( "##ag_site_item_featured_image_default" ).val( filePath );
+	$( "##ag_site_item_featured_image_default_url" ).val( fileURL );
 	$( "##default_image_preview" ).attr( "src", fileURL );
 	closeRemoteModal();
 }
 function cancelDefaultImage() {
-	$( "##ag_portal_item_featured_image_default" ).val( "" );
-	$( "##ag_portal_item_featured_image_default_url" ).val( "" );
+	$( "##ag_site_item_featured_image_default" ).val( "" );
+	$( "##ag_site_item_featured_image_default_url" ).val( "" );
 	$( "##default_image_preview" ).attr( "src", "" );
 	$( "##default_image_controls" ).toggleClass( "hide" );
 }

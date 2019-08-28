@@ -1,6 +1,6 @@
 /**
  * ContentBox RSS Aggregator
- * Portal cache cleanup interceptor
+ * Site cache cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="coldbox.system.Interceptor" {
@@ -78,7 +78,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_postEntrySave( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+		if ( settings.ag_site_display_entries ) doCacheCleanup();
 	}
 
 	/**
@@ -86,7 +86,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_postEntryRemove( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+		if ( settings.ag_site_display_entries ) doCacheCleanup();
 	}
 
 	/**
@@ -94,20 +94,20 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_onEntryStatusUpdate( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_portal_display_entries ) doCacheCleanup();
+		if ( settings.ag_site_display_entries ) doCacheCleanup();
 	}
 
 	/************************************** PRIVATE *********************************************/
 
 	/**
 	 * Clears the portal content cache
-	 * @return PortalCacheCleanup
+	 * @return SiteCacheCleanup
 	 */
-	private PortalCacheCleanup function doCacheCleanup() {
+	private SiteCacheCleanup function doCacheCleanup() {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_portal_cache_name );
+		var cache = cacheBox.getCache( settings.ag_site_cache_name );
 		var cacheKey = "cb-content-aggregator";
 
 		// Clear portal cache

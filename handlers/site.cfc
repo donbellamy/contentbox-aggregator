@@ -36,12 +36,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 		// Default description and keywords
-		if ( len( trim( prc.agSettings.ag_portal_description ) ) ) {
-			cbHelper.setMetaDescription( prc.agSettings.ag_portal_description );
-		}
-		if ( len( trim( prc.agSettings.ag_portal_keywords ) ) ) {
-			cbHelper.setMetaKeywords( prc.agSettings.ag_portal_keywords );
-		}
+		// TODO: Set keywords and description below?
 
 	}
 
@@ -55,7 +50,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Set vars
 		var cacheEnabled = (
-			prc.agSettings.ag_portal_cache_enable AND
+			prc.agSettings.ag_site_cache_enable AND
 			!event.valueExists("cbCache")
 		);
 
@@ -63,7 +58,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( cacheEnabled ) {
 
 			// Set cache and cacheKey
-			var cache = cacheBox.getCache( prc.agSettings.ag_portal_cache_name );
+			var cache = cacheBox.getCache( prc.agSettings.ag_site_cache_name );
 			var cacheKey = "cb-content-aggregator-#cgi.http_host#-#left( event.getCurrentRoutedURL(), 500 )#";
 			cacheKey &= hash( ".#getFWLocale()#.#rc.format#.#event.isSSL()#" & prc.cbox_incomingContextHash );
 
@@ -191,8 +186,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			cache.set(
 				cacheKey,
 				data,
-				prc.agSettings.ag_portal_cache_timeout,
-				prc.agSettings.ag_portal_cache_timeout_idle
+				prc.agSettings.ag_site_cache_timeout,
+				prc.agSettings.ag_site_cache_timeout_idle
 			);
 
 		}
@@ -210,7 +205,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "category", "" )
 			.paramValue( "format", "html" );
 
+		// TODO: grab news page
+
 		// Set vars
+		// TODO: set to page title
 		var title = " | " & cbHelper.siteName();
 
 		// Page check
@@ -225,9 +223,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = prc.agHelper.linkPortal() & "?page=@page@";
+		prc.pagingLink = prc.agHelper.linkNews() & "?page=@page@";
 
 		// Search
 		if ( len( trim( rc.q ) ) ) {
@@ -239,7 +237,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( len( trim( rc.category ) ) ) {
 			prc.category = categoryService.findBySlug( rc.category );
 			if ( !isNull( prc.category ) ) {
-				prc.pagingLink = prc.agHelper.linkPortal() & "/category/#rc.category#/?page=@page@";
+				prc.pagingLink = prc.agHelper.linkNews() & "/category/#rc.category#/?page=@page@";
 				title = " - " & prc.category.getCategory() & title;
 			} else {
 				notFound( argumentCollection=arguments );
@@ -251,9 +249,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		var results = feedItemService.getPublishedFeedItems(
 			searchTerm=rc.q,
 			category=rc.category,
-			max=prc.agSettings.ag_portal_paging_max_items,
+			max=prc.agSettings.ag_site_paging_max_items,
 			offset=prc.pagingBoundaries.startRow - 1,
-			includeEntries=prc.agSettings.ag_portal_display_entries
+			includeEntries=prc.agSettings.ag_site_display_entries
 		);
 
 		prc.feedItems = results.feedItems;
@@ -263,7 +261,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
 
 		// Set the page title
-		title = prc.agSettings.ag_portal_name & title;
+		// TODO: Set to page title
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
@@ -283,6 +281,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "month", 0 )
 			.paramValue( "day", 0 )
 			.paramValue( "format", "html" );
+
+		// TODO: get news page
 
 		// Validate the passed date
 		var validDate = true;
@@ -314,7 +314,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_items );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
 
@@ -323,9 +323,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				year=rc.year,
 				month=rc.month,
 				day=rc.day,
-				max=prc.agSettings.ag_portal_paging_max_items,
+				max=prc.agSettings.ag_site_paging_max_items,
 				offset=prc.pagingBoundaries.startRow - 1,
-				includeEntries=prc.agSettings.ag_portal_display_entries
+				includeEntries=prc.agSettings.ag_site_display_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -341,7 +341,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				prc.formattedDate = dateFormat( prc.archiveDate, "mmmm, yyyy" );
 			}
 			title = " - " & prc.formattedDate & title;
-			title = prc.agSettings.ag_portal_name & title;
+			// TODO: set page title
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
@@ -399,6 +399,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "format", "html" );
 
+		// TODO: grab feeds page
+
 		// Set vars
 		var title = " | " & cbHelper.siteName();
 
@@ -410,13 +412,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_portal_paging_max_feeds );
+		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feeds );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = prc.agHelper.linkFeeds() & "?page=@page@";
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
-			max=prc.agSettings.ag_portal_paging_max_feeds,
+			max=prc.agSettings.ag_site_paging_max_feeds,
 			offset=prc.pagingBoundaries.startRow - 1
 		);
 		prc.feeds = results.feeds;
@@ -426,7 +428,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
 
 		// Set the page title
-		title = prc.agSettings.ag_portal_feeds_title & title;
+		// TODO: set page title
 		cbHelper.setMetaTitle( title );
 
 		// Set layout and view
@@ -445,6 +447,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "page", 1 )
 			.paramValue( "author", "" )
 			.paramValue( "format", "html" );
+
+		// TODO: grab feeds page
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -472,7 +476,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items );
+			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkFeed( prc.feed ) & "?page=@page@";
 
@@ -486,7 +490,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var results = feedItemService.getPublishedFeedItems(
 				feed=prc.feed.getContentID(),
 				author=rc.author,
-				max=val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_portal_paging_max_items,
+				max=val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_items,
 				offset=prc.pagingBoundaries.startRow - 1,
 				includeEntries=false
 			);
@@ -536,6 +540,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Set params
 		event.paramValue( "slug", "" );
 
+		// TODO: grab feeds page
+
 		// Check if author is viewing
 		var showUnpublished = false;
 		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
@@ -549,7 +555,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( prc.feedItem.isLoaded() ) {
 
 			// Calculate link behavior
-			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_portal_item_link_behavior;
+			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_site_item_link_behavior;
 
 			// Turn off cache if forwarding user to feed item
 			if ( prc.linkBehavior == "forward" ) {
@@ -568,6 +574,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Set params
 		event.paramValue( "slug", "" )
 			.paramValue( "format", "html" );
+
+		// TODO: grab feeds page
 
 		// If loaded, else not found
 		if ( prc.feedItem.isLoaded() ) {

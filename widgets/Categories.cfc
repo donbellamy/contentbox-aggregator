@@ -44,7 +44,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category="",
 		boolean useDropdown=false,
 		boolean showItemCount=true,
-		boolean includeEntries=ag.setting("ag_portal_display_entries") ) {
+		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
 
 		// Grab the categories
 		var categories = categoryService.list( sortOrder="category", asQuery=false );

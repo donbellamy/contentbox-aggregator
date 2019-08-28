@@ -114,7 +114,7 @@ component extends="contentHandler" {
 			{ name="Display the entire feed item within the site.", value="display" }
 		];
 		arrayPrepend( prc.linkOptions, {
-			name="Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_portal_item_link_behavior; } ) ].name#",
+			name="Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_link_behavior; } ) ].name#",
 			value=""
 		});
 		prc.featuredImageOptions = [
@@ -123,7 +123,7 @@ component extends="contentHandler" {
 			{ name="Do not display a featured image.", value="none" }
 		];
 		arrayPrepend( prc.featuredImageOptions, {
-			name="Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_portal_item_featured_image_behavior; } ) ].name#",
+			name="Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_featured_image_behavior; } ) ].name#",
 			value=""
 		});
 		prc.itemStatuses = [

@@ -28,25 +28,23 @@ component {
 			// Site
 			"ag_site_news_entrypoint" = "news",
 			"ag_site_feeds_entrypoint" = "feeds",
-
-			// Portal
 			"ag_portal_name" = "News",
 			"ag_portal_tagline" = "The Latest News",
 			"ag_portal_entrypoint" = "news",
 			"ag_portal_description" = "",
 			"ag_portal_keywords" = "",
 			"ag_portal_feeds_title" = "Feeds",
-			"ag_portal_display_entries" = "false",
-			"ag_portal_item_link_behavior" = "forward",
-			"ag_portal_item_featured_image_behavior" = "default",
-			"ag_portal_item_featured_image_default" = "",
-			"ag_portal_item_featured_image_default_url" = "",
-			"ag_portal_paging_max_items" = "20",
-			"ag_portal_paging_max_feeds" = "20",
-			"ag_portal_cache_enable" = "true",
-			"ag_portal_cache_name" = "Template",
-			"ag_portal_cache_timeout" = "60",
-			"ag_portal_cache_timeout_idle" = "15",
+			"ag_site_display_entries" = "false",
+			"ag_site_item_link_behavior" = "forward",
+			"ag_site_item_featured_image_behavior" = "default",
+			"ag_site_item_featured_image_default" = "",
+			"ag_site_item_featured_image_default_url" = "",
+			"ag_site_paging_max_items" = "20",
+			"ag_site_paging_max_feeds" = "20",
+			"ag_site_cache_enable" = "true",
+			"ag_site_cache_name" = "Template",
+			"ag_site_cache_timeout" = "60",
+			"ag_site_cache_timeout_idle" = "15",
 
 			// Importing
 			"ag_importing_import_interval" = "",
@@ -170,9 +168,9 @@ component {
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemTaxonomies", name="feedItemTaxonomies@aggregator" },
 			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
-			{ class = "#moduleMapping#.interceptors.PortalCacheCleanup", name="portalCacheCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.PortalRequest", name="portalRequest@aggregator" },
-			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" }
+			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.SiteCacheCleanup", name="siteCacheCleanup@aggregator" },
+			{ class = "#moduleMapping#.interceptors.SiteRequest", name="siteRequest@aggregator" }
 		];
 
 		// Bindings

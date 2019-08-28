@@ -169,11 +169,11 @@ component persistent="true"
 		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
-			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_portal_item_featured_image_behavior;
+			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_site_item_featured_image_behavior;
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
 			} else if ( behavior == "default" ) {
-				return settings.ag_portal_item_featured_image_default_url;
+				return settings.ag_site_item_featured_image_default_url;
 			} else {
 				return "";
 			}

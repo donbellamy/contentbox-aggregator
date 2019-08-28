@@ -40,7 +40,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric titleLevel=2,
 		boolean useDropdown=false,
 		boolean showItemCount=true,
-		boolean includeEntries=ag.setting("ag_portal_display_entries") ) {
+		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
 
 		// Grab the archives
 		var archives = feedItemService.getArchiveReport( arguments.includeEntries );

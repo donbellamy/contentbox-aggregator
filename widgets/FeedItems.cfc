@@ -56,7 +56,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string searchTerm="",
 		string sortOrder="Most Recent",
 		boolean openNewWindow=false,
-		boolean includeEntries=ag.setting("ag_portal_display_entries") ) {
+		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
 
 		// Sort order
 		switch ( arguments.sortOrder ) {

@@ -80,7 +80,7 @@ component singleton {
 			category=arguments.category,
 			feed=arguments.slug,
 			max=settings.ag_rss_max_items,
-			includeEntries=settings.ag_portal_display_entries
+			includeEntries=settings.ag_site_display_entries
 		);
 		var feedItems = results.feedItems;
 		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url");
@@ -123,7 +123,7 @@ component singleton {
 		} else {
 			feedStruct.title = settings.ag_rss_title;
 			feedStruct.description = settings.ag_rss_description;
-			feedStruct.link = agHelper.linkPortal();
+			feedStruct.link = agHelper.linkNews(); // TODO: should link to site home page
 		}
 		feedStruct.generator = settings.ag_rss_generator;
 		feedStruct.copyright = settings.ag_rss_copyright;
