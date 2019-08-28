@@ -42,8 +42,8 @@ component extends="coldbox.system.Interceptor" {
 		prc.agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Site
-		prc.xehNewsHome = "#prc.agSettings.ag_site_news_entrypoint#";
-		prc.xehFeedsHome = "#prc.agSettings.ag_site_feeds_entrypoint#";
+		//prc.xehNewsHome = "#prc.agSettings.ag_site_news_entrypoint#";
+		//prc.xehFeedsHome = "#prc.agSettings.ag_site_feeds_entrypoint#";
 
 	}
 

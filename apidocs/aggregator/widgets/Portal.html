@@ -327,7 +327,7 @@ Portal Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Portal.html#renderIt()">renderIt</A></strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])
+			<strong><a href="Portal.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the portal widget.
@@ -1282,7 +1282,7 @@ Portal Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -1315,6 +1315,10 @@ Portal Widget</p>
 	
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>title</code> - An optional title to display using an H tag.</dd>
+		
+		<dd><code>titleLevel</code> - The H{level} to use.</dd>
 		
 		<dd><code>max</code> - The number of feed items to display.</dd>
 		

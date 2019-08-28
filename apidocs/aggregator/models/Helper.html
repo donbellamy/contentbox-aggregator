@@ -453,7 +453,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#breadCrumbs()">breadCrumbs</A></strong>([string separator='>'])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the breadcrumb html for the portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the breadcrumb html for the site.
 			
 		</td>
 	</tr>
@@ -611,10 +611,25 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#getPortalEntryPoint()">getPortalEntryPoint</A></strong>()
+			<strong><a href="Helper.html#getFeedsEntryPoint()">getFeedsEntryPoint</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the portal entry point.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds entry point.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getNewsEntryPoint()">getNewsEntryPoint</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the news entry point.
 			
 		</td>
 	</tr>
@@ -644,7 +659,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isArchivesView()">isArchivesView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -659,7 +674,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isCategoryView()">isCategoryView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
 			
 		</td>
 	</tr>
@@ -674,7 +689,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isFeedItemView()">isFeedItemView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -689,7 +704,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isFeedsView()">isFeedsView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -704,7 +719,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isFeedView()">isFeedView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -716,10 +731,10 @@ Aggregator Helper</p>
 			<code>boolean</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#isIndexView()">isIndexView</A></strong>()
+			<strong><a href="Helper.html#isNewsView()">isNewsView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -734,7 +749,7 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isSearchView()">isSearchView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals portal.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
 			
 		</td>
 	</tr>
@@ -971,10 +986,10 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkPortal()">linkPortal</A></strong>([boolean ssl='[runtime expression]'])
+			<strong><a href="Helper.html#linkNews()">linkNews</A></strong>([boolean ssl='[runtime expression]'])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the portal link.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the news link.
 			
 		</td>
 	</tr>
@@ -1326,7 +1341,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Creates the breadcrumb html for the portal</p>
+		<p>Creates the breadcrumb html for the site</p>
 	
 
 	
@@ -1737,18 +1752,18 @@ Aggregator Helper</p>
 	<hr>
 
 	
-	<a name="getPortalEntryPoint()"><!-- --></a>
+	<a name="getFeedsEntryPoint()"><!-- --></a>
 	<h3>
-		getPortalEntryPoint
+		getFeedsEntryPoint
 		
 	</h3>
 
-	<kbd>public string <strong>getPortalEntryPoint</strong>()</kbd>
+	<kbd>public string <strong>getFeedsEntryPoint</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Gets the portal entry point</p>
+		<p>Gets the feeds entry point</p>
 	
 
 	
@@ -1766,7 +1781,46 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>The portal entry point</dd>
+			<dd>The feeds entry point</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getNewsEntryPoint()"><!-- --></a>
+	<h3>
+		getNewsEntryPoint
+		
+	</h3>
+
+	<kbd>public string <strong>getNewsEntryPoint</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the news entry point</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The news entry point</dd>
 		</dl>
 	
 
@@ -1826,7 +1880,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if the current event equals portal.archives</p>
+		<p>Checks to see if the current event equals site.archives</p>
 	
 
 	
@@ -1844,7 +1898,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.archives, false if not</dd>
+			<dd>True if the current event equals site.archives, false if not</dd>
 		</dl>
 	
 
@@ -1865,7 +1919,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if if the current event equals portal.index and a category is present</p>
+		<p>Checks to see if if the current event equals site.index and a category is present</p>
 	
 
 	
@@ -1883,7 +1937,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.index and a category is present, false if not</dd>
+			<dd>True if the current event equals site.index and a category is present, false if not</dd>
 		</dl>
 	
 
@@ -1904,7 +1958,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if the current event equals portal.feeditem</p>
+		<p>Checks to see if the current event equals site.feeditem</p>
 	
 
 	
@@ -1922,7 +1976,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.feeditem, false if not</dd>
+			<dd>True if the current event equals site.feeditem, false if not</dd>
 		</dl>
 	
 
@@ -1943,7 +1997,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if the current event equals portal.feeds</p>
+		<p>Checks to see if the current event equals site.feeds</p>
 	
 
 	
@@ -1961,7 +2015,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.feeds, false if not</dd>
+			<dd>True if the current event equals site.feeds, false if not</dd>
 		</dl>
 	
 
@@ -1982,7 +2036,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if the current event equals portal.feed</p>
+		<p>Checks to see if the current event equals site.feed</p>
 	
 
 	
@@ -2000,7 +2054,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.feed, false if not</dd>
+			<dd>True if the current event equals site.feed, false if not</dd>
 		</dl>
 	
 
@@ -2010,18 +2064,18 @@ Aggregator Helper</p>
 	<hr>
 
 	
-	<a name="isIndexView()"><!-- --></a>
+	<a name="isNewsView()"><!-- --></a>
 	<h3>
-		isIndexView
+		isNewsView
 		
 	</h3>
 
-	<kbd>public boolean <strong>isIndexView</strong>()</kbd>
+	<kbd>public boolean <strong>isNewsView</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Checks to see if the current event equals portal.index</p>
+		<p>Checks to see if the current event equals site.index</p>
 	
 
 	
@@ -2039,7 +2093,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.index, false if not</dd>
+			<dd>True if the current event equals site.index, false if not</dd>
 		</dl>
 	
 
@@ -2060,7 +2114,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if if the current event equals portal.index and a search term is present</p>
+		<p>Checks to see if if the current event equals site.index and a search term is present</p>
 	
 
 	
@@ -2078,7 +2132,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals portal.index and a search term is present, false if not</dd>
+			<dd>True if the current event equals site.index and a search term is present, false if not</dd>
 		</dl>
 	
 
@@ -2818,18 +2872,18 @@ Aggregator Helper</p>
 	<hr>
 
 	
-	<a name="linkPortal()"><!-- --></a>
+	<a name="linkNews()"><!-- --></a>
 	<h3>
-		linkPortal
+		linkNews
 		
 	</h3>
 
-	<kbd>public string <strong>linkPortal</strong>([boolean ssl='[runtime expression]'])</kbd>
+	<kbd>public string <strong>linkNews</strong>([boolean ssl='[runtime expression]'])</kbd>
 
 	<br><br>
 
 	
-		<p>Gets the portal link</p>
+		<p>Gets the news link</p>
 	
 
 	
@@ -2854,7 +2908,7 @@ Aggregator Helper</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>The portal link</dd>
+			<dd>The news link</dd>
 		</dl>
 	
 

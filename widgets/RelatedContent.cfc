@@ -62,7 +62,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		} else {
 			html &= "<p>#arguments.emptyMessage#</p>";
 			if ( cb.isPreview() ) {
-				html &= "<small>NOTE: Related content may not appear in preview mode!</small>" ;
+				html &= "<small>NOTE: Related content may not appear in preview mode!</small>";
 			}
 		}
 
@@ -81,7 +81,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var html = "";
 
 		// Select start
-		html &= '<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>');
+		html &= '<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>';
 
 		// Select options
 		for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {

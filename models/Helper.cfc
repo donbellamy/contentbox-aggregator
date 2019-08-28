@@ -61,66 +61,66 @@ component accessors="true" singleton threadSafe {
 	/************************************** Context Methods *********************************************/
 
 	/**
-	 * Checks to see if the current event equals portal.index
-	 * @return True if the current event equals portal.index, false if not
+	 * Checks to see if the current event equals site.index
+	 * @return True if the current event equals site.index, false if not
 	 */
-	boolean function isIndexView() {
+	boolean function isNewsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.index" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.index" );
 	}
 
 	/**
-	 * Checks to see if if the current event equals portal.index and a search term is present
-	 * @return True if the current event equals portal.index and a search term is present, false if not
+	 * Checks to see if if the current event equals site.index and a search term is present
+	 * @return True if the current event equals site.index and a search term is present, false if not
 	 */
 	boolean function isSearchView() {
 		var rc = cb.getRequestCollection();
-		return ( isIndexView() AND structKeyExists( rc, "q" ) AND len( rc.q ) );
+		return ( isNewsView() AND structKeyExists( rc, "q" ) AND len( rc.q ) );
 	}
 
 	/**
-	 * Checks to see if if the current event equals portal.index and a category is present
-	 * @return True if the current event equals portal.index and a category is present, false if not
+	 * Checks to see if if the current event equals site.index and a category is present
+	 * @return True if the current event equals site.index and a category is present, false if not
 	 */
 	boolean function isCategoryView() {
 		var rc = cb.getRequestCollection();
-		return ( isIndexView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
+		return ( isNewsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
 	}
 
 	/**
-	 * Checks to see if the current event equals portal.archives
-	 * @return True if the current event equals portal.archives, false if not
+	 * Checks to see if the current event equals site.archives
+	 * @return True if the current event equals site.archives, false if not
 	 */
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.archives" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.archives" );
 	}
 
 	/**
-	 * Checks to see if the current event equals portal.feeds
-	 * @return True if the current event equals portal.feeds, false if not
+	 * Checks to see if the current event equals site.feeds
+	 * @return True if the current event equals site.feeds, false if not
 	 */
 	boolean function isFeedsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feeds" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeds" );
 	}
 
 	/**
-	 * Checks to see if the current event equals portal.feed
-	 * @return True if the current event equals portal.feed, false if not
+	 * Checks to see if the current event equals site.feed
+	 * @return True if the current event equals site.feed, false if not
 	 */
 	boolean function isFeedView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feed" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feed" );
 	}
 
 	/**
-	 * Checks to see if the current event equals portal.feeditem
-	 * @return True if the current event equals portal.feeditem, false if not
+	 * Checks to see if the current event equals site.feeditem
+	 * @return True if the current event equals site.feeditem, false if not
 	 */
 	boolean function isFeedItemView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:portal.feeditem" );
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeditem" );
 	}
 
 	/**
@@ -326,7 +326,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed link
 	 */
 	string function linkFeed( required Feed feed, boolean ssl=cb.getRequestContext().isSSL(), string format="html" ) {
-		return linkFeeds( ssl=arguments.ssl ) & arguments.feed.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+		return linkFeeds( ssl=arguments.ssl ) & "/#arguments.feed.getSlug()#" & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -336,7 +336,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed rss link
 	 */
 	string function linkFeedRSS( required Feed feed, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkFeeds( ssl=arguments.ssl ) & arguments.feed.getSlug() & "/rss";
+		return linkFeeds( ssl=arguments.ssl ) & "/#arguments.feed.getSlug()#/rss";
 	}
 
 	/**
@@ -604,11 +604,13 @@ component accessors="true" singleton threadSafe {
 	 * @return The breadcrumb html
 	 */
 	string function breadCrumbs( string separator=">" ) {
-		var bc = "#arguments.separator#";
-		//var bc = '#arguments.separator# <a href="#linkPortal()#">#setting("ag_portal_name")#</a> ';
+		var bc = "";
+		if ( isNewsView() || isArchivesView() ) {
+			bc &= '#arguments.separator# <a href="#linkNews()#">News</a> '; //TODO: Get news page title
+		}
 		if ( isSearchView() ) {
 			var searchTerm = getSearchTerm();
-			//bc &= '#arguments.separator# <a href="#linkPortal()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+			bc &= '#arguments.separator# <a href="#linkNews()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
 		}
 		if ( isCategoryView() ) {
 			var category = getCurrentCategory();
@@ -617,12 +619,12 @@ component accessors="true" singleton threadSafe {
 		if ( isArchivesView() ) {
 			var archiveDate = getCurrentArchiveDate();
 			if ( isDate( archiveDate ) ) {
-				rc = cb.getRequestCollection();
+				var rc = cb.getRequestCollection();
 				bc &= '#arguments.separator# <a href="#linkArchive( rc.year, rc.month, rc.day )#">#getCurrentFormattedArchiveDate()#</a> ';
 			}
 		}
 		if ( isFeedsView() || isFeedView() ) {
-			bc &= '#arguments.separator# <a href="#linkFeeds()#">#setting("ag_portal_feeds_title")#</a> ';
+			bc &= '#arguments.separator# <a href="#linkFeeds()#">Feeds</a> '; // TODO: Get feeds page title
 		}
 		if ( isFeedView() ) {
 			var feed = getCurrentFeed();

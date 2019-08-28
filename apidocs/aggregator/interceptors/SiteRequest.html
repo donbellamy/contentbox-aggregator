@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>feeds</title>
-	<meta name="keywords" content="aggregator.handlers.concurrent.Callable interface">
+	<title>SiteRequest</title>
+	<meta name="keywords" content="aggregator.interceptors.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/handlers/feeds.html" target="_top">
+				<li><a href="../../index.html?aggregator/interceptors/SiteRequest.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.handlers"><span class="label label-success">aggregator.handlers</span></a>
+	<a href="package-summary.html" title="Package: aggregator.interceptors"><span class="label label-success">aggregator.interceptors</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- feeds</h2>
+ SiteRequest</h2>
 
 
 
@@ -132,30 +132,6 @@ Class
 
 
 	
-		
-	
-	
-
-	
-		
-		
-			
-		
-	
-	
-
-	
-		
-		
-			
-		
-	
-	
-
-	
-		
-		
-			
 		
 	
 	
@@ -188,11 +164,8 @@ Class
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
     <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.FrameworkSupertype
-      <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.EventHandler
-        <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules.contentbox-admin.handlers.baseHandler
-          <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules_user.contentbox-aggregator.handlers.baseHandler
-            <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules_user.contentbox-aggregator.handlers.contentHandler
-              <img src="../../resources/inherit.gif" alt="extended by ">aggregator.handlers.feeds
+      <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.Interceptor
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.interceptors.SiteRequest
 </pre>
 
 
@@ -208,7 +181,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-Feeds handler</p>
+Site request interceptor</p>
 </div>
 
 
@@ -324,7 +297,7 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#blacklistedItemService()">blacklistedItemService</A></strong>
+			<strong><a href="SiteRequest.html#agHelper()">agHelper</A></strong>
 			<br>
 			
 			<br><br>
@@ -345,7 +318,7 @@ Feeds handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = blacklistedItemService@aggregator</li>
+				<li class="label label-default label-annotations">inject = helper@aggregator</li>
 				
 			
 				
@@ -379,7 +352,7 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#feedImportService()">feedImportService</A></strong>
+			<strong><a href="SiteRequest.html#cbHelper()">cbHelper</A></strong>
 			<br>
 			
 			<br><br>
@@ -400,7 +373,282 @@ Feeds handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedImportService@aggregator</li>
+				<li class="label label-default label-annotations">inject = CBHelper@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteRequest.html#contentService()">contentService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = contentService@aggregator</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteRequest.html#html()">html</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = HTMLHelper@coldbox</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteRequest.html#moduleService()">moduleService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = coldbox:moduleService</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteRequest.html#routingService()">routingService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = coldbox:routingService</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteRequest.html#settingService()">settingService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = settingService@cb</li>
 				
 			
 				
@@ -451,13 +699,13 @@ Feeds handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>private&nbsp;any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#blacklist()">blacklist</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="SiteRequest.html#$aginject()">$aginject</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blacklists feed item from feed import.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Injects the ag helper.
 			
 		</td>
 	</tr>
@@ -469,25 +717,10 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#editor()">editor</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="SiteRequest.html#afterInstanceCreation()">afterInstanceCreation</A></strong>([any event], [any interceptData], [any buffer])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed editor.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;struct</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#getFilters()">getFilters</A></strong>([any rc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the feed filter struct.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renderer helper injection.
 			
 		</td>
 	</tr>
@@ -499,10 +732,10 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#import()">import</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="SiteRequest.html#postRender()">postRender</A></strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main feed import routine.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired on post render during aggregator requests only.
 			
 		</td>
 	</tr>
@@ -514,220 +747,10 @@ Feeds handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="feeds.html#importActive()">importActive</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="SiteRequest.html#preProcess()">preProcess</A></strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for all active feeds.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#importAll()">importAll</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for all feeds.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#importFeed()">importFeed</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the feed import routine for a single feed.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#index()">index</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed index.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#preHandler()">preHandler</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre handler.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#remove()">remove</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes feed.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#removeImport()">removeImport</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes feed import record.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#resetHits()">resetHits</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets feed hits.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#save()">save</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves feed.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#saveCategories()">saveCategories</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves categories.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#state()">state</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets feed import state.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#table()">table</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed table.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#updateStatus()">updateStatus</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates feed status.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#view()">view</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View feed.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="feeds.html#viewImport()">viewImport</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays feed import record.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired on pre process during contentbox public requests only.
 			
 		</td>
 	</tr>
@@ -744,202 +767,11 @@ Feeds handler</p>
 	
 
 	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.modules_user.contentbox-aggregator.handlers.contentHandler"><!-- --></a>
+	<a name="methods_inherited_from_class_coldbox.system.Interceptor"><!-- --></a>
 	<table class="table table-hover table-bordered">
 		<tr class="info">
 			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.modules_user.contentbox-aggregator.handlers.contentHandler</kbd></strong>
-			</th>
-		</tr>
-		<tr>
-			<td>
-				
-				
-				
-					
-					
-					
-					
-					
-					
-				
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-
-				
-					<a href="../../contentbox/modules_user/contentbox-aggregator/handlers/contentHandler.html#getUserDefaultEditor()">getUserDefaultEditor</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/contentHandler.html#slugify()">slugify</a>
-				
-			</td>
-		</tr>
-	</table>
-
-	
-
-	
-
-	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.modules_user.contentbox-aggregator.handlers.baseHandler"><!-- --></a>
-	<table class="table table-hover table-bordered">
-		<tr class="info">
-			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.modules_user.contentbox-aggregator.handlers.baseHandler</kbd></strong>
-			</th>
-		</tr>
-		<tr>
-			<td>
-				
-				
-				
-					
-					
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-
-				
-					<a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#aroundHandler()">aroundHandler</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onAuthenticationFailure()">onAuthenticationFailure</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onAuthorizationFailure()">onAuthorizationFailure</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onError()">onError</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onExpectationFailed()">onExpectationFailed</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onInvalidHTTPMethod()">onInvalidHTTPMethod</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#onMissingAction()">onMissingAction</a>, <a href="../../contentbox/modules_user/contentbox-aggregator/handlers/baseHandler.html#routeNotFound()">routeNotFound</a>
-				
-			</td>
-		</tr>
-	</table>
-
-	
-
-	
-
-	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.modules.contentbox-admin.handlers.baseHandler"><!-- --></a>
-	<table class="table table-hover table-bordered">
-		<tr class="info">
-			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.modules.contentbox-admin.handlers.baseHandler</kbd></strong>
-			</th>
-		</tr>
-		<tr>
-			<td>
-				
-				
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-				
-
-				
-					<span class="label label-warning"><em>None</em></span>
-				
-			</td>
-		</tr>
-	</table>
-
-	
-
-	
-
-	&nbsp;
-	<a name="methods_inherited_from_class_coldbox.system.EventHandler"><!-- --></a>
-	<table class="table table-hover table-bordered">
-		<tr class="info">
-			<th align="left">
-				<strong>Methods inherited from class <kbd>coldbox.system.EventHandler</kbd></strong>
+				<strong>Methods inherited from class <kbd>coldbox.system.Interceptor</kbd></strong>
 			</th>
 		</tr>
 		<tr>
@@ -1071,9 +903,99 @@ Feeds handler</p>
 					
 					
 				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
 
 				
-					<a href="../../coldbox/system/EventHandler.html#_actionExists()">_actionExists</a>, <a href="../../coldbox/system/EventHandler.html#_actionMetadata()">_actionMetadata</a>, <a href="../../coldbox/system/EventHandler.html#_privateInvoker()">_privateInvoker</a>, <a href="../../coldbox/system/EventHandler.html#getCachebox()">getCachebox</a>, <a href="../../coldbox/system/EventHandler.html#getFlash()">getFlash</a>, <a href="../../coldbox/system/EventHandler.html#getLog()">getLog</a>, <a href="../../coldbox/system/EventHandler.html#getLogBox()">getLogBox</a>, <a href="../../coldbox/system/EventHandler.html#getWirebox()">getWirebox</a>, <a href="../../coldbox/system/EventHandler.html#init()">init</a>, <a href="../../coldbox/system/EventHandler.html#setCachebox()">setCachebox</a>, <a href="../../coldbox/system/EventHandler.html#setFlash()">setFlash</a>, <a href="../../coldbox/system/EventHandler.html#setLog()">setLog</a>, <a href="../../coldbox/system/EventHandler.html#setLogBox()">setLogBox</a>, <a href="../../coldbox/system/EventHandler.html#setWirebox()">setWirebox</a>
+					<a href="../../coldbox/system/Interceptor.html#appendToBuffer()">appendToBuffer</a>, <a href="../../coldbox/system/Interceptor.html#clearBuffer()">clearBuffer</a>, <a href="../../coldbox/system/Interceptor.html#configure()">configure</a>, <a href="../../coldbox/system/Interceptor.html#getBufferObject()">getBufferObject</a>, <a href="../../coldbox/system/Interceptor.html#getBufferString()">getBufferString</a>, <a href="../../coldbox/system/Interceptor.html#getCachebox()">getCachebox</a>, <a href="../../coldbox/system/Interceptor.html#getFlash()">getFlash</a>, <a href="../../coldbox/system/Interceptor.html#getInterceptorService()">getInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#getLog()">getLog</a>, <a href="../../coldbox/system/Interceptor.html#getLogBox()">getLogBox</a>, <a href="../../coldbox/system/Interceptor.html#getProperties()">getProperties</a>, <a href="../../coldbox/system/Interceptor.html#getProperty()">getProperty</a>, <a href="../../coldbox/system/Interceptor.html#getWirebox()">getWirebox</a>, <a href="../../coldbox/system/Interceptor.html#init()">init</a>, <a href="../../coldbox/system/Interceptor.html#propertyExists()">propertyExists</a>, <a href="../../coldbox/system/Interceptor.html#setCachebox()">setCachebox</a>, <a href="../../coldbox/system/Interceptor.html#setFlash()">setFlash</a>, <a href="../../coldbox/system/Interceptor.html#setInterceptorService()">setInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#setLog()">setLog</a>, <a href="../../coldbox/system/Interceptor.html#setLogBox()">setLogBox</a>, <a href="../../coldbox/system/Interceptor.html#setProperties()">setProperties</a>, <a href="../../coldbox/system/Interceptor.html#setProperty()">setProperty</a>, <a href="../../coldbox/system/Interceptor.html#setWirebox()">setWirebox</a>, <a href="../../coldbox/system/Interceptor.html#unregister()">unregister</a>
 				
 			</td>
 		</tr>
@@ -1461,12 +1383,12 @@ Feeds handler</p>
 
 	
 		
-		<a name="blacklistedItemService()"><!-- --></a>
-		<h3>blacklistedItemService</h3>
+		<a name="agHelper()"><!-- --></a>
+		<h3>agHelper</h3>
 
 		<kbd>
 			property any
-			<strong>blacklistedItemService</strong>
+			<strong>agHelper</strong>
 			
 		</kbd>
 
@@ -1493,7 +1415,7 @@ Feeds handler</p>
 			
 		
 			
-			<dd><code>inject</code> - blacklistedItemService@aggregator</dd>
+			<dd><code>inject</code> - helper@aggregator</dd>
 			
 		
 			
@@ -1509,12 +1431,12 @@ Feeds handler</p>
 		<hr>
 	
 		
-		<a name="feedImportService()"><!-- --></a>
-		<h3>feedImportService</h3>
+		<a name="cbHelper()"><!-- --></a>
+		<h3>cbHelper</h3>
 
 		<kbd>
 			property any
-			<strong>feedImportService</strong>
+			<strong>cbHelper</strong>
 			
 		</kbd>
 
@@ -1541,7 +1463,247 @@ Feeds handler</p>
 			
 		
 			
-			<dd><code>inject</code> - feedImportService@aggregator</dd>
+			<dd><code>inject</code> - CBHelper@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="contentService()"><!-- --></a>
+		<h3>contentService</h3>
+
+		<kbd>
+			property any
+			<strong>contentService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - contentService@aggregator</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="html()"><!-- --></a>
+		<h3>html</h3>
+
+		<kbd>
+			property any
+			<strong>html</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - HTMLHelper@coldbox</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="moduleService()"><!-- --></a>
+		<h3>moduleService</h3>
+
+		<kbd>
+			property any
+			<strong>moduleService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - coldbox:moduleService</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="routingService()"><!-- --></a>
+		<h3>routingService</h3>
+
+		<kbd>
+			property any
+			<strong>routingService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - coldbox:routingService</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="settingService()"><!-- --></a>
+		<h3>settingService</h3>
+
+		<kbd>
+			property any
+			<strong>settingService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - settingService@cb</dd>
 			
 		
 			
@@ -1578,18 +1740,52 @@ Feeds handler</p>
 
 
 	
-	<a name="blacklist()"><!-- --></a>
+	<a name="$aginject()"><!-- --></a>
 	<h3>
-		blacklist
+		$aginject
 		
 	</h3>
 
-	<kbd>public any <strong>blacklist</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>private any <strong>$aginject</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Blacklists feed item from feed import</p>
+		<p>Injects the ag helper</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="afterInstanceCreation()"><!-- --></a>
+	<h3>
+		afterInstanceCreation
+		
+	</h3>
+
+	<kbd>public any <strong>afterInstanceCreation</strong>([any event], [any interceptData], [any buffer])</kbd>
+
+	<br><br>
+
+	
+		<p>Renderer helper injection</p>
 	
 
 	
@@ -1607,6 +1803,55 @@ Feeds handler</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		<dd><code>buffer</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="postRender()"><!-- --></a>
+	<h3>
+		postRender
+		
+	</h3>
+
+	<kbd>public any <strong>postRender</strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired on post render during aggregator requests only</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		<dd><code>buffer</code></dd>
 		
 		<dd><code>rc</code></dd>
 		
@@ -1623,18 +1868,18 @@ Feeds handler</p>
 	<hr>
 
 	
-	<a name="editor()"><!-- --></a>
+	<a name="preProcess()"><!-- --></a>
 	<h3>
-		editor
+		preProcess
 		
 	</h3>
 
-	<kbd>public any <strong>editor</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>preProcess</strong>([any event], [any interceptData], [any buffer], [any rc], [any prc])</kbd>
 
 	<br><br>
 
 	
-		<p>Displays feed editor</p>
+		<p>Fired on pre process during contentbox public requests only</p>
 	
 
 	
@@ -1653,787 +1898,9 @@ Feeds handler</p>
 		
 		<dd><code>event</code></dd>
 		
-		<dd><code>rc</code></dd>
+		<dd><code>interceptData</code></dd>
 		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFilters()"><!-- --></a>
-	<h3>
-		getFilters
-		
-	</h3>
-
-	<kbd>private struct <strong>getFilters</strong>([any rc])</kbd>
-
-	<br><br>
-
-	
-		<p>Creates the feed filter struct</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>rc</code></dd>
-		
-		</dl>
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>The feed filter struct</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="import()"><!-- --></a>
-	<h3>
-		import
-		
-	</h3>
-
-	<kbd>public any <strong>import</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>The main feed import routine</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="importActive()"><!-- --></a>
-	<h3>
-		importActive
-		
-	</h3>
-
-	<kbd>public any <strong>importActive</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Runs the feed import routine for all active feeds</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="importAll()"><!-- --></a>
-	<h3>
-		importAll
-		
-	</h3>
-
-	<kbd>public any <strong>importAll</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Runs the feed import routine for all feeds</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="importFeed()"><!-- --></a>
-	<h3>
-		importFeed
-		
-	</h3>
-
-	<kbd>public any <strong>importFeed</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Runs the feed import routine for a single feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="index()"><!-- --></a>
-	<h3>
-		index
-		
-	</h3>
-
-	<kbd>public any <strong>index</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays feed index</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="preHandler()"><!-- --></a>
-	<h3>
-		preHandler
-		
-	</h3>
-
-	<kbd>public any <strong>preHandler</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Pre handler</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/modules_user/contentbox-aggregator/handlers/contentHandler.html#preHandler()">preHandler</a></code>
-			in class
-			<code>
-				contentbox.modules_user.contentbox-aggregator.handlers.contentHandler
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>action</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="remove()"><!-- --></a>
-	<h3>
-		remove
-		
-	</h3>
-
-	<kbd>public any <strong>remove</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Removes feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="removeImport()"><!-- --></a>
-	<h3>
-		removeImport
-		
-	</h3>
-
-	<kbd>public any <strong>removeImport</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Removes feed import record</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="resetHits()"><!-- --></a>
-	<h3>
-		resetHits
-		
-	</h3>
-
-	<kbd>public any <strong>resetHits</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Resets feed hits</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="save()"><!-- --></a>
-	<h3>
-		save
-		
-	</h3>
-
-	<kbd>public any <strong>save</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Saves feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="saveCategories()"><!-- --></a>
-	<h3>
-		saveCategories
-		
-	</h3>
-
-	<kbd>public any <strong>saveCategories</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Saves categories</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="state()"><!-- --></a>
-	<h3>
-		state
-		
-	</h3>
-
-	<kbd>public any <strong>state</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Resets feed import state</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="table()"><!-- --></a>
-	<h3>
-		table
-		
-	</h3>
-
-	<kbd>public any <strong>table</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays feed table</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="updateStatus()"><!-- --></a>
-	<h3>
-		updateStatus
-		
-	</h3>
-
-	<kbd>public any <strong>updateStatus</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Updates feed status</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="view()"><!-- --></a>
-	<h3>
-		view
-		
-	</h3>
-
-	<kbd>public any <strong>view</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>View feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="viewImport()"><!-- --></a>
-	<h3>
-		viewImport
-		
-	</h3>
-
-	<kbd>public any <strong>viewImport</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays feed import record</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
+		<dd><code>buffer</code></dd>
 		
 		<dd><code>rc</code></dd>
 		
