@@ -11,6 +11,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="rssService" inject="rssService@aggregator";
+	property name="mobileDetector" inject="mobileDetector@cb";
 
 	// Around handler exeptions
 	this.aroundhandler_except = "rss,onError,notFound";
@@ -37,6 +38,23 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Default description and keywords
 		// TODO: Set keywords and description below?
+
+		// TODO: notFound() if using /aggregator/site
+
+		//writedump(arguments.action);
+		//abort;
+
+		// Grab the page (news or feeds)
+		/*switch( arguments.action ) {
+			case "index":
+			case "archives":
+			case "rss";
+				prc.page = contentService.findBySlug( prc.agSettings.ag_site_news_entryPoint );
+				break;
+			case "feeds,feed,feedItem":
+				prc.page = contentService.findBySlug( prc.agSettings.ag_site_feeds_entryPoint );
+				break;
+		}*/
 
 	}
 
@@ -175,11 +193,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Save cache
 		if ( cacheEnabled ) {
 
-			// Check for feed/feed item
+			// Check for feed/feeditem/page
 			if ( structKeyExists( prc, "feed" ) && prc.feed.isLoaded() ) {
 				data.contentID = prc.feed.getContentID();
-			} else if (  structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
+			} else if ( structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
 				data.contentID = prc.feedItem.getContentID();
+			} else if ( structKeyExists( prc, "page" ) && prc.page.isLoaded() ) {
+				data.contentID = prc.page.getContentID();
 			}
 
 			// Set the cache
@@ -205,68 +225,77 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "category", "" )
 			.paramValue( "format", "html" );
 
-		// TODO: grab news page
+		// Grab the news page
+		getPage( prc, prc.agSettings.ag_site_news_entryPoint );
 
-		// Set vars
-		// TODO: set to page title
-		var title = " | " & cbHelper.siteName();
+		// Make sure page exists
+		if ( prc.page.isLoaded() ) {
 
-		// Page check
-		if ( !isNumeric( rc.page ) ) rc.page = 1;
-		if ( rc.page GT 1 ) {
-			title = " - " & "Page " & rc.page & title;
-		}
+			// Set page title
+			var title = prc.page.getTitle() & " | " & cbHelper.siteName();
 
-		// XSS Cleanup
-		rc.q = antiSamy.clean( rc.q );
-		rc.category = antiSamy.clean( rc.category );
-
-		// Paging
-		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
-		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = prc.agHelper.linkNews() & "?page=@page@";
-
-		// Search
-		if ( len( trim( rc.q ) ) ) {
-			prc.pagingLink &= "&q=" & rc.q;
-			title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
-		}
-
-		// Category
-		if ( len( trim( rc.category ) ) ) {
-			prc.category = categoryService.findBySlug( rc.category );
-			if ( !isNull( prc.category ) ) {
-				prc.pagingLink = prc.agHelper.linkNews() & "/category/#rc.category#/?page=@page@";
-				title = " - " & prc.category.getCategory() & title;
-			} else {
-				notFound( argumentCollection=arguments );
-				return;
+			// Page check
+			if ( !isNumeric( rc.page ) ) rc.page = 1;
+			if ( rc.page GT 1 ) {
+				title = " - " & "Page " & rc.page & title;
 			}
+
+			// XSS Cleanup
+			rc.q = antiSamy.clean( rc.q );
+			rc.category = antiSamy.clean( rc.category );
+
+			// Paging
+			prc.oPaging = getModel("paging@aggregator");
+			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
+			prc.pagingBoundaries = prc.oPaging.getBoundaries();
+			prc.pagingLink = prc.agHelper.linkNews() & "?page=@page@";
+
+			// Search
+			if ( len( trim( rc.q ) ) ) {
+				prc.pagingLink &= "&q=" & rc.q;
+				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
+			}
+
+			// Category
+			if ( len( trim( rc.category ) ) ) {
+				prc.category = categoryService.findBySlug( rc.category );
+				if ( !isNull( prc.category ) ) {
+					prc.pagingLink = prc.agHelper.linkNews() & "/category/#rc.category#/?page=@page@";
+					title = " - " & prc.category.getCategory() & title;
+				} else {
+					notFound( argumentCollection=arguments );
+					return;
+				}
+			}
+
+			// Grab the results
+			var results = feedItemService.getPublishedFeedItems(
+				searchTerm=rc.q,
+				category=rc.category,
+				max=prc.agSettings.ag_site_paging_max_items,
+				offset=prc.pagingBoundaries.startRow - 1,
+				includeEntries=prc.agSettings.ag_site_display_entries
+			);
+			prc.feedItems = results.feedItems;
+			prc.itemCount = results.count;
+
+			// Announce event
+			announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
+
+			// Set the page title
+			cbHelper.setMetaTitle( title );
+
+			// Set layout and view
+			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
+				.setView( view="#prc.cbTheme#/views/feeditems", module=prc.cbThemeRecord.module );
+
+		} else {
+
+			// Not found
+			notFound( argumentCollection=arguments );
+			return;
+
 		}
-
-		// Grab the results
-		var results = feedItemService.getPublishedFeedItems(
-			searchTerm=rc.q,
-			category=rc.category,
-			max=prc.agSettings.ag_site_paging_max_items,
-			offset=prc.pagingBoundaries.startRow - 1,
-			includeEntries=prc.agSettings.ag_site_display_entries
-		);
-
-		prc.feedItems = results.feedItems;
-		prc.itemCount = results.count;
-
-		// Announce event
-		announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
-
-		// Set the page title
-		// TODO: Set to page title
-		cbHelper.setMetaTitle( title );
-
-		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/feeditems", module="contentbox" );
 
 	}
 
@@ -282,7 +311,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "day", 0 )
 			.paramValue( "format", "html" );
 
-		// TODO: get news page
+		// Grab the news page
+		getPage( prc, prc.agSettings.ag_site_news_entryPoint );
 
 		// Validate the passed date
 		var validDate = true;
@@ -300,8 +330,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			validDate = false;
 		}
 
-		// Make sure we are passing in a valid date
-		if ( validDate ) {
+		// Make sure page exists and date is valid
+		if ( prc.page.isLoaded() AND validDate ) {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
@@ -340,13 +370,14 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			} else if ( val( rc.month ) ) {
 				prc.formattedDate = dateFormat( prc.archiveDate, "mmmm, yyyy" );
 			}
-			title = " - " & prc.formattedDate & title;
-			// TODO: set page title
+			title = prc.page.getTitle() & " - " & prc.formattedDate & title;
+
+			// Set the page title
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-				.setView( view="#prc.cbTheme#/views/feeditemarchives", module="contentbox" );
+			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
+				.setView( view="#prc.cbTheme#/views/feeditemarchives", module=prc.cbThemeRecord.module );
 
 		} else {
 
@@ -363,30 +394,38 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	 */
 	function rss( event, rc, prc ) {
 
-		// RSS enabled?
-		if ( !prc.agSettings.ag_rss_enable ) {
+		// Grab the news page
+		getPage( prc, prc.agSettings.ag_site_news_entryPoint );
+
+		// Make sure page exists and rss is enabled
+		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
+
+			// Set params
+			event.paramValue( "category", "" )
+				.paramValue( "slug", "" );
+
+			// Set format
+			rc.format = "rss";
+
+			// Grab the rss feed
+			var rssFeed = rssService.getRSS(
+				category=rc.category,
+				slug=rc.slug
+			);
+
+			// Announce event
+			announceInterception( "aggregator_onRSSView", { category=rc.category, slug=rc.slug } );
+
+			// Render the xml
+			event.renderData( type="plain", data=rssFeed, contentType="text/xml" );
+
+		} else {
+
+			// Not found
 			notFound( argumentCollection=arguments );
 			return;
+
 		}
-
-		// Set params
-		event.paramValue( "category", "" )
-			.paramValue( "slug", "" );
-
-		// Set format
-		rc.format = "rss";
-
-		// Grab the rss feed
-		var rssFeed = rssService.getRSS(
-			category=rc.category,
-			slug=rc.slug
-		);
-
-		// Announce event
-		announceInterception( "aggregator_onRSSView", { category=rc.category, slug=rc.slug } );
-
-		// Render the xml
-		event.renderData( type="plain", data=rssFeed, contentType="text/xml" );
 
 	}
 
@@ -399,41 +438,53 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "format", "html" );
 
-		// TODO: grab feeds page
+		// Grab the feeds page
+		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
 
-		// Set vars
-		var title = " | " & cbHelper.siteName();
+		// Make sure page exists
+		if ( prc.page.isLoaded() ) {
 
-		// Page check
-		if ( !isNumeric( rc.page ) ) rc.page = 1;
-		if ( rc.page GT 1 ) {
-			title = " - " & "Page " & rc.page & title;
+			// Set vars
+			var title = " | " & cbHelper.siteName();
+
+			// Page check
+			if ( !isNumeric( rc.page ) ) rc.page = 1;
+			if ( rc.page GT 1 ) {
+				title = " - " & "Page " & rc.page & title;
+			}
+
+			// Paging
+			prc.oPaging = getModel("paging@aggregator");
+			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feeds );
+			prc.pagingBoundaries = prc.oPaging.getBoundaries();
+			prc.pagingLink = prc.agHelper.linkFeeds() & "?page=@page@";
+
+			// Grab the results
+			var results = feedService.getPublishedFeeds(
+				max=prc.agSettings.ag_site_paging_max_feeds,
+				offset=prc.pagingBoundaries.startRow - 1
+			);
+			prc.feeds = results.feeds;
+			prc.itemCount = results.count;
+
+			// Announce event
+			announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
+
+			// Set the page title
+			title = prc.page.getTitle() & title;
+			cbHelper.setMetaTitle( title );
+
+			// Set layout and view
+			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
+				.setView( view="#prc.cbTheme#/views/feeds", module=prc.cbThemeRecord.module );
+
+		} else {
+
+			// Not found
+			notFound( argumentCollection=arguments );
+			return;
+
 		}
-
-		// Paging
-		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feeds );
-		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = prc.agHelper.linkFeeds() & "?page=@page@";
-
-		// Grab the results
-		var results = feedService.getPublishedFeeds(
-			max=prc.agSettings.ag_site_paging_max_feeds,
-			offset=prc.pagingBoundaries.startRow - 1
-		);
-		prc.feeds = results.feeds;
-		prc.itemCount = results.count;
-
-		// Announce event
-		announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
-
-		// Set the page title
-		// TODO: set page title
-		cbHelper.setMetaTitle( title );
-
-		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/feeds", module="contentbox" );
 
 	}
 
@@ -448,7 +499,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "author", "" )
 			.paramValue( "format", "html" );
 
-		// TODO: grab feeds page
+		// Grab the feeds page
+		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -459,8 +511,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Get the feed
 		prc.feed = feedService.findBySlug( rc.slug, showUnpublished );
 
-		// If loaded, else not found
-		if ( prc.feed.isLoaded() ) {
+		// Make sure page and feed exists
+		if ( prc.page.isLoaded() && prc.feed.isLoaded() ) {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
@@ -516,8 +568,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-				.setView( view="#prc.cbTheme#/views/feed", module="contentbox" );
+			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
+				.setView( view="#prc.cbTheme#/views/feed", module=prc.cbThemeRecord.module );
 
 		} else {
 
@@ -575,7 +627,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "slug", "" )
 			.paramValue( "format", "html" );
 
-		// TODO: grab feeds page
+		// TODO: grab news page
 
 		// If loaded, else not found
 		if ( prc.feedItem.isLoaded() ) {
@@ -602,8 +654,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
 
-					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-						.setView( view="#prc.cbTheme#/views/interstitial", module="contentbox" );
+					event.setLayout( name="#prc.cbTheme#/layouts/portal", module=prc.cbThemeRecord.module )
+						.setView( view="#prc.cbTheme#/views/interstitial", module=prc.cbThemeRecord.module );
 
 					break;
 
@@ -624,8 +676,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						cbHelper.setMetaKeywords( prc.feedItem.getHTMLKeywords() );
 					}
 
-					event.setLayout( name="#prc.cbTheme#/layouts/portal", module="contentbox" )
-						.setView( view="#prc.cbTheme#/views/feeditem", module="contentbox" );
+					event.setLayout( name="#prc.cbTheme#/layouts/portal", module=prc.cbThemeRecord.module )
+						.setView( view="#prc.cbTheme#/views/feeditem", module=prc.cbThemeRecord.module );
 
 					break;
 
@@ -665,12 +717,64 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		);
 
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/error", module="contentbox" );
+		event.setLayout( name="#prc.cbTheme#/layouts/pages", module=prc.cbThemeRecord.module )
+			.setView( view="#prc.cbTheme#/views/error", module=prc.cbThemeRecord.module );
 
 	}
 
 	/************************************** PRIVATE *********************************************/
+
+	/**
+	 * Gets the current page
+	 */
+	private function getPage( prc, string slug ) {
+
+		// Check author
+		var showUnpublished = false;
+		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+			var showUnpublished = true;
+		}
+
+		// Grab the page
+		prc.page = contentService.findBySlug( arguments.slug, showUnpublished );
+
+		// Make sure page exists
+		if ( prc.page.isLoaded() ) {
+
+			// Update hits
+			contentService.updateHits( prc.page.getContentID() );
+
+			// Comments
+			if ( prc.page.getAllowComments() ) {
+				var commentResults = commentService.findApprovedComments( contentID=prc.page.getContentID(), sortOrder="asc" );
+				prc.comments = commentResults.comments;
+				prc.commentsCount = commentResults.count;
+			} else {
+				prc.comments = [];
+				prc.commentsCount = 0;
+			}
+
+			// Check mobile and layout
+			var isMobile = mobileDetector.isMobile();
+			var layout = isMobile ? prc.page.getMobileLayoutWithInheritance() : prc.page.getLayoutWithInheritance();
+			if ( layout != "-no-layout-" && !fileExists( expandPath( cbHelper.themeRoot() & "/layouts/#layout#.cfm" ) ) ) {
+				throw(
+					message	= "The layout of the page: '#layout#' does not exist in the current theme.",
+					detail= "Please verify your page layout settings",
+					type = "ContentBox.InvalidPageLayout"
+				);
+			}
+
+			// Reset the layout if needed
+			if ( prc.page.getLayout() != layout ) {
+				prc.page.setLayout( layout );
+			}
+
+			// Announce event
+			announceInterception( "cbui_onPage", { page=prc.page, isMobile=isMobile } );
+
+		}
+	}
 
 	/**
 	 * Displays page not found error
@@ -681,12 +785,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		prc.missingPage = event.getCurrentRoutedURL();
 		prc.missingRoutedURL = event.getCurrentRoutedURL();
 
-		// Set header
-		event.setHTTPHeader( "404", "Page not found" );
-
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/pages", module="contentbox" )
-			.setView( view="#prc.cbTheme#/views/notfound", module="contentbox" );
+		event.setLayout( name="#prc.cbTheme#/layouts/pages", module=prc.cbThemeRecord.module )
+			.setView( view="#prc.cbTheme#/views/notfound", module=prc.cbThemeRecord.module )
+			.setHTTPHeader( "404", "Page not found" );
 
 	}
 
