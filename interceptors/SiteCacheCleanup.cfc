@@ -100,7 +100,7 @@ component extends="coldbox.system.Interceptor" {
 	/************************************** PRIVATE *********************************************/
 
 	/**
-	 * Clears the portal content cache
+	 * Clears the site content cache
 	 * @return SiteCacheCleanup
 	 */
 	private SiteCacheCleanup function doCacheCleanup() {

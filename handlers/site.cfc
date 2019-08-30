@@ -36,25 +36,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			rc.format = "html";
 		}
 
-		// Default description and keywords
-		// TODO: Set keywords and description below?
-
-		// TODO: notFound() if using /aggregator/site
-
-		//writedump(arguments.action);
-		//abort;
-
-		// Grab the page (news or feeds)
-		/*switch( arguments.action ) {
-			case "index":
-			case "archives":
-			case "rss";
-				prc.page = contentService.findBySlug( prc.agSettings.ag_site_news_entryPoint );
-				break;
-			case "feeds,feed,feedItem":
-				prc.page = contentService.findBySlug( prc.agSettings.ag_site_feeds_entryPoint );
-				break;
-		}*/
+		// TODO: Set keywords and description in templates ??
 
 	}
 
@@ -126,41 +108,35 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Render the layout
 			data.content = renderLayout(
 				layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
-				module = "contentbox",
-				viewModule = "contentbox"
+				module = prc.cbThemeRecord.module,
+				viewModule = prc.cbThemeRecord.module
 			);
 		}
+
+		// Set the content
+		var content = structKeyExists( prc, "feed" ) ? prc.feed : ( structKeyExists( prc, "feedItem" ) ? prc.feedItem : prc.page );
 
 		// Switch on format
 		switch ( rc.format ) {
 			case "xml": case "json": {
-				var results = [];
-				var xmlRootName = "";
-				if ( structKeyExists( prc, "feed" ) ) {
-					xmlRootName = "feed";
-					results = prc.feed.getResponseMemento();
-				} else if ( structKeyExists( prc, "feedItems" ) ) {
-					xmlRootName = "feeditems"
-					for ( var feedItem IN prc.feedItems ) {
-						results.append( feedItem.getResponseMemento() );
-					}
-				}
-				if ( structKeyExists( prc, "feeds" ) ) {
-					xmlRootName = "feeds";
+				var results = content.getResponseMemento();
+				if ( content.getContentType() == "Page" && structKeyExists( prc, "feeds" ) ) {
+					results["feeds"] = [];
 					for ( var feed IN prc.feeds ) {
-						results.append( feed.getResponseMemento() );
+						results["feeds"].append( feed.getResponseMemento() );
 					}
-				}
-				if ( structKeyExists( prc, "feedItem" ) ) {
-					xmlRootName = "feeditem";
-					results = prc.feedItem.getResponseMemento();
+				} else if ( content.getContentType() == "Page" && structKeyExists( prc, "feedItems" ) ) {
+					results["feedItems"] = [];
+					for ( var feedItem IN prc.feedItems ) {
+						results["feedItems"].append( feedItem.getResponseMemento() );
+					}
 				}
 				if ( rc.format == "json" ) {
 					data.content = dataMarshaller.marshallData( data=results, type="json" );
 					data.contentType = "application/json";
 					data.isBinary = false;
 				} else {
-					data.content = dataMarshaller.marshallData( data=results, type="xml", xmlRootName=xmlRootName );
+					data.content = dataMarshaller.marshallData( data=results, type="xml", xmlRootName=lcase( content.getContentType() ) );
 					data.contentType = "text/xml";
 					data.isBinary = false;
 				}
@@ -191,16 +167,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		);
 
 		// Save cache
-		if ( cacheEnabled ) {
+		if ( cacheEnabled && content.isLoaded() && content.getCacheLayout() && content.isContentPublished() ) {
 
-			// Check for feed/feeditem/page
-			if ( structKeyExists( prc, "feed" ) && prc.feed.isLoaded() ) {
-				data.contentID = prc.feed.getContentID();
-			} else if ( structKeyExists( prc, "feedItem" ) && prc.feedItem.isLoaded() ) {
-				data.contentID = prc.feedItem.getContentID();
-			} else if ( structKeyExists( prc, "page" ) && prc.page.isLoaded() ) {
-				data.contentID = prc.page.getContentID();
-			}
+			// Set contentID
+			data.contentID = content.getContentID();
 
 			// Set the cache
 			cache.set(
@@ -232,7 +202,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( prc.page.isLoaded() ) {
 
 			// Set page title
-			var title = prc.page.getTitle() & " | " & cbHelper.siteName();
+			var title = " | " & cbHelper.siteName();
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -267,6 +237,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					return;
 				}
 			}
+
+			// Set title
+			title = prc.page.getTitle() & title;
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItems(
@@ -574,7 +547,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		} else {
 
 			// Announce event
-			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } );
+			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } ); // TODO: Other events?  newspagenotfound, etc...
 
 			// Not found
 			notFound( argumentCollection=arguments );
@@ -627,10 +600,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "slug", "" )
 			.paramValue( "format", "html" );
 
-		// TODO: grab news page
+		// Grab the news page
+		getPage( prc, prc.agSettings.ag_site_news_entryPoint );
 
-		// If loaded, else not found
-		if ( prc.feedItem.isLoaded() ) {
+		// Make sure page and feed item exists
+		if ( prc.page.isLoaded() && prc.feedItem.isLoaded() ) {
 
 			// Record hit
 			feedItemService.updateHits( prc.feedItem.getContentID() );
@@ -654,7 +628,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
 
-					event.setLayout( name="#prc.cbTheme#/layouts/portal", module=prc.cbThemeRecord.module )
+					event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
 						.setView( view="#prc.cbTheme#/views/interstitial", module=prc.cbThemeRecord.module );
 
 					break;
@@ -676,7 +650,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						cbHelper.setMetaKeywords( prc.feedItem.getHTMLKeywords() );
 					}
 
-					event.setLayout( name="#prc.cbTheme#/layouts/portal", module=prc.cbThemeRecord.module )
+					event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
 						.setView( view="#prc.cbTheme#/views/feeditem", module=prc.cbThemeRecord.module );
 
 					break;
@@ -731,7 +705,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Check author
 		var showUnpublished = false;
-		if( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ){
+		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {
 			var showUnpublished = true;
 		}
 
