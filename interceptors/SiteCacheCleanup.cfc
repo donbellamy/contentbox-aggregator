@@ -97,6 +97,28 @@ component extends="coldbox.system.Interceptor" {
 		if ( settings.ag_site_display_entries ) doCacheCleanup();
 	}
 
+	/**
+	 * Fired after page save
+	 */
+	function cbadmin_postPageSave( event, interceptData ) {
+		var page = arguments.interceptData.page;
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		if ( settings.ag_site_news_entryPoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
+			doCacheCleanup();
+		}
+	}
+
+	/**
+	 * Fired before page delete
+	 */
+	function cbadmin_prePageRemove( event, interceptData ) {
+		var page = arguments.interceptData.page;
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		if ( settings.ag_site_news_entryPoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
+			doCacheCleanup();
+		}
+	}
+
 	/************************************** PRIVATE *********************************************/
 
 	/**

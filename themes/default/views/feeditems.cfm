@@ -1,3 +1,5 @@
+<cfparam name="args.print" default="false" />
+<cfparam name="args.sidebar" default="true" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />

@@ -1,6 +1,7 @@
+<cfparam name="args.print" default="false" />
+<cfparam name="args.sidebar" default="true" />
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="true" />
-
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
