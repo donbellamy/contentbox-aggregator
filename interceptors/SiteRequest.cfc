@@ -78,28 +78,34 @@ component extends="coldbox.system.Interceptor" {
 		};
 
 		// Check for cache
-		if ( structKeyExists( prc, "contentCacheData" ) ) {
+		if ( structKeyExists( prc, "contentCacheData" ) && val( prc.contentCacheData.contentID ) ) {
 			if ( prc.contentCacheData.contentType NEQ "text/html" ) {
 				return;
 			}
-			if ( val( prc.contentCacheData.contentID ) ) {
-				args.oContent = contentService.get( prc.contentCacheData.contentID, false );
-				if ( !isNull( args.oContent ) && args.oContent.getContentType() == "Feed" ) {
-					prc.feed = args.oContent;
-				} else {
-					args.oContent = javaCast( "null", "" );
-				}
-			}
+			args.oContent = contentService.get( prc.contentCacheData.contentID, false );
 		}
 
 		// Check for feed
 		if ( structKeyExists( prc, "feed" ) ) {
 			args.oContent = prc.feed;
-			args.linkEdit = agHelper.linkFeedForm( prc.feed );
 		// Check for feed item
 		} else if ( structKeyExists( prc, "feedItem" ) ) {
 			args.oContent = prc.feedItem;
-			args.linkEdit = agHelper.linkFeedItemForm( prc.feedItem );
+		// Check for page
+		} else if ( structKeyExists( prc, "page" ) ) {
+			args.oContent = prc.page;
+
+		}
+
+		// Set edit link
+		if ( !isNull( args.oContent ) ) {
+			if ( args.oContent.getContentType() == "Feed" ) {
+				args.linkEdit = agHelper.linkFeedForm( args.oContent );
+			} else if ( args.oContent.getContentType() == "FeedItem" ) {
+				args.linkEdit = agHelper.linkFeedItemForm( args.oContent );
+			} else if ( args.oContent.getContentType() == "Page" ) {
+				args.linkEdit = "#cbHelper.linkAdmin()#pages/editor/contentID/#args.oContent.getContentID()#";
+			}
 		}
 
 		// Render the admin bar
@@ -110,16 +116,14 @@ component extends="coldbox.system.Interceptor" {
 		);
 
 		// Hide custom fields and insert options
-		if ( structKeyExists( prc, "feed" ) ) {
-			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; } @media (max-width: 768px) { .button.importing{ display:none; } }</style>";
-			adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button importing"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
-		} else if ( structKeyExists( prc, "feedItem" ) ) {
-			adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments,##cb-admin-bar-actions .seo{ display:none; }</style>";
-		// Insert clear cache button
-		} else if ( structKeyExists( prc, "contentCacheData" ) ) {
-			adminBar &= "<script>$('<a href=""#event.buildLink( event.getCurrentRoutedURL() )#?cbCache=true"" class=""button button-admin clear-cache"">Clear Cache</a>').insertBefore('##cb-admin-bar-actions .button-admin');</script>";
+		if ( !isNull( args.oContent ) ) {
+			if ( args.oContent.getContentType() == "Feed" ) {
+				adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments{ display:none; } @media (max-width: 768px) { .button.importing{ display:none; } }</style>";
+				adminBar &= "<script>$('<a href=""#args.linkEdit###importing"" class=""button importing"" target=""_blank"">Importing</a>').insertAfter('##cb-admin-bar-actions .edit');</script>";
+			} else if ( args.oContent.getContentType() == "FeedItem" ) {
+				adminBar &= "<style>##cb-admin-bar-actions .custom_fields,##cb-admin-bar-actions .comments,##cb-admin-bar-actions .seo{ display:none; }</style>";
+			}
 		}
-		// TODO: Add in page edit links
 
 		// Add to html head
 		cfhtmlhead( text=adminBar );
