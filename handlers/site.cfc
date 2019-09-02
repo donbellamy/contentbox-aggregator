@@ -565,8 +565,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Set params
 		event.paramValue( "slug", "" );
 
-		// TODO: grab feeds page
-
 		// Check if author is viewing
 		var showUnpublished = false;
 		if ( prc.oCurrentAuthor.isLoaded() AND prc.oCurrentAuthor.isLoggedIn() ) {

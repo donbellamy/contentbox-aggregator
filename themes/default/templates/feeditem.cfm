@@ -4,6 +4,7 @@
 		len( feedItem.getFeed().getLinkBehavior() ) ?
 		feedItem.getFeed().getLinkBehavior() :
 		ag.setting("ag_site_item_link_behavior") />
+	<cfset directLink = linkBehavior EQ "link" ? true : false />
 	<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 </cfif>
 <cfparam name="args.showSource" default="true" />
@@ -44,8 +45,9 @@
 			</div>
 		<cfelse>
 			<h2>
-				<a href="#ag.linkFeedItem( feedItem )#"
+				<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
+					<cfif directLink >class="direct-link"</cfif>
 					rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 					title="#encodeForHtmlAttribute( feedItem.getTitle() )#">#feedItem.getTitle()#</a>
 			</h2>
@@ -100,8 +102,9 @@
 			<div class="post-content row">
 				<cfif len( imageUrl ) >
 					<div class="col-sm-3">
-						<a class="thumbnail" href="#ag.linkFeedItem( feedItem )#"
+						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
+							<cfif directLink >class="direct-link"</cfif>
 							rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</div>
@@ -114,8 +117,9 @@
 					</cfif>
 					<cfif args.showReadMore >
 						<div class="post-more">
-							<a href="#ag.linkFeedItem( feedItem )#"
+							<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 								<cfif args.openNewWindow >target="_blank"</cfif>
+								<cfif directLink >class="direct-link"</cfif>
 								rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
 								title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
 						</div>

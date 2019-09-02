@@ -110,6 +110,7 @@ component extends="contentHandler" {
 		prc.categories = categoryService.getAll( sortOrder="category" );
 		prc.linkOptions = [
 			{ name="Forward the user directly to the feed item.", value="forward" },
+			{ name="Link the user directly to the feed item.", value="link" },
 			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
 			{ name="Display the entire feed item within the site.", value="display" }
 		];

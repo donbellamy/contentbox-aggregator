@@ -40,8 +40,8 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##portal" aria-controls="portal" role="tab" data-toggle="tab">
-							<i class="fa fa-newspaper-o"></i> Portal
+						<a href="##site" aria-controls="site" role="tab" data-toggle="tab">
+							<i class="fa fa-cog"></i> Site
 						</a>
 					</li>
 					<li role="presentation">
@@ -158,7 +158,7 @@
 						)#
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane" id="portal">
+				<div role="tabpanel" class="tab-pane" id="site">
 					<fieldset>
 						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
 						<div class="form-group">

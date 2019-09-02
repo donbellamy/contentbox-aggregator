@@ -168,6 +168,7 @@ component {
 			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.FeedItemTaxonomies", name="feedItemTaxonomies@aggregator" },
 			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
+			{ class = "#moduleMapping#.interceptors.PageListener", name="pageListener@aggregator" },
 			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.SiteCacheCleanup", name="siteCacheCleanup@aggregator" },
 			{ class = "#moduleMapping#.interceptors.SiteRequest", name="siteRequest@aggregator" }

@@ -120,6 +120,7 @@ component extends="coldbox.system.Interceptor" {
 		} else if ( structKeyExists( prc, "contentCacheData" ) ) {
 			adminBar &= "<script>$('<a href=""#event.buildLink( event.getCurrentRoutedURL() )#?cbCache=true"" class=""button button-admin clear-cache"">Clear Cache</a>').insertBefore('##cb-admin-bar-actions .button-admin');</script>";
 		}
+		// TODO: Add in page edit links
 
 		// Add to html head
 		cfhtmlhead( text=adminBar );
