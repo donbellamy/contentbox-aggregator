@@ -11,6 +11,7 @@ component extends="baseHandler" {
 	property name="pageService" inject="pageService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
+	property name="routingService" inject="coldbox:routingService";
 
 	/**
 	 * Pre handler
@@ -117,6 +118,19 @@ component extends="baseHandler" {
 			return index( argumentCollection=arguments );
 		}
 
+		// Update the site routes
+		routingService.setRoutes(
+			routingService.getRoutes().map( function( item ) {
+				if ( item.namespaceRouting EQ "aggregator-news" ) {
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_news_entrypoint, "/", "-", "all" ) & "/";
+				}
+				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
+				}
+				return item;
+			})
+		);
+
 		// Save settings
 		var setting = settingService.findWhere( { name="aggregator" } );
 		setting.setValue( serializeJSON( prc.agSettings ) );
@@ -138,20 +152,6 @@ component extends="baseHandler" {
 		} else {
 			cfschedule( action="delete", task="aggregator-import" );
 		}
-
-		// Set portal entrypoint
-		var routingService = controller.getRoutingService();
-		routingService.setRoutes(
-			routingService.getRoutes().map( function( item ) {
-				if ( item.namespaceRouting EQ "aggregator-news" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_news_entrypoint, "/", "-", "all" ) & "/";
-				}
-				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
-				}
-				return item;
-			})
-		);
 
 		announceInterception( "aggregator_postSettingsSave", {
 			settings=prc.agSettings,

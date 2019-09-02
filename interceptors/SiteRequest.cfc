@@ -12,7 +12,6 @@ component extends="coldbox.system.Interceptor" {
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="agHelper" inject="helper@aggregator";
 	property name="moduleService" inject="coldbox:moduleService";
-	property name="routingService" inject="coldbox:routingService";
 
 	/**
 	 * Fired on pre process during contentbox public requests only
