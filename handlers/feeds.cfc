@@ -189,7 +189,7 @@ component extends="contentHandler" {
 		event.paramValue( "tagLine", "" );
 		event.paramValue( "content", "" );
 
-		// Portal
+		// Site
 		event.paramValue( "linkBehavior", "" );
 		event.paramValue( "featuredImageBehavior", "" );
 		event.paramValue( "pagingMaxItems", "" );

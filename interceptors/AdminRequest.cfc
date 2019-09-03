@@ -95,13 +95,13 @@ component extends="coldbox.system.Interceptor" {
 		// Param format
 		event.paramValue( "format", "html" );
 
-		// Add portal link, new feed and clear cache to nav bar
+		// Add new feed, clear cache and import all options to nav bar
 		if ( !event.isAjax() && rc.format EQ "html" ) {
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
 				html.addJSContent("$(function(){$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});",true);
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
-				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""portalpurge""><a href=""javascript:adminAction( \'portal-purge\', \'#event.buildLink( prc.xehClearSiteCache )#\' );"" class="""">Clear Site Caches</a></li>');});",true);
+				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""aggregatorpurge""><a href=""javascript:adminAction( \'aggregator-purge\', \'#event.buildLink( prc.xehClearSiteCache )#\' );"" class="""">Clear Aggregator Caches</a></li>');});",true);
 			}
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) ) {
 				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""feedsimport""><a href=""#event.buildlink( prc.xehFeedImportAll )#"" class="""">Import All Feeds</a></li>');});",true);

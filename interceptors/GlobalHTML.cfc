@@ -9,14 +9,14 @@ component extends="coldbox.system.Interceptor" {
 	property name="agHelper" inject="helper@aggregator";
 
 	/**
-	 * Fired before portal index display
+	 * Fired before news index display
 	 */
 	function aggregator_preIndexDisplay( event, interceptData, buffer ) {
 		arguments.buffer.append( getSettings( event ).ag_html_pre_index_display );
 	}
 
 	/**
-	 * Fired after portal index display
+	 * Fired after news index display
 	 */
 	function aggregator_postIndexDisplay( event, interceptData, buffer ) {
 		arguments.buffer.append( getSettings( event ).ag_html_post_index_display );

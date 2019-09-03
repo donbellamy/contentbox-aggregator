@@ -10,9 +10,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @return RSS
 	 */
 	RSS function init() {
-		setName( "Portal RSS" );
+		setName( "Aggregator RSS" );
 		setVersion( "1.0" );
-		setDescription( "A simple widget that displays a link to the portal rss feed." );
+		setDescription( "A simple widget that displays a link to the aggregator rss feed." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "rss" );
@@ -42,7 +42,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// RSS Link
-		html &= '<ul id="portalrss"><li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li></ul>';
+		html &= '<ul id="aggregator-rss"><li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li></ul>';
 
 		return html;
 

@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>BaseWidget</title>
-	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
+	<title>PageListener</title>
+	<meta name="keywords" content="aggregator.interceptors.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/models/BaseWidget.html" target="_top">
+				<li><a href="../../index.html?aggregator/interceptors/PageListener.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
+	<a href="package-summary.html" title="Package: aggregator.interceptors"><span class="label label-success">aggregator.interceptors</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- BaseWidget</h2>
+ PageListener</h2>
 
 
 
@@ -164,8 +164,8 @@ Class
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
     <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.FrameworkSupertype
-      <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.ui.BaseWidget
-        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BaseWidget
+      <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.Interceptor
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.interceptors.PageListener
 </pre>
 
 
@@ -175,44 +175,13 @@ Class
 
 
 
-<div class="panel panel-default">
-	<div class="panel-heading"><strong>Direct Known Subclasses:</strong></div>
-  	<div class="panel-body">
-	
-		
-		<a href="../../aggregator/widgets/Archives.html" title="class in aggregator.models">Archives</a>
-	
-		,
-		<a href="../../aggregator/widgets/Categories.html" title="class in aggregator.models">Categories</a>
-	
-		,
-		<a href="../../aggregator/widgets/FeedItems.html" title="class in aggregator.models">FeedItems</a>
-	
-		,
-		<a href="../../aggregator/widgets/Feeds.html" title="class in aggregator.models">Feeds</a>
-	
-		,
-		<a href="../../aggregator/widgets/News.html" title="class in aggregator.models">News</a>
-	
-		,
-		<a href="../../aggregator/widgets/RelatedContent.html" title="class in aggregator.models">RelatedContent</a>
-	
-		,
-		<a href="../../aggregator/widgets/RSS.html" title="class in aggregator.models">RSS</a>
-	
-		,
-		<a href="../../aggregator/widgets/SearchForm.html" title="class in aggregator.models">SearchForm</a>
-	
-	</div>
-</div>
-
 
 
 
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-BaseWidget Model</p>
+Page listener</p>
 </div>
 
 
@@ -252,7 +221,7 @@ BaseWidget Model</p>
 			<li class="label label-danger label-annotations">
 				accessors
 				
-				: true
+				: false
 				
 			</li>
 			&nbsp;
@@ -328,7 +297,7 @@ BaseWidget Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BaseWidget.html#ag()">ag</A></strong>
+			<strong><a href="PageListener.html#routingService()">routingService</A></strong>
 			<br>
 			
 			<br><br>
@@ -349,7 +318,7 @@ BaseWidget Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = helper@aggregator</li>
+				<li class="label label-default label-annotations">inject = coldbox:routingService</li>
 				
 			
 				
@@ -383,7 +352,7 @@ BaseWidget Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BaseWidget.html#feedItemService()">feedItemService</A></strong>
+			<strong><a href="PageListener.html#settingService()">settingService</A></strong>
 			<br>
 			
 			<br><br>
@@ -404,62 +373,7 @@ BaseWidget Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#feedService()">feedService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = feedService@aggregator</li>
+				<li class="label label-default label-annotations">inject = settingService@cb</li>
 				
 			
 				
@@ -490,29 +404,6 @@ BaseWidget Model</p>
 </table>
 
 
-
-	
-	
-	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-
-	<a name="constructor_summary"><!-- --></a>
-	<table class="table table-bordered table-hover">
-		<tr class="info">
-			<th align="left" colspan="2">
-				<strong>Constructor Summary</strong>
-			</th>
-		</tr>
-		<tr>
-			
-			<td>
-				<strong><a href="BaseWidget.html#init()">init</A></strong>()
-				<br>
-				
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Base Constructor.
-				
-			</td>
-		</tr>
-	</table>
 
 
 
@@ -533,134 +424,13 @@ BaseWidget Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getAg()">getAg</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getAllCategories()">getAllCategories</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the categories.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedItemService()">getFeedItemService</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedService()">getFeedService</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedSlugs()">getFeedSlugs</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the feed slugs.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getPublicMethods()">getPublicMethods</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BaseWidget.html#renderIt()">renderIt</A></strong>()
+			<strong><a href="PageListener.html#cbadmin_postPageSave()">cbadmin_postPageSave</A></strong>([any event], [any interceptData])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main renderit method you will need to implement in concrete widgets.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setAg()">setAg</A></strong>(any ag)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setFeedItemService()">setFeedItemService</A></strong>(any feedItemService)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setFeedService()">setFeedService</A></strong>(any feedService)
-			<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after page save.
 			
 		</td>
 	</tr>
@@ -677,11 +447,11 @@ BaseWidget Model</p>
 	
 
 	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.models.ui.BaseWidget"><!-- --></a>
+	<a name="methods_inherited_from_class_coldbox.system.Interceptor"><!-- --></a>
 	<table class="table table-hover table-bordered">
 		<tr class="info">
 			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.models.ui.BaseWidget</kbd></strong>
+				<strong>Methods inherited from class <kbd>coldbox.system.Interceptor</kbd></strong>
 			</th>
 		</tr>
 		<tr>
@@ -860,177 +630,6 @@ BaseWidget Model</p>
 				
 					
 					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-				
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
 					
 						
 					
@@ -1076,7 +675,7 @@ BaseWidget Model</p>
 				
 
 				
-					<a href="../../contentbox/models/ui/BaseWidget.html#getAuthor()">getAuthor</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getAuthorService()">getAuthorService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getAuthorURL()">getAuthorURL</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getCategory()">getCategory</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getCategoryService()">getCategoryService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getCb()">getCb</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getCommentService()">getCommentService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getContentService()">getContentService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getContentStoreService()">getContentStoreService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getContentVersionService()">getContentVersionService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getDescription()">getDescription</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getEntryService()">getEntryService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getForgeBoxSlug()">getForgeBoxSlug</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getHtml()">getHtml</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getIcon()">getIcon</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getLog()">getLog</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getMenuService()">getMenuService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getName()">getName</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getPageService()">getPageService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getSecurityService()">getSecurityService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#getVersion()">getVersion</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setAuthor()">setAuthor</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setAuthorService()">setAuthorService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setAuthorURL()">setAuthorURL</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setCategory()">setCategory</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setCategoryService()">setCategoryService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setCb()">setCb</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setCommentService()">setCommentService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setContentService()">setContentService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setContentStoreService()">setContentStoreService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setContentVersionService()">setContentVersionService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setDescription()">setDescription</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setEntryService()">setEntryService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setForgeBoxSlug()">setForgeBoxSlug</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setHtml()">setHtml</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setIcon()">setIcon</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setLog()">setLog</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setMenuService()">setMenuService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setName()">setName</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setPageService()">setPageService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setSecurityService()">setSecurityService</a>, <a href="../../contentbox/models/ui/BaseWidget.html#setVersion()">setVersion</a>
+					<a href="../../coldbox/system/Interceptor.html#appendToBuffer()">appendToBuffer</a>, <a href="../../coldbox/system/Interceptor.html#clearBuffer()">clearBuffer</a>, <a href="../../coldbox/system/Interceptor.html#configure()">configure</a>, <a href="../../coldbox/system/Interceptor.html#getBufferObject()">getBufferObject</a>, <a href="../../coldbox/system/Interceptor.html#getBufferString()">getBufferString</a>, <a href="../../coldbox/system/Interceptor.html#getCachebox()">getCachebox</a>, <a href="../../coldbox/system/Interceptor.html#getFlash()">getFlash</a>, <a href="../../coldbox/system/Interceptor.html#getInterceptorService()">getInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#getLog()">getLog</a>, <a href="../../coldbox/system/Interceptor.html#getLogBox()">getLogBox</a>, <a href="../../coldbox/system/Interceptor.html#getProperties()">getProperties</a>, <a href="../../coldbox/system/Interceptor.html#getProperty()">getProperty</a>, <a href="../../coldbox/system/Interceptor.html#getWirebox()">getWirebox</a>, <a href="../../coldbox/system/Interceptor.html#init()">init</a>, <a href="../../coldbox/system/Interceptor.html#propertyExists()">propertyExists</a>, <a href="../../coldbox/system/Interceptor.html#setCachebox()">setCachebox</a>, <a href="../../coldbox/system/Interceptor.html#setFlash()">setFlash</a>, <a href="../../coldbox/system/Interceptor.html#setInterceptorService()">setInterceptorService</a>, <a href="../../coldbox/system/Interceptor.html#setLog()">setLog</a>, <a href="../../coldbox/system/Interceptor.html#setLogBox()">setLogBox</a>, <a href="../../coldbox/system/Interceptor.html#setProperties()">setProperties</a>, <a href="../../coldbox/system/Interceptor.html#setProperty()">setProperty</a>, <a href="../../coldbox/system/Interceptor.html#setWirebox()">setWirebox</a>, <a href="../../coldbox/system/Interceptor.html#unregister()">unregister</a>
 				
 			</td>
 		</tr>
@@ -1450,28 +1049,6 @@ BaseWidget Model</p>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
-	<a name="constructor_detail"><!-- --></a>
-	<table class="table table-bordered">
-		<tr class="info">
-			<th colspan="1" align="left">
-				<strong>Constructor Detail</strong>
-			</th>
-		</tr>
-	</table>
-
-	<a name="init()"><!-- --></a><h3>
-	init</h3>
-	<kbd>public <strong>init</strong>()</kbd>
-
-	<br><br>
-
-	
-	<p>Base Constructor</p>
-	
-
-	
-	<hr>
-
 
 <!-- ============ PROPERTY DETAIL ========== -->
 
@@ -1486,12 +1063,12 @@ BaseWidget Model</p>
 
 	
 		
-		<a name="ag()"><!-- --></a>
-		<h3>ag</h3>
+		<a name="routingService()"><!-- --></a>
+		<h3>routingService</h3>
 
 		<kbd>
 			property any
-			<strong>ag</strong>
+			<strong>routingService</strong>
 			
 		</kbd>
 
@@ -1518,7 +1095,7 @@ BaseWidget Model</p>
 			
 		
 			
-			<dd><code>inject</code> - helper@aggregator</dd>
+			<dd><code>inject</code> - coldbox:routingService</dd>
 			
 		
 			
@@ -1534,12 +1111,12 @@ BaseWidget Model</p>
 		<hr>
 	
 		
-		<a name="feedItemService()"><!-- --></a>
-		<h3>feedItemService</h3>
+		<a name="settingService()"><!-- --></a>
+		<h3>settingService</h3>
 
 		<kbd>
 			property any
-			<strong>feedItemService</strong>
+			<strong>settingService</strong>
 			
 		</kbd>
 
@@ -1566,55 +1143,7 @@ BaseWidget Model</p>
 			
 		
 			
-			<dd><code>inject</code> - feedItemService@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="feedService()"><!-- --></a>
-		<h3>feedService</h3>
-
-		<kbd>
-			property any
-			<strong>feedService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - feedService@aggregator</dd>
+			<dd><code>inject</code> - settingService@cb</dd>
 			
 		
 			
@@ -1651,280 +1180,18 @@ BaseWidget Model</p>
 
 
 	
-	<a name="getAg()"><!-- --></a>
+	<a name="cbadmin_postPageSave()"><!-- --></a>
 	<h3>
-		getAg
+		cbadmin_postPageSave
 		
 	</h3>
 
-	<kbd>public string <strong>getAg</strong>()</kbd>
+	<kbd>public any <strong>cbadmin_postPageSave</strong>([any event], [any interceptData])</kbd>
 
 	<br><br>
 
 	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getAllCategories()"><!-- --></a>
-	<h3>
-		getAllCategories
-		
-	</h3>
-
-	<kbd>public array <strong>getAllCategories</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Grabs the categories</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>An array of all category names</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedItemService()"><!-- --></a>
-	<h3>
-		getFeedItemService
-		
-	</h3>
-
-	<kbd>public string <strong>getFeedItemService</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedService()"><!-- --></a>
-	<h3>
-		getFeedService
-		
-	</h3>
-
-	<kbd>public string <strong>getFeedService</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedSlugs()"><!-- --></a>
-	<h3>
-		getFeedSlugs
-		
-	</h3>
-
-	<kbd>public array <strong>getFeedSlugs</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Grabs the feed slugs</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>An array of all feed slugs</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getPublicMethods()"><!-- --></a>
-	<h3>
-		getPublicMethods
-		
-	</h3>
-
-	<kbd>public array <strong>getPublicMethods</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/models/ui/BaseWidget.html#getPublicMethods()">getPublicMethods</a></code>
-			in class
-			<code>
-				contentbox.models.ui.BaseWidget
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="renderIt()"><!-- --></a>
-	<h3>
-		renderIt
-		
-	</h3>
-
-	<kbd>public any <strong>renderIt</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>This is the main renderit method you will need to implement in concrete widgets</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/models/ui/BaseWidget.html#renderIt()">renderIt</a></code>
-			in class
-			<code>
-				contentbox.models.ui.BaseWidget
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setAg()"><!-- --></a>
-	<h3>
-		setAg
-		
-	</h3>
-
-	<kbd>public any <strong>setAg</strong>(any ag)</kbd>
-
-	<br><br>
-
+		<p>Fired after page save</p>
 	
 
 	
@@ -1941,85 +1208,9 @@ BaseWidget Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>ag</code></dd>
+		<dd><code>event</code></dd>
 		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setFeedItemService()"><!-- --></a>
-	<h3>
-		setFeedItemService
-		
-	</h3>
-
-	<kbd>public any <strong>setFeedItemService</strong>(any feedItemService)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>feedItemService</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setFeedService()"><!-- --></a>
-	<h3>
-		setFeedService
-		
-	</h3>
-
-	<kbd>public any <strong>setFeedService</strong>(any feedService)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>feedService</code></dd>
+		<dd><code>interceptData</code></dd>
 		
 		</dl>
 	

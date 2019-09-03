@@ -194,10 +194,10 @@ component extends="baseHandler" {
 			arrayAppend( errors, "A valid max feeds value is required." );
 		}
 		if ( !val( prc.agSettings.ag_site_cache_timeout ) ) {
-			arrayAppend( errors, "A valid portal cache timeout is required." );
+			arrayAppend( errors, "A valid site cache timeout is required." );
 		}
 		if ( !val( prc.agSettings.ag_site_cache_timeout_idle ) ) {
-			arrayAppend( errors, "A valid portal cache idle timeout is required." );
+			arrayAppend( errors, "A valid site cache idle timeout is required." );
 		}
 
 		// Importing settings

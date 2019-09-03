@@ -1,18 +1,18 @@
 /**
  * ContentBox RSS Aggregator
- * Portal Widget
+ * News Widget
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Constructor, sets widget properties
-	 * @return Portal
+	 * @return News
 	 */
-	Portal function init() {
-		setName( "Portal" );
+	News function init() {
+		setName( "News" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feed items, similar to the portal home page." );
+		setDescription( "A widget that displays a list of feed items, similar to the news page." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "newspaper-o" );
@@ -21,7 +21,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	 * Renders the portal widget
+	 * Renders the news widget
 	 * @title.label Title
 	 * @title.hint An optional title to display using an H tag.
 	 * @titleLevel.label Title Level
@@ -45,7 +45,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
 	 * @includeEntries.label Include Entries?
 	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
-	 * @return The portal widget html
+	 * @return The news widget html
 	 */
 	string function renderIt(
 		string title="",
@@ -102,7 +102,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			openNewWindow = arguments.openNewWindow
 		};
 
-		// Render the portal template
+		// Render the news template
 		return renderView(
 			view = "#cb.themeName()#/templates/portal",
 			module = "contentbox",

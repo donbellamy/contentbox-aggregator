@@ -508,6 +508,61 @@ Site handler</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="site.html#mobileDetector()">mobileDetector</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = mobileDetector@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="site.html#rssService()">rssService</A></strong>
 			<br>
 			
@@ -586,7 +641,7 @@ Site handler</p>
 			<strong><a href="site.html#archives()">archives</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the portal archive.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the news archive.
 			
 		</td>
 	</tr>
@@ -655,13 +710,28 @@ Site handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="site.html#getPage()">getPage</A></strong>([any prc], [string slug])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the current page.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
 			<strong><a href="site.html#index()">index</A></strong>([any event], [any rc], [any prc])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the portal index.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the news index.
 			
 		</td>
 	</tr>
@@ -1076,6 +1146,54 @@ Site handler</p>
 		<hr>
 	
 		
+		<a name="mobileDetector()"><!-- --></a>
+		<h3>mobileDetector</h3>
+
+		<kbd>
+			property any
+			<strong>mobileDetector</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - mobileDetector@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="rssService()"><!-- --></a>
 		<h3>rssService</h3>
 
@@ -1156,7 +1274,7 @@ Site handler</p>
 	<br><br>
 
 	
-		<p>Displays the portal archive</p>
+		<p>Displays the news archive</p>
 	
 
 	
@@ -1374,6 +1492,49 @@ Site handler</p>
 	<hr>
 
 	
+	<a name="getPage()"><!-- --></a>
+	<h3>
+		getPage
+		
+	</h3>
+
+	<kbd>private any <strong>getPage</strong>([any prc], [string slug])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the current page</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>prc</code></dd>
+		
+		<dd><code>slug</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="index()"><!-- --></a>
 	<h3>
 		index
@@ -1385,7 +1546,7 @@ Site handler</p>
 	<br><br>
 
 	
-		<p>Displays the portal index</p>
+		<p>Displays the news index</p>
 	
 
 	

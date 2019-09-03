@@ -15,7 +15,7 @@ component extends="baseHandler" {
 	property name="feedItemService" inject="feedItemService@aggregator";
 
 	/**
-	 * Clears portal cache
+	 * Clears site cache
 	 */
 	function clearCache( event, rc, prc ) {
 		announceInterception("aggregator_onClearCache");

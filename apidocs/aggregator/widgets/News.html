@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>BaseWidget</title>
-	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
+	<title>News</title>
+	<meta name="keywords" content="aggregator.widgets.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/models/BaseWidget.html" target="_top">
+				<li><a href="../../index.html?aggregator/widgets/News.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
+	<a href="package-summary.html" title="Package: aggregator.widgets"><span class="label label-success">aggregator.widgets</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- BaseWidget</h2>
+ News</h2>
 
 
 
@@ -132,6 +132,14 @@ Class
 
 
 	
+		
+	
+	
+
+	
+		
+		
+			
 		
 	
 	
@@ -165,7 +173,8 @@ Class
 <pre style="background:white">lucee.Component
     <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.FrameworkSupertype
       <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.ui.BaseWidget
-        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BaseWidget
+        <img src="../../resources/inherit.gif" alt="extended by "><a href="../../aggregator/models/BaseWidget.html" title="class in aggregator.models">aggregator.models.BaseWidget</a>
+          <img src="../../resources/inherit.gif" alt="extended by ">aggregator.widgets.News
 </pre>
 
 
@@ -175,44 +184,13 @@ Class
 
 
 
-<div class="panel panel-default">
-	<div class="panel-heading"><strong>Direct Known Subclasses:</strong></div>
-  	<div class="panel-body">
-	
-		
-		<a href="../../aggregator/widgets/Archives.html" title="class in aggregator.models">Archives</a>
-	
-		,
-		<a href="../../aggregator/widgets/Categories.html" title="class in aggregator.models">Categories</a>
-	
-		,
-		<a href="../../aggregator/widgets/FeedItems.html" title="class in aggregator.models">FeedItems</a>
-	
-		,
-		<a href="../../aggregator/widgets/Feeds.html" title="class in aggregator.models">Feeds</a>
-	
-		,
-		<a href="../../aggregator/widgets/News.html" title="class in aggregator.models">News</a>
-	
-		,
-		<a href="../../aggregator/widgets/RelatedContent.html" title="class in aggregator.models">RelatedContent</a>
-	
-		,
-		<a href="../../aggregator/widgets/RSS.html" title="class in aggregator.models">RSS</a>
-	
-		,
-		<a href="../../aggregator/widgets/SearchForm.html" title="class in aggregator.models">SearchForm</a>
-	
-	</div>
-</div>
-
 
 
 
 
 <div id="class-hint">
 	<p>ContentBox RSS Aggregator
-BaseWidget Model</p>
+News Widget</p>
 </div>
 
 
@@ -224,6 +202,15 @@ BaseWidget Model</p>
 		
 			
 		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				singleton
+				
+			</li>
+			&nbsp;
 			
 		
 			
@@ -252,7 +239,7 @@ BaseWidget Model</p>
 			<li class="label label-danger label-annotations">
 				accessors
 				
-				: true
+				: false
 				
 			</li>
 			&nbsp;
@@ -293,202 +280,6 @@ BaseWidget Model</p>
 
 
 
-<!-- ========== METHOD SUMMARY =========== -->
-
-<a name="property_summary"><!-- --></a>
-<table class="table table-bordered table-hover">
-	<tr class="info">
-		<th align="left" colspan="5">
-			<strong>Property Summary</strong>
-		</th>
-	</tr>
-	<tr class="info">
-		<th align="left">
-			<strong>type</strong>
-		</th>
-		<th align="left">
-			<strong>property</strong>
-		</th>
-		<th align="left">
-			<strong>default</strong>
-		</th>
-		<th align="left">
-			<strong>serializable</strong>
-		</th>
-		<th align="left">
-			<strong>required</strong>
-		</th>
-	</tr>
-
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#ag()">ag</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = helper@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#feedItemService()">feedItemService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#feedService()">feedService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = feedService@aggregator</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	</tr>
-</table>
-
 
 
 	
@@ -505,10 +296,10 @@ BaseWidget Model</p>
 		<tr>
 			
 			<td>
-				<strong><a href="BaseWidget.html#init()">init</A></strong>()
+				<strong><a href="News.html#init()">init</A></strong>()
 				<br>
 				
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Base Constructor.
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor, sets widget properties.
 				
 			</td>
 		</tr>
@@ -536,131 +327,10 @@ BaseWidget Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BaseWidget.html#getAg()">getAg</A></strong>()
+			<strong><a href="News.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])
 			<br>
 			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getAllCategories()">getAllCategories</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the categories.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedItemService()">getFeedItemService</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedService()">getFeedService</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getFeedSlugs()">getFeedSlugs</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the feed slugs.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>array</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#getPublicMethods()">getPublicMethods</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#renderIt()">renderIt</A></strong>()
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main renderit method you will need to implement in concrete widgets.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setAg()">setAg</A></strong>(any ag)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setFeedItemService()">setFeedItemService</A></strong>(any feedItemService)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="BaseWidget.html#setFeedService()">setFeedService</A></strong>(any feedService)
-			<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the news widget.
 			
 		</td>
 	</tr>
@@ -671,6 +341,116 @@ BaseWidget Model</p>
 
 <a name="inherited_methods"><!-- --></a>
 
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_aggregator.models.BaseWidget"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd><a href="../../aggregator/models/BaseWidget.html" title="class in aggregator.models">aggregator.models.BaseWidget</a></kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getAllCategories()">getAllCategories</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>
+				
+			</td>
+		</tr>
+	</table>
 
 	
 
@@ -1466,7 +1246,7 @@ BaseWidget Model</p>
 	<br><br>
 
 	
-	<p>Base Constructor</p>
+	<p>Constructor, sets widget properties</p>
 	
 
 	
@@ -1474,161 +1254,6 @@ BaseWidget Model</p>
 
 
 <!-- ============ PROPERTY DETAIL ========== -->
-
-	<a name="property_detail"><!-- --></a>
-	<table class="table table-bordered">
-		<tr class="info">
-			<th colspan="1" align="left">
-				<strong>Property Detail</strong>
-			</th>
-		</tr>
-	</table>
-
-	
-		
-		<a name="ag()"><!-- --></a>
-		<h3>ag</h3>
-
-		<kbd>
-			property any
-			<strong>ag</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - helper@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="feedItemService()"><!-- --></a>
-		<h3>feedItemService</h3>
-
-		<kbd>
-			property any
-			<strong>feedItemService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - feedItemService@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="feedService()"><!-- --></a>
-		<h3>feedService</h3>
-
-		<kbd>
-			property any
-			<strong>feedService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - feedService@aggregator</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
 
 
 
@@ -1651,236 +1276,18 @@ BaseWidget Model</p>
 
 
 	
-	<a name="getAg()"><!-- --></a>
-	<h3>
-		getAg
-		
-	</h3>
-
-	<kbd>public string <strong>getAg</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getAllCategories()"><!-- --></a>
-	<h3>
-		getAllCategories
-		
-	</h3>
-
-	<kbd>public array <strong>getAllCategories</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Grabs the categories</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>An array of all category names</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedItemService()"><!-- --></a>
-	<h3>
-		getFeedItemService
-		
-	</h3>
-
-	<kbd>public string <strong>getFeedItemService</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedService()"><!-- --></a>
-	<h3>
-		getFeedService
-		
-	</h3>
-
-	<kbd>public string <strong>getFeedService</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getFeedSlugs()"><!-- --></a>
-	<h3>
-		getFeedSlugs
-		
-	</h3>
-
-	<kbd>public array <strong>getFeedSlugs</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Grabs the feed slugs</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>An array of all feed slugs</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getPublicMethods()"><!-- --></a>
-	<h3>
-		getPublicMethods
-		
-	</h3>
-
-	<kbd>public array <strong>getPublicMethods</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/models/ui/BaseWidget.html#getPublicMethods()">getPublicMethods</a></code>
-			in class
-			<code>
-				contentbox.models.ui.BaseWidget
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
 	<a name="renderIt()"><!-- --></a>
 	<h3>
 		renderIt
 		
 	</h3>
 
-	<kbd>public any <strong>renderIt</strong>()</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [numeric max='10'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])</kbd>
 
 	<br><br>
 
 	
-		<p>This is the main renderit method you will need to implement in concrete widgets</p>
+		<p>Renders the news widget</p>
 	
 
 	
@@ -1896,134 +1303,45 @@ BaseWidget Model</p>
 			<dt><strong>Overrides:</strong></dt>
 			<dd>
 			<code>
-			<a href="../../contentbox/models/ui/BaseWidget.html#renderIt()">renderIt</a></code>
+			<a href="../../aggregator/models/BaseWidget.html#renderIt()">renderIt</a></code>
 			in class
 			<code>
-				contentbox.models.ui.BaseWidget
+				<a href="../../aggregator/models/BaseWidget.html" title="class in aggregator.models">BaseWidget</a>
 			</code>
 			</dd>
 		</dl>
 	
 
 	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setAg()"><!-- --></a>
-	<h3>
-		setAg
-		
-	</h3>
-
-	<kbd>public any <strong>setAg</strong>(any ag)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>ag</code></dd>
+		<dd><code>title</code> - An optional title to display using an H tag.</dd>
+		
+		<dd><code>titleLevel</code> - The H{level} to use.</dd>
+		
+		<dd><code>max</code> - The number of feed items to display.</dd>
+		
+		<dd><code>feed</code> - The feed to filter on.</dd>
+		
+		<dd><code>category</code> - The list of categories to filter on.</dd>
+		
+		<dd><code>searchTerm</code> - The search term to filter on.</dd>
+		
+		<dd><code>sortOrder</code> - How to order the results, defaults to date published from the feed.</dd>
+		
+		<dd><code>openNewWindow</code> - Open feed items in a new window (tab), default is false.</dd>
+		
+		<dd><code>includeEntries</code> - Include entries in the item count or not, defaults to the global setting.</dd>
 		
 		</dl>
 	
 
 	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setFeedItemService()"><!-- --></a>
-	<h3>
-		setFeedItemService
-		
-	</h3>
-
-	<kbd>public any <strong>setFeedItemService</strong>(any feedItemService)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
 		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>feedItemService</code></dd>
-		
+			<dt><strong>Returns:</strong></dt>
+			<dd>The news widget html</dd>
 		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setFeedService()"><!-- --></a>
-	<h3>
-		setFeedService
-		
-	</h3>
-
-	<kbd>public any <strong>setFeedService</strong>(any feedService)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>feedService</code></dd>
-		
-		</dl>
-	
-
 	
 
 	

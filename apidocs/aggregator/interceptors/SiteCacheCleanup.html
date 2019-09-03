@@ -659,13 +659,43 @@ Site cache cleanup interceptor</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteCacheCleanup.html#cbadmin_postPageSave()">cbadmin_postPageSave</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after page save.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="SiteCacheCleanup.html#cbadmin_prePageRemove()">cbadmin_prePageRemove</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired before page delete.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>private&nbsp;<a href="../../aggregator/interceptors/SiteCacheCleanup.html" title="class in aggregator.interceptors">SiteCacheCleanup</a></code>
 		</td>
 		<td>
 			<strong><a href="SiteCacheCleanup.html#doCacheCleanup()">doCacheCleanup</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears the portal content cache.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears the site content cache.
 			
 		</td>
 	</tr>
@@ -1979,6 +2009,92 @@ Site cache cleanup interceptor</p>
 	<hr>
 
 	
+	<a name="cbadmin_postPageSave()"><!-- --></a>
+	<h3>
+		cbadmin_postPageSave
+		
+	</h3>
+
+	<kbd>public any <strong>cbadmin_postPageSave</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired after page save</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="cbadmin_prePageRemove()"><!-- --></a>
+	<h3>
+		cbadmin_prePageRemove
+		
+	</h3>
+
+	<kbd>public any <strong>cbadmin_prePageRemove</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired before page delete</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="doCacheCleanup()"><!-- --></a>
 	<h3>
 		doCacheCleanup
@@ -1990,7 +2106,7 @@ Site cache cleanup interceptor</p>
 	<br><br>
 
 	
-		<p>Clears the portal content cache</p>
+		<p>Clears the site content cache</p>
 	
 
 	

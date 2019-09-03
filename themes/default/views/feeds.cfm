@@ -14,7 +14,7 @@
 <div id="body-header" style="#bodyHeaderStyle#">
 	<div class="container">
 		<div class="underlined-title">
-			<h1 style="#bodyHeaderH1Style#">#ag.setting("ag_portal_feeds_title")#</h1>
+			<h1 style="#bodyHeaderH1Style#">#prc.page.getTitle()#</h1>
 		</div>
 	</div>
 </div>

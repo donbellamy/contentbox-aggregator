@@ -866,7 +866,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'])
+			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item link.
@@ -2492,7 +2492,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>linkFeedItem</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'])</kbd>
+	<kbd>public string <strong>linkFeedItem</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])</kbd>
 
 	<br><br>
 
@@ -2519,6 +2519,8 @@ Aggregator Helper</p>
 		<dd><code>ssl</code> - Whether or not to use ssl</dd>
 		
 		<dd><code>format</code> - The format to link to, defaults to html</dd>
+		
+		<dd><code>directLink</code> - Whether or not to return the actual item url</dd>
 		
 		</dl>
 	

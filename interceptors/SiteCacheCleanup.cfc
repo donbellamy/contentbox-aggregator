@@ -132,7 +132,7 @@ component extends="coldbox.system.Interceptor" {
 		var cache = cacheBox.getCache( settings.ag_site_cache_name );
 		var cacheKey = "cb-content-aggregator";
 
-		// Clear portal cache
+		// Clear site cache
 		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
 
 		// Clear content caches

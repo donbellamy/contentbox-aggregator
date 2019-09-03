@@ -185,7 +185,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Displays the portal index
+	 * Displays the news index
 	 */
 	function index( event, rc, prc ) {
 
@@ -273,7 +273,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Displays the portal archive
+	 * Displays the news archive
 	 */
 	function archives( event, rc, prc ) {
 

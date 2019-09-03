@@ -28,12 +28,6 @@ component {
 			// Site
 			"ag_site_news_entrypoint" = "news",
 			"ag_site_feeds_entrypoint" = "feeds",
-			"ag_portal_name" = "News",
-			"ag_portal_tagline" = "The Latest News",
-			"ag_portal_entrypoint" = "news",
-			"ag_portal_description" = "",
-			"ag_portal_keywords" = "",
-			"ag_portal_feeds_title" = "Feeds",
 			"ag_site_display_entries" = "false",
 			"ag_site_item_link_behavior" = "forward",
 			"ag_site_item_featured_image_behavior" = "default",
