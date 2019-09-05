@@ -151,11 +151,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												var images = [];
 												var imagePaths = [];
 												var mimeTypes = {
-													"image/bmp"="bmp",
-													"image/gif"="gif",
-													"image/x-icon"="ico",
-													"image/jpeg"="jpg",
-													"image/png"="png"
+													"image/bmp" = "bmp",
+													"image/gif" = "gif",
+													"image/x-icon" = "ico",
+													"image/jpeg" = "jpg",
+													"image/png" = "png"
 												};
 
 												// Check for image attachments
@@ -277,9 +277,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 											// Add the content version
 											feedItem.addNewContentVersion(
-												content=feedBody,
-												changelog="Item imported.",
-												author=arguments.author
+												content = feedBody,
+												changelog = "Item imported.",
+												author = arguments.author
 											);
 
 											// TODO: attach taxonomies from settings and feed

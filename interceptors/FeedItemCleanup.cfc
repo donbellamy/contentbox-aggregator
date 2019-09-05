@@ -16,7 +16,7 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_preFeedItemRemove( event, interceptData ) {
 		var feedItem = arguments.interceptData.feedItem;
 		var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( feedItem.getPublishedDate(), "yyyy\mm\" );
-		var images = directoryList( path=directoryPath, filter="#feedItem.getSlug()#_*" );
+		var images = directoryList( path = directoryPath, filter = "#feedItem.getSlug()#_*" );
 		for ( var imagePath IN images ) {
 			if ( fileExists( imagePath ) && !feedService.isImageInUse( imagePath ) ) {
 				try { fileDelete( imagePath ); } catch( any e ) {}

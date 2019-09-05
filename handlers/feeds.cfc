@@ -36,15 +36,15 @@ component extends="contentHandler" {
 	 */
 	function index( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "state", "" );
-		event.paramValue( "category", "" );
-		event.paramValue( "status", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "state", "" )
+			.paramValue( "category", "" )
+			.paramValue( "status", "" )
+			.paramValue( "showAll", false );
 
 		// Grab categories
-		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.categories = categoryService.getAll( sortOrder = "category" );
 
 		event.setView( "feeds/index" );
 
@@ -55,12 +55,12 @@ component extends="contentHandler" {
 	 */
 	function table( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "state", "" );
-		event.paramValue( "category", "" );
-		event.paramValue( "status", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "state", "" )
+			.paramValue( "category", "" )
+			.paramValue( "status", "" )
+			.paramValue( "showAll", false );
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
@@ -69,19 +69,22 @@ component extends="contentHandler" {
 
 		// Grab results
 		var results = feedService.getFeeds(
-			searchTerm=rc.search,
-			searchActiveContent=false,
-			state=rc.state,
-			category=rc.category,
-			status=rc.status,
-			sortOrder="title ASC",
-			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
+			searchTerm = rc.search,
+			searchActiveContent = false,
+			state = rc.state,
+			category = rc.category,
+			status = rc.status,
+			sortOrder = "title ASC",
+			max = ( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
+			offset = ( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
 		prc.feeds = results.feeds;
 		prc.itemCount = results.count;
 
-		event.setView( view="feeds/table", layout="ajax" );
+		event.setView(
+			view = "feeds/table",
+			layout = "ajax"
+		);
 
 	}
 
@@ -107,68 +110,71 @@ component extends="contentHandler" {
 
 		// Lookups
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
-		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.categories = categoryService.getAll( sortOrder = "category" );
 		prc.linkOptions = [
-			{ name="Forward the user directly to the feed item.", value="forward" },
-			{ name="Link the user directly to the feed item.", value="link" },
-			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
-			{ name="Display the entire feed item within the site.", value="display" }
+			{ name = "Forward the user directly to the feed item.", value = "forward" },
+			{ name = "Link the user directly to the feed item.", value = "link" },
+			{ name = "Use an interstitial page before forwarding the user to the feed item.", value = "interstitial" },
+			{ name = "Display the entire feed item within the site.", value = "display" }
 		];
 		arrayPrepend( prc.linkOptions, {
-			name="Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_link_behavior; } ) ].name#",
-			value=""
+			name = "Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_link_behavior; } ) ].name#",
+			value = ""
 		});
 		prc.featuredImageOptions = [
-			{ name="Display the default featured image.", value="default" },
-			{ name="Display the parent feed's featured image.", value="feed" },
-			{ name="Do not display a featured image.", value="none" }
+			{ name = "Display the default featured image.", value = "default" },
+			{ name = "Display the parent feed's featured image.", value = "feed" },
+			{ name = "Do not display a featured image.", value = "none" }
 		];
 		arrayPrepend( prc.featuredImageOptions, {
-			name="Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_featured_image_behavior; } ) ].name#",
-			value=""
+			name = "Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_item_featured_image_behavior; } ) ].name#",
+			value = ""
 		});
 		prc.itemStatuses = [
-			{ name="Draft", value="draft" },
-			{ name="Published", value="published" }
+			{ name = "Draft", value = "draft" },
+			{ name = "Published", value = "published" }
 		];
 		arrayPrepend( prc.itemStatuses, {
-			name="Use the default setting - #prc.itemStatuses[ arrayFind( prc.itemStatuses, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_status; } ) ].name#",
-			value=""
+			name= " Use the default setting - #prc.itemStatuses[ arrayFind( prc.itemStatuses, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_status; } ) ].name#",
+			value = ""
 		});
 		prc.itemPubDates = [
-			{ name="Original published date", value="original" },
-			{ name="Imported date", value="imported" }
+			{ name = "Original published date", value = "original" },
+			{ name = "Imported date", value = "imported" }
 		];
 		arrayPrepend( prc.itemPubDates, {
-			name="Use the default setting - #prc.itemPubDates[ arrayFind( prc.itemPubDates, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_pub_date; } ) ].name#",
-			value=""
+			name = "Use the default setting - #prc.itemPubDates[ arrayFind( prc.itemPubDates, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_pub_date; } ) ].name#",
+			value = ""
 		});
 		prc.importFeaturedImageOptions = [
-			{ name="Import featured images for this feed.", value="true" },
-			{ name="Do not import featured images for this feed.", value="false" }
+			{ name = "Import featured images for this feed.", value = "true" },
+			{ name = "Do not import featured images for this feed.", value = "false" }
 		];
 		arrayPrepend( prc.importFeaturedImageOptions, {
-			name="Use the default setting - #prc.importFeaturedImageOptions[ arrayFind( prc.importFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_featured_image_enable; } ) ].name#",
-			value=""
+			name = "Use the default setting - #prc.importFeaturedImageOptions[ arrayFind( prc.importFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_featured_image_enable; } ) ].name#",
+			value = ""
 		});
 		prc.importImageOptions = [
-			{ name="Import all images for this feed.", value="true" },
-			{ name="Do not import all images for this feed.", value="false" }
+			{ name = "Import all images for this feed.", value = "true" },
+			{ name = "Do not import all images for this feed.", value = "false" }
 		];
 		arrayPrepend( prc.importImageOptions, {
-			name="Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_all_images_enable; } ) ].name#",
-			value=""
+			name = "Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_all_images_enable; } ) ].name#",
+			value = ""
 		});
 		prc.matchOptions = [
-			{ name="Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value="any" },
-			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" },
-			{ name="Assign the categories above to all feed items ignoring any of the words/phrases below.", value="none" }
+			{ name = "Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value = "any" },
+			{ name = "Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value = "all" },
+			{ name = "Assign the categories above to all feed items ignoring any of the words/phrases below.", value = "none" }
 		];
 
 		// Grab feed items and versions
 		if ( prc.feed.isLoaded() ) {
 			prc.feedItems = feedItemService.getFeedItems( feed=prc.feed.getContentID(), max=5 ).feedItems;
-			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
+			prc.versionsViewlet = runEvent(
+				event = "contentbox-admin:versions.pager",
+				eventArguments = { contentID = rc.contentID }
+			);
 		}
 
 		event.setView( "feeds/editor" );
@@ -181,55 +187,55 @@ component extends="contentHandler" {
 	function save( event, rc, prc ) {
 
 		// Editor
-		event.paramValue( "contentID", 0 );
-		event.paramValue( "contentType", "Feed" );
-		event.paramValue( "title", "" );
-		event.paramValue( "slug", "" );
-		event.paramValue( "feedUrl", "" );
-		event.paramValue( "tagLine", "" );
-		event.paramValue( "content", "" );
+		event.paramValue( "contentID", 0 )
+			.paramValue( "contentType", "Feed" )
+			.paramValue( "title", "" )
+			.paramValue( "slug", "" )
+			.paramValue( "feedUrl", "" )
+			.paramValue( "tagLine", "" )
+			.paramValue( "content", "" );
 
 		// Site
-		event.paramValue( "linkBehavior", "" );
-		event.paramValue( "featuredImageBehavior", "" );
-		event.paramValue( "pagingMaxItems", "" );
+		event.paramValue( "linkBehavior", "" )
+			.paramValue( "featuredImageBehavior", "" )
+			.paramValue( "pagingMaxItems", "" );
 
 		// Importing
-		event.paramValue( "isActive", true );
-		event.paramValue( "startDate", "" );
-		event.paramValue( "startTime", "" );
-		event.paramValue( "stopDate", "" );
-		event.paramValue( "stopTime", "" );
-		event.paramValue( "itemStatus", "" );
-		event.paramValue( "ItemPubDate", "" );
-		event.paramValue( "maxAge", "" );
-		event.paramValue( "maxAgeUnit", "" );
-		event.paramValue( "maxItems", "" );
-		event.paramValue( "matchAnyFilter", "" );
-		event.paramValue( "matchAllFilter", "" );
-		event.paramValue( "matchNoneFilter", "" );
-		event.paramValue( "importFeaturedImages", "" );
-		event.paramValue( "importAllImages", "" );
-		event.paramValue( "taxonomies", {} );
+		event.paramValue( "isActive", true )
+			.paramValue( "startDate", "" )
+			.paramValue( "startTime", "" )
+			.paramValue( "stopDate", "" )
+			.paramValue( "stopTime", "" )
+			.paramValue( "itemStatus", "" )
+			.paramValue( "ItemPubDate", "" )
+			.paramValue( "maxAge", "" )
+			.paramValue( "maxAgeUnit", "" )
+			.paramValue( "maxItems", "" )
+			.paramValue( "matchAnyFilter", "" )
+			.paramValue( "matchAllFilter", "" )
+			.paramValue( "matchNoneFilter", "" )
+			.paramValue( "importFeaturedImages", "" )
+			.paramValue( "importAllImages", "" )
+			.paramValue( "taxonomies", {} );
 
 		// HTML
-		event.paramValue( "preFeedDisplay", "" );
-		event.paramValue( "postFeedDisplay", "" );
-		event.paramValue( "preFeedItemDisplay", "" );
-		event.paramValue( "postFeedItemDisplay", "" );
+		event.paramValue( "preFeedDisplay", "" )
+			.paramValue( "postFeedDisplay", "" )
+			.paramValue( "preFeedItemDisplay", "" )
+			.paramValue( "postFeedItemDisplay", "" );
 
 		// SEO
-		event.paramValue( "htmlTitle", "" );
-		event.paramValue( "htmlKeywords", "" );
-		event.paramValue( "htmlDescription", "" );
+		event.paramValue( "htmlTitle", "" )
+			.paramValue( "htmlKeywords", "" )
+			.paramValue( "htmlDescription", "" );
 
 		// Publishing
-		event.paramValue( "isPublished", true );
-		event.paramValue( "publishedDate", now() );
-		event.paramValue( "publishedTime", timeFormat( rc.publishedDate, "HH" ) & ":" & timeFormat( rc.publishedDate, "mm" ) );
-		event.paramValue( "expireDate", "" );
-		event.paramValue( "expireTime", "" );
-		event.paramValue( "changelog", "" );
+		event.paramValue( "isPublished", true )
+			.paramValue( "publishedDate", now() )
+			.paramValue( "publishedTime", timeFormat( rc.publishedDate, "HH" ) & ":" & timeFormat( rc.publishedDate, "mm" ) )
+			.paramValue( "expireDate", "" )
+			.paramValue( "expireTime", "" )
+			.paramValue( "changelog", "" );
 
 		// Categories
 		event.paramValue( "newCategories", "" );
@@ -288,9 +294,9 @@ component extends="contentHandler" {
 		// Add new content version if needed
 		if ( compare( prc.feed.getContent(), rc.content ) != 0 ) {
 			prc.feed.addNewContentVersion(
-				content=rc.content,
-				changelog=rc.changelog,
-				author=prc.oCurrentAuthor
+				content = rc.content,
+				changelog = rc.changelog,
+				author = prc.oCurrentAuthor
 			);
 		}
 
@@ -302,30 +308,30 @@ component extends="contentHandler" {
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feed.removeAllCategories().setCategories( categories );
 
-		announceInterception( "aggregator_preFeedSave", {
-			feed=prc.feed,
-			oldFeed=oldFeed,
-			isNew=isNew
-		});
+		announceInterception(
+			"aggregator_preFeedSave",
+			{ feed = prc.feed, oldFeed = oldFeed, isNew = isNew }
+		);
 
 		// Save feed
 		feedService.save( prc.feed );
 
 		// Import feed if needed
-		// TODO: move to postfeedsave?
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 		}
 
-		announceInterception( "aggregator_postFeedSave", {
-			feed=prc.feed,
-			oldFeed=oldFeed,
-			isNew=isNew
-		});
+		announceInterception(
+			"aggregator_postFeedSave",
+			{ feed = prc.feed, oldFeed = oldFeed, isNew = isNew }
+		);
 
 		if ( event.isAjax() ) {
 			var data = { "CONTENTID" = prc.feed.getContentID() };
-			event.renderData( type="json", data=data );
+			event.renderData(
+				type = "json",
+				data = data
+			);
 		} else {
 			cbMessagebox.info( "Feed Saved!" );
 			setNextEvent( prc.xehFeeds );
@@ -338,8 +344,8 @@ component extends="contentHandler" {
 	 */
 	function saveCategories( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "newCategories", "" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "newCategories", "" );
 
 		// Check and create categories if needed
 		var categories = [];
@@ -367,7 +373,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -386,9 +395,15 @@ component extends="contentHandler" {
 				var feed = feedService.get( contentID, false );
 				if ( !isNull( feed ) ) {
 					var title = feed.getTitle();
-					announceInterception( "aggregator_preFeedRemove", { feed=feed } );
+					announceInterception(
+						"aggregator_preFeedRemove",
+						{ feed = feed }
+					);
 					feedService.deleteContent( feed );
-					announceInterception( "aggregator_postFeedRemove", { contentID=contentID } );
+					announceInterception(
+						"aggregator_postFeedRemove",
+						{ contentID = contentID }
+					);
 					arrayAppend( messages, "Feed '#title#' deleted." );
 				} else {
 					arrayAppend( messages, "Invalid feed selected: #contentID#." );
@@ -399,7 +414,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -421,7 +439,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -430,19 +451,25 @@ component extends="contentHandler" {
 	 */
 	function updateStatus( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "contentStatus", "draft" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "contentStatus", "draft" );
 
 		// Update selected feed status
 		if ( len( rc.contentID ) ) {
 			feedService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
-			announceInterception( "aggregator_onFeedStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
+			announceInterception(
+				"aggregator_onFeedStatusUpdate",
+				{ contentID = rc.contentID, status = rc.contentStatus }
+			);
 			cbMessagebox.info( "#listLen( rc.contentID )# feed#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentStatus#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -474,7 +501,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -483,19 +513,25 @@ component extends="contentHandler" {
 	 */
 	function state( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "contentState", "pause" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "contentState", "pause" );
 
 		// Reset selected feed state
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, state=rc.contentState );
-			announceInterception( "aggregator_onFeedStateUpdate", { contentID=rc.contentID, state=rc.contentState } );
+			announceInterception(
+				"aggregator_onFeedStateUpdate", \
+				{ contentID = rc.contentID, state = rc.contentState }
+			);
 			cbMessagebox.info( "#listLen( rc.contentID )# feed#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentState#'." );
 		} else {
 			cbMessagebox.warn( "No feeds selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeeds, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeeds,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -504,16 +540,16 @@ component extends="contentHandler" {
 	 */
 	function import( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "importAll", false );
-		event.paramValue( "importActive", false );
-		event.paramValue( "key", "" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "importAll", false )
+			.paramValue( "importActive", false )
+			.paramValue( "key", "" );
 
 		// Set vars
 		var feeds = [];
 		var data = {
-			"error"=false,
-			"messages"=[]
+			"error" = false,
+			"messages" = []
 		};
 
 		// Are we in the admin?
@@ -523,7 +559,7 @@ component extends="contentHandler" {
 		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
 
 			// Set timeout
-			setting requestTimeout="999999";
+			setting requestTimeout = "999999";
 
 			// Grab the author
 			if ( inAdmin || ( structKeyExists( prc, "oCurrentAuthor" ) && prc.oCurrentAuthor.isLoaded() && prc.oCurrentAuthor.isLoggedIn() ) ) {
@@ -531,8 +567,8 @@ component extends="contentHandler" {
 			} else if ( len( prc.agSettings.ag_importing_item_author ) ) {
 				var author = authorService.get( prc.agSettings.ag_importing_item_author );
 			} else {
-				var adminRole = roleService.findWhere( { role="Administrator" } );
-				var author = authorService.findWhere( { role=adminRole } );
+				var adminRole = roleService.findWhere( { role = "Administrator" } );
+				var author = authorService.findWhere( { role = adminRole } );
 			}
 
 			// Grab the feeds
@@ -548,17 +584,20 @@ component extends="contentHandler" {
 					}
 				}
 			} else if ( rc.importAll ) {
-				var feeds = feedService.getAll( sortOrder="title" );
+				var feeds = feedService.getAll( sortOrder = "title" );
 			} else if ( rc.importActive ) {
 				var feeds = feedService.getFeedsForImport();
 			}
 
 			// Import feeds
 			if ( arrayLen( feeds ) && !isNull( author ) ) {
-				announceInterception( "aggregator_preFeedImports", { feeds=feeds } );
+				announceInterception(
+					"aggregator_preFeedImports",
+					{ feeds = feeds }
+				);
 				for ( var feed IN feeds ) {
 					try {
-						var result = new http( method="get", url=prc.agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
+						var result = new http( method = "get", url = prc.agHelper.linkImportFeed( feed, author ) ).send().getPrefix();
 						if ( result.status_code == "200" && isJson( result.fileContent ) ) {
 							var returnData = deserializeJson( result.fileContent );
 							arrayAppend( data.messages, returnData.message );
@@ -571,7 +610,10 @@ component extends="contentHandler" {
 						arrayAppend( data.messages, "Fatal error importing feed items for '#feed.getTitle()#'."  & " " & e.message & " " & e.detail );
 					}
 				}
-				announceInterception( "aggregator_postFeedImports", { feeds=feeds } );
+				announceInterception(
+					"aggregator_postFeedImports",
+					{ feeds = feeds }
+				);
 				sleep(1000);
 			} else {
 				data.error = true;
@@ -587,7 +629,10 @@ component extends="contentHandler" {
 		// Set reponse
 		if ( event.isAjax() || !inAdmin ) {
 			rc.format = "json";
-			event.renderData( type="json", data=data );
+			event.renderData(
+				type = "json",
+				data = data
+			);
 		} else {
 			if ( data.error ) {
 				cbMessagebox.error( messageArray=data.messages );
@@ -605,17 +650,17 @@ component extends="contentHandler" {
 	function importFeed( event, rc, prc ) {
 
 		// Set params
-		event.paramValue( name="key", value="" );
-		event.paramValue( name="contentID", value="" );
-		event.paramValue( name="authorID", value="" );
+		event.paramValue( "key", "" )
+			.paramValue( "contentID", "" )
+			.paramValue( "authorID", "" );
 
 		// Set format
 		rc.format = "json";
 
 		// Set vars
 		var data = {
-			"error"=false,
-			"message"=""
+			"error" = false,
+			"message" = ""
 		};
 
 		// Are we in the admin?
@@ -650,7 +695,10 @@ component extends="contentHandler" {
 		}
 
 		// Set response
-		event.renderData( type="json", data=data );
+		event.renderData(
+			type = "json",
+			data = data
+		);
 
 	}
 
@@ -679,7 +727,11 @@ component extends="contentHandler" {
 
 		prc.feedImport = feedImportService.get( rc.feedImportID, false );
 
-		event.setView( view="feeds/import", layout="ajax" );
+		// Set response
+		event.setView(
+			view = "feeds/import",
+			layout = "ajax"
+		);
 
 	}
 
@@ -704,7 +756,11 @@ component extends="contentHandler" {
 			data.messages = "Invalid feed import!";
 		}
 
-		event.renderData( type="json", data=data );
+		// Set response
+		event.renderData(
+			type = "json",
+			data = data
+		);
 
 	}
 
@@ -729,9 +785,15 @@ component extends="contentHandler" {
 			blacklistedItem.setItemUrl( feedItem.itemUrl );
 			blacklistedItem.setFeed( feedImport.getFeed() );
 			blacklistedItem.setCreator( prc.oCurrentAuthor );
-			announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+			announceInterception(
+				"aggregator_preBlacklistedItemSave",
+				{ blacklistedItem = blacklistedItem }
+			);
 			blacklistedItemService.save( blacklistedItem );
-			announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+			announceInterception(
+				"aggregator_postBlacklistedItemSave",
+				{ blacklistedItem = blacklistedItem }
+			);
 
 			cbMessagebox.info( "Blacklisted item '#feedItem.title#' created!<br/><br/>Click <a href='#event.buildLink(prc.xehFeedImport)#/contentID/#feedImport.getFeed().getContentID()#'>here</a> to import items for '#feedImport.getFeed().getTitle()#'." );
 

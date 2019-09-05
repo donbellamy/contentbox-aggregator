@@ -43,7 +43,7 @@ component extends="coldbox.system.Interceptor" {
 			);
 
 			// Save settings
-			var setting = settingService.findWhere( { name="aggregator" } );
+			var setting = settingService.findWhere( { name = "aggregator" } );
 			setting.setValue( serializeJSON( settings ) );
 			settingService.save( setting );
 

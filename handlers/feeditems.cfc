@@ -33,16 +33,16 @@ component extends="contentHandler" {
 	 */
 	function index( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "feed", "" );
-		event.paramValue( "category", "" );
-		event.paramValue( "status", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "feed", "" )
+			.paramValue( "category", "" )
+			.paramValue( "status", "" )
+			.paramValue( "showAll", false );
 
 		// Grab feeds and categories
-		prc.feeds = feedService.getAll( sortOrder="title" );
-		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.feeds = feedService.getAll( sortOrder = "title" );
+		prc.categories = categoryService.getAll( sortOrder = "category" );
 
 		event.setView( "feeditems/index" );
 
@@ -53,12 +53,12 @@ component extends="contentHandler" {
 	 */
 	function table( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "feed", "" );
-		event.paramValue( "category", "" );
-		event.paramValue( "status", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "feed", "" )
+			.paramValue( "category", "" )
+			.paramValue( "status", "" )
+			.paramValue( "showAll", false );
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
@@ -67,18 +67,21 @@ component extends="contentHandler" {
 
 		// Grab results
 		var results = feedItemService.getFeedItems(
-			status=rc.status,
-			searchTerm=rc.search,
-			searchActiveContent=false,
-			category=rc.category,
-			feed=rc.feed,
-			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
+			status = rc.status,
+			searchTerm = rc.search,
+			searchActiveContent = false,
+			category = rc.category,
+			feed = rc.feed,
+			max = ( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
+			offset = ( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
 
-		event.setView( view="feeditems/table", layout="ajax" );
+		event.setView(
+			view = "feeditems/table",
+			layout = "ajax"
+		);
 
 	}
 
@@ -108,7 +111,7 @@ component extends="contentHandler" {
 		prc.relatedContentIDs = prc.feedItem.getRelatedContentIDs();
 
 		// Categories
-		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.categories = categoryService.getAll( sortOrder = "category" );
 
 		// Exit handlers
 		prc.xehRelatedContentSelector = "#prc.cbAdminEntryPoint#.content.relatedContentSelector";
@@ -119,7 +122,10 @@ component extends="contentHandler" {
 		if ( !prc.feedItem.isLoaded() ) {
 			setNextEvent( prc.xehFeedItems );
 		} else {
-			prc.versionsViewlet = runEvent(event="contentbox-admin:versions.pager",eventArguments={contentID=rc.contentID});
+			prc.versionsViewlet = runEvent(
+				event = "contentbox-admin:versions.pager",
+				eventArguments = { contentID = rc.contentID }
+			);
 			event.setView( "feeditems/editor" );
 		}
 
@@ -131,20 +137,20 @@ component extends="contentHandler" {
 	function save( event, rc, prc ) {
 
 		// Editor
-		event.paramValue( "contentID", 0 );
-		event.paramValue( "contentType", "FeedItem" );
-		event.paramValue( "title", "" );
-		event.paramValue( "slug", "" );
-		event.paramValue( "content", "" );
-		event.paramValue( "excerpt", "" );
+		event.paramValue( "contentID", 0 )
+			.paramValue( "contentType", "FeedItem" )
+			.paramValue( "title", "" )
+			.paramValue( "slug", "" )
+			.paramValue( "content", "" )
+			.paramValue( "excerpt", "" );
 
 		// Publishing
-		event.paramValue( "isPublished", true );
-		event.paramValue( "publishedDate", now() );
-		event.paramValue( "publishedTime", timeFormat( rc.publishedDate, "HH" ) & ":" & timeFormat( rc.publishedDate, "mm" ) );
-		event.paramValue( "expireDate", "" );
-		event.paramValue( "expireTime", "" );
-		event.paramValue( "changelog", "" );
+		event.paramValue( "isPublished", true )
+			.paramValue( "publishedDate", now() )
+			.paramValue( "publishedTime", timeFormat( rc.publishedDate, "HH" ) & ":" & timeFormat( rc.publishedDate, "mm" ) )
+			.paramValue( "expireDate", "" )
+			.paramValue( "expireTime", "" )
+			.paramValue( "changelog", "" );
 
 		// Related content
 		event.paramValue( "relatedContentIDs", "" );
@@ -182,16 +188,16 @@ component extends="contentHandler" {
 			arrayAppend( errors, "Please enter some content." );
 		}
 		if ( arrayLen( errors ) ) {
-			cbMessagebox.warn( messageArray=errors );
-			return editor( argumentCollection=arguments );
+			cbMessagebox.warn( messageArray = errors );
+			return editor( argumentCollection = arguments );
 		}
 
 		// Add new content version if needed
 		if ( compare( prc.feedItem.getContent(), rc.content ) != 0 ) {
 			prc.feedItem.addNewContentVersion(
-				content=rc.content,
-				changelog=rc.changelog,
-				author=prc.oCurrentAuthor
+				content = rc.content,
+				changelog = rc.changelog,
+				author = prc.oCurrentAuthor
 			);
 		}
 
@@ -204,22 +210,25 @@ component extends="contentHandler" {
 		prc.feedItem.removeAllCategories().setCategories( categories );
 		prc.feedItem.inflateRelatedContent( rc.relatedContentIDs );
 
-		announceInterception( "aggregator_preFeedItemSave", {
-			feedItem=prc.feedItem,
-			oldFeedItem=oldFeedItem
-		});
+		announceInterception(
+			"aggregator_preFeedItemSave",
+			{ feedItem = prc.feedItem, oldFeedItem = oldFeedItem }
+		);
 
 		// Save feed item
 		feedItemService.save( prc.feedItem );
 
-		announceInterception( "aggregator_postFeedItemSave", {
-			feedItem=prc.feedItem,
-			oldFeedItem=oldFeedItem
-		});
+		announceInterception(
+			"aggregator_postFeedItemSave",
+			{ feedItem = prc.feedItem, oldFeedItem = oldFeedItem }
+		);
 
 		if ( event.isAjax() ) {
 			var data = { "CONTENTID" = prc.feedItem.getContentID() };
-			event.renderData( type="json", data=data );
+			event.renderData(
+				type = "json",
+				data = data
+			);
 		} else {
 			cbMessagebox.info( "Feed Item Saved!" );
 			setNextEvent( prc.xehFeedItems );
@@ -232,8 +241,8 @@ component extends="contentHandler" {
 	 */
 	function saveCategories( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "newCategories", "" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "newCategories", "" );
 
 		// Check and create categories if needed
 		var categories = [];
@@ -261,7 +270,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -280,9 +292,15 @@ component extends="contentHandler" {
 				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
 					var title = feedItem.getTitle();
-					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
+					announceInterception(
+						"aggregator_preFeedItemRemove",
+						{ feedItem = feedItem }
+					);
 					feedItemService.deleteContent( feedItem );
-					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
+					announceInterception(
+						"aggregator_postFeedItemRemove",
+						{ contentID = contentID }
+					);
 					arrayAppend( messages, "Feed item '#title#' deleted." );
 				} else {
 					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
@@ -293,7 +311,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed Items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -315,7 +336,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -324,19 +348,25 @@ component extends="contentHandler" {
 	 */
 	function updateStatus( event, rc, prc ) {
 
-		event.paramValue( "contentID", "" );
-		event.paramValue( "contentStatus", "draft" );
+		event.paramValue( "contentID", "" )
+			.paramValue( "contentStatus", "draft" );
 
 		// Update selected feed item status
 		if ( len( rc.contentID ) ) {
 			feedItemService.bulkPublishStatus( contentID=rc.contentID, status=rc.contentStatus );
-			announceInterception( "aggregator_onFeedItemStatusUpdate", { contentID=rc.contentID, status=rc.contentStatus } );
+			announceInterception(
+				"aggregator_onFeedItemStatusUpdate",
+				{ contentID = rc.contentID, status = rc.contentStatus }
+			);
 			cbMessagebox.info( "#listLen( rc.contentID )# feed item#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentStatus#'." );
 		} else {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -354,24 +384,33 @@ component extends="contentHandler" {
 			for ( var contentID in rc.contentID ) {
 				var feedItem = feedItemService.get( contentID, false );
 				if ( !isNull( feedItem ) ) {
-
 					// Create and save the blacklisted item
 					var blacklistedItem = blacklistedItemService.new();
 					blacklistedItem.setTitle( feedItem.getTitle() );
 					blacklistedItem.setItemUrl( feedItem.getItemUrl() );
 					blacklistedItem.setFeed( feedItem.getFeed() );
 					blacklistedItem.setCreator( prc.oCurrentAuthor );
-					announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+					announceInterception(
+						"aggregator_preBlacklistedItemSave",
+						{ blacklistedItem = blacklistedItem }
+					);
 					blacklistedItemService.save( blacklistedItem );
-					announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
-
+					announceInterception(
+						"aggregator_postBlacklistedItemSave",
+						{ blacklistedItem = blacklistedItem }
+					);
 					// Delete feed item
 					var title = feedItem.getTitle();
-					announceInterception( "aggregator_preFeedItemRemove", { feedItem=feedItem } );
+					announceInterception(
+						"aggregator_preFeedItemRemove",
+						{ feedItem = feedItem }
+					);
 					feedItemService.deleteContent( feedItem );
-					announceInterception( "aggregator_postFeedItemRemove", { contentID=contentID } );
+					announceInterception(
+						"aggregator_postFeedItemRemove",
+						{ contentID = contentID }
+					);
 					arrayAppend( messages, "Blacklisted item created from feed item '#title#'." );
-
 				} else {
 					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
@@ -381,7 +420,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -413,7 +455,10 @@ component extends="contentHandler" {
 			cbMessagebox.warn( "No feed items selected!" );
 		}
 
-		setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+		setNextEvent(
+			event = prc.xehFeedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 
@@ -426,7 +471,10 @@ component extends="contentHandler" {
 
 		prc.feedItem = feedItemService.get( rc.contentID, false );
 
-		event.setView( view="feeditems/import", layout="ajax" );
+		event.setView(
+			view = "feeditems/import",
+			layout = "ajax"
+		);
 
 	}
 
@@ -464,11 +512,23 @@ component extends="contentHandler" {
 					arrayAppend( messages, "Invalid feed item selected: #contentID#." );
 				}
 			}
+
 			cbMessagebox.info( messageArray=messages );
-			setNextEvent( event=prc.xehEntries, persistStruct=getFilters( rc ) );
+
+			setNextEvent(
+				event = prc.xehEntries,
+				persistStruct = getFilters( rc )
+			);
+
 		} else {
+
 			cbMessagebox.warn( "No feed items selected!" );
-			setNextEvent( event=prc.xehFeedItems, persistStruct=getFilters( rc ) );
+
+			setNextEvent(
+				event = prc.xehFeedItems,
+				persistStruct = getFilters( rc )
+			);
+
 		}
 
 	}

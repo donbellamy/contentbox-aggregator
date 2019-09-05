@@ -109,10 +109,10 @@ component extends="ContentService" singleton {
 		// Grab the feed items
 		} else {
 			results.feeds = c.resultTransformer( c.DISTINCT_ROOT_ENTITY ).list(
-				offset=arguments.offset,
-				max=arguments.max,
-				sortOrder=arguments.sortOrder,
-				asQuery=false
+				offset = arguments.offset,
+				max = arguments.max,
+				sortOrder = arguments.sortOrder,
+				asQuery = false
 			);
 		}
 

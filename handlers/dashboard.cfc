@@ -18,9 +18,12 @@ component extends="baseHandler" {
 	 * Clears site cache
 	 */
 	function clearCache( event, rc, prc ) {
-		announceInterception("aggregator_onClearCache");
+		announceInterception( "aggregator_onClearCache" );
 		if ( event.isAjax() ) {
-			event.renderData( type="json", data={ error = false, executed = true } );
+			event.renderData(
+				type = "json",
+				data = { error = false, executed = true }
+			);
 		} else {
 			setNextEvent( prc.xehDashboard );
 		}
@@ -31,7 +34,10 @@ component extends="baseHandler" {
 	 */
 	function topContent( event, rc, prc ) {
 		prc.topContent = contentService.getTopVisitedContent();
-		event.setView( view="dashboard/topContent", layout="ajax" );
+		event.setView(
+			view = "dashboard/topContent",
+			layout = "ajax"
+		);
 	}
 
 	/**
@@ -39,7 +45,10 @@ component extends="baseHandler" {
 	 */
 	function topCommented( event, rc, prc ) {
 		prc.topCommented = contentService.getTopCommentedContent();
-		event.setView( view="dashboard/topCommented", layout="ajax" );
+		event.setView(
+			view = "dashboard/topCommented",
+			layout = "ajax"
+		);
 	}
 
 	/**
@@ -51,7 +60,10 @@ component extends="baseHandler" {
 		prc.categoriesCount = categoryService.count();
 		prc.feedsCount = feedService.count();
 		prc.feedItemsCount = feedItemService.count();
-		event.setView( view="dashboard/contentCounts", layout="ajax" );
+		event.setView(
+			view = "dashboard/contentCounts",
+			layout = "ajax"
+		);
 	}
 
 }

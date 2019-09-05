@@ -37,35 +37,35 @@ component extends="baseHandler" {
 		// Lookups
 		prc.pages = pageService.getAllFlatPages();
 		prc.intervals = [
-			{ name="Never", value="" },
-			{ name="Every 15 Minutes", value="900" },
-			{ name="Every 30 Minutes", value="1800" },
-			{ name="Every Hour", value="3600" },
-			{ name="Every Two Hours", value="7200" },
-			{ name="Every Twelve Hours", value="43200" },
-			{ name="Once a Day", value="daily" },
-			{ name="Once a Week", value="weekly" },
-			{ name="Once a Month", value="monthly" }
+			{ name = "Never", value = "" },
+			{ name = "Every 15 Minutes", value = "900" },
+			{ name = "Every 30 Minutes", value = "1800" },
+			{ name = "Every Hour", value = "3600" },
+			{ name = "Every Two Hours", value = "7200" },
+			{ name = "Every Twelve Hours", value = "43200" },
+			{ name = "Once a Day", value = "daily" },
+			{ name = "Once a Week", value = "weekly" },
+			{ name = "Once a Month", value = "monthly" }
 		];
-		prc.authors = authorService.getAll( sortOrder="lastName" );
-		prc.categories = categoryService.getAll( sortOrder="category" );
+		prc.authors = authorService.getAll( sortOrder = "lastName" );
+		prc.categories = categoryService.getAll( sortOrder = "category" );
 		prc.limitUnits = [ "days", "weeks", "months", "years" ];
 		prc.linkOptions = [
-			{ name="Forward the user directly to the feed item.", value="forward" },
-			{ name="Link the user directly to the feed item.", value="link" },
-			{ name="Use an interstitial page before forwarding the user to the feed item.", value="interstitial" },
-			{ name="Display the entire feed item within the site.", value="display" }
+			{ name = "Forward the user directly to the feed item.", value = "forward" },
+			{ name = "Link the user directly to the feed item.", value = "link" },
+			{ name = "Use an interstitial page before forwarding the user to the feed item.", value = "interstitial" },
+			{ name = "Display the entire feed item within the site.", value = "display" }
 		];
 		prc.featuredImageOptions = [
-			{ name="Display the default featured image.", value="default" },
-			{ name="Display the parent feed's featured image.", value="feed" },
-			{ name="Do not display a featured image.", value="none" }
+			{ name = "Display the default featured image.", value = "default" },
+			{ name = "Display the parent feed's featured image.", value = "feed" },
+			{ name = "Do not display a featured image.", value = "none" }
 		];
 		prc.cacheNames = cachebox.getCacheNames();
 		prc.matchOptions = [
-			{ name="Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value="any" },
-			{ name="Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value="all" },
-			{ name="Assign the categories above to all feed items ignoring any of the words/phrases below.", value="none" }
+			{ name = "Only assign the categories above to feed items that contain 'any' of the words/phrases below in the title or body.", value = "any" },
+			{ name = "Only assign the categories above to feed items that contain 'all' of the words/phrases below in the title or body.", value = "all" },
+			{ name = "Assign the categories above to all feed items ignoring any of the words/phrases below.", value = "none" }
 		];
 		markdownEditor.loadAssets();
 
@@ -79,7 +79,7 @@ component extends="baseHandler" {
 	function save( event, rc, prc ) {
 
 		// Set timeout
-		setting requestTimeout="999999";
+		setting requestTimeout = "999999";
 
 		// Old settings
 		var oldSettings = duplicate( prc.agSettings );
@@ -106,10 +106,10 @@ component extends="baseHandler" {
 			}
 		}
 
-		announceInterception( "aggregator_preSettingsSave", {
-			settings=prc.agSettings,
-			oldSettings=oldSettings
-		});
+		announceInterception(
+			"aggregator_preSettingsSave",
+			{ settings = prc.agSettings, oldSettings = oldSettings }
+		);
 
 		// Validate settings
 		var errors = validateSettings( prc );
@@ -132,7 +132,7 @@ component extends="baseHandler" {
 		);
 
 		// Save settings
-		var setting = settingService.findWhere( { name="aggregator" } );
+		var setting = settingService.findWhere( { name = "aggregator" } );
 		setting.setValue( serializeJSON( prc.agSettings ) );
 		settingService.save( setting );
 
@@ -142,21 +142,21 @@ component extends="baseHandler" {
 		// Import scheduled task
 		if ( len( prc.agSettings.ag_importing_import_interval ) ) {
 			cfschedule(
-				action="update",
-				task="aggregator-import",
-				url="#prc.agHelper.linkImport(importActive=true)#",
-				startDate=prc.agSettings.ag_importing_import_start_date,
-				startTime=prc.agSettings.ag_importing_import_start_time,
-				interval=prc.agSettings.ag_importing_import_interval
+				action = "update",
+				task = "aggregator-import",
+				url = "#prc.agHelper.linkImport(importActive=true)#",
+				startDate = prc.agSettings.ag_importing_import_start_date,
+				startTime = prc.agSettings.ag_importing_import_start_time,
+				interval = prc.agSettings.ag_importing_import_interval
 			);
 		} else {
-			cfschedule( action="delete", task="aggregator-import" );
+			cfschedule( action = "delete", task = "aggregator-import" );
 		}
 
-		announceInterception( "aggregator_postSettingsSave", {
-			settings=prc.agSettings,
-			oldSettings=oldSettings
-		});
+		announceInterception(
+			"aggregator_postSettingsSave",
+			{ settings = prc.agSettings, oldSettings = oldSettings }
+		);
 
 		cbMessagebox.info( "Settings Updated!" );
 		setNextEvent( prc.xehAggregatorSettings );

@@ -141,9 +141,9 @@ component accessors="true" singleton threadSafe {
 			return prc.feed;
 		} else {
 			throw(
-				message="Feed not found in collection",
-				detail="This probably means you are trying to use the feed in an non-feed page.",
-				type="aggregator.helper.InvalidFeedContext"
+				message = "Feed not found in collection",
+				detail = "This probably means you are trying to use the feed in an non-feed page.",
+				type = "aggregator.helper.InvalidFeedContext"
 			);
 		}
 	}
@@ -158,9 +158,9 @@ component accessors="true" singleton threadSafe {
 			return prc.feeds;
 		} else {
 			throw(
-				message="Feeds not found in collection",
-				detail="This probably means you are trying to use the feeds in an non-index page.",
-				type="aggregator.helper.InvalidFeedsContext"
+				message = "Feeds not found in collection",
+				detail = "This probably means you are trying to use the feeds in an non-index page.",
+				type = "aggregator.helper.InvalidFeedsContext"
 			);
 		}
 	}
@@ -175,9 +175,9 @@ component accessors="true" singleton threadSafe {
 			return prc.feedItem;
 		} else {
 			throw(
-				message="Feed item not found in collection",
-				detail="This probably means you are trying to use the feed item in an non-feed item page.",
-				type="aggregator.helper.InvalidFeedItemContext"
+				message = "Feed item not found in collection",
+				detail = "This probably means you are trying to use the feed item in an non-feed item page.",
+				type = "aggregator.helper.InvalidFeedItemContext"
 			);
 		}
 	}
@@ -192,9 +192,9 @@ component accessors="true" singleton threadSafe {
 			return prc.feedItems;
 		} else {
 			throw(
-				message="Feed items not found in collection",
-				detail="This probably means you are trying to use the feed items in an non-index page.",
-				type="aggregator.helper.InvalidFeedItemsContext"
+				message = "Feed items not found in collection",
+				detail = "This probably means you are trying to use the feed items in an non-index page.",
+				type = "aggregator.helper.InvalidFeedItemsContext"
 			);
 		}
 	}
@@ -209,9 +209,9 @@ component accessors="true" singleton threadSafe {
 			return prc.archiveDate;
 		} else {
 			throw(
-				message="Archive date not found in collection",
-				detail="This probably means you are trying to use the archive date in an non-index page.",
-				type="aggregator.helper.InvalidArchiveDateContext"
+				message = "Archive date not found in collection",
+				detail = "This probably means you are trying to use the archive date in an non-index page.",
+				type = "aggregator.helper.InvalidArchiveDateContext"
 			);
 		}
 	}
@@ -226,9 +226,9 @@ component accessors="true" singleton threadSafe {
 			return prc.formattedDate;
 		} else {
 			throw(
-				message="Formatted date not found in collection",
-				detail="This probably means you are trying to use the formatted date in an non-index page.",
-				type="aggregator.helper.InvalidFormattedDateContext"
+				message = "Formatted date not found in collection",
+				detail = "This probably means you are trying to use the formatted date in an non-index page.",
+				type = "aggregator.helper.InvalidFormattedDateContext"
 			);
 		}
 	}
@@ -243,9 +243,9 @@ component accessors="true" singleton threadSafe {
 			return prc.category;
 		} else {
 			throw(
-				message="Category not found in collection",
-				detail="This probably means you are trying to use the category in an non-index page.",
-				type="aggregator.helper.InvalidCategoryContext"
+				message = "Category not found in collection",
+				detail = "This probably means you are trying to use the category in an non-index page.",
+				type = "aggregator.helper.InvalidCategoryContext"
 			);
 		}
 	}
@@ -540,9 +540,9 @@ component accessors="true" singleton threadSafe {
 		}
 		if ( prc.itemCount GT arguments.maxRows ) {
 			return prc.oPaging.renderit(
-				foundRows=prc.itemCount,
-				link=prc.pagingLink,
-				type=arguments.type
+				foundRows = prc.itemCount,
+				link = prc.pagingLink,
+				type = arguments.type
 			);
 		} else {
 			return "";

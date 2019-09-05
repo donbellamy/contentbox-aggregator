@@ -14,7 +14,9 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_preFeedRemove( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		if ( len( feed.getFeaturedImage() ) && fileExists( feed.getFeaturedImage() ) && !feedservice.isImageInUse( feed.getFeaturedImageUrl() ) ) {
-			try { fileDelete( feed.getFeaturedImage() ); } catch( any e ) {}
+			try {
+				fileDelete( feed.getFeaturedImage() );
+			} catch( any e ) {}
 		}
 	}
 

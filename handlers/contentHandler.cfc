@@ -35,7 +35,10 @@ component extends="baseHandler" {
 
 		event.paramValue( "slug", "" );
 
-		event.renderData( data=trim( htmlHelper.slugify( rc.slug ) ), type="plain" );
+		event.renderData(
+			data = trim( htmlHelper.slugify( rc.slug ) ),
+			type = "plain"
+		);
 
 	}
 

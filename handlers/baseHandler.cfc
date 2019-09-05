@@ -12,7 +12,10 @@ component extends="contentbox.modules.contentbox-admin.handlers.baseHandler" {
 
 		// Make sure call is coming from admin
 		if ( reFindNoCase( "^contentbox-aggregator", event.getCurrentEvent() ) ) {
-			setNextEvent( event="cbadmin/module/aggregator/#event.getCurrentHandler()#", ssl=getRequestContext().isSSL() );
+			setNextEvent(
+				event = "cbadmin/module/aggregator/#event.getCurrentHandler()#",
+				ssl = getRequestContext().isSSL()
+			);
 		}
 
 	}

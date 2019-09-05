@@ -156,16 +156,16 @@ component {
 
 		// Interceptors
 		interceptors = [
-			{ class = "#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
-			{ class = "#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.FeedItemTaxonomies", name="feedItemTaxonomies@aggregator" },
-			{ class = "#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
-			{ class = "#moduleMapping#.interceptors.PageListener", name="pageListener@aggregator" },
-			{ class = "#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.SiteCacheCleanup", name="siteCacheCleanup@aggregator" },
-			{ class = "#moduleMapping#.interceptors.SiteRequest", name="siteRequest@aggregator" }
+			{ class="#moduleMapping#.interceptors.AdminRequest", name="adminRequest@aggregator" },
+			{ class="#moduleMapping#.interceptors.FeedCleanup", name="feedCleanup@aggregator" },
+			{ class="#moduleMapping#.interceptors.FeedImportCleanup", name="feedImportCleanup@aggregator" },
+			{ class="#moduleMapping#.interceptors.FeedItemCleanup", name="feedItemCleanup@aggregator" },
+			{ class="#moduleMapping#.interceptors.FeedItemTaxonomies", name="feedItemTaxonomies@aggregator" },
+			{ class="#moduleMapping#.interceptors.GlobalHTML", name="globalHTML@aggregator" },
+			{ class="#moduleMapping#.interceptors.PageListener", name="pageListener@aggregator" },
+			{ class="#moduleMapping#.interceptors.RSSCacheCleanup", name="rssCacheCleanup@aggregator" },
+			{ class="#moduleMapping#.interceptors.SiteCacheCleanup", name="siteCacheCleanup@aggregator" },
+			{ class="#moduleMapping#.interceptors.SiteRequest", name="siteRequest@aggregator" }
 		];
 
 		// Bindings
@@ -188,41 +188,45 @@ component {
 		// Add menus
 		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
 		menuService.addTopMenu(
-			name="aggregator",
-			label="<i class='fa fa-rss'></i> RSS Aggregator"
+			name = "aggregator",
+			label = "<i class='fa fa-rss'></i> RSS Aggregator"
 		);
 		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="feeds",
-			label="Feeds",
-			href="#menuService.buildModuleLink('aggregator','feeds')#",
-			permissions="FEEDS_ADMIN,FEEDS_EDITOR"
+			topMenu = "aggregator",
+			name = "feeds",
+			label = "Feeds",
+			href = "#menuService.buildModuleLink('aggregator','feeds')#",
+			permissions = "FEEDS_ADMIN,FEEDS_EDITOR"
 		);
 		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="feeditems",
-			label="Feed Items",
-			href="#menuService.buildModuleLink('aggregator','feeditems')#",
-			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
+			topMenu = "aggregator",
+			name = "feeditems",
+			label = "Feed Items",
+			href = "#menuService.buildModuleLink('aggregator','feeditems')#",
+			permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
 		);
 		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="blacklisteditems",
-			label="Blacklisted Items",
-			href="#menuService.buildModuleLink('aggregator','blacklisteditems')#",
-			permissions="FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
+			topMenu = "aggregator",
+			name = "blacklisteditems",
+			label = "Blacklisted Items",
+			href = "#menuService.buildModuleLink('aggregator','blacklisteditems')#",
+			permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
 		);
 		menuService.addSubMenu(
-			topMenu="aggregator",
-			name="settings",
-			label="Settings",
-			href="#menuService.buildModuleLink('aggregator','settings')#",
-			permissions="AGGREGATOR_SETTINGS"
+			topMenu = "aggregator",
+			name = "settings",
+			label = "Settings",
+			href = "#menuService.buildModuleLink('aggregator','settings')#",
+			permissions = "AGGREGATOR_SETTINGS"
 		);
 
 		// Get settings
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );
-		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		var setting = settingService.findWhere(
+			criteria = {
+				name = "aggregator"
+			}
+		);
 
 		// Add site routes
 		var routingService = controller.getRoutingService();
@@ -235,11 +239,27 @@ component {
 			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
-			routingService.addNamespace( pattern="#cbEntryPoint#/#newsEntryPoint#", namespace="aggregator-news", append=false );
-			routingService.addNamespace( pattern="#cbEntryPoint#/#feedsEntryPoint#", namespace="aggregator-feeds", append=false );
+			routingService.addNamespace(
+				pattern = "#cbEntryPoint#/#newsEntryPoint#",
+				namespace = "aggregator-news",
+				append = false
+			);
+			routingService.addNamespace(
+				pattern = "#cbEntryPoint#/#feedsEntryPoint#",
+				namespace = "aggregator-feeds",
+				append = false
+			);
 		} else {
-			routingService.addNamespace( pattern="#newsEntryPoint#", namespace="aggregator-news", append=false );
-			routingService.addNamespace( pattern="#feedsEntryPoint#", namespace="aggregator-feeds", append=false );
+			routingService.addNamespace(
+				pattern = "#newsEntryPoint#",
+				namespace = "aggregator-news",
+				append = false
+			);
+			routingService.addNamespace(
+				pattern = "#feedsEntryPoint#",
+				namespace = "aggregator-feeds",
+				append = false
+			);
 		}
 		siteRoutes.each( function( item ) {
 			if ( structKeyExists( item, "handler" ) ) {
@@ -259,18 +279,38 @@ component {
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
 
 		// Save search adapter setting
-		var setting = settingService.findWhere( criteria = { name="cb_search_adapter" } );
+		var setting = settingService.findWhere(
+			criteria = {
+				name = "cb_search_adapter"
+			}
+		);
 		if ( isNull( setting ) ) {
-			setting = settingService.new( properties = { name="cb_search_adapter", value="#moduleMapping#.models.DBSearch" } );
+			setting = settingService.new(
+				properties = {
+					name = "cb_search_adapter",
+					value = "#moduleMapping#.models.DBSearch"
+				}
+			);
 		} else {
 			setting.setValue( "#moduleMapping#.models.DBSearch" );
 		}
 		settingService.save( setting );
 
 		// Save the aggregator settings if needed
-		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		var setting = settingService.findWhere(
+			criteria = {
+				name = "aggregator"
+			}
+		);
 		if ( isNull( setting ) ) {
-			settingService.save( settingService.new( properties = { name="aggregator", value=serializeJSON( settings ) } ) );
+			settingService.save(
+				settingService.new(
+					properties = {
+						name = "aggregator",
+						value = serializeJSON( settings )
+					}
+				)
+			);
 		}
 
 		// Flush settings cache
@@ -327,10 +367,14 @@ component {
 		// Save permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
 		var roleService= controller.getWireBox().getInstance("roleService@cb");
-		var adminRole = roleService.findWhere( { role="Administrator" } );
-		var editorRole = roleService.findWhere( { role="Editor" } );
+		var adminRole = roleService.findWhere( { role = "Administrator" } );
+		var editorRole = roleService.findWhere( { role = "Editor" } );
 		for ( var item IN permissions ) {
-			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
+			var permission = permissionService.findWhere(
+				criteria = {
+					permission=item["permission"]
+				}
+			);
 			if ( isNull( permission ) ) {
 				permission = permissionService.new();
 				permission.setPermission( item["permission"] );
@@ -366,15 +410,28 @@ component {
 
 		// Delete aggregator settings
 		var settingService = controller.getWireBox().getInstance("settingService@cb");
-		var setting = settingService.findWhere( criteria = { name="aggregator" } );
+		var setting = settingService.findWhere(
+			criteria = {
+				name = "aggregator"
+			}
+		);
 		if ( !isNull( setting ) ) {
 			settingService.delete( setting );
 		}
 
 		// Change search adapter settings back to default
-		var setting = settingService.findWhere( criteria = { name="cb_search_adapter" } );
+		var setting = settingService.findWhere(
+			criteria = {
+				name = "cb_search_adapter"
+			}
+		);
 		if ( isNull( setting ) ) {
-			setting = settingService.new( properties = { name="cb_search_adapter", value="contentbox.models.search.DBSearch" } );
+			setting = settingService.new(
+				properties = {
+					name = "cb_search_adapter",
+					value = "contentbox.models.search.DBSearch"
+				}
+			);
 		} else {
 			setting.setValue( "contentbox.models.search.DBSearch" );
 		}
@@ -386,16 +443,18 @@ component {
 		// Delete permissions
 		var permissionService = controller.getWireBox().getInstance("permissionService@cb");
 		for ( var item IN permissions ) {
-			var permission = permissionService.findWhere( criteria = { permission=item["permission"] } );
+			var permission = permissionService.findWhere(
+				criteria = {
+					permission = item["permission"]
+				}
+			);
 			if ( !isNull( permission ) ) {
 				permissionService.deletePermission( permission.getPermissionID() );
 			}
 		}
 
-		// TODO: Change all layouts back to use pages, and remove any widgets???
-
 		// Delete scheduled task (will delete if one exists)
-		cfschedule( action="delete", task="aggregator-import" );
+		cfschedule( action = "delete", task = "aggregator-import" );
 
 	}
 

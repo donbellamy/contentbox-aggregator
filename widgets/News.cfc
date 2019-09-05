@@ -27,9 +27,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.label Title Level
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
-	 * @max.label Maximum Items
-	 * @max.hint The number of feed items to display.
-	 * @max.options 1,5,10,15,20,25,50,100
 	 * @feed.label Feed
 	 * @feed.hint The feed to filter on.
 	 * @feed.optionsUDF getFeedSlugs
@@ -50,7 +47,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
-		numeric max=10,
 		string feed="",
 		string category="",
 		string searchTerm="",
@@ -73,9 +69,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
 
+		// Fixes bug in widget preview - take out when fixed
+		prc.cbTheme = prc.cbSettings.cb_site_theme;
+		prc.cbThemeRecord = themeService.getThemeRecord( prc.cbTheme );
+
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( arguments.max );
+		prc.oPaging.setpagingMaxRows( ag.setting("ag_site_paging_max_items") );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = ag.linkNews() & "?page=@page@";
 
@@ -85,7 +85,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			searchTerm = arguments.searchTerm,
 			feed = arguments.feed,
 			sortOrder = arguments.sortOrder,
-			max = arguments.max,
+			max = ag.setting("ag_site_paging_max_items"),
 			offset = prc.pagingBoundaries.startRow - 1,
 			includeEntries=arguments.includeEntries
 		);

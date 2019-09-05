@@ -36,8 +36,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			rc.format = "html";
 		}
 
-		// TODO: Set keywords and description in templates ??
-
 	}
 
 	/**
@@ -70,8 +68,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 				// Set cache headers
 				if ( prc.cbSettings.cb_content_cachingHeader ) {
-					event.setHTTPHeader( statusCode="203", statustext="ContentBoxCache Non-Authoritative Information" )
-						.setHTTPHeader( name="x-contentbox-cached-content", value="true" );
+					event.setHTTPHeader(
+						statusCode = "203",
+						statustext = "ContentBoxCache Non-Authoritative Information"
+					).setHTTPHeader(
+						name = "x-contentbox-cached-content",
+						value = "true"
+					);
 				}
 
 				// Update hits
@@ -132,18 +135,18 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					}
 				}
 				if ( rc.format == "json" ) {
-					data.content = dataMarshaller.marshallData( data=results, type="json" );
+					data.content = dataMarshaller.marshallData( data = results, type = "json" );
 					data.contentType = "application/json";
 					data.isBinary = false;
 				} else {
-					data.content = dataMarshaller.marshallData( data=results, type="xml", xmlRootName=lcase( content.getContentType() ) );
+					data.content = dataMarshaller.marshallData( data=results, type = "xml", xmlRootName = lcase( content.getContentType() ) );
 					data.contentType = "text/xml";
 					data.isBinary = false;
 				}
 				break;
 			}
 			case "pdf": {
-				data.content = dataMarshaller.marshallData( data=data.content, type="pdf" );
+				data.content = dataMarshaller.marshallData( data = data.content, type = "pdf" );
 				data.contentType = "application/pdf";
 				data.isBinary = true;
 				break;
@@ -243,24 +246,32 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItems(
-				searchTerm=rc.q,
-				category=rc.category,
-				max=prc.agSettings.ag_site_paging_max_items,
-				offset=prc.pagingBoundaries.startRow - 1,
-				includeEntries=prc.agSettings.ag_site_display_entries
+				searchTerm = rc.q,
+				category = rc.category,
+				max = prc.agSettings.ag_site_paging_max_items,
+				offset = prc.pagingBoundaries.startRow - 1,
+				includeEntries = prc.agSettings.ag_site_display_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
 
 			// Announce event
-			announceInterception( "aggregator_onIndexView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
+			announceInterception(
+				"aggregator_onIndexView",
+				{ feedItems = prc.feedItems, feedItemsCount = prc.itemCount }
+			);
 
 			// Set the page title
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-				.setView( view="#prc.cbTheme#/views/feeditems", module=prc.cbThemeRecord.module );
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
+				view = "#prc.cbTheme#/views/feeditems",
+				module = prc.cbThemeRecord.module
+			);
 
 		} else {
 
@@ -323,18 +334,21 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItemsByDate(
-				year=rc.year,
-				month=rc.month,
-				day=rc.day,
-				max=prc.agSettings.ag_site_paging_max_items,
-				offset=prc.pagingBoundaries.startRow - 1,
-				includeEntries=prc.agSettings.ag_site_display_entries
+				year = rc.year,
+				month = rc.month,
+				day = rc.day,
+				max = prc.agSettings.ag_site_paging_max_items,
+				offset = prc.pagingBoundaries.startRow - 1,
+				includeEntries = prc.agSettings.ag_site_display_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
 
 			// Announce event
-			announceInterception( "aggregator_onArchivesView", { feedItems=prc.feedItems, feedItemsCount=prc.itemCount } );
+			announceInterception(
+				"aggregator_onArchivesView",
+				{ feedItems = prc.feedItems, feedItemsCount = prc.itemCount }
+			);
 
 			// Set the formatted date and page title
 			prc.formattedDate = dateFormat( prc.archiveDate, "yyyy" );
@@ -349,8 +363,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-				.setView( view="#prc.cbTheme#/views/feeditemarchives", module=prc.cbThemeRecord.module );
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
+				view = "#prc.cbTheme#/views/feeditemarchives",
+				module = prc.cbThemeRecord.module
+			);
 
 		} else {
 
@@ -387,10 +406,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			);
 
 			// Announce event
-			announceInterception( "aggregator_onRSSView", { category=rc.category, slug=rc.slug } );
+			announceInterception(
+				"aggregator_onRSSView",
+				{ category = rc.category, slug = rc.slug }
+			);
 
 			// Render the xml
-			event.renderData( type="plain", data=rssFeed, contentType="text/xml" );
+			event.renderData(
+				type = "plain",
+				data = rssFeed,
+				contentType = "text/xml"
+			);
 
 		} else {
 
@@ -434,22 +460,30 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the results
 			var results = feedService.getPublishedFeeds(
-				max=prc.agSettings.ag_site_paging_max_feeds,
-				offset=prc.pagingBoundaries.startRow - 1
+				max = prc.agSettings.ag_site_paging_max_feeds,
+				offset = prc.pagingBoundaries.startRow - 1
 			);
 			prc.feeds = results.feeds;
 			prc.itemCount = results.count;
 
 			// Announce event
-			announceInterception( "aggregator_onFeedsView", { feeds=prc.feeds, feedsCount=prc.itemCount } );
+			announceInterception(
+				"aggregator_onFeedsView",
+				{ feeds = prc.feeds, feedsCount = prc.itemCount }
+			);
 
 			// Set the page title
 			title = prc.page.getTitle() & title;
 			cbHelper.setMetaTitle( title );
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-				.setView( view="#prc.cbTheme#/views/feeds", module=prc.cbThemeRecord.module );
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
+				view = "#prc.cbTheme#/views/feeds",
+				module = prc.cbThemeRecord.module
+			);
 
 		} else {
 
@@ -513,11 +547,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the feed items
 			var results = feedItemService.getPublishedFeedItems(
-				feed=prc.feed.getContentID(),
-				author=rc.author,
-				max=val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_items,
-				offset=prc.pagingBoundaries.startRow - 1,
-				includeEntries=false
+				feed = prc.feed.getContentID(),
+				author = rc.author,
+				max = val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_items,
+				offset = prc.pagingBoundaries.startRow - 1,
+				includeEntries = false
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -526,7 +560,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			feedService.updateHits( prc.feed.getContentID() );
 
 			// Announce event
-			announceInterception( "aggregator_onFeedView", { feed=prc.feed } );
+			announceInterception(
+				"aggregator_onFeedView",
+				{ feed = prc.feed }
+			);
 
 			// Set the page title
 			title = ( len( trim( prc.feed.getHTMLTitle() ) ) ? prc.feed.getHTMLTitle() : prc.feed.getTitle() ) & title;
@@ -541,13 +578,21 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Set layout and view
-			event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-				.setView( view="#prc.cbTheme#/views/feed", module=prc.cbThemeRecord.module );
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
+				view = "#prc.cbTheme#/views/feed",
+				module = prc.cbThemeRecord.module
+			);
 
 		} else {
 
 			// Announce event
-			announceInterception( "aggregator_onFeedNotFound", { slug=rc.slug } ); // TODO: Other events?  newspagenotfound, etc...
+			announceInterception(
+				"aggregator_onFeedNotFound",
+				{ slug = rc.slug }
+			);
 
 			// Not found
 			notFound( argumentCollection=arguments );
@@ -608,7 +653,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			feedItemService.updateHits( prc.feedItem.getContentID() );
 
 			// Announce event
-			announceInterception( "aggregator_onFeedItemView", { feedItem=feedItem } );
+			announceInterception(
+				"aggregator_onFeedItemView",
+				{ feedItem = feedItem }
+			);
 
 			// Disply feed item based on setting
 			switch( prc.linkBehavior ) {
@@ -616,7 +664,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				// Forward user to feed item
 				case "forward": {
 
-					relocate( url=prc.feedItem.getItemUrl(), addToken=false, statusCode="302" );
+					relocate(
+						url = prc.feedItem.getItemUrl(),
+						addToken = false,
+						statusCode = "302"
+					);
 					break;
 
 				}
@@ -626,8 +678,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
 
-					event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-						.setView( view="#prc.cbTheme#/views/interstitial", module=prc.cbThemeRecord.module );
+					event.setLayout(
+						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+						module = prc.cbThemeRecord.module
+					).setView(
+						view = "#prc.cbTheme#/views/interstitial",
+						module = prc.cbThemeRecord.module
+					);
 
 					break;
 
@@ -648,8 +705,13 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						cbHelper.setMetaKeywords( prc.feedItem.getHTMLKeywords() );
 					}
 
-					event.setLayout( name="#prc.cbTheme#/layouts/#prc.page.getLayout()#", module=prc.cbThemeRecord.module )
-						.setView( view="#prc.cbTheme#/views/feeditem", module=prc.cbThemeRecord.module );
+					event.setLayout(
+						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+						module = prc.cbThemeRecord.module
+					).setView(
+						view = "#prc.cbTheme#/views/feeditem",
+						module = prc.cbThemeRecord.module
+					);
 
 					break;
 
@@ -660,7 +722,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		} else {
 
 			// Announce event
-			announceInterception( "aggregator_onFeedItemNotFound", { slug=rc.slug } );
+			announceInterception(
+				"aggregator_onFeedItemNotFound",
+				{ slug = rc.slug }
+			);
 
 			// Not found
 			notFound( argumentCollection=arguments );
@@ -682,15 +747,20 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Announce event
 		announceInterception(
 			"cbui_onError", {
-				faultAction=arguments.faultAction,
-				exception=arguments.exception,
-				eventArguments=arguments.eventArguments
+				faultAction = arguments.faultAction,
+				exception = arguments.exception,
+				eventArguments = arguments.eventArguments
 			}
 		);
 
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/pages", module=prc.cbThemeRecord.module )
-			.setView( view="#prc.cbTheme#/views/error", module=prc.cbThemeRecord.module );
+		event.setLayout(
+			name = "#prc.cbTheme#/layouts/pages",
+			module = prc.cbThemeRecord.module
+		).setView(
+			view = "#prc.cbTheme#/views/error",
+			module = prc.cbThemeRecord.module
+		);
 
 	}
 
@@ -718,7 +788,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Comments
 			if ( prc.page.getAllowComments() ) {
-				var commentResults = commentService.findApprovedComments( contentID=prc.page.getContentID(), sortOrder="asc" );
+				var commentResults = commentService.findApprovedComments( contentID = prc.page.getContentID(), sortOrder = "asc" );
 				prc.comments = commentResults.comments;
 				prc.commentsCount = commentResults.count;
 			} else {
@@ -743,7 +813,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Announce event
-			announceInterception( "cbui_onPage", { page=prc.page, isMobile=isMobile } );
+			announceInterception(
+				"cbui_onPage",
+				{ page = prc.page, isMobile = isMobile }
+			);
 
 		}
 	}
@@ -758,9 +831,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		prc.missingRoutedURL = event.getCurrentRoutedURL();
 
 		// Set layout and view
-		event.setLayout( name="#prc.cbTheme#/layouts/pages", module=prc.cbThemeRecord.module )
-			.setView( view="#prc.cbTheme#/views/notfound", module=prc.cbThemeRecord.module )
-			.setHTTPHeader( "404", "Page not found" );
+		event.setLayout(
+			name = "#prc.cbTheme#/layouts/pages",
+			module = prc.cbThemeRecord.module
+		).setView(
+			view = "#prc.cbTheme#/views/notfound",
+			module = prc.cbThemeRecord.module
+		).setHTTPHeader(
+			"404",
+			"Page not found"
+		);
 
 	}
 

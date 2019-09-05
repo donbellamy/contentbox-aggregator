@@ -61,7 +61,7 @@ component persistent="true"
 	********************************************************************* */
 
 	this.constraints = {
-		"title" = { required = true, size = "1..255" },
+		"title" = { required=true, size="1..255" },
 		"itemUrl" = { required=true, type="url", size="1..255" },
 		"createdDate" = { required=true, type="date" },
 	};

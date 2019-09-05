@@ -107,7 +107,7 @@ component extends="coldbox.system.Interceptor" {
 	 * @return The aggregator settings
 	 */
 	private struct function getSettings( event ) {
-		return event.getValue( name="agSettings", private=true );
+		return event.getValue( name = "agSettings", private = true );
 	}
 
 	/**

@@ -62,10 +62,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Grab the blacklisted items
 		} else {
 			results.blacklistedItems = c.list(
-				offset=arguments.offset,
-				max=arguments.max,
-				sortOrder=arguments.sortOrder,
-				asQuery=false
+				offset = arguments.offset,
+				max = arguments.max,
+				sortOrder = arguments.sortOrder,
+				asQuery = false
 			);
 		}
 

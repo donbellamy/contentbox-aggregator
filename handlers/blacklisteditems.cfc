@@ -36,7 +36,7 @@ component extends="baseHandler" {
 		event.paramValue( "showAll", false );
 
 		// Grab the feeds
-		prc.feeds = feedService.getAll( sortOrder="title" );
+		prc.feeds = feedService.getAll( sortOrder = "title" );
 
 		event.setView( "blacklisteditems/index" );
 
@@ -59,15 +59,18 @@ component extends="baseHandler" {
 
 		// Grab results
 		var results = blacklistedItemService.getBlacklistedItems(
-			searchTerm=rc.search,
-			feed=rc.feed,
-			max=( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
-			offset=( rc.showAll ? 0 : prc.paging.startRow - 1 )
+			searchTerm = rc.search,
+			feed = rc.feed,
+			max = ( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
+			offset = ( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
 		prc.blacklistedItems = results.blacklistedItems;
 		prc.itemCount = results.count;
 
-		event.setView( view="blacklisteditems/table", layout="ajax" );
+		event.setView(
+			view = "blacklisteditems/table",
+			layout = "ajax"
+		);
 
 	}
 
@@ -76,10 +79,10 @@ component extends="baseHandler" {
 	 */
 	function save( event, rc, prc ) {
 
-		event.paramValue( "blacklistedItemID", 0 );
-		event.paramValue( "title", "" );
-		event.paramValue( "itemUrl", "" );
-		event.paramValue( "feedId", "" );
+		event.paramValue( "blacklistedItemID", 0 )
+			.paramValue( "title", "" )
+			.paramValue( "itemUrl", "" )
+			.paramValue( "feedId", "" );
 
 		// Grab the feed
 		var blacklistedItem = blacklistedItemService.get( rc.blacklistedItemID );
@@ -89,16 +92,25 @@ component extends="baseHandler" {
 		blacklistedItem.setFeed( feedService.get( rc.feedId ) );
 		if ( !val(blacklistedItem.getBlacklistedItemID()) ) blacklistedItem.setCreator( prc.oCurrentAuthor );
 
-		announceInterception( "aggregator_preBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+		announceInterception(
+			"aggregator_preBlacklistedItemSave",
+			{ blacklistedItem = blacklistedItem }
+		);
 
 		// Save the item
 		blacklistedItemService.save( blacklistedItem );
 
-		announceInterception( "aggregator_postBlacklistedItemSave", { blacklistedItem=blacklistedItem });
+		announceInterception(
+			"aggregator_postBlacklistedItemSave",
+			{ blacklistedItem = blacklistedItem }
+		);
 
 		if ( event.isAjax() ) {
 			var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
-			event.renderData( type="json", data=data );
+			event.renderData(
+				type = "json",
+				data = data
+			);
 		} else {
 			cbMessagebox.info( "Blacklisted Item Saved!" );
 			setNextEvent( prc.xehBlacklistedItems );
@@ -121,9 +133,15 @@ component extends="baseHandler" {
 				var blacklistedItem = blacklistedItemService.get( blacklistedItemID, false );
 				if ( !isNull( blacklistedItem ) ) {
 					var title = blacklistedItem.getTitle();
-					announceInterception( "aggregator_preBlacklistedItemRemove", { blacklistedItem=blacklistedItem } );
+					announceInterception(
+						"aggregator_preBlacklistedItemRemove",
+						{ blacklistedItem = blacklistedItem }
+					);
 					blacklistedItemService.deleteByID( blacklistedItem.getBlacklistedItemID() );
-					announceInterception( "aggregator_postBlacklistedItemRemove", { blacklistedItemID=blacklistedItemID } );
+					announceInterception(
+						"aggregator_postBlacklistedItemRemove",
+						{ blacklistedItemID = blacklistedItemID }
+					);
 					arrayAppend( messages, "Blacklisted item '#title#' deleted." );
 				} else {
 					arrayAppend( messages, "Invalid blacklisted item selected: #blacklistedItemID#." );
@@ -134,7 +152,10 @@ component extends="baseHandler" {
 			cbMessagebox.warn( "No blacklisted items selected!" );
 		}
 
-		setNextEvent( event=prc.xehBlacklistedItems, persistStruct=getFilters( rc )  );
+		setNextEvent(
+			event = prc.xehBlacklistedItems,
+			persistStruct = getFilters( rc )
+		);
 
 	}
 

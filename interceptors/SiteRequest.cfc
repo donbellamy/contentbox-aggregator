@@ -72,9 +72,9 @@ component extends="coldbox.system.Interceptor" {
 
 		// Set args var
 		var args = {
-			oContent=javaCast( "null", "" ),
-			linkEdit="",
-			oCurrentAuthor=prc.oCurrentAuthor
+			oContent = javaCast( "null", "" ),
+			linkEdit = "",
+			oCurrentAuthor = prc.oCurrentAuthor
 		};
 
 		// Check for cache
@@ -110,8 +110,8 @@ component extends="coldbox.system.Interceptor" {
 
 		// Render the admin bar
 		var adminBar = renderView(
-			view="adminbar/index",
-			module="contentbox-ui",
+			view = "adminbar/index",
+			module = "contentbox-ui",
 			args=args
 		);
 

@@ -47,7 +47,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
 
 		// Grab the categories
-		var categories = categoryService.list( sortOrder="category", asQuery=false );
+		var categories = categoryService.list(
+			sortOrder = "category",
+			asQuery = false
+		);
 
 		// Set return html
 		var html = "";
@@ -84,7 +87,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 			// Select options
 		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-			var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
+			var feedItemCount = feedItemService.getPublishedFeedItems(
+				category = categories[x].getSlug(),
+				countOnly = true,
+				includeEntries = arguments.includeEntries
+			).count;
 			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
 			if ( feedItemCount && showCategory ) {
 				html &= '<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
@@ -115,7 +122,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// List items
 		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-			var feedItemCount = feedItemService.getPublishedFeedItems( category=categories[x].getSlug(), countOnly=true, includeEntries=arguments.includeEntries ).count;
+			var feedItemCount = feedItemService.getPublishedFeedItems(
+				category = categories[x].getSlug(),
+				countOnly = true,
+				includeEntries = arguments.includeEntries
+			).count;
 			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
 			if ( feedItemCount && showCategory ) {
 				html &= '<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';

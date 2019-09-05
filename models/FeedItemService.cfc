@@ -160,10 +160,10 @@ component extends="ContentService" singleton {
 
 		// Get the feed item count
 		results.count = executeQuery(
-			query="SELECT COUNT(*) #hql#",
-			params=params,
-			max=1,
-			asQuery=false
+			query = "SELECT COUNT(*) #hql#",
+			params = params,
+			max = 1,
+			asQuery = false
 		)[1];
 
 		// Check count only
@@ -172,11 +172,11 @@ component extends="ContentService" singleton {
 		// Grab the feed items
 		} else {
 			results.feedItems = executeQuery(
-				query="SELECT cb #hql#",
-				params=params,
-				max=arguments.max,
-				offset=arguments.offset,
-				asQuery=false
+				query = "SELECT cb #hql#",
+				params = params,
+				max = arguments.max,
+				offset = arguments.offset,
+				asQuery = false
 			);
 		}
 
