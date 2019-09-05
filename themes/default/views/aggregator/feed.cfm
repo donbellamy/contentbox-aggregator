@@ -1,5 +1,3 @@
-<cfparam name="args.print" default="false" />
-<cfparam name="args.sidebar" default="true" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -14,7 +12,10 @@
 <div id="body-header" style="#bodyHeaderStyle#">
 	<div class="container">
 		<div class="underlined-title">
-			<h1 style="#bodyHeaderH1Style#">#prc.page.getTitle()#</h1>
+			<h1 style="#bodyHeaderH1Style#">#prc.feed.getTitle()#</h1>
+			<cfif len( prc.feed.getTagLine() ) >
+				<div class="text-center">#prc.feed.getTagLine()#</div>
+			</cfif>
 		</div>
 	</div>
 </div>
@@ -37,7 +38,7 @@
 			</cfif>
 		</cfif>
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			#cb.event("aggregator_preArchivesDisplay")#
+			#cb.event("aggregator_preFeedDisplay", { feed=prc.feed })#
 			<cfif prc.itemCount >
 				#ag.quickFeedItems()#
 				<cfif !args.print >
@@ -48,11 +49,11 @@
 			<cfelse>
 				<div>No results found.</div>
 			</cfif>
-			#cb.event("aggregator_postArchivesDisplay")#
+			#cb.event("aggregator_postFeedDisplay", { feed=prc.feed })#
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">
-				#cb.quickView( view="_portalsidebar", args=args )#
+				#cb.quickView( view="aggregator/_portalsidebar", args=args )#
 			</div>
 		</cfif>
 	</div>

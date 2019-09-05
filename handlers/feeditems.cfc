@@ -328,7 +328,10 @@ component extends="contentHandler" {
 		if ( val( rc.contentID ) ) {
 			var feedItem = feedItemService.get( rc.contentID, false );
 			if ( !isNull( feedItem ) ) {
-				location( url=prc.agHelper.linkFeedItem( feedItem ), addToken=false );
+				location(
+					url = prc.agHelper.linkFeedItem( feedItem ),
+					addToken = false
+				);
 			} else {
 				cbMessagebox.info( "Invalid feed item selected: #rc.contentID#." );
 			}

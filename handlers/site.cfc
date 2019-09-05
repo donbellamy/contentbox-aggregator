@@ -110,7 +110,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( isNull( data.content ) ) {
 			// Render the layout
 			data.content = renderLayout(
-				layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout( format=rc.format, layout=listLast( event.getCurrentLayout(), '/' ) )#",
+				layout = "#prc.cbTheme#/layouts/#themeService.getThemePrintLayout(
+					format = rc.format,
+					layout = listLast( event.getCurrentLayout(), '/' )
+				)#",
 				module = prc.cbThemeRecord.module,
 				viewModule = prc.cbThemeRecord.module
 			);
@@ -269,7 +272,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/feeditems",
+				view = "#prc.cbTheme#/views/aggregator/feeditems",
 				module = prc.cbThemeRecord.module
 			);
 
@@ -367,7 +370,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/feeditemarchives",
+				view = "#prc.cbTheme#/views/aggregator/feeditemarchives",
 				module = prc.cbThemeRecord.module
 			);
 
@@ -481,7 +484,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/feeds",
+				view = "#prc.cbTheme#/views/aggregator/feeds",
 				module = prc.cbThemeRecord.module
 			);
 
@@ -582,7 +585,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/feed",
+				view = "#prc.cbTheme#/views/aggregator/feed",
 				module = prc.cbThemeRecord.module
 			);
 
@@ -682,7 +685,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 						module = prc.cbThemeRecord.module
 					).setView(
-						view = "#prc.cbTheme#/views/interstitial",
+						view = "#prc.cbTheme#/views/aggregator/interstitial",
 						module = prc.cbThemeRecord.module
 					);
 
@@ -709,7 +712,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 						module = prc.cbThemeRecord.module
 					).setView(
-						view = "#prc.cbTheme#/views/feeditem",
+						view = "#prc.cbTheme#/views/aggregator/feeditem",
 						module = prc.cbThemeRecord.module
 					);
 

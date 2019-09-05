@@ -559,7 +559,7 @@ component accessors="true" singleton threadSafe {
 	string function quickFeeds( string template="feed", string collectionAs="feed", struct args=structnew() ) {
 		var feeds = getCurrentFeeds();
 		return controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/#arguments.template#",
+			view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 			collection = feeds,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args,
@@ -577,7 +577,7 @@ component accessors="true" singleton threadSafe {
 	string function quickFeedItems( string template="feeditem", string collectionAs="feeditem", struct args=structnew() ) {
 		var feedItems = getCurrentFeedItems();
 		return controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/#arguments.template#",
+			view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args,
@@ -592,7 +592,7 @@ component accessors="true" singleton threadSafe {
 	function mainView( struct args=structNew() ) {
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
-				view = "#cb.themeName()#/views/portal",
+				view = "#cb.themeName()#/views/aggregator/portal",
 				args = arguments.args,
 				module = cb.themeRecord().module
 			);

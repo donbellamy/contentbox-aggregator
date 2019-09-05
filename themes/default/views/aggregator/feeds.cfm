@@ -37,24 +37,24 @@
 			</cfif>
 		</cfif>
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			#cb.event("aggregator_preIndexDisplay")#
+			#cb.event("aggregator_preFeedsDisplay")#
 			<cfif prc.itemCount >
-				#ag.quickFeedItems()#
+				#ag.quickFeeds()#
 				<cfif !args.print >
 					<div class="contentBar">
-						#ag.quickPaging()#
+						#ag.quickPaging( type="feeds" )#
 					</div>
 				</cfif>
 			<cfelse>
 				<div>No results found.</div>
 			</cfif>
-			#cb.event("aggregator_postIndexDisplay")#
+			#cb.event("aggregator_postFeedsDisplay")#
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">
-				#cb.quickView( view="_portalsidebar", args=args )#
+				#cb.quickView( view="aggregator/_portalsidebar", args=args )#
 			</div>
 		</cfif>
 	</div>
-</section>
+</div>
 </cfoutput>

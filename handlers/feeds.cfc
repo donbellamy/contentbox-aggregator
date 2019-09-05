@@ -431,7 +431,10 @@ component extends="contentHandler" {
 		if ( val( rc.contentID ) ) {
 			var feed = feedService.get( rc.contentID, false );
 			if ( !isNull( feed ) ) {
-				location( url=prc.agHelper.linkFeed( feed ), addToken=false );
+				location(
+					url = prc.agHelper.linkFeed( feed ),
+					addToken = false
+				);
 			} else {
 				cbMessagebox.info( "Invalid feed selected: #contentID#." );
 			}
@@ -520,7 +523,7 @@ component extends="contentHandler" {
 		if ( len( rc.contentID ) ) {
 			feedService.bulkActiveState( contentID=rc.contentID, state=rc.contentState );
 			announceInterception(
-				"aggregator_onFeedStateUpdate", \
+				"aggregator_onFeedStateUpdate",
 				{ contentID = rc.contentID, state = rc.contentState }
 			);
 			cbMessagebox.info( "#listLen( rc.contentID )# feed#listLen(rc.contentID) GT 1?'s were':' was'# set to '#rc.contentState#'." );
