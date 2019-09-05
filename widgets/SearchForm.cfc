@@ -46,7 +46,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Render the search form
 		return renderView(
 			view = "#cb.themeName()#/templates/portalsearch",
-			module = "contentbox",
+			module = cb.themeRecord().module,
 			args = args
 		);
 

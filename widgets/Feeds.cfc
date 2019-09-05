@@ -34,8 +34,21 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 */
 	string function renderIt(
 		string title="",
-		numeric titleLevel=2 ) {
+		numeric titleLevel=2,
+		numeric max=10 ) {
 
+		// Grab the event
+		var event = getRequestContext();
+		var prc = event.getCollection(private=true);
+
+		// Paging
+		prc.oPaging = getModel("paging@aggregator");
+		prc.oPaging.setpagingMaxRows( arguments.max );
+		prc.pagingBoundaries = prc.oPaging.getBoundaries();
+		prc.pagingLink = ag.linkFeeds() & "?page=@page@";
+
+	}
+/*
 		// Grab the results
 		var results = feedService.getFeeds(
 			status="published"
@@ -61,7 +74,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		html &= "</ul>";
 
 		return html;
-
-	}
+*/
 
 }

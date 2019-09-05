@@ -73,9 +73,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
 
-		// Fixes bug in widget preview where prc.cbTheme is not defined
-		prc.cbTheme = prc.cbSettings.cb_site_theme;
-
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( arguments.max );
@@ -104,8 +101,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Render the news template
 		return renderView(
-			view = "#cb.themeName()#/templates/portal",
-			module = "contentbox",
+			view = "#cb.themeName()#/templates/news",
+			module = cb.themeRecord().module,
 			args = args
 		);
 

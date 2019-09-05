@@ -563,7 +563,7 @@ component accessors="true" singleton threadSafe {
 			collection = feeds,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args,
-			module = "contentbox"
+			module = cb.themeRecord().module
 		);
 	}
 
@@ -581,7 +581,7 @@ component accessors="true" singleton threadSafe {
 			collection = feedItems,
 			collectionAs = arguments.collectionAs,
 			args = arguments.args,
-			module = "contentbox"
+			module = cb.themeRecord().module
 		);
 	}
 
@@ -594,7 +594,7 @@ component accessors="true" singleton threadSafe {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/portal",
 				args = arguments.args,
-				module = "contentbox"
+				module = cb.themeRecord().module
 			);
 		} else {
 			return cb.mainView( argumentCollection=arguments );
