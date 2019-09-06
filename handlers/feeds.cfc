@@ -691,10 +691,8 @@ component extends="contentHandler" {
 			}
 
 		} else {
-
 			data.error = true;
 			data.message = "Invalid key passed to importFeed function.";
-
 		}
 
 		// Set response

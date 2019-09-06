@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<!--- Page Includes --->
-	#cb.quickView( "_portalincludes" )#
+	#cb.quickView( "aggregator/_includes" )#
 	<!--- ContentBoxEvent --->
 	#cb.event("cbui_beforeHeadEnd")#
 </head>

@@ -592,7 +592,7 @@ component accessors="true" singleton threadSafe {
 	function mainView( struct args=structNew() ) {
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
-				view = "#cb.themeName()#/views/aggregator/portal",
+				view = "#cb.themeName()#/views/aggregator/page",
 				args = arguments.args,
 				module = cb.themeRecord().module
 			);

@@ -75,7 +75,7 @@ component extends="coldbox.system.Interceptor" {
 					var hql = "SELECT fi FROM cbFeedItem fi JOIN fi.activeContent ac
 						WHERE fi.parent = :parent
 						AND ( ";
-					var params = { parent=feed };
+					var params = { parent = feed };
 					var count = 1;
 					for ( var keyword IN keywords ) {
 						hql &= "( fi.title LIKE :keyword#count# OR ac.content LIKE :keyword#count# )";
@@ -86,7 +86,11 @@ component extends="coldbox.system.Interceptor" {
 					hql &= " )";
 
 					// Get feedItems
-					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					var feedItems = feedItemService.executeQuery(
+						query = hql,
+						params = params,
+						asQuery = false
+					);
 
 					// Check results
 					if ( arrayLen( feedItems ) ) {

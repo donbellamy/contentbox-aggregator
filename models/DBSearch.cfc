@@ -25,7 +25,11 @@ component accessors="true" implements="contentbox.models.search.ISearchAdapter" 
 	 * @max The max results to return if paging
 	 * @offset The offset to use in the search results if paging
 	 */
-	contentbox.models.search.SearchResults function search( required string searchTerm, numeric max=0, numeric offset=0 ) {
+	contentbox.models.search.SearchResults function search(
+		required string searchTerm,
+		numeric max=0,
+		numeric offset=0
+	) {
 
 		// Set vars
 		var searchResults = wirebox.getInstance("searchResults@cb");
@@ -94,7 +98,7 @@ component accessors="true" implements="contentbox.models.search.ISearchAdapter" 
 
 		// Render results
 		var results = controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/search", // /templates/aggregator/search
+			view = "#cb.themeName()#/views/aggregator/search",
 			module = cb.themeRecord().module,
 			args = args
 		);

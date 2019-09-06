@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 	<!--- Portal includes --->
-	#cb.quickView( "aggregator/_portalincludes" )#
+	#cb.quickView( "aggregator/_includes" )#
 	<!--- ContentBoxEvent --->
 	#cb.event( "cbui_beforeHeadEnd" )#
 </head>

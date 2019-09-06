@@ -141,9 +141,13 @@ component extends="ContentService" singleton {
 			WHERE f.isActive = true
 			AND ( f.startDate IS NULL OR f.startDate >= :now )
 			AND ( f.stopDate IS NULL OR f.stopDate <= :now )";
-		var params = { "now"=now() };
+		var params = { "now" = now() };
 
-		return executeQuery( query=hql, params=params, asQuery=false );
+		return executeQuery(
+			query = hql,
+			params = params,
+			asQuery = false
+		);
 
 	}
 

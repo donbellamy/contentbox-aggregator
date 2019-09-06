@@ -125,7 +125,11 @@ component extends="coldbox.system.Interceptor" {
 						count++;
 					}
 					hql &= " )";
-					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					var feedItems = feedItemService.executeQuery(
+						query = hql,
+						params = params,
+						asQuery = false
+					);
 					for ( var feedItem IN feedItems ) {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
@@ -147,7 +151,11 @@ component extends="coldbox.system.Interceptor" {
 						count++;
 					}
 					hql &= " )";
-					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					var feedItems = feedItemService.executeQuery(
+						query = hql,
+						params = params,
+						asQuery = false
+					);
 					for ( var feedItem IN feedItems ) {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );
@@ -169,7 +177,11 @@ component extends="coldbox.system.Interceptor" {
 						count++;
 					}
 					hql &= " )";
-					var feedItems = feedItemService.executeQuery( query=hql, params=params, asQuery=false );
+					var feedItems = feedItemService.executeQuery(
+						query = hql,
+						params = params,
+						asQuery = false
+					);
 					for ( var feedItem IN feedItems ) {
 						var uniqueId = feedItem.getUniqueId();
 						feedItemService.deleteContent( feedItem );

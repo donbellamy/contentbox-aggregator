@@ -1,6 +1,7 @@
 <cfparam name="args" default="#structNew()#" />
 <cfoutput>
 <!--- TODO: title --->
+#cb.event("aggregator_preFeedsDisplay")#
 <cfif prc.itemCount >
 	#ag.quickFeeds()#
 	<div class="contentBar">
@@ -9,4 +10,5 @@
 <cfelse>
 	<div>No results found.</div>
 </cfif>
+#cb.event("aggregator_postFeedsDisplay")#
 </cfoutput>

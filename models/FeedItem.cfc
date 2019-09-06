@@ -240,7 +240,7 @@ component persistent="true"
 	 * @return A structure containing the feed item properties
 	 */
 	struct function getMemento(
-		required array slugCache=[],
+		required array slugCache = [],
 		boolean showAuthor=true,
 		boolean showComments=true,
 		boolean showCustomFields=true,

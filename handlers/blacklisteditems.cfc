@@ -30,10 +30,10 @@ component extends="baseHandler" {
 	 */
 	function index( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "feed", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "feed", "" )
+			.paramValue( "showAll", false );
 
 		// Grab the feeds
 		prc.feeds = feedService.getAll( sortOrder = "title" );
@@ -47,10 +47,10 @@ component extends="baseHandler" {
 	 */
 	function table( event, rc, prc ) {
 
-		event.paramValue( "page", 1 );
-		event.paramValue( "search", "" );
-		event.paramValue( "feed", "" );
-		event.paramValue( "showAll", false );
+		event.paramValue( "page", 1 )
+			.paramValue( "search", "" )
+			.paramValue( "feed", "" )
+			.paramValue( "showAll", false );
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");

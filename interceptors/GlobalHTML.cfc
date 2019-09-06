@@ -9,17 +9,17 @@ component extends="coldbox.system.Interceptor" {
 	property name="agHelper" inject="helper@aggregator";
 
 	/**
-	 * Fired before news index display
+	 * Fired before feed items display
 	 */
-	function aggregator_preIndexDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_pre_index_display );
+	function aggregator_preFeedItemsDisplay( event, interceptData, buffer ) {
+		arguments.buffer.append( getSettings( event ).ag_html_pre_feed_items_display );
 	}
 
 	/**
-	 * Fired after news index display
+	 * Fired after feed items display
 	 */
-	function aggregator_postIndexDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_post_index_display );
+	function aggregator_postFeedItemsDisplay( event, interceptData, buffer ) {
+		arguments.buffer.append( getSettings( event ).ag_html_post_feed_items_display );
 	}
 
 	/**

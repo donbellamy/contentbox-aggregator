@@ -243,8 +243,8 @@ component extends="baseHandler" {
 		}
 
 		// Global html
-		prc.agSettings.ag_html_pre_index_display = trim( prc.agSettings.ag_html_pre_index_display );
-		prc.agSettings.ag_html_post_index_display = trim( prc.agSettings.ag_html_post_index_display );
+		prc.agSettings.ag_html_pre_feed_items_display = trim( prc.agSettings.ag_html_pre_feed_items_display );
+		prc.agSettings.ag_html_post_feed_items_display = trim( prc.agSettings.ag_html_post_feed_items_display );
 		prc.agSettings.ag_html_pre_feeds_display = trim( prc.agSettings.ag_html_pre_feeds_display );
 		prc.agSettings.ag_html_post_feeds_display = trim( prc.agSettings.ag_html_post_feeds_display );
 		prc.agSettings.ag_html_pre_feed_display = trim( prc.agSettings.ag_html_pre_feed_display );

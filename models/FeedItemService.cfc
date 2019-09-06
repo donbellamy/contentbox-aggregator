@@ -243,7 +243,11 @@ component extends="ContentService" singleton {
 		params[ "now" ] = now();
 
 		// Return results
-		return executeQuery( query=hql, params=params, asQuery=false );
+		return executeQuery(
+			query = hql,
+			params = params,
+			asQuery = false
+		);
 
 	}
 

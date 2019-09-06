@@ -1,1 +1,1 @@
-<cfoutput>#cb.quickLayout( "portal_print" )#</cfoutput>
+<cfoutput>#cb.quickLayout( "aggregator_print" )#</cfoutput>

@@ -171,7 +171,7 @@ component extends="coldbox.system.Interceptor" {
 				$("##topcontent table:first tbody").load( "#event.buildLink( prc.xehTopContent )#" );
 				$("##topcontent table:last tbody").load( "#event.buildLink( prc.xehTopCommented )#" );
 				$("##content div").load( "#event.buildLink( prc.xehContentCounts )#" );
-			});',true);
+			});', true );
 		}
 
 		// Add feed items to related content selector
@@ -198,7 +198,7 @@ component extends="coldbox.system.Interceptor" {
 					}
 				}
 				waitForIt();
-			});',true);
+			});', true );
 		}
 
 	}

@@ -53,7 +53,7 @@
 		</div>
 		<cfif args.sidebar >
 			<div class="col-sm-3" id="blog-sidenav">
-				#cb.quickView( view="aggregator/_portalsidebar", args=args )#
+				#cb.quickView( view="aggregator/_sidebar", args=args )#
 			</div>
 		</cfif>
 	</div>

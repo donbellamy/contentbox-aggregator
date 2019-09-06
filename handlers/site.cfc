@@ -97,10 +97,18 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 		// Prepare data
-		var data = { contentID = "", contentType = "text/html", isBinary = false };
+		var data = {
+			contentID = "",
+			contentType = "text/html",
+			isBinary = false
+		};
 
 		// Set arguments
-		var args = { event = arguments.event, rc = arguments.rc, prc = arguments.prc };
+		var args = {
+			event = arguments.event,
+			rc = arguments.rc,
+			prc = arguments.prc
+		};
 		structAppend( args, arguments.eventArguments );
 
 		// Execute the wrapped action
@@ -142,7 +150,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					data.contentType = "application/json";
 					data.isBinary = false;
 				} else {
-					data.content = dataMarshaller.marshallData( data=results, type = "xml", xmlRootName = lcase( content.getContentType() ) );
+					data.content = dataMarshaller.marshallData(
+						data = results,
+						type = "xml",
+						xmlRootName = lcase( content.getContentType() )
+					);
 					data.contentType = "text/xml";
 					data.isBinary = false;
 				}
@@ -260,7 +272,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Announce event
 			announceInterception(
-				"aggregator_onIndexView",
+				"aggregator_onFeedItemsView",
 				{ feedItems = prc.feedItems, feedItemsCount = prc.itemCount }
 			);
 
@@ -272,7 +284,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/aggregator/feeditems",
+				view = "#prc.cbTheme#/views/aggregator/index",
 				module = prc.cbThemeRecord.module
 			);
 
@@ -370,7 +382,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
-				view = "#prc.cbTheme#/views/aggregator/feeditemarchives",
+				view = "#prc.cbTheme#/views/aggregator/archives",
 				module = prc.cbThemeRecord.module
 			);
 

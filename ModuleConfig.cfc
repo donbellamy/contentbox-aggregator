@@ -62,8 +62,8 @@ component {
 			"ag_importing_taxonomies" = [],
 
 			// Global html
-			"ag_html_pre_index_display" = "",
-			"ag_html_post_index_display" = "",
+			"ag_html_pre_feed_items_display" = "",
+			"ag_html_post_feed_items_display" = "",
 			"ag_html_pre_feeds_display" = "",
 			"ag_html_post_feeds_display" = "",
 			"ag_html_pre_feed_display" = "",
@@ -138,8 +138,8 @@ component {
 				"aggregator_onFeedItemStatusUpdate",
 				"aggregator_preBlacklistedItemSave","aggregator_postBlacklistedItemSave",
 				"aggregator_preBlacklistedItemRemove","aggregator_postBlacklistedItemRemove",
-				"aggregator_onIndexView",
-				"aggregator_preIndexDisplay","aggregator_postIndexDisplay",
+				"aggregator_onFeedItemsView",
+				"aggregator_preFeedItemsDisplay","aggregator_postFeedItemsDisplay",
 				"aggregator_onFeedsView",
 				"aggregator_preFeedsDisplay","aggregator_postFeedsDisplay",
 				"aggregator_onFeedView","aggregator_onFeedNotFound",
@@ -331,14 +331,14 @@ component {
 		}
 		var newsPage = pageService.findBySlug( agSettings.ag_site_news_entrypoint );
 		if ( newsPage.isLoaded() ) {
-			newsPage.setLayout( "portal" );
+			newsPage.setLayout( "aggregator" );
 			pageService.savePage( newsPage );
 		} else {
 			newsPage.setTitle( "News" );
 			newsPage.setSlug( agSettings.ag_site_news_entrypoint );
 			newsPage.setPublishedDate( now() );
 			newsPage.setCreator( author );
-			newsPage.setLayout( "portal" );
+			newsPage.setLayout( "aggregator" );
 			newsPage.addNewContentVersion(
 				content = "News page placeholder content.",
 				changelog = "Page created by ContentBox Aggregator Module.",
@@ -348,14 +348,14 @@ component {
 		}
 		var feedsPage = pageService.findBySlug( agSettings.ag_site_feeds_entrypoint );
 		if ( feedsPage.isLoaded() ) {
-			feedsPage.setLayout("portal");
+			feedsPage.setLayout("aggregator");
 			pageService.savePage( feedsPage );
 		} else {
 			feedsPage.setTitle( "Feeds" );
 			feedsPage.setSlug( agSettings.ag_site_feeds_entrypoint );
 			feedsPage.setPublishedDate( now() );
 			feedsPage.setCreator( author );
-			feedsPage.setLayout( "portal" );
+			feedsPage.setLayout( "aggregator" );
 			feedsPage.addNewContentVersion(
 				content = "Feeds page placeholder content.",
 				changelog = "Page created by ContentBox Aggregator Module.",

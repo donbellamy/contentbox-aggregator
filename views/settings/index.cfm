@@ -730,21 +730,21 @@
 									<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
 									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 									#html.textarea(
-										name="ag_html_pre_index_display",
-										label="Before News Index:",
+										name="ag_html_pre_feed_items_display",
+										label="Before Feed Items:",
 										rows="6",
 										class="form-control",
-										value=prc.agSettings.ag_html_pre_index_display,
+										value=prc.agSettings.ag_html_pre_feed_items_display,
 										wrapper="div class=controls",
 										labelClass="control-label",
 										groupWrapper="div class=form-group"
 									)#
 									#html.textarea(
-										name="ag_html_post_index_display",
-										label="After News Index:",
+										name="ag_html_post_feed_items_display",
+										label="After Feed Items:",
 										rows="6",
 										class="form-control",
-										value=prc.agSettings.ag_html_post_index_display,
+										value=prc.agSettings.ag_html_post_feed_items_display,
 										wrapper="div class=controls",
 										labelClass="control-label",
 										groupWrapper="div class=form-group"
