@@ -98,7 +98,7 @@ component accessors="true" implements="contentbox.models.search.ISearchAdapter" 
 
 		// Render results
 		var results = controller.getRenderer().renderView(
-			view = "#cb.themeName()#/views/aggregator/search",
+			view = "#cb.themeName()#/templates/aggregator/search",
 			module = cb.themeRecord().module,
 			args = args
 		);
