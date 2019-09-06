@@ -8,7 +8,8 @@ component persistent="true"
 	table="cb_feedimport"
 	batchsize="25"
 	cachename="cbFeedImport"
-	cacheuse="read-write" {
+	cacheuse="read-write"
+	extends="contentbox.models.BaseEntity" {
 
 	/* *********************************************************************
 	**                            PROPERTIES
@@ -47,6 +48,7 @@ component persistent="true"
 
 	// M20 -> Feed
 	property name="feed"
+		notnull="true"
 		cfc="Feed"
 		fieldtype="many-to-one"
 		fkcolumn="FK_feedID"

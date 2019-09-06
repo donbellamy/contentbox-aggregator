@@ -8,7 +8,8 @@ component persistent="true"
 	table="cb_blacklisteditem"
 	batchsize="25"
 	cachename="cbBlacklistedItem"
-	cacheuse="read-write" {
+	cacheuse="read-write"
+	extends="contentbox.models.BaseEntity" {
 
 	/* *********************************************************************
 	**                            PROPERTIES
@@ -29,19 +30,13 @@ component persistent="true"
 		length="510"
 		index="idx_itemUrl";
 
-	property name="createdDate"
-		type="date"
-		ormtype="timestamp"
-		notnull="true"
-		update="false"
-		index="idx_createdDate";
-
 	/* *********************************************************************
 	**                            RELATIONSHIPS
 	********************************************************************* */
 
 	// M20 -> Feed
 	property name="feed"
+		notnull="true"
 		cfc="Feed"
 		fieldtype="many-to-one"
 		fkcolumn="FK_feedID"
