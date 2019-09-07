@@ -73,4 +73,13 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 	}
 
+	/**
+	 * Determines if a blacklisted item already exists
+	 * @uniqueId The itemUrl to check
+	 * @return Whether or not the blacklisted item exists
+	 */
+	boolean function itemExists( required string itemUrl ) {
+		return newCriteria().isEq( "itemUrl", arguments.itemUrl ).count();
+	}
+
 }

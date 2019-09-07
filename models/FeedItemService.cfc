@@ -298,4 +298,13 @@ component extends="ContentService" singleton {
 
 	}
 
+	/**
+	 * Determines if a feed item already exists
+	 * @uniqueId The unique id to check
+	 * @return Whether or not the feed item exists
+	 */
+	boolean function itemExists( required string uniqueId ) {
+		return newCriteria().isEq( "uniqueId", arguments.uniqueId ).count();
+	}
+
 }

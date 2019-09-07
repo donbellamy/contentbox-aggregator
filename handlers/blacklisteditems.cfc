@@ -84,36 +84,54 @@ component extends="baseHandler" {
 			.paramValue( "itemUrl", "" )
 			.paramValue( "feedId", "" );
 
-		// Grab the feed
+		// Grab the blacklisted item
 		var blacklistedItem = blacklistedItemService.get( rc.blacklistedItemID );
 
-		// Populate item
-		populateModel( blacklistedItem );
-		blacklistedItem.setFeed( feedService.get( rc.feedId ) );
-		if ( !val(blacklistedItem.getBlacklistedItemID()) ) blacklistedItem.setCreator( prc.oCurrentAuthor );
+		// Check to see if the item already exists
+		if ( blacklistedItem.isLoaded() || !blacklistedItemService.itemExists( rc.itemUrl ) ) {
 
-		announceInterception(
-			"aggregator_preBlacklistedItemSave",
-			{ blacklistedItem = blacklistedItem }
-		);
+			// Populate item
+			populateModel( blacklistedItem );
+			blacklistedItem.setFeed( feedService.get( rc.feedId ) );
+			if ( !blacklistedItem.isLoaded() ) blacklistedItem.setCreator( prc.oCurrentAuthor );
 
-		// Save the item
-		blacklistedItemService.save( blacklistedItem );
-
-		announceInterception(
-			"aggregator_postBlacklistedItemSave",
-			{ blacklistedItem = blacklistedItem }
-		);
-
-		if ( event.isAjax() ) {
-			var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
-			event.renderData(
-				type = "json",
-				data = data
+			announceInterception(
+				"aggregator_preBlacklistedItemSave",
+				{ blacklistedItem = blacklistedItem }
 			);
+
+			// Save the item
+			blacklistedItemService.save( blacklistedItem );
+
+			announceInterception(
+				"aggregator_postBlacklistedItemSave",
+				{ blacklistedItem = blacklistedItem }
+			);
+
+			if ( event.isAjax() ) {
+				var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
+				event.renderData(
+					type = "json",
+					data = data
+				);
+			} else {
+				cbMessagebox.info( "Blacklisted Item Saved!" );
+				setNextEvent( prc.xehBlacklistedItems );
+			}
+
 		} else {
-			cbMessagebox.info( "Blacklisted Item Saved!" );
-			setNextEvent( prc.xehBlacklistedItems );
+
+			if ( event.isAjax() ) {
+				var data = { "blacklistedItemID" = prc.blacklistedItem.getBlacklistedItemID() };
+				event.renderData(
+					type = "json",
+					data = data
+				);
+			} else {
+				cbMessagebox.info( "Blacklisted Item Saved!" );
+				setNextEvent( prc.xehBlacklistedItems );
+			}
+
 		}
 
 	}

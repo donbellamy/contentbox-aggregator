@@ -82,7 +82,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						if ( !itemBlacklisted ) {
 
 							// Check if item already exists
-							var itemExists = feedItemService.newCriteria().isEq( "uniqueId", uniqueId ).count();
+							var itemExists = feedItemService.itemExists( uniqueId );
 
 							// Doesn't exist
 							if ( !itemExists ) {
