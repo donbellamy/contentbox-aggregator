@@ -55,10 +55,11 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
+	this.pk = "blacklistedItemID";
+
 	this.constraints = {
 		"title" = { required=true, size="1..255" },
-		"itemUrl" = { required=true, type="url", size="1..255" },
-		"createdDate" = { required=true, type="date" },
+		"itemUrl" = { required=true, type="url", size="1..255" }
 	};
 
 	/**
@@ -66,7 +67,6 @@ component persistent="true"
 	 * @return BlacklistedItem
 	 */
 	BlacklistedItem function init() {
-		createdDate = now();
 		return this;
 	}
 

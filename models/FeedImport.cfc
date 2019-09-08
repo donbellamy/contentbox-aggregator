@@ -21,13 +21,6 @@ component persistent="true"
 		setter="false"
 		params="{ allocationSize=1, sequence='feedImportID_seq' }";
 
-	property name="importedDate"
-		type="date"
-		ormtype="timestamp"
-		notnull="true"
-		update="false"
-		index="idx_importedDate";
-
 	property name="importedCount"
 		notnull="true"
 		ormtype="long";
@@ -67,8 +60,9 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
+	this.pk = "feedImportID";
+
 	this.constraints = {
-		"importedDate" = { required=true, type="date" },
 		"importedCount" = { required=true, type="numeric" }
 	};
 
@@ -77,7 +71,6 @@ component persistent="true"
 	 * @return FeedImport
 	 */
 	FeedImport function init() {
-		importedDate = now();
 		importedCount = 0;
 		setMetaInfo({});
 		return this;
@@ -136,6 +129,15 @@ component persistent="true"
 	 */
 	boolean function failed() {
 		return getImportFailed();
+	}
+
+
+	/**
+	 * Gets the imported date
+	 * @return The imported date
+	 */
+	date function getImportedDate() {
+		return getCreatedDate();
 	}
 
 	/**

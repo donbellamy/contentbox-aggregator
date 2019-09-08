@@ -148,7 +148,7 @@ component persistent="true"
 	********************************************************************* */
 
 	property name="importedDate"
-		formula="select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID"
+		formula="select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID"
 		default="";
 
 	property name="isFailing"

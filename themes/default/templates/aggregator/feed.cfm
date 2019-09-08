@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-sm-7 pull-left">
 				<i class="fa fa-external-link"></i>
-				<a href="#feed.getWebsiteUrl()#" target="_blank" title="#encodeForHtmlAttribute( feed.getTitle() )#">#feed.getWebsiteUrl()#</a>
+				<a href="#feed.getWebsiteUrl()#" target="_blank" title="#encodeForHtmlAttribute( feed.getTitle() )#">#listFirst( reReplaceNoCase( feed.getWebsiteUrl(), "https?://" , "" ), "/" )#</a>
 			</div>
 			<div class="col-sm-5 pull-right text-right">
 				<i class="fa fa-rss"></i>

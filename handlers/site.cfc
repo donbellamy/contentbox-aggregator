@@ -31,6 +31,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 		}
 
+		// Do not allow site access via the module entrypoint
+		if ( reFindNoCase( "^aggregator/site", event.getCurrentRoutedUrl() ) ) {
+			relocate( url=prc.agHelper.linkNews(), addtoken=false );
+		}
+
 		// If UI export is disabled, default to html
 		if ( !prc.cbSettings.cb_content_uiexport ) {
 			rc.format = "html";
@@ -146,7 +151,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 					}
 				}
 				if ( rc.format == "json" ) {
-					data.content = dataMarshaller.marshallData( data = results, type = "json" );
+					data.content = dataMarshaller.marshallData( data=results, type="json" );
 					data.contentType = "application/json";
 					data.isBinary = false;
 				} else {
@@ -161,7 +166,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				break;
 			}
 			case "pdf": {
-				data.content = dataMarshaller.marshallData( data = data.content, type = "pdf" );
+				data.content = dataMarshaller.marshallData( data=data.content, type="pdf" );
 				data.contentType = "application/pdf";
 				data.isBinary = true;
 				break;
