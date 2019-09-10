@@ -22,11 +22,13 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 	}
 
 	/**
-	 * Grabs the categories
-	 * @return An array of all category names
+	 * Grabs the category slugs
+	 * @return An array of all category slugs
 	 */
-	array function getAllCategories() cbIgnore {
-		return categoryService.getAllNames();
+	array function getCategorySlugs() cbIgnore {
+		var c = categoryService.newCriteria();
+		return c.withProjections( property="slug" )
+			.list( sortOrder="slug asc" );
 	}
 
 }

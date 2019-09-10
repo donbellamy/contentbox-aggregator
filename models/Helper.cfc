@@ -88,6 +88,15 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Checks to see if if the current event equals site.index and a feed is present
+	 * @return True if the current event equals site.index and a feed is present, false if not
+	 */
+	boolean function isFeedSearchView() {
+		var rc = cb.getRequestCollection();
+		return ( isNewsView() AND structKeyExists( rc, "feed" ) AND len( rc.feed ) );
+	}
+
+	/**
 	 * Checks to see if the current event equals site.archives
 	 * @return True if the current event equals site.archives, false if not
 	 */
@@ -129,6 +138,23 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function getSearchTerm() {
 		return cb.getRequestContext().getValue( "q", "" );
+	}
+
+	/**
+	 * Gets the page if present in the current request
+	 * @return The page if it exists
+	 */
+	Page function getCurrentPage() {
+		var prc = cb.getPrivateRequestCollection();
+		if ( structKeyExists( prc, "page" ) ) {
+			return prc.page;
+		} else {
+			throw(
+				message = "Page not found in collection",
+				detail = "This probably means you are trying to use the page in a non-page.",
+				type = "aggregator.helper.InvalidFeedContext"
+			);
+		}
 	}
 
 	/**
@@ -611,15 +637,28 @@ component accessors="true" singleton threadSafe {
 	string function breadCrumbs( string separator=">" ) {
 		var bc = "";
 		if ( isNewsView() || isArchivesView() ) {
-			bc &= '#arguments.separator# <a href="#linkNews()#">News</a> '; //TODO: Get news page title
-		}
-		if ( isSearchView() ) {
-			var searchTerm = getSearchTerm();
-			bc &= '#arguments.separator# <a href="#linkNews()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+			var page = getCurrentPage();
+			bc &= '#arguments.separator# <a href="#linkNews()#">#page.getTitle()#</a></a> ';
 		}
 		if ( isCategoryView() ) {
 			var category = getCurrentCategory();
 			bc &= '#arguments.separator# <a href="#linkCategory( category )#">#category.getCategory()#</a> ';
+		}
+		if ( isFeedSearchView() ) {
+			var feed = getCurrentFeed();
+			if ( isCategoryView() ) {
+				bc &= '#arguments.separator# <a href="#linkCategory( category )#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
+			} else {
+				bc &= '#arguments.separator# <a href="#linkNews()#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
+			}
+		}
+		if ( isSearchView() ) {
+			var searchTerm = getSearchTerm();
+			if ( isCategoryView() ) {
+				bc &= '#arguments.separator# <a href="#linkCategory( category )#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+			} else {
+				bc &= '#arguments.separator# <a href="#linkNews()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+			}
 		}
 		if ( isArchivesView() ) {
 			var archiveDate = getCurrentArchiveDate();
@@ -629,7 +668,8 @@ component accessors="true" singleton threadSafe {
 			}
 		}
 		if ( isFeedsView() || isFeedView() ) {
-			bc &= '#arguments.separator# <a href="#linkFeeds()#">Feeds</a> '; // TODO: Get feeds page title
+			var page = getCurrentPage();
+			bc &= '#arguments.separator# <a href="#linkFeeds()#">#page.getTitle()#</a> '; // TODO: Get feeds page title
 		}
 		if ( isFeedView() ) {
 			var feed = getCurrentFeed();

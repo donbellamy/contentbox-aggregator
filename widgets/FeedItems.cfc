@@ -35,7 +35,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getAllCategories
+	 * @category.multiOptionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order

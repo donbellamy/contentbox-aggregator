@@ -216,6 +216,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "q", "" )
 			.paramValue( "category", "" )
+			.paramValue( "feed", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the news page
@@ -241,24 +242,39 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
-			prc.pagingLink = prc.agHelper.linkNews() & "?page=@page@";
-
-			// Search
-			if ( len( trim( rc.q ) ) ) {
-				prc.pagingLink &= "&q=" & rc.q;
-				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
-			}
+			prc.pagingLink = prc.agHelper.linkNews();
 
 			// Category
 			if ( len( trim( rc.category ) ) ) {
 				prc.category = categoryService.findBySlug( rc.category );
 				if ( !isNull( prc.category ) ) {
-					prc.pagingLink = prc.agHelper.linkNews() & "/category/#rc.category#/?page=@page@";
+					prc.pagingLink &= "/category/#rc.category#/";
 					title = " - " & prc.category.getCategory() & title;
 				} else {
 					notFound( argumentCollection=arguments );
 					return;
 				}
+			}
+
+			// Paging
+			prc.pagingLink &= "?page=@page@";
+
+			// Feed
+			if ( len( trim( rc.feed ) ) ) {
+				prc.feed = feedService.findBySlug( rc.feed );
+				if ( !isNull( prc.feed ) ) {
+					prc.pagingLink &= "&feed=" & rc.feed;
+					title = " - " & prc.feed.getTitle() & title;
+				} else {
+					notFound( argumentCollection=arguments );
+					return;
+				}
+			}
+
+			// Search
+			if ( len( trim( rc.q ) ) ) {
+				prc.pagingLink &= "&q=" & rc.q;
+				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
 			// Set title
@@ -268,6 +284,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var results = feedItemService.getPublishedFeedItems(
 				searchTerm = rc.q,
 				category = rc.category,
+				feed = rc.feed,
 				max = prc.agSettings.ag_site_paging_max_items,
 				offset = prc.pagingBoundaries.startRow - 1,
 				includeEntries = prc.agSettings.ag_site_display_entries

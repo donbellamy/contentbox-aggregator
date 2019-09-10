@@ -29,7 +29,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.options 1,2,3,4,5
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getAllCategories
+	 * @category.multiOptionsUDF getCategorySlugs
 	 * @useDropdown.label Use Dropdown?
 	 * @useDropdown.hint Display as a dropdown or a list, default is list.
 	 * @showItemCount.label Show Item Count?

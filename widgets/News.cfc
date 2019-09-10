@@ -32,7 +32,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getAllCategories
+	 * @category.multiOptionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
@@ -40,8 +40,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	 * @includeEntries.label Include Entries?
-	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
 	 * @return The news widget html
 	 */
 	string function renderIt(
@@ -51,8 +49,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category="",
 		string searchTerm="",
 		string sortOrder="Most Recent",
-		boolean openNewWindow=false,
-		boolean includeEntries=ag.setting("ag_site_display_entries")  ) {
+		boolean openNewWindow=false ) {
 
 		// Sort order
 		switch ( arguments.sortOrder ) {
@@ -77,17 +74,35 @@ component extends="aggregator.models.BaseWidget" singleton {
 		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( ag.setting("ag_site_paging_max_items") );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = ag.linkNews() & "?page=@page@";
+		prc.pagingLink = ag.linkNews();
+
+		// Category
+		if ( len( trim( arguments.category ) ) ) {
+			prc.pagingLink &= "/category/#arguments.category#/";
+		}
+
+		// Paging
+		prc.pagingLink &= "?page=@page@";
+
+		// Feed
+		if ( len( trim( arguments.feed ) ) ) {
+			prc.pagingLink &= "&feed=" & arguments.feed;
+		}
+
+		// Search
+		if ( len( trim( arguments.searchTerm ) ) ) {
+			prc.pagingLink &= "&q=" & arguments.searchTerm;
+		}
 
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
-			category = arguments.category,
 			searchTerm = arguments.searchTerm,
+			category = arguments.category,
 			feed = arguments.feed,
 			sortOrder = arguments.sortOrder,
 			max = ag.setting("ag_site_paging_max_items"),
 			offset = prc.pagingBoundaries.startRow - 1,
-			includeEntries  =arguments.includeEntries
+			includeEntries = ag.setting("ag_site_display_entries")
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
