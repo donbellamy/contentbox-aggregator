@@ -669,7 +669,7 @@ component accessors="true" singleton threadSafe {
 		}
 		if ( isFeedsView() || isFeedView() ) {
 			var page = getCurrentPage();
-			bc &= '#arguments.separator# <a href="#linkFeeds()#">#page.getTitle()#</a> '; // TODO: Get feeds page title
+			bc &= '#arguments.separator# <a href="#linkFeeds()#">#page.getTitle()#</a> ';
 		}
 		if ( isFeedView() ) {
 			var feed = getCurrentFeed();

@@ -27,8 +27,10 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 	 */
 	array function getCategorySlugs() cbIgnore {
 		var c = categoryService.newCriteria();
-		return c.withProjections( property="slug" )
+		var slugs =  c.withProjections( property="slug" )
 			.list( sortOrder="slug asc" );
+		arrayPrepend( slugs, "" );
+		return slugs;
 	}
 
 }

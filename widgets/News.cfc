@@ -51,17 +51,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string sortOrder="Most Recent",
 		boolean openNewWindow=false ) {
 
-		// Sort order
-		switch ( arguments.sortOrder ) {
-			case "Most Popular": {
-				arguments.sortOrder = "numberOfHits DESC";
-				break;
-			}
-			default : {
-				arguments.sortOrder = "publishedDate DESC";
-			}
-		}
-
 		// Grab the event
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
@@ -92,6 +81,18 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Search
 		if ( len( trim( arguments.searchTerm ) ) ) {
 			prc.pagingLink &= "&q=" & arguments.searchTerm;
+		}
+
+		// Sort order
+		switch ( arguments.sortOrder ) {
+			case "Most Popular": {
+				prc.pagingLink &= "&sb=hits";
+				arguments.sortOrder = "numberOfHits DESC";
+				break;
+			}
+			default : {
+				arguments.sortOrder = "publishedDate DESC";
+			}
 		}
 
 		// Grab the results

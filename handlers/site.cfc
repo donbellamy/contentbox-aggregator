@@ -217,6 +217,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "q", "" )
 			.paramValue( "category", "" )
 			.paramValue( "feed", "" )
+			.paramValue( "sb", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the news page
@@ -277,6 +278,15 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
+			// Sort
+			var sortOrder = "publishedDate DESC";
+			if ( len( trim( rc.sb ) ) ) {
+				if ( rc.sb == "hits" ) {
+					prc.pagingLink &= "&sb=" & rc.sb;
+					sortOrder = "numberOfHits DESC";
+				}
+			}
+
 			// Set title
 			title = prc.page.getTitle() & title;
 
@@ -285,6 +295,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				searchTerm = rc.q,
 				category = rc.category,
 				feed = rc.feed,
+				sortOrder = sortOrder,
 				max = prc.agSettings.ag_site_paging_max_items,
 				offset = prc.pagingBoundaries.startRow - 1,
 				includeEntries = prc.agSettings.ag_site_display_entries
