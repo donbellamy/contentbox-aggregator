@@ -225,11 +225,26 @@ component persistent="true"
 	}
 
 	/**
+	 * Gets the latest successful feed import
+	 * @return The latest successful feed import if exists, null if not
+	 */
+	any function getLatestSuccessfulFeedImport() {
+		if ( arrayLen( getFeedImports() ) ) {
+			for ( var feedImport IN getFeedImports() ) {
+				if ( !feedImport.failed() ) {
+					return feedImport;
+				}
+			}
+		}
+		return javaCast( "null", "" );
+	}
+
+	/**
 	 * Gets the site url from the latest feed import
 	 * @return The siteUrl if defined, the feed url if not
 	 */
 	string function getWebsiteUrl() {
-		var feedImport = getLatestFeedImport();
+		var feedImport = getLatestSuccessfulFeedImport();
 		if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
 			return feedImport.getWebsiteUrl();
 		}

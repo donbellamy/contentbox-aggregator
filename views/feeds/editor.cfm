@@ -17,6 +17,7 @@
 		</cfif>
 		<cfif prc.feed.isLoaded() >
 			<li><a href="#prc.agHelper.linkFeed( prc.feed )#" target="_blank"><i class="fa fa-eye"></i> Open In Site</a></li>
+			<li><a href="#prc.feed.getWebsiteUrl()#" target="_blank"><i class="fa fa-external-link"></i> Visit Website/Feed</a></li>
 		</cfif>
 	</ul>
 </div>

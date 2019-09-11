@@ -113,6 +113,7 @@
 								<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getLatestFeedImport().getFeedImportID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
+							<li><a href="#feed.getWebsiteUrl()#" target="_blank"><i class="fa fa-external-link fa-lg"></i> Visit Website/Feed</a></li>
 						</ul>
 					</div>
 				</td>

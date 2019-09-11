@@ -1,6 +1,10 @@
 <cfparam name="args" default="#structNew()#" />
+<cfparam name="args.title" default="" />
+<cfparam name="args.titleLevel" default="2" />
 <cfoutput>
-<!--- TODO: title --->
+<cfif len( args.title ) >
+	<h#args.titleLevel#>#args.title#</h#args.titleLevel#>
+</cfif>
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
 	#ag.quickFeedItems( args=args )#

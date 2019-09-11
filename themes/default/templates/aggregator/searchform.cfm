@@ -1,3 +1,4 @@
+<cfparam name="args" default="#structNew()#" />
 <cfparam name="args.title" default="" />
 <cfparam name="args.titleLevel" default="2" />
 <cfparam name="args.q" default="" />

@@ -1,3 +1,4 @@
+<cfparam name="args" default="#structNew()#" />
 <cfoutput>
 <div class="post" id="feed_#feed.getContentID()#">
 	<div class="post-title">
