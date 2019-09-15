@@ -122,8 +122,8 @@ component extends="contentHandler" {
 			value = ""
 		});
 		prc.featuredImageOptions = [
-			{ name = "Display the default featured image.", value = "default" },
 			{ name = "Display the parent feed's featured image.", value = "feed" },
+			{ name = "Display the default featured image.", value = "default" },
 			{ name = "Do not display a featured image.", value = "none" }
 		];
 		arrayPrepend( prc.featuredImageOptions, {
@@ -671,6 +671,9 @@ component extends="contentHandler" {
 
 		// Check key, contentID and authorID
 		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
+
+			// Set timeout
+			setting requestTimeout = "999999";
 
 			// Grab feed and author
 			var feed = feedService.get( rc.contentID, false );

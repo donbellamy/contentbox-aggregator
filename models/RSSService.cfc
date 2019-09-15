@@ -24,7 +24,6 @@ component singleton {
 
 	/**
 	 * Gets the feed items feed from cache or build
-	 * @includeEntries Whether or not to include entries in the rss feed
 	 * @category The category slug to filter on
 	 * @slug The feed slug to filter on
 	 * @return The feed xml string

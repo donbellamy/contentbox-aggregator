@@ -327,7 +327,7 @@ Archives Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Archives.html#buildDropDown()">buildDropDown</A></strong>([any archives], [any showItemCount])
+			<strong><a href="Archives.html#buildDropDown()">buildDropDown</A></strong>([any archives], [any showItemCount], [any monthLimit])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the drop down menu.
@@ -342,7 +342,7 @@ Archives Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Archives.html#buildList()">buildList</A></strong>([any archives], [any showItemCount])
+			<strong><a href="Archives.html#buildList()">buildList</A></strong>([any archives], [any showItemCount], [any monthLimit])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the list menu.
@@ -357,7 +357,7 @@ Archives Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Archives.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])
+			<strong><a href="Archives.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'], [numeric monthLimit='12'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed item archives widget.
@@ -443,7 +443,25 @@ Archives Widget</p>
 				
 					
 					
+					
+						
+					
+					
+					
+					
 				
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
 					
 					
 				
@@ -476,7 +494,7 @@ Archives Widget</p>
 				
 
 				
-					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getAllCategories()">getAllCategories</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>
+					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getCategorySlugs()">getCategorySlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#getThemeService()">getThemeService</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#setThemeService()">setThemeService</a>
 				
 			</td>
 		</tr>
@@ -1312,7 +1330,7 @@ Archives Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildDropDown</strong>([any archives], [any showItemCount])</kbd>
+	<kbd>private string <strong>buildDropDown</strong>([any archives], [any showItemCount], [any monthLimit])</kbd>
 
 	<br><br>
 
@@ -1338,6 +1356,8 @@ Archives Widget</p>
 		
 		<dd><code>showItemCount</code></dd>
 		
+		<dd><code>monthLimit</code></dd>
+		
 		</dl>
 	
 
@@ -1360,7 +1380,7 @@ Archives Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildList</strong>([any archives], [any showItemCount])</kbd>
+	<kbd>private string <strong>buildList</strong>([any archives], [any showItemCount], [any monthLimit])</kbd>
 
 	<br><br>
 
@@ -1386,6 +1406,8 @@ Archives Widget</p>
 		
 		<dd><code>showItemCount</code></dd>
 		
+		<dd><code>monthLimit</code></dd>
+		
 		</dl>
 	
 
@@ -1408,7 +1430,7 @@ Archives Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'], [numeric monthLimit='12'])</kbd>
 
 	<br><br>
 
@@ -1450,7 +1472,7 @@ Archives Widget</p>
 		
 		<dd><code>showItemCount</code> - Show item counts or not, default is true.</dd>
 		
-		<dd><code>includeEntries</code> - Include entries in the item count or not, defaults to the global setting.</dd>
+		<dd><code>monthLimit</code> - The number of months to display in the widget, enter 0 for unlimited.</dd>
 		
 		</dl>
 	

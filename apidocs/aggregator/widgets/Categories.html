@@ -327,7 +327,7 @@ Categories Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#buildDropDown()">buildDropDown</A></strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])
+			<strong><a href="Categories.html#buildDropDown()">buildDropDown</A></strong>([any categories], [any showItemCount], [any categoryFilter])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the drop down menu.
@@ -342,7 +342,7 @@ Categories Widget</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#buildList()">buildList</A></strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])
+			<strong><a href="Categories.html#buildList()">buildList</A></strong>([any categories], [any showItemCount], [any categoryFilter])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the list menu.
@@ -357,7 +357,7 @@ Categories Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])
+			<strong><a href="Categories.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed item categories widget.
@@ -443,7 +443,25 @@ Categories Widget</p>
 				
 					
 					
+					
+						
+					
+					
+					
+					
 				
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
 					
 					
 				
@@ -476,7 +494,7 @@ Categories Widget</p>
 				
 
 				
-					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getAllCategories()">getAllCategories</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>
+					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getCategorySlugs()">getCategorySlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#getThemeService()">getThemeService</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#setThemeService()">setThemeService</a>
 				
 			</td>
 		</tr>
@@ -1312,7 +1330,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildDropDown</strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])</kbd>
+	<kbd>private string <strong>buildDropDown</strong>([any categories], [any showItemCount], [any categoryFilter])</kbd>
 
 	<br><br>
 
@@ -1340,8 +1358,6 @@ Categories Widget</p>
 		
 		<dd><code>categoryFilter</code></dd>
 		
-		<dd><code>includeEntries</code></dd>
-		
 		</dl>
 	
 
@@ -1359,7 +1375,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>private string <strong>buildList</strong>([any categories], [any showItemCount], [any categoryFilter], [any includeEntries])</kbd>
+	<kbd>private string <strong>buildList</strong>([any categories], [any showItemCount], [any categoryFilter])</kbd>
 
 	<br><br>
 
@@ -1387,8 +1403,6 @@ Categories Widget</p>
 		
 		<dd><code>categoryFilter</code></dd>
 		
-		<dd><code>includeEntries</code></dd>
-		
 		</dl>
 	
 
@@ -1406,7 +1420,7 @@ Categories Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'], [boolean includeEntries='[runtime expression]'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [string category=''], [boolean useDropdown='false'], [boolean showItemCount='true'])</kbd>
 
 	<br><br>
 
@@ -1449,8 +1463,6 @@ Categories Widget</p>
 		<dd><code>useDropdown</code> - Display as a dropdown or a list, default is list.</dd>
 		
 		<dd><code>showItemCount</code> - Show item counts or not, default is true.</dd>
-		
-		<dd><code>includeEntries</code> - Include entries in the item count or not, defaults to the global setting.</dd>
 		
 		</dl>
 	

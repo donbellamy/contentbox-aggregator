@@ -43,8 +43,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	 * @includeEntries.label Include Entries?
-	 * @includeEntries.hint Include entries or not, defaults to the global setting.
 	 * @return The feed items widget html
 	 */
 	string function renderIt(
@@ -55,8 +53,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category="",
 		string searchTerm="",
 		string sortOrder="Most Recent",
-		boolean openNewWindow=false,
-		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
+		boolean openNewWindow=false ) {
 
 		// Sort order
 		switch ( arguments.sortOrder ) {
@@ -76,7 +73,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			feed = arguments.feed,
 			sortOrder = arguments.sortOrder,
 			max = arguments.max,
-			includeEntries = arguments.includeEntries
+			includeEntries = ag.setting("ag_site_display_entries")
 		);
 
 		// iteration cap

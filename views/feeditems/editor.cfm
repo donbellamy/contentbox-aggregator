@@ -262,7 +262,7 @@
 							<div class="panel-body">
 								<div class="form-group text-center">
 									<a class="btn btn-primary" href="javascript:loadAssetChooser( 'featuredImageCallback' )">Select Image</a>
-									<div class="<cfif !len( prc.feedItem.getFeaturedImageURL() ) >hide</cfif> form-group" id="featuredImageControls">
+									<div class="<cfif !len( prc.feedItem.getFeaturedImageURL( getAltImageUrl=false ) ) >hide</cfif> form-group" id="featuredImageControls">
 										<a class="btn btn-danger" href="javascript:cancelFeaturedImage()">Clear Image</a>
 										#html.textField(
 											name="featuredImage",
@@ -275,7 +275,7 @@
 											bind=prc.feedItem
 										)#
 										<div class="margin10">
-											<cfif len( prc.feedItem.getFeaturedImageURL() ) >
+											<cfif len( prc.feedItem.getFeaturedImageURL( getAltImageUrl=false ) ) >
 												<img id="featuredImagePreview" src="#prc.feedItem.getFeaturedImageURL()#" class="img-thumbnail" height="75">
 											<cfelse>
 												<img id="featuredImagePreview" class="img-thumbnail" height="75">

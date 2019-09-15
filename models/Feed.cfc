@@ -400,6 +400,7 @@ component persistent="true"
 	 */
 	string function getDisplayImportedDate( string dateFormat="dd mmm yyyy", string timeFormat="hh:mm tt" ) {
 		var importedDate = getImportedDate();
+		if ( isNull( importedDate ) ) importedDate = "";
 		return dateFormat( importedDate, arguments.dateFormat ) & " " & timeFormat( importedDate, arguments.timeFormat );
 	}
 

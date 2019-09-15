@@ -746,7 +746,7 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">formula = select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
+				<li class="label label-default label-annotations">formula = select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
 				
 			
 				
@@ -2367,6 +2367,21 @@ Feed Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the latest feed import.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getLatestSuccessfulFeedImport()">getLatestSuccessfulFeedImport</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the latest successful feed import.
 			
 		</td>
 	</tr>
@@ -5142,7 +5157,7 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>formula</code> - select max(fi.importedDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
+			<dd><code>formula</code> - select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
 			
 		
 			
@@ -7096,6 +7111,45 @@ Feed Model</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The latest feed import if exists, null if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getLatestSuccessfulFeedImport()"><!-- --></a>
+	<h3>
+		getLatestSuccessfulFeedImport
+		
+	</h3>
+
+	<kbd>public any <strong>getLatestSuccessfulFeedImport</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the latest successful feed import</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The latest successful feed import if exists, null if not</dd>
 		</dl>
 	
 

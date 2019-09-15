@@ -144,10 +144,28 @@ Class
 	
 	
 
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
 
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
-    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.FeedImport
+    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntityMethods
+      <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntity
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.FeedImport
 </pre>
 
 
@@ -331,6 +349,73 @@ FeedImport Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>date</code>
+		</td>
+		<td>
+			<strong><a href="FeedImport.html#createdDate()">createdDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">update = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_createDate</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
@@ -356,6 +441,10 @@ FeedImport Model</p>
 			
 				
 				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
 				
 			
 				
@@ -494,73 +583,6 @@ FeedImport Model</p>
 			
 				
 				<li class="label label-default label-annotations">ormtype = long</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>date</code>
-		</td>
-		<td>
-			<strong><a href="FeedImport.html#importedDate()">importedDate</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">notnull = true</li>
-				
-			
-				
-				<li class="label label-default label-annotations">ormtype = timestamp</li>
-				
-			
-				
-				<li class="label label-default label-annotations">update = false</li>
-				
-			
-				
-				<li class="label label-default label-annotations">index = idx_importedDate</li>
 				
 			
 				
@@ -734,6 +756,79 @@ FeedImport Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="FeedImport.html#isDeleted()">isDeleted</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">dbdefault = 0</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_deleted</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">sqltype = bit</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>false</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="FeedImport.html#metaInfo()">metaInfo</A></strong>
 			<br>
 			
@@ -760,6 +855,69 @@ FeedImport Model</p>
 			
 				
 				<li class="label label-default label-annotations">ormtype = text</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>date</code>
+		</td>
+		<td>
+			<strong><a href="FeedImport.html#modifiedDate()">modifiedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_modifiedDate</li>
 				
 			
 				
@@ -902,11 +1060,13 @@ FeedImport Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>string</code>
+			<code>aggregator.models.datetime</code>
 		</td>
 		<td>
 			<strong><a href="FeedImport.html#getImportedDate()">getImportedDate</A></strong>()
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the imported date.
 			
 		</td>
 	</tr>
@@ -1041,19 +1201,6 @@ FeedImport Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedImport.html#setImportedDate()">setImportedDate</A></strong>(date importedDate)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
 			<strong><a href="FeedImport.html#setImporter()">setImporter</A></strong>(any importer)
 			<br>
 			
@@ -1094,6 +1241,163 @@ FeedImport Model</p>
 
 <a name="inherited_methods"><!-- --></a>
 
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntity"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntity</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntity.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#setModifiedDate()">setModifiedDate</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntityMethods"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntityMethods</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntityMethods.html#getBaseMemento()">getBaseMemento</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayCreatedDate()">getDisplayCreatedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayModifiedDate()">getDisplayModifiedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preInsert()">preInsert</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preUpdate()">preUpdate</a>
+				
+			</td>
+		</tr>
+	</table>
 
 	
 
@@ -1161,6 +1465,66 @@ FeedImport Model</p>
 
 	
 		
+		<a name="createdDate()"><!-- --></a>
+		<h3>createdDate</h3>
+
+		<kbd>
+			property date
+			<strong>createdDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>update</code> - false</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_createDate</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="feed()"><!-- --></a>
 		<h3>feed</h3>
 
@@ -1194,6 +1558,10 @@ FeedImport Model</p>
 		
 			
 			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
 			
 		
 			
@@ -1318,66 +1686,6 @@ FeedImport Model</p>
 		
 			
 			<dd><code>ormtype</code> - long</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="importedDate()"><!-- --></a>
-		<h3>importedDate</h3>
-
-		<kbd>
-			property date
-			<strong>importedDate</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>notnull</code> - true</dd>
-			
-		
-			
-			<dd><code>ormtype</code> - timestamp</dd>
-			
-		
-			
-			<dd><code>update</code> - false</dd>
-			
-		
-			
-			<dd><code>index</code> - idx_importedDate</dd>
 			
 		
 			
@@ -1519,6 +1827,72 @@ FeedImport Model</p>
 		<hr>
 	
 		
+		<a name="isDeleted()"><!-- --></a>
+		<h3>isDeleted</h3>
+
+		<kbd>
+			property any
+			<strong>isDeleted</strong>
+			
+			= [false]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>dbdefault</code> - 0</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_deleted</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>sqltype</code> - bit</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="metaInfo()"><!-- --></a>
 		<h3>metaInfo</h3>
 
@@ -1556,6 +1930,62 @@ FeedImport Model</p>
 		
 			
 			<dd><code>ormtype</code> - text</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="modifiedDate()"><!-- --></a>
+		<h3>modifiedDate</h3>
+
+		<kbd>
+			property date
+			<strong>modifiedDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_modifiedDate</dd>
 			
 		
 			
@@ -1781,11 +2211,13 @@ FeedImport Model</p>
 		
 	</h3>
 
-	<kbd>public string <strong>getImportedDate</strong>()</kbd>
+	<kbd>public aggregator.models.datetime <strong>getImportedDate</strong>()</kbd>
 
 	<br><br>
 
 	
+		<p>Gets the imported date</p>
+	
 
 	
 
@@ -1799,6 +2231,11 @@ FeedImport Model</p>
 
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The imported date</dd>
+		</dl>
 	
 
 	
@@ -2132,45 +2569,6 @@ FeedImport Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>importedCount</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setImportedDate()"><!-- --></a>
-	<h3>
-		setImportedDate
-		
-	</h3>
-
-	<kbd>public any <strong>setImportedDate</strong>(date importedDate)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>importedDate</code></dd>
 		
 		</dl>
 	

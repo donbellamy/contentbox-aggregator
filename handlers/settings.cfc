@@ -57,8 +57,8 @@ component extends="baseHandler" {
 			{ name = "Display the entire feed item within the site.", value = "display" }
 		];
 		prc.featuredImageOptions = [
-			{ name = "Display the default featured image.", value = "default" },
 			{ name = "Display the parent feed's featured image.", value = "feed" },
+			{ name = "Display the default featured image.", value = "default" },
 			{ name = "Do not display a featured image.", value = "none" }
 		];
 		prc.cacheNames = cachebox.getCacheNames();

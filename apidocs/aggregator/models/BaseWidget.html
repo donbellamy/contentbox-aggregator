@@ -486,6 +486,61 @@ BaseWidget Model</p>
 		</td>
 	</tr>
 	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseWidget.html#themeService()">themeService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = themeService@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
 	</tr>
 </table>
 
@@ -549,10 +604,10 @@ BaseWidget Model</p>
 			<code>array</code>
 		</td>
 		<td>
-			<strong><a href="BaseWidget.html#getAllCategories()">getAllCategories</A></strong>()
+			<strong><a href="BaseWidget.html#getCategorySlugs()">getCategorySlugs</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the categories.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grabs the category slugs.
 			
 		</td>
 	</tr>
@@ -615,6 +670,19 @@ BaseWidget Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="BaseWidget.html#getThemeService()">getThemeService</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
@@ -660,6 +728,19 @@ BaseWidget Model</p>
 		</td>
 		<td>
 			<strong><a href="BaseWidget.html#setFeedService()">setFeedService</A></strong>(any feedService)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BaseWidget.html#setThemeService()">setThemeService</A></strong>(any themeService)
 			<br>
 			
 		</td>
@@ -1629,6 +1710,54 @@ BaseWidget Model</p>
 
 		<hr>
 	
+		
+		<a name="themeService()"><!-- --></a>
+		<h3>themeService</h3>
+
+		<kbd>
+			property any
+			<strong>themeService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - themeService@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
 
 
 
@@ -1683,18 +1812,18 @@ BaseWidget Model</p>
 	<hr>
 
 	
-	<a name="getAllCategories()"><!-- --></a>
+	<a name="getCategorySlugs()"><!-- --></a>
 	<h3>
-		getAllCategories
+		getCategorySlugs
 		
 	</h3>
 
-	<kbd>public array <strong>getAllCategories</strong>()</kbd>
+	<kbd>public array <strong>getCategorySlugs</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Grabs the categories</p>
+		<p>Grabs the category slugs</p>
 	
 
 	
@@ -1712,7 +1841,7 @@ BaseWidget Model</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>An array of all category names</dd>
+			<dd>An array of all category slugs</dd>
 		</dl>
 	
 
@@ -1857,6 +1986,38 @@ BaseWidget Model</p>
 			</code>
 			</dd>
 		</dl>
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getThemeService()"><!-- --></a>
+	<h3>
+		getThemeService
+		
+	</h3>
+
+	<kbd>public string <strong>getThemeService</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
 	
 
 	
@@ -2020,6 +2181,45 @@ BaseWidget Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>feedService</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setThemeService()"><!-- --></a>
+	<h3>
+		setThemeService
+		
+	</h3>
+
+	<kbd>public any <strong>setThemeService</strong>(any themeService)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>themeService</code></dd>
 		
 		</dl>
 	

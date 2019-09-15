@@ -144,10 +144,28 @@ Class
 	
 	
 
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
 
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
-    <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BlacklistedItem
+    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntityMethods
+      <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntity
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.BlacklistedItem
 </pre>
 
 
@@ -434,7 +452,7 @@ BlacklistedItem Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">index = idx_createdDate</li>
+				<li class="label label-default label-annotations">index = idx_createDate</li>
 				
 			
 				
@@ -568,6 +586,10 @@ BlacklistedItem Model</p>
 				
 			
 				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
 			
 				
 			
@@ -589,6 +611,79 @@ BlacklistedItem Model</p>
 
 		</td>
 		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#isDeleted()">isDeleted</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">dbdefault = 0</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_deleted</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">sqltype = bit</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>false</code>
 			
 		</td>
 		<td align="right" valign="top" width="1%">
@@ -640,6 +735,69 @@ BlacklistedItem Model</p>
 			
 				
 				<li class="label label-default label-annotations">length = 510</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>date</code>
+		</td>
+		<td>
+			<strong><a href="BlacklistedItem.html#modifiedDate()">modifiedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_modifiedDate</li>
 				
 			
 				
@@ -788,19 +946,6 @@ BlacklistedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#getCreatedDate()">getCreatedDate</A></strong>()
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
 			<strong><a href="BlacklistedItem.html#getCreator()">getCreator</A></strong>()
 			<br>
 			
@@ -894,19 +1039,6 @@ BlacklistedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="BlacklistedItem.html#setCreatedDate()">setCreatedDate</A></strong>(date createdDate)
-			<br>
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
 			<strong><a href="BlacklistedItem.html#setCreator()">setCreator</A></strong>(any creator)
 			<br>
 			
@@ -973,6 +1105,157 @@ BlacklistedItem Model</p>
 
 <a name="inherited_methods"><!-- --></a>
 
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntity"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntity</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntity.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#setModifiedDate()">setModifiedDate</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntityMethods"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntityMethods</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntityMethods.html#getBaseMemento()">getBaseMemento</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayModifiedDate()">getDisplayModifiedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preInsert()">preInsert</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preUpdate()">preUpdate</a>
+				
+			</td>
+		</tr>
+	</table>
 
 	
 
@@ -1144,7 +1427,7 @@ BlacklistedItem Model</p>
 			
 		
 			
-			<dd><code>index</code> - idx_createdDate</dd>
+			<dd><code>index</code> - idx_createDate</dd>
 			
 		
 			
@@ -1264,6 +1547,10 @@ BlacklistedItem Model</p>
 			
 		
 			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
 		
 			
 		
@@ -1281,6 +1568,72 @@ BlacklistedItem Model</p>
 		
 			
 			<dd><code>lazy</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="isDeleted()"><!-- --></a>
+		<h3>isDeleted</h3>
+
+		<kbd>
+			property any
+			<strong>isDeleted</strong>
+			
+			= [false]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>dbdefault</code> - 0</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_deleted</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>sqltype</code> - bit</dd>
 			
 		
 		</dl>
@@ -1329,6 +1682,62 @@ BlacklistedItem Model</p>
 		
 			
 			<dd><code>length</code> - 510</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="modifiedDate()"><!-- --></a>
+		<h3>modifiedDate</h3>
+
+		<kbd>
+			property date
+			<strong>modifiedDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_modifiedDate</dd>
 			
 		
 			
@@ -1449,38 +1858,6 @@ BlacklistedItem Model</p>
 	<hr>
 
 	
-	<a name="getCreatedDate()"><!-- --></a>
-	<h3>
-		getCreatedDate
-		
-	</h3>
-
-	<kbd>public string <strong>getCreatedDate</strong>()</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
 	<a name="getCreator()"><!-- --></a>
 	<h3>
 		getCreator
@@ -1535,6 +1912,18 @@ BlacklistedItem Model</p>
 	
 
 	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../contentbox/models/BaseEntityMethods.html#getDisplayCreatedDate()">getDisplayCreatedDate</a></code>
+			in class
+			<code>
+				contentbox.models.BaseEntityMethods
+			</code>
+			</dd>
+		</dl>
 	
 
 	
@@ -1723,45 +2112,6 @@ BlacklistedItem Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>feed</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="setCreatedDate()"><!-- --></a>
-	<h3>
-		setCreatedDate
-		
-	</h3>
-
-	<kbd>public any <strong>setCreatedDate</strong>(date createdDate)</kbd>
-
-	<br><br>
-
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>createdDate</code></dd>
 		
 		</dl>
 	

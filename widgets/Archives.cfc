@@ -31,8 +31,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @useDropdown.hint Display as a dropdown or a list, default is list.
 	 * @showItemCount.label Show Item Count?
 	 * @showItemCount.hint Show item counts or not, default is true.
-	 * @includeEntries.label Include Entries?
-	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
+	 * @monthLimit.label Number of months displayed
+	 * @monthLimit.hint The number of months to display in the widget, enter 0 for unlimited.
 	 * @return The feed item archives widget html
 	 */
 	string function renderIt(
@@ -40,10 +40,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric titleLevel=2,
 		boolean useDropdown=false,
 		boolean showItemCount=true,
-		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
+		numeric monthLimit=12 ) {
 
 		// Grab the archives
-		var archives = feedItemService.getArchiveReport( arguments.includeEntries );
+		var archives = feedItemService.getArchiveReport( includeEntries=ag.setting("ag_site_display_entries") );
 
 		// Set return html
 		var html = "";
@@ -55,10 +55,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Dropdown
 		if ( arguments.useDropdown ) {
-			html &= buildDropDown( archives, arguments.showItemCount );
+			html &= buildDropDown( archives, arguments.showItemCount, arguments.monthLimit );
 		// List
 		} else {
-			html &= buildList( archives, arguments.showItemCount );
+			html &= buildList( archives, arguments.showItemCount, arguments.monthLimit );
 		}
 
 		return html;
@@ -71,7 +71,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * Builds the drop down menu
 	 * @return The drop down menu html
 	 */
-	private string function buildDropDown( archives, showItemCount ) {
+	private string function buildDropDown( archives, showItemCount, monthLimit ) {
 
 		// Set return html
 		var html = "";
@@ -87,6 +87,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 				html &= " (#arguments.archives[x]['count']#)";
 			}
 			html &= "</option>";
+			if ( arguments.monthLimit && x == arguments.monthLimit ) {
+				break;
+			}
 		}
 
 		// Select end
@@ -100,7 +103,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * Builds the list menu
 	 * @return The list menu html
 	 */
-	private string function buildList( archives, showItemCount ) {
+	private string function buildList( archives, showItemCount, monthLimit ) {
 
 		// Set return html
 		var html = "";
@@ -116,6 +119,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 				html &= " (#arguments.archives[x]['count']#)";
 			}
 			html &= "</a></li>";
+			if ( arguments.monthLimit && x == arguments.monthLimit ) {
+				break;
+			}
 		}
 
 		// List end

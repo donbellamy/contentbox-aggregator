@@ -53,7 +53,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			var remoteFeed = feedReader.retrieveFeed( arguments.feed.getFeedUrl() );
 
 			// Check for items in feed
-			if ( arrayLen( remoteFeed.items ) ) {
+			if ( structKeyExists( remoteFeed, "items" ) && arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
 				var itemStatus = len( arguments.feed.getItemStatus() ) ? arguments.feed.getItemStatus() : settings.ag_importing_item_status;
@@ -192,7 +192,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														var imageUrl = isSimpleValue( images[idx] ) ? images[idx] : images[idx].attr("src");
 
 														// Grab the image
-														var result = new http( url=imageUrl, method="GET" ).send().getPrefix();
+														var result = new http( url=imageUrl, method="GET", timeout=90 ).send().getPrefix();
 
 														// Check for error and valid image
 														if ( result.status_code == "200" && structKeyExists( mimeTypes, result.mimeType ) ) {

@@ -30,7 +30,7 @@ component {
 			"ag_site_feeds_entrypoint" = "feeds",
 			"ag_site_display_entries" = "false",
 			"ag_site_item_link_behavior" = "forward",
-			"ag_site_item_featured_image_behavior" = "default",
+			"ag_site_item_featured_image_behavior" = "feed",
 			"ag_site_item_featured_image_default" = "",
 			"ag_site_item_featured_image_default_url" = "",
 			"ag_site_paging_max_items" = "20",

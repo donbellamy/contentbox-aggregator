@@ -327,7 +327,7 @@ Feed Items Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="FeedItems.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])
+			<strong><a href="FeedItems.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed items widget.
@@ -413,7 +413,25 @@ Feed Items Widget</p>
 				
 					
 					
+					
+						
+					
+					
+					
+					
 				
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
 					
 					
 				
@@ -446,7 +464,7 @@ Feed Items Widget</p>
 				
 
 				
-					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getAllCategories()">getAllCategories</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>
+					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getCategorySlugs()">getCategorySlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#getThemeService()">getThemeService</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#setThemeService()">setThemeService</a>
 				
 			</td>
 		</tr>
@@ -1282,7 +1300,7 @@ Feed Items Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'], [boolean includeEntries='[runtime expression]'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])</kbd>
 
 	<br><br>
 
@@ -1331,8 +1349,6 @@ Feed Items Widget</p>
 		<dd><code>sortOrder</code> - How to order the results, defaults to date published from the feed.</dd>
 		
 		<dd><code>openNewWindow</code> - Open feed items in a new window (tab), default is false.</dd>
-		
-		<dd><code>includeEntries</code> - Include entries or not, defaults to the global setting.</dd>
 		
 		</dl>
 	

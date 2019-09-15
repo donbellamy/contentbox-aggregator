@@ -593,6 +593,21 @@ Aggregator Helper</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>aggregator.models.Page</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getCurrentPage()">getCurrentPage</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the page if present in the current request.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>array</code>
 		</td>
 		<td>
@@ -690,6 +705,21 @@ Aggregator Helper</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isFeedSearchView()">isFeedSearchView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
 			
 		</td>
 	</tr>
@@ -1713,6 +1743,45 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="getCurrentPage()"><!-- --></a>
+	<h3>
+		getCurrentPage
+		
+	</h3>
+
+	<kbd>public aggregator.models.Page <strong>getCurrentPage</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the page if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The page if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getCurrentRelatedContent()"><!-- --></a>
 	<h3>
 		getCurrentRelatedContent
@@ -1977,6 +2046,45 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if the current event equals site.feeditem, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFeedSearchView()"><!-- --></a>
+	<h3>
+		isFeedSearchView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedSearchView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if if the current event equals site.index and a feed is present</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals site.index and a feed is present, false if not</dd>
 		</dl>
 	
 

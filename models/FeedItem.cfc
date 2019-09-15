@@ -162,11 +162,11 @@ component persistent="true"
 	 * Gets the url of the featured image
 	 * @return The url of the featured image
 	 */
-	string function getFeaturedImageUrl() {
+	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
 
 		if ( len( super.getFeaturedImageUrl() ) ) {
 			return super.getFeaturedImageUrl();
-		} else {
+		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
 			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_site_item_featured_image_behavior;
@@ -177,6 +177,8 @@ component persistent="true"
 			} else {
 				return "";
 			}
+		} else {
+			return "";
 		}
 
 	}

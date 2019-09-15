@@ -34,8 +34,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @useDropdown.hint Display as a dropdown or a list, default is list.
 	 * @showItemCount.label Show Item Count?
 	 * @showItemCount.hint Show item counts or not, default is true.
-	 * @includeEntries.label Include Entries?
-	 * @includeEntries.hint Include entries in the item count or not, defaults to the global setting.
 	 * @return The feed item categories widget html
 	 */
 	string function renderIt(
@@ -43,8 +41,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric titleLevel=2,
 		string category="",
 		boolean useDropdown=false,
-		boolean showItemCount=true,
-		boolean includeEntries=ag.setting("ag_site_display_entries") ) {
+		boolean showItemCount=true ) {
 
 		// Grab the categories
 		var categories = categoryService.list(
@@ -62,10 +59,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Dropdown
 		if ( arguments.useDropdown ) {
-			html &= buildDropDown( categories, arguments.showItemCount, arguments.category, arguments.includeEntries );
+			html &= buildDropDown( categories, arguments.showItemCount, arguments.category );
 		// List
 		} else {
-			html &= buildList( categories, arguments.showItemCount, arguments.category, arguments.includeEntries );
+			html &= buildList( categories, arguments.showItemCount, arguments.category );
 		}
 
 		return html;
@@ -77,7 +74,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	/**
 	 * Builds the drop down menu
 	 */
-	private string function buildDropDown( categories, showItemCount, categoryFilter, includeEntries ) {
+	private string function buildDropDown( categories, showItemCount, categoryFilter ) {
 
 		// Set return html
 		var html = "";
@@ -90,7 +87,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			var feedItemCount = feedItemService.getPublishedFeedItems(
 				category = categories[x].getSlug(),
 				countOnly = true,
-				includeEntries = arguments.includeEntries
+				includeEntries = ag.setting("ag_site_display_entries")
 			).count;
 			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
 			if ( feedItemCount && showCategory ) {
@@ -112,7 +109,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	/**
 	 * Builds the list menu
 	 */
-	private string function buildList( categories, showItemCount, categoryFilter, includeEntries  ) {
+	private string function buildList( categories, showItemCount, categoryFilter ) {
 
 		// Set return html
 		var html = "";
@@ -125,7 +122,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			var feedItemCount = feedItemService.getPublishedFeedItems(
 				category = categories[x].getSlug(),
 				countOnly = true,
-				includeEntries = arguments.includeEntries
+				includeEntries = ag.setting("ag_site_display_entries")
 			).count;
 			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
 			if ( feedItemCount && showCategory ) {
