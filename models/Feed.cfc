@@ -148,12 +148,16 @@ component persistent="true"
 	********************************************************************* */
 
 	property name="importedDate"
-		formula="select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID"
+		formula="select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID = contentID"
 		default="";
 
 	property name="isFailing"
-		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
+		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID = contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
+
+	property name="numberOfPublishedFeedItems"
+		formula="select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )"
+		default="0";
 
 	/* *********************************************************************
 	**                            CONSTRAINTS

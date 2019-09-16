@@ -23,6 +23,7 @@ component extends="ContentService" singleton {
 	 * @state The state to filter on, defaults to "any"
 	 * @category The category to filter on, defaults to "all"
 	 * @status The status to filter on, defaults to "any"
+	 * @publishedFeedItems Used only when the feed status is "published", will only return feeds with published feed items when true
 	 * @sortOrder The field to sort the results on, defaults to "title"
 	 * @searchActiveContent Whether or not to search active content
 	 * @countOnly Whether or not to return the count only
@@ -36,6 +37,7 @@ component extends="ContentService" singleton {
 		string category="",
 		string status="",
 		string sortOrder="title ASC",
+		boolean publishedFeedItems=false,
 		boolean searchActiveContent=true,
 		boolean countOnly=false,
 		numeric max=0,
@@ -93,6 +95,10 @@ component extends="ContentService" singleton {
 				c.isTrue("isPublished")
 					.isLT( "publishedDate", now() )
 					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
+					// Check for published feed items if needed
+					if ( arguments.publishedFeedItems ) {
+						c.gt( "numberOfPublishedFeedItems", "0" );
+					}
 			} else if ( arguments.status EQ "expired" ) {
 				c.isTrue("isPublished").isLT( "expireDate", now() );
 			} else {
@@ -127,7 +133,7 @@ component extends="ContentService" singleton {
 	 * @return struct - {feeds,count}
 	 */
 	struct function getPublishedFeeds( numeric max=0, numeric offset=0 ) {
-		return getFeeds( argumentCollection=arguments, status="published" );
+		return getFeeds( argumentCollection=arguments, status="published", publishedFeedItems=true );
 	}
 
 	/**
