@@ -82,7 +82,7 @@ component singleton {
 			includeEntries=settings.ag_site_display_entries
 		);
 		var feedItems = results.feedItems;
-		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url");
+		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url,enclosure_url,enclosure_length,enclosure_type");
 
 		// Build the items query
 		for ( var item IN feedItems ) {
@@ -103,7 +103,6 @@ component singleton {
 			querySetCell( items, "link", agHelper.linkContent( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
 			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & ( item.getContentType() EQ "FeedItem" ? item.getItemAuthor() : item.getAuthorName() ) & "]]>" );
-
 			if ( item.hasCategories() ) {
 				querySetCell( items, "category_tag", item.getCategoriesList() );
 			}
@@ -111,6 +110,19 @@ component singleton {
 			querySetCell( items, "guid_string", agHelper.linkContent( item ) );
 			querySetCell( items, "source_title", item.getContentType() EQ "FeedItem" ? item.getFeed().getTitle() : cbHelper.siteName() );
 			querySetCell( items, "source_url", item.getContentType() EQ "FeedItem" ? item.getFeed().getFeedUrl() : cbHelper.linkRSS() );
+			if ( len( item.getFeaturedImageURL() ) && fileExists( item.getFeaturedImage() ) ) {
+				try {
+					var image = fileopen( item.getFeaturedImage() );
+					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
+					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
+					querySetCell( items, "enclosure_type", fileGetMimeType( image ) ); //TODO: bug here in feed generator, replacing the / with &#x2f; using encodeForXML, do pull request
+					fileClose( image );
+				} catch ( any e ) {
+					querySetCell( items, "enclosure_url", "" );
+					querySetCell( items, "enclosure_length", "" );
+					querySetCell( items, "enclosure_type", "" );
+				 }
+			}
 		}
 
 		// Populate the feedStruct
@@ -119,10 +131,17 @@ component singleton {
 			feedStruct.title = feed.getTitle();
 			feedStruct.description = feed.getTagLine();
 			feedStruct.link = agHelper.linkFeed( feed );
+			if ( len( feed.getFeaturedImageURL() ) && fileExists( feed.getFeaturedImage() ) ) {
+				feedStruct.image = {
+					"url" = cbHelper.siteBaseURL() & replace( feed.getFeaturedImageURL(), "/", "" ),
+					"title" = feed.getTitle(),
+					"link" = agHelper.linkFeed( feed )
+				};
+			}
 		} else {
 			feedStruct.title = settings.ag_rss_title;
 			feedStruct.description = settings.ag_rss_description;
-			feedStruct.link = agHelper.linkNews(); // TODO: should link to site home page
+			feedStruct.link = cbHelper.linkHome();
 		}
 		feedStruct.generator = settings.ag_rss_generator;
 		feedStruct.copyright = settings.ag_rss_copyright;

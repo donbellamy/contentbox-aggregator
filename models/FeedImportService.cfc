@@ -430,7 +430,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Announce interception
 		interceptorService.processState( "aggregator_postFeedImport", { feed=arguments.feed } );
 
-		// Update count and set message
+		// Set message
 		if ( data.error ) {
 			data.message = "Error importing feed items for '#arguments.feed.getTitle()#'."
 		} else {
