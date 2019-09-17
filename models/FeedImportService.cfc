@@ -34,9 +34,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	 * The main feed import routine
 	 * @feed The feed to import
 	 * @author The author to use when importing
-	 * @return FeedImportService
+	 * @return struct - { error, message, count }
 	 */
-	FeedImportService function import( required Feed feed, required Author author ) {
+	struct function import( required Feed feed, required Author author ) {
 
 		// Grab the settings
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -45,6 +45,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		interceptorService.processState( "aggregator_preFeedImport", { feed=arguments.feed } );
 
 		try {
+
+			// Set return data
+			var data = {
+				error = false,
+				message = ""
+			}
 
 			// Set an item counter
 			var itemCount = 0;
@@ -300,19 +306,23 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											// Log the error
 											if ( log.canError() ) {
 												log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
-												// Delete any images
-												if ( importFeaturedImages || importAllImages ) {
-													for ( var imagePath IN imagePaths  ) {
-														if ( fileExists( imagePath ) ) {
-															fileDelete( imagePath );
-														}
-													}
-													// Delete directory if empty and defined
-													if ( isDefined("directoryPath") ) {
-														deleteDirectoryIfEmpty( directoryPath );
+											}
+
+											// Delete any images
+											if ( importFeaturedImages || importAllImages ) {
+												for ( var imagePath IN imagePaths  ) {
+													if ( fileExists( imagePath ) ) {
+														fileDelete( imagePath );
 													}
 												}
+												// Delete directory if empty and defined
+												if ( isDefined("directoryPath") ) {
+													deleteDirectoryIfEmpty( directoryPath );
+												}
 											}
+
+											// Set error to true
+											data.error = true;
 
 										}
 
@@ -412,12 +422,23 @@ component extends="cborm.models.VirtualEntityService" singleton {
 				}
 			}
 
+			// Set error to true
+			data.error = true;
+
 		}
 
 		// Announce interception
 		interceptorService.processState( "aggregator_postFeedImport", { feed=arguments.feed } );
 
-		return this;
+		// Update count and set message
+		if ( data.error ) {
+			data.message = "Error importing feed items for '#arguments.feed.getTitle()#'."
+		} else {
+			data.message = "Feed items imported for '#arguments.feed.getTitle()#'.";
+		}
+
+		// Return data struct
+		return data;
 
 	}
 

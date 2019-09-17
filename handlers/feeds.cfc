@@ -604,6 +604,7 @@ component extends="contentHandler" {
 						if ( result.status_code == "200" && isJson( result.fileContent ) ) {
 							var returnData = deserializeJson( result.fileContent );
 							arrayAppend( data.messages, returnData.message );
+							if ( returnData.error ) data.error = true;
 						} else {
 							data.error = true;
 							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
@@ -682,8 +683,7 @@ component extends="contentHandler" {
 			// Run the import routine
 			if ( !isNull( feed ) && !isNull( author ) ) {
 				try {
-					feedImportService.import( feed, author );
-					data.message = "Feed items imported for '#feed.getTitle()#'.";
+					data = feedImportService.import( feed, author );
 				} catch ( any e ) {
 					data.error = true;
 					data.message = "Error importing feed items for '#feed.getTitle()#'." & " " & e.message & " " & e.detail;
