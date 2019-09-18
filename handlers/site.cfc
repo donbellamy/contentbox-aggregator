@@ -438,6 +438,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		getPage( prc, prc.agSettings.ag_site_news_entryPoint );
 
 		// Make sure page exists and rss is enabled
+		// TODO: bug here, can be either a news or feeds page, may need to change this
 		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
 
 			// Set params
