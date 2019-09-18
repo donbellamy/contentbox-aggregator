@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * Admin dashboard handler
  * Extends and adds feed and feed item data to the admin dashboard
  * @author Don Bellamy <don@perfectcode.com>

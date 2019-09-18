@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * DB Search Adapter to include feeds and feed items in results
  * @author Don Bellamy <don@perfectcode.com>
  */

@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * Related Content Widget
  * @author Don Bellamy <don@perfectcode.com>
  */

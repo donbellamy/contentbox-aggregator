@@ -198,7 +198,7 @@ Class
 
 
 <div id="class-hint">
-	<p>ContentBox RSS Aggregator
+	<p>ContentBox Aggregator
 Feed Service</p>
 </div>
 
@@ -351,7 +351,7 @@ Feed Service</p>
 			<code>struct</code>
 		</td>
 		<td>
-			<strong><a href="FeedService.html#getFeeds()">getFeeds</A></strong>([string searchTerm=''], [string state=''], [string category=''], [string status=''], [string sortOrder='title ASC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
+			<strong><a href="FeedService.html#getFeeds()">getFeeds</A></strong>([string searchTerm=''], [string state=''], [string category=''], [string status=''], [string sortOrder='title ASC'], [boolean publishedFeedItems='false'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of feeds and count based upon the passed parameters.
@@ -1736,7 +1736,7 @@ Feed Service</p>
 		
 	</h3>
 
-	<kbd>public struct <strong>getFeeds</strong>([string searchTerm=''], [string state=''], [string category=''], [string status=''], [string sortOrder='title ASC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
+	<kbd>public struct <strong>getFeeds</strong>([string searchTerm=''], [string state=''], [string category=''], [string status=''], [string sortOrder='title ASC'], [boolean publishedFeedItems='false'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
 
 	<br><br>
 
@@ -1767,6 +1767,8 @@ Feed Service</p>
 		<dd><code>status</code> - The status to filter on, defaults to "any"</dd>
 		
 		<dd><code>sortOrder</code> - The field to sort the results on, defaults to "title"</dd>
+		
+		<dd><code>publishedFeedItems</code> - Used only when the feed status is "published", will only return feeds with published feed items when true</dd>
 		
 		<dd><code>searchActiveContent</code> - Whether or not to search active content</dd>
 		

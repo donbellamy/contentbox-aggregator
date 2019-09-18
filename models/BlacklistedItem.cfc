@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * BlacklistedItem Model
  * @author Don Bellamy <don@perfectcode.com>
  */

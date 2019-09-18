@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * Feed item taxonomies
  * @author Don Bellamy <don@perfectcode.com>
  */

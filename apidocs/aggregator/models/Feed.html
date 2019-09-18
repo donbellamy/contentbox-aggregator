@@ -180,7 +180,7 @@ Class
 
 
 <div id="class-hint">
-	<p>ContentBox RSS Aggregator
+	<p>ContentBox Aggregator
 Feed Model</p>
 </div>
 
@@ -746,7 +746,7 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">formula = select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID</li>
+				<li class="label label-default label-annotations">formula = select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID = contentID</li>
 				
 			
 				
@@ -925,7 +925,7 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">formula = select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</li>
+				<li class="label label-default label-annotations">formula = select fi.importFailed from cb_feedimport fi where fi.FK_feedID = contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</li>
 				
 			
 				
@@ -1471,6 +1471,63 @@ Feed Model</p>
 
 		</td>
 		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#numberOfPublishedFeedItems()">numberOfPublishedFeedItems</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>0</code>
 			
 		</td>
 		<td align="right" valign="top" width="1%">
@@ -2514,6 +2571,19 @@ Feed Model</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#getNumberOfPublishedFeedItems()">getNumberOfPublishedFeedItems</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#getPagingMaxItems()">getPagingMaxItems</A></strong>()
 			<br>
 			
@@ -2997,6 +3067,19 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#setMaxItems()">setMaxItems</A></strong>(any maxItems)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setNumberOfPublishedFeedItems()">setNumberOfPublishedFeedItems</A></strong>(any numberOfPublishedFeedItems)
 			<br>
 			
 		</td>
@@ -5157,7 +5240,7 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>formula</code> - select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID=contentID</dd>
+			<dd><code>formula</code> - select max(fi.createdDate) from cb_feedimport fi where fi.FK_feedID = contentID</dd>
 			
 		
 			
@@ -5317,7 +5400,7 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>formula</code> - select fi.importFailed from cb_feedimport fi where fi.FK_feedID=contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</dd>
+			<dd><code>formula</code> - select fi.importFailed from cb_feedimport fi where fi.FK_feedID = contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )</dd>
 			
 		
 			
@@ -5786,6 +5869,56 @@ Feed Model</p>
 		
 			
 			<dd><code>ormtype</code> - long</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="numberOfPublishedFeedItems()"><!-- --></a>
+		<h3>numberOfPublishedFeedItems</h3>
+
+		<kbd>
+			property any
+			<strong>numberOfPublishedFeedItems</strong>
+			
+			= [0]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )</dd>
 			
 		
 			
@@ -7498,6 +7631,38 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getNumberOfPublishedFeedItems()"><!-- --></a>
+	<h3>
+		getNumberOfPublishedFeedItems
+		
+	</h3>
+
+	<kbd>public string <strong>getNumberOfPublishedFeedItems</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getPagingMaxItems()"><!-- --></a>
 	<h3>
 		getPagingMaxItems
@@ -8920,6 +9085,45 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>maxItems</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setNumberOfPublishedFeedItems()"><!-- --></a>
+	<h3>
+		setNumberOfPublishedFeedItems
+		
+	</h3>
+
+	<kbd>public any <strong>setNumberOfPublishedFeedItems</strong>(any numberOfPublishedFeedItems)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>numberOfPublishedFeedItems</code></dd>
 		
 		</dl>
 	

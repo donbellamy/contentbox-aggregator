@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * RSS cache cleanup interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */

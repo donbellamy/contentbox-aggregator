@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * Site handler
  * @author Don Bellamy <don@perfectcode.com>
  */

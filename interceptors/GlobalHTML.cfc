@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * Global HTML interceptor
  * @author Don Bellamy <don@perfectcode.com>
  */

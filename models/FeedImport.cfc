@@ -1,5 +1,5 @@
 /**
- * ContentBox RSS Aggregator
+ * ContentBox Aggregator
  * FeedImport Model
  * @author Don Bellamy <don@perfectcode.com>
  */
