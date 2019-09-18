@@ -23,12 +23,12 @@ component persistent="true"
 
 	property name="uniqueId"
 		notnull="true"
-		length="255"
+		length="510"
 		index="idx_uniqueId";
 
 	property name="itemUrl"
 		notnull="true"
-		length="255";
+		length="510";
 
 	property name="itemAuthor"
 		notnull="false"

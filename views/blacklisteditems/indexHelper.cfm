@@ -101,6 +101,13 @@ function create() {
 	$blacklistedItemEditor.find( "##feedId" ).val("");
 	return false;
 }
+function contentPaginate( page ) {
+	contentLoad({
+		page : page,
+		search : $("##search").val(),
+		feed : $("##feed").val()
+	});
+}
 $(document).ready( function() {
 	setupBlacklistItemView();
 	var criteria = {
