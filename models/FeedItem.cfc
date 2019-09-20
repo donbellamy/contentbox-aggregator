@@ -39,6 +39,23 @@ component persistent="true"
 		ormtype="text";
 
 	/* *********************************************************************
+	**                            RELATIONSHIPS
+	********************************************************************* */
+
+	// O2M -> Attachments
+	property name="attachments"
+		singularName="Attachment"
+		fieldtype="one-to-many"
+		type="array"
+		lazy="extra"
+		batchsize="25"
+		orderby="feedItemAttachmentID DESC"
+		cfc="FeedItemAttachment"
+		fkcolumn="FK_feedItemID"
+		inverse="true"
+		cascade="all-delete-orphan";
+
+	/* *********************************************************************
 	**                            DI INJECTIONS
 	********************************************************************* */
 
@@ -73,6 +90,7 @@ component persistent="true"
 		renderedExcerpt = "";
 		createdDate = now();
 		contentType = "FeedItem";
+		attachments = [];
 		setMetaInfo({});
 		return this;
 	}

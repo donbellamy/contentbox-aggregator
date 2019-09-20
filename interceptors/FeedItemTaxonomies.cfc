@@ -25,9 +25,9 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var oldFeed = arguments.interceptData.oldFeed;
-		if ( !feed.getTaxonomies().equals( oldFeed.taxonomies ) ) {
+		//if ( !feed.getTaxonomies().equals( oldFeed.taxonomies ) ) {
 			applyTaxonomies( feed.getTaxonomies(), feed );
-		}
+		//}
 	}
 
 	/**
@@ -68,90 +68,115 @@ component extends="coldbox.system.Interceptor" {
 				var categoryIds = listToArray( taxonomy.categories );
 				var keywords = listToArray( taxonomy.keywords );
 
-				// Check for categories and keywords, method equals all or any
-				if ( arrayLen( categoryIds ) && arrayLen( keywords ) && taxonomy.method != "none" ) {
+				// Check for categories
+				if ( arrayLen( categoryIds ) ) {
 
-					// Query on keywords
-					var hql = "SELECT fi FROM cbFeedItem fi JOIN fi.activeContent ac
-						WHERE fi.parent = :parent
-						AND ( ";
-					var params = { parent = feed };
-					var count = 1;
-					for ( var keyword IN keywords ) {
-						hql &= "( fi.title LIKE :keyword#count# OR ac.content LIKE :keyword#count# )";
-						params["keyword#count#"] = "%#trim(keyword)#%";
-						if ( arrayLen( keywords ) GT count ) hql &= ( taxonomy.method == "all" ? " AND " : " OR " );
-						count++;
-					}
-					hql &= " )";
+					// Check for keywords, method equals all or any
+					if ( arrayLen( keywords ) && taxonomy.method != "none" && taxonomy.method != "url" ) {
 
-					// Get feedItems
-					var feedItems = feedItemService.executeQuery(
-						query = hql,
-						params = params,
-						asQuery = false
-					);
-
-					// Check results
-					if ( arrayLen( feedItems ) ) {
-
-						// Create the categories
-						var categories = [];
-						for ( var categoryId IN categoryIds ) {
-							arrayAppend( categories, categoryService.get( categoryId ) );
+						// Query on keywords
+						var params = { parent = feed };
+						var hql = "SELECT DISTINCT fi FROM cbFeedItem fi
+							JOIN fi.activeContent ac
+							LEFT JOIN fi.categories cats
+							WHERE fi.parent = :parent
+							AND ( ";
+						var count = 1;
+						for ( var keyword IN keywords ) {
+							hql &= "( fi.title LIKE :keyword#count# OR ac.content LIKE :keyword#count# )";
+							params["keyword#count#"] = "%#trim(keyword)#%";
+							if ( arrayLen( keywords ) GT count ) hql &= ( taxonomy.method == "all" ? " AND " : " OR " );
+							count++;
 						}
+						hql &= " ) AND ( cats.categoryID IS NULL OR ";
+						count = 1;
+						for ( var categoryId IN categoryIds ) {
+							hql &= "cats.categoryID != :categoryID#count#"
+							params["categoryID#count#"] = categoryId;
+							if ( arrayLen( categoryIds ) GT count ) hql &= " OR ";
+							count++;
+						}
+						hql &= " )";
 
-						// Loop over feed items
-						for ( var feedItem IN feedItems ) {
+						// Get feedItems
+						var feedItems = feedItemService.executeQuery(
+							query = hql,
+							params = params,
+							asQuery = false
+						);
 
-							// Loop over categories
-							for ( var category IN categories ) {
+						// Check results
+						if ( arrayLen( feedItems ) ) {
 
-								// Add category
-								if ( !feedItem.hasCategories( category ) ) {
-									feedItem.addCategories( category );
-									feedItemService.save( feedItem );
-									if ( log.canInfo() ) {
-										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+							// Create the categories
+							var categories = createCategories( categoryIds );
+
+							// Loop over feed items
+							for ( var feedItem IN feedItems ) {
+
+								// Loop over categories
+								for ( var category IN categories ) {
+
+									// Add category
+									if ( !feedItem.hasCategories( category ) ) {
+										feedItem.addCategories( category );
+										feedItemService.save( feedItem );
+										if ( log.canInfo() ) {
+											log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+										}
+										numberCategorized++;
 									}
-									numberCategorized++;
+
 								}
 
 							}
 
 						}
 
-					}
+					// Assign categories based on the url
+					} else if ( arrayLen( keywords ) && taxonomy.method == "url" ) {
 
-				// Assign categories to all feed items
-				} else if ( arrayLen( categoryIds ) && taxonomy.method == "none" ) {
+						// Get feedItems
+						// TODO: get items not in categories
+						var feedItems = feed.getFeedItems();
 
-					// Get feedItems
-					var feedItems = feed.getFeedItems();
+						// Check results
+						if ( arrayLen( feedItems ) ) {
 
-					// Check results
-					if ( arrayLen( feedItems ) ) {
+							// Create the categories
+							var categories = createCategories( categoryIds );
 
-						// Create the categories
-						var categories = [];
-						for ( var categoryId IN categoryIds ) {
-							arrayAppend( categories, categoryService.get( categoryId ) );
 						}
 
-						// Loop over feed items
-						for ( var feedItem IN feedItems ) {
+					// Assign categories to all feed items
+					} else if ( taxonomy.method == "none" ) {
 
-							// Loop over categories
-							for ( var category IN categories ) {
+						// Get feedItems
+						// TODO: get items not in categories
+						var feedItems = feed.getFeedItems();
 
-								// Add category
-								if ( !feedItem.hasCategories( category ) ) {
-									feedItem.addCategories( category );
-									feedItemService.save( feedItem );
-									if ( log.canInfo() ) {
-										log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+						// Check results
+						if ( arrayLen( feedItems ) ) {
+
+							// Create the categories
+							var categories = createCategories( categoryIds );
+
+							// Loop over feed items
+							for ( var feedItem IN feedItems ) {
+
+								// Loop over categories
+								for ( var category IN categories ) {
+
+									// Add category
+									if ( !feedItem.hasCategories( category ) ) {
+										feedItem.addCategories( category );
+										feedItemService.save( feedItem );
+										if ( log.canInfo() ) {
+											log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+										}
+										numberCategorized++;
 									}
-									numberCategorized++;
+
 								}
 
 							}
@@ -170,6 +195,18 @@ component extends="coldbox.system.Interceptor" {
 
 		}
 
+	}
+
+	/**
+	 * Creates an array of categories
+	 * @categoryIds An array of categoryIds
+	 */
+	array private function createCategories( required array categoryIds ) {
+		var categories = [];
+		for ( var categoryId IN arguments.categoryIds ) {
+			arrayAppend( categories, categoryService.get( categoryId ) );
+		}
+		return categories;
 	}
 
 }

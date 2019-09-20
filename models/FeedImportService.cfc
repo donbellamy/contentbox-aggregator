@@ -161,6 +161,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													"image/gif" = "gif",
 													"image/x-icon" = "ico",
 													"image/jpeg" = "jpg",
+													"image/jpg" = "jpg",
 													"image/png" = "png"
 												};
 
