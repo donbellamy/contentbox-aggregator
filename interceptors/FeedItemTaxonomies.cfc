@@ -9,6 +9,7 @@ component extends="coldbox.system.Interceptor" {
 	property name="categoryService" inject="categoryService@cb";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="settingService" inject="settingService@cb";
 
 	/**
 	 * Fired after feed import
@@ -25,9 +26,20 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_postFeedSave( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
 		var oldFeed = arguments.interceptData.oldFeed;
-		//if ( !feed.getTaxonomies().equals( oldFeed.taxonomies ) ) {
+		if ( !feed.getTaxonomies().equals( oldFeed.taxonomies ) ) {
 			applyTaxonomies( feed.getTaxonomies(), feed );
-		//}
+		}
+	}
+
+	/**
+	 * Fired after feed imports
+	 */
+	function aggregator_postFeedImports( event, interceptData ) {
+		var feeds = arguments.interceptData.feeds;
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+		for ( var feed IN feeds ) {
+			applyTaxonomies( settings.ag_importing_taxonomies, feed );
+		}
 	}
 
 	/**
@@ -74,7 +86,7 @@ component extends="coldbox.system.Interceptor" {
 					// Check for keywords, method equals all or any
 					if ( arrayLen( keywords ) && taxonomy.method != "none" && taxonomy.method != "url" ) {
 
-						// Query on keywords
+						// Query on keywords and categories
 						var params = { parent = feed };
 						var hql = "SELECT DISTINCT fi FROM cbFeedItem fi
 							JOIN fi.activeContent ac
@@ -136,9 +148,37 @@ component extends="coldbox.system.Interceptor" {
 					// Assign categories based on the url
 					} else if ( arrayLen( keywords ) && taxonomy.method == "url" ) {
 
+						// Query on keywords and categories
+						var params = { parent = feed };
+						var hql = "SELECT DISTINCT fi FROM cbFeedItem fi
+							JOIN fi.activeContent ac
+							LEFT JOIN fi.attachments att
+							LEFT JOIN fi.categories cats
+							WHERE fi.parent = :parent
+							AND ( ";
+						var count = 1;
+						for ( var keyword IN keywords ) {
+							hql &= "( fi.itemUrl LIKE :keyword#count# OR att.attachmentUrl LIKE :keyword#count# )";
+							params["keyword#count#"] = "%#trim(keyword)#%";
+							if ( arrayLen( keywords ) GT count ) hql &= " OR ";
+							count++;
+						}
+						hql &= " ) AND ( cats.categoryID IS NULL OR ";
+						count = 1;
+						for ( var categoryId IN categoryIds ) {
+							hql &= "cats.categoryID != :categoryID#count#"
+							params["categoryID#count#"] = categoryId;
+							if ( arrayLen( categoryIds ) GT count ) hql &= " OR ";
+							count++;
+						}
+						hql &= " )";
+
 						// Get feedItems
-						// TODO: get items not in categories
-						var feedItems = feed.getFeedItems();
+						var feedItems = feedItemService.executeQuery(
+							query = hql,
+							params = params,
+							asQuery = false
+						);
 
 						// Check results
 						if ( arrayLen( feedItems ) ) {
@@ -146,14 +186,53 @@ component extends="coldbox.system.Interceptor" {
 							// Create the categories
 							var categories = createCategories( categoryIds );
 
+							// Loop over feed items
+							for ( var feedItem IN feedItems ) {
+
+								// Loop over categories
+								for ( var category IN categories ) {
+
+									// Add category
+									if ( !feedItem.hasCategories( category ) ) {
+										feedItem.addCategories( category );
+										feedItemService.save( feedItem );
+										if ( log.canInfo() ) {
+											log.info("Category '#category.getCategory()#' saved for feed item '#feedItem.getTitle()#'.");
+										}
+										numberCategorized++;
+									}
+
+								}
+
+							}
+
 						}
 
 					// Assign categories to all feed items
 					} else if ( taxonomy.method == "none" ) {
 
+						// Query on categories
+						var params = { parent = feed };
+						var hql = "SELECT DISTINCT fi FROM cbFeedItem fi
+							JOIN fi.activeContent ac
+							LEFT JOIN fi.categories cats
+							WHERE fi.parent = :parent
+							AND ( cats.categoryID IS NULL OR ";
+						count = 1;
+						for ( var categoryId IN categoryIds ) {
+							hql &= "cats.categoryID != :categoryID#count#"
+							params["categoryID#count#"] = categoryId;
+							if ( arrayLen( categoryIds ) GT count ) hql &= " OR ";
+							count++;
+						}
+						hql &= " )";
+
 						// Get feedItems
-						// TODO: get items not in categories
-						var feedItems = feed.getFeedItems();
+						var feedItems = feedItemService.executeQuery(
+							query = hql,
+							params = params,
+							asQuery = false
+						);
 
 						// Check results
 						if ( arrayLen( feedItems ) ) {

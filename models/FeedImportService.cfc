@@ -9,6 +9,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedReader" inject="feedReader@cbfeeds";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
+	property name="feedItemAttachmentService" inject="entityService:cbFeedItemAttachment";
 	property name="blacklistedItemService" inject="blacklistedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="moduleSettings" inject="coldbox:setting:modules";
@@ -139,7 +140,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												feedItem.setIsPublished( false );
 											}
 
-											// Set whitelist - TODO: Move to jsoup?
+											// Set whitelist
 											var whitelist = jsoup.getWhiteList();
 											// Add rel, target to a tag
 											whitelist.addAttributes( "a", javacast( "string[]", ["rel","target"] ) );
@@ -289,7 +290,23 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												author = arguments.author
 											);
 
-											// TODO: attach taxonomies from settings and feed
+											// Attachments
+											if ( structKeyExists( item, "attachment" ) && arrayLen( item.attachment ) ) {
+												for ( var attachment IN item.attachment ) {
+													if ( structKeyExists( attachment, "url" ) && len( attachment.url ) ) {
+														var feedItemAttachment = feedItemAttachmentService.new(
+															properties = {
+																attachmentUrl = attachment.url,
+																type = ( structKeyExists( attachment, "type" ) ? attachment.type : "" ),
+																medium = ( structKeyExists( attachment, "medium" ) ? attachment.medium : "" ),
+																mimetype = ( structKeyExists( attachment, "mimetype" ) ? attachment.mimetype : "" )
+															}
+														);
+														feedItemAttachment.setFeedItem( feedItem );
+														feedItem.addAttachment( feedItemAttachment );
+													}
+												}
+											}
 
 											// Save item
 											feedItemService.save( feedItem );
