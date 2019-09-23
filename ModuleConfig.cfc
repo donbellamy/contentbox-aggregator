@@ -108,6 +108,7 @@ component {
 
 		// Site routes
 		siteRoutes = [
+			{ pattern="/rss/:category?", handler="site", action="feedsRSS", namespace="aggregator-feeds" },
 			{ pattern="/:slug/rss/:category?", handler="site", action="rss", namespace="aggregator-feeds" },
 			{ pattern="/:slug", handler="site", action="feed", namespace="aggregator-feeds" },
 			{ pattern="/", handler="site", action="feeds", namespace="aggregator-feeds" },

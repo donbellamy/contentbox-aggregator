@@ -319,7 +319,15 @@ component extends="contentHandler" {
 
 		// Import feed if needed
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
+			announceInterception(
+				"aggregator_preFeedImports",
+				{ feeds = feeds }
+			);
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
+			announceInterception(
+				"aggregator_postFeedImports",
+				{ feeds = feeds }
+			);
 		}
 
 		announceInterception(

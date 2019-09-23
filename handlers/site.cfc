@@ -450,8 +450,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the rss feed
 			var rssFeed = rssService.getRSS(
-				category=rc.category,
-				slug=rc.slug
+				slug=rc.slug,
+				category=rc.category
 			);
 
 			// Announce event
@@ -532,6 +532,52 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			).setView(
 				view = "#prc.cbTheme#/views/aggregator/feeds",
 				module = prc.cbThemeRecord.module
+			);
+
+		} else {
+
+			// Not found
+			notFound( argumentCollection=arguments );
+			return;
+
+		}
+
+	}
+
+	/**
+	 * Displays the feeds rss
+	 */
+	function feedsRSS( event, rc, prc ) {
+
+		// Grab the feeds page
+		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
+
+		// Make sure page exists
+		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
+
+			// Set params
+			event.paramValue( "category", "" );
+
+			// Set format
+			rc.format = "rss";
+
+			// Grab the rss feed
+			var rssFeed = rssService.getRSS(
+				category=rc.category,
+				contentType="Feed"
+			);
+
+			// Announce event
+			announceInterception(
+				"aggregator_onRSSView",
+				{ category = rc.category }
+			);
+
+			// Render the xml
+			event.renderData(
+				type = "plain",
+				data = rssFeed,
+				contentType = "text/xml"
 			);
 
 		} else {

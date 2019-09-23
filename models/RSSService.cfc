@@ -24,18 +24,20 @@ component singleton {
 
 	/**
 	 * Gets the feed items feed from cache or build
-	 * @category The category slug to filter on
 	 * @slug The feed slug to filter on
+	 * @category The category slug to filter on
+	 * @contentType The content type to build the rss feed on
 	 * @return The feed xml string
 	 */
 	string function getRSS(
+		string slug="",
 		string category="",
-		string slug="" ) {
+		string contentType="FeedItem" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
-		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.slug & "FeedItem" )#";
+		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.slug & arguments.contentType )#";
 		var rssFeed = "";
 
 		// Check cache
@@ -47,7 +49,11 @@ component singleton {
 		}
 
 		// Build the feed
-		rssFeed = buildFeed( argumentCollection=arguments );
+		if ( arguments.contentType == "Feed" ) {
+			rssFeed = buildFeedFeed( argumentCollection=arguments );
+		} else {
+			rssFeed = buildFeedItemFeed( argumentCollection=arguments );
+		}
 
 		// Cache the feed
 		if ( settings.ag_rss_cache_enable ) {
@@ -62,13 +68,13 @@ component singleton {
 
 	/**
 	 * Builds the feed items feed
-	 * @category The category slug to filter on
 	 * @slug The feed slug to filter on
+	 * @category The category slug to filter on
 	 * @return The feed xml string
 	 */
-	private string function buildFeed(
-		string category="",
-		string slug="" ) {
+	private string function buildFeedItemFeed(
+		string slug="",
+		string category="" ) {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting("aggregator") );
@@ -152,7 +158,71 @@ component singleton {
 		feedStruct.lastBuildDate = now();
 		feedStruct.items = items;
 
-		// Return the generated the feed
+		// Return the generated feed
+		return feedGenerator.createFeed( feedStruct );
+
+	}
+
+	/**
+	 * Builds the feeds feed
+	 * @category The category slug to filter on
+	 * @return The feed xml string
+	 */
+	private string function buildFeedFeed( string category="" ) {
+
+		// Set vars
+		var settings = deserializeJSON( settingService.getSetting("aggregator") );
+		var feedStruct = {};
+
+		// Get results
+		var results = feedService.getPublishedFeeds(
+			category=arguments.category,
+			max=settings.ag_rss_max_items
+		);
+		var feeds = results.feeds;
+		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url,enclosure_url,enclosure_length,enclosure_type");
+
+		// Build the items query
+		for ( var item IN feeds ) {
+			queryAddRow( items, 1 );
+			querySetCell( items, "title", item.getTitle() );
+			// TODO: Description
+			querySetCell( items, "link", agHelper.linkContent( item ) );
+			querySetCell( items, "pubDate", item.getPublishedDate() );
+			if ( item.hasCategories() ) {
+				querySetCell( items, "category_tag", item.getCategoriesList() );
+			}
+			querySetCell( items, "guid_permalink", false );
+			querySetCell( items, "guid_string", agHelper.linkFeed( item ) );
+			if ( len( item.getFeaturedImageURL() ) && fileExists( item.getFeaturedImage() ) ) {
+				try {
+					var image = fileopen( item.getFeaturedImage() );
+					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
+					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
+					querySetCell( items, "enclosure_type", fileGetMimeType( image ) ); //TODO: bug here in feed generator, replacing the / with &#x2f; using encodeForXML, do pull request
+					fileClose( image );
+				} catch ( any e ) {
+					querySetCell( items, "enclosure_url", "" );
+					querySetCell( items, "enclosure_length", "" );
+					querySetCell( items, "enclosure_type", "" );
+				 }
+			}
+		}
+
+		// Populate the feedStruct
+		feedStruct.title = settings.ag_rss_title;
+		feedStruct.description = settings.ag_rss_description;
+		feedStruct.link = cbHelper.linkHome();
+		feedStruct.generator = settings.ag_rss_generator;
+		feedStruct.copyright = settings.ag_rss_copyright;
+		if ( len( settings.ag_rss_webmaster ) ) {
+			feedStruct.webmaster = settings.ag_rss_webmaster;
+		}
+		feedStruct.pubDate = now();
+		feedStruct.lastBuildDate = now();
+		feedStruct.items = items;
+
+		// Return the generated feed
 		return feedGenerator.createFeed( feedStruct );
 
 	}
