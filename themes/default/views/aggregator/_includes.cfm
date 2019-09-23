@@ -30,6 +30,7 @@
 	<link rel="alternate" type="application/rss+xml" title="Recent Content Comment Updates" href="#cb.linkSiteRSS(comments=true)#" />
 	<cfif ag.setting("ag_rss_enable") >
 		<link rel="alternate" type="application/rss+xml" title="Recent News" href="#ag.linkRSS()#" />
+		<link rel="alternate" type="application/rss+xml" title="Recent Feeds" href="#ag.linkFeedsRSS()#" />
 		<cfif ag.isFeedView() >
 			<link rel="alternate" type="application/rss+xml" title="Recent Feed Items" href="#ag.linkFeedRSS( ag.getCurrentFeed() )#" />
 		</cfif>

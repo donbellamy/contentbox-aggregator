@@ -313,6 +313,15 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Gets the feeds rss link
+	 * @ssl Whether or not to use ssl
+	 * @return The feeds rss link
+	 */
+	string function linkFeedsRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkFeeds( ssl=arguments.ssl ) & "/rss";
+	}
+
+	/**
 	 * Gets the category link
 	 * @category The category to link to
 	 * @ssl Whether or not to use ssl
