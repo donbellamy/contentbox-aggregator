@@ -9,13 +9,13 @@
 	<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 </cfif>
 <cfparam name="args.showSource" default="true" />
-<cfparam name="args.showAuthor" default="true" />
+<cfparam name="args.showAuthor" default="false" />
+<cfparam name="args.showCategories" default="false" />
 <cfparam name="args.showExcerpt" default="true" />
 <cfparam name="args.characterLimit" default="500" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
-
 <cfoutput>
 <div class="post" id="feeditem_#feedItem.getContentID()#">
 	<div class="post-title">
@@ -128,6 +128,14 @@
 				</div>
 			</div>
 		</cfif>
+	</cfif>
+	<cfif args.showCategories && feedItem.hasCategories() >
+		<div class="row">
+			<div class="col-sm-12">
+				<i class="fa fa-tag"></i>
+				#ag.quickCategoryLinks( feeditem )#
+			</div>
+		</div>
 	</cfif>
 </div>
 </cfoutput>

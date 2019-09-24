@@ -121,7 +121,7 @@ component singleton {
 					var image = fileopen( item.getFeaturedImage() );
 					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
 					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
-					querySetCell( items, "enclosure_type", fileGetMimeType( image ) ); //TODO: bug here in feed generator, replacing the / with &#x2f; using encodeForXML, do pull request
+					querySetCell( items, "enclosure_type", fileGetMimeType( image ) );
 					fileClose( image );
 				} catch ( any e ) {
 					querySetCell( items, "enclosure_url", "" );
@@ -176,8 +176,7 @@ component singleton {
 
 		// Get results
 		var results = feedService.getPublishedFeeds(
-			category=arguments.category,
-			max=settings.ag_rss_max_items
+			category=arguments.category
 		);
 		var feeds = results.feeds;
 		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url,enclosure_url,enclosure_length,enclosure_type");

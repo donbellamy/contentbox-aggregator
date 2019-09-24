@@ -82,7 +82,7 @@ component {
 			"ag_rss_generator" = "RSS Aggregator by Perfect Code, LLC",
 			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
 			"ag_rss_webmaster" = "",
-			"ag_rss_max_items" = "20",
+			"ag_rss_max_items" = "30",
 			"ag_rss_content_enable" = "true",
 			"ag_rss_cache_enable" = "true",
 			"ag_rss_cache_name" = "Template",
