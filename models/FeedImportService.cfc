@@ -218,6 +218,13 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															var imageName = feedItem.getSlug() & "_" & idx & "." & mimeTypes[result.mimeType];
 															var imagePath = directoryPath & imageName;
 
+															// Check imagePath length
+															if ( len( imagePath ) GT 255 ) {
+																var charsToRemove = len( imagePath ) - 255;
+																imageName = right( imageName, len( imageName ) - charsToRemove );
+																imagePath = directoryPath & imageName;
+															}
+
 															// Save the image
 															fileWrite( imagePath, result.fileContent );
 
