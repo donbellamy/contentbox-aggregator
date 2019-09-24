@@ -321,12 +321,12 @@ component extends="contentHandler" {
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
 			announceInterception(
 				"aggregator_preFeedImports",
-				{ feeds = feeds }
+				{ feeds = [ prc.feed ] }
 			);
 			feedImportService.import( prc.feed, prc.oCurrentAuthor );
 			announceInterception(
 				"aggregator_postFeedImports",
-				{ feeds = feeds }
+				{ feeds = [ prc.feed ] }
 			);
 		}
 

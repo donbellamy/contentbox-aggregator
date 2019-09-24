@@ -296,6 +296,26 @@ component persistent="true"
 	}
 
 	/**
+	 * Checks if the feed item contains a youtube video
+	 * @return Whether of not the feed item contains a youtube video
+	 */
+	boolean function isYoutubeVideo() {
+		var itemUrl = getItemUrl();
+		if ( reFindNoCase( "youtube\.com/watch\?v=", itemUrl ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the feed item contains a podcast
+	 * @return Whether of not the feed item contains a podcast
+	 */
+	boolean function isPodCast() {
+		return false;
+	}
+
+	/**
 	 * Validates the feed item
 	 * @return An array of errors or an empty array if no error is found
 	 */
