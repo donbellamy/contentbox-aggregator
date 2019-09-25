@@ -111,6 +111,7 @@
 					</div>
 				</cfif>
 				<div class="<cfif len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
+					#feedItem.isVideo()# - #feedItem.getVideoEmbedUrl()#
 					<cfif feedItem.hasExcerpt() >
 						#feedItem.renderExcerpt()#
 					<cfelse>

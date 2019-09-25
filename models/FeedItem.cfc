@@ -296,15 +296,43 @@ component persistent="true"
 	}
 
 	/**
-	 * Checks if the feed item contains a youtube video
-	 * @return Whether of not the feed item contains a youtube video
+	 * Checks if the feed item is a video
+	 * @return Whether or not the feed item is a video
 	 */
-	boolean function isYoutubeVideo() {
+	boolean function isVideo() {
 		var itemUrl = getItemUrl();
-		if ( reFindNoCase( "youtube\.com/watch\?v=", itemUrl ) ) {
+		// TODO: twitch support?
+		if ( reFindNoCase( "^http[s]?:\/\/(www\.)?(youtube|dailymotion|vimeo)\.com\/(.*)$", itemUrl ) ) {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getVideoEmbedUrl() {
+		if ( isVideo() ) {
+			var embedUrl = "";
+			var itemUrl = getItemUrl();
+			var results = reFindNoCase( "^http[s]?:\/\/(www\.)?(youtube|dailymotion|vimeo)\.com\/(.*)$", itemUrl, 1, true );
+			var videoType = mid( itemUrl, results.pos[3], results.len[3] );
+			switch( videoType ) {
+				case "youtube":
+					var match = reFindNoCase( "(&|\?)v=([^&]+)$", itemUrl, 1, true );
+					embedUrl = "https://www.youtube.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
+					break;
+				case "vimeo":
+					var match = reFindNoCase( "(\d*)$", itemUrl, 1, true );
+					embedUrl = "https://player.vimeo.com/video/" & mid( itemUrl, match.pos[1], match.len[1];
+					break;
+				case "dailymotion":
+					var match = reFindNoCase( "(video\/)(.*)$", itemUrl, 1, true );
+					embedUrl = "https://www.dailymotion.com/embed/video/" & mid( itemUrl, match.pos[3], match.len[3] );
+					break;
+			}
+		}
+		return embedUrl;
 	}
 
 	/**
