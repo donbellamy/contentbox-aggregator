@@ -163,7 +163,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													"image/x-icon" = "ico",
 													"image/jpeg" = "jpg",
 													"image/jpg" = "jpg",
-													"image/png" = "png"
+													"image/png" = "png",
+													"image/webp" = "webp"
 												};
 
 												// Check for image attachments
@@ -174,8 +175,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																( structKeyExists( attachment, "medium" ) && attachment.medium == "image" ) ||
 																( structKeyExists( attachment, "type" ) && attachment.type == "thumbnail" ) ||
 																( structKeyExists( attachment, "mimetype" ) && structKeyExists( mimeTypes, attachment.mimetype ) )
-															) && ( structKeyExists( attachment, "url" ) && isValid( "url", attachment.url )
-															) && !arrayContains( images, attachment.url )
+															) && ( structKeyExists( attachment, "url" ) && isValid( "url", attachment.url ) )
+															&& !arrayContains( images, attachment.url )
 														) {
 															arrayAppend( images, attachment.url );
 														}
