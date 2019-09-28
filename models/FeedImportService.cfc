@@ -158,13 +158,13 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												var images = [];
 												var imagePaths = [];
 												var mimeTypes = {
-													"image/bmp" = "bmp",
-													"image/gif" = "gif",
-													"image/x-icon" = "ico",
-													"image/jpeg" = "jpg",
-													"image/jpg" = "jpg",
-													"image/png" = "png",
-													"image/webp" = "webp"
+													"image/bmp" = ".bmp",
+													"image/gif" = ".gif",
+													"image/x-icon" = ".ico",
+													"image/jpeg" = ".jpg",
+													"image/jpg" = ".jpg",
+													"image/png" = ".png",
+													"image/webp" = ".webp"
 												};
 
 												// Check for image attachments
@@ -216,7 +216,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															}
 
 															// Set image name and path ( idx used to number images for the feed item )
-															var imageName = feedItem.getSlug() & "_" & idx & "." & mimeTypes[result.mimeType];
+															var imageName = feedItem.getSlug() & "_" & idx & mimeTypes[result.mimeType];
 															var imagePath = directoryPath & imageName;
 
 															// Check imagePath length

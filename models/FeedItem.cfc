@@ -68,7 +68,28 @@ component persistent="true"
 	********************************************************************* */
 
 	property name="renderedExcerpt"
-		persistent="false";
+		persistent="false"
+		default="";
+
+	property name="containsVideo"
+		persistent="false"
+		default="";
+
+	property name="videoEmbedUrl"
+		persistent="false"
+		default="";
+
+	property name="containsPodcast"
+		persistent="false"
+		default="";
+
+	property name="podcastUrl"
+		persistent="false"
+		default="";
+
+	property name="podcastMimeType"
+		persistent="false"
+		default="";
 
 	/* *********************************************************************
 	**                            CONSTRAINTS
@@ -91,6 +112,11 @@ component persistent="true"
 		createdDate = now();
 		contentType = "FeedItem";
 		attachments = [];
+		containsVideo = "";
+		videoEmbedUrl = "";
+		containsPodcast = "";
+		podcastUrl = "";
+		podcastMimeType = "";
 		setMetaInfo({});
 		return this;
 	}
@@ -296,35 +322,48 @@ component persistent="true"
 	}
 
 	/**
-	 * Checks if the feed item is a video (currently supported)
+	 * Sets and checks whether or not the feed item is a video
 	 * @return Whether or not the feed item is a video
 	 */
-	boolean function isVideo() {
+	boolean function getContainsVideo() {
 
-		// Ge the item url
-		var itemUrl = getItemUrl();
+		// Check property and set if needed
+		if ( !len( containsVideo ) ) {
 
-		// Test item url
-		if ( reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", itemUrl ) ) {
-			return true;
+			// Set default
+			containsVideo = false;
+
+			// Get the item url
+			var itemUrl = getItemUrl();
+
+			// Test the item url
+			if ( reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", itemUrl ) ) {
+				containsVideo = true;
+			}
+
 		}
 
-		// Not a video url (we support)
-		return false;
+		// Return property
+		return containsVideo;
 
 	}
 
 	/**
-	 * Returns the video embed url if the feed item is a video (currently supported)
-	 * @return The video embed url if available, empty string if not
+	 * Shorthand function for checking if the feed item is a video
+	 * @return Whether or not the feed item is a video
+	 */
+	boolean function isVideo() {
+		return getContainsVideo();
+	}
+
+	/**
+	 * Sets and returns the video embed url if the feed item is a video
+	 * @return The video embed url
 	 */
 	string function getVideoEmbedUrl() {
 
-		// Set default url
-		var embedUrl = "";
-
 		// Check if item is a video
-		if ( isVideo() ) {
+		if ( isVideo() && !len( videoEmbedUrl ) ) {
 
 			// Set vars
 			var itemUrl = getItemUrl();
@@ -337,63 +376,146 @@ component persistent="true"
 				// Bitchute
 				case "bitchute":
 					var match = reFindNoCase( "(embed\/)(.*)$", itemUrl, 1, true );
-					if ( match.len[1] ) embedUrl = "https://www.bitchute.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
+					if ( match.len[1] ) videoEmbedUrl = "https://www.bitchute.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
 					break;
 
 				// Vimeo
 				case "vimeo":
 					var match = reFindNoCase( "(\d*)$", itemUrl, 1, true );
-					if ( match.len[1] ) embedUrl = "https://player.vimeo.com/video/" & mid( itemUrl, match.pos[1], match.len[1] );
+					if ( match.len[1] ) videoEmbedUrl = "https://player.vimeo.com/video/" & mid( itemUrl, match.pos[1], match.len[1] );
 					break;
 
 				// Youtube
 				case "youtube":
 					var match = reFindNoCase( "(&|\?)v=([^&]+)$", itemUrl, 1, true );
-					if ( match.len[1] ) embedUrl = "https://www.youtube.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
+					if ( match.len[1] ) videoEmbedUrl = "https://www.youtube.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
 					break;
 
 			}
+
 		}
 
 		// Return the url
-		return embedUrl;
+		return videoEmbedUrl;
 
 	}
 
 	/**
-	 * Checks if the feed item contains a podcast
-	 * @return Whether of not the feed item contains a podcast
+	 * Sets and checks if the feed item is a podcast or contains a podcast
+	 * @return Whether or not the feed item is a podcast or contains a podcast
 	 */
-	boolean function isPodCast() {
+	boolean function getContainsPodCast() {
 
-		// Set vars
-		var itemUrl = getItemUrl();
-		var extensions = ".mp3,.m4a";
+		// Check property
+		if ( !len( containsPodcast ) ) {
 
-		// Check item url first TODO: fix
-		if ( listFindNoCase( extensions, right( itemUrl, 4 ) ) ) {
-			return true;
-		// Check attachment urls
-		} else {
-			var attachments = getAttachments();
-			for ( var attachment IN attachments ) {
-				if ( listFindNoCase( extensions, right( attachment.getAttachmentUrl(), 4 ) ) ) {
-					return true;
+			// Set default
+			containsPodcast = false;
+
+			// Get the item urls
+			var itemUrls = getItemUrls();
+
+			// Check urls for podcasts
+			for ( var itemUrl IN itemUrls ) {
+				if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
+					containsPodcast = true;
+					break;
 				}
 			}
+
 		}
 
-		// Not a podcast
-		return false;
+		// Return property
+		return containsPodcast;
 
 	}
 
+	/**
+	 * Shorthand function for checking if the feed item is a podcast or contains a podcast
+	 * @return Whether or not the feed item is a podcast or contains a podcast
+	 */
+	boolean function isPodcast() {
+		return getContainsPodcast();
+	}
 
 	/**
-	 * 'Undocumented function'
+	 * Sets and returns the podcast url if the feed item is a podcast or contains a podcast
+	 * @return The podcast url if the feed item is a podcast or contains a podcast
 	 */
 	string function getPodcastUrl() {
-		return "";
+
+		// Check if item contains a podcast and podcast url set
+		if ( isPodcast() && !len( podcastUrl ) ) {
+
+			// Set vars
+			var itemUrls = getItemUrls();
+
+			// Check urls for podcasts
+			for ( var itemUrl IN itemUrls ) {
+				if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
+					podcastUrl = itemUrl;
+					break;
+				}
+			}
+
+		}
+
+		// Return url
+		return podcastUrl;
+
+	}
+
+	/**
+	 * Sets and returns the mime type if the feed item is a podcast or contains a podcast
+	 * @return The podcast mime type if the feed item is a podcast or contains a podcast
+	 */
+	string function getPodcastMimeType() {
+
+		// Check if item contains a podcast and mime type set
+		if ( isPodCast() && !len( podcastMimeType ) ) {
+
+			// Set vars
+			var podcastUrl = getPodcastUrl();
+			var results = reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", podcastUrl, 1, true );
+			var ext = mid( podcastUrl, results.pos[2], results.len[2] );
+			var mimeTypes = {
+				".mp3" = "audio/mpeg",
+				".m4a" = "audio/mp4",
+				".mp4" = "audio/mp4",
+				".aac" = "audio/mp4",
+				".oga" = "audio/ogg",
+				".ogg" = "audio/ogg",
+				".wav" = "audio/wav"
+			};
+
+			// Set mime type
+			podcastMimeType = mimeTypes[ ext ];
+
+		}
+
+		// Return mime type
+		return podcastMimeType;
+
+	}
+
+	/**
+	 * Returns an array of all urls associated with the feed item
+	 * @return The array of urls
+	 */
+	array function getItemUrls() {
+
+		// Set vars
+		var itemUrls = [ getItemUrl() ];
+		var attachments = getAttachments();
+
+		// Add attachment urls if any
+		for ( var attachment IN attachments ) {
+			arrayAppend( itemUrls, attachment.getAttachmentUrl() );
+		}
+
+		// Return urls
+		return itemUrls;
+
 	}
 
 	/**

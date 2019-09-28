@@ -160,6 +160,14 @@ component persistent="true"
 		default="0";
 
 	/* *********************************************************************
+	**                            NON PERSISTED PROPERTIES
+	********************************************************************* */
+
+	property name="websiteUrl"
+		persistent="false"
+		default="";
+
+	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
 
@@ -192,6 +200,7 @@ component persistent="true"
 		contentType = "Feed";
 		feedImports = [];
 		blacklistedItems = [];
+		websiteUrl = "";
 		setTaxonomies([]);
 		return this;
 	}
@@ -244,15 +253,19 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets the site url from the latest feed import
-	 * @return The siteUrl if defined, the feed url if not
+	 * Gets the website url from the latest feed import
+	 * @return The website url if defined, the feed url if not
 	 */
 	string function getWebsiteUrl() {
-		var feedImport = getLatestSuccessfulFeedImport();
-		if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
-			return feedImport.getWebsiteUrl();
+		if ( !len( websiteUrl ) ) {
+			var feedImport = getLatestSuccessfulFeedImport();
+			if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
+				websiteUrl = feedImport.getWebsiteUrl();
+			} else {
+				websiteUrl = getFeedUrl();
+			}
 		}
-		return getFeedUrl();
+		return websiteUrl
 	}
 
 	/**
