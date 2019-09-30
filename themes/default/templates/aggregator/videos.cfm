@@ -1,0 +1,3 @@
+<cfoutput>
+	Video Widget.
+</cfoutput>

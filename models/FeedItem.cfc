@@ -26,13 +26,21 @@ component persistent="true"
 		length="510"
 		index="idx_uniqueId";
 
+	property name="itemAuthor"
+		notnull="false"
+		length="255";
+
 	property name="itemUrl"
 		notnull="true"
 		length="510";
 
-	property name="itemAuthor"
+	property name="videoUrl"
 		notnull="false"
-		length="255";
+		length="510";
+
+	property name="podcastUrl"
+		notnull="false"
+		length="510";
 
 	property name="metaInfo"
 		notnull="false"
@@ -71,26 +79,6 @@ component persistent="true"
 		persistent="false"
 		default="";
 
-	property name="containsVideo"
-		persistent="false"
-		default="";
-
-	property name="videoEmbedUrl"
-		persistent="false"
-		default="";
-
-	property name="containsPodcast"
-		persistent="false"
-		default="";
-
-	property name="podcastUrl"
-		persistent="false"
-		default="";
-
-	property name="podcastMimeType"
-		persistent="false"
-		default="";
-
 	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
@@ -107,16 +95,12 @@ component persistent="true"
 		super.init();
 		allowComments = false;
 		categories = [];
-		renderedContent = "";
 		renderedExcerpt = "";
 		createdDate = now();
 		contentType = "FeedItem";
 		attachments = [];
-		containsVideo = "";
-		videoEmbedUrl = "";
-		containsPodcast = "";
+		videodUrl = "";
 		podcastUrl = "";
-		podcastMimeType = "";
 		setMetaInfo({});
 		return this;
 	}
@@ -322,112 +306,11 @@ component persistent="true"
 	}
 
 	/**
-	 * Sets and checks whether or not the feed item is a video
-	 * @return Whether or not the feed item is a video
-	 */
-	boolean function getContainsVideo() {
-
-		// Check property and set if needed
-		if ( !len( containsVideo ) ) {
-
-			// Set default
-			containsVideo = false;
-
-			// Get the item url
-			var itemUrl = getItemUrl();
-
-			// Test the item url
-			if ( reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", itemUrl ) ) {
-				containsVideo = true;
-			}
-
-		}
-
-		// Return property
-		return containsVideo;
-
-	}
-
-	/**
 	 * Shorthand function for checking if the feed item is a video
 	 * @return Whether or not the feed item is a video
 	 */
 	boolean function isVideo() {
-		return getContainsVideo();
-	}
-
-	/**
-	 * Sets and returns the video embed url if the feed item is a video
-	 * @return The video embed url
-	 */
-	string function getVideoEmbedUrl() {
-
-		// Check if item is a video
-		if ( isVideo() && !len( videoEmbedUrl ) ) {
-
-			// Set vars
-			var itemUrl = getItemUrl();
-			var results = reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", itemUrl, 1, true );
-			var videoType = mid( itemUrl, results.pos[3], results.len[3] );
-
-			// Switch on video type
-			switch( videoType ) {
-
-				// Bitchute
-				case "bitchute":
-					var match = reFindNoCase( "(embed\/)(.*)$", itemUrl, 1, true );
-					if ( match.len[1] ) videoEmbedUrl = "https://www.bitchute.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
-					break;
-
-				// Vimeo
-				case "vimeo":
-					var match = reFindNoCase( "(\d*)$", itemUrl, 1, true );
-					if ( match.len[1] ) videoEmbedUrl = "https://player.vimeo.com/video/" & mid( itemUrl, match.pos[1], match.len[1] );
-					break;
-
-				// Youtube
-				case "youtube":
-					var match = reFindNoCase( "(&|\?)v=([^&]+)$", itemUrl, 1, true );
-					if ( match.len[1] ) videoEmbedUrl = "https://www.youtube.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
-					break;
-
-			}
-
-		}
-
-		// Return the url
-		return videoEmbedUrl;
-
-	}
-
-	/**
-	 * Sets and checks if the feed item is a podcast or contains a podcast
-	 * @return Whether or not the feed item is a podcast or contains a podcast
-	 */
-	boolean function getContainsPodCast() {
-
-		// Check property
-		if ( !len( containsPodcast ) ) {
-
-			// Set default
-			containsPodcast = false;
-
-			// Get the item urls
-			var itemUrls = getItemUrls();
-
-			// Check urls for podcasts
-			for ( var itemUrl IN itemUrls ) {
-				if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
-					containsPodcast = true;
-					break;
-				}
-			}
-
-		}
-
-		// Return property
-		return containsPodcast;
-
+		return len( getVideoEmbedUrl() );
 	}
 
 	/**
@@ -435,34 +318,7 @@ component persistent="true"
 	 * @return Whether or not the feed item is a podcast or contains a podcast
 	 */
 	boolean function isPodcast() {
-		return getContainsPodcast();
-	}
-
-	/**
-	 * Sets and returns the podcast url if the feed item is a podcast or contains a podcast
-	 * @return The podcast url if the feed item is a podcast or contains a podcast
-	 */
-	string function getPodcastUrl() {
-
-		// Check if item contains a podcast and podcast url set
-		if ( isPodcast() && !len( podcastUrl ) ) {
-
-			// Set vars
-			var itemUrls = getItemUrls();
-
-			// Check urls for podcasts
-			for ( var itemUrl IN itemUrls ) {
-				if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
-					podcastUrl = itemUrl;
-					break;
-				}
-			}
-
-		}
-
-		// Return url
-		return podcastUrl;
-
+		return len( getPodcastUrl() );
 	}
 
 	/**
@@ -471,8 +327,11 @@ component persistent="true"
 	 */
 	string function getPodcastMimeType() {
 
-		// Check if item contains a podcast and mime type set
-		if ( isPodCast() && !len( podcastMimeType ) ) {
+		// Set var
+		var mimeType = "";
+
+		// Check if item contains a podcast
+		if ( isPodCast() ) {
 
 			// Set vars
 			var podcastUrl = getPodcastUrl();
@@ -489,32 +348,12 @@ component persistent="true"
 			};
 
 			// Set mime type
-			podcastMimeType = mimeTypes[ ext ];
+			mimeType = mimeTypes[ ext ];
 
 		}
 
 		// Return mime type
-		return podcastMimeType;
-
-	}
-
-	/**
-	 * Returns an array of all urls associated with the feed item
-	 * @return The array of urls
-	 */
-	array function getItemUrls() {
-
-		// Set vars
-		var itemUrls = [ getItemUrl() ];
-		var attachments = getAttachments();
-
-		// Add attachment urls if any
-		for ( var attachment IN attachments ) {
-			arrayAppend( itemUrls, attachment.getAttachmentUrl() );
-		}
-
-		// Return urls
-		return itemUrls;
+		return mimeType;
 
 	}
 

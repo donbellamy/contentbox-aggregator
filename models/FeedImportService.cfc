@@ -116,12 +116,22 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 										try {
 
+											// Check video and podcast
+											var isVideo = checkIsVideo( item );
+											var isPodcast = checkIsPodcast( item );
+
 											// Create feed item
 											var feedItem = feedItemService.new();
 
 											// FeedItem properties
 											feedItem.setUniqueId( uniqueId );
 											feedItem.setItemUrl( item.url );
+											if ( isVideo ) {
+												feedItem.setVideoUrl( getVideoUrl( item ) );
+											}
+											if ( isPodcast ) {
+												feedItem.setPodcastUrl( getPodcastUrl( item ) );
+											}
 											if ( len( trim( item.author ) ) ) {
 												feedItem.setItemAuthor( item.author );
 											}
@@ -568,7 +578,144 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			}
 		}
 
+		// Return passes
 		return passes;
+
+	}
+
+	/**
+	 * Checks whether or not the feed item is a video
+	 * @item The item to check
+	 * @return Whether or not the feed item is a video
+	 */
+	private boolean function checkIsVideo( required struct item ) {
+
+		// Check if is video
+		if ( reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", arguments.item.url ) ) {
+			return true;
+		}
+
+		// Not a video
+		return false;
+
+	}
+
+	/**
+	 * Returns the video url if the feed item is a video
+	 * @item The item to check
+	 * @return The video url if the feed item is a video
+	 */
+	private string function getVideoUrl( required struct item ) {
+
+		// Set var
+		var videoUrl = "";
+
+		// Check if item is a video
+		if ( checkIsVideo( arguments.item ) ) {
+
+			// Set vars
+			var itemUrl = arguments.item.url;
+			var results = reFindNoCase( "^http[s]?:\/\/(www\.)?(bitchute|vimeo|youtube)\.com\/(.*)$", itemUrl, 1, true );
+			var videoType = mid( itemUrl, results.pos[3], results.len[3] );
+
+			// Switch on video type
+			switch( videoType ) {
+
+				// Bitchute
+				case "bitchute":
+					var match = reFindNoCase( "(embed\/)(.*)$", itemUrl, 1, true );
+					if ( match.len[1] ) videoUrl = "https://www.bitchute.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
+					break;
+
+				// Vimeo
+				case "vimeo":
+					var match = reFindNoCase( "(\d*)$", itemUrl, 1, true );
+					if ( match.len[1] ) videoUrl = "https://player.vimeo.com/video/" & mid( itemUrl, match.pos[1], match.len[1] );
+					break;
+
+				// Youtube
+				case "youtube":
+					var match = reFindNoCase( "(&|\?)v=([^&]+)$", itemUrl, 1, true );
+					if ( match.len[1] ) videoUrl = "https://www.youtube.com/embed/" & mid( itemUrl, match.pos[3], match.len[3] );
+					break;
+
+			}
+
+		}
+
+		// Return url
+		return videoUrl;
+
+	}
+
+	/**
+	 * Checks if the feed item is a podcast or contains a podcast
+	 * @item The item to check
+	 * @return Whether or not the feed item is a podcast or contains a podcast
+	 */
+	private boolean function checkIsPodcast( required struct item ) {
+
+		// Set var
+		var itemUrls = [ arguments.item.url ];
+
+		// Loop over attachments
+		if ( structKeyExists( arguments.item, "attachment" ) && arrayLen( arguments.item.attachment ) ) {
+			for ( var attachment IN arguments.item.attachment ) {
+				if ( structKeyExists( attachment, "url" ) && len( attachment.url ) ) {
+					arrayAppend( itemUrls, attachment.url );
+				}
+			}
+		}
+
+		// Check urls for podcasts
+		for ( var itemUrl IN itemUrls ) {
+			if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
+				return true;
+			}
+		}
+
+		// Not a podcast
+		return false;
+
+	}
+
+	/**
+	 * Returns the podcast url if the feed item is a podcast or contains a podcast
+	 * @item The item to check
+	 * @return The podcast url if the feed item is a podcast or contains a podcast
+	 */
+	private string function getPodcastUrl( required struct item ) {
+
+		// Set var
+		var podcastUrl = "";
+
+		// Check if item contains a podcast
+		if ( checkIsPodcast( arguments.item ) ) {
+
+			// Set var
+			var itemUrls = [ arguments.item.url ];
+
+			// Loop over attachments
+			if ( structKeyExists( arguments.item, "attachment" ) && arrayLen( arguments.item.attachment ) ) {
+				for ( var attachment IN arguments.item.attachment ) {
+					if ( structKeyExists( attachment, "url" ) && len( attachment.url ) ) {
+						arrayAppend( itemUrls, attachment.url );
+					}
+				}
+			}
+
+			// Check urls for podcasts
+			for ( var itemUrl IN itemUrls ) {
+				if ( reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", itemUrl ) ) {
+					podcastUrl = itemUrl;
+					break;
+				}
+			}
+
+		}
+
+		// Return url
+		return podcastUrl;
 
 	}
 

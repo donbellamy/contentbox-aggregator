@@ -27,6 +27,8 @@ component extends="ContentService" singleton {
 	 * @year The year to filter on
 	 * @month The month to filter on
 	 * @day The day to filter on
+	 * @isVideo Whether or not to filter on video items only
+	 * @isPodcast Whether or not to filter on podcast items only
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @searchActiveContent Whether or not to search active content
 	 * @countOnly Whether or not to return the count only
@@ -44,6 +46,8 @@ component extends="ContentService" singleton {
 		numeric year=0,
 		numeric month=0,
 		numeric day=0,
+		boolean isVideo=false,
+		boolean isPodcast=false,
 		string sortOrder="publishedDate DESC",
 		boolean searchActiveContent=true,
 		boolean countOnly=false,
@@ -54,8 +58,8 @@ component extends="ContentService" singleton {
 		var results = {};
 		var params = {};
 
-		// Check for author
-		if ( len( trim( arguments.author ) ) ) {
+		// Check for author and video/podcast
+		if ( len( trim( arguments.author ) ) || arguments.isVideo || arguments.isPodcast ) {
 			arguments.includeEntries = false;
 		}
 
@@ -150,6 +154,16 @@ component extends="ContentService" singleton {
 		if ( val( arguments.day ) ) {
 			whereHql &= " AND DAY( cb.publishedDate ) = :day";
 			params["day"] = arguments.day;
+		}
+
+		// Check for video
+		if ( arguments.isVideo ) {
+			whereHql &= " AND cb.videoUrl > ''";
+		}
+
+		// Check for podcast
+		if ( arguments.isPodcast ) {
+			whereHql &= " AND cb.podcastUrl > ''";
 		}
 
 		// Sort order

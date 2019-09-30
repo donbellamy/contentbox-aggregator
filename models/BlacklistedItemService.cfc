@@ -29,7 +29,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	struct function getBlacklistedItems(
 		string searchTerm="",
 		string feed="",
-		string sortOrder="title ASC",
+		string sortOrder="createdDate DESC",
 		boolean countOnly=false,
 		numeric max=0,
 		numeric offset=0 ) {
