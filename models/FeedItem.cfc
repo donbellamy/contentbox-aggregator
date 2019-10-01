@@ -310,7 +310,7 @@ component persistent="true"
 	 * @return Whether or not the feed item is a video
 	 */
 	boolean function isVideo() {
-		return len( getVideoEmbedUrl() );
+		return len( getVideoUrl() );
 	}
 
 	/**

@@ -36,7 +36,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
-	 * @sortOrder.hint How to order the results, defaults to date published from the feed.
+	 * @sortOrder.hint How to order the results, defaults to date published.
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
