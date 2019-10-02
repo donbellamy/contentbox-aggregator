@@ -7,7 +7,9 @@
 </cfif>
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
-	#ag.quickFeedItems( args=args )#
+	<div class="row display-flex">
+		#ag.quickFeedItems( template="podcast", args=args )#
+	</div>
 	<div class="contentBar">
 		#ag.quickPaging()#
 	</div>
@@ -15,4 +17,18 @@
 	<div>No results found.</div>
 </cfif>
 #cb.event("aggregator_postFeedItemsDisplay")#
-</cfoutput>>
+</cfoutput>
+<style>
+audio {
+	max-width: 95%;
+}
+.row.display-flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+}
+</style>
