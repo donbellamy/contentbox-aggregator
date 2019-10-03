@@ -17,18 +17,22 @@
 	<div>No results found.</div>
 </cfif>
 #cb.event("aggregator_postFeedItemsDisplay")#
-</cfoutput>
 <style>
-audio {
-	max-width: 95%;
-}
-.row.display-flex {
-	display: flex;
-	flex-wrap: wrap;
-}
-.row.display-flex > [class*='col-'] {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 2rem;
-}
+	audio {
+		max-width: 95%;
+	}
+	.img-thumbnail {
+		width: 200px;
+		height: 200px;
+	}
+	.row.display-flex {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.row.display-flex > [class*='col-'] {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 2rem;
+	}
 </style>
+</cfoutput>

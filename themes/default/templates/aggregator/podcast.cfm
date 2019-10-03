@@ -1,4 +1,11 @@
 <cfparam name="args" default="#structNew()#" />
+<cfset linkBehavior =
+	len( feedItem.getFeed().getLinkBehavior() ) ?
+	feedItem.getFeed().getLinkBehavior() :
+	ag.setting("ag_site_item_link_behavior") />
+<cfset directLink = linkBehavior EQ "link" ? true : false />
+<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
+
 <cfset imageUrl = feedItem.getFeaturedImageUrl() />
 <cfoutput>
 <div class="col-md-4 col-sm-6 col-xs-6">
