@@ -17,9 +17,10 @@
 	<div>No results found.</div>
 </cfif>
 #cb.event("aggregator_postFeedItemsDisplay")#
-<style>
+<style type="text/css">
 	audio {
 		max-width: 95%;
+		height: 25px;
 	}
 	.img-thumbnail {
 		width: 200px;
@@ -32,7 +33,7 @@
 	.row.display-flex > [class*='col-'] {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 	}
 </style>
 </cfoutput>

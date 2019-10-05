@@ -83,8 +83,8 @@ component persistent="true"
 	**                            CONSTRAINTS
 	********************************************************************* */
 
-	this.constraints["uniqueId"] = { required=true, size="1..255" };
-	this.constraints["itemUrl"] = { required=true, type="url", size="1..255" };
+	this.constraints["uniqueId"] = { required=true, size="1..510" };
+	this.constraints["itemUrl"] = { required=true, type="url", size="1..510" };
 	this.constraints["itemAuthor"] = { required=false, size="1..255" };
 
 	/**
@@ -93,14 +93,14 @@ component persistent="true"
 	 */
 	FeedItem function init() {
 		super.init();
-		allowComments = false;
-		categories = [];
-		renderedExcerpt = "";
-		createdDate = now();
-		contentType = "FeedItem";
-		attachments = [];
-		videodUrl = "";
-		podcastUrl = "";
+		variables.allowComments = false;
+		variables.categories = [];
+		variables.renderedExcerpt = "";
+		variables.createdDate = now();
+		variables.contentType = "FeedItem";
+		variables.attachments = [];
+		variables.videodUrl = "";
+		variables.podcastUrl = "";
 		setMetaInfo({});
 		return this;
 	}
@@ -148,7 +148,7 @@ component persistent="true"
 	 */
 	string function renderExcerpt() {
 
-		if ( hasExcerpt() AND NOT len( renderedExcerpt ) ) {
+		if ( hasExcerpt() AND NOT len( variables.renderedExcerpt ) ) {
 			lock name="contentbox.excerptrendering.#getContentID()#" type="exclusive" throwontimeout="true" timeout="10" {
 				var b = createObject( "java","java.lang.StringBuilder" ).init( getExcerpt() );
 				var iData = {
@@ -156,11 +156,11 @@ component persistent="true"
 					content	= this
 				};
 				interceptorService.processState( "cb_onContentRendering", iData );
-				renderedExcerpt = b.toString();
+				variables.renderedExcerpt = b.toString();
 			}
 		}
 
-		return renderedExcerpt;
+		return variables.renderedExcerpt;
 
 	}
 
@@ -365,11 +365,11 @@ component persistent="true"
 
 		var errors = [];
 
-		title = trim( left( title, 200 ) );
-		slug = trim( left( slug, 200 ) );
+		variables.title = trim( left( variables.title, 200 ) );
+		variables.slug = trim( left( variables.slug, 200 ) );
 
-		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
-		if ( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
+		if ( !len( variables.title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( variables.slug ) ) { arrayAppend( errors, "Slug is required" ); }
 
 		return errors;
 

@@ -89,11 +89,11 @@ component persistent="true"
 
 		var errors = [];
 
-		title = trim( left( title, 255 ) );
-		itemUrl = trim( left( feedUrl, 255 ) );
+		variables.title = trim( left( variables.title, 255 ) );
+		variables.itemUrl = trim( left( variables.feedUrl, 255 ) );
 
-		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
-		if ( !len( itemUrl ) ) { arrayAppend( errors, "Item URL is required" ); }
+		if ( !len( variables.title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( variables.itemUrl ) ) { arrayAppend( errors, "Item URL is required" ); }
 
 		return errors;
 

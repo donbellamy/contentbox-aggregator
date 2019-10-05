@@ -7,7 +7,7 @@
 </cfif>
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
-	#ag.quickFeedItems( args=args )#
+	#ag.quickFeedItems( template="video", args=args )#
 	<div class="contentBar">
 		#ag.quickPaging()#
 	</div>
@@ -15,4 +15,6 @@
 	<div>No results found.</div>
 </cfif>
 #cb.event("aggregator_postFeedItemsDisplay")#
+<style type="text/css">
+</style>
 </cfoutput>

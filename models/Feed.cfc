@@ -160,14 +160,6 @@ component persistent="true"
 		default="0";
 
 	/* *********************************************************************
-	**                            NON PERSISTED PROPERTIES
-	********************************************************************* */
-
-	property name="websiteUrl"
-		persistent="false"
-		default="";
-
-	/* *********************************************************************
 	**                            CONSTRAINTS
 	********************************************************************* */
 
@@ -193,14 +185,13 @@ component persistent="true"
 	 */
 	Feed function init() {
 		super.init();
-		allowComments = false;
-		categories = [];
-		renderedContent = "";
-		createdDate = now();
-		contentType = "Feed";
-		feedImports = [];
-		blacklistedItems = [];
-		websiteUrl = "";
+		variables.allowComments = false;
+		variables.categories = [];
+		variables.renderedContent = "";
+		variables.createdDate = now();
+		variables.contentType = "Feed";
+		variables.feedImports = [];
+		variables.blacklistedItems = [];
 		setTaxonomies([]);
 		return this;
 	}
@@ -257,15 +248,14 @@ component persistent="true"
 	 * @return The website url if defined, the feed url if not
 	 */
 	string function getWebsiteUrl() {
-		if ( !len( websiteUrl ) ) {
-			var feedImport = getLatestSuccessfulFeedImport();
-			if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
-				websiteUrl = feedImport.getWebsiteUrl();
-			} else {
-				websiteUrl = getFeedUrl();
-			}
+		var wesiteUrl = "";
+		var feedImport = getLatestSuccessfulFeedImport();
+		if ( !isNull( feedImport ) && len( feedImport.getWebsiteUrl() ) ) {
+			websiteUrl = feedImport.getWebsiteUrl();
+		} else {
+			websiteUrl = getFeedUrl();
 		}
-		return websiteUrl
+		return websiteUrl;
 	}
 
 	/**
@@ -553,19 +543,19 @@ component persistent="true"
 
 		var errors = [];
 
-		HTMLKeyWords = trim( left( HTMLKeywords, 160 ) );
-		HTMLDescription = trim( left( HTMLDescription, 160 ) );
-		title = trim( left( title, 200 ) );
-		slug = trim( left( slug, 200 ) );
-		feedUrl = trim( left( feedUrl, 255 ) );
-		tagLine = trim( left( tagLine, 255 ) );
-		matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
-		matchAllFilter = trim( left( matchAllFilter, 255 ) );
-		matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
+		variables.HTMLKeyWords = trim( left( HTMLKeywords, 160 ) );
+		variables.HTMLDescription = trim( left( HTMLDescription, 160 ) );
+		variables.title = trim( left( title, 200 ) );
+		variables.slug = trim( left( slug, 200 ) );
+		variables.feedUrl = trim( left( feedUrl, 255 ) );
+		variables.tagLine = trim( left( tagLine, 255 ) );
+		variables.matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
+		variables.matchAllFilter = trim( left( matchAllFilter, 255 ) );
+		variables.matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
-		if ( !len( title ) ) { arrayAppend( errors, "Title is required" ); }
-		if ( !len( slug ) ) { arrayAppend( errors, "Slug is required" ); }
-		if ( !len( feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
+		if ( !len( variables.title ) ) { arrayAppend( errors, "Title is required" ); }
+		if ( !len( variables.slug ) ) { arrayAppend( errors, "Slug is required" ); }
+		if ( !len( variables.feedUrl ) ) { arrayAppend( errors, "Feed URL is required" ); }
 
 		return errors;
 

@@ -72,8 +72,8 @@ component persistent="true"
 	 */
 	FeedImport function init() {
 		super.init();
-		importedCount = 0;
-		createdDate = now();
+		variables.importedCount = 0;
+		variables.createdDate = now();
 		setMetaInfo({});
 		return this;
 	}
