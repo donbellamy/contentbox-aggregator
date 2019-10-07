@@ -267,10 +267,13 @@ component extends="contentHandler" {
 
 		// Grab the feed
 		prc.feed = feedService.get( rc.contentID );
+		var isNew = ( !prc.feed.isLoaded() );
 		var wasPaused = !prc.feed.canImport();
 
-		// Old feed
-		var oldFeed = duplicate( prc.feed.getMemento() );
+		// Set old feed to memento if not new
+		if ( !isNew ) {
+			var oldFeed = duplicate( prc.feed.getMemento() );
+		}
 
 		// Populate feed
 		populateModel( prc.feed )
@@ -286,8 +289,7 @@ component extends="contentHandler" {
 			return editor( argumentCollection=arguments );
 		}
 
-		// Check if new
-		var isNew = ( NOT prc.feed.isLoaded() );
+		// Set author if needed
 		if ( isNew ) {
 			prc.feed.setCreator( prc.oCurrentAuthor );
 		}
@@ -308,6 +310,11 @@ component extends="contentHandler" {
 		}
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feed.removeAllCategories().setCategories( categories );
+
+		// Set the old feed to current memento if new
+		if ( isNew ) {
+			var oldFeed = duplicate( prc.feed.getMemento() );
+		}
 
 		announceInterception(
 			"aggregator_preFeedSave",
