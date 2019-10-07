@@ -7,8 +7,8 @@
 <cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 <cfset imageUrl = feedItem.getFeaturedImageUrl() />
 <cfoutput>
-<div class="col-md-6 col-sm-6 col-xs-6">
-	<iframe width="560" height="315" src="#feedItem.getVideoUrl()#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="col-md-6 col-sm-12 col-xs-12">
+	<iframe height="240" src="#feedItem.getVideoUrl()#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	<h5>
 		<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
@@ -16,5 +16,9 @@
 			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 	</h5>
+	<p class="small text-muted">
+		<i class="fa fa-calendar"></i>
+		#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
+	</p>
 </div>
 </cfoutput>

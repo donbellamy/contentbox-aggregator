@@ -16,6 +16,7 @@
 			#html.hiddenField( name="feed", id="feedFilter", value="#rc.feed#" )#
 			#html.hiddenField( name="category", id="categoryFilter", value="#rc.category#" )#
 			#html.hiddenField( name="status", id="statusFilter", value="#rc.status#" )#
+			#html.hiddenField( name="type", id="typeFilter", value="#rc.type#" )#
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="row">
@@ -111,6 +112,17 @@
 									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
 									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
 									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="type" class="control-label">Type:</label>
+							<div class="controls">
+								<select name="type" id="type" class="form-control input-sm valid">
+									<option value=""<cfif !len( rc.type ) > selected="selected"</cfif>>Any Type</option>
+									<option value="article"<cfif rc.status EQ "article" > selected="selected"</cfif>>Article</option>
+									<option value="podcast"<cfif rc.status EQ "podcast" > selected="selected"</cfif>>Podcast</option>
+									<option value="video"<cfif rc.status EQ "video" > selected="selected"</cfif>>Video</option>
 								</select>
 							</div>
 						</div>

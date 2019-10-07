@@ -371,6 +371,93 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#attachments()">attachments</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">inverse = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = one-to-many</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">cascade = all-delete-orphan</li>
+				
+			
+				
+				<li class="label label-default label-annotations">orderby = feedItemAttachmentID DESC</li>
+				
+			
+				
+				<li class="label label-default label-annotations">batchsize = 25</li>
+				
+			
+				
+				<li class="label label-default label-annotations">singularname = Attachment</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedItemID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = FeedItemAttachment</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = extra</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
@@ -610,6 +697,65 @@ FeedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="FeedItem.html#podcastUrl()">podcastUrl</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 510</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="FeedItem.html#renderedExcerpt()">renderedExcerpt</A></strong>
 			<br>
 			
@@ -780,6 +926,65 @@ FeedItem Model</p>
 		</td>
 	</tr>
 	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#videoUrl()">videoUrl</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">length = 510</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
 	</tr>
 </table>
 
@@ -822,6 +1027,32 @@ FeedItem Model</p>
 		</th>
 	</tr>
 
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#addAttachment()">addAttachment</A></strong>(any Attachment)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getAttachments()">getAttachments</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
 	
 	
 	
@@ -944,6 +1175,34 @@ FeedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="FeedItem.html#getPodcastMimeType()">getPodcastMimeType</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets and returns the mime type if the feed item is a podcast or contains a podcast.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getPodcastUrl()">getPodcastUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="FeedItem.html#getRenderedExcerpt()">getRenderedExcerpt</A></strong>()
 			<br>
 			
@@ -982,6 +1241,32 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getVideoUrl()">getVideoUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#hasAttachment()">hasAttachment</A></strong>([any Attachment])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>boolean</code>
 		</td>
 		<td>
@@ -997,6 +1282,49 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#isPodcast()">isPodcast</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a podcast or contains a podcast.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#isVideo()">isVideo</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a video.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#removeAttachment()">removeAttachment</A></strong>(any Attachment)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
@@ -1004,6 +1332,19 @@ FeedItem Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed item excerpt.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#setAttachments()">setAttachments</A></strong>(array attachments)
+			<br>
 			
 		</td>
 	</tr>
@@ -1069,6 +1410,19 @@ FeedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="FeedItem.html#setPodcastUrl()">setPodcastUrl</A></strong>(any podcastUrl)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="FeedItem.html#setRenderedExcerpt()">setRenderedExcerpt</A></strong>(any renderedExcerpt)
 			<br>
 			
@@ -1083,6 +1437,19 @@ FeedItem Model</p>
 		</td>
 		<td>
 			<strong><a href="FeedItem.html#setUniqueId()">setUniqueId</A></strong>(any uniqueId)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#setVideoUrl()">setVideoUrl</A></strong>(any videoUrl)
 			<br>
 			
 		</td>
@@ -2770,6 +3137,86 @@ FeedItem Model</p>
 
 	
 		
+		<a name="attachments()"><!-- --></a>
+		<h3>attachments</h3>
+
+		<kbd>
+			property array
+			<strong>attachments</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>inverse</code> - true</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - one-to-many</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>cascade</code> - all-delete-orphan</dd>
+			
+		
+			
+			<dd><code>orderby</code> - feedItemAttachmentID DESC</dd>
+			
+		
+			
+			<dd><code>batchsize</code> - 25</dd>
+			
+		
+			
+			<dd><code>singularname</code> - Attachment</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedItemID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - FeedItemAttachment</dd>
+			
+		
+			
+			<dd><code>lazy</code> - extra</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="excerpt()"><!-- --></a>
 		<h3>excerpt</h3>
 
@@ -2978,6 +3425,58 @@ FeedItem Model</p>
 		<hr>
 	
 		
+		<a name="podcastUrl()"><!-- --></a>
+		<h3>podcastUrl</h3>
+
+		<kbd>
+			property any
+			<strong>podcastUrl</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 510</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="renderedExcerpt()"><!-- --></a>
 		<h3>renderedExcerpt</h3>
 
@@ -3133,6 +3632,58 @@ FeedItem Model</p>
 
 		<hr>
 	
+		
+		<a name="videoUrl()"><!-- --></a>
+		<h3>videoUrl</h3>
+
+		<kbd>
+			property any
+			<strong>videoUrl</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - false</dd>
+			
+		
+			
+			<dd><code>length</code> - 510</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
 
 
 
@@ -3153,6 +3704,77 @@ FeedItem Model</p>
 	</tr>
 </table>
 
+
+	
+	<a name="addAttachment()"><!-- --></a>
+	<h3>
+		addAttachment
+		
+	</h3>
+
+	<kbd>public any <strong>addAttachment</strong>(any Attachment)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>Attachment</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getAttachments()"><!-- --></a>
+	<h3>
+		getAttachments
+		
+	</h3>
+
+	<kbd>public string <strong>getAttachments</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
 
 	
 	<a name="getContentExcerpt()"><!-- --></a>
@@ -3511,6 +4133,77 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="getPodcastMimeType()"><!-- --></a>
+	<h3>
+		getPodcastMimeType
+		
+	</h3>
+
+	<kbd>public string <strong>getPodcastMimeType</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Sets and returns the mime type if the feed item is a podcast or contains a podcast</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The podcast mime type if the feed item is a podcast or contains a podcast</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPodcastUrl()"><!-- --></a>
+	<h3>
+		getPodcastUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getPodcastUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getRenderedExcerpt()"><!-- --></a>
 	<h3>
 		getRenderedExcerpt
@@ -3647,6 +4340,77 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="getVideoUrl()"><!-- --></a>
+	<h3>
+		getVideoUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getVideoUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasAttachment()"><!-- --></a>
+	<h3>
+		hasAttachment
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasAttachment</strong>([any Attachment])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>Attachment</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="hasExcerpt()"><!-- --></a>
 	<h3>
 		hasExcerpt
@@ -3686,6 +4450,123 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="isPodcast()"><!-- --></a>
+	<h3>
+		isPodcast
+		
+	</h3>
+
+	<kbd>public boolean <strong>isPodcast</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Shorthand function for checking if the feed item is a podcast or contains a podcast</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a podcast or contains a podcast</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isVideo()"><!-- --></a>
+	<h3>
+		isVideo
+		
+	</h3>
+
+	<kbd>public boolean <strong>isVideo</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Shorthand function for checking if the feed item is a video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a video</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="removeAttachment()"><!-- --></a>
+	<h3>
+		removeAttachment
+		
+	</h3>
+
+	<kbd>public boolean <strong>removeAttachment</strong>(any Attachment)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>Attachment</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="renderExcerpt()"><!-- --></a>
 	<h3>
 		renderExcerpt
@@ -3717,6 +4598,45 @@ FeedItem Model</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The rendered excerpt</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setAttachments()"><!-- --></a>
+	<h3>
+		setAttachments
+		
+	</h3>
+
+	<kbd>public any <strong>setAttachments</strong>(array attachments)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>attachments</code></dd>
+		
+		</dl>
+	
+
 	
 
 	
@@ -3888,6 +4808,45 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="setPodcastUrl()"><!-- --></a>
+	<h3>
+		setPodcastUrl
+		
+	</h3>
+
+	<kbd>public any <strong>setPodcastUrl</strong>(any podcastUrl)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>podcastUrl</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="setRenderedExcerpt()"><!-- --></a>
 	<h3>
 		setRenderedExcerpt
@@ -3954,6 +4913,45 @@ FeedItem Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>uniqueId</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setVideoUrl()"><!-- --></a>
+	<h3>
+		setVideoUrl
+		
+	</h3>
+
+	<kbd>public any <strong>setVideoUrl</strong>(any videoUrl)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>videoUrl</code></dd>
 		
 		</dl>
 	

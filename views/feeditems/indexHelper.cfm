@@ -20,6 +20,7 @@ function contentLoad( criteria ) {
 	if ( !( "feed" in criteria) ) { criteria.feed = ""; }
 	if ( !( "category" in criteria) ) { criteria.category = ""; }
 	if ( !( "status" in criteria) ) { criteria.status = ""; }
+	if ( !( "type" in criteria) ) { criteria.type = ""; }
 	if ( !( "showAll" in criteria) ) { criteria.showAll = false; }
 	$tableContainer.css( "opacity", .60 );
 	var args = {
@@ -28,6 +29,7 @@ function contentLoad( criteria ) {
 		feed : criteria.feed,
 		category : criteria.category,
 		status : criteria.status,
+		type : criteria.type,
 		showAll : criteria.showAll
 	};
 	$tableContainer.load( "#event.buildLink( prc.xehFeedItemTable )#", args, function() {
@@ -36,7 +38,7 @@ function contentLoad( criteria ) {
 	});
 }
 function contentFilter() {
-	if ( $("##feed").val() != "" || $("##category").val() != "" || $("##status").val() != "" ) {
+	if ( $("##feed").val() != "" || $("##category").val() != "" || $("##status").val() != "" || $("##type").val() != "" ) {
 		$("##filterBox").addClass("selected");
 	} else {
 		$("##filterBox").removeClass("selected");
@@ -44,11 +46,13 @@ function contentFilter() {
 	$("##feedFilter").val( $("##feed").val() );
 	$("##categoryFilter").val( $("##category").val() );
 	$("##statusFilter").val( $("##status").val() );
+	$("##typeFilter").val( $("##type").val() );
 	contentLoad({
 		search : $("##search").val(),
 		feed : $("##feed").val(),
 		category : $("##category").val(),
-		status : $("##status").val()
+		status : $("##status").val(),
+		type : $("##type").val()
 	});
 }
 function contentShowAll() {
@@ -57,6 +61,7 @@ function contentShowAll() {
 		feed : $("##feed").val(),
 		category : $("##category").val(),
 		status : $("##status").val(),
+		type : $("##type").val(),
 		showAll : true
 	});
 }
@@ -71,6 +76,7 @@ function resetFilter( reload ) {
 	$("##feed").val("");
 	$("##category").val("");
 	$("##status").val("");
+	$("##type").val("");
 	$("##filterBox").removeClass("selected");
 }
 function activateInfoPanels() {
@@ -129,7 +135,8 @@ function contentPaginate( page ) {
 		page : page,
 		feed : $("##feed").val(),
 		category : $("##category").val(),
-		status : $("##status").val()
+		status : $("##status").val(),
+		type : $("##type").val()
 	});
 }
 function categoryChooser( contentID ) {
@@ -166,6 +173,7 @@ $(document).ready( function() {
 		feed: "#rc.feed#",
 		category: "#rc.category#",
 		status: "#rc.status#",
+		type: "#rc.type#",
 		showAll: "#rc.showAll#"
 	};
 	contentLoad( criteria );

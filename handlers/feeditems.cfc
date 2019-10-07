@@ -38,6 +38,7 @@ component extends="contentHandler" {
 			.paramValue( "feed", "" )
 			.paramValue( "category", "" )
 			.paramValue( "status", "" )
+			.paramValue( "type", "" )
 			.paramValue( "showAll", false );
 
 		// Grab feeds and categories
@@ -58,6 +59,7 @@ component extends="contentHandler" {
 			.paramValue( "feed", "" )
 			.paramValue( "category", "" )
 			.paramValue( "status", "" )
+			.paramValue( "type", "" )
 			.paramValue( "showAll", false );
 
 		// Paging
@@ -72,6 +74,7 @@ component extends="contentHandler" {
 			searchActiveContent = false,
 			category = rc.category,
 			feed = rc.feed,
+			type = rc.type,
 			max = ( rc.showAll ? 0 : prc.cbSettings.cb_paging_maxrows ),
 			offset = ( rc.showAll ? 0 : prc.paging.startRow - 1 )
 		);
@@ -552,6 +555,7 @@ component extends="contentHandler" {
 		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
 		if ( structKeyExists( rc, "category" ) ) filters.category = rc.category;
 		if ( structKeyExists( rc, "status" ) ) filters.status = rc.status;
+		if ( structKeyExists( rc, "type" ) ) filters.status = rc.type;
 
 		return filters;
 

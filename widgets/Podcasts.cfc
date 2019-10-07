@@ -71,7 +71,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// Paging
-		prc.pagingLink &= "?page=@page@";
+		prc.pagingLink &= "?page=@page@&type=podcast";
 
 		// Feed
 		if ( len( trim( arguments.feed ) ) ) {
@@ -104,7 +104,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			max = ag.setting("ag_site_paging_max_items"),
 			offset = prc.pagingBoundaries.startRow - 1,
 			includeEntries = false,
-			isPodcast = true
+			type = "podcast"
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;

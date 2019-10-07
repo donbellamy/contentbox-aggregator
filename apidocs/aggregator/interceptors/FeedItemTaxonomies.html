@@ -455,6 +455,61 @@ Feed item taxonomies</p>
 		</td>
 	</tr>
 	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemTaxonomies.html#settingService()">settingService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = settingService@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
 	</tr>
 </table>
 
@@ -486,6 +541,21 @@ Feed item taxonomies</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after feed import.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemTaxonomies.html#aggregator_postFeedImports()">aggregator_postFeedImports</A></strong>([any event], [any interceptData])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired after feed imports.
 			
 		</td>
 	</tr>
@@ -531,6 +601,21 @@ Feed item taxonomies</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applies taxonomies to the feed items.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;array</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemTaxonomies.html#createCategories()">createCategories</A></strong>(array categoryIds)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an array of categories.
 			
 		</td>
 	</tr>
@@ -1306,6 +1391,54 @@ Feed item taxonomies</p>
 
 		<hr>
 	
+		
+		<a name="settingService()"><!-- --></a>
+		<h3>settingService</h3>
+
+		<kbd>
+			property any
+			<strong>settingService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - settingService@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
 
 
 
@@ -1340,6 +1473,49 @@ Feed item taxonomies</p>
 
 	
 		<p>Fired after feed import</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>interceptData</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="aggregator_postFeedImports()"><!-- --></a>
+	<h3>
+		aggregator_postFeedImports
+		
+	</h3>
+
+	<kbd>public any <strong>aggregator_postFeedImports</strong>([any event], [any interceptData])</kbd>
+
+	<br><br>
+
+	
+		<p>Fired after feed imports</p>
 	
 
 	
@@ -1488,6 +1664,47 @@ Feed item taxonomies</p>
 		<dd><code>taxonomies</code> - An array of taxonomies to apply to the feed items</dd>
 		
 		<dd><code>feed</code> - The feed to use when applying the taxonomies</dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createCategories()"><!-- --></a>
+	<h3>
+		createCategories
+		
+	</h3>
+
+	<kbd>private array <strong>createCategories</strong>(array categoryIds)</kbd>
+
+	<br><br>
+
+	
+		<p>Creates an array of categories</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>categoryIds</code> - An array of categoryIds</dd>
 		
 		</dl>
 	

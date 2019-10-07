@@ -46,8 +46,7 @@ component extends="ContentService" singleton {
 		numeric year=0,
 		numeric month=0,
 		numeric day=0,
-		boolean isVideo=false,
-		boolean isPodcast=false,
+		string type="",
 		string sortOrder="publishedDate DESC",
 		boolean searchActiveContent=true,
 		boolean countOnly=false,
@@ -59,7 +58,7 @@ component extends="ContentService" singleton {
 		var params = {};
 
 		// Check for author and video/podcast
-		if ( len( trim( arguments.author ) ) || arguments.isVideo || arguments.isPodcast ) {
+		if ( len( trim( arguments.author ) ) || arguments.type == "video" || arguments.type == "podcast" ) {
 			arguments.includeEntries = false;
 		}
 
@@ -156,14 +155,22 @@ component extends="ContentService" singleton {
 			params["day"] = arguments.day;
 		}
 
-		// Check for video
-		if ( arguments.isVideo ) {
-			whereHql &= " AND cb.videoUrl > ''";
-		}
-
-		// Check for podcast
-		if ( arguments.isPodcast ) {
-			whereHql &= " AND cb.podcastUrl > ''";
+		// Check for type
+		if ( len( arguments.type ) ) {
+			switch( arguments.type ) {
+				case "article": {
+					whereHql &= " AND ( cb.podcastUrl = '' OR cb.podcastUrl IS NULL ) AND ( cb.videoUrl = '' OR cb.videoUrl IS NULL )";
+					break;
+				}
+				case "podcast": {
+					whereHql &= " AND cb.podcastUrl > ''";
+					break;
+				}
+				case "video": {
+					whereHql &= " AND cb.videoUrl > ''";
+					break;
+				}
+			}
 		}
 
 		// Sort order

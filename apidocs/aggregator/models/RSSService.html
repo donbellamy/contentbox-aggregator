@@ -716,7 +716,22 @@ RSS Service</p>
 			<code>private&nbsp;string</code>
 		</td>
 		<td>
-			<strong><a href="RSSService.html#buildFeed()">buildFeed</A></strong>([string category=''], [string slug=''])
+			<strong><a href="RSSService.html#buildFeedFeed()">buildFeedFeed</A></strong>([string category=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the feeds feed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="RSSService.html#buildFeedItemFeed()">buildFeedItemFeed</A></strong>([string slug=''], [string category=''])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the feed items feed.
@@ -731,7 +746,7 @@ RSS Service</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="RSSService.html#getRSS()">getRSS</A></strong>([string category=''], [string slug=''])
+			<strong><a href="RSSService.html#getRSS()">getRSS</A></strong>([string slug=''], [string category=''], [string contentType='FeedItem'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items feed from cache or build.
@@ -1169,13 +1184,59 @@ RSS Service</p>
 
 
 	
-	<a name="buildFeed()"><!-- --></a>
+	<a name="buildFeedFeed()"><!-- --></a>
 	<h3>
-		buildFeed
+		buildFeedFeed
 		
 	</h3>
 
-	<kbd>private string <strong>buildFeed</strong>([string category=''], [string slug=''])</kbd>
+	<kbd>private string <strong>buildFeedFeed</strong>([string category=''])</kbd>
+
+	<br><br>
+
+	
+		<p>Builds the feeds feed</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>category</code> - The category slug to filter on</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed xml string</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="buildFeedItemFeed()"><!-- --></a>
+	<h3>
+		buildFeedItemFeed
+		
+	</h3>
+
+	<kbd>private string <strong>buildFeedItemFeed</strong>([string slug=''], [string category=''])</kbd>
 
 	<br><br>
 
@@ -1197,9 +1258,9 @@ RSS Service</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>category</code> - The category slug to filter on</dd>
-		
 		<dd><code>slug</code> - The feed slug to filter on</dd>
+		
+		<dd><code>category</code> - The category slug to filter on</dd>
 		
 		</dl>
 	
@@ -1223,7 +1284,7 @@ RSS Service</p>
 		
 	</h3>
 
-	<kbd>public string <strong>getRSS</strong>([string category=''], [string slug=''])</kbd>
+	<kbd>public string <strong>getRSS</strong>([string slug=''], [string category=''], [string contentType='FeedItem'])</kbd>
 
 	<br><br>
 
@@ -1245,9 +1306,11 @@ RSS Service</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
+		<dd><code>slug</code> - The feed slug to filter on</dd>
+		
 		<dd><code>category</code> - The category slug to filter on</dd>
 		
-		<dd><code>slug</code> - The feed slug to filter on</dd>
+		<dd><code>contentType</code> - The content type to build the rss feed on</dd>
 		
 		</dl>
 	

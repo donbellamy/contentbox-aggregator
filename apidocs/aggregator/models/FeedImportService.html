@@ -361,6 +361,61 @@ FeedImport Service</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="FeedImportService.html#feedItemAttachmentService()">feedItemAttachmentService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = entityService:cbFeedItemAttachment</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="FeedImportService.html#feedItemService()">feedItemService</A></strong>
 			<br>
 			
@@ -969,6 +1024,36 @@ FeedImport Service</p>
 			<code>private&nbsp;boolean</code>
 		</td>
 		<td>
+			<strong><a href="FeedImportService.html#checkIsPodcast()">checkIsPodcast</A></strong>(struct item)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the feed item is a podcast or contains a podcast.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#checkIsVideo()">checkIsVideo</A></strong>(struct item)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks whether or not the feed item is a video.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;boolean</code>
+		</td>
+		<td>
 			<strong><a href="FeedImportService.html#checkKeywordFilters()">checkKeywordFilters</A></strong>(struct item, <a href="../../aggregator/models/Feed.html" title="class in aggregator.models">Feed</a> feed)
 			<br>
 			
@@ -988,6 +1073,36 @@ FeedImport Service</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the directory path only if it is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#getPodcastUrl()">getPodcastUrl</A></strong>(struct item)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the podcast url if the feed item is a podcast or contains a podcast.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#getVideoUrl()">getVideoUrl</A></strong>(struct item)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the video url if the feed item is a video.
 			
 		</td>
 	</tr>
@@ -1954,6 +2069,54 @@ FeedImport Service</p>
 		<hr>
 	
 		
+		<a name="feedItemAttachmentService()"><!-- --></a>
+		<h3>feedItemAttachmentService</h3>
+
+		<kbd>
+			property any
+			<strong>feedItemAttachmentService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - entityService:cbFeedItemAttachment</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="feedItemService()"><!-- --></a>
 		<h3>feedItemService</h3>
 
@@ -2503,6 +2666,98 @@ FeedImport Service</p>
 	<hr>
 
 	
+	<a name="checkIsPodcast()"><!-- --></a>
+	<h3>
+		checkIsPodcast
+		
+	</h3>
+
+	<kbd>private boolean <strong>checkIsPodcast</strong>(struct item)</kbd>
+
+	<br><br>
+
+	
+		<p>Checks if the feed item is a podcast or contains a podcast</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a podcast or contains a podcast</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="checkIsVideo()"><!-- --></a>
+	<h3>
+		checkIsVideo
+		
+	</h3>
+
+	<kbd>private boolean <strong>checkIsVideo</strong>(struct item)</kbd>
+
+	<br><br>
+
+	
+		<p>Checks whether or not the feed item is a video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a video</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="checkKeywordFilters()"><!-- --></a>
 	<h3>
 		checkKeywordFilters
@@ -2588,6 +2843,98 @@ FeedImport Service</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>FeedImportService</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPodcastUrl()"><!-- --></a>
+	<h3>
+		getPodcastUrl
+		
+	</h3>
+
+	<kbd>private string <strong>getPodcastUrl</strong>(struct item)</kbd>
+
+	<br><br>
+
+	
+		<p>Returns the podcast url if the feed item is a podcast or contains a podcast</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The podcast url if the feed item is a podcast or contains a podcast</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getVideoUrl()"><!-- --></a>
+	<h3>
+		getVideoUrl
+		
+	</h3>
+
+	<kbd>private string <strong>getVideoUrl</strong>(struct item)</kbd>
+
+	<br><br>
+
+	
+		<p>Returns the video url if the feed item is a video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code> - The item to check</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The video url if the feed item is a video</dd>
 		</dl>
 	
 

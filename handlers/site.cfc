@@ -218,6 +218,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "category", "" )
 			.paramValue( "feed", "" )
 			.paramValue( "sb", "" )
+			.paramValue( "type", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the news page
@@ -238,6 +239,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// XSS Cleanup
 			rc.q = antiSamy.clean( rc.q );
 			rc.category = antiSamy.clean( rc.category );
+			rc.feed = antiSamy.clean( rc.feed );
+			rc.type = antiSamy.clean( rc.type );
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
@@ -246,7 +249,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.pagingLink = prc.agHelper.linkNews();
 
 			// Category
-			if ( len( trim( rc.category ) ) ) {
+			if ( len( rc.category ) ) {
 				prc.category = categoryService.findBySlug( rc.category );
 				if ( !isNull( prc.category ) ) {
 					prc.pagingLink &= "/category/#rc.category#/";
@@ -261,7 +264,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.pagingLink &= "?page=@page@";
 
 			// Feed
-			if ( len( trim( rc.feed ) ) ) {
+			if ( len( rc.feed ) ) {
 				prc.feed = feedService.findBySlug( rc.feed );
 				if ( !isNull( prc.feed ) ) {
 					prc.pagingLink &= "&feed=" & rc.feed;
@@ -273,18 +276,21 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Search
-			if ( len( trim( rc.q ) ) ) {
+			if ( len( rc.q ) ) {
 				prc.pagingLink &= "&q=" & rc.q;
 				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
 			// Sort
 			var sortOrder = "publishedDate DESC";
-			if ( len( trim( rc.sb ) ) ) {
-				if ( rc.sb == "hits" ) {
-					prc.pagingLink &= "&sb=" & rc.sb;
-					sortOrder = "numberOfHits DESC";
-				}
+			if ( len( rc.sb ) && rc.sb == "hits" ) {
+				prc.pagingLink &= "&sb=" & rc.sb;
+				sortOrder = "numberOfHits DESC";
+			}
+
+			// Type
+			if ( len( rc.type ) && listFindNoCase( "article,podcast,video", rc.type ) ) {
+				prc.pagingLink &= "&type=" & rc.type;
 			}
 
 			// Set title
@@ -292,9 +298,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItems(
-				searchTerm = rc.q,
+				searchTerm = rc.q ,
 				category = rc.category,
 				feed = rc.feed,
+				type = rc.type,
 				sortOrder = sortOrder,
 				max = prc.agSettings.ag_site_paging_max_items,
 				offset = prc.pagingBoundaries.startRow - 1,
