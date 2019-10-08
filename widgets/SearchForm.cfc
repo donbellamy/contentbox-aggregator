@@ -45,7 +45,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Render the search form
 		return renderView(
-			view = "#cb.themeName()#/templates/aggregator/searchform",
+			view = "#cb.themeName()#/views/aggregator/widgets/searchform",
 			module = cb.themeRecord().module,
 			args = args
 		);

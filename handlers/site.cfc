@@ -288,9 +288,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = "numberOfHits DESC";
 			}
 
-			// Type
+			// Set template var and check type
+			prc.template = "feeditem"
 			if ( len( rc.type ) && listFindNoCase( "article,podcast,video", rc.type ) ) {
 				prc.pagingLink &= "&type=" & rc.type;
+				prc.template = rc.type;
 			}
 
 			// Set title

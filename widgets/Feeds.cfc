@@ -61,9 +61,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 			titleLevel = arguments.titleLevel
 		};
 
-		// Render the feeds template
+		// Render the feeds view
 		return renderView(
-			view = "#cb.themeName()#/templates/aggregator/feeds",
+			view = "#cb.themeName()#/views/aggregator/widgets/feeds",
 			module = cb.themeRecord().module,
 			args = args
 		);

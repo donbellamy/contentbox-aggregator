@@ -118,7 +118,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Render the podcasts template
 		return renderView(
-			view = "#cb.themeName()#/templates/aggregator/podcasts",
+			view = "#cb.themeName()#/views/aggregator/widgets/podcasts",
 			module = cb.themeRecord().module,
 			args = args
 		);

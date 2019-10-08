@@ -117,7 +117,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Render the news template
 		return renderView(
-			view = "#cb.themeName()#/templates/aggregator/news",
+			view = "#cb.themeName()#/views/aggregator/widgets/news",
 			module = cb.themeRecord().module,
 			args = args
 		);

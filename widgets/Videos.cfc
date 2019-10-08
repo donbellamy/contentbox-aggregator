@@ -119,7 +119,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Render the videos template
 		return renderView(
-			view = "#cb.themeName()#/templates/aggregator/videos",  // This could be using news as the view - also, just feeditems?
+			view = "#cb.themeName()#/views/aggregator/widgets/videos",  // This could be using news as the view - also, just feeditems?
 			module = cb.themeRecord().module,
 			args = args
 		);

@@ -311,7 +311,7 @@ component extends="contentHandler" {
 		categories.addAll( categoryService.inflateCategories( rc ) );
 		prc.feed.removeAllCategories().setCategories( categories );
 
-		// Set the old feed to current memento if new
+		// Set old feed to current memento if new
 		if ( isNew ) {
 			var oldFeed = duplicate( prc.feed.getMemento() );
 		}
