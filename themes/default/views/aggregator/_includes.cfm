@@ -20,6 +20,13 @@
 <!---					RSS DISCOVERY													--->
 <!--- ********************************************************************************* --->
 <cfif cb.themeSetting( "rssDiscovery", true ) >
+	<cfif ag.setting("ag_rss_enable") >
+		<link rel="alternate" type="application/rss+xml" title="Recent News" href="#ag.linkRSS()#" />
+		<link rel="alternate" type="application/rss+xml" title="Recent Feeds" href="#ag.linkFeedsRSS()#" />
+		<cfif ag.isFeedView() >
+			<link rel="alternate" type="application/rss+xml" title="Recent Feed Items" href="#ag.linkFeedRSS( ag.getCurrentFeed() )#" />
+		</cfif>
+	</cfif>
 	<cfif !prc.cbSettings.cb_site_disable_blog >
 		<link rel="alternate" type="application/rss+xml" title="Recent Blog Updates" href="#cb.linkRSS()#" />
 		<link rel="alternate" type="application/rss+xml" title="Recent Blog Comment Updates" href="#cb.linkRSS(comments=true)#" />
@@ -28,13 +35,6 @@
 	<link rel="alternate" type="application/rss+xml" title="Recent Page Comment Updates" href="#cb.linkPageRSS(comments=true)#" />
 	<link rel="alternate" type="application/rss+xml" title="Recent Content Updates" href="#cb.linkSiteRSS()#" />
 	<link rel="alternate" type="application/rss+xml" title="Recent Content Comment Updates" href="#cb.linkSiteRSS(comments=true)#" />
-	<cfif ag.setting("ag_rss_enable") >
-		<link rel="alternate" type="application/rss+xml" title="Recent News" href="#ag.linkRSS()#" />
-		<link rel="alternate" type="application/rss+xml" title="Recent Feeds" href="#ag.linkFeedsRSS()#" />
-		<cfif ag.isFeedView() >
-			<link rel="alternate" type="application/rss+xml" title="Recent Feed Items" href="#ag.linkFeedRSS( ag.getCurrentFeed() )#" />
-		</cfif>
-	</cfif>
 </cfif>
 
 <!--- ********************************************************************************* --->
@@ -55,9 +55,17 @@
 </style>
 </cfif>
 
+<!--- Aggregator CSS --->
+<link rel="stylesheet" href="#cb.themeRoot()#/includes/css/aggregator.css" />
+
 <!--- ********************************************************************************* --->
 <!---					JAVASCRIPT														--->
 <!--- ********************************************************************************* --->
+
 <!-- injector:js -->
 <script src="#cb.themeRoot()#/includes/js/ae19f5c3.theme.min.js"></script>
+
+<!--- Aggregator Javascript --->
+<script src="#cb.themeRoot()#/includes/js/agregator.js"></script>
+
 </cfoutput>

@@ -96,7 +96,7 @@ component extends="coldbox.system.Interceptor" {
 		event.paramValue( "format", "html" );
 
 		// Add new feed, clear cache and import all options to nav bar
-		if ( !event.isAjax() && rc.format EQ "html" ) {
+		if ( !event.isAjax() && rc.format == "html" ) {
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
 				html.addJSContent("$(function(){$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});",true);
 			}

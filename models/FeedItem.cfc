@@ -188,6 +188,7 @@ component persistent="true"
 
 	/**
 	 * Gets the url of the featured image
+	 * @getAltImageUrl Whether or not to check and return the alt featured image if one exists
 	 * @return The url of the featured image
 	 */
 	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
@@ -306,6 +307,20 @@ component persistent="true"
 	}
 
 	/**
+	 * Gets the feed item type
+	 * @return The feed item type
+	 */
+	string function getType() {
+		if ( len( getVideoUrl() ) ) {
+			return "video";
+		} else if ( len( getPodcastUrl() ) ) {
+			return "podcast";
+		} else {
+			return "article";
+		}
+	}
+
+	/**
 	 * Shorthand function for checking if the feed item is a video
 	 * @return Whether or not the feed item is a video
 	 */
@@ -322,7 +337,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Sets and returns the mime type if the feed item is a podcast or contains a podcast
+	 * Gets the mime type if the feed item is a podcast or contains a podcast
 	 * @return The podcast mime type if the feed item is a podcast or contains a podcast
 	 */
 	string function getPodcastMimeType() {

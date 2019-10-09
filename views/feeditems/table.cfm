@@ -6,6 +6,7 @@
 			<th id="checkboxHolder" class="{sorter:false} text-center" width="15"><input type="checkbox" onClick="checkAll(this.checked,'contentID')"/></th>
 			<th>Name</th>
 			<th width="125">Feed</th>
+			<th width="45" class="text-center">Type</th>
 			<th width="100">Published Date</th>
 			<th width="40" class="text-center"><i class="fa fa-globe fa-lg" title="Published Status"></i></th>
 			<th width="40" class="text-center"><i class="fa fa-signal fa-lg" title="Hits"></i></th>
@@ -33,6 +34,7 @@
 					<br/><small><i class="fa fa-tag"></i> #feedItem.getCategoriesList()#</small>
 				</td>
 				<td><a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feedItem.getFeed().getContentID()#" title="Edit Feed">#feedItem.getFeed().getTitle()#</a></td>
+				<td class="text-center">#feedItem.getType()#</td>
 				<td nowrap="nowrap">#feedItem.getDisplayPublishedDate()#</td>
 				<td class="text-center">
 					<cfif feedItem.isExpired() >

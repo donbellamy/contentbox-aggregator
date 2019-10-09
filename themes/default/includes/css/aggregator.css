@@ -1,0 +1,20 @@
+audio {
+	max-width: 95%;
+	height: 25px;
+}
+
+.img-thumbnail {
+	width: 200px;
+	height: 200px;
+}
+
+.row.display-flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.row.display-flex>[class*='col-'] {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2.5rem;
+}
