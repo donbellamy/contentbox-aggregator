@@ -288,11 +288,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = "numberOfHits DESC";
 			}
 
-			// Set template var and check type
-			prc.template = "feeditem"
+			// Set template and paging label
+			prc.template = "feeditem";
+			prc.pagingLabel = "items";
 			if ( len( rc.type ) && listFindNoCase( "article,podcast,video", rc.type ) ) {
 				prc.pagingLink &= "&type=" & rc.type;
 				prc.template = rc.type;
+				if ( rc.type == "video" ) prc.pagingLabel = "videos";
+				else if ( rc.type == "podcast" ) prc.pagingLabel = "podcasts";
+			} else if ( len( rc.type ) ) {
+				notFound( argumentCollection=arguments );
+				return;
 			}
 
 			// Set title
@@ -300,7 +306,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Grab the results
 			var results = feedItemService.getPublishedFeedItems(
-				searchTerm = rc.q ,
+				searchTerm = rc.q,
 				category = rc.category,
 				feed = rc.feed,
 				type = rc.type,

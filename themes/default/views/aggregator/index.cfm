@@ -40,10 +40,12 @@
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 			#cb.event("aggregator_preFeedItemsDisplay")#
 			<cfif prc.itemCount >
-				#ag.quickFeedItems( template="#prc.template#", args=args )#
+				<div class="row display-flex">
+					#ag.quickFeedItems( template=prc.template, args=args )#
+				</div>
 				<cfif !args.print >
 					<div class="contentBar">
-						#ag.quickPaging()#
+						#ag.quickPaging( label=prc.pagingLabel )#
 					</div>
 				</cfif>
 			<cfelse>

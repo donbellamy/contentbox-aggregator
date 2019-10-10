@@ -70,7 +70,7 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
-	 * Checks to see if if the current event equals site.index and a search term is present
+	 * Checks to see if the current event equals site.index and a search term is present
 	 * @return True if the current event equals site.index and a search term is present, false if not
 	 */
 	boolean function isSearchView() {
@@ -79,7 +79,7 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
-	 * Checks to see if if the current event equals site.index and a category is present
+	 * Checks to see if the current event equals site.index and a category is present
 	 * @return True if the current event equals site.index and a category is present, false if not
 	 */
 	boolean function isCategoryView() {
@@ -88,12 +88,21 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
-	 * Checks to see if if the current event equals site.index and a feed is present
+	 * Checks to see if the current event equals site.index and a feed is present
 	 * @return True if the current event equals site.index and a feed is present, false if not
 	 */
 	boolean function isFeedSearchView() {
 		var rc = cb.getRequestCollection();
 		return ( isNewsView() AND structKeyExists( rc, "feed" ) AND len( rc.feed ) );
+	}
+
+	/**
+	 * Checks to see if the current event equals site.index and a type is present
+	 * @return True if the current event equals site.index and a type is present, false if not
+	 */
+	boolean function isTypeView() {
+		var rc = cb.getRequestCollection();
+		return ( isNewsView() AND structKeyExists( rc, "type" ) AND len( rc.type ) );
 	}
 
 	/**
@@ -272,6 +281,23 @@ component accessors="true" singleton threadSafe {
 				message = "Category not found in collection",
 				detail = "This probably means you are trying to use the category in an non-index page.",
 				type = "aggregator.helper.InvalidCategoryContext"
+			);
+		}
+	}
+
+	/**
+	 * Gets the type if present in the current request
+	 * @return The type if it exists
+	 */
+	string function getCurrentType() {
+		var rc = cb.getRequestCollection();
+		if ( structKeyExists( rc, "type" ) && len( rc.type ) ) {
+			return rc.type;
+		} else {
+			throw(
+				message = "Type not found in collection",
+				detail = "This probably means you are trying to use the type in an non-index page.",
+				type = "aggregator.helper.InvalidTypeContext"
 			);
 		}
 	}
@@ -558,10 +584,10 @@ component accessors="true" singleton threadSafe {
 	/**
 	 * Renders the paging links
 	 * @maxRows The maximum number of rows to return
-	 * @type The content type label to use, defaults to "items"
+	 * @label The content type label to use, defaults to "items"
 	 * @return The paging links html
 	 */
-	string function quickPaging( numeric maxRows, string type="items" ) {
+	string function quickPaging( numeric maxRows, string label="items" ) {
 		var prc = cb.getPrivateRequestCollection();
 		if ( NOT structKeyExists( prc,"oPaging" ) ) {
 			throw(
@@ -577,7 +603,7 @@ component accessors="true" singleton threadSafe {
 			return prc.oPaging.renderit(
 				foundRows = prc.itemCount,
 				link = prc.pagingLink,
-				type = arguments.type
+				label = arguments.label
 			);
 		} else {
 			return "";
@@ -659,6 +685,15 @@ component accessors="true" singleton threadSafe {
 				bc &= '#arguments.separator# <a href="#linkCategory( category )#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
 			} else {
 				bc &= '#arguments.separator# <a href="#linkNews()#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
+			}
+		}
+		if ( isTypeView() ) {
+			var type = getCurrentType();
+			var typeLabel = uCase( left( type, 1 ) ) & right( type, len( type ) - 1 ) & "s";
+			if ( isCategoryView() ) {
+				bc &= '#arguments.separator# <a href="#linkCategory( category )#?type=#type#">#typeLabel#</a> ';
+			} else {
+				bc &= '#arguments.separator# <a href="#linkNews()#?type=#type#">#typeLabel#</a> ';
 			}
 		}
 		if ( isSearchView() ) {

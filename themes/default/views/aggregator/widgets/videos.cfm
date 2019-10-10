@@ -1,4 +1,5 @@
 <cfparam name="args" default="#structNew()#" />
+<cfparam name="args.print" default="false" />
 <cfparam name="args.title" default="" />
 <cfparam name="args.titleLevel" default="2" />
 <cfoutput>
@@ -10,9 +11,11 @@
 	<div class="row display-flex">
 		#ag.quickFeedItems( template="video", args=args )#
 	</div>
-	<div class="contentBar">
-		#ag.quickPaging()#
-	</div>
+	<cfif !args.print >
+		<div class="contentBar">
+			#ag.quickPaging( label="videos" )#
+		</div>
+	</cfif>
 <cfelse>
 	<div>No results found.</div>
 </cfif>

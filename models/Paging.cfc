@@ -11,7 +11,7 @@ component accessors="true" extends="contentbox.models.ui.Paging" {
 	 * @link The link to use in the paging widget
 	 * @pagingMaxRows The max paging rows
 	 * @asList Whether or not to display as a list
-	 * @type The type of content we are paging, defaults to "items"
+	 * @label The content type label to use, defaults to "items"
 	 * @return The paging widget html
 	 */
 	string function renderIt(
@@ -19,11 +19,11 @@ component accessors="true" extends="contentbox.models.ui.Paging" {
 		required string link,
 		numeric pagingMaxRows,
 		boolean asList=false,
-		string type="items" ) {
+		string label="items" ) {
 
 		var pager = super.renderIt( argumentCollection=arguments );
 
-		return replaceNoCase( pager, "entries", arguments.type, "all" );
+		return replaceNoCase( pager, "entries", arguments.label, "all" );
 
 	}
 

@@ -1,4 +1,5 @@
 <cfparam name="args" default="#structNew()#" />
+<cfparam name="args.print" default="false" />
 <cfparam name="args.title" default="" />
 <cfparam name="args.titleLevel" default="2" />
 <cfoutput>
@@ -8,9 +9,11 @@
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
 	#ag.quickFeedItems( args=args )#
-	<div class="contentBar">
-		#ag.quickPaging()#
-	</div>
+	<cfif !args.print >
+		<div class="contentBar">
+			#ag.quickPaging()#
+		</div>
+	</cfif>
 <cfelse>
 	<div>No results found.</div>
 </cfif>
