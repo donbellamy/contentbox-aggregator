@@ -156,7 +156,19 @@ component persistent="true"
 		default="false";
 
 	property name="numberOfPublishedFeedItems"
-		formula="select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )"
+		formula="select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
+		default="0";
+
+	property name="numberOfArticles"
+		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and ( fi.podcastUrl = '' or fi.podcastUrl IS NULL ) and ( fi.videoUrl = '' or fi.videoUrl IS NULL )"
+		default="0";
+
+	property name="numberOfPodcasts"
+		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.podcastUrl > ''"
+		default="0";
+
+	property name="numberOfVideos"
+		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.videoUrl > ''"
 		default="0";
 
 	/* *********************************************************************
@@ -306,7 +318,45 @@ component persistent="true"
 		if ( !isNull( getIsFailing() ) ) {
 			return getIsFailing();
 		}
-		return 0;
+		return false;
+	}
+
+	/**
+	 * Checks to see if the feed contains mostly articles
+	 * @return True if the feed contains mostly articles, false if not
+	 */
+	boolean function isArticleFeed() {
+		return ( getNumberOfArticles() / getNumberOfFeedItems() ) GT .5;
+	}
+
+	/**
+	 * Checks to see if the feed contains mostly podcasts
+	 * @return True if the feed contains mostly podcasts, false if not
+	 */
+	boolean function isPodcastFeed() {
+		return ( getNumberOfPodcasts() / getNumberOfFeedItems() ) GT .5;
+	}
+
+	/**
+	 * Checks to see if the feed contains mostly videos
+	 * @return True if the feed contains mostly videos, false if not
+	 */
+	boolean function isVideoFeed() {
+		return ( getNumberOfVideos() / getNumberOfFeedItems() ) GT .5;
+	}
+
+	/**
+	 * Gets the feed type based on the feed item types
+	 * @return The feed type
+	 */
+	string function getFeedType() {
+		if ( isArticleFeed() ) {
+			return "article";
+		} else if ( isPodcastFeed() ) {
+			return "podcast";
+		} else {
+			return "video";
+		}
 	}
 
 	/**

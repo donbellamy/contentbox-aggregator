@@ -291,7 +291,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set template and paging label
 			prc.template = "feeditem";
 			prc.pagingLabel = "items";
-			if ( len( rc.type ) && listFindNoCase( "article,podcast,video", rc.type ) ) {
+			if ( len( rc.type ) && listFindNoCase( "podcast,video", rc.type ) ) {
 				prc.pagingLink &= "&type=" & rc.type;
 				prc.template = rc.type;
 				if ( rc.type == "video" ) prc.pagingLabel = "videos";
@@ -656,6 +656,19 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			if ( len( trim( rc.author ) ) ) {
 				prc.pagingLink &= "&author=" & rc.author;
 				title = " - " & rc.author & title;
+			}
+
+			// Set template and paging label
+			prc.template = "feeditem";
+			prc.pagingLabel = "items";
+			if ( !prc.feed.isArticleFeed() ) {
+				if ( prc.feed.isPodcastFeed() ) {
+					prc.template = "podcast";
+					prc.pagingLabel = "podcasts";
+				} else {
+					prc.template = "video";
+					prc.pagingLabel = "videos";
+				}
 			}
 
 			// Grab the feed items

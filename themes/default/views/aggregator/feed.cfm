@@ -1,3 +1,6 @@
+<cfparam name="prc.template" default="feeditem" />
+<cfparam name="args.print" default="false" />
+<cfparam name="args.sidebar" default="true" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -40,10 +43,12 @@
 		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 			#cb.event("aggregator_preFeedDisplay", { feed=prc.feed })#
 			<cfif prc.itemCount >
-				#ag.quickFeedItems()#
+				<div class="row display-flex">
+					#ag.quickFeedItems( template=prc.template, args=args )#
+				</div>
 				<cfif !args.print >
 					<div class="contentBar">
-						#ag.quickPaging()#
+						#ag.quickPaging( label=prc.pagingLabel )#
 					</div>
 				</cfif>
 			<cfelse>

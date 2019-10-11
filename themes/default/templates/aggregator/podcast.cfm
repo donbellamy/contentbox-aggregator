@@ -26,10 +26,14 @@
 			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 	</h5>
-	<p class="small text-muted">
-		<i class="fa fa-calendar"></i>
-		#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
-	</p>
+	<div class="text-muted small">
+		<p>
+			<i class="fa fa-microphone"></i>
+			<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
+			<i class="fa fa-calendar"></i>
+			#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
+		</p>
+	</div>
 	<audio controls="controls">
 		<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
 	</audio>
