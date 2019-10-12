@@ -33,6 +33,10 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
+	property name="size"
+		notnull="false"
+		length="255";
+
 	property name="mimeType"
 		notnull="false"
 		length="255";

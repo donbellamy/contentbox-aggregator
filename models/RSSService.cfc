@@ -116,19 +116,40 @@ component singleton {
 			querySetCell( items, "guid_string", agHelper.linkContent( item ) );
 			querySetCell( items, "source_title", item.getContentType() EQ "FeedItem" ? item.getFeed().getTitle() : cbHelper.siteName() );
 			querySetCell( items, "source_url", item.getContentType() EQ "FeedItem" ? item.getFeed().getFeedUrl() : cbHelper.linkRSS() );
+			// Enclosures
+			var enclosure_url = "";
+			var enclosure_length = "";
+			var enclosure_type = "";
+			// Check featured image
 			if ( len( item.getFeaturedImageURL() ) && fileExists( item.getFeaturedImage() ) ) {
 				try {
 					var image = fileopen( item.getFeaturedImage() );
-					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
-					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
-					querySetCell( items, "enclosure_type", fileGetMimeType( image ) );
+					enclosure_url = cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" );
+					enclosure_length = listFirst( image.size, " " );
+					enclosure_type = fileGetMimeType( image );
 					fileClose( image );
 				} catch ( any e ) {
-					querySetCell( items, "enclosure_url", "" );
-					querySetCell( items, "enclosure_length", "" );
-					querySetCell( items, "enclosure_type", "" );
-				 }
+					enclosure_url = "";
+					enclosure_length = "";
+					enclosure_type = "";
+				}
 			}
+			// Attachments
+			if ( item.getContentType() EQ "FeedItem" && item.hasAttachment() ) {
+				for ( attachment IN item.getAttachments() ) {
+					if ( len( attachment.getSize() ) && len( attachment.getMimeType() ) &&
+						isValid( "url", attachment.getAttachmentUrl() ) &&
+						!listFind( enclosure_url, attachment.getAttachmentUrl() ) ) {
+						enclosure_url = listAppend( enclosure_url, attachment.getAttachmentUrl() );
+						enclosure_length = listAppend( enclosure_length, attachment.getSize() );
+						enclosure_type = listAppend( enclosure_type, attachment.getMimeType() );
+					}
+				}
+			}
+			// Set enclosure values
+			querySetCell( items, "enclosure_url", enclosure_url );
+			querySetCell( items, "enclosure_length", enclosure_length );
+			querySetCell( items, "enclosure_type", enclosure_type );
 		}
 
 		// Populate the feedStruct
@@ -157,6 +178,9 @@ component singleton {
 		feedStruct.pubDate = now();
 		feedStruct.lastBuildDate = now();
 		feedStruct.items = items;
+
+//writedump(feedStruct);
+//abort;
 
 		// Return the generated feed
 		return feedGenerator.createFeed( feedStruct );
