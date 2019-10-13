@@ -502,6 +502,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Set params
 		event.paramValue( "page", 1 )
+			.paramValue( "category", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
@@ -523,10 +524,26 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feeds );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
-			prc.pagingLink = prc.agHelper.linkFeeds() & "?page=@page@";
+			prc.pagingLink = prc.agHelper.linkFeeds();
+
+			// Category
+			if ( len( rc.category ) ) {
+				prc.category = categoryService.findBySlug( rc.category );
+				if ( !isNull( prc.category ) ) {
+					prc.pagingLink &= "/category/#rc.category#/";
+					title = " - " & prc.category.getCategory() & title;
+				} else {
+					notFound( argumentCollection=arguments );
+					return;
+				}
+			}
+
+			// Paging
+			prc.pagingLink &= "?page=@page@";
 
 			// Grab the results
 			var results = feedService.getPublishedFeeds(
+				category = rc.category,
 				max = prc.agSettings.ag_site_paging_max_feeds,
 				offset = prc.pagingBoundaries.startRow - 1
 			);

@@ -1,40 +1,44 @@
 /**
  * ContentBox Aggregator
- * Feeds Widget
+ * Feed Items List Widget
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Constructor, sets widget properties
-	 * @return Feeds
+	 * @return FeedsList
 	 */
-	Feeds function init() {
-		setName( "Feeds" );
+	FeedsList function init() {
+		setName( "Feeds List" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feeds, similar to the feeds page." );
+		setDescription( "A widget that displays a simple list of feeds." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
-		setIcon( "list" );
+		setIcon( "list-alt" );
 		setCategory( "Aggregator" );
 		return this;
 	}
 
 	/**
-	 * Renders the feeds widget
+	 * Renders the feeds list widget
 	 * @title.label Title
 	 * @title.hint An optional title to display using an H tag.
 	 * @titleLevel.label Title Level
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
+	 * @max.label Maximum Feeds
+	 * @max.hint The number of feeds to display.
+	 * @max.options 1,5,10,15,20,25,50,100,unlimited
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
 	 * @category.multiOptionsUDF getCategorySlugs
-	 * @return The feeds widget html
+	 * @return The feeds list widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
+		numeric max=5,
 		string category="" ) {
 
 		// Grab the event
@@ -45,32 +49,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		prc.cbTheme = prc.cbSettings.cb_site_theme;
 		prc.cbThemeRecord = themeService.getThemeRecord( prc.cbTheme );
 
-		// Paging
-		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( ag.setting("ag_site_paging_max_feeds") );
-		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = ag.linkFeeds() & "?page=@page@";
-
-		// Grab the results
-		var results = feedService.getPublishedFeeds(
-			max = ag.setting("ag_site_paging_max_feeds"),
-			offset = prc.pagingBoundaries.startRow - 1
-		);
-		prc.feeds = results.feeds;
-		prc.itemCount = results.count;
-
-		// Set args
-		var args = {
-			title = arguments.title,
-			titleLevel = arguments.titleLevel
-		};
-
-		// Render the feeds view
-		return renderView(
-			view = "#cb.themeName()#/views/aggregator/widgets/feeds",
-			module = cb.themeRecord().module,
-			args = args
-		);
+		return "";
 
 	}
 

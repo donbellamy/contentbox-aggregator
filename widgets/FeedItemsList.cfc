@@ -1,27 +1,27 @@
 /**
  * ContentBox Aggregator
- * Feed Items Widget
+ * Feed Items List Widget
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Constructor, sets widget properties
-	 * @return FeedItems
+	 * @return FeedItemsList
 	 */
-	FeedItems function init() {
-		setName( "Feed Items" );
+	FeedItemsList function init() {
+		setName( "Feed Items List" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feed items." );
+		setDescription( "A widget that displays a simple list of feed items." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
-		setIcon( "list" );
+		setIcon( "list-alt" );
 		setCategory( "Aggregator" );
 		return this;
 	}
 
 	/**
-	 * Renders the feed items widget
+	 * Renders the feed items list widget
 	 * @title.label Title
 	 * @title.hint An optional title to display using an H tag.
 	 * @titleLevel.label Title Level
@@ -39,11 +39,11 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
-	 * @sortOrder.hint How to order the results, defaults to date published from the feed.
+	 * @sortOrder.hint How to order the feed items, defaults to published date.
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	 * @return The feed items widget html
+	 * @return The feed items list widget html
 	 */
 	string function renderIt(
 		string title="",

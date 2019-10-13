@@ -10,7 +10,7 @@
 	<div class="panel-heading">
 		<h4>Recent Items</h4>
 	</div>
-	#cb.widget("FeedItems@contentbox-aggregator")#
+	#cb.widget("FeedItemsList@contentbox-aggregator")#
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
