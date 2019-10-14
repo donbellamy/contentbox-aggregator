@@ -1,38 +1,41 @@
 /**
  * ContentBox Aggregator
- * Videos Widget
+ * Feed Items Widget
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Constructor, sets widget properties
-	 * @return Videos
+	 * @return FeedItems
 	 */
-	Podcasts function init() {
-		setName( "Podcasts" );
+	FeedItems function init() {
+		setName( "Feed items" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of podcast feed items." );
+		setDescription( "A widget that displays a detailed list of feed items, similar to the news page." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
-		setIcon( "podcast" );
+		setIcon( "list" );
 		setCategory( "Aggregator" );
 		return this;
 	}
 
 	/**
-	 * Renders the podcasts widget
+	 * Renders the feed items widget
 	 * @title.label Title
 	 * @title.hint An optional title to display using an H tag.
 	 * @titleLevel.label Title Level
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
+	 * @type.label Type
+	 * @type.hint The type of feed item to filter on.
+	 * @type.optionsUDF getTypes
 	 * @feed.label Feed
 	 * @feed.hint The feed to filter on.
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getCategorySlugs
+	 * @category.optionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
@@ -40,11 +43,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	 * @return The podcasts widget html
+	 * @return The news widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
+		string type="",
 		string feed="",
 		string category="",
 		string searchTerm="",
@@ -71,7 +75,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// Paging
-		prc.pagingLink &= "?page=@page@&type=podcast";
+		prc.pagingLink &= "?page=@page@";
 
 		// Feed
 		if ( len( trim( arguments.feed ) ) ) {
@@ -95,16 +99,26 @@ component extends="aggregator.models.BaseWidget" singleton {
 			}
 		}
 
+		// Set template and paging label
+		prc.template = "feeditem";
+		prc.pagingLabel = "items";
+		if ( len( arguments.type ) && listFindNoCase( "podcast,video", arguments.type ) ) {
+			prc.template = arguments.type;
+			prc.pagingLink &= "&type=" & arguments.type;
+			if ( arguments.type == "video" ) prc.pagingLabel = "videos";
+			else if ( arguments.type == "podcast" ) prc.pagingLabel = "podcasts";
+		}
+
 		// Grab the results
 		var results = feedItemService.getPublishedFeedItems(
 			searchTerm = arguments.searchTerm,
 			category = arguments.category,
 			feed = arguments.feed,
+			type = arguments.type,
 			sortOrder = arguments.sortOrder,
 			max = ag.setting("ag_site_paging_max_items"),
 			offset = prc.pagingBoundaries.startRow - 1,
-			includeEntries = false,
-			type = "podcast"
+			includeEntries = ag.setting("ag_site_display_entries")
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
@@ -116,9 +130,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 			openNewWindow = arguments.openNewWindow
 		};
 
-		// Render the podcasts template
+		// Render the news template
 		return renderView(
-			view = "#cb.themeName()#/views/aggregator/widgets/podcasts",
+			view = "#cb.themeName()#/views/aggregator/widgets/feeditems",
 			module = cb.themeRecord().module,
 			args = args
 		);

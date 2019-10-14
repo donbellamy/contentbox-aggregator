@@ -81,7 +81,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var html = "";
 
 		// Select start
-		html &= '<select name="relatedcontent" id="relatedcontent" onchange="window.location=this.value" )><option value="##">Select Content</option>';
+		html &= '<select name="relatedcontent" id="related-content" onchange="window.location=this.value" )><option value="##">Select Content</option>';
 
 		// Select options
 		for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
@@ -106,12 +106,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var html = "";
 
 		// List start
-		html &= '<ul id="relatedcontent">';
+		html &= '<ul id="related-content">';
 
 		// List items
 		for ( var x=1; x LTE arrayLen( arguments.relatedContent ); x++ ) {
 			if ( relatedContent[x].isContentPublished() ) {
-				html &= '<li class="relatedcontent"><a href="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#</a></li>';
+				html &= '<li><a href="#ag.linkContent( arguments.relatedContent[x] )#">#arguments.relatedContent[x].getTitle()#</a></li>';
 			}
 		}
 

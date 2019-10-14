@@ -33,4 +33,17 @@ component accessors="true" extends="contentbox.models.ui.BaseWidget" {
 		return slugs;
 	}
 
+	/**
+	 * Grabs the feed item types
+	 * @return An array of feed item types
+	 */
+	array function getTypes() cbIgnore {
+		return [
+			"",
+			"article",
+			"podcast",
+			"video"
+		];
+	}
+
 }

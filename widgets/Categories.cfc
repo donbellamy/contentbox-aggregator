@@ -126,7 +126,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			).count;
 			var showCategory = !len( arguments.categoryFilter ) || ( len( arguments.categoryFilter ) && listFindNoCase( arguments.categoryFilter, categories[x].getCategory() ) );
 			if ( feedItemCount && showCategory ) {
-				html &= '<li class="categories"><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
+				html &= '<li><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
 				if ( arguments.showItemCount ) {
 					html &= " (#feedItemCount#)";
 				}

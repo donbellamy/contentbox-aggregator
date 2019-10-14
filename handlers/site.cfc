@@ -292,8 +292,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.template = "feeditem";
 			prc.pagingLabel = "items";
 			if ( len( rc.type ) && listFindNoCase( "podcast,video", rc.type ) ) {
-				prc.pagingLink &= "&type=" & rc.type;
 				prc.template = rc.type;
+				prc.pagingLink &= "&type=" & rc.type;
 				if ( rc.type == "video" ) prc.pagingLabel = "videos";
 				else if ( rc.type == "podcast" ) prc.pagingLabel = "podcasts";
 			} else if ( len( rc.type ) ) {

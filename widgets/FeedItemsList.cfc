@@ -12,7 +12,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	FeedItemsList function init() {
 		setName( "Feed Items List" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a simple list of feed items." );
+		setDescription( "A widget that displays a simple list of published feed items." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list-alt" );
@@ -35,7 +35,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getCategorySlugs
+	 * @category.optionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
@@ -76,7 +76,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			includeEntries = ag.setting("ag_site_display_entries")
 		);
 
-		// iteration cap
+		// Iteration cap
 		if ( results.count LT arguments.max ) {
 			arguments.max = results.count;
 		}
@@ -90,7 +90,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// List start
-		html &= '<ul id="feedItems">';
+		html &= '<ul id="feed-items-list">';
 
 		// List items
 		for ( var x=1; x LTE arguments.max; x++ ) {
@@ -98,7 +98,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			if ( arguments.openNewWindow ) {
 				target = "_blank";
 			}
-			html &= '<li class="feedItems"><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>';
+			html &= '<li><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>';
 		}
 
 		// List end

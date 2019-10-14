@@ -12,7 +12,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	FeedsList function init() {
 		setName( "Feeds List" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a simple list of feeds." );
+		setDescription( "A widget that displays a simple list of published feeds." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list-alt" );
@@ -29,27 +29,56 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.options 1,2,3,4,5
 	 * @max.label Maximum Feeds
 	 * @max.hint The number of feeds to display.
-	 * @max.options 1,5,10,15,20,25,50,100,unlimited
+	 * @max.options 1,5,10,15,20,25,50,100
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getCategorySlugs
+	 * @category.optionsUDF getCategorySlugs
+	 * @openNewWindow.label Open In New Window?
+	 * @openNewWindow.hint Open feeds in a new window (tab), default is false.
 	 * @return The feeds list widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		numeric max=5,
-		string category="" ) {
+		string category="",
+		boolean openNewWindow=false ) {
 
-		// Grab the event
-		var event = getRequestContext();
-		var prc = event.getCollection(private=true);
+		// Grab the results
+		var results = feedService.getPublishedFeeds(
+			category = arguments.category,
+			max = arguments.max
+		);
 
-		// Fixes bug in widget preview - take out when fixed
-		prc.cbTheme = prc.cbSettings.cb_site_theme;
-		prc.cbThemeRecord = themeService.getThemeRecord( prc.cbTheme );
+		// iteration cap
+		if ( results.count LT arguments.max ) {
+			arguments.max = results.count;
+		}
 
-		return "";
+		// Set return html
+		var html = "";
+
+		// Title
+		if ( len( trim( arguments.title ) ) ) {
+			html &= "<h#arguments.titleLevel#>#arguments.title#</h#arguments.titleLevel#>";
+		}
+
+		// List start
+		html &= '<ul id="feeds-list">';
+
+		// List items
+		for ( var x=1; x LTE arguments.max; x++ ) {
+			var target = "_self";
+			if ( arguments.openNewWindow ) {
+				target = "_blank";
+			}
+			html &= '<li><a href="#ag.linkFeed( results.feeds[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feeds[x].getTitle()#</a></li>';
+		}
+
+			// List end
+		html &= "</ul>";
+
+		return html;
 
 	}
 

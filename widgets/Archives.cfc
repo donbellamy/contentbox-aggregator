@@ -114,7 +114,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// List items
 		for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
 			var thisDate = arguments.archives[x]["year"] & "-" & arguments.archives[x]["month"] & "-1";
-			html &= '<li class="archives"><a href="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#';
+			html &= '<li><a href="#ag.linkArchive( year=arguments.archives[x]['year'], month=arguments.archives[x]['month'])#">#dateFormat( thisDate, "mmmm yyyy" )#';
 			if ( arguments.showItemCount ) {
 				html &= " (#arguments.archives[x]['count']#)";
 			}

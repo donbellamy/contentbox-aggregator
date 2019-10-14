@@ -317,6 +317,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																attachmentUrl = attachment.url,
 																type = ( structKeyExists( attachment, "type" ) ? attachment.type : "" ),
 																medium = ( structKeyExists( attachment, "medium" ) ? attachment.medium : "" ),
+																size = ( structKeyExists( attachment, "size" ) ? attachment.size : ( structKeyExists( attachment, "filesize" ) ? attachment.filesize : "" ) ),
 																mimetype = ( structKeyExists( attachment, "mimetype" ) ? attachment.mimetype : "" )
 															}
 														);
@@ -661,7 +662,10 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Loop over attachments
 		if ( structKeyExists( arguments.item, "attachment" ) && arrayLen( arguments.item.attachment ) ) {
 			for ( var attachment IN arguments.item.attachment ) {
-				if ( structKeyExists( attachment, "url" ) && len( attachment.url ) ) {
+				if (
+					( structKeyExists( attachment, "url" ) && len( attachment.url ) ) &&
+					( structKeyExists( attachment, "mimetype" ) && findNoCase( "audio", attachment.mimetype ) )
+					) {
 					arrayAppend( itemUrls, attachment.url );
 				}
 			}

@@ -12,7 +12,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	Feeds function init() {
 		setName( "Feeds" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feeds, similar to the feeds page." );
+		setDescription( "A widget that displays a detailed list of feeds, similar to the feeds page." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list" );
