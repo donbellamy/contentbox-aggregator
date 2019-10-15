@@ -57,8 +57,8 @@ component extends="ContentService" singleton {
 		var results = {};
 		var params = {};
 
-		// Check for author and video/podcast
-		if ( len( trim( arguments.author ) ) || arguments.type == "video" || arguments.type == "podcast" ) {
+		// Check for author and type
+		if ( len( trim( arguments.author ) ) || len( trim( arguments.type ) ) ) {
 			arguments.includeEntries = false;
 		}
 
