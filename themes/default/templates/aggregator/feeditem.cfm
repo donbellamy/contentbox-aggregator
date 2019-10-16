@@ -10,12 +10,13 @@
 </cfif>
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="false" />
-<cfparam name="args.showCategories" default="false" />
-<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.showImage" default="false" />
+<cfparam name="args.showExcerpt" default="false" />
 <cfparam name="args.characterLimit" default="500" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
+<cfparam name="args.showCategories" default="false" />
 <cfoutput>
 <div class="post" id="feeditem_#feedItem.getContentID()#">
 	<div class="post-title">
@@ -41,7 +42,7 @@
 				</cfif>
 				<div class="col-sm-5 pull-right text-right">
 					<i class="fa fa-calendar"></i>
-					#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
+					<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 				</div>
 			</div>
 		<cfelse>
@@ -73,35 +74,37 @@
 			</div>
 		</cfif>
 	</div>
-	<cfif args.showExcerpt >
+	<cfif args.showExcerpt || args.showImage >
 		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<cfif contentType EQ "Entry" >
 			<div class="post-content row">
-				<cfif len( imageUrl ) >
+				<cfif args.showImage && len( imageUrl ) >
 					<div class="col-sm-3">
 						<a class="thumbnail" href="#cb.linkEntry( feedItem )#"
 							rel="bookmark"
 							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</div>
 				</cfif>
-				<div class="<cfif len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
-					<cfif feedItem.hasExcerpt() >
-						#feedItem.renderExcerpt()#
-					<cfelse>
-						#feedItem.renderContent()#
-					</cfif>
-					<cfif args.showReadMore >
-						<div class="post-more">
-							<a href="#cb.linkEntry( feedItem )#"
-								rel="bookmark"
-								title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
-						</div>
-					</cfif>
-				</div>
+				<cfif args.showExcerpt >
+					<div class="<cfif args.showImage && len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
+						<cfif feedItem.hasExcerpt() >
+							#feedItem.renderExcerpt()#
+						<cfelse>
+							#feedItem.renderContent()#
+						</cfif>
+						<cfif args.showReadMore >
+							<div class="post-more">
+								<a href="#cb.linkEntry( feedItem )#"
+									rel="bookmark"
+									title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
+							</div>
+						</cfif>
+					</div>
+				</cfif>
 			</div>
 		<cfelse>
 			<div class="post-content row">
-				<cfif len( imageUrl ) >
+				<cfif args.showImage && len( imageUrl ) >
 					<div class="col-sm-3">
 						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
@@ -110,22 +113,24 @@
 							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</div>
 				</cfif>
-				<div class="<cfif len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
-					<cfif feedItem.hasExcerpt() >
-						#feedItem.renderExcerpt()#
-					<cfelse>
-						#feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
-					</cfif>
-					<cfif args.showReadMore >
-						<div class="post-more">
-							<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
-								<cfif args.openNewWindow >target="_blank"</cfif>
-								<cfif directLink >class="direct-link"</cfif>
-								rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
-								title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
-						</div>
-					</cfif>
-				</div>
+				<cfif args.showExcerpt >
+					<div class="<cfif args.showImage && len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
+						<cfif feedItem.hasExcerpt() >
+							#feedItem.renderExcerpt()#
+						<cfelse>
+							#feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
+						</cfif>
+						<cfif args.showReadMore >
+							<div class="post-more">
+								<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+									<cfif args.openNewWindow >target="_blank"</cfif>
+									<cfif directLink >class="direct-link"</cfif>
+									rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
+									title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
+							</div>
+						</cfif>
+					</div>
+				</cfif>
 			</div>
 		</cfif>
 	</cfif>

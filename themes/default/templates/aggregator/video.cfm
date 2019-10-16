@@ -9,13 +9,13 @@
 <cfoutput>
 <div class="col-md-6 col-sm-12 col-xs-12">
 	<iframe height="240" src="#feedItem.getVideoUrl()#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	<h5>
+	<h4>
 		<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
 			<cfif directLink >class="direct-link"</cfif>
 			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
-	</h5>
+	</h4>
 	<div class="text-muted small">
 		<i class="fa fa-youtube-play"></i>
 		<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
