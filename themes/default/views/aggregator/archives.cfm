@@ -21,40 +21,46 @@
 <section id="body-main">
 	<div class="container">
 		<cfif !args.print >
-			<div id="body-breadcrumbs" class="col-sm-9">
-				<i class="fa fa-home"></i> #ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
-			</div>
-			<cfif cb.setting("cb_content_uiexport") >
-				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Export Page...">
-						<i class="fa fa-print"></i> <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#ag.linkExport( "print" )#" target="_blank">Print Format</a></li>
-						<li><a href="#ag.linkExport( "pdf" )#" target="_blank">PDF</a></li>
-					</ul>
+			<div class="row">
+				<div id="body-breadcrumbs" class="col-xs-12 col-sm-9">
+					<i class="fa fa-home"></i> #ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
 				</div>
-			</cfif>
-		</cfif>
-		<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
-			#cb.event("aggregator_preArchivesDisplay")#
-			<cfif prc.itemCount >
-				#ag.quickFeedItems()#
-				<cfif !args.print >
-					<div class="contentBar">
-						#ag.quickPaging()#
+				<cfif cb.setting("cb_content_uiexport") >
+					<div class="hidden-xs col-sm-3">
+						<div class="btn-group pull-right">
+							<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Export Page...">
+								<i class="fa fa-print"></i> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#ag.linkExport( "print" )#" target="_blank">Print Format</a></li>
+								<li><a href="#ag.linkExport( "pdf" )#" target="_blank">PDF</a></li>
+							</ul>
+						</div>
 					</div>
 				</cfif>
-			<cfelse>
-				<div>No results found.</div>
-			</cfif>
-			#cb.event("aggregator_postArchivesDisplay")#
-		</div>
-		<cfif args.sidebar >
-			<div class="col-sm-3" id="blog-sidenav">
-				#cb.quickView( view="aggregator/_sidebar", args=args )#
 			</div>
 		</cfif>
+		<div class="row">
+			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
+				#cb.event("aggregator_preArchivesDisplay")#
+				<cfif prc.itemCount >
+					#ag.quickFeedItems()#
+					<cfif !args.print >
+						<div class="contentBar">
+							#ag.quickPaging()#
+						</div>
+					</cfif>
+				<cfelse>
+					<div>No results found.</div>
+				</cfif>
+				#cb.event("aggregator_postArchivesDisplay")#
+			</div>
+			<cfif args.sidebar >
+				<div class="col-sm-3" id="blog-sidenav">
+					#cb.quickView( view="aggregator/_sidebar", args=args )#
+				</div>
+			</cfif>
+		</div>
 	</div>
 </div>
 </cfoutput>

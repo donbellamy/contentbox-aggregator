@@ -1,6 +1,6 @@
 <cfparam name="args" default="#structNew()#" />
 <cfoutput>
-<div class="post" id="feed_#feed.getContentID()#">
+<div class="post feed" id="feed_#feed.getContentID()#">
 	<div class="post-title">
 		<h2><a href="#ag.linkFeed( feed )#" title="#encodeForHtmlAttribute( feed.getTitle() )#">#feed.getTitle()#</a></h2>
 		<div class="row">

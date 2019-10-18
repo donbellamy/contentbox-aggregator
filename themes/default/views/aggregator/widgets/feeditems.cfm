@@ -8,9 +8,13 @@
 </cfif>
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
-	<div class="row<cfif prc.template NEQ "feeditem" > display-flex</cfif>">
+	<cfif prc.template EQ "feeditem" >
 		#ag.quickFeedItems( template=prc.template, args=args )#
-	</div>
+	<cfelse>
+		<div class="row display-flex">
+			#ag.quickFeedItems( template=prc.template, args=args )#
+		</div>
+	</cfif>
 	<cfif !args.print >
 		<div class="contentBar">
 			#ag.quickPaging( label=prc.pagingLabel )#

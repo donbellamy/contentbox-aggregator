@@ -11,7 +11,7 @@
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
 <cfoutput>
-<div class="col-md-4 col-sm-6 col-xs-6">
+<div class="col-md-4 col-sm-6 col-xs-12 post podcast" id="feeditem_#feedItem.getContentID()#">
 	<cfif args.showImage >
 		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<cfif len( imageUrl ) >
@@ -40,7 +40,7 @@
 				<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
 			</cfif>
 			<i class="fa fa-calendar"></i>
-			#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
+			<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 		</p>
 	</div>
 	<cfif feedItem.isPodcast() && args.showPlayer >

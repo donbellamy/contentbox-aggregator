@@ -1,12 +1,29 @@
-audio {
+.post {
+	margin-bottom: 2.5rem;
+}
+
+.post h2 {
+	margin-top: 0;
+	margin-bottom: 15px !important;
+}
+
+.podcast audio {
 	max-width: 95%;
 	height: 35px;
 }
 
-.img-thumbnail {
-	width: 200px;
-	height: 200px;
+.post .img-thumbnail {
+	height: 125px;
+	width: 100%;
+	object-fit: cover;
 }
+
+.podcast .img-thumbnail {
+	height: 200px;
+	width: 100%;
+	object-fit: cover;
+}
+
 
 .row.display-flex {
 	display: flex;

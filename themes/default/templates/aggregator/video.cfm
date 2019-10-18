@@ -7,7 +7,7 @@
 <cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 <cfset imageUrl = feedItem.getFeaturedImageUrl() />
 <cfoutput>
-<div class="col-md-6 col-sm-12 col-xs-12">
+<div class="col-md-6 col-sm-12 col-xs-12 post video" id="feeditem_#feedItem.getContentID()#">
 	<iframe height="240" src="#feedItem.getVideoUrl()#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
@@ -20,7 +20,7 @@
 		<i class="fa fa-youtube-play"></i>
 		<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
 		<i class="fa fa-calendar"></i>
-		#ag.timeAgo( feedItem.getDisplayPublishedDate() )#
+		<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 	</div>
 </div>
 </cfoutput>

@@ -1,4 +1,3 @@
-<cfparam name="args" default="#structNew()#" />
 <cfoutput>
 <div class="searchResults">
 	<div class="well well-sm searchResultsCount">
