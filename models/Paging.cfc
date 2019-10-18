@@ -18,7 +18,7 @@ component accessors="true" extends="contentbox.models.ui.Paging" {
 		required numeric foundRows,
 		required string link,
 		numeric pagingMaxRows,
-		boolean asList=false,
+		boolean asList=true,
 		string label="items" ) {
 
 		var pager = super.renderIt( argumentCollection=arguments );

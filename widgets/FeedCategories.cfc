@@ -1,18 +1,18 @@
 /**
  * ContentBox Aggregator
- * Categories Widget
+ * Feed Categories Widget
  * @author Don Bellamy <don@perfectcode.com>
  */
 component extends="aggregator.models.BaseWidget" singleton {
 
 	/**
 	 * Constructor, sets widget properties
-	 * @return Categories
+	 * @return FeedCategories
 	 */
-	Categories function init() {
-		setName( "Feed Item Categories" );
+	FeedCategories function init() {
+		setName( "Feed Categories" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a list of feed item categories." );
+		setDescription( "A widget that displays a list of feed categories." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "tags" );
@@ -21,7 +21,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	}
 
 	/**
-	 * Renders the feed item categories widget
+	 * Renders the feed categories widget
 	 * @title.label Title
 	 * @title.hint An optional title to display using an H tag.
 	 * @titleLevel.label Title Level
@@ -80,15 +80,14 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 			// Select options
 		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-			var feedItemCount = feedItemService.getPublishedFeedItems(
+			var feedCount = feedService.getPublishedFeeds(
 				category = categories[x].getSlug(),
-				countOnly = true,
-				includeEntries = ag.setting("ag_site_display_entries")
+				countOnly = true
 			).count;
-			if ( feedItemCount ) {
-				html &= '<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
+			if ( feedCount ) {
+				html &= '<option value="#ag.linkFeedsCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
 				if ( arguments.showItemCount ) {
-					html &= " (#feedItemCount#)";
+					html &= " (#feedCount#)";
 				}
 				html &= "</option>";
 			}
@@ -114,15 +113,14 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// List items
 		for ( var x=1; x LTE arrayLen( arguments.categories ); x++ ) {
-			var feedItemCount = feedItemService.getPublishedFeedItems(
+			var feedCount = feedService.getPublishedFeeds(
 				category = categories[x].getSlug(),
-				countOnly = true,
-				includeEntries = ag.setting("ag_site_display_entries")
+				countOnly = true
 			).count;
-			if ( feedItemCount ) {
-				html &= '<li><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
+			if ( feedCount ) {
+				html &= '<li><a href="#ag.linkFeedsCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
 				if ( arguments.showItemCount ) {
-					html &= " (#feedItemCount#)";
+					html &= " (#feedCount#)";
 				}
 				html &= "</a></li>";
 			}

@@ -170,7 +170,7 @@ component persistent="true"
 	 * @excerptEnding The characters to display at the end of the excerpt
 	 * @return The generated content excerpt
 	 */
-	string function getContentExcerpt( numeric count=500, string excerptEnding="..." ) {
+	string function getContentExcerpt( numeric count=255, string excerptEnding="..." ) {
 
 		// Remove html from content
 		var content = reReplaceNoCase( getContent(), "<[^>]*>", "", "ALL" );

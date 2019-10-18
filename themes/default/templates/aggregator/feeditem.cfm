@@ -11,8 +11,8 @@
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="false" />
 <cfparam name="args.showImage" default="true" />
-<cfparam name="args.showExcerpt" default="false" />
-<cfparam name="args.characterLimit" default="500" />
+<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.characterLimit" default="255" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
@@ -84,8 +84,7 @@
 			</cfif>
 		</div>
 	</div>
-	<!---
-	<cfif args.showExcerpt || args.showImage >
+	<cfif args.showExcerpt >
 		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<cfif contentType EQ "Entry" >
 			<div class="post-content row">
@@ -153,6 +152,5 @@
 			</div>
 		</div>
 	</cfif>
---->
 </div>
 </cfoutput>

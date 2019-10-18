@@ -411,20 +411,19 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
-	 * Gets the feed category link
-	 * @feed The feed to link to
+	 * Gets the feeds category link
 	 * @category The category to link to
 	 * @ssl Whether or not to use ssl
-	 * @return The feed category link
+	 * @return The feeds category link
 	 */
-	string function linkFeedCategory( required Feed feed, any category="", boolean ssl=cb.getRequestContext().isSSL() ) {
+	string function linkFeedsCategory( any category="", boolean ssl=cb.getRequestContext().isSSL() ) {
 		var slug = "";
 		if ( isSimpleValue( arguments.category ) ) {
 			slug = arguments.category;
 		} else {
 			slug = category.getSlug();
 		}
-		return linkFeed( feed=arguments.feed, ssl=ssl=arguments.ssl ) & "/category/" & slug;
+		return linkFeeds( ssl=ssl=arguments.ssl ) & "/category/" & slug;
 	}
 
 	/**
