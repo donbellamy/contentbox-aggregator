@@ -120,9 +120,9 @@
 							<div class="controls">
 								<select name="type" id="type" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.type ) > selected="selected"</cfif>>Any Type</option>
-									<option value="article"<cfif rc.status EQ "article" > selected="selected"</cfif>>Article</option>
-									<option value="podcast"<cfif rc.status EQ "podcast" > selected="selected"</cfif>>Podcast</option>
-									<option value="video"<cfif rc.status EQ "video" > selected="selected"</cfif>>Video</option>
+									<option value="article"<cfif rc.type EQ "article" > selected="selected"</cfif>>Article</option>
+									<option value="podcast"<cfif rc.type EQ "podcast" > selected="selected"</cfif>>Podcast</option>
+									<option value="video"<cfif rc.type EQ "video" > selected="selected"</cfif>>Video</option>
 								</select>
 							</div>
 						</div>

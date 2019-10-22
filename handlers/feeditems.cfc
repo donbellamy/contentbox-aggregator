@@ -555,7 +555,7 @@ component extends="contentHandler" {
 		if ( structKeyExists( rc, "feed" ) ) filters.feed = rc.feed;
 		if ( structKeyExists( rc, "category" ) ) filters.category = rc.category;
 		if ( structKeyExists( rc, "status" ) ) filters.status = rc.status;
-		if ( structKeyExists( rc, "type" ) ) filters.status = rc.type;
+		if ( structKeyExists( rc, "type" ) ) filters.type = rc.type;
 
 		return filters;
 

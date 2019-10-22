@@ -73,6 +73,7 @@ function resetFilter( reload ) {
 	$("##feedFilter").val("");
 	$("##categoryFilter").val("");
 	$("##statusFilter").val("");
+	$("##typeFilter").val("");
 	$("##feed").val("");
 	$("##category").val("");
 	$("##status").val("");
