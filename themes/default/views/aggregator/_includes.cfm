@@ -66,6 +66,6 @@
 <script src="#cb.themeRoot()#/includes/js/ae19f5c3.theme.min.js"></script>
 
 <!--- Aggregator Javascript --->
-<script src="#cb.themeRoot()#/includes/js/agregator.js"></script>
+<script src="#cb.themeRoot()#/includes/js/aggregator.js"></script>
 
 </cfoutput>

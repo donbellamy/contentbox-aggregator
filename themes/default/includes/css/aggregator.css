@@ -7,11 +7,6 @@
 	margin-bottom: 15px !important;
 }
 
-.podcast audio {
-	max-width: 95%;
-	height: 35px;
-}
-
 .post .img-thumbnail {
 	height: 125px;
 	width: 100%;
@@ -24,6 +19,10 @@
 	object-fit: cover;
 }
 
+.podcast audio {
+	max-width: 95%;
+	height: 35px;
+}
 
 .row.display-flex {
 	display: flex;

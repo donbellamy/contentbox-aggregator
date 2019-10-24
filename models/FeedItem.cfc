@@ -329,6 +329,14 @@ component persistent="true"
 	}
 
 	/**
+	 * Shorthand function for checking if the feed item is a youtube video
+	 * @return Whether or not the feed item is a youtube video
+	 */
+	boolean function isYouTubeVideo() {
+		return isVideo() && reFindNoCase( "youtube\.com", getVideoUrl() );
+	}
+
+	/**
 	 * Shorthand function for checking if the feed item is a podcast or contains a podcast
 	 * @return Whether or not the feed item is a podcast or contains a podcast
 	 */
