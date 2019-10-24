@@ -5,10 +5,23 @@
 	ag.setting("ag_site_item_link_behavior") />
 <cfset directLink = linkBehavior EQ "link" ? true : false />
 <cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
-<cfset imageUrl = feedItem.getFeaturedImageUrl() />
+<cfparam name="args.showImage" default="true" />
+<cfparam name="args.showSource" default="true" />
+<cfparam name="args.showPlayer" default="true" />
 <cfoutput>
 <div class="col-md-6 col-sm-12 col-xs-12 post video" id="feeditem_#feedItem.getContentID()#">
-	<iframe height="240" src="#feedItem.getVideoUrl()#" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<cfif args.showImage || args.showPlayer >
+		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
+		<cfif feedItem.isVideo() && args.showPlayer >
+			<div class="video-player" data-id="#listLast(feedItem.getVideoUrl(),"/")#" data-url="#feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+		<cfelseif len( imageUrl ) && args.showImage >
+			<div class="video-image">
+				<a href="#ag.linkFeedItem( feedItem )#"
+					rel="bookmark"
+					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
+			</div>
+		</cfif>
+	</cfif>
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
@@ -17,8 +30,10 @@
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 	</h4>
 	<div class="text-muted small">
-		<i class="fa fa-youtube-play"></i>
-		<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
+		<cfif args.showSource >
+			<i class="fa fa-youtube-play"></i>
+			<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
+		</cfif>
 		<i class="fa fa-calendar"></i>
 		<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 	</div>

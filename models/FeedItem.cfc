@@ -329,10 +329,26 @@ component persistent="true"
 	}
 
 	/**
+	 * Shorthand function for checking if the feed item is a bitchute video
+	 * @return Whether or not the feed item is a bitchute video
+	 */
+	boolean function isBitchute() {
+		return isVideo() && reFindNoCase( "bitchute\.com", getVideoUrl() );
+	}
+
+	/**
+	 * Shorthand function for checking if the feed item is a vimeo video
+	 * @return Whether or not the feed item is a vimeo video
+	 */
+	boolean function isVimeo() {
+		return isVideo() && reFindNoCase( "vimeo\.com", getVideoUrl() );
+	}
+
+	/**
 	 * Shorthand function for checking if the feed item is a youtube video
 	 * @return Whether or not the feed item is a youtube video
 	 */
-	boolean function isYouTubeVideo() {
+	boolean function isYouTube() {
 		return isVideo() && reFindNoCase( "youtube\.com", getVideoUrl() );
 	}
 

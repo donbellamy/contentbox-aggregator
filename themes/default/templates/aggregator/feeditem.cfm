@@ -17,13 +17,15 @@
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
 <cfparam name="args.showCategories" default="false" />
+<!--- TODO: combine these things into one, add functions to help to link correctly --->
+<!--- TODO: add video and/or audio player when needed --->
 <cfoutput>
 <div class="post feeditem" id="feeditem_#feedItem.getContentID()#">
 	<div class="row">
 		<cfif !args.showExcerpt && args.showImage >
 			<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 			<div class="col-sm-3">
-				<a href="#cb.linkEntry( feedItem )#"
+				<a href="#cb.linkEntry( feedItem )#" <!--- TODO: fix this.... --->
 					rel="bookmark"
 					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
 			</div>
