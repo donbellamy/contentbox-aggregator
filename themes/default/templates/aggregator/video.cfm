@@ -29,13 +29,17 @@
 			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 	</h4>
-	<div class="text-muted small">
+	<div class="row text-muted small">
 		<cfif args.showSource >
-			<i class="fa fa-youtube-play"></i>
-			<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
+			<div class="col-sm-7 pull-left">
+				<i class="fa fa-youtube-play"></i>
+				<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a>
+			</div>
 		</cfif>
-		<i class="fa fa-calendar"></i>
-		<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
+		<div class="col-sm-5 pull-right text-right">
+			<i class="fa fa-calendar"></i>
+			<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
+		</div>
 	</div>
 </div>
 </cfoutput>

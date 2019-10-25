@@ -33,22 +33,26 @@
 			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 	</h4>
-	<div class="text-muted small">
-		<p>
+	<div class="row text-muted small">
 			<cfif args.showSource >
-				<i class="fa fa-microphone"></i>
-				<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a><br/>
+				<div class="col-sm-12">
+					<i class="fa fa-microphone"></i>
+					<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a>
+				</div>
 			</cfif>
-			<i class="fa fa-calendar"></i>
-			<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
-		</p>
+			<div class="col-sm-12">
+				<i class="fa fa-calendar"></i>
+				<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
+			</div>
 	</div>
 	<cfif feedItem.isPodcast() && args.showPlayer >
-		<audio controls="controls">
-			<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
-		</audio>
+		<div class="audio-player">
+			<audio controls="controls">
+				<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
+			</audio>
+		</div>
 	<cfelseif args.showReadMore >
-		<a  class="btn btn-success btn-sm" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+		<a class="btn btn-success btn-sm" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
 			<cfif directLink >class="direct-link"</cfif>
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>"

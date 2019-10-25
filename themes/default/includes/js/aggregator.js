@@ -15,4 +15,5 @@ $( document )
 					$this.html( '<iframe src="' + videoUrl + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' );
 				}
 			} );
+		// TODO: Add in clicks to hits for direct links
 	} );

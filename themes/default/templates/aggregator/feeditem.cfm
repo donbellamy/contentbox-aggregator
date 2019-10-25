@@ -15,7 +15,7 @@
 <cfparam name="args.showAuthor" default="false" />
 <cfparam name="args.showImage" default="true" />
 <cfparam name="args.showPlayer" default="true" />
-<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.showExcerpt" default="false" />
 <cfparam name="args.characterLimit" default="255" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
@@ -28,11 +28,12 @@
 <cfoutput>
 <div class="post feeditem" id="feeditem_#feedItem.getContentID()#">
 	<div class="row">
-		<cfif !args.showExcerpt && ( showImage || showVideoPlayer ) >
-			<div class="col-sm-3">
-				<cfif feedItem.isVideo() && showPlayer >
-				<cfelse>
-					<a href="#ag.linkFeedItem( feedItem )#"
+		<cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >
+			<div class="col-md-3">
+				<cfif showVideoPlayer >
+					<div class="video-player" data-id="#listLast(feedItem.getVideoUrl(),"/")#" data-url="#feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+				<cfelseif showFeaturedImage >
+					<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
 						<cfif directLink >class="direct-link"</cfif>
 						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
@@ -40,7 +41,7 @@
 				</cfif>
 			</div>
 		</cfif>
-		<div class="post-title <cfif !args.showExcerpt && args.showImage && len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
+		<div class="post-title <cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >col-md-9<cfelse>col-md-12</cfif>">
 			<h2>
 				<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
@@ -65,7 +66,7 @@
 							<cfif contentType EQ "FeedItem">
 								<a href="#ag.linkFeedAuthor( feedItem )#" title="#encodeForHTMLAttribute( feedItem.getItemAuthor() )#">#feedItem.getItemAuthor()#</a>
 							<cfelse>
-								<a href="##">#feedItem.getAuthorName()#</a><!--- TODO: Fix this? --->
+								<a href="##">#feedItem.getAuthorName()#</a>
 							</cfif>
 						</cfif>
 					</div>
@@ -75,42 +76,61 @@
 					<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
 				</div>
 			</div>
+			<cfif !args.showExcerpt && showAudioPlayer >
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="audio-player">
+							<audio controls="controls">
+								<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
+							</audio>
+						</div>
+					</div>
+				</div>
+			</cfif>
 		</div>
 	</div>
 	<cfif args.showExcerpt >
-		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<div class="post-content row">
-			<cfif args.showImage && len( imageUrl ) >
-				<div class="col-sm-3">
-					<a class="thumbnail" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
-						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif directLink >class="direct-link"</cfif>
-						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
-						title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
+			<cfif showFeaturedImage || showVideoPlayer >
+				<div class="col-md-3">
+					<cfif showVideoPlayer >
+						<div class="video-player" data-id="#listLast(feedItem.getVideoUrl(),"/")#" data-url="#feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+					<cfelseif showFeaturedImage >
+						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+							<cfif args.openNewWindow >target="_blank"</cfif>
+							<cfif directLink >class="direct-link"</cfif>
+							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" /></a>
+					</cfif>
 				</div>
 			</cfif>
-			<cfif args.showExcerpt >
-				<div class="<cfif args.showImage && len( imageUrl ) >col-sm-9<cfelse>col-sm-12</cfif>">
-					<cfif feedItem.hasExcerpt() >
-						#feedItem.renderExcerpt()#
+			<div class="<cfif showFeaturedImage || showVideoPlayer >col-md-9<cfelse>col-md-12</cfif>">
+				<cfif feedItem.hasExcerpt() >
+					#feedItem.renderExcerpt()#
+				<cfelse>
+					<cfif contentType EQ "FeedItem" >
+						#feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
 					<cfelse>
-						<cfif contentType EQ "FeedItem" >
-							#feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
-						<cfelse>
-							#feedItem.renderContent()#
-						</cfif>
+						#feedItem.renderContent()#
 					</cfif>
-					<cfif args.showReadMore >
-						<div class="post-more">
-							<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
-								<cfif args.openNewWindow >target="_blank"</cfif>
-								<cfif directLink >class="direct-link"</cfif>
-								rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
-								title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
-						</div>
-					</cfif>
-				</div>
-			</cfif>
+				</cfif>
+				<cfif showAudioPlayer >
+					<div class="audio-player">
+						<audio controls="controls">
+							<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
+						</audio>
+					</div>
+				</cfif>
+				<cfif args.showReadMore >
+					<div class="post-more">
+						<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+							<cfif args.openNewWindow >target="_blank"</cfif>
+							<cfif directLink >class="direct-link"</cfif>
+							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+							title="#encodeForHtmlAttribute( feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
+					</div>
+				</cfif>
+			</div>
 		</div>
 	</cfif>
 	<cfif args.showCategories && feedItem.hasCategories() >
