@@ -7,6 +7,16 @@
 	margin-bottom: 15px !important;
 }
 
+.post .post-content {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.post .post-content.row {
+	margin-left: -15px;
+	margin-right: 15px;
+}
+
 .post .img-thumbnail {
 	height: 125px;
 	width: 100%;

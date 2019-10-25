@@ -4,6 +4,7 @@
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>Feed Import<cfif prc.feedImport.failed() > - Fatal Error Occurred</cfif></h3>
+			<h4>RSS feed: <a href="#prc.feedImport.getFeed().getFeedUrl()#" target="_blank">#prc.feedImport.getFeed().getFeedUrl()#</a></h4>
 			<h4>Imported on: #prc.feedImport.getDisplayImportedDate()#</h4>
 			<h4>Items imported: #prc.feedImport.getImportedCount()#</h4>
 			<cfif prc.feedImport.failed() && structKeyExists( prc.feedImport.getMetaInfo(), "FeedItem" ) >

@@ -6,8 +6,8 @@
 <cfset directLink = linkBehavior EQ "link" ? true : false />
 <cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 <cfparam name="args.showImage" default="true" />
-<cfparam name="args.showSource" default="true" />
 <cfparam name="args.showPlayer" default="true" />
+<cfparam name="args.showSource" default="true" />
 <cfoutput>
 <div class="col-md-6 col-sm-12 col-xs-12 post video" id="feeditem_#feedItem.getContentID()#">
 	<cfif args.showImage || args.showPlayer >

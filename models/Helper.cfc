@@ -451,17 +451,21 @@ component accessors="true" singleton threadSafe {
 
 	/**
 	 * Gets the feed item link
-	 * @feedItem The feed item to link to
+	 * @feedItem The feed item or entry to link to
 	 * @ssl Whether or not to use ssl
 	 * @format The format to link to, defaults to html
 	 * @directLink Whether or not to return the actual item url
 	 * @return The feed item link
 	 */
-	string function linkFeedItem( required FeedItem feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html", boolean directLink=false ) {
-		if ( arguments.directLink ) {
-			return arguments.feedItem.getItemUrl();
+	string function linkFeedItem( required any feedItem, boolean ssl=cb.getRequestContext().isSSL(), string format="html", boolean directLink=false ) {
+		if ( arguments.feedItem.getContentType() == "FeedItem" ) {
+			if ( arguments.directLink ) {
+				return arguments.feedItem.getItemUrl();
+			} else {
+				return linkNews( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+			}
 		} else {
-			return linkNews( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+			return cb.linkEntry( arguments.feedItem );
 		}
 	}
 
