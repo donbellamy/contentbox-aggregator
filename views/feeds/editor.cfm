@@ -427,12 +427,12 @@
 							#html.label(
 								class="control-label",
 								field="matchAnyFilter",
-								content="Contains any of these kewords:"
+								content="Contains any of these keywords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain any of these kewords in the title or body will be imported.
-									Existing feed items that do not contain any of these kewords in the title or body will be deleted.
+									Only feed items that contain any of these keywords in the title or body will be imported.
+									Existing feed items that do not contain any of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchAnyFilter",
@@ -448,12 +448,12 @@
 							#html.label(
 								class="control-label",
 								field="matchAllFilter",
-								content="Contains all of these kewords:"
+								content="Contains all of these keywords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that contain all of these kewords in the title or body will be imported.
-									Existing feed items that do not contain all of these kewords in the title or body will be deleted.
+									Only feed items that contain all of these keywords in the title or body will be imported.
+									Existing feed items that do not contain all of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchAllFilter",
@@ -469,12 +469,12 @@
 							#html.label(
 								class="control-label",
 								field="matchNoneFilter",
-								content="Contains none of these kewords:"
+								content="Contains none of these keywords:"
 							)#
 							<div class="controls">
 								<small>
-									Only feed items that do not contain any of these kewords in the title or body will be imported.
-									Existing feed items that contain any of these kewords in the title or body will be deleted.
+									Only feed items that do not contain any of these keywords in the title or body will be imported.
+									Existing feed items that contain any of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
 									name="matchNoneFilter",
@@ -865,11 +865,39 @@
 										</tr>
 										<cfif prc.feed.hasChild() >
 											<tr>
+												<th class="col-md-4">Feed Type:</th>
+												<td class="col-md-8">#prc.feed.getFeedType()#</td>
+											</tr>
+											<tr>
 												<th class="col-md-4">Feed Items:</th>
 												<td class="col-md-8">
 													<a href="#prc.agHelper.linkFeedItemsAdmin( prc.feed.getContentID() )#">#prc.feed.getNumberOfChildren()#</a>
 												</td>
 											</tr>
+											<cfif val( prc.feed.getNumberOfArticles() ) >
+												<tr>
+													<th class="col-md-4">Articles:</th>
+													<td class="col-md-8">
+														<a href="#prc.agHelper.linkFeedItemsAdmin( prc.feed.getContentID(), "article" )#">#prc.feed.getNumberOfArticles()#</a>
+													</td>
+												</tr>
+											</cfif>
+											<cfif val( prc.feed.getNumberOfPodcasts() ) >
+												<tr>
+													<th class="col-md-4">Podcasts:</th>
+													<td class="col-md-8">
+														<a href="#prc.agHelper.linkFeedItemsAdmin( prc.feed.getContentID(), "podcast" )#">#prc.feed.getNumberOfPodcasts()#</a>
+													</td>
+												</tr>
+											</cfif>
+											<cfif val( prc.feed.getNumberOfVideos() ) >
+												<tr>
+													<th class="col-md-4">Videos:</th>
+													<td class="col-md-8">
+														<a href="#prc.agHelper.linkFeedItemsAdmin( prc.feed.getContentID(), "video" )#">#prc.feed.getNumberOfVideos()#</a>
+													</td>
+												</tr>
+											</cfif>
 										</cfif>
 										<tr>
 											<th class="col-md-4">Created By:</th>

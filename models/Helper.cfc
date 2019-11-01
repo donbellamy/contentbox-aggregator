@@ -475,10 +475,13 @@ component accessors="true" singleton threadSafe {
 	 * @ssl Whether or not to use ssl
 	 * @return The feed items admin link
 	 */
-	string function linkFeedItemsAdmin( any contentID, boolean ssl=cb.getRequestContext().isSSL() ) {
+	string function linkFeedItemsAdmin( any contentID, string type, boolean ssl=cb.getRequestContext().isSSL() ) {
 		var link = cb.linkAdmin( ssl=arguments.ssl ) & "module/aggregator/feeditems";
 		if ( structKeyExists( arguments, "contentID" ) && isNumeric( arguments.contentID ) ) {
 			link &= "?feed=" & arguments.contentID;
+		}
+		if ( structKeyExists( arguments, "type" ) ) {
+			link &= "&type=" & arguments.type;
 		}
 		return link;
 	}
