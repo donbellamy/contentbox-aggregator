@@ -103,9 +103,6 @@ component extends="coldbox.system.Interceptor" {
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
 				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""aggregatorpurge""><a href=""javascript:adminAction( \'aggregator-purge\', \'#event.buildLink( prc.xehClearSiteCache )#\' );"" class="""">Clear Aggregator Caches</a></li>');});",true);
 			}
-			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) ) {
-				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""feedsimport""><a href=""#event.buildlink( prc.xehFeedImportAll )#"" class="""">Import All Feeds</a></li>');});",true);
-			}
 		}
 
 		// Fix global search

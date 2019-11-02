@@ -1,4 +1,5 @@
 <cfoutput>
+<script type="text/javascript" src="#prc.agRoot#/includes/js/loadingoverlay.min.js"></script>
 <script>
 function setupFeedView( settings ) {
 	$contentForm = $("##feedForm");
@@ -118,6 +119,7 @@ function resetHits( contentID ) {
 	$contentForm.submit();
 }
 function importFeed( contentID ) {
+	$.LoadingOverlay("show");
 	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedImport )#" );
 	if ( contentID != null ) {
 		checkByValue( "contentID", contentID );
@@ -125,6 +127,7 @@ function importFeed( contentID ) {
 	$contentForm.submit();
 }
 function importAll() {
+	$.LoadingOverlay("show");
 	$contentForm.attr( "action", "#event.buildlink( prc.xehFeedImportAll )#" ).submit();
 }
 function contentPaginate( page ) {
@@ -173,6 +176,12 @@ $(document).ready( function() {
 		showAll: "#rc.showAll#"
 	};
 	contentLoad( criteria );
+	$.LoadingOverlaySetup({
+		image : "",
+		fontawesome : "fa fa-spinner fa-spin",
+		fontawesomeResizeFactor : ".5",
+		fontawesomeColor : "##999"
+	});
 });
 </script>
 </cfoutput>

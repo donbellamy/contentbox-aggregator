@@ -1,5 +1,6 @@
 <cfoutput>
 #renderView( view="/contentbox/modules/contentbox-admin/views/_tags/editors", prePostExempt=true )#
+<script type="text/javascript" src="#prc.agRoot#/includes/js/loadingoverlay.min.js"></script>
 <script type="text/javascript" src="#prc.agRoot#/includes/js/bootstrap-multiselect.js"></script>
 <link rel="stylesheet" href="#prc.agRoot#/includes/css/bootstrap-multiselect.css" type="text/css"/>
 <style>
@@ -54,6 +55,12 @@ $( document ).ready( function() {
 		nonSelectedText: "Choose Categories",
 		numberDisplayed: 0,
 		buttonWidth: "100%"
+	});
+	$.LoadingOverlaySetup({
+		image : "",
+		fontawesome : "fa fa-spinner fa-spin",
+		fontawesomeResizeFactor : ".5",
+		fontawesomeColor : "##999"
 	});
 });
 function setupFeedForm() {
@@ -149,6 +156,7 @@ function setupFeedForm() {
 
 }
 function importFeed() {
+	$.LoadingOverlay("show");
 	var $feedForm = $("##feedForm");
 	$feedForm.attr("action","#event.buildLink( prc.xehFeedImport )#").submit();
 }
