@@ -124,6 +124,15 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Checks to see if the current event equals site.feeds and a category is present
+	 * @return True if the current event equals site.feeds and a category is present, false if not
+	 */
+	boolean function isFeedsCategoryView() {
+		var rc = cb.getRequestCollection();
+		return ( isFeedsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
+	}
+
+	/**
 	 * Checks to see if the current event equals site.feed
 	 * @return True if the current event equals site.feed, false if not
 	 */
@@ -737,6 +746,10 @@ component accessors="true" singleton threadSafe {
 		if ( isFeedsView() || isFeedView() ) {
 			var page = getCurrentPage();
 			bc &= '#arguments.separator# <a href="#linkFeeds()#">#page.getTitle()#</a> ';
+		}
+		if ( isFeedsCategoryView() ) {
+			var category = getCurrentCategory();
+			bc &= '#arguments.separator# <a href="#linkFeedsCategory( category )#">#category.getCategory()#</a> ';
 		}
 		if ( isFeedView() ) {
 			var feed = getCurrentFeed();
