@@ -336,6 +336,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
+		// News page not published, throw a 404
 		} else {
 
 			// Not found
@@ -434,6 +435,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
+		// News page not published, throw a 404
 		} else {
 
 			// Not found
@@ -485,6 +487,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				contentType = "text/xml"
 			);
 
+		// News page not published or rss not enabled, throw a 404
 		} else {
 
 			// Not found
@@ -569,6 +572,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
+		// Feeds page not published, throw a 404
 		} else {
 
 			// Not found
@@ -615,6 +619,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				contentType = "text/xml"
 			);
 
+		// Feeds page not published or rss not enabled, throw a 404
 		} else {
 
 			// Not found
@@ -729,6 +734,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
+		// Feeds page off, forward directly to the feed source
+		} else if ( !prc.page.isLoaded() && prc.feed.isLoaded() ) {
+
+			// Relocate
+			relocate(
+				url = prc.feed.getWebsiteUrl(),
+				addToken = false,
+				statusCode = "307"
+			);
+
+		// Feed not published, throw a 404
 		} else {
 
 			// Announce event
@@ -862,6 +878,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			}
 
+		// News page off, forward directly to the feed item
+		} else if ( !prc.page.isLoaded() && prc.feedItem.isLoaded()  ) {
+
+			// Relocate
+			relocate(
+				url = prc.feedItem.getItemUrl(),
+				addToken = false,
+				statusCode = "307"
+			);
+
+		// Feed item not published, throw a 404
 		} else {
 
 			// Announce event
