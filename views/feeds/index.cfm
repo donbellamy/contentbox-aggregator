@@ -98,7 +98,7 @@
 								<select name="category" id="category" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.category ) > selected="selected"</cfif>>All Categories</option>
 									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
-									<cfloop array="#prc.categories#" index="category">
+									<cfloop array="#prc.feedCategories#" index="category">
 										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
 									</cfloop>
 								</select>

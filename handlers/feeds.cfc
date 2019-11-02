@@ -46,6 +46,18 @@ component extends="contentHandler" {
 		// Grab categories
 		prc.categories = categoryService.getAll( sortOrder = "category" );
 
+		// Feed categories
+		prc.feedCategories = [];
+		for ( var category IN prc.categories ) {
+			var feedCount = feedService.getPublishedFeeds(
+				category = category.getSlug(),
+				countOnly = true
+			).count;
+			if ( feedCount ) {
+				arrayAppend( prc.feedCategories, category );
+			}
+		}
+
 		event.setView( "feeds/index" );
 
 	}
