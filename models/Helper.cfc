@@ -664,18 +664,50 @@ component accessors="true" singleton threadSafe {
 	 * Renders the feed items list
 	 * @template The theme template used to render the feed items, defaults to "feeditem"
 	 * @collectionAs The variable name used in the template for each feed item, defaults to "feeditem"
+	 * @groupBy The property to group the feed items by (date or feed), defaults to none
 	 * @args A structure of arguments to pass to the template
 	 * @return The feed items list html
 	 */
-	string function quickFeedItems( string template="feeditem", string collectionAs="feeditem", struct args=structnew() ) {
+	string function quickFeedItems(
+		string template="feeditem",
+		string collectionAs="feeditem",
+		boolean groupBy="",
+		struct args=structnew() ) {
 		var feedItems = getCurrentFeedItems();
-		return controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
-			collection = feedItems,
-			collectionAs = arguments.collectionAs,
-			args = arguments.args,
-			module = cb.themeRecord().module
-		);
+		if ( len( arguments.groupBy ) ) {
+			var html = "";
+			if ( arguments.groupBy == "date" ) {
+				arguments.args.groupedDate = "";
+				arguments.args.showGroupedDate = false;
+				for ( var feedItem IN feedItems ) {
+					var publishedDate = feedItem.getPublishedDateNoTime();
+					if ( arguments.args.groupedDate != publishedDate ) {
+						arguments.args.groupedDate = publishedDate;
+						arguments.args.showGroupedDate = true;
+					} else {
+						arguments.args.showGroupedDate = false;
+					}
+					html &= controller.getRenderer().renderView(
+						view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
+						collection = [ feedItem ],
+						collectionAs = arguments.collectionAs,
+						args = arguments.args,
+						module = cb.themeRecord().module
+					);
+				}
+			} else if ( arguments.groupBy == "feed" ) {
+
+			}
+			return html;
+		} else {
+			return controller.getRenderer().renderView(
+				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
+				collection = feedItems,
+				collectionAs = arguments.collectionAs,
+				args = arguments.args,
+				module = cb.themeRecord().module
+			);
+		}
 	}
 
 	/**

@@ -397,6 +397,15 @@ component persistent="true"
 	}
 
 	/**
+	 * Gets the published date without the time
+	 * @return The published date
+	 */
+	date function getPublishedDateNoTime() {
+		var publishedDate = getPublishedDate();
+		return createDate( datePart( "yyyy", publishedDate ), datePart( "m", publishedDate ), datePart( "d", publishedDate ) );
+	}
+
+	/**
 	 * Validates the feed item
 	 * @return An array of errors or an empty array if no error is found
 	 */

@@ -281,12 +281,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
-			// Sort
+			// Sort by
 			var sortOrder = "publishedDate DESC";
 			if ( len( rc.sb ) && rc.sb == "hits" ) {
 				prc.pagingLink &= "&sb=" & rc.sb;
 				sortOrder = "numberOfHits DESC";
 			}
+
+			// Group by
+			// if ( rc.gb )
+			// prc.groupby = "date";
+			// prc.groupby = "feed";
 
 			// Set template and paging label
 			prc.template = "feeditem";
