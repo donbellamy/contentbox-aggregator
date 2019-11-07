@@ -11,8 +11,7 @@
 	<cfset directLink = false />
 	<cfparam name="args.openNewWindow" default="false" />
 </cfif>
-<cfparam name="args.groupedDate" default="" />
-<cfparam name="args.showGroupedDate" default="false" />
+<cfparam name="args.showGroupByDate" default="false" />
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="false" />
 <cfparam name="args.showImage" default="true" />
@@ -28,9 +27,9 @@
 <cfset showVideoPlayer = args.showPlayer && feedItem.isVideo() />
 <cfset showAudioPlayer = args.showPlayer && feedItem.isPodcast() />
 <cfoutput>
-<cfif isDate( args.groupedDate ) && args.showGroupedDate >
+<cfif args.showGroupByDate >
 	<div class="post-date">
-		<h4>#dateFormat( args.groupedDate, "dddd, mmmm d, yyyy" )#</h4>
+		<h4>#dateFormat( feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
 </cfif>
 <div class="post feeditem" id="feeditem_#feedItem.getContentID()#">

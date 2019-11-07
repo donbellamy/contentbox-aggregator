@@ -60,7 +60,7 @@
 									</ul>
 								</div>
 								<button class="btn btn-primary btn-sm" onclick="return to( '#event.buildLink( linkTo=prc.xehFeedEditor )#' );">Create Feed</button>
-								<button class="btn btn-primary btn-sm" onclick="importAll();">Import All</button>
+								<button class="btn btn-success btn-sm" onclick="importAll();">Import All</button>
 							</div>
 						</div>
 					</div>

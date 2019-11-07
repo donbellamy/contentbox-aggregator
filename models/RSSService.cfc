@@ -179,9 +179,6 @@ component singleton {
 		feedStruct.lastBuildDate = now();
 		feedStruct.items = items;
 
-//writedump(feedStruct);
-//abort;
-
 		// Return the generated feed
 		return feedGenerator.createFeed( feedStruct );
 

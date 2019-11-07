@@ -217,6 +217,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "q", "" )
 			.paramValue( "category", "" )
 			.paramValue( "feed", "" )
+			.paramValue( "gb", "" )
 			.paramValue( "sb", "" )
 			.paramValue( "type", "" )
 			.paramValue( "format", "html" );
@@ -281,17 +282,21 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
-			// Sort by
+			// Group by date
+			// TODO: setting for this, then do not have to pass in the url
+			prc.groupByDate = false;
+			if ( len( rc.gb ) && rc.gb == "date" ) {
+				prc.groupByDate = true;
+				prc.pagingLink &= "&gb=" & rc.gb;
+				rc.sb = "";
+			}
+
+			// Sort order
 			var sortOrder = "publishedDate DESC";
 			if ( len( rc.sb ) && rc.sb == "hits" ) {
 				prc.pagingLink &= "&sb=" & rc.sb;
 				sortOrder = "numberOfHits DESC";
 			}
-
-			// Group by
-			// if ( rc.gb )
-			// prc.groupby = "date";
-			// prc.groupby = "feed";
 
 			// Set template and paging label
 			prc.template = "feeditem";

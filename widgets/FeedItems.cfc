@@ -42,7 +42,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.hint How to order the results, defaults to date published.
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @groupByDate.label Group by Date?
-	 * @groupByDate.hint Results are grouped by published date, default is false.
+	 * @groupByDate.hint Group the results by published date, default is false.
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
 	 * @return The news widget html
@@ -55,7 +55,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string category="",
 		string searchTerm="",
 		string sortOrder="Most Recent",
-		boolean groupByDate=false, // TODO: Default to general settings when implemented
+		boolean groupByDate=false,
 		boolean openNewWindow=false ) {
 
 		// Grab the event
@@ -90,10 +90,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 			prc.pagingLink &= "&q=" & arguments.searchTerm;
 		}
 
-		// Group by date, verify sort order
-		prc.groupBy = "";
+		// Group by date
+		// TODO: setting for this, then do not have to pass in the url
+		prc.groupByDate = false;
 		if ( arguments.groupByDate ) {
-			prc.groupBy = "date";
+			prc.groupByDate = true;
+			prc.pagingLink &= "&gb=date";
 			arguments.sortOrder = "Most Recent";
 		}
 

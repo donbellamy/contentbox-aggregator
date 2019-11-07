@@ -9,10 +9,10 @@
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
 	<cfif prc.template EQ "feeditem" >
-		#ag.quickFeedItems( template=prc.template, args=args )#
+		#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
 	<cfelse>
 		<div class="row display-flex">
-			#ag.quickFeedItems( template=prc.template, args=args )#
+			#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
 		</div>
 	</cfif>
 	<cfif !args.print >
