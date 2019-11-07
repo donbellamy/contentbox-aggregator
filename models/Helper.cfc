@@ -708,8 +708,9 @@ component accessors="true" singleton threadSafe {
 	/**
 	 * Renders the main view of the current event
 	 * @args A structure of arguments to pass to the view
+	 * @return The main view html
 	 */
-	function mainView( struct args=structNew() ) {
+	string function mainView( struct args=structNew() ) {
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/aggregator/page",

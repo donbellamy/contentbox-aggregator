@@ -19,7 +19,9 @@
 	<cfif args.showImage || args.showPlayer >
 		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
 		<cfif feedItem.isVideo() && args.showPlayer >
-			<div class="video-player" data-id="#listLast(feedItem.getVideoUrl(),"/")#" data-url="#feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+			<div class="video-player" data-id="#listLast(feedItem.getVideoUrl(),"/")#" data-url="#feedItem.getVideoUrl()#" data-image="#imageUrl#">
+				<img class="img-thumbnail" title="#encodeForHtmlAttribute( feedItem.getTitle() )#" src="#imageUrl#" />
+			</div>
 		<cfelseif len( imageUrl ) && args.showImage >
 			<div class="video-image">
 				<a href="#ag.linkFeedItem( feedItem )#"

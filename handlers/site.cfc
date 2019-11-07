@@ -999,6 +999,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			);
 
 		}
+
 	}
 
 	/**
