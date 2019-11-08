@@ -29,7 +29,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.options 1,2,3,4,5
 	 * @category.label Category
 	 * @category.hint The list of categories to filter on.
-	 * @category.multiOptionsUDF getCategorySlugs
+	 * @category.optionsUDF getCategorySlugs
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
@@ -53,6 +53,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
+			category = arguments.category,
 			max = ag.setting("ag_site_paging_max_feeds"),
 			offset = prc.pagingBoundaries.startRow - 1
 		);
