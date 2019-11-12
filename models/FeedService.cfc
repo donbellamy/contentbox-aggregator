@@ -37,7 +37,7 @@ component extends="ContentService" singleton {
 		string category="",
 		string status="",
 		string sortOrder="title ASC",
-		boolean publishedFeedItems=false,
+		boolean hasPublishedFeedItems=false,
 		boolean searchActiveContent=true,
 		boolean countOnly=false,
 		numeric max=0,
@@ -96,7 +96,7 @@ component extends="ContentService" singleton {
 					.isLT( "publishedDate", now() )
 					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
 					// Check for published feed items if needed
-					if ( arguments.publishedFeedItems ) {
+					if ( arguments.hasPublishedFeedItems ) {
 						c.gt( "numberOfPublishedFeedItems", "0" );
 					}
 			} else if ( arguments.status EQ "expired" ) {
@@ -133,7 +133,7 @@ component extends="ContentService" singleton {
 	 * @return struct - {feeds,count}
 	 */
 	struct function getPublishedFeeds( numeric max=0, numeric offset=0 ) {
-		return getFeeds( argumentCollection=arguments, status="published", publishedFeedItems=true );
+		return getFeeds( argumentCollection=arguments, status="published", hasPublishedFeedItems=true );
 	}
 
 	/**
