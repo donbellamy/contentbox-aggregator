@@ -155,10 +155,6 @@ component persistent="true"
 		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID = contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
-	property name="numberOfPublishedFeedItems"
-		formula="select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
-		default="0";
-
 	property name="numberOfArticles"
 		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and ( fi.podcastUrl = '' or fi.podcastUrl IS NULL ) and ( fi.videoUrl = '' or fi.videoUrl IS NULL )"
 		default="0";
@@ -170,6 +166,14 @@ component persistent="true"
 	property name="numberOfVideos"
 		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.videoUrl > ''"
 		default="0";
+
+	property name="numberOfPublishedChildren"
+		formula="select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
+		default="0";
+
+	property name="lastPublishedDate"
+		formula="select max(c.publishedDate) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
+		default="";
 
 	/* *********************************************************************
 	**                            CONSTRAINTS
@@ -292,6 +296,26 @@ component persistent="true"
 	 */
 	numeric function getNumberOfFeedItems() {
 		return getNumberOfChildren();
+	}
+
+	/**
+	 * Gets the latest feed items
+	 * @numberOfItems The number of feed items to return
+	 * @return An array of feed items
+	 */
+	// TODO: This is taking too long per feed, just need a few props, maybe a query or struct from query?
+	// TODO: Also not returning in the correct order, should be newest to oldest...
+	array function getLatestFeedItems( required numeric numberOfItems=5 ) {
+		var feedItems = [];
+		for ( var feedItem IN getFeedItems() ) {
+			if ( feedItem.isContentPublished() && !feedItem.isExpired() ) {
+				arrayAppend( feedItems, feedItem );
+				if ( arrayLen( feedItems ) EQ arguments.numberOfItems ) {
+					break;
+				}
+			}
+		}
+		return feedItems;
 	}
 
 	/**

@@ -62,8 +62,15 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Paging
 		prc.pagingLink &= "?page=@page@";
 
+		// Check items
+		var sortOrder = "title ASC";
+		if ( arguments.includeitems ) {
+			sortOrder = "lastPublishedDate DESC";
+		}
+
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
+			sortOrder = sortOrder,
 			category = arguments.category,
 			max = ag.setting("ag_site_paging_max_feeds"),
 			offset = prc.pagingBoundaries.startRow - 1

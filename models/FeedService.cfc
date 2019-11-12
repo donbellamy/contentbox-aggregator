@@ -97,7 +97,7 @@ component extends="ContentService" singleton {
 					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
 					// Check for published feed items if needed
 					if ( arguments.hasPublishedFeedItems ) {
-						c.gt( "numberOfPublishedFeedItems", "0" );
+						c.gt( "numberOfPublishedChildren", "0" );
 					}
 			} else if ( arguments.status EQ "expired" ) {
 				c.isTrue("isPublished").isLT( "expireDate", now() );
