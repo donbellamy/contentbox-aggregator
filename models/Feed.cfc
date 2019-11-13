@@ -144,6 +144,14 @@ component persistent="true"
 		cascade="all-delete-orphan";
 
 	/* *********************************************************************
+	**                            DI INJECTIONS
+	********************************************************************* */
+
+	property name="feedItemService"
+		inject="feedItemService@aggregator"
+		persistent="false";
+
+	/* *********************************************************************
 	**                            CALCULATED FIELDS
 	********************************************************************* */
 
@@ -299,21 +307,17 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets the latest feed items
-	 * @numberOfItems The number of feed items to return
+	 * Gets the latest published feed items
+	 * @max The maximum number of feed items to return
 	 * @return An array of feed items
 	 */
-	// TODO: This is taking too long per feed, just need a few props, maybe a query or struct from query?
-	// TODO: Also not returning in the correct order, should be newest to oldest...
-	array function getLatestFeedItems( required numeric numberOfItems=5 ) {
-		var feedItems = [];
-		for ( var feedItem IN getFeedItems() ) {
-			if ( feedItem.isContentPublished() && !feedItem.isExpired() ) {
-				arrayAppend( feedItems, feedItem );
-				if ( arrayLen( feedItems ) EQ arguments.numberOfItems ) {
-					break;
-				}
-			}
+	array function getLatestFeedItems( required numeric max=5 ) {
+		var feeditems = [];
+		if ( isLoaded() ) {
+			feedItems = feedItemService.getPublishedFeedItems(
+				feed=getContentID(),
+				max=arguments.max
+			).feedItems;
 		}
 		return feedItems;
 	}

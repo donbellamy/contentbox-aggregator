@@ -24,6 +24,10 @@
 	object-fit: cover;
 }
 
+.post .feeditems {
+	margin-top: .5rem;
+}
+
 .video .img-thumbnail {
 	height: 225px;
 	width: 100%;

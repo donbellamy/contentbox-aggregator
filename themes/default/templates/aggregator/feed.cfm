@@ -38,19 +38,23 @@
 				</div>
 			</cfif>
 			<cfif args.includeItems && feed.getNumberOfPublishedChildren() >
-				<div class="row">
+				<cfset linkBehavior =
+					len( feed.getLinkBehavior() ) ?
+					feed.getLinkBehavior() :
+					ag.setting("ag_site_item_link_behavior") />
+				<cfset directLink = linkBehavior EQ "link" ? true : false />
+				<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
+				<div class="row feeditems">
 					<div class="col-md-12">
 						<cfloop array="#feed.getLatestFeedItems()#" index="feedItem" >
 							<h4>
 								<a href="#ag.linkFeedItem( feedItem=feedItem )#"
+									<cfif args.openNewWindow >target="_blank"</cfif>
+									<cfif directLink >class="direct-link"</cfif>
 									title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
-									rel="nofollow">#feedItem.getTitle()#</a>
+									rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 							</h4>
 						</cfloop>
-					<div class="post-more">
-						<a href="#ag.linkFeed( feed )#"
-							title="#encodeForHtmlAttribute( feed.getTitle() )#"><button class="btn btn-success">Read more from #feed.getTitle()#</button></a>
-					</div>
 					</div>
 				</div>
 			</cfif>
