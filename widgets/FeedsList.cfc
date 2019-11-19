@@ -31,7 +31,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @max.hint The number of feeds to display.
 	 * @max.options 1,5,10,15,20,25,50,100
 	 * @category.label Category
-	 * @category.hint The list of categories to filter on.
+	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feeds in a new window (tab), default is false.

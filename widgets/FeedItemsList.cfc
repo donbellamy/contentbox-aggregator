@@ -34,7 +34,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @feed.hint The feed to filter on.
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
-	 * @category.hint The list of categories to filter on.
+	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.

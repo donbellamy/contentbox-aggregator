@@ -816,14 +816,15 @@ component extends="contentHandler" {
 
 				// Create and save the blacklisted item
 				var blacklistedItem = blacklistedItemService.new();
-				blacklistedItem.setTitle( feedItem.title );
-				blacklistedItem.setItemUrl( feedItem.itemUrl );
+				blacklistedItem.setTitle( left( feedItem.title, 255 ) );
+				blacklistedItem.setItemUrl( left( feedItem.itemUrl, 510 ) );
 				blacklistedItem.setFeed( feedImport.getFeed() );
 				blacklistedItem.setCreator( prc.oCurrentAuthor );
 				announceInterception(
 					"aggregator_preBlacklistedItemSave",
 					{ blacklistedItem = blacklistedItem }
 				);
+
 				blacklistedItemService.save( blacklistedItem );
 				announceInterception(
 					"aggregator_postBlacklistedItemSave",

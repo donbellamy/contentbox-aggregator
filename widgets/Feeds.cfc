@@ -28,17 +28,21 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
 	 * @category.label Category
-	 * @category.hint The list of categories to filter on.
+	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
-	 * @includeItems.label Include Feed Items
-	 * @includeItems.hint Displays the most recent 5 feed items (last 7 days) within the list of feeds.  A feed without any recent feed items will not display.
+	 * @sortOrder.label Sort Order
+	 * @sortOrder.hint How to order the results, defaults to feed title.
+	 * @sortOrder.options Feed Title,Most Recent
+	 * @includeItems.label Include Feed Items?
+	 * @includeItems.hint Displays the most recent five feed items within the list of feeds, defaults to false.
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		string category="",
-		boolean includeItems=true ) {
+		string sortOrder="Feed Title",
+		boolean includeItems=false ) {
 
 		// Grab the event
 		var event = getRequestContext();
@@ -62,15 +66,28 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Paging
 		prc.pagingLink &= "?page=@page@";
 
-		// Check items
-		var sortOrder = "title ASC";
-		if ( arguments.includeitems ) {
-			sortOrder = "lastPublishedDate DESC";
+		// Sort order
+		switch ( arguments.sortOrder ) {
+			case "Most Recent": {
+				// TODO: Check global setting and do not include if we can
+				prc.pagingLink &= "&sb=recent";
+				arguments.sortOrder = "lastPublishedDate DESC";
+				break;
+			}
+			default : {
+				arguments.sortOrder = "title ASC";
+			}
+		}
+
+		// Include items
+		// TODO: Check global setting and do not include if we can
+		if ( arguments.includeItems ) {
+			prc.pagingLink &= "&in=true";
 		}
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
-			sortOrder = sortOrder,
+			sortOrder = arguments.sortOrder,
 			category = arguments.category,
 			max = ag.setting("ag_site_paging_max_feeds"),
 			offset = prc.pagingBoundaries.startRow - 1

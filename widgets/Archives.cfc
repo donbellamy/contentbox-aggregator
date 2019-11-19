@@ -32,7 +32,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @showItemCount.label Show Item Count?
 	 * @showItemCount.hint Show item counts or not, default is true.
 	 * @monthLimit.label Number of months displayed
-	 * @monthLimit.hint The number of months to display in the widget, enter 0 for unlimited.
+	 * @monthLimit.hint The number of months to display in the widget, defaults to 12, enter 0 for unlimited.
 	 * @return The feed item archives widget html
 	 */
 	string function renderIt(

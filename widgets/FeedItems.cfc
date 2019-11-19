@@ -34,12 +34,12 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @feed.hint The feed to filter on.
 	 * @feed.optionsUDF getFeedSlugs
 	 * @category.label Category
-	 * @category.hint The list of categories to filter on.
+	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
 	 * @searchTerm.label Search Term
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
-	 * @sortOrder.hint How to order the results, defaults to date published.
+	 * @sortOrder.hint How to order the results, defaults to most recent.
 	 * @sortOrder.options Most Recent,Most Popular
 	 * @groupByDate.label Group by Date?
 	 * @groupByDate.hint Group the results by published date, default is false.
@@ -92,7 +92,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Group by date
 		// TODO: setting for this, then do not have to pass in the url
-		prc.groupByDate = false;
+		prc.groupByDate = false; // TODO: move to args?
 		if ( arguments.groupByDate ) {
 			prc.groupByDate = true;
 			prc.pagingLink &= "&gb=date";

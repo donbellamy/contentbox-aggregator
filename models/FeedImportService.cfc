@@ -139,8 +139,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 											// BaseContent properties
 											feedItem.setParent( arguments.feed );
-											feedItem.setTitle( item.title );
-											feedItem.setSlug( htmlHelper.slugify( item.title ) );
+											feedItem.setTitle( left( item.title, 200 ) );
+											feedItem.setSlug( left( htmlHelper.slugify( item.title ), 200 ) );
 											feedItem.setCreator( arguments.author );
 											feedItem.setPublishedDate( item.datePublished );
 											feedItem.setModifiedDate( item.dateUpdated );

@@ -284,17 +284,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Group by date
 			// TODO: setting for this, then do not have to pass in the url
-			prc.groupByDate = false;
+			prc.groupByDate = false; // TODO: Why need this?
 			if ( len( rc.gb ) && rc.gb == "date" ) {
 				prc.groupByDate = true;
-				prc.pagingLink &= "&gb=" & rc.gb;
+				prc.pagingLink &= "&gb=date";
 				rc.sb = "";
 			}
 
 			// Sort order
 			var sortOrder = "publishedDate DESC";
 			if ( len( rc.sb ) && rc.sb == "hits" ) {
-				prc.pagingLink &= "&sb=" & rc.sb;
+				prc.pagingLink &= "&sb=hits";
 				sortOrder = "numberOfHits DESC";
 			}
 
@@ -516,6 +516,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Set params
 		event.paramValue( "page", 1 )
 			.paramValue( "category", "" )
+			.paramValue( "sb", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
@@ -554,8 +555,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Paging
 			prc.pagingLink &= "?page=@page@";
 
+			// Sort order
+			var sortOrder = "title ASC";
+			if ( len( rc.sb ) && rc.sb == "recent" ) {
+				prc.pagingLink &= "&sb=recent";
+				sortOrder = "lastPublishedDate DESC";
+			}
+
 			// Grab the results
 			var results = feedService.getPublishedFeeds(
+				sortOrder = sortOrder,
 				category = rc.category,
 				max = prc.agSettings.ag_site_paging_max_feeds,
 				offset = prc.pagingBoundaries.startRow - 1
