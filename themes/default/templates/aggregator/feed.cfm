@@ -3,14 +3,8 @@
 <cfparam name="args.showWebsite" default="true" />
 <cfparam name="args.showRSS" default="true" />
 <cfparam name="args.includeItems" default="false" />
-<cftry>
 <cfset imageUrl = feed.getFeaturedImageUrl() />
 <cfset showFeaturedImage = args.showImage && len( imageUrl ) />
-<cfcatch type="any">
-	<cfdump var="#feed#" top="2"/>
-	<cfabort/>
-</cfcatch>
-</cftry>
 <cfoutput>
 <div class="post feed" id="feed_#feed.getContentID()#">
 	<div class="row">

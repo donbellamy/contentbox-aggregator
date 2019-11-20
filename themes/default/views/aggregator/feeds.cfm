@@ -1,5 +1,7 @@
+<cfparam name="args" default="#structNew()#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
+<cfparam name="args.includeItems" default="false" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -23,7 +25,8 @@
 		<cfif !args.print >
 			<div class="row">
 				<div id="body-breadcrumbs" class="col-xs-12 col-sm-9">
-					<i class="fa fa-home"></i> #ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
+					<i class="fa fa-home"></i>
+					#ag.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
 				</div>
 				<cfif cb.setting("cb_content_uiexport") >
 					<div class="hidden-xs col-sm-3">
@@ -44,7 +47,7 @@
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preFeedsDisplay")#
 				<cfif prc.itemCount >
-					#ag.quickFeeds()#
+					#ag.quickFeeds( args=args )#
 					<cfif !args.print >
 						<div class="contentBar">
 							#ag.quickPaging( type="feeds" )#

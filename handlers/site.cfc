@@ -517,6 +517,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "category", "" )
 			.paramValue( "sb", "" )
+			.paramValue( "inc", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
@@ -527,6 +528,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
+			var args = {}; // Used in fix for args not passed to layouts
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -562,6 +564,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = "lastPublishedDate DESC";
 			}
 
+			// Include items?
+			if ( len( rc.inc ) && rc.inc == "items" ) {
+				prc.pagingLink &= "&inc=items";
+				args.includeItems = true;
+			}
+
 			// Grab the results
 			var results = feedService.getPublishedFeeds(
 				sortOrder = sortOrder,
@@ -582,14 +590,19 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			title = prc.page.getTitle() & title;
 			cbHelper.setMetaTitle( title );
 
+			// Set args
+			prc.args = args;
+
 			// Set layout and view
 			event.setLayout(
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
 				view = "#prc.cbTheme#/views/aggregator/feeds",
-				module = prc.cbThemeRecord.module
+				module = prc.cbThemeRecord.module,
+				args = args
 			);
+
 
 		// Feeds page not published, throw a 404
 		} else {

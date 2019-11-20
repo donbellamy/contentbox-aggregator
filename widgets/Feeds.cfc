@@ -82,7 +82,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Include items
 		// TODO: Check global setting and do not include if we can
 		if ( arguments.includeItems ) {
-			prc.pagingLink &= "&in=true";
+			prc.pagingLink &= "&inc=items";
 		}
 
 		// Grab the results

@@ -53,7 +53,8 @@
 		<cfif !args.print AND !isNull( "prc.page" ) AND prc.page.getSlug() neq cb.getHomePage() >
 			<div class="row">
 				<div id="body-breadcrumbs" class="col-xs-12 col-sm-9">
-					<i class="fa fa-home"></i> #cb.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
+					<i class="fa fa-home"></i>
+					#cb.breadCrumbs( separator="<i class='fa fa-angle-right'></i> " )#
 				</div>
 				<cfif cb.setting("cb_content_uiexport") >
 					<div class="hidden-xs col-sm-3">
