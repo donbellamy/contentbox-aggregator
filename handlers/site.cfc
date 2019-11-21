@@ -284,7 +284,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Group by date
 			// TODO: setting for this, then do not have to pass in the url
-			prc.groupByDate = false; // TODO: Why need this?
+			prc.groupByDate = false; // TODO: Why need this? change to use args - see feeds
 			if ( len( rc.gb ) && rc.gb == "date" ) {
 				prc.groupByDate = true;
 				prc.pagingLink &= "&gb=date";

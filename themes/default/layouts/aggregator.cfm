@@ -1,9 +1,9 @@
-<cfoutput>
 <cfparam name="args" default="#structNew()#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
 <cfparam name="prc.args" default="#structNew()#" />
 <cfset structAppend( args, prc.args ) />
+<cfoutput>
 <!DOCTYPE html>
 <html lang="en">
 <head>

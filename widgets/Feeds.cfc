@@ -69,7 +69,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Sort order
 		switch ( arguments.sortOrder ) {
 			case "Most Recent": {
-				// TODO: Check global setting and do not include if we can
+				// TODO: Check global setting and do not include if not needed
 				prc.pagingLink &= "&sb=recent";
 				arguments.sortOrder = "lastPublishedDate DESC";
 				break;
@@ -80,7 +80,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// Include items
-		// TODO: Check global setting and do not include if we can
+		// TODO: Check global setting and do not include if not needed
 		if ( arguments.includeItems ) {
 			prc.pagingLink &= "&inc=items";
 		}

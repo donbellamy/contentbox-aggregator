@@ -25,16 +25,53 @@ component {
 		// Settings
 		settings = {
 
-			// Site
-			"ag_site_news_entrypoint" = "news",
+			/*
+				Site options (defaults)
+				- Feed Items page - change from News (news is default url and name)
+					- open new window
+					- include entries
+					- group by date
+					- show source
+					- show author
+					- show image
+					- showVideoPlayer
+					- showAudioPlayer
+					- show excerpt
+					- show read more
+					- show categories
+				- Feeds page
+					- Show image ag_site_feeds_show_image
+					- Show website
+					- Show rss
+					- Include items
+					- Sort by option
+
+				- New function in site to set args defaults or in helper?
+
+			*/
+
+			// Site Options
+
+			// Feed items
+			"ag_site_news_entrypoint" = "news", // ag_site_items_entrypoint
+			"ag_site_display_entries" = "false", // ag_site_items_include_entries
+			"ag_site_item_link_behavior" = "forward", // ag_site_items_link_behavior
+
+			// ag_site_items_show_featured_image = true,
+			"ag_site_item_featured_image_behavior" = "feed", // ag_site_items_featured_image_behavior
+			"ag_site_item_featured_image_default" = "", // ag_site_items_featured_image_default
+			"ag_site_item_featured_image_default_url" = "", // ag_site_items_featured_image_default_url
+
+			// Feeds
 			"ag_site_feeds_entrypoint" = "feeds",
-			"ag_site_display_entries" = "false",
-			"ag_site_item_link_behavior" = "forward",
-			"ag_site_item_featured_image_behavior" = "feed",
-			"ag_site_item_featured_image_default" = "",
-			"ag_site_item_featured_image_default_url" = "",
+			// ag_site_feeds_show_featured_image = true,
+			// ag_site_feeds_show_website = true,
+			// ag_site_feeds_show_rss = true,
+			// ag_site_feeds_include_items = false,
+
 			"ag_site_paging_max_items" = "20",
 			"ag_site_paging_max_feeds" = "20",
+
 			"ag_site_cache_enable" = "true",
 			"ag_site_cache_name" = "Template",
 			"ag_site_cache_timeout" = "60",
