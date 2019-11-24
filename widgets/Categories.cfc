@@ -83,7 +83,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			var feedItemCount = feedItemService.getPublishedFeedItems(
 				category = categories[x].getSlug(),
 				countOnly = true,
-				includeEntries = ag.setting("ag_site_display_entries")
+				includeEntries = ag.setting("ag_site_items_include_entries")
 			).count;
 			if ( feedItemCount ) {
 				html &= '<option value="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';
@@ -117,7 +117,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			var feedItemCount = feedItemService.getPublishedFeedItems(
 				category = categories[x].getSlug(),
 				countOnly = true,
-				includeEntries = ag.setting("ag_site_display_entries")
+				includeEntries = ag.setting("ag_site_items_include_entries")
 			).count;
 			if ( feedItemCount ) {
 				html &= '<li><a href="#ag.linkCategory( arguments.categories[x] )#">#arguments.categories[x].getCategory()#';

@@ -47,7 +47,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The news entry point
 	 */
 	string function getNewsEntryPoint() {
-		return setting("ag_site_news_entrypoint");
+		return setting("ag_site_items_entrypoint");
 	}
 
 	/**

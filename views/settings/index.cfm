@@ -44,17 +44,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_news_entrypoint",
+											field="ag_site_items_entrypoint",
 											content="News Page:"
 										)#
 										<div class="controls">
 											<small>The page used in the site to display the imported feed items.</small>
 											#html.select(
-												name="ag_site_news_entrypoint",
+												name="ag_site_items_entrypoint",
 												options=prc.pages,
 												column="slug",
 												nameColumn="title",
-												selectedValue=prc.agSettings.ag_site_news_entrypoint,
+												selectedValue=prc.agSettings.ag_site_items_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -80,19 +80,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_display_entries",
+											field="ag_site_items_include_entries",
 											content="Display Blog Entries:"
 										)#
 										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_display_entries_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_display_entries' },
-												checked=prc.agSettings.ag_site_display_entries
+												name="ag_site_items_include_entries_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_include_entries' },
+												checked=prc.agSettings.ag_site_items_include_entries
 											)#
 											#html.hiddenField(
-												name="ag_site_display_entries",
-												value=prc.agSettings.ag_site_display_entries
+												name="ag_site_items_include_entries",
+												value=prc.agSettings.ag_site_items_include_entries
 											)#
 										</div>
 									</div>
@@ -102,17 +102,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_item_link_behavior",
+											field="ag_site_items_link_behavior",
 											content="Link Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
-												name="ag_site_item_link_behavior",
+												name="ag_site_items_link_behavior",
 												options=prc.linkOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_site_item_link_behavior,
+												selectedValue=prc.agSettings.ag_site_items_link_behavior,
 												class="form-control input-sm"
 											)#
 										</div>
@@ -120,17 +120,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_item_featured_image_behavior",
+											field="ag_site_items_featured_image_behavior",
 											content="Featured Image Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when a feed item does not have a featured image.</small>
 											#html.select(
-												name="ag_site_item_featured_image_behavior",
+												name="ag_site_items_featured_image_behavior",
 												options=prc.featuredImageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_site_item_featured_image_behavior,
+												selectedValue=prc.agSettings.ag_site_items_featured_image_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -138,25 +138,25 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_item_featured_image_default",
+											field="ag_site_items_featured_image_default",
 											content="Default Featured Image:"
 										)#
 										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_site_item_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
+											<div class="<cfif !len( prc.agSettings.ag_site_items_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
 												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
 												#html.hiddenField(
-													name="ag_site_item_featured_image_default",
-													value=prc.agSettings.ag_site_item_featured_image_default
+													name="ag_site_items_featured_image_default",
+													value=prc.agSettings.ag_site_items_featured_image_default
 												)#
 												#html.hiddenField(
-													name="ag_site_item_featured_image_default_url",
-													value=prc.agSettings.ag_site_item_featured_image_default_url
+													name="ag_site_items_featured_image_default_url",
+													value=prc.agSettings.ag_site_items_featured_image_default_url
 												)#
 												<div class="margin10">
-													<cfif len( prc.agSettings.ag_site_item_featured_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_site_item_featured_image_default_url#" class="img-thumbnail" height="75" />
+													<cfif len( prc.agSettings.ag_site_items_featured_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_site_items_featured_image_default_url#" class="img-thumbnail" height="75" />
 													<cfelse>
 														<img id="default_image_preview" class="img-thumbnail" height="75" />
 													</cfif>

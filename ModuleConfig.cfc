@@ -25,53 +25,41 @@ component {
 		// Settings
 		settings = {
 
-			/*
-				Site options (defaults)
-				- Feed Items page - change from News (news is default url and name)
-					- open new window
-					- include entries
-					- group by date
-					- show source
-					- show author
-					- show image
-					- showVideoPlayer
-					- showAudioPlayer
-					- show excerpt
-					- show read more
-					- show categories
-				- Feeds page
-					- Show image ag_site_feeds_show_image
-					- Show website
-					- Show rss
-					- Include items
-					- Sort by option
-
-				- New function in site to set args defaults or in helper?
-
-			*/
-
 			// Site Options
 
 			// Feed items
-			"ag_site_news_entrypoint" = "news", // ag_site_items_entrypoint
-			"ag_site_display_entries" = "false", // ag_site_items_include_entries
-			"ag_site_item_link_behavior" = "forward", // ag_site_items_link_behavior
-
-			// ag_site_items_show_featured_image = true,
-			"ag_site_item_featured_image_behavior" = "feed", // ag_site_items_featured_image_behavior
-			"ag_site_item_featured_image_default" = "", // ag_site_items_featured_image_default
-			"ag_site_item_featured_image_default_url" = "", // ag_site_items_featured_image_default_url
+			"ag_site_items_entrypoint" = "news",
+			"ag_site_items_include_entries" = "false",
+			"ag_site_items_link_behavior" = "forward",
+			"ag_site_items_show_featured_image" = "true",
+			"ag_site_items_featured_image_behavior" = "feed",
+			"ag_site_items_featured_image_default" = "",
+			"ag_site_items_featured_image_default_url" = "",
+			"ag_site_items_group_by_date" = "false",
+			"ag_site_items_open_new_window" = "true",
+			"ag_site_items_show_video_player" = "true",
+			"ag_site_items_show_audio_player" = "true",
+			"ag_site_items_show_source" = "true",
+			"ag_site_items_show_author" = "false",
+			"ag_site_items_show_excerpt" = "true",
+			"ag_site_items_excerpt_limit" = "255",
+			"ag_site_items_excerpt_ending" = "...",
+			"ag_site_items_show_read_more" = "true",
+			"ag_site_items_read_more_text" = "Read More...",
+			"ag_site_items_show_categories" = "false",
 
 			// Feeds
 			"ag_site_feeds_entrypoint" = "feeds",
-			// ag_site_feeds_show_featured_image = true,
-			// ag_site_feeds_show_website = true,
-			// ag_site_feeds_show_rss = true,
-			// ag_site_feeds_include_items = false,
+			"ag_site_feeds_show_featured_image" = "true",
+			"ag_site_feeds_show_website" = "true",
+			"ag_site_feeds_show_rss" = "true",
+			"ag_site_feeds_include_items" = "false",
 
+			// Paging
 			"ag_site_paging_max_items" = "20",
 			"ag_site_paging_max_feeds" = "20",
 
+			// Caching
 			"ag_site_cache_enable" = "true",
 			"ag_site_cache_name" = "Template",
 			"ag_site_cache_timeout" = "60",
@@ -270,11 +258,11 @@ component {
 		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var newsEntryPoint = settings.ag_site_news_entrypoint;
+		var newsEntryPoint = settings.ag_site_items_entrypoint;
 		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			newsEntryPoint = agSettings.ag_site_news_entrypoint;
+			newsEntryPoint = agSettings.ag_site_items_entrypoint;
 			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
@@ -368,13 +356,13 @@ component {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
 		}
-		var newsPage = pageService.findBySlug( agSettings.ag_site_news_entrypoint );
+		var newsPage = pageService.findBySlug( agSettings.ag_site_items_entrypoint );
 		if ( newsPage.isLoaded() ) {
 			newsPage.setLayout( "aggregator" );
 			pageService.savePage( newsPage );
 		} else {
 			newsPage.setTitle( "News" );
-			newsPage.setSlug( agSettings.ag_site_news_entrypoint );
+			newsPage.setSlug( agSettings.ag_site_items_entrypoint );
 			newsPage.setPublishedDate( now() );
 			newsPage.setCreator( author );
 			newsPage.setLayout( "aggregator" );

@@ -35,7 +35,7 @@
 				<cfset linkBehavior =
 					len( feed.getLinkBehavior() ) ?
 					feed.getLinkBehavior() :
-					ag.setting("ag_site_item_link_behavior") />
+					ag.setting("ag_site_items_link_behavior") />
 				<cfset directLink = linkBehavior EQ "link" ? true : false />
 				<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
 				<div class="row feeditems">

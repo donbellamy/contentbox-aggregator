@@ -123,7 +123,7 @@ component extends="baseHandler" {
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
 				if ( item.namespaceRouting EQ "aggregator-news" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_news_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_items_entrypoint, "/", "-", "all" ) & "/";
 				}
 				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
 					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
@@ -175,17 +175,17 @@ component extends="baseHandler" {
 		var errors = [];
 
 		// Site settings
-		if ( !len( trim( prc.agSettings.ag_site_news_entrypoint ) ) ) {
+		if ( !len( trim( prc.agSettings.ag_site_items_entrypoint ) ) ) {
 			arrayAppend( errors, "A news page is required." );
 		} else {
-			prc.agSettings.ag_site_news_entrypoint = trim( prc.agSettings.ag_site_news_entrypoint );
+			prc.agSettings.ag_site_items_entrypoint = trim( prc.agSettings.ag_site_items_entrypoint );
 		}
 		if ( !len( trim( prc.agSettings.ag_site_feeds_entrypoint ) ) ) {
 			arrayAppend( errors, "A feeds page is required." );
 		} else {
 			prc.agSettings.ag_site_feeds_entrypoint = trim( prc.agSettings.ag_site_feeds_entrypoint );
 		}
-		if ( prc.agSettings.ag_site_news_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
+		if ( prc.agSettings.ag_site_items_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
 			arrayAppend( errors, "The news and feeds pages must be different." );
 		}
 		if ( !val( prc.agSettings.ag_site_paging_max_items ) ) {
