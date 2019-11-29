@@ -26,15 +26,11 @@ component {
 		settings = {
 
 			// Site Options
+			"ag_site_items_entrypoint" = "news",
+			"ag_site_feeds_entrypoint" = "feeds",
 
 			// Feed items
-			"ag_site_items_entrypoint" = "news",
 			"ag_site_items_include_entries" = "false",
-			"ag_site_items_link_behavior" = "forward",
-			"ag_site_items_show_featured_image" = "true",
-			"ag_site_items_featured_image_behavior" = "feed",
-			"ag_site_items_featured_image_default" = "",
-			"ag_site_items_featured_image_default_url" = "",
 			"ag_site_items_group_by_date" = "false",
 			"ag_site_items_open_new_window" = "true",
 			"ag_site_items_show_video_player" = "true",
@@ -48,12 +44,17 @@ component {
 			"ag_site_items_read_more_text" = "Read More...",
 			"ag_site_items_show_categories" = "false",
 
+			"ag_site_items_link_behavior" = "forward",
+			"ag_site_items_show_featured_image" = "true",
+			"ag_site_items_featured_image_behavior" = "feed",
+			"ag_site_items_featured_image_default" = "",
+			"ag_site_items_featured_image_default_url" = "",
+
 			// Feeds
-			"ag_site_feeds_entrypoint" = "feeds",
+			"ag_site_feeds_include_items" = "false",
 			"ag_site_feeds_show_featured_image" = "true",
 			"ag_site_feeds_show_website" = "true",
 			"ag_site_feeds_show_rss" = "true",
-			"ag_site_feeds_include_items" = "false",
 
 			// Paging
 			"ag_site_paging_max_items" = "20",

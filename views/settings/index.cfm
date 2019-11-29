@@ -45,7 +45,7 @@
 										#html.label(
 											class="control-label",
 											field="ag_site_items_entrypoint",
-											content="News Page:"
+											content="Feed Items Page:"
 										)#
 										<div class="controls">
 											<small>The page used in the site to display the imported feed items.</small>
@@ -77,11 +77,14 @@
 											)#
 										</div>
 									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Item Options</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="ag_site_items_include_entries",
-											content="Display Blog Entries:"
+											content="Include Blog Entries:"
 										)#
 										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
@@ -96,9 +99,6 @@
 											)#
 										</div>
 									</div>
-								</fieldset>
-								<fieldset>
-									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -114,6 +114,25 @@
 												nameColumn="name",
 												selectedValue=prc.agSettings.ag_site_items_link_behavior,
 												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_featured_image",
+											content="Show Featured Image:"
+										)#
+										<p><small>If enabled, the feed item's featured image will be displayed if one exists.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_featured_image' },
+												checked=prc.agSettings.ag_site_items_show_featured_image
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_featured_image",
+												value=prc.agSettings.ag_site_items_show_featured_image
 											)#
 										</div>
 									</div>
@@ -162,6 +181,86 @@
 													</cfif>
 												</div>
 											</div>
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
+									<p><small>These options determine the way feeds are listed on the feeds page.  The current theme must support these settings or they will not work.</small></p>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_include_items",
+											content="Include Feed Items:"
+										)#
+										<p><small>If enabled, the latest feed items will also be displayed within the list of feeds.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_include_items_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_include_items' },
+												checked=prc.agSettings.ag_site_feeds_include_items
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_include_items",
+												value=prc.agSettings.ag_site_feeds_include_items
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_featured_image",
+											content="Show Featured Image:"
+										)#
+										<p><small>If enabled, the feed's featured image will be displayed if one exists.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_featured_image' },
+												checked=prc.agSettings.ag_site_feeds_show_featured_image
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_featured_image",
+												value=prc.agSettings.ag_site_feeds_show_featured_image
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_website",
+											content="Show Website Link:"
+										)#
+										<p><small>If enabled, a link to the feed's website will be displayed within the list of feeds.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_website_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_website' },
+												checked=prc.agSettings.ag_site_feeds_show_website
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_website",
+												value=prc.agSettings.ag_site_feeds_show_website
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_rss",
+											content="Show RSS Link:"
+										)#
+										<p><small>If enabled, a link to the feed's rss will be displayed within the list of feeds.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_rss_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_rss' },
+												checked=prc.agSettings.ag_site_feeds_show_rss
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_rss",
+												value=prc.agSettings.ag_site_feeds_show_rss
+											)#
 										</div>
 									</div>
 								</fieldset>
