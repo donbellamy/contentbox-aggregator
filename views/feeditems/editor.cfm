@@ -61,7 +61,7 @@
 						<label for="slug" class="control-label">
 							Permalink:
 							<i class="fa fa-cloud" title="Convert title to permalink" onclick="createPermalink()"></i>
-							<small>#prc.agHelper.linkNews()#/</small>
+							<small>#prc.agHelper.linkFeedItems()#/</small>
 						</label>
 						<div class="controls">
 							<div id='slugCheckErrors'></div>

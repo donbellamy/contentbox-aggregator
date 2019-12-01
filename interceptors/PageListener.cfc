@@ -22,7 +22,7 @@ component extends="coldbox.system.Interceptor" {
 		// Check if page slugs have changed
 		if ( page.getSlug() != originalSlug && ( settings.ag_site_items_entrypoint == originalSlug || settings.ag_site_feeds_entryPoint == originalSlug ) ) {
 
-			// News or feeds slug
+			// Feed items or feeds slug
 			if ( settings.ag_site_items_entrypoint == originalSlug ) {
 				settings.ag_site_items_entrypoint = page.getSlug();
 			} else {
@@ -32,7 +32,7 @@ component extends="coldbox.system.Interceptor" {
 			// Update the site routes
 			routingService.setRoutes(
 				routingService.getRoutes().map( function( item ) {
-					if ( item.namespaceRouting EQ "aggregator-news" ) {
+					if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
 						item.pattern = item.regexpattern = replace( settings.ag_site_items_entrypoint, "/", "-", "all" ) & "/";
 					}
 					if ( item.namespaceRouting EQ "aggregator-feeds" ) {

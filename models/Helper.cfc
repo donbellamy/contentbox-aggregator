@@ -43,10 +43,10 @@ component accessors="true" singleton threadSafe {
 	/************************************** Root Methods *********************************************/
 
 	/**
-	 * Gets the news entry point
-	 * @return The news entry point
+	 * Gets the feed items entry point
+	 * @return The feed items entry point
 	 */
-	string function getNewsEntryPoint() {
+	string function getFeedItemsEntryPoint() {
 		return setting("ag_site_items_entrypoint");
 	}
 
@@ -64,7 +64,7 @@ component accessors="true" singleton threadSafe {
 	 * Checks to see if the current event equals site.index
 	 * @return True if the current event equals site.index, false if not
 	 */
-	boolean function isNewsView() {
+	boolean function isFeedItemsView() {
 		var event = cb.getRequestContext();
 		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.index" );
 	}
@@ -75,7 +75,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isSearchView() {
 		var rc = cb.getRequestCollection();
-		return ( isNewsView() AND structKeyExists( rc, "q" ) AND len( rc.q ) );
+		return ( isFeedItemsView() AND structKeyExists( rc, "q" ) AND len( rc.q ) );
 	}
 
 	/**
@@ -84,7 +84,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isCategoryView() {
 		var rc = cb.getRequestCollection();
-		return ( isNewsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
+		return ( isFeedItemsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
 	}
 
 	/**
@@ -93,7 +93,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isFeedSearchView() {
 		var rc = cb.getRequestCollection();
-		return ( isNewsView() AND structKeyExists( rc, "feed" ) AND len( rc.feed ) );
+		return ( isFeedItemsView() AND structKeyExists( rc, "feed" ) AND len( rc.feed ) );
 	}
 
 	/**
@@ -102,7 +102,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isTypeView() {
 		var rc = cb.getRequestCollection();
-		return ( isNewsView() AND structKeyExists( rc, "type" ) AND len( rc.type ) );
+		return ( isFeedItemsView() AND structKeyExists( rc, "type" ) AND len( rc.type ) );
 	}
 
 	/**
@@ -330,12 +330,12 @@ component accessors="true" singleton threadSafe {
 	/************************************** Link Methods *********************************************/
 
 	/**
-	 * Gets the news link
+	 * Gets the feed items link
 	 * @ssl Whether or not to use ssl
-	 * @return The news link
+	 * @return The feed items link
 	 */
-	string function linkNews( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & getNewsEntryPoint();
+	string function linkFeedItems( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkHome( ssl=arguments.ssl ) & getFeedItemsEntryPoint();
 	}
 
 	/**
@@ -369,7 +369,7 @@ component accessors="true" singleton threadSafe {
 		} else {
 			slug = category.getSlug();
 		}
-		return linkNews( ssl=arguments.ssl ) & "/category/" & slug;
+		return linkFeedItems( ssl=arguments.ssl ) & "/category/" & slug;
 	}
 
 	/**
@@ -381,7 +381,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The archive link
 	 */
 	string function linkArchive( string year="", string month="", string day="", boolean ssl=cb.getRequestContext().isSSL() ) {
-		var link = linkNews( ssl=arguments.ssl ) & "/archives";
+		var link = linkFeedItems( ssl=arguments.ssl ) & "/archives";
 		if ( val( arguments.year ) ) { link &= "/#arguments.year#"; }
 		if ( val( arguments.month ) ) { link &= "/#arguments.month#"; }
 		if ( val( arguments.day ) ) { link &= "/#arguments.day#"; }
@@ -471,7 +471,7 @@ component accessors="true" singleton threadSafe {
 			if ( arguments.directLink ) {
 				return arguments.feedItem.getItemUrl();
 			} else {
-				return linkNews( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+				return linkFeedItems( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
 			}
 		} else {
 			return cb.linkEntry( arguments.feedItem );
@@ -515,7 +515,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The rss link
 	 */
 	string function linkRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return linkNews( ssl=arguments.ssl ) & "/rss";
+		return linkFeedItems( ssl=arguments.ssl ) & "/rss";
 	}
 
 	/**
@@ -731,9 +731,9 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function breadCrumbs( string separator=">" ) {
 		var bc = "";
-		if ( isNewsView() || isArchivesView() ) {
+		if ( isFeedItemsView() || isArchivesView() ) {
 			var page = getCurrentPage();
-			bc &= '#arguments.separator# <a href="#linkNews()#">#page.getTitle()#</a></a> ';
+			bc &= '#arguments.separator# <a href="#linkFeedItems()#">#page.getTitle()#</a></a> ';
 		}
 		if ( isCategoryView() ) {
 			var category = getCurrentCategory();
@@ -744,7 +744,7 @@ component accessors="true" singleton threadSafe {
 			if ( isCategoryView() ) {
 				bc &= '#arguments.separator# <a href="#linkCategory( category )#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
 			} else {
-				bc &= '#arguments.separator# <a href="#linkNews()#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
+				bc &= '#arguments.separator# <a href="#linkFeedItems()#?feed=#feed.getSlug()#">#feed.getTitle()#</a> ';
 			}
 		}
 		if ( isTypeView() ) {
@@ -753,7 +753,7 @@ component accessors="true" singleton threadSafe {
 			if ( isCategoryView() ) {
 				bc &= '#arguments.separator# <a href="#linkCategory( category )#?type=#type#">#typeLabel#</a> ';
 			} else {
-				bc &= '#arguments.separator# <a href="#linkNews()#?type=#type#">#typeLabel#</a> ';
+				bc &= '#arguments.separator# <a href="#linkFeedItems()#?type=#type#">#typeLabel#</a> ';
 			}
 		}
 		if ( isSearchView() ) {
@@ -761,7 +761,7 @@ component accessors="true" singleton threadSafe {
 			if ( isCategoryView() ) {
 				bc &= '#arguments.separator# <a href="#linkCategory( category )#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
 			} else {
-				bc &= '#arguments.separator# <a href="#linkNews()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
+				bc &= '#arguments.separator# <a href="#linkFeedItems()#?q=#searchTerm#">#reReplace( searchTerm, "(^[a-z])","\U\1", "ALL" )#</a> ';
 			}
 		}
 		if ( isArchivesView() ) {

@@ -32,19 +32,18 @@ component {
 			// Feed items
 			"ag_site_items_include_entries" = "false",
 			"ag_site_items_group_by_date" = "false",
-			"ag_site_items_open_new_window" = "true",
 			"ag_site_items_show_video_player" = "true",
 			"ag_site_items_show_audio_player" = "true",
 			"ag_site_items_show_source" = "true",
 			"ag_site_items_show_author" = "false",
+			"ag_site_items_show_categories" = "false",
 			"ag_site_items_show_excerpt" = "true",
 			"ag_site_items_excerpt_limit" = "255",
 			"ag_site_items_excerpt_ending" = "...",
 			"ag_site_items_show_read_more" = "true",
 			"ag_site_items_read_more_text" = "Read More...",
-			"ag_site_items_show_categories" = "false",
-
 			"ag_site_items_link_behavior" = "forward",
+			"ag_site_items_open_new_window" = "true",
 			"ag_site_items_show_featured_image" = "true",
 			"ag_site_items_featured_image_behavior" = "feed",
 			"ag_site_items_featured_image_default" = "",
@@ -139,11 +138,11 @@ component {
 			{ pattern="/:slug/rss/:category?", handler="site", action="rss", namespace="aggregator-feeds" },
 			{ pattern="/:slug", handler="site", action="feed", namespace="aggregator-feeds" },
 			{ pattern="/", handler="site", action="feeds", namespace="aggregator-feeds" },
-			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="site", action="archives", namespace="aggregator-news" },
-			{ pattern="/category/:category", handler="site", action="index", namespace="aggregator-news" },
-			{ pattern="/rss/:category?", handler="site", action="rss", namespace="aggregator-news" },
-			{ pattern="/:slug", handler="site", action="feeditem", namespace="aggregator-news" },
-			{ pattern="/", handler="site", action="index", namespace="aggregator-news" }
+			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="site", action="archives", namespace="aggregator-feed-items" },
+			{ pattern="/category/:category", handler="site", action="index", namespace="aggregator-feed-items" },
+			{ pattern="/rss/:category?", handler="site", action="rss", namespace="aggregator-feed-items" },
+			{ pattern="/:slug", handler="site", action="feeditem", namespace="aggregator-feed-items" },
+			{ pattern="/", handler="site", action="index", namespace="aggregator-feed-items" }
 		];
 
 		// Interception points
@@ -259,17 +258,17 @@ component {
 		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var newsEntryPoint = settings.ag_site_items_entrypoint;
+		var feedItemsEntryPoint = settings.ag_site_items_entrypoint;
 		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			newsEntryPoint = agSettings.ag_site_items_entrypoint;
+			feedItemsEntryPoint = agSettings.ag_site_items_entrypoint;
 			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
 			routingService.addNamespace(
-				pattern = "#cbEntryPoint#/#newsEntryPoint#",
-				namespace = "aggregator-news",
+				pattern = "#cbEntryPoint#/#feedItemsEntryPoint#",
+				namespace = "aggregator-feed-items",
 				append = false
 			);
 			routingService.addNamespace(
@@ -279,8 +278,8 @@ component {
 			);
 		} else {
 			routingService.addNamespace(
-				pattern = "#newsEntryPoint#",
-				namespace = "aggregator-news",
+				pattern = "#feedItemsEntryPoint#",
+				namespace = "aggregator-feed-items",
 				append = false
 			);
 			routingService.addNamespace(
@@ -357,22 +356,22 @@ component {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
 		}
-		var newsPage = pageService.findBySlug( agSettings.ag_site_items_entrypoint );
-		if ( newsPage.isLoaded() ) {
-			newsPage.setLayout( "aggregator" );
-			pageService.savePage( newsPage );
+		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_items_entrypoint );
+		if ( feedItemsPage.isLoaded() ) {
+			feedItemsPage.setLayout( "aggregator" );
+			pageService.savePage( feedItemsPage );
 		} else {
-			newsPage.setTitle( "News" );
-			newsPage.setSlug( agSettings.ag_site_items_entrypoint );
-			newsPage.setPublishedDate( now() );
-			newsPage.setCreator( author );
-			newsPage.setLayout( "aggregator" );
-			newsPage.addNewContentVersion(
-				content = "News page placeholder content.",
+			feedItemsPage.setTitle( "News" );
+			feedItemsPage.setSlug( agSettings.ag_site_items_entrypoint );
+			feedItemsPage.setPublishedDate( now() );
+			feedItemsPage.setCreator( author );
+			feedItemsPage.setLayout( "aggregator" );
+			feedItemsPage.addNewContentVersion(
+				content = "Feed items page placeholder content.",
 				changelog = "Page created by ContentBox Aggregator Module.",
 				author = author
 			);
-			pageService.savePage( newsPage );
+			pageService.savePage( feedItemsPage );
 		}
 		var feedsPage = pageService.findBySlug( agSettings.ag_site_feeds_entrypoint );
 		if ( feedsPage.isLoaded() ) {
@@ -497,7 +496,7 @@ component {
 
 		// Remove routes
 		var routingService = controller.getRoutingService();
-		routingService.removeNamespaceRoutes("aggregator-news");
+		routingService.removeNamespaceRoutes("aggregator-feed-items");
 		routingService.removeNamespaceRoutes("aggregator-feeds");
 
 	}

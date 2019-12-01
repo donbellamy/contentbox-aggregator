@@ -33,7 +33,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Do not allow site access via the module entrypoint
 		if ( reFindNoCase( "^aggregator/site", event.getCurrentRoutedUrl() ) ) {
-			relocate( url=prc.agHelper.linkNews(), addtoken=false );
+			relocate( url=prc.agHelper.linkFeedItems(), addtoken=false );
 		}
 
 		// If UI export is disabled, default to html
@@ -208,7 +208,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Displays the news index
+	 * Displays the feed items index
 	 */
 	function index( event, rc, prc ) {
 
@@ -222,7 +222,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "type", "" )
 			.paramValue( "format", "html" );
 
-		// Grab the news page
+		// Grab the feed items page
 		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
 
 		// Make sure page exists
@@ -247,7 +247,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.oPaging = getModel("paging@aggregator");
 			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
-			prc.pagingLink = prc.agHelper.linkNews();
+			prc.pagingLink = prc.agHelper.linkFeedItems();
 
 			// Category
 			if ( len( rc.category ) ) {
@@ -346,7 +346,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
-		// News page not published, throw a 404
+		// Feed items page not published, throw a 404
 		} else {
 
 			// Not found
@@ -358,7 +358,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Displays the news archive
+	 * Displays the feed items archive
 	 */
 	function archives( event, rc, prc ) {
 
@@ -369,7 +369,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "day", 0 )
 			.paramValue( "format", "html" );
 
-		// Grab the news page
+		// Grab the feed items page
 		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
 
 		// Validate the passed date
@@ -445,7 +445,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				module = prc.cbThemeRecord.module
 			);
 
-		// News page not published, throw a 404
+		// Feed items page not published, throw a 404
 		} else {
 
 			// Not found
@@ -497,7 +497,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				contentType = "text/xml"
 			);
 
-		// News page not published or rss not enabled, throw a 404
+		// Feed items page not published or rss not enabled, throw a 404
 		} else {
 
 			// Not found
@@ -834,7 +834,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "slug", "" )
 			.paramValue( "format", "html" );
 
-		// Grab the news page
+		// Grab the feed items page
 		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
 
 		// Make sure page and feed item exists
@@ -910,7 +910,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			}
 
-		// News page off, forward directly to the feed item
+		// Feed items page off, forward directly to the feed item
 		} else if ( !prc.page.isLoaded() && prc.feedItem.isLoaded()  ) {
 
 			// Relocate

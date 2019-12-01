@@ -122,7 +122,7 @@ component extends="baseHandler" {
 		// Update the site routes
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
-				if ( item.namespaceRouting EQ "aggregator-news" ) {
+				if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
 					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_items_entrypoint, "/", "-", "all" ) & "/";
 				}
 				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
@@ -176,7 +176,7 @@ component extends="baseHandler" {
 
 		// Site settings
 		if ( !len( trim( prc.agSettings.ag_site_items_entrypoint ) ) ) {
-			arrayAppend( errors, "A news page is required." );
+			arrayAppend( errors, "A feed items page is required." );
 		} else {
 			prc.agSettings.ag_site_items_entrypoint = trim( prc.agSettings.ag_site_items_entrypoint );
 		}
@@ -186,7 +186,7 @@ component extends="baseHandler" {
 			prc.agSettings.ag_site_feeds_entrypoint = trim( prc.agSettings.ag_site_feeds_entrypoint );
 		}
 		if ( prc.agSettings.ag_site_items_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
-			arrayAppend( errors, "The news and feeds pages must be different." );
+			arrayAppend( errors, "The feed items and feeds pages must be different." );
 		}
 		if ( !val( prc.agSettings.ag_site_paging_max_items ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );

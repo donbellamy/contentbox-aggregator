@@ -12,7 +12,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	FeedItems function init() {
 		setName( "Feed items" );
 		setVersion( "1.0" );
-		setDescription( "A widget that displays a detailed list of feed items, similar to the news page." );
+		setDescription( "A widget that displays a detailed list of feed items, similar to the feed items page." );
 		setAuthor( "Perfect Code, LLC" );
 		setAuthorURL( "https://perfectcode.com" );
 		setIcon( "list" );
@@ -45,7 +45,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @groupByDate.hint Group the results by published date, default is false.
 	 * @openNewWindow.label Open In New Window?
 	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
-	 * @return The news widget html
+	 * @return The feed items widget html
 	 */
 	string function renderIt(
 		string title="",
@@ -70,7 +70,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		prc.oPaging = getModel("paging@aggregator");
 		prc.oPaging.setpagingMaxRows( ag.setting("ag_site_paging_max_items") );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
-		prc.pagingLink = ag.linkNews();
+		prc.pagingLink = ag.linkFeedItems();
 
 		// Category
 		if ( len( trim( arguments.category ) ) ) {
@@ -142,7 +142,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			openNewWindow = arguments.openNewWindow
 		};
 
-		// Render the news template
+		// Render the feed items template
 		return renderView(
 			view = "#cb.themeName()#/views/aggregator/widgets/feeditems",
 			module = cb.themeRecord().module,

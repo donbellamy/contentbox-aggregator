@@ -40,7 +40,10 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="site">
 								<fieldset>
-									<legend><i class="fa fa-cog fa-lg"></i> Site Options</legend>
+									<legend>
+										<i class="fa fa-cog fa-lg"></i>
+										Site Options
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -79,7 +82,11 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Item Options</legend>
+									<legend>
+										<i class="fa fa-file-text-o fa-lg"></i>
+										Feed Item Options
+									</legend>
+									<p><small>These options determine the way feed items are listed on the feed items page.  The current theme must support these settings or they will not work.</small></p>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -102,6 +109,210 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_site_items_group_by_date",
+											content="Group By Date:"
+										)#
+										<p><small>If enabled, feed items will be grouped by date on the feed items page.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_group_by_date_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_group_by_date' },
+												checked=prc.agSettings.ag_site_items_group_by_date
+											)#
+											#html.hiddenField(
+												name="ag_site_items_group_by_date",
+												value=prc.agSettings.ag_site_items_group_by_date
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_video_player",
+											content="Show Video Player:"
+										)#
+										<p><small>If enabled, an inline video player will be displayed for videos.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_video_player_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_video_player' },
+												checked=prc.agSettings.ag_site_items_show_video_player
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_video_player",
+												value=prc.agSettings.ag_site_items_show_video_player
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_audio_player",
+											content="Show Audio Player:"
+										)#
+										<p><small>If enabled, an inline audio player will be displayed for podcasts.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_audio_player_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_audio_player' },
+												checked=prc.agSettings.ag_site_items_show_audio_player
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_audio_player",
+												value=prc.agSettings.ag_site_items_show_audio_player
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_source",
+											content="Show Source:"
+										)#
+										<p><small>If enabled, the feed source will be displayed for each feed item.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_source_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_source' },
+												checked=prc.agSettings.ag_site_items_show_source
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_source",
+												value=prc.agSettings.ag_site_items_show_source
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_author",
+											content="Show Author:"
+										)#
+										<p><small>If enabled, the author will be displayed for each feed item.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_author_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_author' },
+												checked=prc.agSettings.ag_site_items_show_author
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_author",
+												value=prc.agSettings.ag_site_items_show_author
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_categories",
+											content="Show Categories:"
+										)#
+										<p><small>If enabled, the categories will be displayed for each feed item.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_categories_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_categories' },
+												checked=prc.agSettings.ag_site_items_show_categories
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_categories",
+												value=prc.agSettings.ag_site_items_show_categories
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_excerpt",
+											content="Show Excerpt:"
+										)#
+										<p><small>If enabled, an excerpt will be displayed for each feed item.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_excerpt_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_excerpt' },
+												checked=prc.agSettings.ag_site_items_show_excerpt
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_excerpt",
+												value=prc.agSettings.ag_site_items_show_excerpt
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_excerpt_limit",
+											content="Excerpt Character Limit:"
+										)#
+										<div class="controls">
+											<small>The maximum number of characters to display in the feed item excerpt.</small>
+											#html.inputField(
+												name="ag_site_items_excerpt_limit",
+												type="number",
+												value=prc.agSettings.ag_site_items_excerpt_limit,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_excerpt_ending",
+											content="Excerpt Ending:"
+										)#
+										<div class="controls">
+											<small>The ending text displayed when the length of the excerpt is larger than the character limit.</small>
+											#html.textField(
+												name="ag_site_items_excerpt_ending",
+												required="required",
+												value=prc.agSettings.ag_site_items_excerpt_ending,
+												class="form-control",
+												maxlength="10"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_show_read_more",
+											content="Show Read More:"
+										)#
+										<p><small>If enabled, a link to the feed item will be displayed after the feed item excerpt.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_show_read_more_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_show_read_more' },
+												checked=prc.agSettings.ag_site_items_show_read_more
+											)#
+											#html.hiddenField(
+												name="ag_site_items_show_read_more",
+												value=prc.agSettings.ag_site_items_show_read_more
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_read_more_text",
+											content="Read More Text:"
+										)#
+										<div class="controls">
+											<small>The text used when the read more link is enabled.</small>
+											#html.textField(
+												name="ag_site_items_read_more_text",
+												required="required",
+												value=prc.agSettings.ag_site_items_read_more_text,
+												class="form-control",
+												maxlength="30"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_site_items_link_behavior",
 											content="Link Behavior:"
 										)#
@@ -114,6 +325,25 @@
 												nameColumn="name",
 												selectedValue=prc.agSettings.ag_site_items_link_behavior,
 												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_items_open_new_window",
+											content="Open New Window:"
+										)#
+										<p><small>If enabled, links to feed items will be open in a new window (tab).</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_items_open_new_window_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_items_open_new_window' },
+												checked=prc.agSettings.ag_site_items_open_new_window
+											)#
+											#html.hiddenField(
+												name="ag_site_items_open_new_window",
+												value=prc.agSettings.ag_site_items_open_new_window
 											)#
 										</div>
 									</div>
@@ -185,7 +415,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
+									<legend>
+										<i class="fa fa-file-text-o fa-lg"></i>
+										Feed Options
+									</legend>
 									<p><small>These options determine the way feeds are listed on the feeds page.  The current theme must support these settings or they will not work.</small></p>
 									<div class="form-group">
 										#html.label(
@@ -265,14 +498,17 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
+									<legend>
+										<i class="fa fa-copy fa-lg"></i>
+										Paging Options
+									</legend>
 									<div class="form-group">
 										<label class="control-label" for="ag_site_paging_max_items">
 											Max Feed Items:
 											<span class="badge badge-info" id="ag_site_paging_max_items_label">#prc.agSettings.ag_site_paging_max_items#</span>
 										</label>
 										<div class="controls">
-											<small>The number of feed items displayed on the news page and feed page before paging.</small><br />
+											<small>The number of feed items displayed on the feed items page and feed page before paging.</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="ag_site_paging_max_items"
@@ -310,7 +546,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-hdd-o fa-lg"></i> Site Caching</legend>
+									<legend>
+										<i class="fa fa-hdd-o fa-lg"></i>
+										Site Caching
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -394,7 +633,10 @@
 							</div>
 							<div class="tab-pane" id="importing">
 								<fieldset>
-									<legend><i class="fa fa-download fa-lg"></i> Importing Options</legend>
+									<legend>
+										<i class="fa fa-download fa-lg"></i>
+										Importing Options
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -487,7 +729,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-file-text-o fa-lg"></i> Item Defaults</legend>
+									<legend>
+										<i class="fa fa-file-text-o fa-lg"></i>
+										Item Defaults
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -541,7 +786,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+									<legend>
+										<i class="fa fa-list-ol fa-lg"></i>
+										Item Limits
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -598,7 +846,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-filter fa-lg"></i> Keyword Filtering</legend>
+									<legend>
+										<i class="fa fa-filter fa-lg"></i>
+										Keyword Filtering
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -664,7 +915,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-image fa-lg"></i> Image Settings</legend>
+									<legend>
+										<i class="fa fa-image fa-lg"></i>
+										Image Settings
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -743,7 +997,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
+									<legend>
+										<i class="fa fa-tags fa-lg"></i>
+										Taxonomies
+									</legend>
 									<p><small>Taxonomies are used to automatically assign categories to feed items.</small></p>
 									<div id="taxonomies">
 										<cfloop from="1" to="#arrayLen( prc.agSettings.ag_importing_taxonomies )#" index="idx">
@@ -826,7 +1083,10 @@
 							</div>
 							<div class="tab-pane" id="global_html">
 								<fieldset>
-									<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
+									<legend>
+										<i class="fa fa-globe fa-lg"></i>
+										Global HTML
+									</legend>
 									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
 									#html.textarea(
 										name="ag_html_pre_feed_items_display",
@@ -952,7 +1212,10 @@
 							</div>
 							<div class="tab-pane" id="rss">
 								<fieldset>
-									<legend><i class="fa fa-rss fa-lg"></i> RSS Feed Options</legend>
+									<legend>
+										<i class="fa fa-rss fa-lg"></i>
+										RSS Feed Options
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -1097,7 +1360,10 @@
 									</div>
 								</fieldset>
 								<fieldset>
-									<legend><i class="fa fa-hdd-o fa-lg"></i> RSS Caching</legend>
+									<legend>
+										<i class="fa fa-hdd-o fa-lg"></i>
+										RSS Caching
+									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
