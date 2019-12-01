@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Categories</title>
+	<title>FeedItemsList</title>
 	<meta name="keywords" content="aggregator.widgets.concurrent.Callable interface">
 	<!-- common assets -->
 	
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/widgets/Categories.html" target="_top">
+				<li><a href="../../index.html?aggregator/widgets/FeedItemsList.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- Categories</h2>
+ FeedItemsList</h2>
 
 
 
@@ -174,7 +174,7 @@ Class
     <img src="../../resources/inherit.gif" alt="extended by ">coldbox.system.FrameworkSupertype
       <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.ui.BaseWidget
         <img src="../../resources/inherit.gif" alt="extended by "><a href="../../aggregator/models/BaseWidget.html" title="class in aggregator.models">aggregator.models.BaseWidget</a>
-          <img src="../../resources/inherit.gif" alt="extended by ">aggregator.widgets.Categories
+          <img src="../../resources/inherit.gif" alt="extended by ">aggregator.widgets.FeedItemsList
 </pre>
 
 
@@ -190,7 +190,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox Aggregator
-Categories Widget</p>
+Feed Items List Widget</p>
 </div>
 
 
@@ -296,7 +296,7 @@ Categories Widget</p>
 		<tr>
 			
 			<td>
-				<strong><a href="Categories.html#init()">init</A></strong>()
+				<strong><a href="FeedItemsList.html#init()">init</A></strong>()
 				<br>
 				
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor, sets widget properties.
@@ -324,43 +324,13 @@ Categories Widget</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;string</code>
-		</td>
-		<td>
-			<strong><a href="Categories.html#buildDropDown()">buildDropDown</A></strong>([any categories], [any showItemCount])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the drop down menu.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;string</code>
-		</td>
-		<td>
-			<strong><a href="Categories.html#buildList()">buildList</A></strong>([any categories], [any showItemCount])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds the list menu.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Categories.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'])
+			<strong><a href="FeedItemsList.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed item categories widget.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed items list widget.
 			
 		</td>
 	</tr>
@@ -1333,104 +1303,18 @@ Categories Widget</p>
 
 
 	
-	<a name="buildDropDown()"><!-- --></a>
-	<h3>
-		buildDropDown
-		
-	</h3>
-
-	<kbd>private string <strong>buildDropDown</strong>([any categories], [any showItemCount])</kbd>
-
-	<br><br>
-
-	
-		<p>Builds the drop down menu</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>categories</code></dd>
-		
-		<dd><code>showItemCount</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="buildList()"><!-- --></a>
-	<h3>
-		buildList
-		
-	</h3>
-
-	<kbd>private string <strong>buildList</strong>([any categories], [any showItemCount])</kbd>
-
-	<br><br>
-
-	
-		<p>Builds the list menu</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>categories</code></dd>
-		
-		<dd><code>showItemCount</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
 	<a name="renderIt()"><!-- --></a>
 	<h3>
 		renderIt
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [boolean useDropdown='false'], [boolean showItemCount='true'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [numeric max='5'], [string feed=''], [string category=''], [string searchTerm=''], [string sortOrder='Most Recent'], [boolean openNewWindow='false'])</kbd>
 
 	<br><br>
 
 	
-		<p>Renders the feed item categories widget</p>
+		<p>Renders the feed items list widget</p>
 	
 
 	
@@ -1463,9 +1347,17 @@ Categories Widget</p>
 		
 		<dd><code>titleLevel</code> - The H{level} to use.</dd>
 		
-		<dd><code>useDropdown</code> - Display as a dropdown or a list, default is list.</dd>
+		<dd><code>max</code> - The number of feed items to display.</dd>
 		
-		<dd><code>showItemCount</code> - Show item counts or not, default is true.</dd>
+		<dd><code>feed</code> - The feed to filter on.</dd>
+		
+		<dd><code>category</code> - The category to filter on.</dd>
+		
+		<dd><code>searchTerm</code> - The search term to filter on.</dd>
+		
+		<dd><code>sortOrder</code> - How to order the feed items, defaults to published date.</dd>
+		
+		<dd><code>openNewWindow</code> - Open feed items in a new window (tab), default is false.</dd>
 		
 		</dl>
 	
@@ -1473,7 +1365,7 @@ Categories Widget</p>
 	
 		<dl>
 			<dt><strong>Returns:</strong></dt>
-			<dd>The feed item categories widget html</dd>
+			<dd>The feed items list widget html</dd>
 		</dl>
 	
 

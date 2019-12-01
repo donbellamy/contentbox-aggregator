@@ -607,6 +607,65 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#feedItemService()">feedItemService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">persistent = false</li>
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#feedUrl()">feedUrl</A></strong>
 			<br>
 			
@@ -1079,6 +1138,61 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#lastPublishedDate()">lastPublishedDate</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select max(c.publishedDate) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#linkBehavior()">linkBehavior</A></strong>
 			<br>
 			
@@ -1492,7 +1606,7 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#numberOfPublishedFeedItems()">numberOfPublishedFeedItems</A></strong>
+			<strong><a href="Feed.html#numberOfArticles()">numberOfArticles</A></strong>
 			<br>
 			
 			<br><br>
@@ -1513,7 +1627,178 @@ Feed Model</p>
 				
 			
 				
-				<li class="label label-default label-annotations">formula = select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )</li>
+				<li class="label label-default label-annotations">formula = select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and ( fi.podcastUrl = '' or fi.podcastUrl IS NULL ) and ( fi.videoUrl = '' or fi.videoUrl IS NULL )</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>0</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#numberOfPodcasts()">numberOfPodcasts</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.podcastUrl > ''</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>0</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#numberOfPublishedChildren()">numberOfPublishedChildren</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>0</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#numberOfVideos()">numberOfVideos</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">formula = select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.videoUrl > ''</li>
 				
 			
 				
@@ -2316,6 +2601,34 @@ Feed Model</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#getFeedItemService()">getFeedItemService</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getFeedType()">getFeedType</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed type based on the feed item types.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#getFeedUrl()">getFeedUrl</A></strong>()
 			<br>
 			
@@ -2417,6 +2730,19 @@ Feed Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getLastPublishedDate()">getLastPublishedDate</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>any</code>
 		</td>
 		<td>
@@ -2424,6 +2750,21 @@ Feed Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the latest feed import.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>array</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getLatestFeedItems()">getLatestFeedItems</A></strong>(numeric max='5')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the latest published feed items.
 			
 		</td>
 	</tr>
@@ -2553,6 +2894,19 @@ Feed Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getNumberOfArticles()">getNumberOfArticles</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>numeric</code>
 		</td>
 		<td>
@@ -2571,7 +2925,33 @@ Feed Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#getNumberOfPublishedFeedItems()">getNumberOfPublishedFeedItems</A></strong>()
+			<strong><a href="Feed.html#getNumberOfPodcasts()">getNumberOfPodcasts</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getNumberOfPublishedChildren()">getNumberOfPublishedChildren</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#getNumberOfVideos()">getNumberOfVideos</A></strong>()
 			<br>
 			
 		</td>
@@ -2804,10 +3184,55 @@ Feed Model</p>
 			<code>boolean</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#isArticleFeed()">isArticleFeed</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed contains mostly articles.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#isFailing()">isFailing</A></strong>()
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed import routine is currently failing.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#isPodcastFeed()">isPodcastFeed</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed contains mostly podcasts.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#isVideoFeed()">isVideoFeed</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed contains mostly videos.
 			
 		</td>
 	</tr>
@@ -2872,6 +3297,19 @@ Feed Model</p>
 		</td>
 		<td>
 			<strong><a href="Feed.html#setFeedImports()">setFeedImports</A></strong>(array feedImports)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setFeedItemService()">setFeedItemService</A></strong>(any feedItemService)
 			<br>
 			
 		</td>
@@ -2988,6 +3426,19 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="Feed.html#setLastPublishedDate()">setLastPublishedDate</A></strong>(any lastPublishedDate)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="Feed.html#setLinkBehavior()">setLinkBehavior</A></strong>(any linkBehavior)
 			<br>
 			
@@ -3079,7 +3530,46 @@ Feed Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="Feed.html#setNumberOfPublishedFeedItems()">setNumberOfPublishedFeedItems</A></strong>(any numberOfPublishedFeedItems)
+			<strong><a href="Feed.html#setNumberOfArticles()">setNumberOfArticles</A></strong>(any numberOfArticles)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setNumberOfPodcasts()">setNumberOfPodcasts</A></strong>(any numberOfPodcasts)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setNumberOfPublishedChildren()">setNumberOfPublishedChildren</A></strong>(any numberOfPublishedChildren)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Feed.html#setNumberOfVideos()">setNumberOfVideos</A></strong>(any numberOfVideos)
 			<br>
 			
 		</td>
@@ -5104,6 +5594,58 @@ Feed Model</p>
 		<hr>
 	
 		
+		<a name="feedItemService()"><!-- --></a>
+		<h3>feedItemService</h3>
+
+		<kbd>
+			property any
+			<strong>feedItemService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - feedItemService@aggregator</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>persistent</code> - false</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="feedUrl()"><!-- --></a>
 		<h3>feedUrl</h3>
 
@@ -5520,6 +6062,54 @@ Feed Model</p>
 		<hr>
 	
 		
+		<a name="lastPublishedDate()"><!-- --></a>
+		<h3>lastPublishedDate</h3>
+
+		<kbd>
+			property any
+			<strong>lastPublishedDate</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select max(c.publishedDate) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="linkBehavior()"><!-- --></a>
 		<h3>linkBehavior</h3>
 
@@ -5884,12 +6474,12 @@ Feed Model</p>
 		<hr>
 	
 		
-		<a name="numberOfPublishedFeedItems()"><!-- --></a>
-		<h3>numberOfPublishedFeedItems</h3>
+		<a name="numberOfArticles()"><!-- --></a>
+		<h3>numberOfArticles</h3>
 
 		<kbd>
 			property any
-			<strong>numberOfPublishedFeedItems</strong>
+			<strong>numberOfArticles</strong>
 			
 			= [0]
 			
@@ -5918,7 +6508,157 @@ Feed Model</p>
 			
 		
 			
-			<dd><code>formula</code> - select count(*) from cb_content cb where cb.FK_parentID = contentID and cb.isPublished = 1 and cb.publishedDate < now() and ( cb.expireDate is null or cb.expireDate > now() )</dd>
+			<dd><code>formula</code> - select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and ( fi.podcastUrl = '' or fi.podcastUrl IS NULL ) and ( fi.videoUrl = '' or fi.videoUrl IS NULL )</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="numberOfPodcasts()"><!-- --></a>
+		<h3>numberOfPodcasts</h3>
+
+		<kbd>
+			property any
+			<strong>numberOfPodcasts</strong>
+			
+			= [0]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.podcastUrl > ''</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="numberOfPublishedChildren()"><!-- --></a>
+		<h3>numberOfPublishedChildren</h3>
+
+		<kbd>
+			property any
+			<strong>numberOfPublishedChildren</strong>
+			
+			= [0]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="numberOfVideos()"><!-- --></a>
+		<h3>numberOfVideos</h3>
+
+		<kbd>
+			property any
+			<strong>numberOfVideos</strong>
+			
+			= [0]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>formula</code> - select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.videoUrl > ''</dd>
 			
 		
 			
@@ -6958,6 +7698,77 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getFeedItemService()"><!-- --></a>
+	<h3>
+		getFeedItemService
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedItemService</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedType()"><!-- --></a>
+	<h3>
+		getFeedType
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedType</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed type based on the feed item types</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed type</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getFeedUrl()"><!-- --></a>
 	<h3>
 		getFeedUrl
@@ -7214,6 +8025,38 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getLastPublishedDate()"><!-- --></a>
+	<h3>
+		getLastPublishedDate
+		
+	</h3>
+
+	<kbd>public string <strong>getLastPublishedDate</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getLatestFeedImport()"><!-- --></a>
 	<h3>
 		getLatestFeedImport
@@ -7244,6 +8087,52 @@ Feed Model</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The latest feed import if exists, null if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getLatestFeedItems()"><!-- --></a>
+	<h3>
+		getLatestFeedItems
+		
+	</h3>
+
+	<kbd>public array <strong>getLatestFeedItems</strong>(numeric max='5')</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the latest published feed items</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>max</code> - The maximum number of feed items to return</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>An array of feed items</dd>
 		</dl>
 	
 
@@ -7592,6 +8481,38 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="getNumberOfArticles()"><!-- --></a>
+	<h3>
+		getNumberOfArticles
+		
+	</h3>
+
+	<kbd>public string <strong>getNumberOfArticles</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getNumberOfFeedItems()"><!-- --></a>
 	<h3>
 		getNumberOfFeedItems
@@ -7631,13 +8552,77 @@ Feed Model</p>
 	<hr>
 
 	
-	<a name="getNumberOfPublishedFeedItems()"><!-- --></a>
+	<a name="getNumberOfPodcasts()"><!-- --></a>
 	<h3>
-		getNumberOfPublishedFeedItems
+		getNumberOfPodcasts
 		
 	</h3>
 
-	<kbd>public string <strong>getNumberOfPublishedFeedItems</strong>()</kbd>
+	<kbd>public string <strong>getNumberOfPodcasts</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getNumberOfPublishedChildren()"><!-- --></a>
+	<h3>
+		getNumberOfPublishedChildren
+		
+	</h3>
+
+	<kbd>public string <strong>getNumberOfPublishedChildren</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getNumberOfVideos()"><!-- --></a>
+	<h3>
+		getNumberOfVideos
+		
+	</h3>
+
+	<kbd>public string <strong>getNumberOfVideos</strong>()</kbd>
 
 	<br><br>
 
@@ -8278,6 +9263,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="isArticleFeed()"><!-- --></a>
+	<h3>
+		isArticleFeed
+		
+	</h3>
+
+	<kbd>public boolean <strong>isArticleFeed</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the feed contains mostly articles</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the feed contains mostly articles, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="isFailing()"><!-- --></a>
 	<h3>
 		isFailing
@@ -8308,6 +9332,84 @@ Feed Model</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if imports are failing, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isPodcastFeed()"><!-- --></a>
+	<h3>
+		isPodcastFeed
+		
+	</h3>
+
+	<kbd>public boolean <strong>isPodcastFeed</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the feed contains mostly podcasts</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the feed contains mostly podcasts, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isVideoFeed()"><!-- --></a>
+	<h3>
+		isVideoFeed
+		
+	</h3>
+
+	<kbd>public boolean <strong>isVideoFeed</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the feed contains mostly videos</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the feed contains mostly videos, false if not</dd>
 		</dl>
 	
 
@@ -8500,6 +9602,45 @@ Feed Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>feedImports</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setFeedItemService()"><!-- --></a>
+	<h3>
+		setFeedItemService
+		
+	</h3>
+
+	<kbd>public any <strong>setFeedItemService</strong>(any feedItemService)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>feedItemService</code></dd>
 		
 		</dl>
 	
@@ -8824,6 +9965,45 @@ Feed Model</p>
 	<hr>
 
 	
+	<a name="setLastPublishedDate()"><!-- --></a>
+	<h3>
+		setLastPublishedDate
+		
+	</h3>
+
+	<kbd>public any <strong>setLastPublishedDate</strong>(any lastPublishedDate)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>lastPublishedDate</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="setLinkBehavior()"><!-- --></a>
 	<h3>
 		setLinkBehavior
@@ -9097,13 +10277,13 @@ Feed Model</p>
 	<hr>
 
 	
-	<a name="setNumberOfPublishedFeedItems()"><!-- --></a>
+	<a name="setNumberOfArticles()"><!-- --></a>
 	<h3>
-		setNumberOfPublishedFeedItems
+		setNumberOfArticles
 		
 	</h3>
 
-	<kbd>public any <strong>setNumberOfPublishedFeedItems</strong>(any numberOfPublishedFeedItems)</kbd>
+	<kbd>public any <strong>setNumberOfArticles</strong>(any numberOfArticles)</kbd>
 
 	<br><br>
 
@@ -9123,7 +10303,124 @@ Feed Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>numberOfPublishedFeedItems</code></dd>
+		<dd><code>numberOfArticles</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setNumberOfPodcasts()"><!-- --></a>
+	<h3>
+		setNumberOfPodcasts
+		
+	</h3>
+
+	<kbd>public any <strong>setNumberOfPodcasts</strong>(any numberOfPodcasts)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>numberOfPodcasts</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setNumberOfPublishedChildren()"><!-- --></a>
+	<h3>
+		setNumberOfPublishedChildren
+		
+	</h3>
+
+	<kbd>public any <strong>setNumberOfPublishedChildren</strong>(any numberOfPublishedChildren)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>numberOfPublishedChildren</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setNumberOfVideos()"><!-- --></a>
+	<h3>
+		setNumberOfVideos
+		
+	</h3>
+
+	<kbd>public any <strong>setNumberOfVideos</strong>(any numberOfVideos)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>numberOfVideos</code></dd>
 		
 		</dl>
 	

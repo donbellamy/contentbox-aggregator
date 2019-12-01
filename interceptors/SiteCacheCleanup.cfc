@@ -78,7 +78,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_postEntrySave( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_site_items_include_entries ) doCacheCleanup();
+		if ( settings.ag_site_feed_items_include_entries ) doCacheCleanup();
 	}
 
 	/**
@@ -86,7 +86,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_postEntryRemove( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_site_items_include_entries ) doCacheCleanup();
+		if ( settings.ag_site_feed_items_include_entries ) doCacheCleanup();
 	}
 
 	/**
@@ -94,7 +94,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function cbadmin_onEntryStatusUpdate( event, interceptData ) {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_site_items_include_entries ) doCacheCleanup();
+		if ( settings.ag_site_feed_items_include_entries ) doCacheCleanup();
 	}
 
 	/**
@@ -103,7 +103,7 @@ component extends="coldbox.system.Interceptor" {
 	function cbadmin_postPageSave( event, interceptData ) {
 		var page = arguments.interceptData.page;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_site_items_entrypoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
+		if ( settings.ag_site_feed_items_entrypoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
 			doCacheCleanup();
 		}
 	}
@@ -114,7 +114,7 @@ component extends="coldbox.system.Interceptor" {
 	function cbadmin_prePageRemove( event, interceptData ) {
 		var page = arguments.interceptData.page;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		if ( settings.ag_site_items_entrypoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
+		if ( settings.ag_site_feed_items_entrypoint == page.getslug() || settings.ag_site_feeds_entryPoint == page.getslug() ) {
 			doCacheCleanup();
 		}
 	}

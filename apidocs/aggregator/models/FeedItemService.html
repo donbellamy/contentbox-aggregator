@@ -366,7 +366,7 @@ FeedItem Service</p>
 			<code>struct</code>
 		</td>
 		<td>
-			<strong><a href="FeedItemService.html#getFeedItems()">getFeedItems</A></strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [boolean isVideo='false'], [boolean isPodcast='false'], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
+			<strong><a href="FeedItemService.html#getFeedItems()">getFeedItems</A></strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string type=''], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a struct of feeditems and count based upon the passed parameters.
@@ -1818,7 +1818,7 @@ FeedItem Service</p>
 		
 	</h3>
 
-	<kbd>public struct <strong>getFeedItems</strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [boolean isVideo='false'], [boolean isPodcast='false'], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
+	<kbd>public struct <strong>getFeedItems</strong>([boolean includeEntries='false'], [string status=''], [string searchTerm=''], [string category=''], [string author=''], [string feed=''], [numeric year='0'], [numeric month='0'], [numeric day='0'], [string type=''], [string sortOrder='publishedDate DESC'], [boolean searchActiveContent='true'], [boolean countOnly='false'], [numeric max='0'], [numeric offset='0'])</kbd>
 
 	<br><br>
 
@@ -1858,9 +1858,7 @@ FeedItem Service</p>
 		
 		<dd><code>day</code> - The day to filter on</dd>
 		
-		<dd><code>isVideo</code> - Whether or not to filter on video items only</dd>
-		
-		<dd><code>isPodcast</code> - Whether or not to filter on podcast items only</dd>
+		<dd><code>type</code></dd>
 		
 		<dd><code>sortOrder</code> - The field to sort the results on, defaults to "publishedDate"</dd>
 		

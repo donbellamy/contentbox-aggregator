@@ -198,11 +198,11 @@ component persistent="true"
 		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
-			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_site_items_featured_image_behavior;
+			var behavior = len( feed.getFeaturedImageBehavior() ) ? feed.getFeaturedImageBehavior() : settings.ag_site_feed_items_featured_image_behavior;
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
 			} else if ( behavior == "default" ) {
-				return settings.ag_site_items_featured_image_default_url;
+				return settings.ag_site_feed_items_featured_image_default_url;
 			} else {
 				return "";
 			}

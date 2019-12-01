@@ -43,7 +43,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric monthLimit=12 ) {
 
 		// Grab the archives
-		var archives = feedItemService.getArchiveReport( includeEntries=ag.setting("ag_site_items_include_entries") );
+		var archives = feedItemService.getArchiveReport( includeEntries=ag.setting("ag_site_feed_items_include_entries") );
 
 		// Set return html
 		var html = "";

@@ -327,7 +327,7 @@ Feeds Widget</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Feeds.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'])
+			<strong><a href="Feeds.html#renderIt()">renderIt</A></strong>([string title=''], [numeric titleLevel='2'], [string category=''], [string sortOrder='Feed Title'], [boolean includeItems='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feeds widget.
@@ -422,6 +422,15 @@ Feeds Widget</p>
 				
 					
 					
+					
+						
+					
+					
+					
+					
+				
+					
+					
 				
 					
 					
@@ -464,7 +473,7 @@ Feeds Widget</p>
 				
 
 				
-					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getCategorySlugs()">getCategorySlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#getThemeService()">getThemeService</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#setThemeService()">setThemeService</a>
+					<a href="../../aggregator/models/BaseWidget.html#getAg()">getAg</a>, <a href="../../aggregator/models/BaseWidget.html#getCategorySlugs()">getCategorySlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedItemService()">getFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedService()">getFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#getFeedSlugs()">getFeedSlugs</a>, <a href="../../aggregator/models/BaseWidget.html#getPublicMethods()">getPublicMethods</a>, <a href="../../aggregator/models/BaseWidget.html#getThemeService()">getThemeService</a>, <a href="../../aggregator/models/BaseWidget.html#getTypes()">getTypes</a>, <a href="../../aggregator/models/BaseWidget.html#setAg()">setAg</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedItemService()">setFeedItemService</a>, <a href="../../aggregator/models/BaseWidget.html#setFeedService()">setFeedService</a>, <a href="../../aggregator/models/BaseWidget.html#setThemeService()">setThemeService</a>
 				
 			</td>
 		</tr>
@@ -1300,7 +1309,7 @@ Feeds Widget</p>
 		
 	</h3>
 
-	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'])</kbd>
+	<kbd>public string <strong>renderIt</strong>([string title=''], [numeric titleLevel='2'], [string category=''], [string sortOrder='Feed Title'], [boolean includeItems='false'])</kbd>
 
 	<br><br>
 
@@ -1337,6 +1346,12 @@ Feeds Widget</p>
 		<dd><code>title</code> - An optional title to display using an H tag.</dd>
 		
 		<dd><code>titleLevel</code> - The H{level} to use.</dd>
+		
+		<dd><code>category</code> - The category to filter on.</dd>
+		
+		<dd><code>sortOrder</code> - How to order the results, defaults to feed title.</dd>
+		
+		<dd><code>includeItems</code> - Displays the most recent five feed items within the list of feeds, defaults to false.</dd>
 		
 		</dl>
 	

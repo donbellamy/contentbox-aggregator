@@ -73,7 +73,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			feed = arguments.feed,
 			sortOrder = arguments.sortOrder,
 			max = arguments.max,
-			includeEntries = ag.setting("ag_site_items_include_entries")
+			includeEntries = ag.setting("ag_site_feed_items_include_entries")
 		);
 
 		// Iteration cap

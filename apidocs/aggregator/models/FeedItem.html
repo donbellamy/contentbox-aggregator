@@ -1061,7 +1061,7 @@ FeedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="FeedItem.html#getContentExcerpt()">getContentExcerpt</A></strong>([numeric count='500'], [string excerptEnding='...'])
+			<strong><a href="FeedItem.html#getContentExcerpt()">getContentExcerpt</A></strong>([numeric count='255'], [string excerptEnding='...'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the shortened and cleaned version of the excerpt taken from the feed item body.
@@ -1178,7 +1178,7 @@ FeedItem Model</p>
 			<strong><a href="FeedItem.html#getPodcastMimeType()">getPodcastMimeType</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets and returns the mime type if the feed item is a podcast or contains a podcast.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mime type if the feed item is a podcast or contains a podcast.
 			
 		</td>
 	</tr>
@@ -1192,6 +1192,21 @@ FeedItem Model</p>
 		<td>
 			<strong><a href="FeedItem.html#getPodcastUrl()">getPodcastUrl</A></strong>()
 			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>aggregator.models.datetime</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getPublishedDateNoTime()">getPublishedDateNoTime</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the published date without the time.
 			
 		</td>
 	</tr>
@@ -1220,6 +1235,21 @@ FeedItem Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a flat representation of the feed item for UI response format which restricts the data displayed.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getType()">getType</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item type.
 			
 		</td>
 	</tr>
@@ -1285,6 +1315,21 @@ FeedItem Model</p>
 			<code>boolean</code>
 		</td>
 		<td>
+			<strong><a href="FeedItem.html#isBitchute()">isBitchute</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a bitchute video.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
 			<strong><a href="FeedItem.html#isPodcast()">isPodcast</A></strong>()
 			<br>
 			
@@ -1304,6 +1349,36 @@ FeedItem Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a video.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#isVimeo()">isVimeo</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a vimeo video.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#isYouTube()">isYouTube</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shorthand function for checking if the feed item is a youtube video.
 			
 		</td>
 	</tr>
@@ -3783,7 +3858,7 @@ FeedItem Model</p>
 		
 	</h3>
 
-	<kbd>public string <strong>getContentExcerpt</strong>([numeric count='500'], [string excerptEnding='...'])</kbd>
+	<kbd>public string <strong>getContentExcerpt</strong>([numeric count='255'], [string excerptEnding='...'])</kbd>
 
 	<br><br>
 
@@ -3897,7 +3972,7 @@ FeedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>getAltImageUrl</code></dd>
+		<dd><code>getAltImageUrl</code> - Whether or not to check and return the alt featured image if one exists</dd>
 		
 		</dl>
 	
@@ -4144,7 +4219,7 @@ FeedItem Model</p>
 	<br><br>
 
 	
-		<p>Sets and returns the mime type if the feed item is a podcast or contains a podcast</p>
+		<p>Gets the mime type if the feed item is a podcast or contains a podcast</p>
 	
 
 	
@@ -4196,6 +4271,45 @@ FeedItem Model</p>
 
 	
 
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPublishedDateNoTime()"><!-- --></a>
+	<h3>
+		getPublishedDateNoTime
+		
+	</h3>
+
+	<kbd>public aggregator.models.datetime <strong>getPublishedDateNoTime</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the published date without the time</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The published date</dd>
+		</dl>
 	
 
 	
@@ -4299,6 +4413,45 @@ FeedItem Model</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>A structure containing the feed item properties</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getType()"><!-- --></a>
+	<h3>
+		getType
+		
+	</h3>
+
+	<kbd>public string <strong>getType</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed item type</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed item type</dd>
 		</dl>
 	
 
@@ -4450,6 +4603,45 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="isBitchute()"><!-- --></a>
+	<h3>
+		isBitchute
+		
+	</h3>
+
+	<kbd>public boolean <strong>isBitchute</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Shorthand function for checking if the feed item is a bitchute video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a bitchute video</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="isPodcast()"><!-- --></a>
 	<h3>
 		isPodcast
@@ -4519,6 +4711,84 @@ FeedItem Model</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>Whether or not the feed item is a video</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isVimeo()"><!-- --></a>
+	<h3>
+		isVimeo
+		
+	</h3>
+
+	<kbd>public boolean <strong>isVimeo</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Shorthand function for checking if the feed item is a vimeo video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a vimeo video</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isYouTube()"><!-- --></a>
+	<h3>
+		isYouTube
+		
+	</h3>
+
+	<kbd>public boolean <strong>isYouTube</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Shorthand function for checking if the feed item is a youtube video</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>Whether or not the feed item is a youtube video</dd>
 		</dl>
 	
 

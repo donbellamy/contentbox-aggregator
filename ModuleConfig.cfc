@@ -26,28 +26,28 @@ component {
 		settings = {
 
 			// Site Options
-			"ag_site_items_entrypoint" = "news",
+			"ag_site_feed_items_entrypoint" = "news",
 			"ag_site_feeds_entrypoint" = "feeds",
 
 			// Feed items
-			"ag_site_items_include_entries" = "false",
-			"ag_site_items_group_by_date" = "false",
-			"ag_site_items_show_video_player" = "true",
-			"ag_site_items_show_audio_player" = "true",
-			"ag_site_items_show_source" = "true",
-			"ag_site_items_show_author" = "false",
-			"ag_site_items_show_categories" = "false",
-			"ag_site_items_show_excerpt" = "true",
-			"ag_site_items_excerpt_limit" = "255",
-			"ag_site_items_excerpt_ending" = "...",
-			"ag_site_items_show_read_more" = "true",
-			"ag_site_items_read_more_text" = "Read More...",
-			"ag_site_items_link_behavior" = "forward",
-			"ag_site_items_open_new_window" = "true",
-			"ag_site_items_show_featured_image" = "true",
-			"ag_site_items_featured_image_behavior" = "feed",
-			"ag_site_items_featured_image_default" = "",
-			"ag_site_items_featured_image_default_url" = "",
+			"ag_site_feed_items_include_entries" = "false",
+			"ag_site_feed_items_group_by_date" = "false",
+			"ag_site_feed_items_show_video_player" = "true",
+			"ag_site_feed_items_show_audio_player" = "true",
+			"ag_site_feed_items_show_source" = "true",
+			"ag_site_feed_items_show_author" = "false",
+			"ag_site_feed_items_show_categories" = "false",
+			"ag_site_feed_items_show_excerpt" = "true",
+			"ag_site_feed_items_excerpt_limit" = "255",
+			"ag_site_feed_items_excerpt_ending" = "...",
+			"ag_site_feed_items_show_read_more" = "true",
+			"ag_site_feed_items_read_more_text" = "Read More...",
+			"ag_site_feed_items_link_behavior" = "forward",
+			"ag_site_feed_items_open_new_window" = "true",
+			"ag_site_feed_items_show_featured_image" = "true",
+			"ag_site_feed_items_featured_image_behavior" = "feed",
+			"ag_site_feed_items_featured_image_default" = "",
+			"ag_site_feed_items_featured_image_default_url" = "",
 
 			// Feeds
 			"ag_site_feeds_include_items" = "false",
@@ -258,11 +258,11 @@ component {
 		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var feedItemsEntryPoint = settings.ag_site_items_entrypoint;
+		var feedItemsEntryPoint = settings.ag_site_feed_items_entrypoint;
 		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			feedItemsEntryPoint = agSettings.ag_site_items_entrypoint;
+			feedItemsEntryPoint = agSettings.ag_site_feed_items_entrypoint;
 			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
@@ -356,13 +356,13 @@ component {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
 		}
-		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_items_entrypoint );
+		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_feed_items_entrypoint );
 		if ( feedItemsPage.isLoaded() ) {
 			feedItemsPage.setLayout( "aggregator" );
 			pageService.savePage( feedItemsPage );
 		} else {
 			feedItemsPage.setTitle( "News" );
-			feedItemsPage.setSlug( agSettings.ag_site_items_entrypoint );
+			feedItemsPage.setSlug( agSettings.ag_site_feed_items_entrypoint );
 			feedItemsPage.setPublishedDate( now() );
 			feedItemsPage.setCreator( author );
 			feedItemsPage.setLayout( "aggregator" );

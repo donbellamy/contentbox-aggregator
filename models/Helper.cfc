@@ -47,7 +47,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed items entry point
 	 */
 	string function getFeedItemsEntryPoint() {
-		return setting("ag_site_items_entrypoint");
+		return setting("ag_site_feed_items_entrypoint");
 	}
 
 	/**

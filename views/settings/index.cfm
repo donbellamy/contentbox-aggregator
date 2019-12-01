@@ -47,17 +47,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_entrypoint",
+											field="ag_site_feed_items_entrypoint",
 											content="Feed Items Page:"
 										)#
 										<div class="controls">
 											<small>The page used in the site to display the imported feed items.</small>
 											#html.select(
-												name="ag_site_items_entrypoint",
+												name="ag_site_feed_items_entrypoint",
 												options=prc.pages,
 												column="slug",
 												nameColumn="title",
-												selectedValue=prc.agSettings.ag_site_items_entrypoint,
+												selectedValue=prc.agSettings.ag_site_feed_items_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -90,167 +90,167 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_include_entries",
+											field="ag_site_feed_items_include_entries",
 											content="Include Blog Entries:"
 										)#
 										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_include_entries_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_include_entries' },
-												checked=prc.agSettings.ag_site_items_include_entries
+												name="ag_site_feed_items_include_entries_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_include_entries' },
+												checked=prc.agSettings.ag_site_feed_items_include_entries
 											)#
 											#html.hiddenField(
-												name="ag_site_items_include_entries",
-												value=prc.agSettings.ag_site_items_include_entries
+												name="ag_site_feed_items_include_entries",
+												value=prc.agSettings.ag_site_feed_items_include_entries
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_group_by_date",
+											field="ag_site_feed_items_group_by_date",
 											content="Group By Date:"
 										)#
 										<p><small>If enabled, feed items will be grouped by date on the feed items page.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_group_by_date_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_group_by_date' },
-												checked=prc.agSettings.ag_site_items_group_by_date
+												name="ag_site_feed_items_group_by_date_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_group_by_date' },
+												checked=prc.agSettings.ag_site_feed_items_group_by_date
 											)#
 											#html.hiddenField(
-												name="ag_site_items_group_by_date",
-												value=prc.agSettings.ag_site_items_group_by_date
+												name="ag_site_feed_items_group_by_date",
+												value=prc.agSettings.ag_site_feed_items_group_by_date
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_video_player",
+											field="ag_site_feed_items_show_video_player",
 											content="Show Video Player:"
 										)#
 										<p><small>If enabled, an inline video player will be displayed for videos.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_video_player_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_video_player' },
-												checked=prc.agSettings.ag_site_items_show_video_player
+												name="ag_site_feed_items_show_video_player_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_video_player' },
+												checked=prc.agSettings.ag_site_feed_items_show_video_player
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_video_player",
-												value=prc.agSettings.ag_site_items_show_video_player
+												name="ag_site_feed_items_show_video_player",
+												value=prc.agSettings.ag_site_feed_items_show_video_player
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_audio_player",
+											field="ag_site_feed_items_show_audio_player",
 											content="Show Audio Player:"
 										)#
 										<p><small>If enabled, an inline audio player will be displayed for podcasts.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_audio_player_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_audio_player' },
-												checked=prc.agSettings.ag_site_items_show_audio_player
+												name="ag_site_feed_items_show_audio_player_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_audio_player' },
+												checked=prc.agSettings.ag_site_feed_items_show_audio_player
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_audio_player",
-												value=prc.agSettings.ag_site_items_show_audio_player
+												name="ag_site_feed_items_show_audio_player",
+												value=prc.agSettings.ag_site_feed_items_show_audio_player
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_source",
+											field="ag_site_feed_items_show_source",
 											content="Show Source:"
 										)#
 										<p><small>If enabled, the feed source will be displayed for each feed item.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_source_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_source' },
-												checked=prc.agSettings.ag_site_items_show_source
+												name="ag_site_feed_items_show_source_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_source' },
+												checked=prc.agSettings.ag_site_feed_items_show_source
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_source",
-												value=prc.agSettings.ag_site_items_show_source
+												name="ag_site_feed_items_show_source",
+												value=prc.agSettings.ag_site_feed_items_show_source
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_author",
+											field="ag_site_feed_items_show_author",
 											content="Show Author:"
 										)#
 										<p><small>If enabled, the author will be displayed for each feed item.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_author_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_author' },
-												checked=prc.agSettings.ag_site_items_show_author
+												name="ag_site_feed_items_show_author_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_author' },
+												checked=prc.agSettings.ag_site_feed_items_show_author
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_author",
-												value=prc.agSettings.ag_site_items_show_author
+												name="ag_site_feed_items_show_author",
+												value=prc.agSettings.ag_site_feed_items_show_author
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_categories",
+											field="ag_site_feed_items_show_categories",
 											content="Show Categories:"
 										)#
 										<p><small>If enabled, the categories will be displayed for each feed item.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_categories_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_categories' },
-												checked=prc.agSettings.ag_site_items_show_categories
+												name="ag_site_feed_items_show_categories_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_categories' },
+												checked=prc.agSettings.ag_site_feed_items_show_categories
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_categories",
-												value=prc.agSettings.ag_site_items_show_categories
+												name="ag_site_feed_items_show_categories",
+												value=prc.agSettings.ag_site_feed_items_show_categories
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_excerpt",
+											field="ag_site_feed_items_show_excerpt",
 											content="Show Excerpt:"
 										)#
 										<p><small>If enabled, an excerpt will be displayed for each feed item.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_excerpt_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_excerpt' },
-												checked=prc.agSettings.ag_site_items_show_excerpt
+												name="ag_site_feed_items_show_excerpt_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_excerpt' },
+												checked=prc.agSettings.ag_site_feed_items_show_excerpt
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_excerpt",
-												value=prc.agSettings.ag_site_items_show_excerpt
+												name="ag_site_feed_items_show_excerpt",
+												value=prc.agSettings.ag_site_feed_items_show_excerpt
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_excerpt_limit",
+											field="ag_site_feed_items_excerpt_limit",
 											content="Excerpt Character Limit:"
 										)#
 										<div class="controls">
 											<small>The maximum number of characters to display in the feed item excerpt.</small>
 											#html.inputField(
-												name="ag_site_items_excerpt_limit",
+												name="ag_site_feed_items_excerpt_limit",
 												type="number",
-												value=prc.agSettings.ag_site_items_excerpt_limit,
+												value=prc.agSettings.ag_site_feed_items_excerpt_limit,
 												class="form-control counter",
 												placeholder="No limit",
 												min="0"
@@ -260,15 +260,15 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_excerpt_ending",
+											field="ag_site_feed_items_excerpt_ending",
 											content="Excerpt Ending:"
 										)#
 										<div class="controls">
 											<small>The ending text displayed when the length of the excerpt is larger than the character limit.</small>
 											#html.textField(
-												name="ag_site_items_excerpt_ending",
+												name="ag_site_feed_items_excerpt_ending",
 												required="required",
-												value=prc.agSettings.ag_site_items_excerpt_ending,
+												value=prc.agSettings.ag_site_feed_items_excerpt_ending,
 												class="form-control",
 												maxlength="10"
 											)#
@@ -277,34 +277,34 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_read_more",
+											field="ag_site_feed_items_show_read_more",
 											content="Show Read More:"
 										)#
 										<p><small>If enabled, a link to the feed item will be displayed after the feed item excerpt.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_read_more_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_read_more' },
-												checked=prc.agSettings.ag_site_items_show_read_more
+												name="ag_site_feed_items_show_read_more_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_read_more' },
+												checked=prc.agSettings.ag_site_feed_items_show_read_more
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_read_more",
-												value=prc.agSettings.ag_site_items_show_read_more
+												name="ag_site_feed_items_show_read_more",
+												value=prc.agSettings.ag_site_feed_items_show_read_more
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_read_more_text",
+											field="ag_site_feed_items_read_more_text",
 											content="Read More Text:"
 										)#
 										<div class="controls">
 											<small>The text used when the read more link is enabled.</small>
 											#html.textField(
-												name="ag_site_items_read_more_text",
+												name="ag_site_feed_items_read_more_text",
 												required="required",
-												value=prc.agSettings.ag_site_items_read_more_text,
+												value=prc.agSettings.ag_site_feed_items_read_more_text,
 												class="form-control",
 												maxlength="30"
 											)#
@@ -313,17 +313,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_link_behavior",
+											field="ag_site_feed_items_link_behavior",
 											content="Link Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
-												name="ag_site_items_link_behavior",
+												name="ag_site_feed_items_link_behavior",
 												options=prc.linkOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_site_items_link_behavior,
+												selectedValue=prc.agSettings.ag_site_feed_items_link_behavior,
 												class="form-control input-sm"
 											)#
 										</div>
@@ -331,55 +331,55 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_open_new_window",
+											field="ag_site_feed_items_open_new_window",
 											content="Open New Window:"
 										)#
 										<p><small>If enabled, links to feed items will be open in a new window (tab).</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_open_new_window_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_open_new_window' },
-												checked=prc.agSettings.ag_site_items_open_new_window
+												name="ag_site_feed_items_open_new_window_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_open_new_window' },
+												checked=prc.agSettings.ag_site_feed_items_open_new_window
 											)#
 											#html.hiddenField(
-												name="ag_site_items_open_new_window",
-												value=prc.agSettings.ag_site_items_open_new_window
+												name="ag_site_feed_items_open_new_window",
+												value=prc.agSettings.ag_site_feed_items_open_new_window
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_show_featured_image",
+											field="ag_site_feed_items_show_featured_image",
 											content="Show Featured Image:"
 										)#
 										<p><small>If enabled, the feed item's featured image will be displayed if one exists.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_items_show_featured_image_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_items_show_featured_image' },
-												checked=prc.agSettings.ag_site_items_show_featured_image
+												name="ag_site_feed_items_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feed_items_show_featured_image' },
+												checked=prc.agSettings.ag_site_feed_items_show_featured_image
 											)#
 											#html.hiddenField(
-												name="ag_site_items_show_featured_image",
-												value=prc.agSettings.ag_site_items_show_featured_image
+												name="ag_site_feed_items_show_featured_image",
+												value=prc.agSettings.ag_site_feed_items_show_featured_image
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_featured_image_behavior",
+											field="ag_site_feed_items_featured_image_behavior",
 											content="Featured Image Behavior:"
 										)#
 										<div class="controls">
 											<small>The default behavior when a feed item does not have a featured image.</small>
 											#html.select(
-												name="ag_site_items_featured_image_behavior",
+												name="ag_site_feed_items_featured_image_behavior",
 												options=prc.featuredImageOptions,
 												column="value",
 												nameColumn="name",
-												selectedValue=prc.agSettings.ag_site_items_featured_image_behavior,
+												selectedValue=prc.agSettings.ag_site_feed_items_featured_image_behavior,
 												class="form-control"
 											)#
 										</div>
@@ -387,25 +387,25 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_items_featured_image_default",
+											field="ag_site_feed_items_featured_image_default",
 											content="Default Featured Image:"
 										)#
 										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
-											<div class="<cfif !len( prc.agSettings.ag_site_items_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
+											<div class="<cfif !len( prc.agSettings.ag_site_feed_items_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
 												<a class="btn btn-danger" href="javascript:cancelDefaultImage()">Clear Image</a>
 												#html.hiddenField(
-													name="ag_site_items_featured_image_default",
-													value=prc.agSettings.ag_site_items_featured_image_default
+													name="ag_site_feed_items_featured_image_default",
+													value=prc.agSettings.ag_site_feed_items_featured_image_default
 												)#
 												#html.hiddenField(
-													name="ag_site_items_featured_image_default_url",
-													value=prc.agSettings.ag_site_items_featured_image_default_url
+													name="ag_site_feed_items_featured_image_default_url",
+													value=prc.agSettings.ag_site_feed_items_featured_image_default_url
 												)#
 												<div class="margin10">
-													<cfif len( prc.agSettings.ag_site_items_featured_image_default_url ) >
-														<img id="default_image_preview" src="#prc.agSettings.ag_site_items_featured_image_default_url#" class="img-thumbnail" height="75" />
+													<cfif len( prc.agSettings.ag_site_feed_items_featured_image_default_url ) >
+														<img id="default_image_preview" src="#prc.agSettings.ag_site_feed_items_featured_image_default_url#" class="img-thumbnail" height="75" />
 													<cfelse>
 														<img id="default_image_preview" class="img-thumbnail" height="75" />
 													</cfif>

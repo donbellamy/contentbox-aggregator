@@ -223,7 +223,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
+		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
 
 		// Make sure page exists
 		if ( prc.page.isLoaded() ) {
@@ -323,7 +323,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = sortOrder,
 				max = prc.agSettings.ag_site_paging_max_items,
 				offset = prc.pagingBoundaries.startRow - 1,
-				includeEntries = prc.agSettings.ag_site_items_include_entries
+				includeEntries = prc.agSettings.ag_site_feed_items_include_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -370,7 +370,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
+		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
 
 		// Validate the passed date
 		var validDate = true;
@@ -413,7 +413,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				day = rc.day,
 				max = prc.agSettings.ag_site_paging_max_items,
 				offset = prc.pagingBoundaries.startRow - 1,
-				includeEntries = prc.agSettings.ag_site_items_include_entries
+				includeEntries = prc.agSettings.ag_site_feed_items_include_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -465,7 +465,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( event.getCurrentRoutedNamespace() == "aggregator-feeds" ) {
 			getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
 		} else {
-			getPage( prc, prc.agSettings.ag_site_items_entrypoint );
+			getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
 		}
 
 		// Make sure page exists and rss is enabled
@@ -814,7 +814,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( prc.feedItem.isLoaded() ) {
 
 			// Calculate link behavior
-			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_site_items_link_behavior;
+			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_site_feed_items_link_behavior;
 
 			// Turn off cache if forwarding user to feed item
 			if ( prc.linkBehavior == "forward" ) {
@@ -835,7 +835,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_items_entrypoint );
+		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
 
 		// Make sure page and feed item exists
 		if ( prc.page.isLoaded() && prc.feedItem.isLoaded() ) {

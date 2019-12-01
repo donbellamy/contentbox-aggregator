@@ -6,7 +6,7 @@
 <cfif len( args.title ) >
 	<h#args.titleLevel#>#args.title#</h#args.titleLevel#>
 </cfif>
-#html.startForm( name="searchForm", action=ag.linkNews(), method="get" )#
+#html.startForm( name="searchForm", action=ag.linkFeedItems(), method="get" )#
 <div class="input-group">
 	#html.textField( name="q", placeholder="Search", value=args.q, class="form-control")#
 	<span class="input-group-btn">

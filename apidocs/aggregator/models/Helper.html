@@ -626,10 +626,10 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#getFeedsEntryPoint()">getFeedsEntryPoint</A></strong>()
+			<strong><a href="Helper.html#getCurrentType()">getCurrentType</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds entry point.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the type if present in the current request.
 			
 		</td>
 	</tr>
@@ -641,10 +641,25 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#getNewsEntryPoint()">getNewsEntryPoint</A></strong>()
+			<strong><a href="Helper.html#getFeedItemsEntryPoint()">getFeedItemsEntryPoint</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the news entry point.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items entry point.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getFeedsEntryPoint()">getFeedsEntryPoint</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds entry point.
 			
 		</td>
 	</tr>
@@ -689,7 +704,22 @@ Aggregator Helper</p>
 			<strong><a href="Helper.html#isCategoryView()">isCategoryView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#isFeedItemsView()">isFeedItemsView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -716,10 +746,25 @@ Aggregator Helper</p>
 			<code>boolean</code>
 		</td>
 		<td>
+			<strong><a href="Helper.html#isFeedsCategoryView()">isFeedsCategoryView</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
 			<strong><a href="Helper.html#isFeedSearchView()">isFeedSearchView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -761,7 +806,7 @@ Aggregator Helper</p>
 			<code>boolean</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#isNewsView()">isNewsView</A></strong>()
+			<strong><a href="Helper.html#isSearchView()">isSearchView</A></strong>()
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
@@ -776,10 +821,10 @@ Aggregator Helper</p>
 			<code>boolean</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#isSearchView()">isSearchView</A></strong>()
+			<strong><a href="Helper.html#isTypeView()">isTypeView</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if if the current event equals site.
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the current event equals site.
 			
 		</td>
 	</tr>
@@ -896,7 +941,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])
+			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item link.
@@ -926,7 +971,22 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkFeedItemsAdmin()">linkFeedItemsAdmin</A></strong>([any contentID], [boolean ssl='[runtime expression]'])
+			<strong><a href="Helper.html#linkFeedItems()">linkFeedItems</A></strong>([boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#linkFeedItemsAdmin()">linkFeedItemsAdmin</A></strong>([any contentID], [string type], [boolean ssl='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed items admin link.
@@ -986,6 +1046,21 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="Helper.html#linkFeedsCategory()">linkFeedsCategory</A></strong>([any category=''], [boolean ssl='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feeds category link.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="Helper.html#linkFeedsRSS()">linkFeedsRSS</A></strong>([boolean ssl='[runtime expression]'])
 			<br>
 			
@@ -1031,21 +1106,6 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkNews()">linkNews</A></strong>([boolean ssl='[runtime expression]'])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the news link.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>string</code>
-		</td>
-		<td>
 			<strong><a href="Helper.html#linkRSS()">linkRSS</A></strong>([boolean ssl='[runtime expression]'])
 			<br>
 			
@@ -1058,7 +1118,7 @@ Aggregator Helper</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>string</code>
 		</td>
 		<td>
 			<strong><a href="Helper.html#mainView()">mainView</A></strong>([struct args='[runtime expression]'])
@@ -1091,7 +1151,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#quickFeedItems()">quickFeedItems</A></strong>([string template='feeditem'], [string collectionAs='feeditem'], [struct args='[runtime expression]'])
+			<strong><a href="Helper.html#quickFeedItems()">quickFeedItems</A></strong>([string template='feeditem'], [string collectionAs='feeditem'], [boolean groupByDate='false'], [struct args='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed items list.
@@ -1121,7 +1181,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#quickPaging()">quickPaging</A></strong>([numeric maxRows], [string type='items'])
+			<strong><a href="Helper.html#quickPaging()">quickPaging</A></strong>([numeric maxRows], [string label='items'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the paging links.
@@ -1836,6 +1896,84 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="getCurrentType()"><!-- --></a>
+	<h3>
+		getCurrentType
+		
+	</h3>
+
+	<kbd>public string <strong>getCurrentType</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the type if present in the current request</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The type if it exists</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedItemsEntryPoint()"><!-- --></a>
+	<h3>
+		getFeedItemsEntryPoint
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedItemsEntryPoint</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed items entry point</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed items entry point</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getFeedsEntryPoint()"><!-- --></a>
 	<h3>
 		getFeedsEntryPoint
@@ -1866,45 +2004,6 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>The feeds entry point</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getNewsEntryPoint()"><!-- --></a>
-	<h3>
-		getNewsEntryPoint
-		
-	</h3>
-
-	<kbd>public string <strong>getNewsEntryPoint</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Gets the news entry point</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>The news entry point</dd>
 		</dl>
 	
 
@@ -2003,7 +2102,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if if the current event equals site.index and a category is present</p>
+		<p>Checks to see if the current event equals site.index and a category is present</p>
 	
 
 	
@@ -2022,6 +2121,45 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if the current event equals site.index and a category is present, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFeedItemsView()"><!-- --></a>
+	<h3>
+		isFeedItemsView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedItemsView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals site.index</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals site.index, false if not</dd>
 		</dl>
 	
 
@@ -2070,6 +2208,45 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="isFeedsCategoryView()"><!-- --></a>
+	<h3>
+		isFeedsCategoryView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isFeedsCategoryView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals site.feeds and a category is present</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals site.feeds and a category is present, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="isFeedSearchView()"><!-- --></a>
 	<h3>
 		isFeedSearchView
@@ -2081,7 +2258,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if if the current event equals site.index and a feed is present</p>
+		<p>Checks to see if the current event equals site.index and a feed is present</p>
 	
 
 	
@@ -2187,45 +2364,6 @@ Aggregator Helper</p>
 	<hr>
 
 	
-	<a name="isNewsView()"><!-- --></a>
-	<h3>
-		isNewsView
-		
-	</h3>
-
-	<kbd>public boolean <strong>isNewsView</strong>()</kbd>
-
-	<br><br>
-
-	
-		<p>Checks to see if the current event equals site.index</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>True if the current event equals site.index, false if not</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
 	<a name="isSearchView()"><!-- --></a>
 	<h3>
 		isSearchView
@@ -2237,7 +2375,7 @@ Aggregator Helper</p>
 	<br><br>
 
 	
-		<p>Checks to see if if the current event equals site.index and a search term is present</p>
+		<p>Checks to see if the current event equals site.index and a search term is present</p>
 	
 
 	
@@ -2256,6 +2394,45 @@ Aggregator Helper</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if the current event equals site.index and a search term is present, false if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isTypeView()"><!-- --></a>
+	<h3>
+		isTypeView
+		
+	</h3>
+
+	<kbd>public boolean <strong>isTypeView</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Checks to see if the current event equals site.index and a type is present</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>True if the current event equals site.index and a type is present, false if not</dd>
 		</dl>
 	
 
@@ -2615,7 +2792,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>linkFeedItem</strong>(<a href="../../aggregator/models/FeedItem.html" title="class in aggregator.models">FeedItem</a> feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])</kbd>
+	<kbd>public string <strong>linkFeedItem</strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])</kbd>
 
 	<br><br>
 
@@ -2637,7 +2814,7 @@ Aggregator Helper</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>feedItem</code> - The feed item to link to</dd>
+		<dd><code>feedItem</code> - The feed item or entry to link to</dd>
 		
 		<dd><code>ssl</code> - Whether or not to use ssl</dd>
 		
@@ -2709,13 +2886,59 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="linkFeedItems()"><!-- --></a>
+	<h3>
+		linkFeedItems
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedItems</strong>([boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feed items link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feed items link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="linkFeedItemsAdmin()"><!-- --></a>
 	<h3>
 		linkFeedItemsAdmin
 		
 	</h3>
 
-	<kbd>public string <strong>linkFeedItemsAdmin</strong>([any contentID], [boolean ssl='[runtime expression]'])</kbd>
+	<kbd>public string <strong>linkFeedItemsAdmin</strong>([any contentID], [string type], [boolean ssl='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -2738,6 +2961,8 @@ Aggregator Helper</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>contentID</code> - The feed contentID to link to if provided</dd>
+		
+		<dd><code>type</code></dd>
 		
 		<dd><code>ssl</code> - Whether or not to use ssl</dd>
 		
@@ -2897,6 +3122,54 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="linkFeedsCategory()"><!-- --></a>
+	<h3>
+		linkFeedsCategory
+		
+	</h3>
+
+	<kbd>public string <strong>linkFeedsCategory</strong>([any category=''], [boolean ssl='[runtime expression]'])</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the feeds category link</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>category</code> - The category to link to</dd>
+		
+		<dd><code>ssl</code> - Whether or not to use ssl</dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The feeds category link</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="linkFeedsRSS()"><!-- --></a>
 	<h3>
 		linkFeedsRSS
@@ -3043,52 +3316,6 @@ Aggregator Helper</p>
 	<hr>
 
 	
-	<a name="linkNews()"><!-- --></a>
-	<h3>
-		linkNews
-		
-	</h3>
-
-	<kbd>public string <strong>linkNews</strong>([boolean ssl='[runtime expression]'])</kbd>
-
-	<br><br>
-
-	
-		<p>Gets the news link</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>ssl</code> - Whether or not to use ssl</dd>
-		
-		</dl>
-	
-
-	
-		<dl>
-			<dt><strong>Returns:</strong></dt>
-			<dd>The news link</dd>
-		</dl>
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
 	<a name="linkRSS()"><!-- --></a>
 	<h3>
 		linkRSS
@@ -3141,7 +3368,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public any <strong>mainView</strong>([struct args='[runtime expression]'])</kbd>
+	<kbd>public string <strong>mainView</strong>([struct args='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -3168,6 +3395,11 @@ Aggregator Helper</p>
 		</dl>
 	
 
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The main view html</dd>
+		</dl>
 	
 
 	
@@ -3228,7 +3460,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>quickFeedItems</strong>([string template='feeditem'], [string collectionAs='feeditem'], [struct args='[runtime expression]'])</kbd>
+	<kbd>public string <strong>quickFeedItems</strong>([string template='feeditem'], [string collectionAs='feeditem'], [boolean groupByDate='false'], [struct args='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -3253,6 +3485,8 @@ Aggregator Helper</p>
 		<dd><code>template</code> - The theme template used to render the feed items, defaults to "feeditem"</dd>
 		
 		<dd><code>collectionAs</code> - The variable name used in the template for each feed item, defaults to "feeditem"</dd>
+		
+		<dd><code>groupByDate</code> - Whether or not to group the feed items by published date, defaults to false</dd>
 		
 		<dd><code>args</code> - A structure of arguments to pass to the template</dd>
 		
@@ -3328,7 +3562,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>quickPaging</strong>([numeric maxRows], [string type='items'])</kbd>
+	<kbd>public string <strong>quickPaging</strong>([numeric maxRows], [string label='items'])</kbd>
 
 	<br><br>
 
@@ -3352,7 +3586,7 @@ Aggregator Helper</p>
 		
 		<dd><code>maxRows</code> - The maximum number of rows to return</dd>
 		
-		<dd><code>type</code> - The content type label to use, defaults to "items"</dd>
+		<dd><code>label</code> - The content type label to use, defaults to "items"</dd>
 		
 		</dl>
 	

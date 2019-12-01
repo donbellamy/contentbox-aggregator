@@ -20,11 +20,11 @@ component extends="coldbox.system.Interceptor" {
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 
 		// Check if page slugs have changed
-		if ( page.getSlug() != originalSlug && ( settings.ag_site_items_entrypoint == originalSlug || settings.ag_site_feeds_entryPoint == originalSlug ) ) {
+		if ( page.getSlug() != originalSlug && ( settings.ag_site_feed_items_entrypoint == originalSlug || settings.ag_site_feeds_entryPoint == originalSlug ) ) {
 
 			// Feed items or feeds slug
-			if ( settings.ag_site_items_entrypoint == originalSlug ) {
-				settings.ag_site_items_entrypoint = page.getSlug();
+			if ( settings.ag_site_feed_items_entrypoint == originalSlug ) {
+				settings.ag_site_feed_items_entrypoint = page.getSlug();
 			} else {
 				settings.ag_site_feeds_entryPoint = page.getSlug();
 			}
@@ -33,7 +33,7 @@ component extends="coldbox.system.Interceptor" {
 			routingService.setRoutes(
 				routingService.getRoutes().map( function( item ) {
 					if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
-						item.pattern = item.regexpattern = replace( settings.ag_site_items_entrypoint, "/", "-", "all" ) & "/";
+						item.pattern = item.regexpattern = replace( settings.ag_site_feed_items_entrypoint, "/", "-", "all" ) & "/";
 					}
 					if ( item.namespaceRouting EQ "aggregator-feeds" ) {
 						item.pattern = item.regexpattern = replace( settings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
