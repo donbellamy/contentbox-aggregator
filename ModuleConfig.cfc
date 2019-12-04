@@ -26,8 +26,14 @@ component {
 		settings = {
 
 			// Site Options
-			"ag_site_feed_items_entrypoint" = "news",
 			"ag_site_feeds_entrypoint" = "feeds",
+			"ag_site_feed_items_entrypoint" = "news",
+
+			// Feeds
+			"ag_site_feeds_include_items" = "false",
+			"ag_site_feeds_show_featured_image" = "true",
+			"ag_site_feeds_show_website" = "true",
+			"ag_site_feeds_show_rss" = "true",
 
 			// Feed items
 			"ag_site_feed_items_include_entries" = "false",
@@ -49,15 +55,9 @@ component {
 			"ag_site_feed_items_featured_image_default" = "",
 			"ag_site_feed_items_featured_image_default_url" = "",
 
-			// Feeds
-			"ag_site_feeds_include_items" = "false",
-			"ag_site_feeds_show_featured_image" = "true",
-			"ag_site_feeds_show_website" = "true",
-			"ag_site_feeds_show_rss" = "true",
-
 			// Paging
-			"ag_site_paging_max_items" = "20",
 			"ag_site_paging_max_feeds" = "20",
+			"ag_site_paging_max_feed_items" = "20",
 
 			// Caching
 			"ag_site_cache_enable" = "true",
@@ -258,33 +258,33 @@ component {
 		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var feedItemsEntryPoint = settings.ag_site_feed_items_entrypoint;
 		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
+		var feedItemsEntryPoint = settings.ag_site_feed_items_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			feedItemsEntryPoint = agSettings.ag_site_feed_items_entrypoint;
 			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
+			feedItemsEntryPoint = agSettings.ag_site_feed_items_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
-			routingService.addNamespace(
-				pattern = "#cbEntryPoint#/#feedItemsEntryPoint#",
-				namespace = "aggregator-feed-items",
-				append = false
-			);
 			routingService.addNamespace(
 				pattern = "#cbEntryPoint#/#feedsEntryPoint#",
 				namespace = "aggregator-feeds",
 				append = false
 			);
-		} else {
 			routingService.addNamespace(
-				pattern = "#feedItemsEntryPoint#",
+				pattern = "#cbEntryPoint#/#feedItemsEntryPoint#",
 				namespace = "aggregator-feed-items",
 				append = false
 			);
+		} else {
 			routingService.addNamespace(
 				pattern = "#feedsEntryPoint#",
 				namespace = "aggregator-feeds",
+				append = false
+			);
+			routingService.addNamespace(
+				pattern = "#feedItemsEntryPoint#",
+				namespace = "aggregator-feed-items",
 				append = false
 			);
 		}
@@ -356,23 +356,6 @@ component {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
 		}
-		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_feed_items_entrypoint );
-		if ( feedItemsPage.isLoaded() ) {
-			feedItemsPage.setLayout( "aggregator" );
-			pageService.savePage( feedItemsPage );
-		} else {
-			feedItemsPage.setTitle( "News" );
-			feedItemsPage.setSlug( agSettings.ag_site_feed_items_entrypoint );
-			feedItemsPage.setPublishedDate( now() );
-			feedItemsPage.setCreator( author );
-			feedItemsPage.setLayout( "aggregator" );
-			feedItemsPage.addNewContentVersion(
-				content = "Feed items page placeholder content.",
-				changelog = "Page created by ContentBox Aggregator Module.",
-				author = author
-			);
-			pageService.savePage( feedItemsPage );
-		}
 		var feedsPage = pageService.findBySlug( agSettings.ag_site_feeds_entrypoint );
 		if ( feedsPage.isLoaded() ) {
 			feedsPage.setLayout("aggregator");
@@ -384,11 +367,28 @@ component {
 			feedsPage.setCreator( author );
 			feedsPage.setLayout( "aggregator" );
 			feedsPage.addNewContentVersion(
-				content = "Feeds page placeholder content.",
+				content = "<!--Feeds page placeholder content.-->",
 				changelog = "Page created by ContentBox Aggregator Module.",
 				author = author
 			);
 			pageService.savePage( feedsPage );
+		}
+		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_feed_items_entrypoint );
+		if ( feedItemsPage.isLoaded() ) {
+			feedItemsPage.setLayout( "aggregator" );
+			pageService.savePage( feedItemsPage );
+		} else {
+			feedItemsPage.setTitle( "News" );
+			feedItemsPage.setSlug( agSettings.ag_site_feed_items_entrypoint );
+			feedItemsPage.setPublishedDate( now() );
+			feedItemsPage.setCreator( author );
+			feedItemsPage.setLayout( "aggregator" );
+			feedItemsPage.addNewContentVersion(
+				content = "<!--Feed items page placeholder content.-->",
+				changelog = "Page created by ContentBox Aggregator Module.",
+				author = author
+			);
+			pageService.savePage( feedItemsPage );
 		}
 
 		// Save permissions

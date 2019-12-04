@@ -174,25 +174,30 @@ component extends="baseHandler" {
 
 		var errors = [];
 
-		// Site settings
-		if ( !len( trim( prc.agSettings.ag_site_feed_items_entrypoint ) ) ) {
-			arrayAppend( errors, "A feed items page is required." );
-		} else {
-			prc.agSettings.ag_site_feed_items_entrypoint = trim( prc.agSettings.ag_site_feed_items_entrypoint );
-		}
+		// Site Options
 		if ( !len( trim( prc.agSettings.ag_site_feeds_entrypoint ) ) ) {
 			arrayAppend( errors, "A feeds page is required." );
 		} else {
 			prc.agSettings.ag_site_feeds_entrypoint = trim( prc.agSettings.ag_site_feeds_entrypoint );
 		}
+		if ( !len( trim( prc.agSettings.ag_site_feed_items_entrypoint ) ) ) {
+			arrayAppend( errors, "A feed items page is required." );
+		} else {
+			prc.agSettings.ag_site_feed_items_entrypoint = trim( prc.agSettings.ag_site_feed_items_entrypoint );
+		}
 		if ( prc.agSettings.ag_site_feed_items_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
 			arrayAppend( errors, "The feed items and feeds pages must be different." );
 		}
-		if ( !val( prc.agSettings.ag_site_paging_max_items ) ) {
+		if ( !val( prc.agSettings.ag_site_feed_items_excerpt_limit ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );
 		}
+		prc.agSettings.ag_site_feed_items_excerpt_ending = trim( prc.agSettings.ag_site_feed_items_excerpt_ending );
+		prc.agSettings.ag_site_feed_items_read_more_text = trim( prc.agSettings.ag_site_feed_items_read_more_text );
 		if ( !val( prc.agSettings.ag_site_paging_max_feeds ) ) {
 			arrayAppend( errors, "A valid max feeds value is required." );
+		}
+		if ( !val( prc.agSettings.ag_site_paging_max_feed_items ) ) {
+			arrayAppend( errors, "A valid max feed items value is required." );
 		}
 		if ( !val( prc.agSettings.ag_site_cache_timeout ) ) {
 			arrayAppend( errors, "A valid site cache timeout is required." );

@@ -47,6 +47,24 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
+											field="ag_site_feeds_entrypoint",
+											content="Feeds Page:"
+										)#
+										<div class="controls">
+											<small>The page used in the site to display the list of feeds.</small>
+											#html.select(
+												name="ag_site_feeds_entrypoint",
+												options=prc.pages,
+												column="slug",
+												nameColumn="title",
+												selectedValue=prc.agSettings.ag_site_feeds_entrypoint,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
 											field="ag_site_feed_items_entrypoint",
 											content="Feed Items Page:"
 										)#
@@ -62,21 +80,86 @@
 											)#
 										</div>
 									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-file-text-o fa-lg"></i>
+										Feed Options
+									</legend>
+									<p><small>These options determine the way feeds are listed on the feeds page.  The current theme must support these settings or they will not work.</small></p>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_entrypoint",
-											content="Feeds Page:"
+											field="ag_site_feeds_include_items",
+											content="Include Feed Items:"
 										)#
+										<p><small>If enabled, the latest feed items will also be displayed within the list of feeds.</small></p>
 										<div class="controls">
-											<small>The page used in the site to display the list of feeds.</small>
-											#html.select(
-												name="ag_site_feeds_entrypoint",
-												options=prc.pages,
-												column="slug",
-												nameColumn="title",
-												selectedValue=prc.agSettings.ag_site_feeds_entrypoint,
-												class="form-control"
+											#html.checkbox(
+												name="ag_site_feeds_include_items_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_include_items' },
+												checked=prc.agSettings.ag_site_feeds_include_items
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_include_items",
+												value=prc.agSettings.ag_site_feeds_include_items
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_featured_image",
+											content="Show Featured Image:"
+										)#
+										<p><small>If enabled, the feed's featured image will be displayed if one exists.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_featured_image' },
+												checked=prc.agSettings.ag_site_feeds_show_featured_image
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_featured_image",
+												value=prc.agSettings.ag_site_feeds_show_featured_image
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_website",
+											content="Show Website Link:"
+										)#
+										<p><small>If enabled, a link to the feed's website will be displayed within the list of feeds.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_website_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_website' },
+												checked=prc.agSettings.ag_site_feeds_show_website
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_website",
+												value=prc.agSettings.ag_site_feeds_show_website
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="ag_site_feeds_show_rss",
+											content="Show RSS Link:"
+										)#
+										<p><small>If enabled, a link to the feed's rss will be displayed within the list of feeds.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="ag_site_feeds_show_rss_toggle",
+												data={ toggle: 'toggle', match: 'ag_site_feeds_show_rss' },
+												checked=prc.agSettings.ag_site_feeds_show_rss
+											)#
+											#html.hiddenField(
+												name="ag_site_feeds_show_rss",
+												value=prc.agSettings.ag_site_feeds_show_rss
 											)#
 										</div>
 									</div>
@@ -267,7 +350,6 @@
 											<small>The ending text displayed when the length of the excerpt is larger than the character limit.</small>
 											#html.textField(
 												name="ag_site_feed_items_excerpt_ending",
-												required="required",
 												value=prc.agSettings.ag_site_feed_items_excerpt_ending,
 												class="form-control",
 												maxlength="10"
@@ -416,113 +498,9 @@
 								</fieldset>
 								<fieldset>
 									<legend>
-										<i class="fa fa-file-text-o fa-lg"></i>
-										Feed Options
-									</legend>
-									<p><small>These options determine the way feeds are listed on the feeds page.  The current theme must support these settings or they will not work.</small></p>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_site_feeds_include_items",
-											content="Include Feed Items:"
-										)#
-										<p><small>If enabled, the latest feed items will also be displayed within the list of feeds.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_site_feeds_include_items_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_include_items' },
-												checked=prc.agSettings.ag_site_feeds_include_items
-											)#
-											#html.hiddenField(
-												name="ag_site_feeds_include_items",
-												value=prc.agSettings.ag_site_feeds_include_items
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_site_feeds_show_featured_image",
-											content="Show Featured Image:"
-										)#
-										<p><small>If enabled, the feed's featured image will be displayed if one exists.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_site_feeds_show_featured_image_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_featured_image' },
-												checked=prc.agSettings.ag_site_feeds_show_featured_image
-											)#
-											#html.hiddenField(
-												name="ag_site_feeds_show_featured_image",
-												value=prc.agSettings.ag_site_feeds_show_featured_image
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_site_feeds_show_website",
-											content="Show Website Link:"
-										)#
-										<p><small>If enabled, a link to the feed's website will be displayed within the list of feeds.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_site_feeds_show_website_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_website' },
-												checked=prc.agSettings.ag_site_feeds_show_website
-											)#
-											#html.hiddenField(
-												name="ag_site_feeds_show_website",
-												value=prc.agSettings.ag_site_feeds_show_website
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="ag_site_feeds_show_rss",
-											content="Show RSS Link:"
-										)#
-										<p><small>If enabled, a link to the feed's rss will be displayed within the list of feeds.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="ag_site_feeds_show_rss_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_rss' },
-												checked=prc.agSettings.ag_site_feeds_show_rss
-											)#
-											#html.hiddenField(
-												name="ag_site_feeds_show_rss",
-												value=prc.agSettings.ag_site_feeds_show_rss
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
 										<i class="fa fa-copy fa-lg"></i>
 										Paging Options
 									</legend>
-									<div class="form-group">
-										<label class="control-label" for="ag_site_paging_max_items">
-											Max Feed Items:
-											<span class="badge badge-info" id="ag_site_paging_max_items_label">#prc.agSettings.ag_site_paging_max_items#</span>
-										</label>
-										<div class="controls">
-											<small>The number of feed items displayed on the feed items page and feed page before paging.</small><br />
-											<strong class="margin10">10</strong>
-											<input type="text"
-												id="ag_site_paging_max_items"
-												name="ag_site_paging_max_items"
-												class="slider"
-												data-slider-value="#prc.agSettings.ag_site_paging_max_items#"
-												data-provide="slider"
-												data-slider-min="10"
-												data-slider-max="50"
-												data-slider-step="10"
-												data-slider-tooltip="hide" />
-											<strong class="margin10">50</strong>
-										</div>
-									</div>
 									<div class="form-group">
 										<label class="control-label" for="ag_site_paging_max_feeds">
 											Max Feeds:
@@ -536,6 +514,27 @@
 												name="ag_site_paging_max_feeds"
 												class="slider"
 												data-slider-value="#prc.agSettings.ag_site_paging_max_feeds#"
+												data-provide="slider"
+												data-slider-min="10"
+												data-slider-max="50"
+												data-slider-step="10"
+												data-slider-tooltip="hide" />
+											<strong class="margin10">50</strong>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label" for="ag_site_paging_max_feed_items">
+											Max Feed Items:
+											<span class="badge badge-info" id="ag_site_paging_max_feed_items_label">#prc.agSettings.ag_site_paging_max_feed_items#</span>
+										</label>
+										<div class="controls">
+											<small>The number of feed items displayed on the feed items page and feed page before paging.</small><br />
+											<strong class="margin10">10</strong>
+											<input type="text"
+												id="ag_site_paging_max_feed_items"
+												name="ag_site_paging_max_feed_items"
+												class="slider"
+												data-slider-value="#prc.agSettings.ag_site_paging_max_feed_items#"
 												data-provide="slider"
 												data-slider-min="10"
 												data-slider-max="50"

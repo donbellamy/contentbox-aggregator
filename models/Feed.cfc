@@ -113,6 +113,10 @@ component persistent="true"
 		notnull="false"
 		ormtype="text";
 
+	property name="settings"
+		notnull="false"
+		ormtype="text";
+
 	/* *********************************************************************
 	**                            RELATIONSHIPS
 	********************************************************************* */
@@ -217,7 +221,50 @@ component persistent="true"
 		variables.feedImports = [];
 		variables.blacklistedItems = [];
 		setTaxonomies([]);
+		setSettings({});
 		return this;
+	}
+
+	/**
+	 * Sets the settings property
+	 * @settings A structure of custom settings
+	 * @return Feed
+	 */
+	Feed function setSettings( required any settings ) {
+		if ( isStruct( arguments.settings ) ) {
+			arguments.settings = serializeJSON( arguments.settings );
+		}
+		variables.settings = arguments.settings;
+		return this;
+	}
+
+	/**
+	 * Gets the settings property
+	 * @return A structure of settings
+	 */
+	struct function getSettings() {
+		return ( !isNull( variables.settings ) && isJSON( variables.settings ) ) ? deserializeJSON( variables.settings ) : {};
+	}
+
+	/**
+	 * Gets an feed setting value by key or by default value
+	 * @key The setting key to get
+	 * @value The default value to return if not found
+	 * @return The setting value or default value if found
+	 */
+	any function getSetting( required any key, value ) {
+		var settings = getSettings();
+		if ( structKeyExists( settings, arguments.key ) ) {
+			return settings[ key ];
+		}
+		if ( structKeyExists( arguments, "value" ) ) {
+			return arguments.value;
+		}
+		throw(
+			message = "Setting requested: #arguments.key# not found",
+			detail = "Settings keys are #structKeyList( settings )#",
+			type = "aggregator.Feed.InvalidSetting"
+		);
 	}
 
 	/**

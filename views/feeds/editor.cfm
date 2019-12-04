@@ -214,7 +214,7 @@
 									type="number",
 									value=prc.feed.getPagingMaxItems(),
 									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.ag_site_paging_max_items#",
+									placeholder="Use the default setting - #prc.agSettings.ag_site_paging_max_feed_items#",
 									min="0"
 								)#
 							</div>

@@ -43,14 +43,6 @@ component accessors="true" singleton threadSafe {
 	/************************************** Root Methods *********************************************/
 
 	/**
-	 * Gets the feed items entry point
-	 * @return The feed items entry point
-	 */
-	string function getFeedItemsEntryPoint() {
-		return setting("ag_site_feed_items_entrypoint");
-	}
-
-	/**
 	 * Gets the feeds entry point
 	 * @return The feeds entry point
 	 */
@@ -58,7 +50,42 @@ component accessors="true" singleton threadSafe {
 		return setting("ag_site_feeds_entrypoint");
 	}
 
+	/**
+	 * Gets the feed items entry point
+	 * @return The feed items entry point
+	 */
+	string function getFeedItemsEntryPoint() {
+		return setting("ag_site_feed_items_entrypoint");
+	}
+
 	/************************************** Context Methods *********************************************/
+
+	/**
+	 * Checks to see if the current event equals site.feeds
+	 * @return True if the current event equals site.feeds, false if not
+	 */
+	boolean function isFeedsView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeds" );
+	}
+
+	/**
+	 * Checks to see if the current event equals site.feeds and a category is present
+	 * @return True if the current event equals site.feeds and a category is present, false if not
+	 */
+	boolean function isFeedsCategoryView() {
+		var rc = cb.getRequestCollection();
+		return ( isFeedsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
+	}
+
+	/**
+	 * Checks to see if the current event equals site.feed
+	 * @return True if the current event equals site.feed, false if not
+	 */
+	boolean function isFeedView() {
+		var event = cb.getRequestContext();
+		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feed" );
+	}
 
 	/**
 	 * Checks to see if the current event equals site.index
@@ -112,33 +139,6 @@ component accessors="true" singleton threadSafe {
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
 		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.archives" );
-	}
-
-	/**
-	 * Checks to see if the current event equals site.feeds
-	 * @return True if the current event equals site.feeds, false if not
-	 */
-	boolean function isFeedsView() {
-		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeds" );
-	}
-
-	/**
-	 * Checks to see if the current event equals site.feeds and a category is present
-	 * @return True if the current event equals site.feeds and a category is present, false if not
-	 */
-	boolean function isFeedsCategoryView() {
-		var rc = cb.getRequestCollection();
-		return ( isFeedsView() AND structKeyExists( rc, "category" ) AND len( rc.category ) );
-	}
-
-	/**
-	 * Checks to see if the current event equals site.feed
-	 * @return True if the current event equals site.feed, false if not
-	 */
-	boolean function isFeedView() {
-		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feed" );
 	}
 
 	/**
@@ -330,15 +330,6 @@ component accessors="true" singleton threadSafe {
 	/************************************** Link Methods *********************************************/
 
 	/**
-	 * Gets the feed items link
-	 * @ssl Whether or not to use ssl
-	 * @return The feed items link
-	 */
-	string function linkFeedItems( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & getFeedItemsEntryPoint();
-	}
-
-	/**
 	 * Gets the feeds link
 	 * @ssl Whether or not to use ssl
 	 * @return The feeds link
@@ -354,6 +345,15 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function linkFeedsRSS( boolean ssl=cb.getRequestContext().isSSL() ) {
 		return linkFeeds( ssl=arguments.ssl ) & "/rss";
+	}
+
+	/**
+	 * Gets the feed items link
+	 * @ssl Whether or not to use ssl
+	 * @return The feed items link
+	 */
+	string function linkFeedItems( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return cb.linkHome( ssl=arguments.ssl ) & getFeedItemsEntryPoint();
 	}
 
 	/**
