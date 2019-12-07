@@ -26,17 +26,17 @@ component {
 		settings = {
 
 			// Site Options
-			"ag_site_feeds_entrypoint" = "feeds",
-			"ag_site_feed_items_entrypoint" = "news",
 
 			// Feeds
-			"ag_site_feeds_include_items" = "false",
-			"ag_site_feeds_show_featured_image" = "true",
-			"ag_site_feeds_show_website" = "true",
-			"ag_site_feeds_show_rss" = "true",
+			"feeds_entrypoint" = "feeds",
+			"feeds_include_items" = "false",
+			"feeds_show_featured_image" = "true",
+			"feeds_show_website" = "true",
+			"feeds_show_rss" = "true",
 
 			// Feed items
-			"ag_site_feed_items_include_entries" = "false",
+			"feed_items_entrypoint" = "news",
+			"feed_items_include_entries" = "false",
 			"ag_site_feed_items_group_by_date" = "false",
 			"ag_site_feed_items_show_video_player" = "true",
 			"ag_site_feed_items_show_audio_player" = "true",
@@ -258,12 +258,12 @@ component {
 		// Add site routes
 		var routingService = controller.getRoutingService();
 		var cbEntryPoint = controller.getConfigSettings().modules["contentbox-ui"].entryPoint;
-		var feedsEntryPoint = settings.ag_site_feeds_entrypoint;
-		var feedItemsEntryPoint = settings.ag_site_feed_items_entrypoint;
+		var feedsEntryPoint = settings.feeds_entrypoint;
+		var feedItemsEntryPoint = settings.feed_items_entrypoint;
 		if ( !isNull( setting ) ) {
 			var agSettings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-			feedsEntryPoint = agSettings.ag_site_feeds_entrypoint;
-			feedItemsEntryPoint = agSettings.ag_site_feed_items_entrypoint;
+			feedsEntryPoint = agSettings.feeds_entrypoint;
+			feedItemsEntryPoint = agSettings.feed_items_entrypoint;
 		}
 		if ( len( cbEntryPoint ) ) {
 			routingService.addNamespace(
@@ -356,13 +356,13 @@ component {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
 		}
-		var feedsPage = pageService.findBySlug( agSettings.ag_site_feeds_entrypoint );
+		var feedsPage = pageService.findBySlug( agSettings.feeds_entrypoint );
 		if ( feedsPage.isLoaded() ) {
 			feedsPage.setLayout("aggregator");
 			pageService.savePage( feedsPage );
 		} else {
 			feedsPage.setTitle( "Feeds" );
-			feedsPage.setSlug( agSettings.ag_site_feeds_entrypoint );
+			feedsPage.setSlug( agSettings.feeds_entrypoint );
 			feedsPage.setPublishedDate( now() );
 			feedsPage.setCreator( author );
 			feedsPage.setLayout( "aggregator" );
@@ -373,13 +373,13 @@ component {
 			);
 			pageService.savePage( feedsPage );
 		}
-		var feedItemsPage = pageService.findBySlug( agSettings.ag_site_feed_items_entrypoint );
+		var feedItemsPage = pageService.findBySlug( agSettings.feed_items_entrypoint );
 		if ( feedItemsPage.isLoaded() ) {
 			feedItemsPage.setLayout( "aggregator" );
 			pageService.savePage( feedItemsPage );
 		} else {
 			feedItemsPage.setTitle( "News" );
-			feedItemsPage.setSlug( agSettings.ag_site_feed_items_entrypoint );
+			feedItemsPage.setSlug( agSettings.feed_items_entrypoint );
 			feedItemsPage.setPublishedDate( now() );
 			feedItemsPage.setCreator( author );
 			feedItemsPage.setLayout( "aggregator" );

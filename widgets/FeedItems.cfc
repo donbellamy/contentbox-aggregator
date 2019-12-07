@@ -130,7 +130,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			sortOrder = arguments.sortOrder,
 			max = ag.setting("ag_site_paging_max_feed_items"),
 			offset = prc.pagingBoundaries.startRow - 1,
-			includeEntries = ag.setting("ag_site_feed_items_include_entries")
+			includeEntries = ag.setting("feed_items_include_entries")
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;

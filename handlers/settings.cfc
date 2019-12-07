@@ -49,7 +49,12 @@ component extends="baseHandler" {
 		];
 		prc.authors = authorService.getAll( sortOrder = "lastName" );
 		prc.categories = categoryService.getAll( sortOrder = "category" );
-		prc.limitUnits = [ "days", "weeks", "months", "years" ];
+		prc.limitUnits = [
+			{ name = "Days", value = "days" },
+			{ name = "Weeks", value = "weeks" },
+			{ name = "Months", value = "months" },
+			{ name = "Years", value = "years" }
+		];
 		prc.linkOptions = [
 			{ name = "Forward the user directly to the feed item.", value = "forward" },
 			{ name = "Link the user directly to the feed item.", value = "link" },
@@ -86,18 +91,24 @@ component extends="baseHandler" {
 		var oldSettings = duplicate( prc.agSettings );
 
 		// Taxonomies
-		if ( structKeyExists( rc, "ag_importing_taxonomies" ) ) {
-			var taxonomies = [];
-			for ( var item IN structKeyArray( rc.ag_importing_taxonomies ) ) {
-				if ( structKeyExists( rc.ag_importing_taxonomies[item], "categories" ) &&
-					( len( trim( rc.ag_importing_taxonomies[item].keywords ) ) || rc.ag_importing_taxonomies[item].method == "none" )
-				) {
-					arrayAppend( taxonomies, rc.ag_importing_taxonomies[item] );
+		var taxonomies = [];
+		rc["ag_importing_taxonomies"] = [];
+		for ( var item IN rc ) {
+			if ( reFindNoCase( "^ag_importing_taxonomies_", item ) ) {
+				var key = listLast( item, "_" );
+				var count = listGetAt( item, 4, "_" );
+				if ( arrayLen( taxonomies ) LT count ) {
+					taxonomies[ count ] = {};
 				}
+				taxonomies[ count ][ key ] = rc[ item ];
 			}
-			rc.ag_importing_taxonomies = taxonomies;
-		} else {
-			rc.ag_importing_taxonomies = [];
+		}
+		for ( var item IN taxonomies ) {
+			if ( len( item.categories) &&
+				( len( trim( item.keywords ) ) || item.method == "none"  )
+			) {
+				arrayAppend( rc["ag_importing_taxonomies"], item );
+			}
 		}
 
 		// Set settings struct
@@ -123,10 +134,10 @@ component extends="baseHandler" {
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
 				if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feed_items_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = replace( prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 				}
 				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.ag_site_feeds_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = replace( prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
 			})
@@ -175,17 +186,17 @@ component extends="baseHandler" {
 		var errors = [];
 
 		// Site Options
-		if ( !len( trim( prc.agSettings.ag_site_feeds_entrypoint ) ) ) {
+		if ( !len( trim( prc.agSettings.feeds_entrypoint ) ) ) {
 			arrayAppend( errors, "A feeds page is required." );
 		} else {
-			prc.agSettings.ag_site_feeds_entrypoint = trim( prc.agSettings.ag_site_feeds_entrypoint );
+			prc.agSettings.feeds_entrypoint = trim( prc.agSettings.feeds_entrypoint );
 		}
-		if ( !len( trim( prc.agSettings.ag_site_feed_items_entrypoint ) ) ) {
+		if ( !len( trim( prc.agSettings.feed_items_entrypoint ) ) ) {
 			arrayAppend( errors, "A feed items page is required." );
 		} else {
-			prc.agSettings.ag_site_feed_items_entrypoint = trim( prc.agSettings.ag_site_feed_items_entrypoint );
+			prc.agSettings.feed_items_entrypoint = trim( prc.agSettings.feed_items_entrypoint );
 		}
-		if ( prc.agSettings.ag_site_feed_items_entrypoint == prc.agSettings.ag_site_feeds_entrypoint ) {
+		if ( prc.agSettings.feed_items_entrypoint == prc.agSettings.feeds_entrypoint ) {
 			arrayAppend( errors, "The feed items and feeds pages must be different." );
 		}
 		if ( !val( prc.agSettings.ag_site_feed_items_excerpt_limit ) ) {

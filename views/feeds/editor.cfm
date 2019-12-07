@@ -1,3 +1,4 @@
+<cfdump var="#prc.feed.getSettings()#"/>
 <cfoutput>
 <div class="btn-group btn-group-xs">
 	<button class="btn btn-sm btn-info" onclick="window.location.href='#event.buildLink( prc.xehFeeds )#';return false;">
@@ -171,7 +172,8 @@
 							<div class="controls">
 								<small>The default behavior when clicking on a feed item.</small>
 								#html.select(
-									name="linkBehavior",
+									name="settings_linkBehavior",
+									id="linkBehavior",
 									options=prc.linkOptions,
 									column="value",
 									nameColumn="name",
@@ -189,7 +191,8 @@
 							<div class="controls">
 								<small>The default behavior when a feed item has no featured image.</small>
 								#html.select(
-									name="featuredImageBehavior",
+									name="settings_featuredImageBehavior",
+									id="featuredImageBehavior",
 									options=prc.featuredImageOptions,
 									column="value",
 									nameColumn="name",
@@ -210,7 +213,8 @@
 							<div class="controls">
 								<small>The number of feed items displayed on the feed page before paging.</small>
 								#html.inputField(
-									name="pagingMaxItems",
+									name="settings_pagingMaxItems",
+									id="pagingMaxItems",
 									type="number",
 									value=prc.feed.getPagingMaxItems(),
 									class="form-control counter",
@@ -336,7 +340,8 @@
 							<div class="controls">
 								<small>The status used for imported feed items.</small>
 								#html.select(
-									name="itemStatus",
+									name="settings_itemStatus",
+									id="itemStatus",
 									options=prc.itemStatuses,
 									column="value",
 									nameColumn="name",
@@ -354,7 +359,8 @@
 							<div class="controls">
 								<small>The value used as the published date for imported feed items.</small>
 								#html.select(
-									name="ItemPubDate",
+									name="settings_itemPubDate",
+									id="itemPubDate",
 									options=prc.itemPubDates,
 									column="value",
 									nameColumn="name",
@@ -381,7 +387,8 @@
 							<div class="controls row">
 								<div class="col-sm-6">
 									#html.inputField(
-										name="maxAge",
+										name="settings_maxAge",
+										id="maxAge",
 										type="number",
 										value=prc.feed.getMaxAge(),
 										class="form-control counter",
@@ -391,7 +398,8 @@
 								</div>
 								<div class="col-sm-6">
 									#html.select(
-										name="maxAgeUnit",
+										name="settings_maxAgeUnit",
+										id="maxAgeUnit",
 										options=prc.limitUnits,
 										selectedValue=prc.feed.getMaxAgeUnit(),
 										class="form-control"
@@ -411,7 +419,8 @@
 									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
 								</small>
 								#html.inputField(
-									name="maxItems",
+									name="settings_maxItems",
+									id="maxItems",
 									type="number",
 									value=prc.feed.getMaxItems(),
 									class="form-control counter",
@@ -435,7 +444,8 @@
 									Existing feed items that do not contain any of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchAnyFilter",
+									name="settings_matchAnyFilter",
+									id="matchAnyFilter",
 									value=prc.feed.getMatchAnyFilter(),
 									rows="3",
 									class="form-control",
@@ -456,7 +466,8 @@
 									Existing feed items that do not contain all of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchAllFilter",
+									name="settings_matchAllFilter",
+									id="matchAllFilter",
 									value=prc.feed.getMatchAllFilter(),
 									rows="3",
 									class="form-control",
@@ -477,7 +488,8 @@
 									Existing feed items that contain any of these keywords in the title or body will be deleted.
 								</small>
 								#html.textArea(
-									name="matchNoneFilter",
+									name="settings_matchNoneFilter",
+									id="matchNoneFilter",
 									value=prc.feed.getMatchNoneFilter(),
 									rows="3",
 									class="form-control",
@@ -500,7 +512,8 @@
 									If enabled, an image will be saved locally as the featured image for each feed item when imported.
 								</small>
 								#html.select(
-									name="importFeaturedImages",
+									name="settings_importFeaturedImages",
+									id="importFeaturedImages",
 									options=prc.importFeaturedImageOptions,
 									column="value",
 									nameColumn="name",
@@ -520,7 +533,8 @@
 									If enabled, all images will be saved locally for each feed item when imported.
 								</small>
 								#html.select(
-									name="importAllImages",
+									name="settings_importAllImages",
+									id="importAllImages",
 									options=prc.importImageOptions,
 									column="value",
 									nameColumn="name",
@@ -540,14 +554,15 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="taxonomies.#idx#.categories",
+											field="taxonomies_#idx#_categories",
 											content="Categories:"
 										)#
 										<div class="controls">
 											<small>Assign the following categories to feed items using the matching method below.</small>
 											<div class="input-group">
+												#html.hiddenField( name="taxonomies_#idx#_categories", value="" )#
 												#html.select(
-													name="taxonomies.#idx#.categories",
+													name="taxonomies_#idx#_categories",
 													options=prc.categories,
 													column="categoryID",
 													nameColumn="category",
@@ -565,13 +580,13 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="taxonomies.#idx#.method",
+											field="taxonomies_#idx#_method",
 											content="Matching Method:"
 										)#
 										<div class="controls">
 											<small>Use the following method when matching feed items to the above categories.</small>
 											#html.select(
-												name="taxonomies.#idx#.method",
+												name="taxonomies_#idx#_method",
 												options=prc.matchOptions,
 												column="value",
 												nameColumn="name",
@@ -583,13 +598,13 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="taxonomies.#idx#.keywords",
+											field="taxonomies_#idx#_keywords",
 											content="Keywords:"
 										)#
 										<div class="controls">
 											<small>Use the following keywords when matching feed items to the above categories.</small>
 											#html.textArea(
-												name="taxonomies.#idx#.keywords",
+												name="taxonomies_#idx#_keywords",
 												value=taxonomy.keywords,
 												rows="2",
 												class="form-control input-keywords",
@@ -624,8 +639,9 @@
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="preFeedDisplay",
-									bind=prc.feed,
+									name="settings_preFeedDisplay",
+									id="preFeedDisplay",
+									value=prc.feed.getPreFeedDisplay(),
 									rows="6",
 									class="form-control"
 								)#
@@ -652,8 +668,9 @@
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="postFeedDisplay",
-									bind=prc.feed,
+									name="settings_postFeedDisplay",
+									id="postFeedDisplay",
+									value=prc.feed.getPostFeedDisplay(),
 									rows="6",
 									class="form-control"
 								)#
@@ -680,8 +697,9 @@
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="preFeedItemDisplay",
-									bind=prc.feed,
+									name="settings_preFeedItemDisplay",
+									id="preFeedItemDisplay",
+									value=prc.feed.getPreFeedItemDisplay(),
 									rows="6",
 									class="form-control"
 								)#
@@ -718,8 +736,9 @@
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="postFeedItemDisplay",
-									bind=prc.feed,
+									name="settings_postFeedItemDisplay",
+									id="postFeedItemDisplay",
+									value=prc.feed.getPostFeedItemDisplay(),
 									rows="6",
 									class="form-control"
 								)#
@@ -789,7 +808,7 @@
 						<div role="tabpanel" class="tab-pane" id="imports">
 							<p>
 								Below are the most recent feed imports.
-								You can view the import record by right clicking on the table row or clicking the view icon.
+								You can view the import record by clicking the view icon.
 								The current import history limit of <strong>#prc.agSettings.ag_importing_max_feed_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
 							</p>
 							<table id="feedImportsTable" width="100%" class="table table-hover table-condensed table-striped" border="0">
@@ -1080,13 +1099,14 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="taxonomies.templateIndex.categories",
+				field="taxonomies_templateIndex_categories",
 				content="Categories:"
 			)#
 			<div class="controls">
 				<small>Assign the following categories to feed items using the matching method below.</small><br/>
+				#html.hiddenField( name="taxonomies_templateIndex_categories", value="" )#
 				#html.select(
-					name="taxonomies.templateIndex.categories",
+					name="taxonomies_templateIndex_categories",
 					options=prc.categories,
 					column="categoryID",
 					nameColumn="category",
@@ -1098,13 +1118,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="taxonomies.templateIndex.method",
+				field="taxonomies_templateIndex_method",
 				content="Matching Method:"
 			)#
 			<div class="controls">
 				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
-					name="taxonomies.templateIndex.method",
+					name="taxonomies_templateIndex_method",
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
@@ -1115,13 +1135,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="taxonomies.templateIndex.keywords",
+				field="taxonomies_templateIndex_keywords",
 				content="Keywords:"
 			)#
 			<div class="controls">
 				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
-					name="taxonomies.templateIndex.keywords",
+					name="taxonomies_templateIndex_keywords",
 					rows="2",
 					class="form-control input-keywords",
 					placeholder="Comma delimited list of words or phrases",

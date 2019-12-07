@@ -121,7 +121,16 @@ component extends="contentHandler" {
 		prc.oEditorDriver = editorService.getEditor( prc.defaultEditor );
 
 		// Lookups
-		prc.limitUnits = [ "days", "weeks", "months", "years" ];
+		prc.limitUnits = [
+			{ name = "Days", value = "days" },
+			{ name = "Weeks", value = "weeks" },
+			{ name = "Months", value = "months" },
+			{ name = "Years", value = "years" }
+		];
+		arrayPrepend( prc.limitUnits, {
+			name = "Use the default setting - #prc.limitUnits[ arrayFind( prc.limitUnits, function( struct ) { return struct.value == prc.agSettings.ag_importing_max_age_unit; } ) ].name#",
+			value = ""
+		});
 		prc.categories = categoryService.getAll( sortOrder = "category" );
 		prc.linkOptions = [
 			{ name = "Forward the user directly to the feed item.", value = "forward" },
@@ -208,34 +217,35 @@ component extends="contentHandler" {
 			.paramValue( "tagLine", "" )
 			.paramValue( "content", "" );
 
-		// Site
-		event.paramValue( "linkBehavior", "" )
-			.paramValue( "featuredImageBehavior", "" )
-			.paramValue( "pagingMaxItems", "" );
+		// Site Options
+		event.paramValue( "settings_linkBehavior", "" )
+			.paramValue( "settings_featuredImageBehavior", "" )
+			.paramValue( "settings_pagingMaxItems", "" );
 
-		// Importing
+		// Importing Options
 		event.paramValue( "isActive", true )
 			.paramValue( "startDate", "" )
 			.paramValue( "startTime", "" )
 			.paramValue( "stopDate", "" )
-			.paramValue( "stopTime", "" )
-			.paramValue( "itemStatus", "" )
-			.paramValue( "ItemPubDate", "" )
-			.paramValue( "maxAge", "" )
-			.paramValue( "maxAgeUnit", "" )
-			.paramValue( "maxItems", "" )
-			.paramValue( "matchAnyFilter", "" )
-			.paramValue( "matchAllFilter", "" )
-			.paramValue( "matchNoneFilter", "" )
-			.paramValue( "importFeaturedImages", "" )
-			.paramValue( "importAllImages", "" )
-			.paramValue( "taxonomies", {} );
+			.paramValue( "stopTime", "" );
+
+		// Item defaults
+		event.paramValue( "settings_itemStatus", "" )
+			.paramValue( "settings_itemPubDate", "" )
+			.paramValue( "settings_maxAge", "" )
+			.paramValue( "settings_maxAgeUnit", "" )
+			.paramValue( "settings_maxItems", "" )
+			.paramValue( "settings_matchAnyFilter", "" )
+			.paramValue( "settings_matchAllFilter", "" )
+			.paramValue( "settings_matchNoneFilter", "" )
+			.paramValue( "settings_importFeaturedImages", "" )
+			.paramValue( "settings_importAllImages", "" );
 
 		// HTML
-		event.paramValue( "preFeedDisplay", "" )
-			.paramValue( "postFeedDisplay", "" )
-			.paramValue( "preFeedItemDisplay", "" )
-			.paramValue( "postFeedItemDisplay", "" );
+		event.paramValue( "settings_preFeedDisplay", "" )
+			.paramValue( "settings_postFeedDisplay", "" )
+			.paramValue( "settings_preFeedItemDisplay", "" )
+			.paramValue( "settings_postFeedItemDisplay", "" );
 
 		// SEO
 		event.paramValue( "htmlTitle", "" )
@@ -253,16 +263,35 @@ component extends="contentHandler" {
 		// Categories
 		event.paramValue( "newCategories", "" );
 
-		// Taxonomies
-		var taxonomies = [];
-		for ( var item IN structKeyArray( rc.taxonomies ) ) {
-			if ( structKeyExists( rc.taxonomies[item], "categories" ) &&
-				( len( trim( rc.taxonomies[item].keywords ) ) || rc.taxonomies[item].method == "none"  )
-			) {
-				arrayAppend( taxonomies, rc.taxonomies[item] );
+		// Settings
+		var settings = {};
+		for ( var item IN rc ) {
+			if ( reFindNoCase( "^settings_", item ) ) {
+				settings[ listRest( item, "_" ) ] = rc[ item ];
 			}
 		}
-		rc.taxonomies = taxonomies;
+		rc["settings"] = settings;
+
+		// Taxonomies
+		var taxonomies = [];
+		rc.settings["taxonomies"] = [];
+		for ( var item IN rc ) {
+			if ( reFindNoCase( "^taxonomies_", item ) ) {
+				var key = listLast( item, "_" );
+				var count = listGetAt( item, 2, "_" );
+				if ( arrayLen( taxonomies ) LT count ) {
+					taxonomies[ count ] = {};
+				}
+				taxonomies[ count ][ key ] = rc[ item ];
+			}
+		}
+		for ( var item IN taxonomies ) {
+			if ( len( item.categories) &&
+				( len( trim( item.keywords ) ) || item.method == "none"  )
+			) {
+				arrayAppend( rc.settings["taxonomies"], item );
+			}
+		}
 
 		// Published date
 		if ( NOT len( rc.publishedDate ) ) {

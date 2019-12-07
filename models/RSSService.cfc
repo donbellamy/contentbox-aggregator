@@ -85,7 +85,7 @@ component singleton {
 			category=arguments.category,
 			feed=arguments.slug,
 			max=settings.ag_rss_max_items,
-			includeEntries=settings.ag_site_feed_items_include_entries
+			includeEntries=settings.feed_items_include_entries
 		);
 		var feedItems = results.feedItems;
 		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url,enclosure_url,enclosure_length,enclosure_type");

@@ -47,7 +47,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feeds entry point
 	 */
 	string function getFeedsEntryPoint() {
-		return setting("ag_site_feeds_entrypoint");
+		return setting("feeds_entrypoint");
 	}
 
 	/**
@@ -55,7 +55,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed items entry point
 	 */
 	string function getFeedItemsEntryPoint() {
-		return setting("ag_site_feed_items_entrypoint");
+		return setting("feed_items_entrypoint");
 	}
 
 	/************************************** Context Methods *********************************************/

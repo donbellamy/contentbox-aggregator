@@ -47,17 +47,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_entrypoint",
+											field="feeds_entrypoint",
 											content="Feeds Page:"
 										)#
 										<div class="controls">
 											<small>The page used in the site to display the list of feeds.</small>
 											#html.select(
-												name="ag_site_feeds_entrypoint",
+												name="feeds_entrypoint",
 												options=prc.pages,
 												column="slug",
 												nameColumn="title",
-												selectedValue=prc.agSettings.ag_site_feeds_entrypoint,
+												selectedValue=prc.agSettings.feeds_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -65,17 +65,17 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feed_items_entrypoint",
+											field="feed_items_entrypoint",
 											content="Feed Items Page:"
 										)#
 										<div class="controls">
 											<small>The page used in the site to display the imported feed items.</small>
 											#html.select(
-												name="ag_site_feed_items_entrypoint",
+												name="feed_items_entrypoint",
 												options=prc.pages,
 												column="slug",
 												nameColumn="title",
-												selectedValue=prc.agSettings.ag_site_feed_items_entrypoint,
+												selectedValue=prc.agSettings.feed_items_entrypoint,
 												class="form-control"
 											)#
 										</div>
@@ -90,76 +90,76 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_include_items",
+											field="feeds_include_items",
 											content="Include Feed Items:"
 										)#
 										<p><small>If enabled, the latest feed items will also be displayed within the list of feeds.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_feeds_include_items_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_include_items' },
-												checked=prc.agSettings.ag_site_feeds_include_items
+												name="feeds_include_items_toggle",
+												data={ toggle: 'toggle', match: 'feeds_include_items' },
+												checked=prc.agSettings.feeds_include_items
 											)#
 											#html.hiddenField(
-												name="ag_site_feeds_include_items",
-												value=prc.agSettings.ag_site_feeds_include_items
+												name="feeds_include_items",
+												value=prc.agSettings.feeds_include_items
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_show_featured_image",
+											field="feeds_show_featured_image",
 											content="Show Featured Image:"
 										)#
 										<p><small>If enabled, the feed's featured image will be displayed if one exists.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_feeds_show_featured_image_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_featured_image' },
-												checked=prc.agSettings.ag_site_feeds_show_featured_image
+												name="feeds_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'feeds_show_featured_image' },
+												checked=prc.agSettings.feeds_show_featured_image
 											)#
 											#html.hiddenField(
-												name="ag_site_feeds_show_featured_image",
-												value=prc.agSettings.ag_site_feeds_show_featured_image
+												name="feeds_show_featured_image",
+												value=prc.agSettings.feeds_show_featured_image
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_show_website",
+											field="feeds_show_website",
 											content="Show Website Link:"
 										)#
 										<p><small>If enabled, a link to the feed's website will be displayed within the list of feeds.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_feeds_show_website_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_website' },
-												checked=prc.agSettings.ag_site_feeds_show_website
+												name="feeds_show_website_toggle",
+												data={ toggle: 'toggle', match: 'feeds_show_website' },
+												checked=prc.agSettings.feeds_show_website
 											)#
 											#html.hiddenField(
-												name="ag_site_feeds_show_website",
-												value=prc.agSettings.ag_site_feeds_show_website
+												name="feeds_show_website",
+												value=prc.agSettings.feeds_show_website
 											)#
 										</div>
 									</div>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feeds_show_rss",
+											field="feeds_show_rss",
 											content="Show RSS Link:"
 										)#
 										<p><small>If enabled, a link to the feed's rss will be displayed within the list of feeds.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_feeds_show_rss_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feeds_show_rss' },
-												checked=prc.agSettings.ag_site_feeds_show_rss
+												name="feeds_show_rss_toggle",
+												data={ toggle: 'toggle', match: 'feeds_show_rss' },
+												checked=prc.agSettings.feeds_show_rss
 											)#
 											#html.hiddenField(
-												name="ag_site_feeds_show_rss",
-												value=prc.agSettings.ag_site_feeds_show_rss
+												name="feeds_show_rss",
+												value=prc.agSettings.feeds_show_rss
 											)#
 										</div>
 									</div>
@@ -173,19 +173,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="ag_site_feed_items_include_entries",
+											field="feed_items_include_entries",
 											content="Include Blog Entries:"
 										)#
 										<p><small>If enabled, blog entries will also be displayed with the feed items and any feed item that has a related blog entry will not display.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="ag_site_feed_items_include_entries_toggle",
-												data={ toggle: 'toggle', match: 'ag_site_feed_items_include_entries' },
-												checked=prc.agSettings.ag_site_feed_items_include_entries
+												name="feed_items_include_entries_toggle",
+												data={ toggle: 'toggle', match: 'feed_items_include_entries' },
+												checked=prc.agSettings.feed_items_include_entries
 											)#
 											#html.hiddenField(
-												name="ag_site_feed_items_include_entries",
-												value=prc.agSettings.ag_site_feed_items_include_entries
+												name="feed_items_include_entries",
+												value=prc.agSettings.feed_items_include_entries
 											)#
 										</div>
 									</div>
@@ -1008,14 +1008,14 @@
 												<div class="form-group">
 													#html.label(
 														class="control-label",
-														field="ag_importing_taxonomies.#idx#.categories",
+														field="ag_importing_taxonomies_#idx#_categories",
 														content="Categories:"
 													)#
 													<div class="controls">
 														<small>Assign the following categories to feed items using the matching method below.</small>
 														<div class="input-group">
 															#html.select(
-																name="ag_importing_taxonomies.#idx#.categories",
+																name="ag_importing_taxonomies_#idx#_categories",
 																options=prc.categories,
 																column="categoryID",
 																nameColumn="category",
@@ -1033,13 +1033,13 @@
 												<div class="form-group">
 													#html.label(
 														class="control-label",
-														field="ag_importing_taxonomies.#idx#.method",
+														field="ag_importing_taxonomies_#idx#_method",
 														content="Matching Method:"
 													)#
 													<div class="controls">
 														<small>Use the following method when matching feed items to the above categories.</small>
 														#html.select(
-															name="ag_importing_taxonomies.#idx#.method",
+															name="ag_importing_taxonomies_#idx#_method",
 															options=prc.matchOptions,
 															column="value",
 															nameColumn="name",
@@ -1051,13 +1051,13 @@
 												<div class="form-group">
 													#html.label(
 														class="control-label",
-														field="ag_importing_taxonomies.#idx#.keywords",
+														field="ag_importing_taxonomies_#idx#_keywords",
 														content="Keywords:"
 													)#
 													<div class="controls">
 														<small>Use the following keywords when matching feed items to the above categories.</small>
 														#html.textArea(
-															name="ag_importing_taxonomies.#idx#.keywords",
+															name="ag_importing_taxonomies_#idx#_keywords",
 															value=taxonomy.keywords,
 															rows="2",
 															class="form-control input-keywords",
@@ -1461,13 +1461,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.categories",
+				field="ag_importing_taxonomies_templateIndex_categories",
 				content="Categories:"
 			)#
 			<div class="controls">
 				<small>Assign the following categories to feed items using the matching method below.</small><br/>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.categories",
+					name="ag_importing_taxonomies_templateIndex_categories",
 					options=prc.categories,
 					column="categoryID",
 					nameColumn="category",
@@ -1479,13 +1479,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.method",
+				field="ag_importing_taxonomies_templateIndex_method",
 				content="Matching Method:"
 			)#
 			<div class="controls">
 				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
-					name="ag_importing_taxonomies.templateIndex.method",
+					name="ag_importing_taxonomies_templateIndex_method",
 					options=prc.matchOptions,
 					column="value",
 					nameColumn="name",
@@ -1496,13 +1496,13 @@
 		<div class="form-group">
 			#html.label(
 				class="control-label",
-				field="ag_importing_taxonomies.templateIndex.keywords",
+				field="ag_importing_taxonomies_templateIndex_keywords",
 				content="Keywords:"
 			)#
 			<div class="controls">
 				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
-					name="ag_importing_taxonomies.templateIndex.keywords",
+					name="ag_importing_taxonomies_templateIndex_keywords",
 					rows="2",
 					class="form-control input-keywords",
 					placeholder="Comma delimited list of words or phrases",

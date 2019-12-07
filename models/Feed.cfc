@@ -25,18 +25,6 @@ component persistent="true"
 		notnull="false"
 		length="255";
 
-	property name="linkBehavior"
-		notnull="false"
-		length="15";
-
-	property name="featuredImageBehavior"
-		notnull="false"
-		length="10";
-
-	property name="pagingMaxItems"
-		notnull="false"
-		ormtype="long";
-
 	property name="isActive"
 		notnull="true"
 		ormtype="boolean"
@@ -52,66 +40,6 @@ component persistent="true"
 		notnull="false"
 		ormtype="timestamp"
 		index="idx_stopDate";
-
-	property name="itemStatus"
-		notnull="false"
-		length="10";
-
-	property name="ItemPubDate"
-		notnull="false"
-		length="10";
-
-	property name="maxAge"
-		notnull="false"
-		ormtype="long";
-
-	property name="maxAgeUnit"
-		notnull="false"
-		length="10";
-
-	property name="maxItems"
-		notnull="false"
-		ormtype="long";
-
-	property name="matchAnyFilter"
-		notnull="false"
-		length="255";
-
-	property name="matchAllFilter"
-		notnull="false"
-		length="255";
-
-	property name="matchNoneFilter"
-		notnull="false"
-		length="255";
-
-	property name="importFeaturedImages"
-		notnull="false"
-		ormtype="boolean";
-
-	property name="importAllImages"
-		notnull="false"
-		ormtype="boolean";
-
-	property name="taxonomies"
-		notnull="false"
-		ormtype="text";
-
-	property name="preFeedDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="postFeedDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="preFeedItemDisplay"
-		notnull="false"
-		ormtype="text";
-
-	property name="postFeedItemDisplay"
-		notnull="false"
-		ormtype="text";
 
 	property name="settings"
 		notnull="false"
@@ -193,19 +121,8 @@ component persistent="true"
 
 	this.constraints["feedUrl"] = { required=true, type="url", size="1..255" };
 	this.constraints["tagLine"] = { required=false, size="1..255" };
-	this.constraints["linkBehavior"] = { required=false, regex="(forward|interstitial|display)" };
-	this.constraints["featuredImageBehavior"] = { required=false, regex="(default|feed|none)" };
-	this.constraints["pagingMaxItems"] = { required=false, type="numeric" };
 	this.constraints["startDate"] = { required=false, type="date" };
 	this.constraints["stopDate"] = { required=false, type="date" };
-	this.constraints["itemStatus"] = { required=false, regex="(draft|published)" };
-	this.constraints["itemPubDate"] = { required=false, regex="(original|imported)" }
-	this.constraints["maxAge"] = { required=false, type="numeric" };
-	this.constraints["maxAgeUnit"] = { required=false, regex="(days|weeks|months|years)" };
-	this.constraints["maxItems"] = { required=false, type="numeric" };
-	this.constraints["matchAnyFilter"] = { required=false, size="1..255" };
-	this.constraints["matchAllFilter"] = { required=false, size="1..255" };
-	this.constraints["matchNoneFilter"] = { required=false, size="1..255" };
 
 	/**
 	 * Constructor
@@ -220,7 +137,6 @@ component persistent="true"
 		variables.contentType = "Feed";
 		variables.feedImports = [];
 		variables.blacklistedItems = [];
-		setTaxonomies([]);
 		setSettings({});
 		return this;
 	}
@@ -268,10 +184,138 @@ component persistent="true"
 	}
 
 	/**
+	 * Undocumented function
+	 */
+	string function getLinkBehavior() {
+		return getSetting( "linkBehavior", "" );
+	}
+
+
+	/**
+	 * Undocumented function
+	 */
+	string function getFeaturedImageBehavior() {
+		return getSetting( "featuredImageBehavior", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getPagingMaxItems() {
+		return getSetting( "pagingMaxItems", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getItemStatus() {
+		return getSetting( "itemStatus", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getItemPubDate() {
+		return getSetting( "itemPubDate", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMaxAge() {
+		return getSetting( "maxAge", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMaxAgeUnit() {
+		return getSetting( "maxAgeUnit", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMaxItems() {
+		return getSetting( "maxItems", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMatchAnyFilter() {
+		return getSetting( "matchAnyFilter", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMatchAllFilter() {
+		return getSetting( "matchAllFilter", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getMatchNoneFilter() {
+		return getSetting( "matchNoneFilter", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getImportFeaturedImages() {
+		return getSetting( "importFeaturedImages", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getImportAllImages() {
+		return getSetting( "importAllImages", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	array function getTaxonomies() {
+		return getSetting( "taxonomies", [] );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getPreFeedDisplay() {
+		return getSetting( "preFeedDisplay", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getPostFeedDisplay() {
+		return getSetting( "postFeedDisplay", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getPreFeedItemDisplay() {
+		return getSetting( "preFeedItemDisplay", "" );
+	}
+
+	/**
+	 * Undocumented function
+	 */
+	string function getPostFeedItemDisplay() {
+		return getSetting( "postFeedItemDisplay", "" );
+	}
+
+	/**
 	 * Sets the taxomomies property
 	 * @taxonomies An array of taxonomies to set on the feed
 	 * @return Feed
 	 */
+	/*
 	Feed function setTaxonomies( required any taxonomies ) {
 		if ( isArray( arguments.taxonomies ) ) {
 			arguments.taxonomies = serializeJSON( arguments.taxonomies );
@@ -279,14 +323,17 @@ component persistent="true"
 		variables.taxonomies = arguments.taxonomies;
 		return this;
 	}
+	*/
 
 	/**
 	 * Gets the taxonomies property
 	 * @return An array of taxonomies if defined
 	 */
+	/*
 	array function getTaxonomies() {
 		return ( !isNull( variables.taxonomies ) && isJSON( variables.taxonomies ) ) ? deserializeJSON( variables.taxonomies ) : [];
 	}
+	*/
 
 	/**
 	 * Gets the latest feed import
@@ -620,25 +667,8 @@ component persistent="true"
 		arguments.properties = [
 			"feedUrl",
 			"tagLine",
-			"linkBehavior",
-			"featuredImageBehavior",
-			"pagingMaxItems",
 			"startDate",
-			"stopDate",
-			"itemStatus",
-			"ItemPubDate",
-			"maxAge",
-			"maxAgeUnit",
-			"maxItems",
-			"matchAnyFilter",
-			"matchAllFilter",
-			"matchNoneFilter",
-			"importFeaturedImages",
-			"importAllImages",
-			"preFeedDisplay",
-			"postFeedDisplay",
-			"preFeedItemDisplay",
-			"postFeedItemDisplay"
+			"stopDate"
 		];
 
 		// Grab the base content memento
@@ -648,7 +678,7 @@ component persistent="true"
 		result["websiteUrl"] = getWebsiteUrl();
 		result["importedDate"] = getDisplayImportedDate();
 		result["isActive"] = canImport();
-		result["taxonomies"] = getTaxonomies();
+		result["settings"] = getSettings();
 		result["feedItems"] = [];
 		if ( hasFeedItem() ) {
 			for ( var item IN children ) {
@@ -674,9 +704,6 @@ component persistent="true"
 		variables.slug = trim( left( slug, 200 ) );
 		variables.feedUrl = trim( left( feedUrl, 255 ) );
 		variables.tagLine = trim( left( tagLine, 255 ) );
-		variables.matchAnyFilter = trim( left( matchAnyFilter, 255 ) );
-		variables.matchAllFilter = trim( left( matchAllFilter, 255 ) );
-		variables.matchNoneFilter = trim( left( matchNoneFilter, 255 ) );
 
 		if ( !len( variables.title ) ) { arrayAppend( errors, "Title is required" ); }
 		if ( !len( variables.slug ) ) { arrayAppend( errors, "Slug is required" ); }

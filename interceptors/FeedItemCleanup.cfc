@@ -40,6 +40,8 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after feed save
 	 */
 	function aggregator_postFeedSave( event, interceptData ) {
+		/*
+		TODO: fix
 		var feed = arguments.interceptData.feed;
 		var oldFeed = arguments.interceptData.oldFeed;
 		if (
@@ -58,6 +60,7 @@ component extends="coldbox.system.Interceptor" {
 		if ( val( feed.getMaxItems() ) != val( oldFeed.maxItems ) ) {
 			doMaxItemCleanup( feed );
 		}
+		*/
 	}
 
 	/**

@@ -223,7 +223,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
+		getPage( prc, prc.agSettings.feed_items_entrypoint );
 
 		// Make sure page exists
 		if ( prc.page.isLoaded() ) {
@@ -323,7 +323,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = sortOrder,
 				max = prc.agSettings.ag_site_paging_max_feed_items,
 				offset = prc.pagingBoundaries.startRow - 1,
-				includeEntries = prc.agSettings.ag_site_feed_items_include_entries
+				includeEntries = prc.agSettings.feed_items_include_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -370,7 +370,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
+		getPage( prc, prc.agSettings.feed_items_entrypoint );
 
 		// Validate the passed date
 		var validDate = true;
@@ -413,7 +413,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				day = rc.day,
 				max = prc.agSettings.ag_site_paging_max_feed_items,
 				offset = prc.pagingBoundaries.startRow - 1,
-				includeEntries = prc.agSettings.ag_site_feed_items_include_entries
+				includeEntries = prc.agSettings.feed_items_include_entries
 			);
 			prc.feedItems = results.feedItems;
 			prc.itemCount = results.count;
@@ -463,9 +463,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Grab the correct page
 		if ( event.getCurrentRoutedNamespace() == "aggregator-feeds" ) {
-			getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
+			getPage( prc, prc.agSettings.feeds_entrypoint );
 		} else {
-			getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
+			getPage( prc, prc.agSettings.feed_items_entrypoint );
 		}
 
 		// Make sure page exists and rss is enabled
@@ -521,7 +521,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
-		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
+		getPage( prc, prc.agSettings.feeds_entrypoint );
 
 		// Make sure page exists
 		if ( prc.page.isLoaded() ) {
@@ -621,7 +621,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	function feedsRSS( event, rc, prc ) {
 
 		// Grab the feeds page
-		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
+		getPage( prc, prc.agSettings.feeds_entrypoint );
 
 		// Make sure page exists
 		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
@@ -674,7 +674,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
-		getPage( prc, prc.agSettings.ag_site_feeds_entryPoint );
+		getPage( prc, prc.agSettings.feeds_entrypoint );
 
 		// Check if author is viewing
 		var showUnpublished = false;
@@ -702,6 +702,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
+			// prc.feed.getSetting( "paging_max_feed_items", prc.agSettings.ag_site_paging_max_feed_items )
 			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_feed_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkFeed( prc.feed ) & "?page=@page@";
@@ -835,7 +836,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "format", "html" );
 
 		// Grab the feed items page
-		getPage( prc, prc.agSettings.ag_site_feed_items_entrypoint );
+		getPage( prc, prc.agSettings.feed_items_entrypoint );
 
 		// Make sure page and feed item exists
 		if ( prc.page.isLoaded() && prc.feedItem.isLoaded() ) {
