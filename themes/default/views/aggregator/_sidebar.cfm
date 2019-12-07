@@ -24,7 +24,7 @@
 	</div>
 	#cb.widget("Archives@contentbox-aggregator")#
 </div>
-<cfif ag.setting("ag_rss_enable") >
+<cfif ag.setting("rss_enable") >
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4>News Updates</h4>

@@ -567,7 +567,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport link
 	 */
 	string function linkImport( boolean ssl=cb.getRequestContext().isSSL(), boolean importAll=false, boolean importActive=false ) {
-		var link = cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("ag_importing_secret_key");
+		var link = cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("importing_secret_key");
 		if ( arguments.importAll ) link &= "&importAll=true";
 		else if ( arguments.importActive ) link &= "&importActive=true";
 		return link;
@@ -581,7 +581,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport feed link
 	 */
 	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("ag_importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
+		return cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
 	}
 
 	/************************************** Quick HTML *********************************************/

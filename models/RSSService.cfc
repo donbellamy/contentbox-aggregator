@@ -36,12 +36,12 @@ component singleton {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
+		var cache = cacheBox.getCache( settings.rss_cache_name );
 		var cacheKey = "cb-feeds-aggregator-#cgi.http_host#-#hash( arguments.category & arguments.slug & arguments.contentType )#";
 		var rssFeed = "";
 
 		// Check cache
-		if ( settings.ag_rss_cache_enable ) {
+		if ( settings.rss_cache_enable ) {
 			rssFeed = cache.get( cacheKey );
 			if ( !isNull( rssFeed ) ) {
 				return rssFeed;
@@ -56,8 +56,8 @@ component singleton {
 		}
 
 		// Cache the feed
-		if ( settings.ag_rss_cache_enable ) {
-			cache.set( cacheKey, rssFeed, settings.ag_rss_cache_timeout, settings.ag_rss_cache_timeout_idle );
+		if ( settings.rss_cache_enable ) {
+			cache.set( cacheKey, rssFeed, settings.rss_cache_timeout, settings.rss_cache_idle_timeout );
 		}
 
 		return rssFeed;
@@ -84,7 +84,7 @@ component singleton {
 		var results = feedItemService.getPublishedFeedItems(
 			category=arguments.category,
 			feed=arguments.slug,
-			max=settings.ag_rss_max_items,
+			max=settings.rss_max_feed_items,
 			includeEntries=settings.feed_items_include_entries
 		);
 		var feedItems = results.feedItems;
@@ -103,7 +103,7 @@ component singleton {
 			if ( len( description ) ) {
 				querySetCell( items, "description", "<![CDATA[" & description & "]]>" );
 			}
-			if ( settings.ag_rss_content_enable ) {
+			if ( settings.rss_content_enable ) {
 				querySetCell( items, "content_encoded", "<![CDATA[" & item.renderContent() & "]]>" );
 			}
 			querySetCell( items, "link", agHelper.linkContent( item ) );
@@ -166,14 +166,14 @@ component singleton {
 				};
 			}
 		} else {
-			feedStruct.title = settings.ag_rss_title;
-			feedStruct.description = settings.ag_rss_description;
+			feedStruct.title = settings.rss_title;
+			feedStruct.description = settings.rss_description;
 			feedStruct.link = cbHelper.linkHome();
 		}
-		feedStruct.generator = settings.ag_rss_generator;
-		feedStruct.copyright = settings.ag_rss_copyright;
-		if ( len( settings.ag_rss_webmaster ) ) {
-			feedStruct.webmaster = settings.ag_rss_webmaster;
+		feedStruct.generator = settings.rss_generator;
+		feedStruct.copyright = settings.rss_copyright;
+		if ( len( settings.rss_webmaster ) ) {
+			feedStruct.webmaster = settings.rss_webmaster;
 		}
 		feedStruct.pubDate = now();
 		feedStruct.lastBuildDate = now();
@@ -197,7 +197,8 @@ component singleton {
 
 		// Get results
 		var results = feedService.getPublishedFeeds(
-			category=arguments.category
+			category=arguments.category,
+			max=settings.rss_max_feeds
 		);
 		var feeds = results.feeds;
 		var items = queryNew("title,description,content_encoded,link,pubDate,dcmiterm_creator,category_tag,guid_permalink,guid_string,source_title,source_url,enclosure_url,enclosure_length,enclosure_type");
@@ -230,13 +231,13 @@ component singleton {
 		}
 
 		// Populate the feedStruct
-		feedStruct.title = settings.ag_rss_title;
-		feedStruct.description = settings.ag_rss_description;
+		feedStruct.title = settings.rss_title;
+		feedStruct.description = settings.rss_description;
 		feedStruct.link = cbHelper.linkHome();
-		feedStruct.generator = settings.ag_rss_generator;
-		feedStruct.copyright = settings.ag_rss_copyright;
-		if ( len( settings.ag_rss_webmaster ) ) {
-			feedStruct.webmaster = settings.ag_rss_webmaster;
+		feedStruct.generator = settings.rss_generator;
+		feedStruct.copyright = settings.rss_copyright;
+		if ( len( settings.rss_webmaster ) ) {
+			feedStruct.webmaster = settings.rss_webmaster;
 		}
 		feedStruct.pubDate = now();
 		feedStruct.lastBuildDate = now();

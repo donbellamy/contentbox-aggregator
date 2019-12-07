@@ -218,7 +218,7 @@
 									type="number",
 									value=prc.feed.getPagingMaxItems(),
 									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.ag_site_paging_max_feed_items#",
+									placeholder="Use the default setting - #prc.agSettings.paging_max_feed_items#",
 									min="0"
 								)#
 							</div>
@@ -809,7 +809,7 @@
 							<p>
 								Below are the most recent feed imports.
 								You can view the import record by clicking the view icon.
-								The current import history limit of <strong>#prc.agSettings.ag_importing_max_feed_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
+								The current import history limit of <strong>#prc.agSettings.importing_max_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
 							</p>
 							<table id="feedImportsTable" width="100%" class="table table-hover table-condensed table-striped" border="0">
 								<thead>

@@ -129,7 +129,7 @@ component extends="coldbox.system.Interceptor" {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_site_cache_name );
+		var cache = cacheBox.getCache( settings.site_cache_name );
 		var cacheKey = "cb-content-aggregator";
 
 		// Clear site cache

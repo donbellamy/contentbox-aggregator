@@ -92,9 +92,9 @@ component extends="baseHandler" {
 
 		// Taxonomies
 		var taxonomies = [];
-		rc["ag_importing_taxonomies"] = [];
+		rc["importing_taxonomies"] = [];
 		for ( var item IN rc ) {
-			if ( reFindNoCase( "^ag_importing_taxonomies_", item ) ) {
+			if ( reFindNoCase( "^importing_taxonomies_", item ) ) {
 				var key = listLast( item, "_" );
 				var count = listGetAt( item, 4, "_" );
 				if ( arrayLen( taxonomies ) LT count ) {
@@ -107,7 +107,7 @@ component extends="baseHandler" {
 			if ( len( item.categories) &&
 				( len( trim( item.keywords ) ) || item.method == "none"  )
 			) {
-				arrayAppend( rc["ag_importing_taxonomies"], item );
+				arrayAppend( rc["importing_taxonomies"], item );
 			}
 		}
 
@@ -152,14 +152,14 @@ component extends="baseHandler" {
 		settingService.flushSettingsCache();
 
 		// Import scheduled task
-		if ( len( prc.agSettings.ag_importing_import_interval ) ) {
+		if ( len( prc.agSettings.importing_interval ) ) {
 			cfschedule(
 				action = "update",
 				task = "aggregator-import",
 				url = "#prc.agHelper.linkImport(importActive=true)#",
-				startDate = prc.agSettings.ag_importing_import_start_date,
-				startTime = prc.agSettings.ag_importing_import_start_time,
-				interval = prc.agSettings.ag_importing_import_interval
+				startDate = prc.agSettings.importing_start_date,
+				startTime = prc.agSettings.importing_start_time,
+				interval = prc.agSettings.importing_interval
 			);
 		} else {
 			cfschedule( action = "delete", task = "aggregator-import" );
@@ -199,105 +199,106 @@ component extends="baseHandler" {
 		if ( prc.agSettings.feed_items_entrypoint == prc.agSettings.feeds_entrypoint ) {
 			arrayAppend( errors, "The feed items and feeds pages must be different." );
 		}
-		if ( !val( prc.agSettings.ag_site_feed_items_excerpt_limit ) ) {
+		if ( !val( prc.agSettings.feed_items_excerpt_limit ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );
 		}
-		prc.agSettings.ag_site_feed_items_excerpt_ending = trim( prc.agSettings.ag_site_feed_items_excerpt_ending );
-		prc.agSettings.ag_site_feed_items_read_more_text = trim( prc.agSettings.ag_site_feed_items_read_more_text );
-		if ( !val( prc.agSettings.ag_site_paging_max_feeds ) ) {
+		prc.agSettings.feed_items_excerpt_ending = trim( prc.agSettings.feed_items_excerpt_ending );
+		prc.agSettings.feed_items_read_more_text = trim( prc.agSettings.feed_items_read_more_text );
+		if ( !val( prc.agSettings.paging_max_feeds ) ) {
 			arrayAppend( errors, "A valid max feeds value is required." );
 		}
-		if ( !val( prc.agSettings.ag_site_paging_max_feed_items ) ) {
+		if ( !val( prc.agSettings.paging_max_feed_items ) ) {
 			arrayAppend( errors, "A valid max feed items value is required." );
 		}
-		if ( !val( prc.agSettings.ag_site_cache_timeout ) ) {
+		if ( !val( prc.agSettings.site_cache_timeout ) ) {
 			arrayAppend( errors, "A valid site cache timeout is required." );
 		}
-		if ( !val( prc.agSettings.ag_site_cache_timeout_idle ) ) {
+		if ( !val( prc.agSettings.site_cache_idle_timeout ) ) {
 			arrayAppend( errors, "A valid site cache idle timeout is required." );
 		}
 
 		// Importing settings
-		if ( !len( prc.agSettings.ag_importing_import_interval ) ) {
-			prc.agSettings.ag_importing_import_start_date = "";
-			prc.agSettings.ag_importing_import_start_time = "";
+		if ( !len( prc.agSettings.importing_interval ) ) {
+			prc.agSettings.importing_start_date = "";
+			prc.agSettings.importing_start_time = "";
 		} else {
-			if ( len( prc.agSettings.ag_importing_import_start_date ) && !isDate( prc.agSettings.ag_importing_import_start_date ) ) {
+			if ( len( prc.agSettings.importing_start_date ) && !isDate( prc.agSettings.importing_start_date ) ) {
 				arrayAppend( errors, "A valid start date is required." );
-			} else if ( isDate( prc.agSettings.ag_importing_import_start_date ) ) {
-				prc.agSettings.ag_importing_import_start_date = dateFormat( prc.agSettings.ag_importing_import_start_date, "mm/dd/yy" );
+			} else if ( isDate( prc.agSettings.importing_start_date ) ) {
+				prc.agSettings.importing_start_date = dateFormat( prc.agSettings.importing_start_date, "mm/dd/yy" );
 			} else {
-				prc.agSettings.ag_importing_import_start_date = dateFormat( now(), "mm/dd/yy" );
+				prc.agSettings.importing_start_date = dateFormat( now(), "mm/dd/yy" );
 			}
-			if ( len( prc.agSettings.ag_importing_import_start_time ) && !isDate( prc.agSettings.ag_importing_import_start_time ) ) {
+			if ( len( prc.agSettings.importing_start_time ) && !isDate( prc.agSettings.importing_start_time ) ) {
 				arrayAppend( errors, "A valid start time is required." );
-			} else if ( isDate( prc.agSettings.ag_importing_import_start_time ) ) {
-				prc.agSettings.ag_importing_import_start_time = timeFormat( prc.agSettings.ag_importing_import_start_time, "short" );
+			} else if ( isDate( prc.agSettings.importing_start_time ) ) {
+				prc.agSettings.importing_start_time = timeFormat( prc.agSettings.importing_start_time, "short" );
 			} else {
-				prc.agSettings.ag_importing_import_start_time = timeFormat( now(), "short" );
+				prc.agSettings.importing_start_time = timeFormat( now(), "short" );
 			}
 		}
-		if ( !len( trim( prc.agSettings.ag_importing_secret_key ) ) ) {
+		if ( !len( trim( prc.agSettings.importing_secret_key ) ) ) {
 			arrayAppend( errors, "A valid secret key is required." );
 		}
-		if ( len( prc.agSettings.ag_importing_max_feed_imports ) && !isNumeric( prc.agSettings.ag_importing_max_feed_imports ) ) {
+		if ( len( prc.agSettings.importing_max_imports ) && !isNumeric( prc.agSettings.importing_max_imports ) ) {
 			arrayAppend( errors, "A valid import history limit is required." );
 		}
-		if ( len( prc.agSettings.ag_importing_max_age ) && !isNumeric( prc.agSettings.ag_importing_max_age ) ) {
+		if ( len( prc.agSettings.importing_max_feed_item_age ) && !isNumeric( prc.agSettings.importing_max_feed_item_age ) ) {
 			arrayAppend( errors, "A valid age limit is required." );
 		}
-		if ( len( prc.agSettings.ag_importing_max_items ) && !isNumeric( prc.agSettings.ag_importing_max_items ) ) {
+		// TODO: if age is valid, then unit is required
+		if ( len( prc.agSettings.importing_max_feed_items ) && !isNumeric( prc.agSettings.importing_max_feed_items ) ) {
 			arrayAppend( errors, "A valid item limit is required." );
 		}
-		prc.agSettings.ag_importing_match_any_filter = trim( prc.agSettings.ag_importing_match_any_filter );
-		prc.agSettings.ag_importing_match_all_filter = trim( prc.agSettings.ag_importing_match_all_filter );
-		prc.agSettings.ag_importing_match_none_filter = trim( prc.agSettings.ag_importing_match_none_filter );
-		if ( len( prc.agSettings.ag_importing_image_minimum_width ) && !isNumeric( prc.agSettings.ag_importing_image_minimum_width ) ) {
+		prc.agSettings.importing_match_any_filter = trim( prc.agSettings.importing_match_any_filter );
+		prc.agSettings.importing_match_all_filter = trim( prc.agSettings.importing_match_all_filter );
+		prc.agSettings.importing_match_none_filter = trim( prc.agSettings.importing_match_none_filter );
+		if ( len( prc.agSettings.importing_image_minimum_width ) && !isNumeric( prc.agSettings.importing_image_minimum_width ) ) {
 			arrayAppend( errors, "A valid minimum width is required." );
 		}
-		if ( len( prc.agSettings.ag_importing_image_minimum_height ) && !isNumeric( prc.agSettings.ag_importing_image_minimum_height ) ) {
+		if ( len( prc.agSettings.importing_image_minimum_height ) && !isNumeric( prc.agSettings.importing_image_minimum_height ) ) {
 			arrayAppend( errors, "A valid minimum height is required." );
 		}
 
 		// Global html
-		prc.agSettings.ag_html_pre_feed_items_display = trim( prc.agSettings.ag_html_pre_feed_items_display );
-		prc.agSettings.ag_html_post_feed_items_display = trim( prc.agSettings.ag_html_post_feed_items_display );
-		prc.agSettings.ag_html_pre_feeds_display = trim( prc.agSettings.ag_html_pre_feeds_display );
-		prc.agSettings.ag_html_post_feeds_display = trim( prc.agSettings.ag_html_post_feeds_display );
-		prc.agSettings.ag_html_pre_feed_display = trim( prc.agSettings.ag_html_pre_feed_display );
-		prc.agSettings.ag_html_post_feed_display = trim( prc.agSettings.ag_html_post_feed_display );
-		prc.agSettings.ag_html_pre_feedItem_display = trim( prc.agSettings.ag_html_pre_feedItem_display );
-		prc.agSettings.ag_html_post_feedItem_display = trim( prc.agSettings.ag_html_post_feedItem_display );
-		prc.agSettings.ag_html_pre_archives_display = trim( prc.agSettings.ag_html_pre_archives_display );
-		prc.agSettings.ag_html_post_archives_display = trim( prc.agSettings.ag_html_post_archives_display );
-		prc.agSettings.ag_html_pre_sidebar_display = trim( prc.agSettings.ag_html_pre_sidebar_display );
-		prc.agSettings.ag_html_post_sidebar_display = trim( prc.agSettings.ag_html_post_sidebar_display );
+		prc.agSettings.html_pre_feed_items_display = trim( prc.agSettings.html_pre_feed_items_display );
+		prc.agSettings.html_post_feed_items_display = trim( prc.agSettings.html_post_feed_items_display );
+		prc.agSettings.html_pre_feeds_display = trim( prc.agSettings.html_pre_feeds_display );
+		prc.agSettings.html_post_feeds_display = trim( prc.agSettings.html_post_feeds_display );
+		prc.agSettings.html_pre_feed_display = trim( prc.agSettings.html_pre_feed_display );
+		prc.agSettings.html_post_feed_display = trim( prc.agSettings.html_post_feed_display );
+		prc.agSettings.html_pre_feedItem_display = trim( prc.agSettings.html_pre_feedItem_display );
+		prc.agSettings.html_post_feedItem_display = trim( prc.agSettings.html_post_feedItem_display );
+		prc.agSettings.html_pre_archives_display = trim( prc.agSettings.html_pre_archives_display );
+		prc.agSettings.html_post_archives_display = trim( prc.agSettings.html_post_archives_display );
+		prc.agSettings.html_pre_sidebar_display = trim( prc.agSettings.html_pre_sidebar_display );
+		prc.agSettings.html_post_sidebar_display = trim( prc.agSettings.html_post_sidebar_display );
 
 		// RSS settings
-		if ( !len( trim( prc.agSettings.ag_rss_title ) ) ) {
+		if ( !len( trim( prc.agSettings.rss_title ) ) ) {
 			arrayAppend( errors, "A valid feed title is required." );
 		} else {
-			prc.agSettings.ag_rss_title = trim( prc.agSettings.ag_rss_title );
+			prc.agSettings.rss_title = trim( prc.agSettings.rss_title );
 		}
-		if ( !len( trim( prc.agSettings.ag_rss_description ) ) ) {
+		if ( !len( trim( prc.agSettings.rss_description ) ) ) {
 			arrayAppend( errors, "A valid feed description is required." );
 		} else {
-			prc.agSettings.ag_rss_description = trim( prc.agSettings.ag_rss_description );
+			prc.agSettings.rss_description = trim( prc.agSettings.rss_description );
 		}
-		prc.agSettings.ag_rss_generator = trim( prc.agSettings.ag_rss_generator );
-		prc.agSettings.ag_rss_copyright = trim( prc.agSettings.ag_rss_copyright );
-		if ( len( trim( prc.agSettings.ag_rss_webmaster ) ) && !isValid( "email", trim( prc.agSettings.ag_rss_webmaster ) ) ) {
+		prc.agSettings.rss_generator = trim( prc.agSettings.rss_generator );
+		prc.agSettings.rss_copyright = trim( prc.agSettings.rss_copyright );
+		if ( len( trim( prc.agSettings.rss_webmaster ) ) && !isValid( "email", trim( prc.agSettings.rss_webmaster ) ) ) {
 			arrayAppend( errors, "The value for the feed webmaster is invalid." );
 		} else {
-			prc.agSettings.ag_rss_webmaster = trim( prc.agSettings.ag_rss_webmaster );
+			prc.agSettings.rss_webmaster = trim( prc.agSettings.rss_webmaster );
 		}
-		if ( !val( prc.agSettings.ag_rss_max_items ) ) {
+		if ( !val( prc.agSettings.rss_max_feed_items ) ) {
 			arrayAppend( errors, "A valid max rss content items is required." );
 		}
-		if ( !val( prc.agSettings.ag_rss_cache_timeout ) ) {
+		if ( !val( prc.agSettings.rss_cache_timeout ) ) {
 			arrayAppend( errors, "A valid feed cache timeout is required." );
 		}
-		if ( !val( prc.agSettings.ag_rss_cache_timeout_idle ) ) {
+		if ( !val( prc.agSettings.rss_cache_idle_timeout ) ) {
 			arrayAppend( errors, "A valid feed cache idle timeout is required." );
 		}
 

@@ -128,7 +128,7 @@ component extends="contentHandler" {
 			{ name = "Years", value = "years" }
 		];
 		arrayPrepend( prc.limitUnits, {
-			name = "Use the default setting - #prc.limitUnits[ arrayFind( prc.limitUnits, function( struct ) { return struct.value == prc.agSettings.ag_importing_max_age_unit; } ) ].name#",
+			name = "Use the default setting - #prc.limitUnits[ arrayFind( prc.limitUnits, function( struct ) { return struct.value == prc.agSettings.importing_max_feed_item_age_unit; } ) ].name#",
 			value = ""
 		});
 		prc.categories = categoryService.getAll( sortOrder = "category" );
@@ -139,7 +139,7 @@ component extends="contentHandler" {
 			{ name = "Display the entire feed item within the site.", value = "display" }
 		];
 		arrayPrepend( prc.linkOptions, {
-			name = "Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_feed_items_link_behavior; } ) ].name#",
+			name = "Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_link_behavior; } ) ].name#",
 			value = ""
 		});
 		prc.featuredImageOptions = [
@@ -148,7 +148,7 @@ component extends="contentHandler" {
 			{ name = "Do not display a featured image.", value = "none" }
 		];
 		arrayPrepend( prc.featuredImageOptions, {
-			name = "Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_site_feed_items_featured_image_behavior; } ) ].name#",
+			name = "Use the default setting - #prc.featuredImageOptions[ arrayFind( prc.featuredImageOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_featured_image_behavior; } ) ].name#",
 			value = ""
 		});
 		prc.itemStatuses = [
@@ -156,7 +156,7 @@ component extends="contentHandler" {
 			{ name = "Published", value = "published" }
 		];
 		arrayPrepend( prc.itemStatuses, {
-			name= " Use the default setting - #prc.itemStatuses[ arrayFind( prc.itemStatuses, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_status; } ) ].name#",
+			name= " Use the default setting - #prc.itemStatuses[ arrayFind( prc.itemStatuses, function( struct ) { return struct.value == prc.agSettings.importing_feed_item_status; } ) ].name#",
 			value = ""
 		});
 		prc.itemPubDates = [
@@ -164,7 +164,7 @@ component extends="contentHandler" {
 			{ name = "Imported date", value = "imported" }
 		];
 		arrayPrepend( prc.itemPubDates, {
-			name = "Use the default setting - #prc.itemPubDates[ arrayFind( prc.itemPubDates, function( struct ) { return struct.value == prc.agSettings.ag_importing_item_pub_date; } ) ].name#",
+			name = "Use the default setting - #prc.itemPubDates[ arrayFind( prc.itemPubDates, function( struct ) { return struct.value == prc.agSettings.importing_feed_item_published_date; } ) ].name#",
 			value = ""
 		});
 		prc.importFeaturedImageOptions = [
@@ -172,7 +172,7 @@ component extends="contentHandler" {
 			{ name = "Do not import featured images for this feed.", value = "false" }
 		];
 		arrayPrepend( prc.importFeaturedImageOptions, {
-			name = "Use the default setting - #prc.importFeaturedImageOptions[ arrayFind( prc.importFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_featured_image_enable; } ) ].name#",
+			name = "Use the default setting - #prc.importFeaturedImageOptions[ arrayFind( prc.importFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.importing_featured_image_enable; } ) ].name#",
 			value = ""
 		});
 		prc.importImageOptions = [
@@ -180,7 +180,7 @@ component extends="contentHandler" {
 			{ name = "Do not import all images for this feed.", value = "false" }
 		];
 		arrayPrepend( prc.importImageOptions, {
-			name = "Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.ag_importing_all_images_enable; } ) ].name#",
+			name = "Use the default setting - #prc.importImageOptions[ arrayFind( prc.importImageOptions, function( struct ) { return struct.value == prc.agSettings.importing_all_images_enable; } ) ].name#",
 			value = ""
 		});
 		prc.matchOptions = [
@@ -616,7 +616,7 @@ component extends="contentHandler" {
 		var inAdmin = reFindNoCase( "^contentbox-admin", event.getCurrentEvent() );
 
 		// Check for key unless we are in the admin
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
+		if ( rc.key EQ prc.agSettings.importing_secret_key || inAdmin ) {
 
 			// Set timeout
 			setting requestTimeout = "999999";
@@ -624,8 +624,8 @@ component extends="contentHandler" {
 			// Grab the author
 			if ( inAdmin || ( structKeyExists( prc, "oCurrentAuthor" ) && prc.oCurrentAuthor.isLoaded() && prc.oCurrentAuthor.isLoggedIn() ) ) {
 				var author = prc.oCurrentAuthor;
-			} else if ( len( prc.agSettings.ag_importing_item_author ) ) {
-				var author = authorService.get( prc.agSettings.ag_importing_item_author );
+			} else if ( len( prc.agSettings.importing_feed_item_author ) ) {
+				var author = authorService.get( prc.agSettings.importing_feed_item_author );
 			} else {
 				var adminRole = roleService.findWhere( { role = "Administrator" } );
 				var author = authorService.findWhere( { role = adminRole } );
@@ -728,7 +728,7 @@ component extends="contentHandler" {
 		var inAdmin = reFindNoCase( "^contentbox-admin", event.getCurrentEvent() );
 
 		// Check key, contentID and authorID
-		if ( rc.key EQ prc.agSettings.ag_importing_secret_key || inAdmin ) {
+		if ( rc.key EQ prc.agSettings.importing_secret_key || inAdmin ) {
 
 			// Set timeout
 			setting requestTimeout = "999999";

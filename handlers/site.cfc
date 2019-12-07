@@ -53,7 +53,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 		// Set vars
 		var cacheEnabled = (
-			prc.agSettings.ag_site_cache_enable AND
+			prc.agSettings.site_cache_enable AND
 			!event.valueExists("cbCache")
 		);
 
@@ -61,7 +61,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( cacheEnabled ) {
 
 			// Set cache and cacheKey
-			var cache = cacheBox.getCache( prc.agSettings.ag_site_cache_name );
+			var cache = cacheBox.getCache( prc.agSettings.site_cache_name );
 			var cacheKey = "cb-content-aggregator-#cgi.http_host#-#left( event.getCurrentRoutedURL(), 500 )#";
 			cacheKey &= hash( ".#getFWLocale()#.#rc.format#.#event.isSSL()#" & prc.cbox_incomingContextHash );
 
@@ -199,8 +199,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			cache.set(
 				cacheKey,
 				data,
-				prc.agSettings.ag_site_cache_timeout,
-				prc.agSettings.ag_site_cache_timeout_idle
+				prc.agSettings.site_cache_timeout,
+				prc.agSettings.site_cache_idle_timeout
 			);
 
 		}
@@ -245,7 +245,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feed_items );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.paging_max_feed_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkFeedItems();
 
@@ -321,7 +321,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				feed = rc.feed,
 				type = rc.type,
 				sortOrder = sortOrder,
-				max = prc.agSettings.ag_site_paging_max_feed_items,
+				max = prc.agSettings.paging_max_feed_items,
 				offset = prc.pagingBoundaries.startRow - 1,
 				includeEntries = prc.agSettings.feed_items_include_entries
 			);
@@ -402,7 +402,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feed_items );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.paging_max_feed_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkArchive( rc.year, rc.month, rc.day ) & "?page=@page@";
 
@@ -411,7 +411,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				year = rc.year,
 				month = rc.month,
 				day = rc.day,
-				max = prc.agSettings.ag_site_paging_max_feed_items,
+				max = prc.agSettings.paging_max_feed_items,
 				offset = prc.pagingBoundaries.startRow - 1,
 				includeEntries = prc.agSettings.feed_items_include_entries
 			);
@@ -469,7 +469,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 		// Make sure page exists and rss is enabled
-		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
+		if ( prc.page.isLoaded() && prc.agSettings.rss_enable ) {
 
 			// Set params
 			event.paramValue( "category", "" )
@@ -538,7 +538,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			prc.oPaging.setpagingMaxRows( prc.agSettings.ag_site_paging_max_feeds );
+			prc.oPaging.setpagingMaxRows( prc.agSettings.paging_max_feeds );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkFeeds();
 
@@ -574,7 +574,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var results = feedService.getPublishedFeeds(
 				sortOrder = sortOrder,
 				category = rc.category,
-				max = prc.agSettings.ag_site_paging_max_feeds,
+				max = prc.agSettings.paging_max_feeds,
 				offset = prc.pagingBoundaries.startRow - 1
 			);
 			prc.feeds = results.feeds;
@@ -624,7 +624,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		getPage( prc, prc.agSettings.feeds_entrypoint );
 
 		// Make sure page exists
-		if ( prc.page.isLoaded() && prc.agSettings.ag_rss_enable ) {
+		if ( prc.page.isLoaded() && prc.agSettings.rss_enable ) {
 
 			// Set params
 			event.paramValue( "category", "" );
@@ -702,8 +702,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Paging
 			prc.oPaging = getModel("paging@aggregator");
-			// prc.feed.getSetting( "paging_max_feed_items", prc.agSettings.ag_site_paging_max_feed_items )
-			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_feed_items );
+			// prc.feed.getSetting( "paging_max_feed_items", prc.agSettings.paging_max_feed_items )
+			prc.oPaging.setpagingMaxRows( val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.paging_max_feed_items );
 			prc.pagingBoundaries = prc.oPaging.getBoundaries();
 			prc.pagingLink = prc.agHelper.linkFeed( prc.feed ) & "?page=@page@";
 
@@ -730,7 +730,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			var results = feedItemService.getPublishedFeedItems(
 				feed = prc.feed.getContentID(),
 				author = rc.author,
-				max = val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.ag_site_paging_max_feed_items,
+				max = val( prc.feed.getPagingMaxItems() ) ? val( prc.feed.getPagingMaxItems() ) : prc.agSettings.paging_max_feed_items,
 				offset = prc.pagingBoundaries.startRow - 1,
 				includeEntries = false
 			);
@@ -815,7 +815,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( prc.feedItem.isLoaded() ) {
 
 			// Calculate link behavior
-			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.ag_site_feed_items_link_behavior;
+			prc.linkBehavior = len( prc.feedItem.getFeed().getLinkBehavior() ) ? prc.feedItem.getFeed().getLinkBehavior() : prc.agSettings.feed_items_link_behavior;
 
 			// Turn off cache if forwarding user to feed item
 			if ( prc.linkBehavior == "forward" ) {

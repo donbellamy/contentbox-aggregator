@@ -61,7 +61,7 @@ component extends="coldbox.system.Interceptor" {
 
 		// Set vars
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var cache = cacheBox.getCache( settings.ag_rss_cache_name );
+		var cache = cacheBox.getCache( settings.rss_cache_name );
 		var cacheKey = "cb-feeds-aggregator";
 
 		// Clear cache

@@ -25,8 +25,6 @@ component {
 		// Settings
 		settings = {
 
-			// Site Options
-
 			// Feeds
 			"feeds_entrypoint" = "feeds",
 			"feeds_include_items" = "false",
@@ -37,82 +35,83 @@ component {
 			// Feed items
 			"feed_items_entrypoint" = "news",
 			"feed_items_include_entries" = "false",
-			"ag_site_feed_items_group_by_date" = "false",
-			"ag_site_feed_items_show_video_player" = "true",
-			"ag_site_feed_items_show_audio_player" = "true",
-			"ag_site_feed_items_show_source" = "true",
-			"ag_site_feed_items_show_author" = "false",
-			"ag_site_feed_items_show_categories" = "false",
-			"ag_site_feed_items_show_excerpt" = "true",
-			"ag_site_feed_items_excerpt_limit" = "255",
-			"ag_site_feed_items_excerpt_ending" = "...",
-			"ag_site_feed_items_show_read_more" = "true",
-			"ag_site_feed_items_read_more_text" = "Read More...",
-			"ag_site_feed_items_link_behavior" = "forward",
-			"ag_site_feed_items_open_new_window" = "true",
-			"ag_site_feed_items_show_featured_image" = "true",
-			"ag_site_feed_items_featured_image_behavior" = "feed",
-			"ag_site_feed_items_featured_image_default" = "",
-			"ag_site_feed_items_featured_image_default_url" = "",
+			"feed_items_group_by_date" = "false",
+			"feed_items_show_video_player" = "true",
+			"feed_items_show_audio_player" = "true",
+			"feed_items_show_source" = "true",
+			"feed_items_show_author" = "false",
+			"feed_items_show_categories" = "false",
+			"feed_items_show_excerpt" = "true",
+			"feed_items_excerpt_limit" = "255",
+			"feed_items_excerpt_ending" = "...",
+			"feed_items_show_read_more" = "true",
+			"feed_items_read_more_text" = "Read More...",
+			"feed_items_link_behavior" = "forward",
+			"feed_items_open_new_window" = "true",
+			"feed_items_show_featured_image" = "true",
+			"feed_items_featured_image_behavior" = "feed",
+			"feed_items_featured_image_default" = "",
+			"feed_items_featured_image_default_url" = "",
 
 			// Paging
-			"ag_site_paging_max_feeds" = "20",
-			"ag_site_paging_max_feed_items" = "20",
+			"paging_max_feeds" = "20",
+			"paging_max_feed_items" = "20",
 
 			// Caching
-			"ag_site_cache_enable" = "true",
-			"ag_site_cache_name" = "Template",
-			"ag_site_cache_timeout" = "60",
-			"ag_site_cache_timeout_idle" = "15",
+			"site_cache_enable" = "true",
+			"site_cache_name" = "Template",
+			"site_cache_timeout" = "60",
+			"site_cache_idle_timeout" = "15",
 
 			// Importing
-			"ag_importing_import_interval" = "",
-			"ag_importing_import_start_date" = "",
-			"ag_importing_import_start_time" = "",
-			"ag_importing_secret_key" = hash( getCurrentTemplatePath() ),
-			"ag_importing_max_feed_imports" = "25",
-			"ag_importing_item_author" = "",
-			"ag_importing_item_status" = "draft",
-			"ag_importing_item_pub_date" = "original",
-			"ag_importing_max_age" = "",
-			"ag_importing_max_age_unit" = "days",
-			"ag_importing_max_items" = "",
-			"ag_importing_match_any_filter" = "",
-			"ag_importing_match_all_filter" = "",
-			"ag_importing_match_none_filter" = "",
-			"ag_importing_featured_image_enable" = "true",
-			"ag_importing_all_images_enable" = "false",
-			"ag_importing_image_minimum_width" = "100",
-			"ag_importing_image_minimum_height" = "100",
-			"ag_importing_taxonomies" = [],
+			"importing_interval" = "",
+			"importing_start_date" = "",
+			"importing_start_time" = "",
+			"importing_secret_key" = hash( getCurrentTemplatePath() ),
+			"importing_max_imports" = "25",
+			"importing_feed_item_author" = "",
+			"importing_feed_item_status" = "draft",
+			"importing_feed_item_published_date" = "original",
+			"importing_max_feed_item_age" = "",
+			"importing_max_feed_item_age_unit" = "",
+			"importing_max_feed_items" = "",
+			"importing_match_any_filter" = "",
+			"importing_match_all_filter" = "",
+			"importing_match_none_filter" = "",
+			"importing_featured_image_enable" = "true",
+			"importing_all_images_enable" = "false",
+			"importing_image_minimum_width" = "100",
+			"importing_image_minimum_height" = "100",
+			"importing_taxonomies" = [],
 
 			// Global html
-			"ag_html_pre_feed_items_display" = "",
-			"ag_html_post_feed_items_display" = "",
-			"ag_html_pre_feeds_display" = "",
-			"ag_html_post_feeds_display" = "",
-			"ag_html_pre_feed_display" = "",
-			"ag_html_post_feed_display" = "",
-			"ag_html_pre_feeditem_display" = "",
-			"ag_html_post_feeditem_display" = "",
-			"ag_html_pre_archives_display" = "",
-			"ag_html_post_archives_display" = "",
-			"ag_html_pre_sidebar_display" = "",
-			"ag_html_post_sidebar_display" = "",
+			"html_pre_feed_items_display" = "",
+			"html_post_feed_items_display" = "",
+			"html_pre_feeds_display" = "",
+			"html_post_feeds_display" = "",
+			"html_pre_feed_display" = "",
+			"html_post_feed_display" = "",
+			"html_pre_feeditem_display" = "",
+			"html_post_feeditem_display" = "",
+			"html_pre_archives_display" = "",
+			"html_post_archives_display" = "",
+			"html_pre_sidebar_display" = "",
+			"html_post_sidebar_display" = "",
 
 			// RSS
-			"ag_rss_enable" = "true",
-			"ag_rss_title" = "RSS Aggregator Feed",
-			"ag_rss_description" = "RSS Aggregator Feed",
-			"ag_rss_generator" = "RSS Aggregator by Perfect Code, LLC",
-			"ag_rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
-			"ag_rss_webmaster" = "",
-			"ag_rss_max_items" = "30",
-			"ag_rss_content_enable" = "true",
-			"ag_rss_cache_enable" = "true",
-			"ag_rss_cache_name" = "Template",
-			"ag_rss_cache_timeout" = "60",
-			"ag_rss_cache_timeout_idle" = "15"
+			"rss_enable" = "true",
+			"rss_title" = "RSS Aggregator Feed",
+			"rss_description" = "RSS Aggregator Feed",
+			"rss_generator" = "RSS Aggregator by Perfect Code, LLC",
+			"rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
+			"rss_webmaster" = "",
+			"rss_max_feeds" = "30",
+			"rss_max_feed_items" = "30",
+			"rss_content_enable" = "true",
+			"rss_cache_enable" = "true",
+			"rss_cache_name" = "Template",
+			"rss_cache_timeout" = "60",
+			"rss_cache_idle_timeout" = "15"
 
 		};
 
@@ -350,8 +349,8 @@ component {
 		var pageService = controller.getWireBox().getInstance("pageService@cb");
 		var authorService = controller.getWireBox().getInstance("authorService@cb");
 		var roleService = controller.getWireBox().getInstance("roleService@cb");
-		if ( len( agSettings.ag_importing_item_author ) ) {
-			var author = authorService.get( prc.agSettings.ag_importing_item_author );
+		if ( len( agSettings.importing_feed_item_author ) ) {
+			var author = authorService.get( prc.agSettings.importing_feed_item_author );
 		} else {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );

@@ -70,19 +70,19 @@ component extends="coldbox.system.Interceptor" {
 		var settings = arguments.interceptData.settings;
 		var oldSettings = arguments.interceptData.oldSettings;
 		if (
-			settings.ag_importing_match_any_filter != oldSettings.ag_importing_match_any_filter ||
-			settings.ag_importing_match_all_filter != oldSettings.ag_importing_match_all_filter ||
-			settings.ag_importing_match_none_filter != oldSettings.ag_importing_match_none_filter
+			settings.importing_match_any_filter != oldSettings.importing_match_any_filter ||
+			settings.importing_match_all_filter != oldSettings.importing_match_all_filter ||
+			settings.importing_match_none_filter != oldSettings.importing_match_none_filter
 		) {
 			doKeywordCleanup();
 		}
 		if (
-			val( settings.ag_importing_max_age ) != val( oldSettings.ag_importing_max_age ) ||
-			settings.ag_importing_max_age_unit != oldSettings.ag_importing_max_age_unit
+			val( settings.importing_max_feed_item_age ) != val( oldSettings.importing_max_feed_item_age ) ||
+			settings.importing_max_feed_item_age_unit != oldSettings.importing_max_feed_item_age_unit
 		 ) {
 			doAgeCleanup();
 		}
-		if ( val( settings.ag_importing_max_items ) != val( oldSettings.ag_importing_max_items ) ) {
+		if ( val( settings.importing_max_feed_items ) != val( oldSettings.importing_max_feed_items ) ) {
 			doMaxItemCleanup();
 		}
 	}
@@ -110,9 +110,9 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Keyword filters
-			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : settings.ag_importing_match_any_filter );
-			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : settings.ag_importing_match_all_filter );
-			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : settings.ag_importing_match_none_filter );
+			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : settings.importing_match_any_filter );
+			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : settings.importing_match_all_filter );
+			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : settings.importing_match_none_filter );
 
 			// Filter out if any filters exist
 			if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {
@@ -226,8 +226,8 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Max age
-			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.ag_importing_max_age );
-			var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
+			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.importing_max_feed_item_age );
+			var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.importing_max_feed_item_age_unit;
 			if ( maxAge ) {
 				var maxDate = now();
 				switch( maxAgeUnit ) {
@@ -291,7 +291,7 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Max items
-			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.ag_importing_max_items );
+			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.importing_max_feed_items );
 			if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
 				var feedItems = feed.getFeedItems();
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );

@@ -41,7 +41,7 @@ component extends="coldbox.system.Interceptor" {
 		var feeds = arguments.interceptData.feeds;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		for ( var feed IN feeds ) {
-			applyTaxonomies( settings.ag_importing_taxonomies, feed );
+			applyTaxonomies( settings.importing_taxonomies, feed );
 		}
 	}
 
@@ -51,8 +51,8 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_postSettingsSave( event, interceptData ) {
 		var settings = arguments.interceptData.settings;
 		var oldSettings = arguments.interceptData.oldSettings;
-		if ( !settings.ag_importing_taxonomies.equals( oldSettings.ag_importing_taxonomies ) ) {
-			applyTaxonomies( settings.ag_importing_taxonomies );
+		if ( !settings.importing_taxonomies.equals( oldSettings.importing_taxonomies ) ) {
+			applyTaxonomies( settings.importing_taxonomies );
 		}
 	}
 

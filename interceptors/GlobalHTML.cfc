@@ -12,28 +12,28 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired before feed items display
 	 */
 	function aggregator_preFeedItemsDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_pre_feed_items_display );
+		arguments.buffer.append( getSettings( event ).html_pre_feed_items_display );
 	}
 
 	/**
 	 * Fired after feed items display
 	 */
 	function aggregator_postFeedItemsDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_post_feed_items_display );
+		arguments.buffer.append( getSettings( event ).html_post_feed_items_display );
 	}
 
 	/**
 	 * Fired before feeds display
 	 */
 	function aggregator_preFeedsDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_pre_feeds_display );
+		arguments.buffer.append( getSettings( event ).html_pre_feeds_display );
 	}
 
 	/**
 	 * Fired after feeds display
 	 */
 	function aggregator_postFeedsDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_post_feeds_display );
+		arguments.buffer.append( getSettings( event ).html_post_feeds_display );
 	}
 
 	/**
@@ -41,7 +41,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_preFeedDisplay( event, interceptData, buffer ) {
 		var feed = arguments.interceptData.feed;
-		var html = len( feed.getPreFeedDisplay() ) ? feed.getPreFeedDisplay() : getSettings( event ).ag_html_pre_feed_display;
+		var html = len( feed.getPreFeedDisplay() ) ? feed.getPreFeedDisplay() : getSettings( event ).html_pre_feed_display;
 		arguments.buffer.append( parseFeedTokens( feed, html ) );
 	}
 
@@ -50,7 +50,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedDisplay( event, interceptData, buffer ) {
 		var feed = arguments.interceptData.feed;
-		var html = len( feed.getPostFeedDisplay() ) ? feed.getPostFeedDisplay() : getSettings( event ).ag_html_post_feed_display;
+		var html = len( feed.getPostFeedDisplay() ) ? feed.getPostFeedDisplay() : getSettings( event ).html_post_feed_display;
 		arguments.buffer.append( parseFeedTokens( feed, html ) );
 	}
 
@@ -59,7 +59,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_preFeedItemDisplay( event, interceptData, buffer ) {
 		var feedItem = arguments.interceptData.feedItem;
-		var html = len( feedItem.getFeed().getPreFeedItemDisplay() ) ? feedItem.getFeed().getPreFeedItemDisplay() : getSettings( event ).ag_html_pre_feeditem_display;
+		var html = len( feedItem.getFeed().getPreFeedItemDisplay() ) ? feedItem.getFeed().getPreFeedItemDisplay() : getSettings( event ).html_pre_feeditem_display;
 		arguments.buffer.append( parseFeedItemTokens( feedItem, html ) );
 	}
 
@@ -68,7 +68,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedItemDisplay( event, interceptData, buffer ) {
 		var feedItem = arguments.interceptData.feedItem;
-		var html = len( feedItem.getFeed().getPostFeedItemDisplay() ) ? feedItem.getFeed().getPostFeedItemDisplay() : getSettings( event ).ag_html_post_feeditem_display;
+		var html = len( feedItem.getFeed().getPostFeedItemDisplay() ) ? feedItem.getFeed().getPostFeedItemDisplay() : getSettings( event ).html_post_feeditem_display;
 		arguments.buffer.append( parseFeedItemTokens( feedItem, html ) );
 	}
 
@@ -76,28 +76,28 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired before archives display
 	 */
 	function aggregator_preArchivesDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_pre_archives_display );
+		arguments.buffer.append( getSettings( event ).html_pre_archives_display );
 	}
 
 	/**
 	 * Fired after archives display
 	 */
 	function aggregator_postArchivesDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_post_archives_display );
+		arguments.buffer.append( getSettings( event ).html_post_archives_display );
 	}
 
 	/**
 	 * Fired before sidebar display
 	 */
 	function aggregator_preSideBarDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_pre_sidebar_display );
+		arguments.buffer.append( getSettings( event ).html_pre_sidebar_display );
 	}
 
 	/**
 	 * Fired after sidebar display
 	 */
 	function aggregator_postSideBarDisplay( event, interceptData, buffer ) {
-		arguments.buffer.append( getSettings( event ).ag_html_post_sidebar_display );
+		arguments.buffer.append( getSettings( event ).html_post_sidebar_display );
 	}
 
 	/************************************** PRIVATE *********************************************/

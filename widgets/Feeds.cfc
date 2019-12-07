@@ -54,7 +54,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// Paging
 		prc.oPaging = getModel("paging@aggregator");
-		prc.oPaging.setpagingMaxRows( ag.setting("ag_site_paging_max_feeds") );
+		prc.oPaging.setpagingMaxRows( ag.setting("paging_max_feeds") );
 		prc.pagingBoundaries = prc.oPaging.getBoundaries();
 		prc.pagingLink = ag.linkFeeds();
 
@@ -89,7 +89,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var results = feedService.getPublishedFeeds(
 			sortOrder = arguments.sortOrder,
 			category = arguments.category,
-			max = ag.setting("ag_site_paging_max_feeds"),
+			max = ag.setting("paging_max_feeds"),
 			offset = prc.pagingBoundaries.startRow - 1
 		);
 		prc.feeds = results.feeds;

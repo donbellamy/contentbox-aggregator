@@ -20,7 +20,7 @@
 <!---					RSS DISCOVERY													--->
 <!--- ********************************************************************************* --->
 <cfif cb.themeSetting( "rssDiscovery", true ) >
-	<cfif ag.setting("ag_rss_enable") >
+	<cfif ag.setting("rss_enable") >
 		<link rel="alternate" type="application/rss+xml" title="Recent News" href="#ag.linkRSS()#" />
 		<link rel="alternate" type="application/rss+xml" title="Recent Feeds" href="#ag.linkFeedsRSS()#" />
 		<cfif ag.isFeedView() >

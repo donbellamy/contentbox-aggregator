@@ -63,12 +63,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			if ( structKeyExists( remoteFeed, "items" ) && arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
-				var itemStatus = len( arguments.feed.getItemStatus() ) ? arguments.feed.getItemStatus() : settings.ag_importing_item_status;
-				var itemPubDate = len( arguments.feed.getItemPubDate() ) ? arguments.feed.getItemPubDate() : settings.ag_importing_item_pub_date;
+				var itemStatus = len( arguments.feed.getItemStatus() ) ? arguments.feed.getItemStatus() : settings.importing_feed_item_status;
+				var itemPubDate = len( arguments.feed.getItemPubDate() ) ? arguments.feed.getItemPubDate() : settings.importing_feed_item_published_date;
 
 				// Grab image settings
-				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.ag_importing_featured_image_enable;
-				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.ag_importing_all_images_enable;
+				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.importing_featured_image_enable;
+				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.importing_all_images_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -243,8 +243,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															var image = imageRead( imagePath );
 
 															// Save the image if it is valid
-															if ( image.getWidth() GTE val( settings.ag_importing_image_minimum_width ) &&
-																image.getHeight() GTE val( settings.ag_importing_image_minimum_height ) ) {
+															if ( image.getWidth() GTE val( settings.importing_image_minimum_width ) &&
+																image.getHeight() GTE val( settings.importing_image_minimum_height ) ) {
 
 																// Set the image url
 																var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
@@ -492,9 +492,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Set vars
 		var passes = true;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.ag_importing_match_any_filter ) );
-		var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.ag_importing_match_all_filter ) );
-		var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.ag_importing_match_none_filter ) );
+		var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.importing_match_any_filter ) );
+		var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.importing_match_all_filter ) );
+		var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.importing_match_none_filter ) );
 
 		// Filter out if any filters exist
 		if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {
@@ -550,8 +550,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Set vars
 		var passes = true;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var maxAge = val( arguments.feed.getMaxAge() ) ? val( arguments.feed.getMaxAge() ) : val( settings.ag_importing_max_age );
-		var maxAgeUnit = val( arguments.feed.getMaxAge() ) ? arguments.feed.getMaxAgeUnit() : settings.ag_importing_max_age_unit;
+		var maxAge = val( arguments.feed.getMaxAge() ) ? val( arguments.feed.getMaxAge() ) : val( settings.importing_max_feed_item_age );
+		var maxAgeUnit = val( arguments.feed.getMaxAge() ) ? arguments.feed.getMaxAgeUnit() : settings.importing_max_feed_item_age_unit;
 
 		// Check date
 		if ( maxAge ) {
