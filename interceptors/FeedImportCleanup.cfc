@@ -24,7 +24,7 @@ component extends="coldbox.system.Interceptor" {
 	function aggregator_postSettingsSave( event, interceptData ) {
 		var settings = arguments.interceptData.settings;
 		var oldSettings = arguments.interceptData.oldSettings;
-		if ( val( settings.importing_max_imports ) != val( oldSettings.importing_max_imports ) ) {
+		if ( val( settings.importing_max_feed_imports ) != val( oldSettings.importing_max_feed_imports ) ) {
 			doFeedImportCleanup();
 		}
 	}
@@ -47,7 +47,7 @@ component extends="coldbox.system.Interceptor" {
 
 		// Loop over feeds
 		for ( var feed IN feeds ) {
-			var maxFeedImports = val( settings.importing_max_imports );
+			var maxFeedImports = val( settings.importing_max_feed_imports );
 			var feedImports = feed.getFeedImports();
 			var numberDeleted = 0;
 			if ( maxFeedImports && ( arrayLen( feedImports ) GT maxFeedImports ) ) {

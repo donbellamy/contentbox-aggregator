@@ -122,6 +122,7 @@ component extends="contentHandler" {
 
 		// Lookups
 		prc.limitUnits = [
+			{ name = "n/a", value = "" },
 			{ name = "Days", value = "days" },
 			{ name = "Weeks", value = "weeks" },
 			{ name = "Months", value = "months" },

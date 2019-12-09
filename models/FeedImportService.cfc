@@ -304,7 +304,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											// Add the content version
 											feedItem.addNewContentVersion(
 												content = feedBody,
-												changelog = "Item imported.",
+												changelog = "Feed item imported.",
 												author = arguments.author
 											);
 

@@ -27,7 +27,7 @@ component {
 
 			// Feeds
 			"feeds_entrypoint" = "feeds",
-			"feeds_include_items" = "false",
+			"feeds_include_feed_items" = "false",
 			"feeds_show_featured_image" = "true",
 			"feeds_show_website" = "true",
 			"feeds_show_rss" = "true",
@@ -68,7 +68,7 @@ component {
 			"importing_start_date" = "",
 			"importing_start_time" = "",
 			"importing_secret_key" = hash( getCurrentTemplatePath() ),
-			"importing_max_imports" = "25",
+			"importing_max_feed_imports" = "25",
 			"importing_feed_item_author" = "",
 			"importing_feed_item_status" = "draft",
 			"importing_feed_item_published_date" = "original",
@@ -100,11 +100,11 @@ component {
 
 			// RSS
 			"rss_enable" = "true",
-			"rss_title" = "RSS Aggregator Feed",
-			"rss_description" = "RSS Aggregator Feed",
-			"rss_generator" = "RSS Aggregator by Perfect Code, LLC",
+			"rss_title" = "ContentBox Aggregator Feed",
+			"rss_description" = "ContentBox Aggregator Feed",
+			"rss_generator" = "ContentBox Aggregator by Perfect Code, LLC",
 			"rss_copyright" = "Perfect Code, LCC (perfectcode.com)",
-			"rss_webmaster" = "",
+			"rss_webmaster" = "info@perfectcode.com",
 			"rss_max_feeds" = "30",
 			"rss_max_feed_items" = "30",
 			"rss_content_enable" = "true",

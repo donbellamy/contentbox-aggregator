@@ -90,19 +90,19 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="feeds_include_items",
+											field="feeds_include_feed_items",
 											content="Include Feed Items:"
 										)#
 										<p><small>If enabled, the latest feed items will also be displayed within the list of feeds.</small></p>
 										<div class="controls">
 											#html.checkbox(
-												name="feeds_include_items_toggle",
-												data={ toggle: 'toggle', match: 'feeds_include_items' },
-												checked=prc.agSettings.feeds_include_items
+												name="feeds_include_feed_items_toggle",
+												data={ toggle: 'toggle', match: 'feeds_include_feed_items' },
+												checked=prc.agSettings.feeds_include_feed_items
 											)#
 											#html.hiddenField(
-												name="feeds_include_items",
-												value=prc.agSettings.feeds_include_items
+												name="feeds_include_feed_items",
+												value=prc.agSettings.feeds_include_feed_items
 											)#
 										</div>
 									</div>
@@ -166,7 +166,7 @@
 								</fieldset>
 								<fieldset>
 									<legend>
-										<i class="fa fa-file-text-o fa-lg"></i>
+										<i class="fa fa-file-o fa-lg"></i>
 										Feed Item Options
 									</legend>
 									<p><small>These options determine the way feed items are listed on the feed items page.  The current theme must support these settings or they will not work.</small></p>
@@ -528,7 +528,7 @@
 											<span class="badge badge-info" id="paging_max_feed_items_label">#prc.agSettings.paging_max_feed_items#</span>
 										</label>
 										<div class="controls">
-											<small>The number of feed items displayed on the feed items page and feed page before paging.</small><br />
+											<small>The number of feed items displayed on the feed items page before paging.</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="paging_max_feed_items"
@@ -708,8 +708,8 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="importing_max_imports",
-											content="Import History Limit:"
+											field="importing_max_feed_imports",
+											content="Feed Import History Limit:"
 										)#
 										<div class="controls">
 											<small>
@@ -717,9 +717,9 @@
 												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
 											</small>
 											#html.inputField(
-												name="importing_max_imports",
+												name="importing_max_feed_imports",
 												type="number",
-												value=prc.agSettings.importing_max_imports,
+												value=prc.agSettings.importing_max_feed_imports,
 												class="form-control counter",
 												placeholder="No limit",
 												min="0"
@@ -729,14 +729,14 @@
 								</fieldset>
 								<fieldset>
 									<legend>
-										<i class="fa fa-file-text-o fa-lg"></i>
-										Item Defaults
+										<i class="fa fa-file-o fa-lg"></i>
+										Feed Item Defaults
 									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="importing_feed_item_author",
-											content="Item Author:"
+											content="Feed Item Author:"
 										)#
 										<div class="controls">
 											<small>The account used as the feed item author during the automated feed import process.</small>
@@ -751,7 +751,7 @@
 										#html.label(
 											class="control-label",
 											field="importing_feed_item_status",
-											content="Item Status:"
+											content="Feed Item Status:"
 										)#
 										<div class="controls">
 											<small>The status used for imported feed items.</small>
@@ -787,13 +787,13 @@
 								<fieldset>
 									<legend>
 										<i class="fa fa-list-ol fa-lg"></i>
-										Item Limits
+										Feed Item Limits
 									</legend>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
 											field="importing_max_feed_item_age",
-											content="Limit items by age:"
+											content="Limit feed items by age:"
 										)#
 										<div>
 											<small>
@@ -826,7 +826,7 @@
 										#html.label(
 											class="control-label",
 											field="importing_max_feed_items",
-											content="Limit items by number:"
+											content="Limit feed items by number:"
 										)#
 										<div class="controls">
 											<small>
@@ -1363,7 +1363,7 @@
 										#html.label(
 											class="control-label",
 											field="rss_content_enable",
-											content="Include Item Content:"
+											content="Include Feed Item Content:"
 										)#
 										<p><small>If enabled, the feed item content as well as description will be included in the rss feed.</small></p>
 										<div class="controls">
@@ -1465,7 +1465,7 @@
 								</fieldset>
 							</div>
 							<div class="form-actions">
-								<br />#html.submitButton( value="Save Settings", class="btn btn-danger" )#
+								#html.submitButton( value="Save Settings", class="btn btn-danger" )#
 							</div>
 						</div>
 					</div>

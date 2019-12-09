@@ -50,6 +50,7 @@ component extends="baseHandler" {
 		prc.authors = authorService.getAll( sortOrder = "lastName" );
 		prc.categories = categoryService.getAll( sortOrder = "category" );
 		prc.limitUnits = [
+			{ name = "n/a", value = "" },
 			{ name = "Days", value = "days" },
 			{ name = "Weeks", value = "weeks" },
 			{ name = "Months", value = "months" },
@@ -240,15 +241,17 @@ component extends="baseHandler" {
 		if ( !len( trim( prc.agSettings.importing_secret_key ) ) ) {
 			arrayAppend( errors, "A valid secret key is required." );
 		}
-		if ( len( prc.agSettings.importing_max_imports ) && !isNumeric( prc.agSettings.importing_max_imports ) ) {
+		if ( len( prc.agSettings.importing_max_feed_imports ) && !isNumeric( prc.agSettings.importing_max_feed_imports ) ) {
 			arrayAppend( errors, "A valid import history limit is required." );
 		}
 		if ( len( prc.agSettings.importing_max_feed_item_age ) && !isNumeric( prc.agSettings.importing_max_feed_item_age ) ) {
 			arrayAppend( errors, "A valid age limit is required." );
 		}
-		// TODO: if age is valid, then unit is required
 		if ( len( prc.agSettings.importing_max_feed_items ) && !isNumeric( prc.agSettings.importing_max_feed_items ) ) {
 			arrayAppend( errors, "A valid item limit is required." );
+		}
+		if ( val( prc.agSettings.importing_max_feed_items ) && !len( prc.agSettings.importing_max_feed_item_age_unit ) ) {
+			arrayAppend( errors, "A valid age limit unit is required" );
 		}
 		prc.agSettings.importing_match_any_filter = trim( prc.agSettings.importing_match_any_filter );
 		prc.agSettings.importing_match_all_filter = trim( prc.agSettings.importing_match_all_filter );

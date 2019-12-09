@@ -1,4 +1,3 @@
-<cfdump var="#prc.feed.getSettings()#"/>
 <cfoutput>
 <div class="btn-group btn-group-xs">
 	<button class="btn btn-sm btn-info" onclick="window.location.href='#event.buildLink( prc.xehFeeds )#';return false;">
@@ -43,7 +42,7 @@
 					</li>
 					<li role="presentation">
 						<a href="##site" aria-controls="site" role="tab" data-toggle="tab">
-							<i class="fa fa-cog"></i> Site
+							<i class="fa fa-cog"></i> Site Options
 						</a>
 					</li>
 					<li role="presentation">
@@ -162,7 +161,10 @@
 				</div>
 				<div role="tabpanel" class="tab-pane" id="site">
 					<fieldset>
-						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Options</legend>
+						<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-file-o fa-lg"></i> Feed Item Options</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -330,7 +332,7 @@
 						</fieldset>
 					</cfif>
 					<fieldset>
-						<legend><i class="fa fa-file-text-o fa-lg"></i> Item Defaults</legend>
+						<legend><i class="fa fa-file-o fa-lg"></i> Feed Item Defaults</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -371,7 +373,7 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend><i class="fa fa-list-ol fa-lg"></i> Item Limits</legend>
+						<legend><i class="fa fa-list-ol fa-lg"></i> Feed Item Limits</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -809,7 +811,7 @@
 							<p>
 								Below are the most recent feed imports.
 								You can view the import record by clicking the view icon.
-								The current import history limit of <strong>#prc.agSettings.importing_max_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
+								The current import history limit of <strong>#prc.agSettings.importing_max_feed_imports#</strong> records can be changed in the <a href="#event.buildLink(prc.xehAggregatorSettings)#">settings</a>.
 							</p>
 							<table id="feedImportsTable" width="100%" class="table table-hover table-condensed table-striped" border="0">
 								<thead>
