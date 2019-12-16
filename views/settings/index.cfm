@@ -50,8 +50,8 @@
 											field="feeds_entrypoint",
 											content="Feeds Page:"
 										)#
+										<p><small>The page used in the site to display the list of feeds.</small></p>
 										<div class="controls">
-											<small>The page used in the site to display the list of feeds.</small>
 											#html.select(
 												name="feeds_entrypoint",
 												options=prc.pages,
@@ -68,8 +68,8 @@
 											field="feed_items_entrypoint",
 											content="Feed Items Page:"
 										)#
+										<p><small>The page used in the site to display the imported feed items.</small></p>
 										<div class="controls">
-											<small>The page used in the site to display the imported feed items.</small>
 											#html.select(
 												name="feed_items_entrypoint",
 												options=prc.pages,
@@ -86,7 +86,6 @@
 										<i class="fa fa-file-text-o fa-lg"></i>
 										Feed Options
 									</legend>
-									<p><small>These options determine the way feeds are listed on the feeds page.  The current theme must support these settings or they will not work.</small></p>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -112,7 +111,7 @@
 											field="feeds_show_featured_image",
 											content="Show Featured Image:"
 										)#
-										<p><small>If enabled, the feed's featured image will be displayed if one exists.</small></p>
+										<p><small>If enabled, the feed's featured image will be displayed.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="feeds_show_featured_image_toggle",
@@ -131,7 +130,7 @@
 											field="feeds_show_website",
 											content="Show Website Link:"
 										)#
-										<p><small>If enabled, a link to the feed's website will be displayed within the list of feeds.</small></p>
+										<p><small>If enabled, a link to the feed's website will be displayed.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="feeds_show_website_toggle",
@@ -150,7 +149,7 @@
 											field="feeds_show_rss",
 											content="Show RSS Link:"
 										)#
-										<p><small>If enabled, a link to the feed's rss will be displayed within the list of feeds.</small></p>
+										<p><small>If enabled, a link to the feed's rss will be displayed.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="feeds_show_rss_toggle",
@@ -169,7 +168,6 @@
 										<i class="fa fa-file-o fa-lg"></i>
 										Feed Item Options
 									</legend>
-									<p><small>These options determine the way feed items are listed on the feed items page.  The current theme must support these settings or they will not work.</small></p>
 									<div class="form-group">
 										#html.label(
 											class="control-label",
@@ -328,8 +326,8 @@
 											field="feed_items_excerpt_limit",
 											content="Excerpt Character Limit:"
 										)#
+										<p><small>The maximum number of characters to display in the feed item excerpt.</small></p>
 										<div class="controls">
-											<small>The maximum number of characters to display in the feed item excerpt.</small>
 											#html.inputField(
 												name="feed_items_excerpt_limit",
 												type="number",
@@ -346,8 +344,8 @@
 											field="feed_items_excerpt_ending",
 											content="Excerpt Ending:"
 										)#
+										<p><small>The ending text displayed when the length of the excerpt is larger than the character limit.</small></p>
 										<div class="controls">
-											<small>The ending text displayed when the length of the excerpt is larger than the character limit.</small>
 											#html.textField(
 												name="feed_items_excerpt_ending",
 												value=prc.agSettings.feed_items_excerpt_ending,
@@ -381,8 +379,8 @@
 											field="feed_items_read_more_text",
 											content="Read More Text:"
 										)#
+										<p><small>The text used when the read more link is enabled.</small></p>
 										<div class="controls">
-											<small>The text used when the read more link is enabled.</small>
 											#html.textField(
 												name="feed_items_read_more_text",
 												required="required",
@@ -398,8 +396,8 @@
 											field="feed_items_link_behavior",
 											content="Link Behavior:"
 										)#
+										<p><small>The default behavior when clicking on a feed item.</small></p>
 										<div class="controls">
-											<small>The default behavior when clicking on a feed item.</small>
 											#html.select(
 												name="feed_items_link_behavior",
 												options=prc.linkOptions,
@@ -454,8 +452,8 @@
 											field="feed_items_featured_image_behavior",
 											content="Featured Image Behavior:"
 										)#
+										<p><small>The default behavior when a feed item does not have a featured image.</small></p>
 										<div class="controls">
-											<small>The default behavior when a feed item does not have a featured image.</small>
 											#html.select(
 												name="feed_items_featured_image_behavior",
 												options=prc.featuredImageOptions,
@@ -472,7 +470,7 @@
 											field="feed_items_featured_image_default",
 											content="Default Featured Image:"
 										)#
-										<div><small class="text-left">Use the tool below to select a default featured image.</small></div>
+										<p><small>Use the tool below to select a default featured image.</small></p>
 										<div class="controls text-center">
 											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultImageCallback' )">Select Image</a>
 											<div class="<cfif !len( prc.agSettings.feed_items_featured_image_default ) >hide</cfif> form-group" id="default_image_controls">
@@ -506,8 +504,8 @@
 											Max Feeds:
 											<span class="badge badge-info" id="paging_max_feeds_label">#prc.agSettings.paging_max_feeds#</span>
 										</label>
+										<p><small>The number of feeds displayed on the feeds page before paging.</small></p>
 										<div class="controls">
-											<small>The number of feeds displayed on the feeds page before paging..</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="paging_max_feeds"
@@ -527,8 +525,8 @@
 											Max Feed Items:
 											<span class="badge badge-info" id="paging_max_feed_items_label">#prc.agSettings.paging_max_feed_items#</span>
 										</label>
+										<p><small>The number of feed items displayed on the feed items page before paging.</small></p>
 										<div class="controls">
-											<small>The number of feed items displayed on the feed items page before paging.</small><br />
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="paging_max_feed_items"
@@ -574,8 +572,8 @@
 											field="cache_name",
 											content="Site Cache Provider:"
 										)#
+										<p><small>Choose the CacheBox provider to cache site content into.</small></p>
 										<div class="controls">
-											<small>Choose the CacheBox provider to cache site content into.</small><br/>
 											#html.select(
 												name="cache_name",
 												options=prc.cacheNames,
@@ -589,8 +587,8 @@
 											Site Cache Timeouts:
 											<span class="badge badge-info" id="site_cache_timeout_label">#prc.agSettings.site_cache_timeout#</span>
 										</label>
+										<p><small>The number of minutes site content is cached for.</small></p>
 										<div class="controls">
-											<small>The number of minutes site content is cached for.</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
 												id="site_cache_timeout"
@@ -611,8 +609,8 @@
 											Site Cache Idle Timeouts:
 											<span class="badge badge-info" id="site_cache_idle_timeout_label">#prc.agSettings.site_cache_idle_timeout#</span>
 										</label>
+										<p><small>The number of idle minutes allowed for cached site content to live. Usually this is less than the timeout you selected above</small></p>
 										<div class="controls">
-											<small>The number of idle minutes allowed for cached site content to live. Usually this is less than the timeout you selected above</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
 												id="site_cache_idle_timeout"
@@ -642,11 +640,8 @@
 											field="importing_interval",
 											content="Import Interval:"
 										)#
+										<p><small>How frequently the feeds should be checked for updates and imported.  Select "Never" if you plan to manually import feeds.</small></p>
 										<div class="controls">
-											<small>
-												How frequently the feeds should be checked for updates and imported.
-												Select "Never" if you plan to manually import feeds.
-											</small>
 											#html.select(
 												name="importing_interval",
 												options=prc.intervals,
@@ -663,7 +658,7 @@
 											field="importing_start_date",
 											content="Start Date:"
 										)#
-										<div><small>The date and time to begin importing feeds.</small></div>
+										<p><small>The date and time to begin importing feeds.</small></p>
 										<div class="controls row">
 											<div class="col-md-6">
 												<div class="input-group">
@@ -695,8 +690,8 @@
 											field="importing_secret_key",
 											content="Secret Key:"
 										)#
+										<p><small>The secret key used to secure the automated feed import process.</small></p>
 										<div class="controls">
-											<small>The secret key used to secure the automated feed import process.</small>
 											#html.textField(
 												name="importing_secret_key",
 												value=prc.agSettings.importing_secret_key,
@@ -711,11 +706,8 @@
 											field="importing_max_feed_imports",
 											content="Feed Import History Limit:"
 										)#
+										<p><small>The maximum number of records to keep in the feed import history.  When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.</small></p>
 										<div class="controls">
-											<small>
-												The maximum number of records to keep in the feed import history.
-												When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.
-											</small>
 											#html.inputField(
 												name="importing_max_feed_imports",
 												type="number",
@@ -738,8 +730,8 @@
 											field="importing_feed_item_author",
 											content="Feed Item Author:"
 										)#
+										<p><small>The account used as the feed item author during the automated feed import process.</small></p>
 										<div class="controls">
-											<small>The account used as the feed item author during the automated feed import process.</small>
 											<select name="importing_feed_item_author" id="importing_feed_item_author" class="form-control">
 												<cfloop array="#prc.authors#" index="author">
 													<option value="#author.getAuthorID()#"<cfif prc.agSettings.importing_feed_item_author EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
@@ -753,8 +745,8 @@
 											field="importing_feed_item_status",
 											content="Feed Item Status:"
 										)#
+										<p><small>The status used for imported feed items.</small></p>
 										<div class="controls">
-											<small>The status used for imported feed items.</small>
 											#html.select(
 												name="importing_feed_item_status",
 												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
@@ -771,8 +763,8 @@
 											field="importing_feed_item_published_date",
 											content="Published Date:"
 										)#
+										<p><small>The value used as the published date for imported feed items.</small></p>
 										<div class="controls">
-											<small>The value used as the published date for imported feed items.</small>
 											#html.select(
 												name="importing_feed_item_published_date",
 												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
@@ -795,12 +787,7 @@
 											field="importing_max_feed_item_age",
 											content="Limit feed items by age:"
 										)#
-										<div>
-											<small>
-												The maximum age allowed for feed items.
-												Existing feed items will be deleted once they exceed this age limit.
-											</small>
-										</div>
+										<p><small>The maximum age allowed for feed items.  Existing feed items will be deleted once they exceed this age limit.</small></p>
 										<div class="controls row">
 											<div class="col-sm-6">
 												#html.inputField(
@@ -828,11 +815,8 @@
 											field="importing_max_feed_items",
 											content="Limit feed items by number:"
 										)#
+										<p><small>The maximum number of feed items to keep per feed.  When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.</small></p>
 										<div class="controls">
-											<small>
-												The maximum number of feed items to keep per feed.
-												When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-											</small>
 											#html.inputField(
 												name="importing_max_feed_items",
 												type="number",
@@ -855,11 +839,8 @@
 											field="importing_match_any_filter",
 											content="Contains any of these kewords:"
 										)#
+										<p><small>Only feed items that contain any of these kewords in the title or body will be imported.  Existing feed items that do not contain any of these kewords in the title or body will be deleted.</small></p>
 										<div class="controls">
-											<small>
-												Only feed items that contain any of these kewords in the title or body will be imported.
-												Existing feed items that do not contain any of these kewords in the title or body will be deleted.
-											</small>
 											#html.textArea(
 												name="importing_match_any_filter",
 												value=prc.agSettings.importing_match_any_filter,
@@ -876,11 +857,8 @@
 											field="importing_match_all_filter",
 											content="Contains all of these kewords:"
 										)#
+										<p><small>Only feed items that contain all of these kewords in the title or body will be imported.  Existing feed items that do not contain all of these kewords in the title or body will be deleted.</small></p>
 										<div class="controls">
-											<small>
-												Only feed items that contain all of these kewords in the title or body will be imported.
-												Existing feed items that do not contain all of these kewords in the title or body will be deleted.
-											</small>
 											#html.textArea(
 												name="importing_match_all_filter",
 												value=prc.agSettings.importing_match_all_filter,
@@ -897,11 +875,8 @@
 											field="importing_match_none_filter",
 											content="Contains none of these kewords:"
 										)#
+										<p><small>Only feed items that do not contain any of these kewords in the title or body will be imported.  Existing feed items that contain any of these kewords in the title or body will be deleted.</small></p>
 										<div class="controls">
-											<small>
-												Only feed items that do not contain any of these kewords in the title or body will be imported.
-												Existing feed items that contain any of these kewords in the title or body will be deleted.
-											</small>
 											#html.textArea(
 												name="importing_match_none_filter",
 												value=prc.agSettings.importing_match_none_filter,
@@ -962,9 +937,8 @@
 											field="importing_image_minimum_width",
 											content="Minimum Width:"
 										)#
-
+										<p><small>Images smaller than the minimum width below will not be imported.</small></p>
 										<div class="controls">
-											<small>Images smaller than the minimum width below will not be imported.</small>
 											#html.inputField(
 												name="importing_image_minimum_width",
 												type="number",
@@ -981,9 +955,8 @@
 											field="importing_image_minimum_height",
 											content="Minimum Height:"
 										)#
-
+										<p><small>Images smaller than the minimum height below will not be imported.</small></p>
 										<div class="controls">
-											<small>Images smaller than the minimum height below will not be imported.</small>
 											#html.inputField(
 												name="importing_image_minimum_height",
 												type="number",
@@ -1011,8 +984,8 @@
 														field="importing_taxonomies_#idx#_categories",
 														content="Categories:"
 													)#
+													<p><small>Assign the following categories to feed items using the matching method below.</small></p>
 													<div class="controls">
-														<small>Assign the following categories to feed items using the matching method below.</small>
 														<div class="input-group">
 															#html.select(
 																name="importing_taxonomies_#idx#_categories",
@@ -1036,8 +1009,8 @@
 														field="importing_taxonomies_#idx#_method",
 														content="Matching Method:"
 													)#
+													<p><small>Use the following method when matching feed items to the above categories.</small></p>
 													<div class="controls">
-														<small>Use the following method when matching feed items to the above categories.</small>
 														#html.select(
 															name="importing_taxonomies_#idx#_method",
 															options=prc.matchOptions,
@@ -1054,8 +1027,8 @@
 														field="importing_taxonomies_#idx#_keywords",
 														content="Keywords:"
 													)#
+													<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
 													<div class="controls">
-														<small>Use the following keywords when matching feed items to the above categories.</small>
 														#html.textArea(
 															name="importing_taxonomies_#idx#_keywords",
 															value=taxonomy.keywords,
@@ -1086,7 +1059,7 @@
 										<i class="fa fa-globe fa-lg"></i>
 										Global HTML
 									</legend>
-									<p>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
+									<p><small>These global HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</small></p>
 									#html.textarea(
 										name="html_pre_feed_items_display",
 										label="Before Feed Items:",
@@ -1239,8 +1212,8 @@
 											field="rss_title",
 											content="Feed Title:"
 										)#
+										<p><small>The title of the rss feed</small></p>
 										<div class="controls">
-											<small>The title of the rss feed</small><br/>
 											#html.textField(
 												name="rss_title",
 												required="required",
@@ -1256,8 +1229,8 @@
 											field="rss_description",
 											content="Feed Description:"
 										)#
+										<p><small>The description of the rss feed</small></p>
 										<div class="controls">
-											<small>The description of the rss feed</small><br/>
 											#html.textArea(
 												name="rss_description",
 												value=prc.agSettings.rss_description,
@@ -1273,8 +1246,8 @@
 											field="rss_generator",
 											content="Feed Generator:"
 										)#
+										<p><small>The generator of the rss feed</small></p>
 										<div class="controls">
-											<small>The generator of the rss feed</small><br/>
 											#html.textField(
 												name="rss_generator",
 												required="required",
@@ -1290,8 +1263,8 @@
 											field="rss_copyright",
 											content="Feed Copyright:"
 										)#
+										<p><small>The copyright of the rss feed</small></p>
 										<div class="controls">
-											<small>The copyright of the rss feed</small><br/>
 											#html.textField(
 												name="rss_copyright",
 												required="required",
@@ -1307,8 +1280,8 @@
 											field="rss_webmaster",
 											content="Feed Webmaster:"
 										)#
+										<p><small>The rss feed webmaster. Ex: myemail@mysite.com (Site Administrator)</small></p>
 										<div class="controls">
-											<small>The rss feed webmaster. Ex: myemail@mysite.com (Site Administrator)</small><br/>
 											#html.textField(
 												name="rss_webmaster",
 												value=prc.agSettings.rss_webmaster,
@@ -1322,8 +1295,8 @@
 											Max RSS Feeds:
 											<span class="badge badge-info" id="rss_max_feeds_label">#prc.agSettings.rss_max_feeds#</span>
 										</label>
+										<p><small>The number of feeds to show in the feeds rss feed.</small></p>
 										<div class="controls">
-											<small>The number of feeds to show in the feeds rss feed.</small><br/>
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="rss_max_feeds"
@@ -1343,8 +1316,8 @@
 											Max RSS Feed Items:
 											<span class="badge badge-info" id="rss_max_feed_items_label">#prc.agSettings.rss_max_feed_items#</span>
 										</label>
+										<p><small>The number of feed items to show in the feed items rss feed.</small></p>
 										<div class="controls">
-											<small>The number of feed items to show in the feed items rss feed.</small><br/>
 											<strong class="margin10">10</strong>
 											<input type="text"
 												id="rss_max_feed_items"
@@ -1408,8 +1381,8 @@
 											field="rss_cache_name",
 											content="Feed Cache Provider:"
 										)#
+										<p><small>Choose the CacheBox provider to cache feed content into.</small></p>
 										<div class="controls">
-											<small>Choose the CacheBox provider to cache feed content into.</small><br/>
 											#html.select(
 												name="rss_cache_name",
 												options=prc.cacheNames,
@@ -1423,8 +1396,8 @@
 											Feed Cache Timeouts:
 											<span class="badge badge-info" id="rss_cache_timeout_label">#prc.agSettings.rss_cache_timeout#</span>
 										</label>
+										<p><small>The number of minutes a feed XML is cached per permutation of feed type.</small></p>
 										<div class="controls">
-											<small>The number of minutes a feed XML is cached per permutation of feed type.</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
 												id="rss_cache_timeout"
@@ -1445,8 +1418,8 @@
 											Feed Cache Idle Timeouts:
 											<span class="badge badge-info" id="rss_cache_idle_timeout_label">#prc.agSettings.rss_cache_idle_timeout#</span>
 										</label>
+										<p><small>The number of idle minutes allowed for cached RSS feeds to live. Usually this is less than the timeout you selected above</small></p>
 										<div class="controls">
-											<small>The number of idle minutes allowed for cached RSS feeds to live. Usually this is less than the timeout you selected above</small><br/>
 											<strong class="margin10">5</strong>
 											<input type="text"
 												id="rss_cache_idle_timeout"
@@ -1485,8 +1458,8 @@
 				field="importing_taxonomies_templateIndex_categories",
 				content="Categories:"
 			)#
+			<p><small>Assign the following categories to feed items using the matching method below.</small></p>
 			<div class="controls">
-				<small>Assign the following categories to feed items using the matching method below.</small><br/>
 				#html.select(
 					name="importing_taxonomies_templateIndex_categories",
 					options=prc.categories,
@@ -1503,8 +1476,8 @@
 				field="importing_taxonomies_templateIndex_method",
 				content="Matching Method:"
 			)#
+			<p><small>Use the following method when matching feed items to the above categories.</small></p>
 			<div class="controls">
-				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
 					name="importing_taxonomies_templateIndex_method",
 					options=prc.matchOptions,
@@ -1520,8 +1493,8 @@
 				field="importing_taxonomies_templateIndex_keywords",
 				content="Keywords:"
 			)#
+			<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
 			<div class="controls">
-				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
 					name="importing_taxonomies_templateIndex_keywords",
 					rows="2",

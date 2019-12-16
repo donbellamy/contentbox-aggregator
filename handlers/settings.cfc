@@ -91,13 +91,15 @@ component extends="baseHandler" {
 		// Old settings
 		var oldSettings = duplicate( prc.agSettings );
 
+
+
 		// Taxonomies
 		var taxonomies = [];
 		rc["importing_taxonomies"] = [];
 		for ( var item IN rc ) {
 			if ( reFindNoCase( "^importing_taxonomies_", item ) ) {
 				var key = listLast( item, "_" );
-				var count = listGetAt( item, 4, "_" );
+				var count = listGetAt( item, 3, "_" );
 				if ( arrayLen( taxonomies ) LT count ) {
 					taxonomies[ count ] = {};
 				}

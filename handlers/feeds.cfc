@@ -133,6 +133,101 @@ component extends="contentHandler" {
 			value = ""
 		});
 		prc.categories = categoryService.getAll( sortOrder = "category" );
+		prc.includeFeedItemOptions = [
+			{ name = "Include feed items in the list of feeds for this feed.", value = "true" },
+			{ name = "Do not include feed items in the list of feeds for this feed.", value = "false" }
+		];
+		arrayPrepend( prc.includeFeedItemOptions, {
+			name = "Use the default setting - #prc.includeFeedItemOptions[ arrayFind( prc.includeFeedItemOptions, function( struct ) { return struct.value == prc.agSettings.feeds_include_feed_items; } ) ].name#",
+			value = ""
+		});
+		prc.feedFeaturedImageOptions = [
+			{ name = "Display the featured image for this feed.", value = "true" },
+			{ name = "Do not display the featured image for this feed.", value = "false" }
+		];
+		arrayPrepend( prc.feedFeaturedImageOptions, {
+			name = "Use the default setting - #prc.feedFeaturedImageOptions[ arrayFind( prc.feedFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_featured_image; } ) ].name#",
+			value = ""
+		});
+		prc.showWebsiteOptions = [
+			{ name = "Display a link to the feed's website for this feed.", value = "true" },
+			{ name = "Do not display a link to the feed's website for this feed.", value = "false" }
+		];
+		arrayPrepend( prc.showWebsiteOptions, {
+			name = "Use the default setting - #prc.showWebsiteOptions[ arrayFind( prc.showWebsiteOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_website; } ) ].name#",
+			value = ""
+		});
+		prc.showRSSOptions = [
+			{ name = "Display a link to the feed's rss for this feed.", value = "true" },
+			{ name = "Do not display a link to the feed's rss for this feed.", value = "false" }
+		];
+		arrayPrepend( prc.showRSSOptions, {
+			name = "Use the default setting - #prc.showRSSOptions[ arrayFind( prc.showRSSOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_rss; } ) ].name#",
+			value = ""
+		});
+
+		prc.showVideoOptions = [
+			{ name = "Display an inline video player for videos.", value = "true" },
+			{ name = "Do not display an inline video player for videos.", value = "false" }
+		];
+		arrayPrepend( prc.showVideoOptions, {
+			name = "Use the default setting - #prc.showVideoOptions[ arrayFind( prc.showVideoOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_video_player; } ) ].name#",
+			value = ""
+		});
+		prc.showAudioOptions = [
+			{ name = "Display an inline audio player for podcasts.", value = "true" },
+			{ name = "Do not display an inline audio player for podcasts.", value = "false" }
+		];
+		arrayPrepend( prc.showAudioOptions, {
+			name = "Use the default setting - #prc.showAudioOptions[ arrayFind( prc.showAudioOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_video_player; } ) ].name#",
+			value = ""
+		});
+
+		prc.showSourceOptions = [
+			{ name = "Display the feed source for feed items.", value = "true" },
+			{ name = "Do not display the feed source for feed items.", value = "false" }
+		];
+		arrayPrepend( prc.showSourceOptions, {
+			name = "Use the default setting - #prc.showSourceOptions[ arrayFind( prc.showSourceOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_source; } ) ].name#",
+			value = ""
+		});
+
+		prc.showAuthorOptions = [
+			{ name = "Display the author for feed items.", value = "true" },
+			{ name = "Do not display the author for feed items.", value = "false" }
+		];
+		arrayPrepend( prc.showAuthorOptions, {
+			name = "Use the default setting - #prc.showAuthorOptions[ arrayFind( prc.showAuthorOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_author; } ) ].name#",
+			value = ""
+		});
+
+		prc.showCategoryOptions = [
+			{ name = "Display the categories for feed items.", value = "true" },
+			{ name = "Do not display the categories for feed items.", value = "false" }
+		];
+		arrayPrepend( prc.showCategoryOptions, {
+			name = "Use the default setting - #prc.showCategoryOptions[ arrayFind( prc.showCategoryOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_categories; } ) ].name#",
+			value = ""
+		});
+
+		prc.showExcerptOptions = [
+			{ name = "Display an excerpt for feed items.", value = "true" },
+			{ name = "Do not display an excerpt for feed items.", value = "false" }
+		];
+		arrayPrepend( prc.showExcerptOptions, {
+			name = "Use the default setting - #prc.showExcerptOptions[ arrayFind( prc.showExcerptOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_excerpt; } ) ].name#",
+			value = ""
+		});
+
+		prc.showReadMoreOptions = [
+			{ name = "Display a link after the excerpt for feed items.", value = "true" },
+			{ name = "Do not display a link after the excerpt for feed items.", value = "false" }
+		];
+		arrayPrepend( prc.showReadMoreOptions, {
+			name = "Use the default setting - #prc.showReadMoreOptions[ arrayFind( prc.showReadMoreOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_read_more; } ) ].name#",
+			value = ""
+		});
+
 		prc.linkOptions = [
 			{ name = "Forward the user directly to the feed item.", value = "forward" },
 			{ name = "Link the user directly to the feed item.", value = "link" },
@@ -219,6 +314,12 @@ component extends="contentHandler" {
 			.paramValue( "content", "" );
 
 		// Site Options
+
+		event.paramValue( "settings_feeds_include_feed_items", "" )
+			.paramValue( "settings_feeds_show_featured_image", "" )
+			.paramValue( "settings_feeds_show_website", "" )
+			.paramValue( "settings_feeds_show_rss", "" );
+
 		event.paramValue( "settings_linkBehavior", "" )
 			.paramValue( "settings_featuredImageBehavior", "" )
 			.paramValue( "settings_pagingMaxItems", "" );
@@ -272,6 +373,9 @@ component extends="contentHandler" {
 			}
 		}
 		rc["settings"] = settings;
+
+		writedump(rc);
+		abort;
 
 		// Taxonomies
 		var taxonomies = [];

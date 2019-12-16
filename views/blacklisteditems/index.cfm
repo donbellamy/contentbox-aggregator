@@ -116,11 +116,8 @@
 				)#
 				<div class="form-group">
 					<label class="control-label" for="itemUrl">Item URL:</label>
+					<p><small>The URL of the feed item.  Be sure to include the <code>http(s)://</code> prefix in the url.</small></p>
 					<div class="controls">
-						<small>
-							The URL of the feed item.
-							Be sure to include the <code>http(s)://</code> prefix in the url.
-						</small>
 						#html.inputfield(
 							type="url",
 							name="itemUrl",

@@ -117,11 +117,8 @@
 						<label for="feedUrl" class="control-label">
 							Feed URL:
 						</label>
+						<p><small>The URL of the feed source.  Be sure to include the <code>http(s)://</code> prefix in the url.</small></p>
 						<div class="controls">
-							<small>
-								The URL of the feed source.
-								Be sure to include the <code>http(s)://</code> prefix in the url.
-							</small>
 							<div class="input-group">
 								#html.inputfield(
 									type="url",
@@ -162,17 +159,265 @@
 				<div role="tabpanel" class="tab-pane" id="site">
 					<fieldset>
 						<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_include_feed_items",
+								content="Include Feed Items:"
+							)#
+							<p><small>If enabled, the latest feed items will also be displayed within the list of feeds for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_include_feed_items",
+									options=prc.includeFeedItemOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feeds_include_feed_items",""),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_featured_image",
+								content="Show Featured Image:"
+							)#
+							<p><small>If enabled, the feed's featured image will be displayed if one exists for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_featured_image",
+									options=prc.feedFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feeds_show_featured_image",""),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_website",
+								content="Show Website Link:"
+							)#
+							<p><small>If enabled, a link to the feed's website will be displayed for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_website",
+									options=prc.showWebsiteOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feeds_show_website",""),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_rss",
+								content="Show RSS Link:"
+							)#
+							<p><small>If enabled, a link to the feed's rss will be displayed for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_rss",
+									options=prc.showRSSOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feeds_show_rss",""),
+									class="form-control"
+								)#
+							</div>
+						</div>
 					</fieldset>
 					<fieldset>
 						<legend><i class="fa fa-file-o fa-lg"></i> Feed Item Options</legend>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
+								field="settings_feed_items_show_video_player",
+								content="Show Video Player:"
+							)#
+							<p><small>If enabled, an inline video player will be displayed for videos.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_video_player",
+									options=prc.showVideoOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_video_player",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_audio_player",
+								content="Show Audio Player:"
+							)#
+							<p><small>If enabled, an inline audio player will be displayed for podcasts.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_audio_player",
+									options=prc.showAudioOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_audio_player",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_source",
+								content="Show Source:"
+							)#
+							<p><small>If enabled, the feed source will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_source",
+									options=prc.showSourceOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_source",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_author",
+								content="Show Author:"
+							)#
+							<p><small>If enabled, the author will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_author",
+									options=prc.showAuthorOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_author",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_categories",
+								content="Show Categories:"
+							)#
+							<p><small>If enabled, the categories will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_categories",
+									options=prc.showCategoryOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_categories",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_excerpt",
+								content="Show Excerpt:"
+							)#
+							<p><small>If enabled, an excerpt will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_excerpt",
+									options=prc.showExcerptOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_excerpt",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_excerpt_limit",
+								content="Excerpt Character Limit:"
+							)#
+							<p><small>The maximum number of characters to display in the feed item excerpt.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_excerpt_limit",
+									type="number",
+									value=prc.feed.getSetting("feed_items_excerpt_limit",""),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_limit#",
+									min="0"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_excerpt_ending",
+								content="Excerpt Ending:"
+							)#
+							<p><small>The ending text displayed when the length of the excerpt is larger than the character limit.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_excerpt_ending",
+									value=prc.feed.getSetting("feed_items_excerpt_ending",""),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_ending#"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_read_more",
+								content="Show Read More:"
+							)#
+							<p><small>If enabled, a link to the feed item will be displayed after the feed item excerpt.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_read_more",
+									options=prc.showReadMoreOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_read_more",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_read_more_text",
+								content="Read More Text:"
+							)#
+							<p><small>The text used when the read more link is enabled.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_read_more_text",
+									value=prc.feed.getSetting("feed_items_read_more_text",""),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_read_more_text#"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
 								field="linkBehavior",
 								content="Link Behavior:"
 							)#
+							<p><small>The default behavior when clicking on a feed item.</small></p>
 							<div class="controls">
-								<small>The default behavior when clicking on a feed item.</small>
 								#html.select(
 									name="settings_linkBehavior",
 									id="linkBehavior",
@@ -184,14 +429,16 @@
 								)#
 							</div>
 						</div>
+						Open New Window<br/>
+
 						<div class="form-group">
 							#html.label(
 								class="control-label",
 								field="featuredImageBehavior",
 								content="Featured Image Behavior:"
 							)#
+							<p><small>The default behavior when a feed item has no featured image.</small></p>
 							<div class="controls">
-								<small>The default behavior when a feed item has no featured image.</small>
 								#html.select(
 									name="settings_featuredImageBehavior",
 									id="featuredImageBehavior",
@@ -212,8 +459,8 @@
 								field="pagingMaxItems",
 								content="Max Feed Items:"
 							)#
+							<p><small>The number of feed items displayed on the feed page before paging.</small></p>
 							<div class="controls">
-								<small>The number of feed items displayed on the feed page before paging.</small>
 								#html.inputField(
 									name="settings_pagingMaxItems",
 									id="pagingMaxItems",
@@ -237,8 +484,8 @@
 									field="isActive",
 									content="Import State"
 								)#
+								<p><small>When active, this feed will be included in the automated feed import process.</small></p>
 								<div class="controls">
-									<small>When active, this feed will be included in the automated feed import process.</small>
 									#html.select(
 										name="isActive",
 										options=[{name="Active",value="true"},{name="Paused",value="false"}],
@@ -255,7 +502,7 @@
 									field="startDate",
 									content="Start Date"
 								)#
-								<div><small>The date and time to begin importing this feed.</small></div>
+								<p><small>The date and time to begin importing this feed.</small></p>
 								<div class="controls row">
 									<div class="col-md-6">
 										<div class="input-group">
@@ -295,7 +542,7 @@
 									field="stopDate",
 									content="Stop Date"
 								)#
-								<div><small>The date and time to stop importing this feed.</small></div>
+								<p><small>The date and time to stop importing this feed.</small></p>
 								<div class="controls row">
 									<div class="col-md-6">
 										<div class="input-group">
@@ -339,8 +586,8 @@
 								field="itemStatus",
 								content="Item Status"
 							)#
+							<p><small>The status used for imported feed items.</small></p>
 							<div class="controls">
-								<small>The status used for imported feed items.</small>
 								#html.select(
 									name="settings_itemStatus",
 									id="itemStatus",
@@ -358,8 +605,8 @@
 								field="ItemPubDate",
 								content="Published Date:"
 							)#
+							<p><small>The value used as the published date for imported feed items.</small></p>
 							<div class="controls">
-								<small>The value used as the published date for imported feed items.</small>
 								#html.select(
 									name="settings_itemPubDate",
 									id="itemPubDate",
@@ -380,12 +627,7 @@
 								field="maxAge",
 								content="Limit items by age:"
 							)#
-							<div>
-								<small>
-									The maximum age allowed for feed items.
-									Existing feed items will be deleted once they exceed this age limit.
-								</small>
-							</div>
+							<p><small>The maximum age allowed for feed items.  Existing feed items will be deleted once they exceed this age limit.</small></p>
 							<div class="controls row">
 								<div class="col-sm-6">
 									#html.inputField(
@@ -415,11 +657,8 @@
 								field="maxItems",
 								content="Limit items by number:"
 							)#
+							<p><small>The maximum number of feed items to keep per feed.  When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.</small></p>
 							<div class="controls">
-								<small>
-									The maximum number of feed items to keep per feed.
-									When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.
-								</small>
 								#html.inputField(
 									name="settings_maxItems",
 									id="maxItems",
@@ -440,11 +679,8 @@
 								field="matchAnyFilter",
 								content="Contains any of these keywords:"
 							)#
+							<p><small>Only feed items that contain any of these keywords in the title or body will be imported.  Existing feed items that do not contain any of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
-								<small>
-									Only feed items that contain any of these keywords in the title or body will be imported.
-									Existing feed items that do not contain any of these keywords in the title or body will be deleted.
-								</small>
 								#html.textArea(
 									name="settings_matchAnyFilter",
 									id="matchAnyFilter",
@@ -462,11 +698,8 @@
 								field="matchAllFilter",
 								content="Contains all of these keywords:"
 							)#
+							<p><small>Only feed items that contain all of these keywords in the title or body will be imported.  Existing feed items that do not contain all of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
-								<small>
-									Only feed items that contain all of these keywords in the title or body will be imported.
-									Existing feed items that do not contain all of these keywords in the title or body will be deleted.
-								</small>
 								#html.textArea(
 									name="settings_matchAllFilter",
 									id="matchAllFilter",
@@ -484,11 +717,8 @@
 								field="matchNoneFilter",
 								content="Contains none of these keywords:"
 							)#
+							<p><small>Only feed items that do not contain any of these keywords in the title or body will be imported.  Existing feed items that contain any of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
-								<small>
-									Only feed items that do not contain any of these keywords in the title or body will be imported.
-									Existing feed items that contain any of these keywords in the title or body will be deleted.
-								</small>
 								#html.textArea(
 									name="settings_matchNoneFilter",
 									id="matchNoneFilter",
@@ -509,10 +739,8 @@
 								field="importFeaturedImages",
 								content="Import Featured Images:"
 							)#
+							<p><small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small></p>
 							<div class="controls">
-								<small>
-									If enabled, an image will be saved locally as the featured image for each feed item when imported.
-								</small>
 								#html.select(
 									name="settings_importFeaturedImages",
 									id="importFeaturedImages",
@@ -530,10 +758,8 @@
 								field="importAllImages",
 								content="Import All Images:"
 							)#
+							<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
 							<div class="controls">
-								<small>
-									If enabled, all images will be saved locally for each feed item when imported.
-								</small>
 								#html.select(
 									name="settings_importAllImages",
 									id="importAllImages",
@@ -559,8 +785,8 @@
 											field="taxonomies_#idx#_categories",
 											content="Categories:"
 										)#
+										<p><small>Assign the following categories to feed items using the matching method below.</small></p>
 										<div class="controls">
-											<small>Assign the following categories to feed items using the matching method below.</small>
 											<div class="input-group">
 												#html.hiddenField( name="taxonomies_#idx#_categories", value="" )#
 												#html.select(
@@ -585,8 +811,8 @@
 											field="taxonomies_#idx#_method",
 											content="Matching Method:"
 										)#
+										<p><small>Use the following method when matching feed items to the above categories.</small></p>
 										<div class="controls">
-											<small>Use the following method when matching feed items to the above categories.</small>
 											#html.select(
 												name="taxonomies_#idx#_method",
 												options=prc.matchOptions,
@@ -603,8 +829,8 @@
 											field="taxonomies_#idx#_keywords",
 											content="Keywords:"
 										)#
+										<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
 										<div class="controls">
-											<small>Use the following keywords when matching feed items to the above categories.</small>
 											#html.textArea(
 												name="taxonomies_#idx#_keywords",
 												value=taxonomy.keywords,
@@ -632,7 +858,7 @@
 				<div role="tabpanel" class="tab-pane" id="global_html">
 					<fieldset>
 						<legend><i class="fa fa-globe fa-lg"></i> Global HTML</legend>
-						<p>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</p>
+						<p><small>These HTML snippets will be rendered by your theme's layouts and views at the specific points specified below.</small></p>
 						<div class="form-group">
 							#html.label(
 								class="control-label",
@@ -1104,8 +1330,8 @@
 				field="taxonomies_templateIndex_categories",
 				content="Categories:"
 			)#
+			<p><small>Assign the following categories to feed items using the matching method below.</small></p>
 			<div class="controls">
-				<small>Assign the following categories to feed items using the matching method below.</small><br/>
 				#html.hiddenField( name="taxonomies_templateIndex_categories", value="" )#
 				#html.select(
 					name="taxonomies_templateIndex_categories",
@@ -1123,8 +1349,8 @@
 				field="taxonomies_templateIndex_method",
 				content="Matching Method:"
 			)#
+			<p><small>Use the following method when matching feed items to the above categories.</small></p>
 			<div class="controls">
-				<small>Use the following method when matching feed items to the above categories.</small>
 				#html.select(
 					name="taxonomies_templateIndex_method",
 					options=prc.matchOptions,
@@ -1140,8 +1366,8 @@
 				field="taxonomies_templateIndex_keywords",
 				content="Keywords:"
 			)#
+			<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
 			<div class="controls">
-				<small>Use the following keywords when matching feed items to the above categories.</small>
 				#html.textArea(
 					name="taxonomies_templateIndex_keywords",
 					rows="2",
