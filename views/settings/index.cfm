@@ -414,7 +414,7 @@
 											field="feed_items_open_new_window",
 											content="Open New Window:"
 										)#
-										<p><small>If enabled, links to feed items will be open in a new window (tab).</small></p>
+										<p><small>If enabled, links to feed items will be opened in a new window (tab).</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="feed_items_open_new_window_toggle",

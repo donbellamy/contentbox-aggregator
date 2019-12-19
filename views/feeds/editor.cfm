@@ -429,8 +429,42 @@
 								)#
 							</div>
 						</div>
-						Open New Window<br/>
-
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_open_new_window",
+								content="Open New Window:"
+							)#
+							<p><small>If enabled, links to feed items will be opened in a new window (tab).</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_open_new_window",
+									options=prc.openWindowOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_open_new_window",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_featured_image",
+								content="Show Featured Image:"
+							)#
+							<p><small>If enabled, the feed item's featured image will be displayed if one exists.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_featured_image",
+									options=prc.showFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting("feed_items_show_featured_image",""),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
 						<div class="form-group">
 							#html.label(
 								class="control-label",

@@ -238,6 +238,25 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_link_behavior; } ) ].name#",
 			value = ""
 		});
+
+		prc.openWindowOptions = [
+			{ name = "Open feed items in a new window (tab).", value = "true" },
+			{ name = "Do not open feed items in a new window (tab).", value = "false" }
+		];
+		arrayPrepend( prc.openWindowOptions, {
+			name = "Use the default setting - #prc.openWindowOptions[ arrayFind( prc.openWindowOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_open_new_window; } ) ].name#",
+			value = ""
+		});
+
+		prc.showFeaturedImageOptions = [
+			{ name = "Display the feed item's featured image.", value = "true" },
+			{ name = "Do not display the feed item's featured image.", value = "false" }
+		];
+		arrayPrepend( prc.showFeaturedImageOptions, {
+			name = "Use the default setting - #prc.showFeaturedImageOptions[ arrayFind( prc.showFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_featured_image; } ) ].name#",
+			value = ""
+		});
+
 		prc.featuredImageOptions = [
 			{ name = "Display the parent feed's featured image.", value = "feed" },
 			{ name = "Display the default featured image.", value = "default" },
