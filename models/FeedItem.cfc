@@ -198,7 +198,7 @@ component persistent="true"
 		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
-			var behavior = len( feed.getSetting("feed_items_featured_image_behavior","") ) ? feed.getSetting("feed_items_featured_image_behavior","") : settings.feed_items_featured_image_behavior;
+			var behavior = len( feed.getSetting( "feed_items_featured_image_behavior", "" ) ) ? feed.getSetting( "feed_items_featured_image_behavior", "" ) : settings.feed_items_featured_image_behavior;
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
 			} else if ( behavior == "default" ) {

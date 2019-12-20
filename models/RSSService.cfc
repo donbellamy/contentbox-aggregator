@@ -77,7 +77,7 @@ component singleton {
 		string category="" ) {
 
 		// Set vars
-		var settings = deserializeJSON( settingService.getSetting("aggregator") );
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var feedStruct = {};
 
 		// Get results
@@ -192,7 +192,7 @@ component singleton {
 	private string function buildFeedFeed( string category="" ) {
 
 		// Set vars
-		var settings = deserializeJSON( settingService.getSetting("aggregator") );
+		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 		var feedStruct = {};
 
 		// Get results

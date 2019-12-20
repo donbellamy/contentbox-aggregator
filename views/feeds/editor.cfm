@@ -41,13 +41,13 @@
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##site" aria-controls="site" role="tab" data-toggle="tab">
-							<i class="fa fa-cog"></i> Site Options
+						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
+							<i class="fa fa-download"></i> Importing
 						</a>
 					</li>
 					<li role="presentation">
-						<a href="##importing" aria-controls="importing" role="tab" data-toggle="tab">
-							<i class="fa fa-download"></i> Importing
+						<a href="##site" aria-controls="site" role="tab" data-toggle="tab">
+							<i class="fa fa-cog"></i> Site Options
 						</a>
 					</li>
 					<li role="presentation">
@@ -155,355 +155,6 @@
 							class="form-control"
 						)#
 					</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="site">
-					<fieldset>
-						<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feeds_include_feed_items",
-								content="Include Feed Items:"
-							)#
-							<p><small>If enabled, the latest feed items will also be displayed within the list of feeds for this feed.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_include_feed_items",
-									options=prc.includeFeedItemOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feeds_include_feed_items",""),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feeds_show_featured_image",
-								content="Show Featured Image:"
-							)#
-							<p><small>If enabled, the feed's featured image will be displayed if one exists for this feed.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_show_featured_image",
-									options=prc.feedFeaturedImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feeds_show_featured_image",""),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feeds_show_website",
-								content="Show Website Link:"
-							)#
-							<p><small>If enabled, a link to the feed's website will be displayed for this feed.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_show_website",
-									options=prc.showWebsiteOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feeds_show_website",""),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feeds_show_rss",
-								content="Show RSS Link:"
-							)#
-							<p><small>If enabled, a link to the feed's rss will be displayed for this feed.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_show_rss",
-									options=prc.showRSSOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feeds_show_rss",""),
-									class="form-control"
-								)#
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend><i class="fa fa-file-o fa-lg"></i> Feed Item Options</legend>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_video_player",
-								content="Show Video Player:"
-							)#
-							<p><small>If enabled, an inline video player will be displayed for videos.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_video_player",
-									options=prc.showVideoOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_video_player",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_audio_player",
-								content="Show Audio Player:"
-							)#
-							<p><small>If enabled, an inline audio player will be displayed for podcasts.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_audio_player",
-									options=prc.showAudioOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_audio_player",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_source",
-								content="Show Source:"
-							)#
-							<p><small>If enabled, the feed source will be displayed for each feed item.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_source",
-									options=prc.showSourceOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_source",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_author",
-								content="Show Author:"
-							)#
-							<p><small>If enabled, the author will be displayed for each feed item.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_author",
-									options=prc.showAuthorOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_author",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_categories",
-								content="Show Categories:"
-							)#
-							<p><small>If enabled, the categories will be displayed for each feed item.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_categories",
-									options=prc.showCategoryOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_categories",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_excerpt",
-								content="Show Excerpt:"
-							)#
-							<p><small>If enabled, an excerpt will be displayed for each feed item.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_excerpt",
-									options=prc.showExcerptOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_excerpt",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_excerpt_limit",
-								content="Excerpt Character Limit:"
-							)#
-							<p><small>The maximum number of characters to display in the feed item excerpt.</small></p>
-							<div class="controls">
-								#html.inputField(
-									name="settings_feed_items_excerpt_limit",
-									type="number",
-									value=prc.feed.getSetting("feed_items_excerpt_limit",""),
-									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_limit#",
-									min="0"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_excerpt_ending",
-								content="Excerpt Ending:"
-							)#
-							<p><small>The ending text displayed when the length of the excerpt is larger than the character limit.</small></p>
-							<div class="controls">
-								#html.inputField(
-									name="settings_feed_items_excerpt_ending",
-									value=prc.feed.getSetting("feed_items_excerpt_ending",""),
-									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_ending#"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_read_more",
-								content="Show Read More:"
-							)#
-							<p><small>If enabled, a link to the feed item will be displayed after the feed item excerpt.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_read_more",
-									options=prc.showReadMoreOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_read_more",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_read_more_text",
-								content="Read More Text:"
-							)#
-							<p><small>The text used when the read more link is enabled.</small></p>
-							<div class="controls">
-								#html.inputField(
-									name="settings_feed_items_read_more_text",
-									value=prc.feed.getSetting("feed_items_read_more_text",""),
-									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.feed_items_read_more_text#"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_link_behavior",
-								content="Link Behavior:"
-							)#
-							<p><small>The default behavior when clicking on a feed item.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_link_behavior",
-									options=prc.linkOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_link_behavior",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_open_new_window",
-								content="Open New Window:"
-							)#
-							<p><small>If enabled, links to feed items will be opened in a new window (tab).</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_open_new_window",
-									options=prc.openWindowOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_open_new_window",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_show_featured_image",
-								content="Show Featured Image:"
-							)#
-							<p><small>If enabled, the feed item's featured image will be displayed if one exists.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_show_featured_image",
-									options=prc.showFeaturedImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_show_featured_image",""),
-									class="form-control input-sm"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_feed_items_featured_image_behavior",
-								content="Featured Image Behavior:"
-							)#
-							<p><small>The default behavior when a feed item has no featured image.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feed_items_featured_image_behavior",
-									options=prc.featuredImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting("feed_items_featured_image_behavior",""),
-									class="form-control"
-								)#
-							</div>
-						</div>
-					</fieldset>
-					<fieldset>
-						<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
-								field="settings_paging_max_feed_items",
-								content="Max Feed Items:"
-							)#
-							<p><small>The number of feed items displayed on the feed page before paging.</small></p>
-							<div class="controls">
-								#html.inputField(
-									name="settings_paging_max_feed_items",
-									type="number",
-									value=prc.feed.getSetting("paging_max_feed_items",""),
-									class="form-control counter",
-									placeholder="Use the default setting - #prc.agSettings.paging_max_feed_items#",
-									min="0"
-								)#
-							</div>
-						</div>
-					</fieldset>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="importing">
 					<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN" ) >
@@ -689,7 +340,7 @@
 								#html.inputField(
 									name="settings_importing_max_feed_items",
 									type="number",
-									value=prc.feed.getSetting( "settings_importing_max_feed_items", "" ),
+									value=prc.feed.getSetting( "importing_max_feed_items", "" ),
 									class="form-control counter",
 									placeholder="No limit",
 									min="0"
@@ -873,6 +524,355 @@
 							<button id="removeAll" class="btn btn-sm btn-danger" onclick="return false;">
 								<i class="fa fa-trash-o"></i> Remove All
 							</button>
+						</div>
+					</fieldset>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="site">
+					<fieldset>
+						<legend><i class="fa fa-file-text-o fa-lg"></i> Feed Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_include_feed_items",
+								content="Include Feed Items:"
+							)#
+							<p><small>If enabled, the latest feed items will also be displayed within the list of feeds for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_include_feed_items",
+									options=prc.includeFeedItemOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feeds_include_feed_items", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_featured_image",
+								content="Show Featured Image:"
+							)#
+							<p><small>If enabled, the feed's featured image will be displayed if one exists for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_featured_image",
+									options=prc.feedFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feeds_show_featured_image", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_website",
+								content="Show Website Link:"
+							)#
+							<p><small>If enabled, a link to the feed's website will be displayed for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_website",
+									options=prc.showWebsiteOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feeds_show_website", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_rss",
+								content="Show RSS Link:"
+							)#
+							<p><small>If enabled, a link to the feed's rss will be displayed for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_rss",
+									options=prc.showRSSOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feeds_show_rss", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-file-o fa-lg"></i> Feed Item Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_video_player",
+								content="Show Video Player:"
+							)#
+							<p><small>If enabled, an inline video player will be displayed for videos.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_video_player",
+									options=prc.showVideoOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_video_player", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_audio_player",
+								content="Show Audio Player:"
+							)#
+							<p><small>If enabled, an inline audio player will be displayed for podcasts.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_audio_player",
+									options=prc.showAudioOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_audio_player", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_source",
+								content="Show Source:"
+							)#
+							<p><small>If enabled, the feed source will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_source",
+									options=prc.showSourceOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_source", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_author",
+								content="Show Author:"
+							)#
+							<p><small>If enabled, the author will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_author",
+									options=prc.showAuthorOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_author", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_categories",
+								content="Show Categories:"
+							)#
+							<p><small>If enabled, the categories will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_categories",
+									options=prc.showCategoryOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_categories", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_excerpt",
+								content="Show Excerpt:"
+							)#
+							<p><small>If enabled, an excerpt will be displayed for each feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_excerpt",
+									options=prc.showExcerptOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_excerpt", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_excerpt_limit",
+								content="Excerpt Character Limit:"
+							)#
+							<p><small>The maximum number of characters to display in the feed item excerpt.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_excerpt_limit",
+									type="number",
+									value=prc.feed.getSetting( "feed_items_excerpt_limit", "" ),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_limit#",
+									min="0"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_excerpt_ending",
+								content="Excerpt Ending:"
+							)#
+							<p><small>The ending text displayed when the length of the excerpt is larger than the character limit.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_excerpt_ending",
+									value=prc.feed.getSetting( "feed_items_excerpt_ending", "" ),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_excerpt_ending#"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_read_more",
+								content="Show Read More:"
+							)#
+							<p><small>If enabled, a link to the feed item will be displayed after the feed item excerpt.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_read_more",
+									options=prc.showReadMoreOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_read_more", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_read_more_text",
+								content="Read More Text:"
+							)#
+							<p><small>The text used when the read more link is enabled.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_feed_items_read_more_text",
+									value=prc.feed.getSetting( "feed_items_read_more_text", "" ),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.feed_items_read_more_text#"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_link_behavior",
+								content="Link Behavior:"
+							)#
+							<p><small>The default behavior when clicking on a feed item.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_link_behavior",
+									options=prc.linkOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_link_behavior", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_open_new_window",
+								content="Open New Window:"
+							)#
+							<p><small>If enabled, links to feed items will be opened in a new window (tab).</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_open_new_window",
+									options=prc.openWindowOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_open_new_window", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_show_featured_image",
+								content="Show Featured Image:"
+							)#
+							<p><small>If enabled, the feed item's featured image will be displayed if one exists.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_show_featured_image",
+									options=prc.showFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_show_featured_image", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_items_featured_image_behavior",
+								content="Featured Image Behavior:"
+							)#
+							<p><small>The default behavior when a feed item has no featured image.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_featured_image_behavior",
+									options=prc.featuredImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_featured_image_behavior", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend><i class="fa fa-copy fa-lg"></i> Paging Options</legend>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_paging_max_feed_items",
+								content="Max Feed Items:"
+							)#
+							<p><small>The number of feed items displayed on the feed page before paging.</small></p>
+							<div class="controls">
+								#html.inputField(
+									name="settings_paging_max_feed_items",
+									type="number",
+									value=prc.feed.getSetting( "paging_max_feed_items", "" ),
+									class="form-control counter",
+									placeholder="Use the default setting - #prc.agSettings.paging_max_feed_items#",
+									min="0"
+								)#
+							</div>
 						</div>
 					</fieldset>
 				</div>

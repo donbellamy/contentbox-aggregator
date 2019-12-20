@@ -322,17 +322,6 @@ component extends="contentHandler" {
 			.paramValue( "tagLine", "" )
 			.paramValue( "content", "" );
 
-		// Site Options
-
-		event.paramValue( "settings_feeds_include_feed_items", "" )
-			.paramValue( "settings_feeds_show_featured_image", "" )
-			.paramValue( "settings_feeds_show_website", "" )
-			.paramValue( "settings_feeds_show_rss", "" );
-
-		event.paramValue( "settings_feed_items_link_behavior", "" )
-			.paramValue( "settings_feed_items_featured_image_behavior", "" )
-			.paramValue( "settings_paging_max_feed_items", "" );
-
 		// Importing Options
 		event.paramValue( "isActive", true )
 			.paramValue( "startDate", "" )
@@ -352,7 +341,16 @@ component extends="contentHandler" {
 			.paramValue( "settings_importing_featured_image_enable", "" )
 			.paramValue( "settings_importing_all_images_enable", "" );
 
-		// HTML
+		// Site Options
+		event.paramValue( "settings_feeds_include_feed_items", "" )
+			.paramValue( "settings_feeds_show_featured_image", "" )
+			.paramValue( "settings_feeds_show_website", "" )
+			.paramValue( "settings_feeds_show_rss", "" )
+			.paramValue( "settings_feed_items_link_behavior", "" )
+			.paramValue( "settings_feed_items_featured_image_behavior", "" )
+			.paramValue( "settings_paging_max_feed_items", "" );
+
+		// Global HTML
 		event.paramValue( "settings_html_pre_feed_display", "" )
 			.paramValue( "settings_html_post_feed_display", "" )
 			.paramValue( "settings_html_pre_feeditem_display", "" )
@@ -382,9 +380,6 @@ component extends="contentHandler" {
 			}
 		}
 		rc["settings"] = settings;
-
-		writedump(rc["settings"]);
-		abort;
 
 		// Taxonomies
 		var taxonomies = [];

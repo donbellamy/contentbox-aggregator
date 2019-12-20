@@ -17,13 +17,13 @@
 					<div class="tab-wrapper tab-left tab-primary">
 						<ul class="nav nav-tabs">
 							<li role="presentation" class="active">
-								<a href="##site" data-toggle="tab">
-									<i class="fa fa-cog fa-lg"></i> Site Options
-								</a>
-							</li>
-							<li role="presentation" >
 								<a href="##importing" data-toggle="tab">
 									<i class="fa fa-download fa-lg"></i> Importing
+								</a>
+							</li>
+							<li role="presentation">
+								<a href="##site" data-toggle="tab">
+									<i class="fa fa-cog fa-lg"></i> Site Options
 								</a>
 							</li>
 							<li role="presentation" >
@@ -38,7 +38,432 @@
 							</li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="site">
+							<div class="tab-pane active" id="importing">
+								<fieldset>
+									<legend>
+										<i class="fa fa-download fa-lg"></i>
+										Importing Options
+									</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_interval",
+											content="Import Interval:"
+										)#
+										<p><small>How frequently the feeds should be checked for updates and imported.  Select "Never" if you plan to manually import feeds.</small></p>
+										<div class="controls">
+											#html.select(
+												name="importing_interval",
+												options=prc.intervals,
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.importing_interval,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_start_date",
+											content="Start Date:"
+										)#
+										<p><small>The date and time to begin importing feeds.</small></p>
+										<div class="controls row">
+											<div class="col-md-6">
+												<div class="input-group">
+													#html.inputField(
+														size="9",
+														name="importing_start_date",
+														value=prc.agSettings.importing_start_date,
+														class="form-control datepicker",
+														placeholder="Immediately"
+													)#
+													<span class="input-group-addon">
+														<span class="fa fa-calendar"></span>
+													</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
+													<input type="text" class="form-control inline" value="#prc.agSettings.importing_start_time#" name="importing_start_time" id="importing_start_time" />
+													<span class="input-group-addon">
+														<span class="fa fa-clock-o"></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_secret_key",
+											content="Secret Key:"
+										)#
+										<p><small>The secret key used to secure the automated feed import process.</small></p>
+										<div class="controls">
+											#html.textField(
+												name="importing_secret_key",
+												value=prc.agSettings.importing_secret_key,
+												class="form-control",
+												maxlength="100"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_max_feed_imports",
+											content="Feed Import History Limit:"
+										)#
+										<p><small>The maximum number of records to keep in the feed import history.  When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.</small></p>
+										<div class="controls">
+											#html.inputField(
+												name="importing_max_feed_imports",
+												type="number",
+												value=prc.agSettings.importing_max_feed_imports,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-file-o fa-lg"></i>
+										Feed Item Defaults
+									</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_feed_item_author",
+											content="Feed Item Author:"
+										)#
+										<p><small>The account used as the feed item author during the automated feed import process.</small></p>
+										<div class="controls">
+											<select name="importing_feed_item_author" id="importing_feed_item_author" class="form-control">
+												<cfloop array="#prc.authors#" index="author">
+													<option value="#author.getAuthorID()#"<cfif prc.agSettings.importing_feed_item_author EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
+												</cfloop>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_feed_item_status",
+											content="Feed Item Status:"
+										)#
+										<p><small>The status used for imported feed items.</small></p>
+										<div class="controls">
+											#html.select(
+												name="importing_feed_item_status",
+												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.importing_feed_item_status,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_feed_item_published_date",
+											content="Published Date:"
+										)#
+										<p><small>The value used as the published date for imported feed items.</small></p>
+										<div class="controls">
+											#html.select(
+												name="importing_feed_item_published_date",
+												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.importing_feed_item_published_date,
+												class="form-control input-sm"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-list-ol fa-lg"></i>
+										Feed Item Limits
+									</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_max_feed_item_age",
+											content="Limit feed items by age:"
+										)#
+										<p><small>The maximum age allowed for feed items.  Existing feed items will be deleted once they exceed this age limit.</small></p>
+										<div class="controls row">
+											<div class="col-sm-6">
+												#html.inputField(
+													name="importing_max_feed_item_age",
+													type="number",
+													value=prc.agSettings.importing_max_feed_item_age,
+													class="form-control counter",
+													placeholder="No limit",
+													min="0"
+												)#
+											</div>
+											<div class="col-sm-6">
+												#html.select(
+													name="importing_max_feed_item_age_unit",
+													options=prc.limitUnits,
+													selectedValue=prc.agSettings.importing_max_feed_item_age_unit,
+													class="form-control"
+												)#
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_max_feed_items",
+											content="Limit feed items by number:"
+										)#
+										<p><small>The maximum number of feed items to keep per feed.  When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.</small></p>
+										<div class="controls">
+											#html.inputField(
+												name="importing_max_feed_items",
+												type="number",
+												value=prc.agSettings.importing_max_feed_items,
+												class="form-control counter",
+												placeholder="No limit",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-filter fa-lg"></i>
+										Keyword Filtering
+									</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_match_any_filter",
+											content="Contains any of these kewords:"
+										)#
+										<p><small>Only feed items that contain any of these kewords in the title or body will be imported.  Existing feed items that do not contain any of these kewords in the title or body will be deleted.</small></p>
+										<div class="controls">
+											#html.textArea(
+												name="importing_match_any_filter",
+												value=prc.agSettings.importing_match_any_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_match_all_filter",
+											content="Contains all of these kewords:"
+										)#
+										<p><small>Only feed items that contain all of these kewords in the title or body will be imported.  Existing feed items that do not contain all of these kewords in the title or body will be deleted.</small></p>
+										<div class="controls">
+											#html.textArea(
+												name="importing_match_all_filter",
+												value=prc.agSettings.importing_match_all_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_match_none_filter",
+											content="Contains none of these kewords:"
+										)#
+										<p><small>Only feed items that do not contain any of these kewords in the title or body will be imported.  Existing feed items that contain any of these kewords in the title or body will be deleted.</small></p>
+										<div class="controls">
+											#html.textArea(
+												name="importing_match_none_filter",
+												value=prc.agSettings.importing_match_none_filter,
+												rows="3",
+												class="form-control",
+												placeholder="Comma delimited list of words or phrases",
+												maxlength="255"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-image fa-lg"></i>
+										Image Settings
+									</legend>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_featured_image_enable",
+											content="Import Featured Images:"
+										)#
+										<p><small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="importing_featured_image_enable_toggle",
+												data={ toggle: 'toggle', match: 'importing_featured_image_enable' },
+												checked=prc.agSettings.importing_featured_image_enable
+											)#
+											#html.hiddenField(
+												name="importing_featured_image_enable",
+												value=prc.agSettings.importing_featured_image_enable
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_all_images_enable",
+											content="Import All Images:"
+										)#
+										<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="importing_all_images_enable_toggle",
+												data={ toggle: 'toggle', match: 'importing_all_images_enable' },
+												checked=prc.agSettings.importing_all_images_enable
+											)#
+											#html.hiddenField(
+												name="importing_all_images_enable",
+												value=prc.agSettings.importing_all_images_enable
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_image_minimum_width",
+											content="Minimum Width:"
+										)#
+										<p><small>Images smaller than the minimum width below will not be imported.</small></p>
+										<div class="controls">
+											#html.inputField(
+												name="importing_image_minimum_width",
+												type="number",
+												value=prc.agSettings.importing_image_minimum_width,
+												class="form-control counter",
+												placeholder="No minimum width",
+												min="0"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="importing_image_minimum_height",
+											content="Minimum Height:"
+										)#
+										<p><small>Images smaller than the minimum height below will not be imported.</small></p>
+										<div class="controls">
+											#html.inputField(
+												name="importing_image_minimum_height",
+												type="number",
+												value=prc.agSettings.importing_image_minimum_height,
+												class="form-control counter",
+												placeholder="No minimum height",
+												min="0"
+											)#
+										</div>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>
+										<i class="fa fa-tags fa-lg"></i>
+										Taxonomies
+									</legend>
+									<p><small>Taxonomies are used to automatically assign categories to feed items.</small></p>
+									<div id="taxonomies">
+										<cfloop from="1" to="#arrayLen( prc.agSettings.importing_taxonomies )#" index="idx">
+											<cfset taxonomy = prc.agSettings.importing_taxonomies[idx] />
+											<div class="taxonomy">
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="importing_taxonomies_#idx#_categories",
+														content="Categories:"
+													)#
+													<p><small>Assign the following categories to feed items using the matching method below.</small></p>
+													<div class="controls">
+														<div class="input-group">
+															#html.select(
+																name="importing_taxonomies_#idx#_categories",
+																options=prc.categories,
+																column="categoryID",
+																nameColumn="category",
+																selectedValue=taxonomy.categories,
+																class="form-control input-sm multiselect",
+																style="margin-bottom:0px;",
+																multiple="true"
+															)#
+															<a class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
+																<i class="fa fa-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="importing_taxonomies_#idx#_method",
+														content="Matching Method:"
+													)#
+													<p><small>Use the following method when matching feed items to the above categories.</small></p>
+													<div class="controls">
+														#html.select(
+															name="importing_taxonomies_#idx#_method",
+															options=prc.matchOptions,
+															column="value",
+															nameColumn="name",
+															selectedValue=taxonomy.method,
+															class="form-control input-sm input-methods"
+														)#
+													</div>
+												</div>
+												<div class="form-group">
+													#html.label(
+														class="control-label",
+														field="importing_taxonomies_#idx#_keywords",
+														content="Keywords:"
+													)#
+													<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
+													<div class="controls">
+														#html.textArea(
+															name="importing_taxonomies_#idx#_keywords",
+															value=taxonomy.keywords,
+															rows="2",
+															class="form-control input-keywords",
+															placeholder="Comma delimited list of words or phrases",
+															maxlength="255"
+														)#
+													</div>
+												</div>
+												<hr />
+											</div>
+										</cfloop>
+									</div>
+									<div>
+										<button id="addTaxonomy" class="btn btn-sm btn-primary" onclick="return false;">
+											<i class="fa fa-plus"></i> Add
+										</button>
+										<button id="removeAll" class="btn btn-sm btn-danger" onclick="return false;">
+											<i class="fa fa-trash-o"></i> Remove All
+										</button>
+									</div>
+								</fieldset>
+							</div>
+							<div class="tab-pane" id="site">
 								<fieldset>
 									<legend>
 										<i class="fa fa-cog fa-lg"></i>
@@ -625,431 +1050,6 @@
 												data-slider-scale="logarithmic" />
 											<strong class="margin10">500</strong>
 										</div>
-									</div>
-								</fieldset>
-							</div>
-							<div class="tab-pane" id="importing">
-								<fieldset>
-									<legend>
-										<i class="fa fa-download fa-lg"></i>
-										Importing Options
-									</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_interval",
-											content="Import Interval:"
-										)#
-										<p><small>How frequently the feeds should be checked for updates and imported.  Select "Never" if you plan to manually import feeds.</small></p>
-										<div class="controls">
-											#html.select(
-												name="importing_interval",
-												options=prc.intervals,
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.importing_interval,
-												class="form-control"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_start_date",
-											content="Start Date:"
-										)#
-										<p><small>The date and time to begin importing feeds.</small></p>
-										<div class="controls row">
-											<div class="col-md-6">
-												<div class="input-group">
-													#html.inputField(
-														size="9",
-														name="importing_start_date",
-														value=prc.agSettings.importing_start_date,
-														class="form-control datepicker",
-														placeholder="Immediately"
-													)#
-													<span class="input-group-addon">
-														<span class="fa fa-calendar"></span>
-													</span>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-													<input type="text" class="form-control inline" value="#prc.agSettings.importing_start_time#" name="importing_start_time" id="importing_start_time" />
-													<span class="input-group-addon">
-														<span class="fa fa-clock-o"></span>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_secret_key",
-											content="Secret Key:"
-										)#
-										<p><small>The secret key used to secure the automated feed import process.</small></p>
-										<div class="controls">
-											#html.textField(
-												name="importing_secret_key",
-												value=prc.agSettings.importing_secret_key,
-												class="form-control",
-												maxlength="100"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_max_feed_imports",
-											content="Feed Import History Limit:"
-										)#
-										<p><small>The maximum number of records to keep in the feed import history.  When feeds are imported and this limit is exceeded, the oldest record will be deleted to make room for the new one.</small></p>
-										<div class="controls">
-											#html.inputField(
-												name="importing_max_feed_imports",
-												type="number",
-												value=prc.agSettings.importing_max_feed_imports,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
-										<i class="fa fa-file-o fa-lg"></i>
-										Feed Item Defaults
-									</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_feed_item_author",
-											content="Feed Item Author:"
-										)#
-										<p><small>The account used as the feed item author during the automated feed import process.</small></p>
-										<div class="controls">
-											<select name="importing_feed_item_author" id="importing_feed_item_author" class="form-control">
-												<cfloop array="#prc.authors#" index="author">
-													<option value="#author.getAuthorID()#"<cfif prc.agSettings.importing_feed_item_author EQ author.getAuthorID() > selected="selected"</cfif>>#author.getName()#</option>
-												</cfloop>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_feed_item_status",
-											content="Feed Item Status:"
-										)#
-										<p><small>The status used for imported feed items.</small></p>
-										<div class="controls">
-											#html.select(
-												name="importing_feed_item_status",
-												options=[{name="Draft",value="draft"},{name="Published",value="published"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.importing_feed_item_status,
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_feed_item_published_date",
-											content="Published Date:"
-										)#
-										<p><small>The value used as the published date for imported feed items.</small></p>
-										<div class="controls">
-											#html.select(
-												name="importing_feed_item_published_date",
-												options=[{name="Original published date",value="original"},{name="Imported date",value="imported"}],
-												column="value",
-												nameColumn="name",
-												selectedValue=prc.agSettings.importing_feed_item_published_date,
-												class="form-control input-sm"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
-										<i class="fa fa-list-ol fa-lg"></i>
-										Feed Item Limits
-									</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_max_feed_item_age",
-											content="Limit feed items by age:"
-										)#
-										<p><small>The maximum age allowed for feed items.  Existing feed items will be deleted once they exceed this age limit.</small></p>
-										<div class="controls row">
-											<div class="col-sm-6">
-												#html.inputField(
-													name="importing_max_feed_item_age",
-													type="number",
-													value=prc.agSettings.importing_max_feed_item_age,
-													class="form-control counter",
-													placeholder="No limit",
-													min="0"
-												)#
-											</div>
-											<div class="col-sm-6">
-												#html.select(
-													name="importing_max_feed_item_age_unit",
-													options=prc.limitUnits,
-													selectedValue=prc.agSettings.importing_max_feed_item_age_unit,
-													class="form-control"
-												)#
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_max_feed_items",
-											content="Limit feed items by number:"
-										)#
-										<p><small>The maximum number of feed items to keep per feed.  When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.</small></p>
-										<div class="controls">
-											#html.inputField(
-												name="importing_max_feed_items",
-												type="number",
-												value=prc.agSettings.importing_max_feed_items,
-												class="form-control counter",
-												placeholder="No limit",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
-										<i class="fa fa-filter fa-lg"></i>
-										Keyword Filtering
-									</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_match_any_filter",
-											content="Contains any of these kewords:"
-										)#
-										<p><small>Only feed items that contain any of these kewords in the title or body will be imported.  Existing feed items that do not contain any of these kewords in the title or body will be deleted.</small></p>
-										<div class="controls">
-											#html.textArea(
-												name="importing_match_any_filter",
-												value=prc.agSettings.importing_match_any_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_match_all_filter",
-											content="Contains all of these kewords:"
-										)#
-										<p><small>Only feed items that contain all of these kewords in the title or body will be imported.  Existing feed items that do not contain all of these kewords in the title or body will be deleted.</small></p>
-										<div class="controls">
-											#html.textArea(
-												name="importing_match_all_filter",
-												value=prc.agSettings.importing_match_all_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_match_none_filter",
-											content="Contains none of these kewords:"
-										)#
-										<p><small>Only feed items that do not contain any of these kewords in the title or body will be imported.  Existing feed items that contain any of these kewords in the title or body will be deleted.</small></p>
-										<div class="controls">
-											#html.textArea(
-												name="importing_match_none_filter",
-												value=prc.agSettings.importing_match_none_filter,
-												rows="3",
-												class="form-control",
-												placeholder="Comma delimited list of words or phrases",
-												maxlength="255"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
-										<i class="fa fa-image fa-lg"></i>
-										Image Settings
-									</legend>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_featured_image_enable",
-											content="Import Featured Images:"
-										)#
-										<p><small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="importing_featured_image_enable_toggle",
-												data={ toggle: 'toggle', match: 'importing_featured_image_enable' },
-												checked=prc.agSettings.importing_featured_image_enable
-											)#
-											#html.hiddenField(
-												name="importing_featured_image_enable",
-												value=prc.agSettings.importing_featured_image_enable
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_all_images_enable",
-											content="Import All Images:"
-										)#
-										<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="importing_all_images_enable_toggle",
-												data={ toggle: 'toggle', match: 'importing_all_images_enable' },
-												checked=prc.agSettings.importing_all_images_enable
-											)#
-											#html.hiddenField(
-												name="importing_all_images_enable",
-												value=prc.agSettings.importing_all_images_enable
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_image_minimum_width",
-											content="Minimum Width:"
-										)#
-										<p><small>Images smaller than the minimum width below will not be imported.</small></p>
-										<div class="controls">
-											#html.inputField(
-												name="importing_image_minimum_width",
-												type="number",
-												value=prc.agSettings.importing_image_minimum_width,
-												class="form-control counter",
-												placeholder="No minimum width",
-												min="0"
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
-											field="importing_image_minimum_height",
-											content="Minimum Height:"
-										)#
-										<p><small>Images smaller than the minimum height below will not be imported.</small></p>
-										<div class="controls">
-											#html.inputField(
-												name="importing_image_minimum_height",
-												type="number",
-												value=prc.agSettings.importing_image_minimum_height,
-												class="form-control counter",
-												placeholder="No minimum height",
-												min="0"
-											)#
-										</div>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>
-										<i class="fa fa-tags fa-lg"></i>
-										Taxonomies
-									</legend>
-									<p><small>Taxonomies are used to automatically assign categories to feed items.</small></p>
-									<div id="taxonomies">
-										<cfloop from="1" to="#arrayLen( prc.agSettings.importing_taxonomies )#" index="idx">
-											<cfset taxonomy = prc.agSettings.importing_taxonomies[idx] />
-											<div class="taxonomy">
-												<div class="form-group">
-													#html.label(
-														class="control-label",
-														field="importing_taxonomies_#idx#_categories",
-														content="Categories:"
-													)#
-													<p><small>Assign the following categories to feed items using the matching method below.</small></p>
-													<div class="controls">
-														<div class="input-group">
-															#html.select(
-																name="importing_taxonomies_#idx#_categories",
-																options=prc.categories,
-																column="categoryID",
-																nameColumn="category",
-																selectedValue=taxonomy.categories,
-																class="form-control input-sm multiselect",
-																style="margin-bottom:0px;",
-																multiple="true"
-															)#
-															<a class="input-group-addon btn btn-danger removeTaxonomy" href="javascript:void(0);" data-original-title="Remove Taxonomy" data-container="body">
-																<i class="fa fa-trash-o"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													#html.label(
-														class="control-label",
-														field="importing_taxonomies_#idx#_method",
-														content="Matching Method:"
-													)#
-													<p><small>Use the following method when matching feed items to the above categories.</small></p>
-													<div class="controls">
-														#html.select(
-															name="importing_taxonomies_#idx#_method",
-															options=prc.matchOptions,
-															column="value",
-															nameColumn="name",
-															selectedValue=taxonomy.method,
-															class="form-control input-sm input-methods"
-														)#
-													</div>
-												</div>
-												<div class="form-group">
-													#html.label(
-														class="control-label",
-														field="importing_taxonomies_#idx#_keywords",
-														content="Keywords:"
-													)#
-													<p><small>Use the following keywords when matching feed items to the above categories.</small></p>
-													<div class="controls">
-														#html.textArea(
-															name="importing_taxonomies_#idx#_keywords",
-															value=taxonomy.keywords,
-															rows="2",
-															class="form-control input-keywords",
-															placeholder="Comma delimited list of words or phrases",
-															maxlength="255"
-														)#
-													</div>
-												</div>
-												<hr />
-											</div>
-										</cfloop>
-									</div>
-									<div>
-										<button id="addTaxonomy" class="btn btn-sm btn-primary" onclick="return false;">
-											<i class="fa fa-plus"></i> Add
-										</button>
-										<button id="removeAll" class="btn btn-sm btn-danger" onclick="return false;">
-											<i class="fa fa-trash-o"></i> Remove All
-										</button>
 									</div>
 								</fieldset>
 							</div>

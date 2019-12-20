@@ -291,8 +291,8 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Max items
-			var maxItems = val( feed.getSetting( "settings_importing_max_feed_items", "" ) ) ?
-				val( feed.getSetting( "settings_importing_max_feed_items", "" ) ) :
+			var maxItems = val( feed.getSetting( "importing_max_feed_items", "" ) ) ?
+				val( feed.getSetting( "importing_max_feed_items", "" ) ) :
 				val( settings.importing_max_feed_items );
 			if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
 				var feedItems = feed.getFeedItems();

@@ -33,8 +33,8 @@
 			</cfif>
 			<cfif args.includeItems && feed.getNumberOfPublishedChildren() >
 				<cfset linkBehavior =
-					len( feed.getSetting("feed_items_link_behavior","") ) ?
-					feed.getSetting("feed_items_link_behavior","") :
+					len( feed.getSetting( "feed_items_link_behavior", "" ) ) ?
+					feed.getSetting( "feed_items_link_behavior", "" ) :
 					ag.setting("feed_items_link_behavior") />
 				<cfset directLink = linkBehavior EQ "link" ? true : false />
 				<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
