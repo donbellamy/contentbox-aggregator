@@ -16,7 +16,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
-		var taxonomies = feed.getTaxonomies();
+		var taxonomies = feed.getSetting( "taxonomies", [] );
 		applyTaxonomies( taxonomies, feed );
 	}
 

@@ -2,8 +2,8 @@
 <cfset contentType = feedItem.getContentType() />
 <cfif contentType EQ "FeedItem" >
 	<cfset linkBehavior =
-		len( feedItem.getFeed().getLinkBehavior() ) ?
-		feedItem.getFeed().getLinkBehavior() :
+		len( feedItem.getFeed().getSetting("feed_items_link_behavior","") ) ?
+		feedItem.getFeed().getSetting("feed_items_link_behavior","") :
 		ag.setting("feed_items_link_behavior") />
 	<cfset directLink = linkBehavior EQ "link" ? true : false />
 	<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />

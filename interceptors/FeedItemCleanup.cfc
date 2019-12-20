@@ -110,9 +110,9 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Keyword filters
-			var matchAnyFilter = listToArray( len( trim( feed.getMatchAnyFilter() ) ) ? feed.getMatchAnyFilter() : settings.importing_match_any_filter );
-			var matchAllFilter = listToArray( len( trim( feed.getMatchAllFilter() ) ) ? feed.getMatchAllFilter() : settings.importing_match_all_filter );
-			var matchNoneFilter = listToArray( len( trim( feed.getMatchNoneFilter() ) ) ? feed.getMatchNoneFilter() : settings.importing_match_none_filter );
+			var matchAnyFilter = listToArray( len( trim( feed.getSetting( "importing_match_any_filter", "" ) ) ) ? feed.getSetting( "importing_match_any_filter", "" ) : settings.importing_match_any_filter );
+			var matchAllFilter = listToArray( len( trim( feed.getSetting( "importing_match_all_filter", "" ) ) ) ? feed.getSetting( "importing_match_all_filter", "" ) : settings.importing_match_all_filter );
+			var matchNoneFilter = listToArray( len( trim( feed.getSetting( "importing_match_none_filter", "" ) ) ) ? feed.getSetting( "importing_match_none_filter", "" ) : settings.importing_match_none_filter );
 
 			// Filter out if any filters exist
 			if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {
@@ -226,9 +226,9 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Max age
-			var maxAge = val( feed.getMaxAge() ) ? val( feed.getMaxAge() ) : val( settings.importing_max_feed_item_age );
-			var maxAgeUnit = val( feed.getMaxAge() ) ? feed.getMaxAgeUnit() : settings.importing_max_feed_item_age_unit;
-			if ( maxAge ) {
+			var maxAge = val( feed.getSetting( "importing_max_feed_item_age", "" ) ) ? val( feed.getSetting( "importing_max_feed_item_age", "" ) ) : val( settings.importing_max_feed_item_age );
+			var maxAgeUnit = len( feed.getSetting( "importing_max_feed_item_age_unit", "" ) ) ? feed.getSetting( "importing_max_feed_item_age_unit", "" ) : settings.importing_max_feed_item_age_unit;
+			if ( maxAge && len( maxAgeUnit ) ) {
 				var maxDate = now();
 				switch( maxAgeUnit ) {
 					case "weeks": {
@@ -291,7 +291,9 @@ component extends="coldbox.system.Interceptor" {
 			var numberDeleted = 0;
 
 			// Max items
-			var maxItems = val( feed.getMaxItems() ) ? val( feed.getMaxItems() ) : val( settings.importing_max_feed_items );
+			var maxItems = val( feed.getSetting( "settings_importing_max_feed_items", "" ) ) ?
+				val( feed.getSetting( "settings_importing_max_feed_items", "" ) ) :
+				val( settings.importing_max_feed_items );
 			if ( maxItems && ( arrayLen( feed.getFeedItems() ) GT maxItems ) ) {
 				var feedItems = feed.getFeedItems();
 				var itemsToDelete = arraySlice( feedItems, maxItems + 1 );

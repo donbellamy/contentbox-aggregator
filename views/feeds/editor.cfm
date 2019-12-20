@@ -413,18 +413,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="linkBehavior",
+								field="settings_feed_items_link_behavior",
 								content="Link Behavior:"
 							)#
 							<p><small>The default behavior when clicking on a feed item.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_linkBehavior",
-									id="linkBehavior",
+									name="settings_feed_items_link_behavior",
 									options=prc.linkOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getLinkBehavior(),
+									selectedValue=prc.feed.getSetting("feed_items_link_behavior",""),
 									class="form-control input-sm"
 								)#
 							</div>
@@ -468,18 +467,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="featuredImageBehavior",
+								field="settings_feed_items_featured_image_behavior",
 								content="Featured Image Behavior:"
 							)#
 							<p><small>The default behavior when a feed item has no featured image.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_featuredImageBehavior",
-									id="featuredImageBehavior",
+									name="settings_feed_items_featured_image_behavior",
 									options=prc.featuredImageOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getFeaturedImageBehavior(),
+									selectedValue=prc.feed.getSetting("feed_items_featured_image_behavior",""),
 									class="form-control"
 								)#
 							</div>
@@ -490,16 +488,15 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="pagingMaxItems",
+								field="settings_paging_max_feed_items",
 								content="Max Feed Items:"
 							)#
 							<p><small>The number of feed items displayed on the feed page before paging.</small></p>
 							<div class="controls">
 								#html.inputField(
-									name="settings_pagingMaxItems",
-									id="pagingMaxItems",
+									name="settings_paging_max_feed_items",
 									type="number",
-									value=prc.feed.getPagingMaxItems(),
+									value=prc.feed.getSetting("paging_max_feed_items",""),
 									class="form-control counter",
 									placeholder="Use the default setting - #prc.agSettings.paging_max_feed_items#",
 									min="0"
@@ -617,18 +614,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="itemStatus",
+								field="settings_importing_feed_item_status",
 								content="Item Status"
 							)#
 							<p><small>The status used for imported feed items.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_itemStatus",
-									id="itemStatus",
+									name="settings_importing_feed_item_status",
 									options=prc.itemStatuses,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getItemStatus(),
+									selectedValue=prc.feed.getSetting( "importing_feed_item_status", "" ),
 									class="form-control input-sm"
 								)#
 							</div>
@@ -636,18 +632,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="ItemPubDate",
+								field="settings_importing_feed_item_published_date",
 								content="Published Date:"
 							)#
 							<p><small>The value used as the published date for imported feed items.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_itemPubDate",
-									id="itemPubDate",
+									name="settings_importing_feed_item_published_date",
 									options=prc.itemPubDates,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getItemPubDate(),
+									selectedValue=prc.feed.getSetting( "importing_feed_item_published_date", "" ),
 									class="form-control input-sm"
 								)#
 							</div>
@@ -658,17 +653,16 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="maxAge",
+								field="settings_importing_max_feed_item_age",
 								content="Limit items by age:"
 							)#
 							<p><small>The maximum age allowed for feed items.  Existing feed items will be deleted once they exceed this age limit.</small></p>
 							<div class="controls row">
 								<div class="col-sm-6">
 									#html.inputField(
-										name="settings_maxAge",
-										id="maxAge",
+										name="settings_importing_max_feed_item_age",
 										type="number",
-										value=prc.feed.getMaxAge(),
+										value=prc.feed.getSetting( "importing_max_feed_item_age", "" ),
 										class="form-control counter",
 										placeholder="No limit",
 										min="0"
@@ -676,10 +670,9 @@
 								</div>
 								<div class="col-sm-6">
 									#html.select(
-										name="settings_maxAgeUnit",
-										id="maxAgeUnit",
+										name="settings_importing_max_feed_item_age_unit",
 										options=prc.limitUnits,
-										selectedValue=prc.feed.getMaxAgeUnit(),
+										selectedValue=prc.feed.getSetting( "importing_max_feed_item_age_unit", "" ),
 										class="form-control"
 									)#
 								</div>
@@ -688,16 +681,15 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="maxItems",
+								field="settings_importing_max_feed_items",
 								content="Limit items by number:"
 							)#
 							<p><small>The maximum number of feed items to keep per feed.  When feeds are imported and this limit is exceeded, the oldest feed items will be deleted first to make room for the new ones.</small></p>
 							<div class="controls">
 								#html.inputField(
-									name="settings_maxItems",
-									id="maxItems",
+									name="settings_importing_max_feed_items",
 									type="number",
-									value=prc.feed.getMaxItems(),
+									value=prc.feed.getSetting( "settings_importing_max_feed_items", "" ),
 									class="form-control counter",
 									placeholder="No limit",
 									min="0"
@@ -710,15 +702,14 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="matchAnyFilter",
+								field="settings_importing_match_any_filter",
 								content="Contains any of these keywords:"
 							)#
 							<p><small>Only feed items that contain any of these keywords in the title or body will be imported.  Existing feed items that do not contain any of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
 								#html.textArea(
-									name="settings_matchAnyFilter",
-									id="matchAnyFilter",
-									value=prc.feed.getMatchAnyFilter(),
+									name="settings_importing_match_any_filter",
+									value=prc.feed.getSetting( "importing_match_any_filter", "" ),
 									rows="3",
 									class="form-control",
 									placeholder="Comma delimited list of words or phrases",
@@ -729,15 +720,14 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="matchAllFilter",
+								field="settings_importing_match_all_filter",
 								content="Contains all of these keywords:"
 							)#
 							<p><small>Only feed items that contain all of these keywords in the title or body will be imported.  Existing feed items that do not contain all of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
 								#html.textArea(
-									name="settings_matchAllFilter",
-									id="matchAllFilter",
-									value=prc.feed.getMatchAllFilter(),
+									name="settings_importing_match_all_filter",
+									value=prc.feed.getSetting( "importing_match_all_filter", "" ),
 									rows="3",
 									class="form-control",
 									placeholder="Comma delimited list of words or phrases",
@@ -748,15 +738,14 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="matchNoneFilter",
+								field="settings_importing_match_none_filter",
 								content="Contains none of these keywords:"
 							)#
 							<p><small>Only feed items that do not contain any of these keywords in the title or body will be imported.  Existing feed items that contain any of these keywords in the title or body will be deleted.</small></p>
 							<div class="controls">
 								#html.textArea(
-									name="settings_matchNoneFilter",
-									id="matchNoneFilter",
-									value=prc.feed.getMatchNoneFilter(),
+									name="settings_importing_match_none_filter",
+									value=prc.feed.getSetting( "importing_match_none_filter", "" ),
 									rows="3",
 									class="form-control",
 									placeholder="Comma delimited list of words or phrases",
@@ -770,18 +759,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="importFeaturedImages",
+								field="setting_importing_featured_image_enable",
 								content="Import Featured Images:"
 							)#
 							<p><small>If enabled, an image will be saved locally as the featured image for each feed item when imported.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_importFeaturedImages",
-									id="importFeaturedImages",
+									name="settings_importing_featured_image_enable",
 									options=prc.importFeaturedImageOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getImportFeaturedImages(),
+									selectedValue=prc.feed.getSetting( "importing_featured_image_enable", "" ),
 									class="form-control"
 								)#
 							</div>
@@ -789,18 +777,17 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="importAllImages",
+								field="settings_importing_all_images_enable",
 								content="Import All Images:"
 							)#
 							<p><small>If enabled, all images will be saved locally for each feed item when imported.</small></p>
 							<div class="controls">
 								#html.select(
-									name="settings_importAllImages",
-									id="importAllImages",
+									name="settings_importing_all_images_enable",
 									options=prc.importImageOptions,
 									column="value",
 									nameColumn="name",
-									selectedValue=prc.feed.getImportAllImages(),
+									selectedValue=prc.feed.getSetting( "importing_all_images_enable", "" ),
 									class="form-control"
 								)#
 							</div>
@@ -810,8 +797,8 @@
 						<legend><i class="fa fa-tags fa-lg"></i> Taxonomies</legend>
 						<p><small>Taxonomies are used to automatically assign categories to feed items.  The taxonomies defined here will be used in addition to taxonomies defined in the general settings.</small></p>
 						<div id="taxonomies">
-							<cfloop from="1" to="#arrayLen( prc.feed.getTaxonomies() )#" index="idx">
-								<cfset taxonomy = prc.feed.getTaxonomies()[idx] />
+							<cfloop from="1" to="#arrayLen( prc.feed.getSetting( "taxonomies", [] ) )#" index="idx">
+								<cfset taxonomy = prc.feed.getSetting( "taxonomies", [] )[idx] />
 								<div class="taxonomy">
 									<div class="form-group">
 										#html.label(
@@ -896,14 +883,13 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="preFeedDisplay",
+								field="settings_html_pre_feed_display",
 								content="Before Feed:"
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="settings_preFeedDisplay",
-									id="preFeedDisplay",
-									value=prc.feed.getPreFeedDisplay(),
+									name="settings_html_pre_feed_display",
+									value=prc.feed.getSetting( "html_pre_feed_display", "" ),
 									rows="6",
 									class="form-control"
 								)#
@@ -925,14 +911,13 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="postFeedDisplay",
+								field="settings_html_post_feed_display",
 								content="After Feed:"
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="settings_postFeedDisplay",
-									id="postFeedDisplay",
-									value=prc.feed.getPostFeedDisplay(),
+									name="settings_html_post_feed_display",
+									value=prc.feed.getSetting( "html_post_feed_display", "" ),
 									rows="6",
 									class="form-control"
 								)#
@@ -954,14 +939,13 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="preFeedItemDisplay",
+								field="settings_html_pre_feeditem_display",
 								content="Before Feed Item:"
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="settings_preFeedItemDisplay",
-									id="preFeedItemDisplay",
-									value=prc.feed.getPreFeedItemDisplay(),
+									name="settings_html_pre_feeditem_display",
+									value=prc.feed.getSetting( "html_pre_feeditem_display", "" ),
 									rows="6",
 									class="form-control"
 								)#
@@ -993,14 +977,13 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="postFeedItemDisplay",
+								field="settings_html_post_feeditem_display",
 								content="After Feed Item:"
 							)#
 							<div class="controls">
 								#html.textarea(
-									name="settings_postFeedItemDisplay",
-									id="postFeedItemDisplay",
-									value=prc.feed.getPostFeedItemDisplay(),
+									name="settings_html_post_feeditem_display",
+									value=prc.feed.getSetting( "html_post_feeditem_display", "" ),
 									rows="6",
 									class="form-control"
 								)#

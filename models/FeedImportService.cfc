@@ -63,12 +63,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			if ( structKeyExists( remoteFeed, "items" ) && arrayLen( remoteFeed.items ) ) {
 
 				// Grab item settings
-				var itemStatus = len( arguments.feed.getItemStatus() ) ? arguments.feed.getItemStatus() : settings.importing_feed_item_status;
-				var itemPubDate = len( arguments.feed.getItemPubDate() ) ? arguments.feed.getItemPubDate() : settings.importing_feed_item_published_date;
+				var itemStatus = len( arguments.feed.getSetting( "importing_feed_item_status", "" ) ) ? arguments.feed.getSetting( "importing_feed_item_status", "" ) : settings.importing_feed_item_status;
+				var itemPubDate = len( arguments.feed.getSetting( "importing_feed_item_published_date", "" ) ) ? arguments.feed.getSetting( "importing_feed_item_published_date", "" ) : settings.importing_feed_item_published_date;
 
 				// Grab image settings
-				var importFeaturedImages = len( arguments.feed.getImportFeaturedImages() ) ? arguments.feed.getImportFeaturedImages() : settings.importing_featured_image_enable;
-				var importAllImages = len( arguments.feed.getImportAllImages() ) ? arguments.feed.getImportAllImages() : settings.importing_all_images_enable;
+				var importFeaturedImages = len( arguments.feed.getSetting( "importing_featured_image_enable", "" ) ) ? arguments.feed.getSetting( "importing_featured_image_enable", "" ) : settings.importing_featured_image_enable;
+				var importAllImages = len( arguments.feed.getSetting( "importing_all_images_enable", "" ) ) ? arguments.feed.getSetting( "importing_all_images_enable", "" ) : settings.importing_all_images_enable;
 
 				// Loop over items
 				for ( var item IN remoteFeed.items ) {
@@ -492,9 +492,9 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Set vars
 		var passes = true;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var matchAnyFilter = listToArray( len( trim( arguments.feed.getMatchAnyFilter() ) ) ? arguments.feed.getMatchAnyFilter() : trim( settings.importing_match_any_filter ) );
-		var matchAllFilter = listToArray( len( trim( arguments.feed.getMatchAllFilter() ) ) ? arguments.feed.getMatchAllFilter() : trim( settings.importing_match_all_filter ) );
-		var matchNoneFilter = listToArray( len( trim( arguments.feed.getMatchNoneFilter() ) ) ? arguments.feed.getMatchNoneFilter() : trim( settings.importing_match_none_filter ) );
+		var matchAnyFilter = listToArray( len( trim( arguments.feed.getSetting( "importing_match_any_filter", "" ) ) ) ? arguments.feed.getSetting( "importing_match_any_filter", "" ) : trim( settings.importing_match_any_filter ) );
+		var matchAllFilter = listToArray( len( trim( arguments.feed.getSetting( "importing_match_all_filter", "" ) ) ) ? arguments.feed.getSetting( "importing_match_all_filter", "" ) : trim( settings.importing_match_all_filter ) );
+		var matchNoneFilter = listToArray( len( trim( arguments.feed.getSetting( "importing_match_none_filter", "" ) ) ) ? arguments.feed.getSetting( "importing_match_none_filter", "" ) : trim( settings.importing_match_none_filter ) );
 
 		// Filter out if any filters exist
 		if ( arrayLen( matchAnyFilter ) || arrayLen( matchAllFilter ) || arrayLen( matchNoneFilter ) ) {
@@ -550,11 +550,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 		// Set vars
 		var passes = true;
 		var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
-		var maxAge = val( arguments.feed.getMaxAge() ) ? val( arguments.feed.getMaxAge() ) : val( settings.importing_max_feed_item_age );
-		var maxAgeUnit = val( arguments.feed.getMaxAge() ) ? arguments.feed.getMaxAgeUnit() : settings.importing_max_feed_item_age_unit;
+		var maxAge = val( arguments.feed.getSetting( "importing_max_feed_item_age", "" ) ) ? val( arguments.feed.getSetting( "importing_max_feed_item_age", "" ) ) : val( settings.importing_max_feed_item_age );
+		var maxAgeUnit = len( arguments.feed.getSetting( "importing_max_feed_item_age_unit", "" ) ) ? arguments.feed.getSetting( "importing_max_feed_item_age_unit", "" ) : settings.importing_max_feed_item_age_unit;
 
 		// Check date
-		if ( maxAge ) {
+		if ( maxAge && len( maxAgeUnit ) ) {
 			var maxDate = now();
 			switch( maxAgeUnit ) {
 				case "weeks": {

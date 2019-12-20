@@ -41,7 +41,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_preFeedDisplay( event, interceptData, buffer ) {
 		var feed = arguments.interceptData.feed;
-		var html = len( feed.getPreFeedDisplay() ) ? feed.getPreFeedDisplay() : getSettings( event ).html_pre_feed_display;
+		var html = len( feed.getSetting( "html_pre_feed_display", "" ) ) ? feed.getSetting( "html_pre_feed_display", "" ) : getSettings( event ).html_pre_feed_display;
 		arguments.buffer.append( parseFeedTokens( feed, html ) );
 	}
 
@@ -50,7 +50,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedDisplay( event, interceptData, buffer ) {
 		var feed = arguments.interceptData.feed;
-		var html = len( feed.getPostFeedDisplay() ) ? feed.getPostFeedDisplay() : getSettings( event ).html_post_feed_display;
+		var html = len( feed.getSetting( "html_post_feed_display", "" ) ) ? feed.getSetting( "html_post_feed_display", "" ) : getSettings( event ).html_post_feed_display;
 		arguments.buffer.append( parseFeedTokens( feed, html ) );
 	}
 
@@ -59,7 +59,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_preFeedItemDisplay( event, interceptData, buffer ) {
 		var feedItem = arguments.interceptData.feedItem;
-		var html = len( feedItem.getFeed().getPreFeedItemDisplay() ) ? feedItem.getFeed().getPreFeedItemDisplay() : getSettings( event ).html_pre_feeditem_display;
+		var html = len( feedItem.getFeed().getSetting( "html_pre_feeditem_display", "" ) ) ? feedItem.getFeed().getSetting( "html_pre_feeditem_display", "" ) : getSettings( event ).html_pre_feeditem_display;
 		arguments.buffer.append( parseFeedItemTokens( feedItem, html ) );
 	}
 
@@ -68,7 +68,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedItemDisplay( event, interceptData, buffer ) {
 		var feedItem = arguments.interceptData.feedItem;
-		var html = len( feedItem.getFeed().getPostFeedItemDisplay() ) ? feedItem.getFeed().getPostFeedItemDisplay() : getSettings( event ).html_post_feeditem_display;
+		var html = len( feedItem.getFeed().getSetting( "html_post_feeditem_display", "" ) ) ? feedItem.getFeed().getSetting( "html_post_feeditem_display", "" ) : getSettings( event ).html_post_feeditem_display;
 		arguments.buffer.append( parseFeedItemTokens( feedItem, html ) );
 	}
 

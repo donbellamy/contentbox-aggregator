@@ -165,7 +165,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showRSSOptions[ arrayFind( prc.showRSSOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_rss; } ) ].name#",
 			value = ""
 		});
-
 		prc.showVideoOptions = [
 			{ name = "Display an inline video player for videos.", value = "true" },
 			{ name = "Do not display an inline video player for videos.", value = "false" }
@@ -182,7 +181,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showAudioOptions[ arrayFind( prc.showAudioOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_video_player; } ) ].name#",
 			value = ""
 		});
-
 		prc.showSourceOptions = [
 			{ name = "Display the feed source for feed items.", value = "true" },
 			{ name = "Do not display the feed source for feed items.", value = "false" }
@@ -191,7 +189,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showSourceOptions[ arrayFind( prc.showSourceOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_source; } ) ].name#",
 			value = ""
 		});
-
 		prc.showAuthorOptions = [
 			{ name = "Display the author for feed items.", value = "true" },
 			{ name = "Do not display the author for feed items.", value = "false" }
@@ -200,7 +197,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showAuthorOptions[ arrayFind( prc.showAuthorOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_author; } ) ].name#",
 			value = ""
 		});
-
 		prc.showCategoryOptions = [
 			{ name = "Display the categories for feed items.", value = "true" },
 			{ name = "Do not display the categories for feed items.", value = "false" }
@@ -209,7 +205,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showCategoryOptions[ arrayFind( prc.showCategoryOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_categories; } ) ].name#",
 			value = ""
 		});
-
 		prc.showExcerptOptions = [
 			{ name = "Display an excerpt for feed items.", value = "true" },
 			{ name = "Do not display an excerpt for feed items.", value = "false" }
@@ -218,7 +213,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showExcerptOptions[ arrayFind( prc.showExcerptOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_excerpt; } ) ].name#",
 			value = ""
 		});
-
 		prc.showReadMoreOptions = [
 			{ name = "Display a link after the excerpt for feed items.", value = "true" },
 			{ name = "Do not display a link after the excerpt for feed items.", value = "false" }
@@ -227,7 +221,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showReadMoreOptions[ arrayFind( prc.showReadMoreOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_read_more; } ) ].name#",
 			value = ""
 		});
-
 		prc.linkOptions = [
 			{ name = "Forward the user directly to the feed item.", value = "forward" },
 			{ name = "Link the user directly to the feed item.", value = "link" },
@@ -238,7 +231,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.linkOptions[ arrayFind( prc.linkOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_link_behavior; } ) ].name#",
 			value = ""
 		});
-
 		prc.openWindowOptions = [
 			{ name = "Open feed items in a new window (tab).", value = "true" },
 			{ name = "Do not open feed items in a new window (tab).", value = "false" }
@@ -247,7 +239,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.openWindowOptions[ arrayFind( prc.openWindowOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_open_new_window; } ) ].name#",
 			value = ""
 		});
-
 		prc.showFeaturedImageOptions = [
 			{ name = "Display the feed item's featured image.", value = "true" },
 			{ name = "Do not display the feed item's featured image.", value = "false" }
@@ -256,7 +247,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showFeaturedImageOptions[ arrayFind( prc.showFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_featured_image; } ) ].name#",
 			value = ""
 		});
-
 		prc.featuredImageOptions = [
 			{ name = "Display the parent feed's featured image.", value = "feed" },
 			{ name = "Display the default featured image.", value = "default" },
@@ -339,9 +329,9 @@ component extends="contentHandler" {
 			.paramValue( "settings_feeds_show_website", "" )
 			.paramValue( "settings_feeds_show_rss", "" );
 
-		event.paramValue( "settings_linkBehavior", "" )
-			.paramValue( "settings_featuredImageBehavior", "" )
-			.paramValue( "settings_pagingMaxItems", "" );
+		event.paramValue( "settings_feed_items_link_behavior", "" )
+			.paramValue( "settings_feed_items_featured_image_behavior", "" )
+			.paramValue( "settings_paging_max_feed_items", "" );
 
 		// Importing Options
 		event.paramValue( "isActive", true )
@@ -351,22 +341,22 @@ component extends="contentHandler" {
 			.paramValue( "stopTime", "" );
 
 		// Item defaults
-		event.paramValue( "settings_itemStatus", "" )
-			.paramValue( "settings_itemPubDate", "" )
-			.paramValue( "settings_maxAge", "" )
-			.paramValue( "settings_maxAgeUnit", "" )
-			.paramValue( "settings_maxItems", "" )
-			.paramValue( "settings_matchAnyFilter", "" )
-			.paramValue( "settings_matchAllFilter", "" )
-			.paramValue( "settings_matchNoneFilter", "" )
-			.paramValue( "settings_importFeaturedImages", "" )
-			.paramValue( "settings_importAllImages", "" );
+		event.paramValue( "settings_importing_feed_item_status", "" )
+			.paramValue( "settings_importing_feed_item_published_date", "" )
+			.paramValue( "settings_importing_max_feed_item_age", "" )
+			.paramValue( "settings_importing_max_feed_item_age_unit", "" )
+			.paramValue( "settings_importing_max_feed_items", "" )
+			.paramValue( "settings_importing_match_any_filter", "" )
+			.paramValue( "settings_importing_match_all_filter", "" )
+			.paramValue( "settings_importing_match_none_filter", "" )
+			.paramValue( "settings_importing_featured_image_enable", "" )
+			.paramValue( "settings_importing_all_images_enable", "" );
 
 		// HTML
-		event.paramValue( "settings_preFeedDisplay", "" )
-			.paramValue( "settings_postFeedDisplay", "" )
-			.paramValue( "settings_preFeedItemDisplay", "" )
-			.paramValue( "settings_postFeedItemDisplay", "" );
+		event.paramValue( "settings_html_pre_feed_display", "" )
+			.paramValue( "settings_html_post_feed_display", "" )
+			.paramValue( "settings_html_pre_feeditem_display", "" )
+			.paramValue( "settings_html_post_feeditem_display", "" );
 
 		// SEO
 		event.paramValue( "htmlTitle", "" )
@@ -393,7 +383,7 @@ component extends="contentHandler" {
 		}
 		rc["settings"] = settings;
 
-		writedump(rc);
+		writedump(rc["settings"]);
 		abort;
 
 		// Taxonomies
