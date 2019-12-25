@@ -50,7 +50,7 @@ component extends="baseHandler" {
 		prc.authors = authorService.getAll( sortOrder = "lastName" );
 		prc.categories = categoryService.getAll( sortOrder = "category" );
 		prc.limitUnits = [
-			{ name = "n/a", value = "" },
+			{ name = "None", value = "" },
 			{ name = "Days", value = "days" },
 			{ name = "Weeks", value = "weeks" },
 			{ name = "Months", value = "months" },
@@ -90,8 +90,6 @@ component extends="baseHandler" {
 
 		// Old settings
 		var oldSettings = duplicate( prc.agSettings );
-
-
 
 		// Taxonomies
 		var taxonomies = [];
@@ -188,39 +186,7 @@ component extends="baseHandler" {
 
 		var errors = [];
 
-		// Site Options
-		if ( !len( trim( prc.agSettings.feeds_entrypoint ) ) ) {
-			arrayAppend( errors, "A feeds page is required." );
-		} else {
-			prc.agSettings.feeds_entrypoint = trim( prc.agSettings.feeds_entrypoint );
-		}
-		if ( !len( trim( prc.agSettings.feed_items_entrypoint ) ) ) {
-			arrayAppend( errors, "A feed items page is required." );
-		} else {
-			prc.agSettings.feed_items_entrypoint = trim( prc.agSettings.feed_items_entrypoint );
-		}
-		if ( prc.agSettings.feed_items_entrypoint == prc.agSettings.feeds_entrypoint ) {
-			arrayAppend( errors, "The feed items and feeds pages must be different." );
-		}
-		if ( !val( prc.agSettings.feed_items_excerpt_limit ) ) {
-			arrayAppend( errors, "A valid max feed items value is required." );
-		}
-		prc.agSettings.feed_items_excerpt_ending = trim( prc.agSettings.feed_items_excerpt_ending );
-		prc.agSettings.feed_items_read_more_text = trim( prc.agSettings.feed_items_read_more_text );
-		if ( !val( prc.agSettings.paging_max_feeds ) ) {
-			arrayAppend( errors, "A valid max feeds value is required." );
-		}
-		if ( !val( prc.agSettings.paging_max_feed_items ) ) {
-			arrayAppend( errors, "A valid max feed items value is required." );
-		}
-		if ( !val( prc.agSettings.site_cache_timeout ) ) {
-			arrayAppend( errors, "A valid site cache timeout is required." );
-		}
-		if ( !val( prc.agSettings.site_cache_idle_timeout ) ) {
-			arrayAppend( errors, "A valid site cache idle timeout is required." );
-		}
-
-		// Importing settings
+		// Importing
 		if ( !len( prc.agSettings.importing_interval ) ) {
 			prc.agSettings.importing_start_date = "";
 			prc.agSettings.importing_start_time = "";
@@ -265,6 +231,38 @@ component extends="baseHandler" {
 			arrayAppend( errors, "A valid minimum height is required." );
 		}
 
+		// Site options
+		if ( !len( trim( prc.agSettings.feeds_entrypoint ) ) ) {
+			arrayAppend( errors, "A feeds page is required." );
+		} else {
+			prc.agSettings.feeds_entrypoint = trim( prc.agSettings.feeds_entrypoint );
+		}
+		if ( !len( trim( prc.agSettings.feed_items_entrypoint ) ) ) {
+			arrayAppend( errors, "A feed items page is required." );
+		} else {
+			prc.agSettings.feed_items_entrypoint = trim( prc.agSettings.feed_items_entrypoint );
+		}
+		if ( prc.agSettings.feed_items_entrypoint == prc.agSettings.feeds_entrypoint ) {
+			arrayAppend( errors, "The feed items and feeds pages must be different." );
+		}
+		if ( !val( prc.agSettings.feed_items_excerpt_limit ) ) {
+			arrayAppend( errors, "A valid max feed items value is required." );
+		}
+		prc.agSettings.feed_items_excerpt_ending = trim( prc.agSettings.feed_items_excerpt_ending );
+		prc.agSettings.feed_items_read_more_text = trim( prc.agSettings.feed_items_read_more_text );
+		if ( !val( prc.agSettings.paging_max_feeds ) ) {
+			arrayAppend( errors, "A valid max feeds value is required." );
+		}
+		if ( !val( prc.agSettings.paging_max_feed_items ) ) {
+			arrayAppend( errors, "A valid max feed items value is required." );
+		}
+		if ( !val( prc.agSettings.site_cache_timeout ) ) {
+			arrayAppend( errors, "A valid site cache timeout is required." );
+		}
+		if ( !val( prc.agSettings.site_cache_idle_timeout ) ) {
+			arrayAppend( errors, "A valid site cache idle timeout is required." );
+		}
+
 		// Global html
 		prc.agSettings.html_pre_feed_items_display = trim( prc.agSettings.html_pre_feed_items_display );
 		prc.agSettings.html_post_feed_items_display = trim( prc.agSettings.html_post_feed_items_display );
@@ -279,7 +277,7 @@ component extends="baseHandler" {
 		prc.agSettings.html_pre_sidebar_display = trim( prc.agSettings.html_pre_sidebar_display );
 		prc.agSettings.html_post_sidebar_display = trim( prc.agSettings.html_post_sidebar_display );
 
-		// RSS settings
+		// RSS
 		if ( !len( trim( prc.agSettings.rss_title ) ) ) {
 			arrayAppend( errors, "A valid feed title is required." );
 		} else {

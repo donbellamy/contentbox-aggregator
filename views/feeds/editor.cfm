@@ -315,7 +315,7 @@
 										type="number",
 										value=prc.feed.getSetting( "importing_max_feed_item_age", "" ),
 										class="form-control counter",
-										placeholder="No limit",
+										placeholder="Use the default setting - #val(prc.agSettings.importing_max_feed_item_age)?prc.agSettings.importing_max_feed_item_age:'No Limit'#",
 										min="0"
 									)#
 								</div>
@@ -342,7 +342,7 @@
 									type="number",
 									value=prc.feed.getSetting( "importing_max_feed_items", "" ),
 									class="form-control counter",
-									placeholder="No limit",
+									placeholder="Use the default setting - #val(prc.agSettings.importing_max_feed_items)?prc.agSettings.importing_max_feed_items:'No Limit'#",
 									min="0"
 								)#
 							</div>
@@ -363,7 +363,7 @@
 									value=prc.feed.getSetting( "importing_match_any_filter", "" ),
 									rows="3",
 									class="form-control",
-									placeholder="Comma delimited list of words or phrases",
+									placeholder="Use the default setting - #val(prc.agSettings.importing_match_any_filter)?prc.agSettings.importing_match_any_filter:'None'#",
 									maxlength="255"
 								)#
 							</div>
@@ -381,7 +381,7 @@
 									value=prc.feed.getSetting( "importing_match_all_filter", "" ),
 									rows="3",
 									class="form-control",
-									placeholder="Comma delimited list of words or phrases",
+									placeholder="Use the default setting - #val(prc.agSettings.importing_match_all_filter)?prc.agSettings.importing_match_all_filter:'None'#",
 									maxlength="255"
 								)#
 							</div>
@@ -399,7 +399,7 @@
 									value=prc.feed.getSetting( "importing_match_none_filter", "" ),
 									rows="3",
 									class="form-control",
-									placeholder="Comma delimited list of words or phrases",
+									placeholder="Use the default setting - #val(prc.agSettings.importing_match_none_filter)?prc.agSettings.importing_match_none_filter:'None'#",
 									maxlength="255"
 								)#
 							</div>

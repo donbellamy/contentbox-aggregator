@@ -25,44 +25,6 @@ component {
 		// Settings
 		settings = {
 
-			// Feeds
-			"feeds_entrypoint" = "feeds",
-			"feeds_include_feed_items" = "false",
-			"feeds_show_featured_image" = "true",
-			"feeds_show_website" = "true",
-			"feeds_show_rss" = "true",
-
-			// Feed items
-			"feed_items_entrypoint" = "news",
-			"feed_items_include_entries" = "false",
-			"feed_items_group_by_date" = "false",
-			"feed_items_show_video_player" = "true",
-			"feed_items_show_audio_player" = "true",
-			"feed_items_show_source" = "true",
-			"feed_items_show_author" = "false",
-			"feed_items_show_categories" = "false",
-			"feed_items_show_excerpt" = "true",
-			"feed_items_excerpt_limit" = "255",
-			"feed_items_excerpt_ending" = "...",
-			"feed_items_show_read_more" = "true",
-			"feed_items_read_more_text" = "Read More...",
-			"feed_items_link_behavior" = "forward",
-			"feed_items_open_new_window" = "true",
-			"feed_items_show_featured_image" = "true",
-			"feed_items_featured_image_behavior" = "feed",
-			"feed_items_featured_image_default" = "",
-			"feed_items_featured_image_default_url" = "",
-
-			// Paging
-			"paging_max_feeds" = "20",
-			"paging_max_feed_items" = "20",
-
-			// Caching
-			"site_cache_enable" = "true",
-			"site_cache_name" = "Template",
-			"site_cache_timeout" = "60",
-			"site_cache_idle_timeout" = "15",
-
 			// Importing
 			"importing_interval" = "",
 			"importing_start_date" = "",
@@ -83,6 +45,38 @@ component {
 			"importing_image_minimum_width" = "100",
 			"importing_image_minimum_height" = "100",
 			"importing_taxonomies" = [],
+
+			// Site options
+			"feeds_entrypoint" = "feeds",
+			"feeds_include_feed_items" = "false",
+			"feeds_show_featured_image" = "true",
+			"feeds_show_website" = "true",
+			"feeds_show_rss" = "true",
+			"feed_items_entrypoint" = "news",
+			"feed_items_include_entries" = "false",
+			"feed_items_group_by_date" = "false",
+			"feed_items_show_video_player" = "true",
+			"feed_items_show_audio_player" = "true",
+			"feed_items_show_source" = "true",
+			"feed_items_show_author" = "false",
+			"feed_items_show_categories" = "false",
+			"feed_items_show_excerpt" = "true",
+			"feed_items_excerpt_limit" = "255",
+			"feed_items_excerpt_ending" = "...",
+			"feed_items_show_read_more" = "true",
+			"feed_items_read_more_text" = "Read More...",
+			"feed_items_link_behavior" = "forward",
+			"feed_items_open_new_window" = "true",
+			"feed_items_show_featured_image" = "true",
+			"feed_items_featured_image_behavior" = "feed",
+			"feed_items_featured_image_default" = "",
+			"feed_items_featured_image_default_url" = "",
+			"paging_max_feeds" = "20",
+			"paging_max_feed_items" = "20",
+			"site_cache_enable" = "true",
+			"site_cache_name" = "Template",
+			"site_cache_timeout" = "60",
+			"site_cache_idle_timeout" = "15",
 
 			// Global html
 			"html_pre_feed_items_display" = "",

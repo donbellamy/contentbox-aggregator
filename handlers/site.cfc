@@ -814,7 +814,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		if ( prc.feedItem.isLoaded() ) {
 
 			// Calculate link behavior
-			prc.linkBehavior = len( prc.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ? prc.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) : prc.agSettings.feed_items_link_behavior;
+			prc.linkBehavior = len( prc.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ) ? prc.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) : prc.agSettings.feed_items_link_behavior;
 
 			// Turn off cache if forwarding user to feed item
 			if ( prc.linkBehavior == "forward" ) {

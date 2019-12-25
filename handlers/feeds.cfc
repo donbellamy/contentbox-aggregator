@@ -122,7 +122,7 @@ component extends="contentHandler" {
 
 		// Lookups
 		prc.limitUnits = [
-			{ name = "n/a", value = "" },
+			{ name = "None", value = "" },
 			{ name = "Days", value = "days" },
 			{ name = "Weeks", value = "weeks" },
 			{ name = "Months", value = "months" },
@@ -322,15 +322,13 @@ component extends="contentHandler" {
 			.paramValue( "tagLine", "" )
 			.paramValue( "content", "" );
 
-		// Importing Options
+		// Importing
 		event.paramValue( "isActive", true )
 			.paramValue( "startDate", "" )
 			.paramValue( "startTime", "" )
 			.paramValue( "stopDate", "" )
-			.paramValue( "stopTime", "" );
-
-		// Item defaults
-		event.paramValue( "settings_importing_feed_item_status", "" )
+			.paramValue( "stopTime", "" )
+			.paramValue( "settings_importing_feed_item_status", "" )
 			.paramValue( "settings_importing_feed_item_published_date", "" )
 			.paramValue( "settings_importing_max_feed_item_age", "" )
 			.paramValue( "settings_importing_max_feed_item_age_unit", "" )
@@ -341,16 +339,30 @@ component extends="contentHandler" {
 			.paramValue( "settings_importing_featured_image_enable", "" )
 			.paramValue( "settings_importing_all_images_enable", "" );
 
-		// Site Options
+			// TODO: taxonomies defaults?
+
+		// Site options
 		event.paramValue( "settings_feeds_include_feed_items", "" )
 			.paramValue( "settings_feeds_show_featured_image", "" )
 			.paramValue( "settings_feeds_show_website", "" )
 			.paramValue( "settings_feeds_show_rss", "" )
+			.paramValue( "settings_feed_items_show_video_player", "" )
+			.paramValue( "settings_feed_items_show_audio_player", "" )
+			.paramValue( "settings_feed_items_show_source", "" )
+			.paramValue( "settings_feed_items_show_author", "" )
+			.paramValue( "settings_feed_items_show_categories", "" )
+			.paramValue( "settings_feed_items_show_excerpt", "" )
+			.paramValue( "settings_feed_items_excerpt_limit", "" )
+			.paramValue( "settings_feed_items_excerpt_ending", "" )
+			.paramValue( "settings_feed_items_show_read_more", "" )
+			.paramValue( "settings_feed_items_read_more_text", "" )
 			.paramValue( "settings_feed_items_link_behavior", "" )
+			.paramValue( "settings_feed_items_open_new_window", "" )
+			.paramValue( "settings_feed_items_show_featured_image", "" )
 			.paramValue( "settings_feed_items_featured_image_behavior", "" )
 			.paramValue( "settings_paging_max_feed_items", "" );
 
-		// Global HTML
+		// Global html
 		event.paramValue( "settings_html_pre_feed_display", "" )
 			.paramValue( "settings_html_post_feed_display", "" )
 			.paramValue( "settings_html_pre_feeditem_display", "" )
