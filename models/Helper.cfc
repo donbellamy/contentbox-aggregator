@@ -711,10 +711,11 @@ component accessors="true" singleton threadSafe {
 	 * @return The main view html
 	 */
 	string function mainView( struct args=structNew() ) {
+		//variables.event.getCurrentViewArgs()
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/aggregator/page",
-				args = arguments.args,
+				//args = arguments.args,
 				module = cb.themeRecord().module
 			);
 		} else {

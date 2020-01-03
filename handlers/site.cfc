@@ -337,13 +337,31 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set the page title
 			cbHelper.setMetaTitle( title );
 
+			// Set the args
+			var args = { "test" = "YES" };
+
 			// Set layout and view
-			event.setLayout(
+			/*event.setLayout(
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
 				view = "#prc.cbTheme#/views/aggregator/index",
+				module = prc.cbThemeRecord.module,
+				args = args
+			);*/
+
+			// Set the view
+			event.setView(
+				view = "#prc.cbTheme#/views/aggregator/index",
 				module = prc.cbThemeRecord.module
+			)
+
+			// Render the layout
+			// Note - Had to go this route so that we can pass custom args to the layout and view - bug in cb?
+			return renderLayout(
+				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module,
+				args = args
 			);
 
 		// Feed items page not published, throw a 404

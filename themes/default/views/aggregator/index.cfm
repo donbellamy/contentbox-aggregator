@@ -1,3 +1,4 @@
+<cfdump var="#args#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
 <cfoutput>
