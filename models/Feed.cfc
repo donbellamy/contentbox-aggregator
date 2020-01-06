@@ -163,7 +163,7 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets an feed setting value by key or by default value
+	 * Gets a feed setting value by key or by default value
 	 * @key The setting key to get
 	 * @value The default value to return if not found
 	 * @return The setting value or default value if found
@@ -181,6 +181,30 @@ component persistent="true"
 			detail = "Settings keys are #structKeyList( settings )#",
 			type = "aggregator.Feed.InvalidSetting"
 		);
+	}
+
+	/**
+	 * Gets the view args set on the feed
+	 * @return A struct of the view args set on the feed
+	 */
+	struct function getViewArgs() {
+		var args = {
+			// Feeds
+			"includeFeedItems" = getSetting( "feeds_include_feed_items", "" ),
+			"showFeedImage" = getSetting( "feeds_show_featured_image", "" ),
+			"showFeedWebsite" = getSetting( "feeds_show_website", "" ),
+			"showFeedRSS" = getSetting( "feeds_show_rss", "" ),
+			// Feed items
+			"linkBehavior" = getSetting( "feed_items_link_behavior", "" ),
+			"openNewWindow" = getSetting( "feed_items_open_new_window", "" )
+		};
+		var viewArgs = {};
+		for ( var arg IN args ) {
+			if ( len( args[arg] ) ) {
+				viewArgs[arg] = args[arg];
+			}
+		}
+		return viewArgs;
 	}
 
 	/**

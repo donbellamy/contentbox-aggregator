@@ -649,8 +649,21 @@ component accessors="true" singleton threadSafe {
 	 * @args A structure of arguments to pass to the template
 	 * @return The feeds list html
 	 */
-	string function quickFeeds( string template="feed", string collectionAs="feed", struct args=structnew() ) {
+	string function quickFeeds( string template="feed", string collectionAs="feed", struct args=structNew() ) {
 		var feeds = getCurrentFeeds();
+		var html = "";
+		for ( var feed IN feeds ) {
+			var viewArgs = duplicate( arguments.args );
+			viewArgs.feed = feed;
+			viewArgs.append( feed.getViewArgs() );
+			html &= controller.getRenderer().renderView(
+				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
+				args = viewArgs,
+				module = cb.themeRecord().module
+			)
+		}
+		return html;
+		/*
 		return controller.getRenderer().renderView(
 			view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 			collection = feeds,
@@ -658,6 +671,7 @@ component accessors="true" singleton threadSafe {
 			args = arguments.args,
 			module = cb.themeRecord().module
 		);
+		*/
 	}
 
 	/**
@@ -672,7 +686,8 @@ component accessors="true" singleton threadSafe {
 		string template="feeditem",
 		string collectionAs="feeditem",
 		boolean groupByDate=false,
-		struct args=structnew() ) {
+		struct args=structNew()
+	) {
 		var feedItems = getCurrentFeedItems();
 		if ( arguments.groupByDate ) {
 			var html = "";
@@ -685,6 +700,7 @@ component accessors="true" singleton threadSafe {
 				} else {
 					arguments.args.showGroupByDate = false;
 				}
+				// TODO: Seems kind of messy
 				html &= controller.getRenderer().renderView(
 					view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 					collection = [ feedItem ],
@@ -711,16 +727,32 @@ component accessors="true" singleton threadSafe {
 	 * @return The main view html
 	 */
 	string function mainView( struct args=structNew() ) {
-		//variables.event.getCurrentViewArgs()
 		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/aggregator/page",
-				//args = arguments.args,
+				args = arguments.args,
 				module = cb.themeRecord().module
 			);
 		} else {
 			return cb.mainView( argumentCollection=arguments );
 		}
+	}
+
+	/**
+	 * Gets the default view args
+	 * @return The default view args struct
+	 */
+	struct function getViewArgs() {
+		return {
+			// Feeds
+			"includeFeedItems" = setting("feeds_include_feed_items"),
+			"showFeedImage" = setting("feeds_show_featured_image"),
+			"showFeedWebsite" = setting("feeds_show_website"),
+			"showFeedRSS" = setting("feeds_show_rss"),
+			// Feed items
+			"linkBehavior" = setting("feed_items_link_behavior"),
+			"openNewWindow" = setting("feed_items_open_new_window")
+		};
 	}
 
 	/************************************** MENUS *********************************************/

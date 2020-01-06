@@ -1,4 +1,3 @@
-<cfdump var="#args#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
 <cfoutput>
@@ -46,12 +45,13 @@
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preFeedItemsDisplay")#
 				<cfif prc.itemCount >
-					<cfif prc.template EQ "feeditem" >
-						#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
-					<cfelse>
+					<cfif prc.template EQ "podcast" || prc.template EQ "video" >
 						<div class="row display-flex">
+							<!--- TODO: move groupby date into args --->
 							#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
 						</div>
+					<cfelse>
+						#ag.quickFeedItems( groupByDate=prc.groupByDate, args=args )#
 					</cfif>
 					<cfif !args.print >
 						<div class="contentBar">

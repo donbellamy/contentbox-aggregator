@@ -98,6 +98,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 			if ( arguments.openNewWindow ) {
 				target = "_blank";
 			}
+			// TODO: Fix this - cfml in output
 			html &= '<li><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>';
 		}
 

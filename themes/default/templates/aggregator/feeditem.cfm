@@ -1,4 +1,3 @@
-<cfparam name="args" default="#structNew()#" />
 <cfset contentType = feedItem.getContentType() />
 <cfif contentType EQ "FeedItem" >
 	<cfset linkBehavior =

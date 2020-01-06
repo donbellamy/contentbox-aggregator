@@ -1,4 +1,3 @@
-<!--- TODO: Find out how args get defined here, we may be able to set them here and pass to the view ? --->
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
 <cfoutput>

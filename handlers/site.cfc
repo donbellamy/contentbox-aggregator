@@ -357,7 +357,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			)
 
 			// Render the layout
-			// Note - Had to go this route so that we can pass custom args to the layout and view - bug in cb?
 			return renderLayout(
 				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module,
@@ -546,7 +545,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
-			var args = {}; // Used in fix for args not passed to layouts
+			var args = prc.agHelper.getViewArgs();
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -575,6 +574,8 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Paging
 			prc.pagingLink &= "?page=@page@";
 
+			// TODO: Go through all rc vars
+
 			// Sort order
 			var sortOrder = "title ASC";
 			if ( len( rc.sb ) && rc.sb == "recent" ) {
@@ -585,7 +586,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Include items?
 			if ( len( rc.inc ) && rc.inc == "items" ) {
 				prc.pagingLink &= "&inc=items";
-				args.includeItems = true;
+				args.includeFeedItems = true;
 			}
 
 			// Grab the results
@@ -608,15 +609,25 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			title = prc.page.getTitle() & title;
 			cbHelper.setMetaTitle( title );
 
-			// Set args
-			prc.args = args;
-
 			// Set layout and view
-			event.setLayout(
+			/*event.setLayout(
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
 				view = "#prc.cbTheme#/views/aggregator/feeds",
+				module = prc.cbThemeRecord.module,
+				args = args
+			);*/
+
+			// Set the view
+			event.setView(
+				view = "#prc.cbTheme#/views/aggregator/feeds",
+				module = prc.cbThemeRecord.module
+			)
+
+			// Render the layout
+			return renderLayout(
+				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module,
 				args = args
 			);

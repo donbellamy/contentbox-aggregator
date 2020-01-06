@@ -1,7 +1,5 @@
-<cfparam name="args" default="#structNew()#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
-<cfparam name="args.includeItems" default="false" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />

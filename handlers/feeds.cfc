@@ -387,7 +387,7 @@ component extends="contentHandler" {
 		// Settings
 		var settings = {};
 		for ( var item IN rc ) {
-			if ( reFindNoCase( "^settings_", item ) ) {
+			if ( reFindNoCase( "^settings_", item ) && len( rc[ item ] ) ) {
 				settings[ listRest( item, "_" ) ] = rc[ item ];
 			}
 		}

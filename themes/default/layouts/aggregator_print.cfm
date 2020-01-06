@@ -16,7 +16,7 @@
 			<!--- ContentBoxEvent --->
 			#cb.event("cbui_beforeContent")#
 			<!--- Main View --->
-			#ag.mainView( args={ sidebar=false, print=true } )#
+			#ag.mainView( args={ sidebar=false, print=true } )# <!--- TODO: FIX THIS --->
 			<!--- ContentBoxEvent --->
 			#cb.event("cbui_afterContent")#
 		</div>
