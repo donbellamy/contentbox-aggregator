@@ -33,8 +33,8 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the results, defaults to feed title.
 	 * @sortOrder.options Feed Title,Most Recent
-	 * @includeItems.label Include Feed Items?
-	 * @includeItems.hint Displays the most recent five feed items within the list of feeds, defaults to false.
+	 * @includeFeedItems.label Include Feed Items?
+	 * @includeFeedItems.hint Displays the most recent five feed items within the list of feeds, defaults to false.
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
@@ -42,11 +42,18 @@ component extends="aggregator.models.BaseWidget" singleton {
 		numeric titleLevel=2,
 		string category="",
 		string sortOrder="Feed Title",
-		boolean includeItems=false ) {
+		boolean includeFeedItems=ag.setting("feeds_include_feed_items") ) {
 
 		// Grab the event
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
+
+		// Set args
+		var args = ag.getViewArgs().append({
+			"title" = arguments.title,
+			"titleLevel" = arguments.titleLevel,
+			"includeFeedItems" = arguments.includeFeedItems
+		});
 
 		// Fixes bug in widget preview - take out when fixed
 		prc.cbTheme = prc.cbSettings.cb_site_theme;
@@ -59,7 +66,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		prc.pagingLink = ag.linkFeeds();
 
 		// Category
-		if ( len( arguments.category) ) {
+		if ( len( arguments.category ) ) {
 			prc.pagingLink &= "/category/#arguments.category#/";
 		}
 
@@ -69,7 +76,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Sort order
 		switch ( arguments.sortOrder ) {
 			case "Most Recent": {
-				// TODO: Check global setting and do not include if not needed
 				prc.pagingLink &= "&sb=recent";
 				arguments.sortOrder = "lastPublishedDate DESC";
 				break;
@@ -79,9 +85,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 			}
 		}
 
-		// Include items
-		// TODO: Check global setting and do not include if not needed
-		if ( arguments.includeItems ) {
+		// Include feed items
+		if ( arguments.includeFeedItems &&
+			( arguments.includeFeedItems != ag.setting("feeds_include_feed_items") )
+		) {
 			prc.pagingLink &= "&inc=items";
 		}
 
@@ -94,13 +101,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		);
 		prc.feeds = results.feeds;
 		prc.itemCount = results.count;
-
-		// Set args
-		var args = {
-			title = arguments.title,
-			titleLevel = arguments.titleLevel,
-			includeItems = arguments.includeItems
-		};
 
 		// Render the feeds view
 		return renderView(

@@ -534,7 +534,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "category", "" )
 			.paramValue( "sb", "" )
-			.paramValue( "inc", "" )
+			.paramValue( "fi", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
@@ -574,8 +574,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Paging
 			prc.pagingLink &= "?page=@page@";
 
-			// TODO: Go through all rc vars
-
 			// Sort order
 			var sortOrder = "title ASC";
 			if ( len( rc.sb ) && rc.sb == "recent" ) {
@@ -583,7 +581,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				sortOrder = "lastPublishedDate DESC";
 			}
 
-			// Include items?
+			// Include feed items
 			if ( len( rc.inc ) && rc.inc == "items" ) {
 				prc.pagingLink &= "&inc=items";
 				args.includeFeedItems = true;

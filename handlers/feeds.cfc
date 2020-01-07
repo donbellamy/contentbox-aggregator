@@ -339,8 +339,6 @@ component extends="contentHandler" {
 			.paramValue( "settings_importing_featured_image_enable", "" )
 			.paramValue( "settings_importing_all_images_enable", "" );
 
-			// TODO: taxonomies defaults?
-
 		// Site options
 		event.paramValue( "settings_feeds_include_feed_items", "" )
 			.paramValue( "settings_feeds_show_featured_image", "" )
@@ -395,7 +393,6 @@ component extends="contentHandler" {
 
 		// Taxonomies
 		var taxonomies = [];
-		rc.settings["taxonomies"] = [];
 		for ( var item IN rc ) {
 			if ( reFindNoCase( "^taxonomies_", item ) ) {
 				var key = listLast( item, "_" );
@@ -406,11 +403,14 @@ component extends="contentHandler" {
 				taxonomies[ count ][ key ] = rc[ item ];
 			}
 		}
-		for ( var item IN taxonomies ) {
-			if ( len( item.categories) &&
-				( len( trim( item.keywords ) ) || item.method == "none"  )
-			) {
-				arrayAppend( rc.settings["taxonomies"], item );
+		if ( arrayLen( taxonomies ) ) {
+			rc.settings["taxonomies"] = [];
+			for ( var item IN taxonomies ) {
+				if ( len( item.categories) &&
+					( len( trim( item.keywords ) ) || item.method == "none"  )
+				) {
+					arrayAppend( rc.settings["taxonomies"], item );
+				}
 			}
 		}
 

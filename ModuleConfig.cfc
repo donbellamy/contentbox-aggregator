@@ -66,7 +66,7 @@ component {
 			"feed_items_show_read_more" = "true",
 			"feed_items_read_more_text" = "Read More...",
 			"feed_items_link_behavior" = "forward",
-			"feed_items_open_new_window" = "true",
+			"feed_items_open_new_window" = "false",
 			"feed_items_show_featured_image" = "true",
 			"feed_items_featured_image_behavior" = "feed",
 			"feed_items_featured_image_default" = "",
