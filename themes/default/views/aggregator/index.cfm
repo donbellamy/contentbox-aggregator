@@ -47,11 +47,10 @@
 				<cfif prc.itemCount >
 					<cfif prc.template EQ "podcast" || prc.template EQ "video" >
 						<div class="row display-flex">
-							<!--- TODO: move groupby date into args --->
-							#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
+							#ag.quickFeedItems( template=prc.template, args=args )#
 						</div>
 					<cfelse>
-						#ag.quickFeedItems( groupByDate=prc.groupByDate, args=args )#
+						#ag.quickFeedItems( args=args )#
 					</cfif>
 					<cfif !args.print >
 						<div class="contentBar">

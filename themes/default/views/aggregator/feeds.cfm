@@ -48,7 +48,7 @@
 					#ag.quickFeeds( args=args )#
 					<cfif !args.print >
 						<div class="contentBar">
-							#ag.quickPaging( type="feeds" )#
+							#ag.quickPaging( label="feeds" )#
 						</div>
 					</cfif>
 				<cfelse>

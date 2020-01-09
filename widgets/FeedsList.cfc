@@ -33,16 +33,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @category.label Category
 	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
-	 * @openNewWindow.label Open In New Window?
-	 * @openNewWindow.hint Open feeds in a new window (tab), default is false.
 	 * @return The feeds list widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		numeric max=5,
-		string category="",
-		boolean openNewWindow=false ) {
+		string category="" ) {
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
@@ -68,11 +65,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// List items
 		for ( var x=1; x LTE arguments.max; x++ ) {
-			var target = "_self";
-			if ( arguments.openNewWindow ) {
-				target = "_blank";
-			}
-			html &= '<li><a href="#ag.linkFeed( results.feeds[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feeds[x].getTitle()#</a></li>';
+			html &= '<li><a href="#ag.linkFeed( results.feeds[x] )#" rel="nofollow">#results.feeds[x].getTitle()#</a></li>';
 		}
 
 			// List end

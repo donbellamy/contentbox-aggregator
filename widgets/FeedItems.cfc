@@ -41,10 +41,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the results, defaults to most recent.
 	 * @sortOrder.options Most Recent,Most Popular
-	 * @groupByDate.label Group by Date?
-	 * @groupByDate.hint Group the results by published date, default is false.
-	 * @openNewWindow.label Open In New Window?
-	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
 	 * @return The feed items widget html
 	 */
 	string function renderIt(
@@ -54,13 +50,17 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string feed="",
 		string category="",
 		string searchTerm="",
-		string sortOrder="Most Recent",
-		boolean groupByDate=false,
-		boolean openNewWindow=false ) {
+		string sortOrder="Most Recent" ) {
 
 		// Grab the event
 		var event = getRequestContext();
 		var prc = event.getCollection(private=true);
+
+		// Set args
+		var args = ag.getViewArgs().append({
+			"title" = arguments.title,
+			"titleLevel" = arguments.titleLevel
+		});
 
 		// Fixes bug in widget preview - take out when fixed
 		prc.cbTheme = prc.cbSettings.cb_site_theme;
@@ -88,15 +88,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Search
 		if ( len( trim( arguments.searchTerm ) ) ) {
 			prc.pagingLink &= "&q=" & arguments.searchTerm;
-		}
-
-		// Group by date
-		// TODO: setting for this, then do not have to pass in the url
-		prc.groupByDate = false; // TODO: move to args?
-		if ( arguments.groupByDate ) {
-			prc.groupByDate = true;
-			prc.pagingLink &= "&gb=date";
-			arguments.sortOrder = "Most Recent";
 		}
 
 		// Sort order
@@ -134,13 +125,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 		);
 		prc.feedItems = results.feedItems;
 		prc.itemCount = results.count;
-
-		// Set args
-		var args = {
-			title = arguments.title,
-			titleLevel = arguments.titleLevel,
-			openNewWindow = arguments.openNewWindow
-		};
 
 		// Render the feed items template
 		return renderView(

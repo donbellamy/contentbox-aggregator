@@ -645,11 +645,10 @@ component accessors="true" singleton threadSafe {
 	/**
 	 * Renders the feeds list
 	 * @template The theme template used to render the feeds, defaults to "feed"
-	 * @collectionAs The variable name used in the template for each feed, defaults to "feed"
 	 * @args A structure of arguments to pass to the template
 	 * @return The feeds list html
 	 */
-	string function quickFeeds( string template="feed", string collectionAs="feed", struct args=structNew() ) {
+	string function quickFeeds( string template="feed", struct args=structNew() ) {
 		var feeds = getCurrentFeeds();
 		var html = "";
 		for ( var feed IN feeds ) {
@@ -663,32 +662,29 @@ component accessors="true" singleton threadSafe {
 			)
 		}
 		return html;
-		/*
-		return controller.getRenderer().renderView(
-			view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
-			collection = feeds,
-			collectionAs = arguments.collectionAs,
-			args = arguments.args,
-			module = cb.themeRecord().module
-		);
-		*/
 	}
 
 	/**
 	 * Renders the feed items list
 	 * @template The theme template used to render the feed items, defaults to "feeditem"
-	 * @collectionAs The variable name used in the template for each feed item, defaults to "feeditem"
-	 * @groupByDate Whether or not to group the feed items by published date, defaults to false
 	 * @args A structure of arguments to pass to the template
 	 * @return The feed items list html
 	 */
-	string function quickFeedItems(
-		string template="feeditem",
-		string collectionAs="feeditem",
-		boolean groupByDate=false,
-		struct args=structNew()
-	) {
+	string function quickFeedItems( string template="feeditem", struct args=structNew() ) {
 		var feedItems = getCurrentFeedItems();
+		var html = "";
+		for ( var feedItem IN feedItems ) {
+			var viewArgs = duplicate( arguments.args );
+			viewArgs.feedItem = feedItem;
+			viewArgs.append( feedItem.getFeed().getViewArgs() );
+			html &= controller.getRenderer().renderView(
+				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
+				args = viewArgs,
+				module = cb.themeRecord().module
+			)
+		}
+		return html;
+		/*
 		if ( arguments.groupByDate ) {
 			var html = "";
 			var currentDate = "";
@@ -700,7 +696,6 @@ component accessors="true" singleton threadSafe {
 				} else {
 					arguments.args.showGroupByDate = false;
 				}
-				// TODO: Seems kind of messy
 				html &= controller.getRenderer().renderView(
 					view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 					collection = [ feedItem ],
@@ -719,6 +714,7 @@ component accessors="true" singleton threadSafe {
 				module = cb.themeRecord().module
 			);
 		}
+		*/
 	}
 
 	/**

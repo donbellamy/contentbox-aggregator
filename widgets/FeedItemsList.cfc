@@ -41,8 +41,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the feed items, defaults to published date.
 	 * @sortOrder.options Most Recent,Most Popular
-	 * @openNewWindow.label Open In New Window?
-	 * @openNewWindow.hint Open feed items in a new window (tab), default is false.
 	 * @return The feed items list widget html
 	 */
 	string function renderIt(
@@ -52,8 +50,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		string feed = "",
 		string category="",
 		string searchTerm="",
-		string sortOrder="Most Recent",
-		boolean openNewWindow=false ) {
+		string sortOrder="Most Recent" ) {
 
 		// Sort order
 		switch ( arguments.sortOrder ) {
@@ -94,12 +91,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 
 		// List items
 		for ( var x=1; x LTE arguments.max; x++ ) {
-			var target = "_self";
-			if ( arguments.openNewWindow ) {
-				target = "_blank";
-			}
-			// TODO: Fix this - cfml in output
-			html &= '<li><a href="#ag.linkContent( results.feedItems[x] )#" target="#target#" rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#results.feedItems[x].getTitle()#</a></li>';
+			html &= '<li><a href="#ag.linkContent( results.feedItems[x] )#" rel="nofollow">#results.feedItems[x].getTitle()#</a></li>';
 		}
 
 		// List end

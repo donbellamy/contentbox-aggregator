@@ -217,7 +217,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			.paramValue( "q", "" )
 			.paramValue( "category", "" )
 			.paramValue( "feed", "" )
-			.paramValue( "gb", "" )
 			.paramValue( "sb", "" )
 			.paramValue( "type", "" )
 			.paramValue( "format", "html" );
@@ -228,8 +227,10 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Make sure page exists
 		if ( prc.page.isLoaded() ) {
 
-			// Set page title
+			// Set vars
 			var title = " | " & cbHelper.siteName();
+			var args = prc.agHelper.getViewArgs();
+			var sortOrder = "publishedDate DESC";
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -282,17 +283,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				title = " - " & reReplace( rc.q,"(^[a-z])","\U\1","ALL") & title;
 			}
 
-			// Group by date
-			// TODO: setting for this, then do not have to pass in the url
-			prc.groupByDate = false; // TODO: Why need this? change to use args - see feeds
-			if ( len( rc.gb ) && rc.gb == "date" ) {
-				prc.groupByDate = true;
-				prc.pagingLink &= "&gb=date";
-				rc.sb = "";
-			}
-
 			// Sort order
-			var sortOrder = "publishedDate DESC";
 			if ( len( rc.sb ) && rc.sb == "hits" ) {
 				prc.pagingLink &= "&sb=hits";
 				sortOrder = "numberOfHits DESC";
@@ -336,19 +327,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set the page title
 			cbHelper.setMetaTitle( title );
-
-			// Set the args
-			var args = { "test" = "YES" };
-
-			// Set layout and view
-			/*event.setLayout(
-				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module
-			).setView(
-				view = "#prc.cbTheme#/views/aggregator/index",
-				module = prc.cbThemeRecord.module,
-				args = args
-			);*/
 
 			// Set the view
 			event.setView(
@@ -534,7 +512,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		event.paramValue( "page", 1 )
 			.paramValue( "category", "" )
 			.paramValue( "sb", "" )
-			.paramValue( "fi", "" )
 			.paramValue( "format", "html" );
 
 		// Grab the feeds page
@@ -546,6 +523,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set vars
 			var title = " | " & cbHelper.siteName();
 			var args = prc.agHelper.getViewArgs();
+			var sortOrder = "title ASC";
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -575,16 +553,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.pagingLink &= "?page=@page@";
 
 			// Sort order
-			var sortOrder = "title ASC";
 			if ( len( rc.sb ) && rc.sb == "recent" ) {
 				prc.pagingLink &= "&sb=recent";
 				sortOrder = "lastPublishedDate DESC";
-			}
-
-			// Include feed items
-			if ( len( rc.inc ) && rc.inc == "items" ) {
-				prc.pagingLink &= "&inc=items";
-				args.includeFeedItems = true;
 			}
 
 			// Grab the results
@@ -606,16 +577,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set the page title
 			title = prc.page.getTitle() & title;
 			cbHelper.setMetaTitle( title );
-
-			// Set layout and view
-			/*event.setLayout(
-				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module
-			).setView(
-				view = "#prc.cbTheme#/views/aggregator/feeds",
-				module = prc.cbThemeRecord.module,
-				args = args
-			);*/
 
 			// Set the view
 			event.setView(
@@ -717,6 +678,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
+			var args = prc.agHelper.getViewArgs();
 
 			// Page numeric check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -784,13 +746,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				cbHelper.setMetaKeywords( prc.feed.getHTMLKeywords() );
 			}
 
-			// Set layout and view
-			event.setLayout(
-				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module
-			).setView(
+			// Set the view
+			event.setView(
 				view = "#prc.cbTheme#/views/aggregator/feed",
 				module = prc.cbThemeRecord.module
+			)
+
+			// Render the layout
+			return renderLayout(
+				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module,
+				args = args
 			);
 
 		// Feeds page off, forward directly to the feed source

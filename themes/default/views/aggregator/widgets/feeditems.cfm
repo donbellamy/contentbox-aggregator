@@ -1,4 +1,3 @@
-<cfparam name="args" default="#structNew()#" />
 <cfparam name="args.print" default="false" />
 <cfparam name="args.title" default="" />
 <cfparam name="args.titleLevel" default="2" />
@@ -9,10 +8,10 @@
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
 	<cfif prc.template EQ "feeditem" >
-		#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
+		#ag.quickFeedItems( template=prc.template, args=args )#
 	<cfelse>
 		<div class="row display-flex">
-			#ag.quickFeedItems( template=prc.template, groupByDate=prc.groupByDate, args=args )#
+			#ag.quickFeedItems( template=prc.template, args=args )#
 		</div>
 	</cfif>
 	<cfif !args.print >

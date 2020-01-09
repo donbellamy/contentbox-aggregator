@@ -32,11 +32,6 @@
 				</div>
 			</cfif>
 			<cfif args.includeFeedItems && args.feed.getNumberOfPublishedChildren() >
-				<!---<cfset linkBehavior =
-					len( feed.getSetting( "feed_items_link_behavior", "" ) ) ?
-					feed.getSetting( "feed_items_link_behavior", "" ) :
-					ag.setting("feed_items_link_behavior") />--->
-				<!---<cfset directLink = args.linkBehavior EQ "link" ? true : false />--->
 				<cfparam name="args.linkBehavior" default="forward" />
 				<cfparam name="args.openNewWindow" default="#args.linkBehavior EQ 'interstitial' ? true : false#" />
 				<div class="row feeditems">

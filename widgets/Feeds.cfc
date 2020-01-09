@@ -33,16 +33,13 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the results, defaults to feed title.
 	 * @sortOrder.options Feed Title,Most Recent
-	 * @includeFeedItems.label Include Feed Items?
-	 * @includeFeedItems.hint Displays the most recent five feed items within the list of feeds, defaults to false.
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		string category="",
-		string sortOrder="Feed Title",
-		boolean includeFeedItems=ag.setting("feeds_include_feed_items") ) {
+		string sortOrder="Feed Title" ) {
 
 		// Grab the event
 		var event = getRequestContext();
@@ -51,8 +48,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		// Set args
 		var args = ag.getViewArgs().append({
 			"title" = arguments.title,
-			"titleLevel" = arguments.titleLevel,
-			"includeFeedItems" = arguments.includeFeedItems
+			"titleLevel" = arguments.titleLevel
 		});
 
 		// Fixes bug in widget preview - take out when fixed
@@ -83,13 +79,6 @@ component extends="aggregator.models.BaseWidget" singleton {
 			default : {
 				arguments.sortOrder = "title ASC";
 			}
-		}
-
-		// Include feed items
-		if ( arguments.includeFeedItems &&
-			( arguments.includeFeedItems != ag.setting("feeds_include_feed_items") )
-		) {
-			prc.pagingLink &= "&inc=items";
 		}
 
 		// Grab the results

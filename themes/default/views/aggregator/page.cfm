@@ -1,6 +1,6 @@
-<cfoutput>
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
+<cfoutput>
 <cfif cb.isHomePage() >
 	<cfset styleHTML = "" />
 	<cfif cb.themeSetting( 'hpHeaderImgBg' ) is not "" >
