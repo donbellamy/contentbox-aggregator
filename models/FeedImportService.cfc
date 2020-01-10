@@ -82,17 +82,17 @@ component extends="cborm.models.VirtualEntityService" singleton {
 					// Validate url, title and body
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
-						// Check if item is blacklisted
-						var itemBlacklisted = blacklistedItemService.newCriteria().isEq( "itemUrl", item.url ).eq( "feed.contentID", javaCast( "int", arguments.feed.getContentID() ) ).count();
+						// Check if item already exists
+						var itemExists = feedItemService.itemExists( uniqueId );
 
-						// Not blacklisted
-						if ( !itemBlacklisted ) {
+						// Doesn't exist
+						if ( !itemExists  ) {
 
-							// Check if item already exists
-							var itemExists = feedItemService.itemExists( uniqueId );
+							// Check if item is blacklisted
+							var itemBlacklisted = blacklistedItemService.newCriteria().isEq( "itemUrl", item.url ).eq( "feed.contentID", javaCast( "int", arguments.feed.getContentID() ) ).count();
 
-							// Doesn't exist
-							if ( !itemExists ) {
+							// Not blacklisted
+							if ( !itemBlacklisted ) {
 
 								// Check keywords
 								var passesKeywordFilters = checkKeywordFilters( item, arguments.feed );

@@ -1,7 +1,6 @@
-<cfparam name="args" default="#structNew()#" />
 <cfset linkBehavior =
-	len( feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ) ?
-	feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) :
+	len( args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ) ?
+	args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) :
 	ag.setting("feed_items_link_behavior") />
 <cfset directLink = linkBehavior EQ "link" ? true : false />
 <cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
@@ -14,55 +13,55 @@
 <cfoutput>
 <cfif args.showGroupByDate >
 	<div class="post-date col-sm-12">
-		<h4>#dateFormat( feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
+		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
 </cfif>
-<div class="col-md-4 col-sm-6 col-xs-12 post podcast" id="feeditem_#feedItem.getContentID()#">
+<div class="col-md-4 col-sm-6 col-xs-12 post podcast" id="feeditem_#args.feedItem.getContentID()#">
 	<cfif args.showImage >
-		<cfset imageUrl = feedItem.getFeaturedImageUrl() />
+		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
 		<cfif len( imageUrl ) >
 			<div class="text-center">
-				<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
 					<cfif directLink >class="direct-link"</cfif>
-					title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
+					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 					rel="nofollow<cfif args.openNewWindow > noopener</cfif>">
-					<img src="#imageUrl#" class="img-thumbnail" alt="#encodeForHtmlAttribute( feedItem.getTitle() )#" />
+					<img src="#imageUrl#" class="img-thumbnail" alt="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" />
 				</a>
 			</div>
 		</cfif>
 	</cfif>
 	<h4>
-		<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+		<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
 			<cfif directLink >class="direct-link"</cfif>
-			title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
-			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
+			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
+			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#args.feedItem.getTitle()#</a>
 	</h4>
 	<div class="row text-muted small">
 			<cfif args.showSource >
 				<div class="col-sm-12">
 					<i class="fa fa-microphone"></i>
-					<a href="#ag.linkFeed( feedItem.getFeed() )#" title="#encodeForHTMLAttribute( feeditem.getFeed().getTitle() )#">#feeditem.getFeed().getTitle()#</a>
+					<a href="#ag.linkFeed( args.feedItem.getFeed() )#" title="#encodeForHTMLAttribute( args.feedItem.getFeed().getTitle() )#">#args.feedItem.getFeed().getTitle()#</a>
 				</div>
 			</cfif>
 			<div class="col-sm-12">
 				<i class="fa fa-calendar"></i>
-				<time datetime="#feedItem.getDisplayPublishedDate()#" title="#feedItem.getDisplayPublishedDate()#">#ag.timeAgo( feedItem.getDisplayPublishedDate() )#</time>
+				<time datetime="#args.feedItem.getDisplayPublishedDate()#" title="#args.feedItem.getDisplayPublishedDate()#">#ag.timeAgo( args.feedItem.getDisplayPublishedDate() )#</time>
 			</div>
 	</div>
-	<cfif feedItem.isPodcast() && args.showPlayer >
+	<cfif args.feedItem.isPodcast() && args.showPlayer >
 		<div class="audio-player">
 			<audio controls="controls">
-				<source src="#feedItem.getPodcastUrl()#" type="#feedItem.getPodcastMimeType()#">
+				<source src="#args.feedItem.getPodcastUrl()#" type="#args.feedItem.getPodcastMimeType()#">
 			</audio>
 		</div>
 	<cfelseif args.showReadMore >
-		<a class="btn btn-success btn-sm" href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+		<a class="btn btn-success btn-sm" href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
 			<cfif directLink >class="direct-link"</cfif>
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>"
-			title="#encodeForHtmlAttribute( feedItem.getTitle() )#">#args.readMoreText#</a>
+			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#">#args.readMoreText#</a>
 	</cfif>
 </div>
 </cfoutput>

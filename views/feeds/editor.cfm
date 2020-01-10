@@ -608,6 +608,24 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
+								field="settings_feed_items_group_by_date",
+								content="Group By Date:"
+							)#
+							<p><small>If enabled, feed items will be grouped by date on the feed detail page.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_items_group_by_date",
+									options=prc.groupByOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_items_group_by_date", "" ),
+									class="form-control input-sm"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
 								field="settings_feed_items_show_video_player",
 								content="Show Video Player:"
 							)#

@@ -1,36 +1,33 @@
-<cfset contentType = args.feedItem.getContentType() />
-<cfif contentType EQ "FeedItem" >
-	<cfset linkBehavior =
-		len( args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ) ?
-		args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) :
-		ag.setting("feed_items_link_behavior") />
-	<cfset directLink = linkBehavior EQ "link" ? true : false />
-	<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
-<cfelse>
-	<cfset directLink = false />
-	<cfparam name="args.openNewWindow" default="false" />
-</cfif>
-<cfparam name="args.showGroupByDate" default="false" />
+<cfparam name="args.groupByDate" default="false" />
+<cfparam name="args.showVideoPlayer" default="true" />
+<cfparam name="args.showAudioPlayer" default="true" />
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="false" />
-<cfparam name="args.showImage" default="true" />
-<cfparam name="args.showPlayer" default="true" />
+<cfparam name="args.showCategories" default="false" />
 <cfparam name="args.showExcerpt" default="true" />
 <cfparam name="args.characterLimit" default="255" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
-<cfparam name="args.showCategories" default="false" />
+<cfparam name="args.linkBehavior" default="forward" />
+<cfparam name="args.openNewWindow" default="false" />
+<cfparam name="args.showImage" default="true" />
+<cfset contentType = args.feedItem.getContentType() />
+<cfif contentType EQ "Entry" >
+	<cfset args.openNewWindow = false />
+</cfif>
 <cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
 <cfset showFeaturedImage = args.showImage && len( imageUrl ) />
-<cfset showVideoPlayer = args.showPlayer && args.feedItem.isVideo() />
-<cfset showAudioPlayer = args.showPlayer && args.feedItem.isPodcast() />
+<cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
+<cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 <cfoutput>
+<!---
 <cfif args.showGroupByDate >
 	<div class="post-date">
 		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
 </cfif>
+--->
 <div class="post feeditem" id="feeditem_#args.feedItem.getContentID()#">
 	<div class="row">
 		<cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >
@@ -38,9 +35,9 @@
 				<cfif showVideoPlayer >
 					<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
 				<cfelseif showFeaturedImage >
-					<a href="#ag.linkFeedItem( feedItem=feedItem, directLink=directLink )#"
+					<a href="#ag.linkFeedItem( feedItem=feedItem, linkBehavior=args.linkBehavior )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif directLink >class="direct-link"</cfif>
+						<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 						title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 				</cfif>
@@ -48,9 +45,9 @@
 		</cfif>
 		<div class="post-title <cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >col-md-9<cfelse>col-md-12</cfif>">
 			<h2>
-				<a href="#ag.linkFeedItem( feedItem=args.feedItem, directLink=directLink )#"
+				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif directLink >class="direct-link"</cfif>
+					<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 					rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#">#args.feedItem.getTitle()#</a>
 			</h2>
@@ -101,9 +98,9 @@
 					<cfif showVideoPlayer >
 						<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
 					<cfelseif showFeaturedImage >
-						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=args.feedItem, directLink=directLink )#"
+						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif directLink >class="direct-link"</cfif>
+							<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</cfif>
@@ -128,9 +125,9 @@
 				</cfif>
 				<cfif args.showReadMore >
 					<div class="post-more">
-						<a href="#ag.linkFeedItem( feedItem=args.feedItem, directLink=directLink )#"
+						<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif directLink >class="direct-link"</cfif>
+							<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
 					</div>

@@ -195,8 +195,20 @@ component persistent="true"
 			"showFeedWebsite" = getSetting( "feeds_show_website", "" ),
 			"showFeedRSS" = getSetting( "feeds_show_rss", "" ),
 			// Feed items
-			"linkBehavior" = getSetting( "feed_items_link_behavior", "" ),
-			"openNewWindow" = getSetting( "feed_items_open_new_window", "" )
+			"groupByDate" = getSetting( "feed_items_group_by_date", "" ),
+			"showVideoPlayer" = getSetting( "feed_items_show_video_player", "" ),
+			"showAudioPlayer" = getSetting( "feed_items_show_audio_player", "" ),
+			"showSource" = getSetting( "feed_items_show_source", "" ),
+			"showAuthor" = getSetting( "feed_items_show_source", "" ),
+			"showCategories" = getSetting( "feed_items_show_source", "" ),
+			"showExcerpt" = getSetting( "feed_items_show_source", "" ),
+			"characterLimit" = getSetting( "feed_items_show_source", "" ),
+			"excerptEnding" = getSetting( "feed_items_show_source", "" ),
+			"showReadMore" = getSetting( "feed_items_show_source", "" ),
+			"readMoreText" = getSetting( "feed_items_show_source", "" ),
+			"linkBehavior" = getSetting( "feed_items_show_source", "" ),
+			"openNewWindow" = getSetting( "feed_items_show_source", "" ),
+			"showImage" = getSetting( "feed_items_show_source", "" )
 		};
 		var viewArgs = {};
 		for ( var arg IN args ) {

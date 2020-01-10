@@ -165,6 +165,14 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.showRSSOptions[ arrayFind( prc.showRSSOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_rss; } ) ].name#",
 			value = ""
 		});
+		prc.groupByOptions = [
+			{ name = "Group feed items by date on the feed detail page.", value = "true" },
+			{ name = "Do not group feed items by date on the feed detail page.", value = "false" }
+		];
+		arrayPrepend( prc.groupByOptions, {
+			name = "Use the default setting - #prc.groupByOptions[ arrayFind( prc.groupByOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_group_by_date; } ) ].name#",
+			value = ""
+		});
 		prc.showVideoOptions = [
 			{ name = "Display an inline video player for videos.", value = "true" },
 			{ name = "Do not display an inline video player for videos.", value = "false" }
@@ -178,7 +186,7 @@ component extends="contentHandler" {
 			{ name = "Do not display an inline audio player for podcasts.", value = "false" }
 		];
 		arrayPrepend( prc.showAudioOptions, {
-			name = "Use the default setting - #prc.showAudioOptions[ arrayFind( prc.showAudioOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_video_player; } ) ].name#",
+			name = "Use the default setting - #prc.showAudioOptions[ arrayFind( prc.showAudioOptions, function( struct ) { return struct.value == prc.agSettings.feed_items_show_audio_player; } ) ].name#",
 			value = ""
 		});
 		prc.showSourceOptions = [
@@ -344,6 +352,7 @@ component extends="contentHandler" {
 			.paramValue( "settings_feeds_show_featured_image", "" )
 			.paramValue( "settings_feeds_show_website", "" )
 			.paramValue( "settings_feeds_show_rss", "" )
+			.paramValue( "settings_feed_items_group_by_date", "" )
 			.paramValue( "settings_feed_items_show_video_player", "" )
 			.paramValue( "settings_feed_items_show_audio_player", "" )
 			.paramValue( "settings_feed_items_show_source", "" )

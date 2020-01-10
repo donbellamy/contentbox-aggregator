@@ -38,7 +38,7 @@
 					<div class="col-md-12">
 						<cfloop array="#args.feed.getLatestFeedItems()#" index="feedItem" >
 							<h4>
-								<a href="#ag.linkFeedItem( feedItem=feedItem )#"
+								<a href="#ag.linkFeedItem( feedItem=feedItem, linkBehavior=args.linkBehavior )#"
 									<cfif args.openNewWindow >target="_blank"</cfif>
 									<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 									title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
