@@ -747,8 +747,19 @@ component accessors="true" singleton threadSafe {
 			"showFeedRSS" = setting("feeds_show_rss"),
 			// Feed items
 			"groupByDate" = setting("feed_items_group_by_date"),
+			"showVideoPlayer" = setting("feed_items_show_video_player"),
+			"showAudioPlayer" = setting("feed_items_show_audio_player"),
+			"showSource" = setting("feed_items_show_source"),
+			"showAuthor" = setting("feed_items_show_author"),
+			"showCategories" = setting("feed_items_show_categories"),
+			"showExcerpt" = setting("feed_items_show_excerpt"),
+			"excerptLimit" = setting("feed_items_excerpt_limit"),
+			"excerptEnding" = setting("feed_items_excerpt_ending"),
+			"showReadMore" = setting("feed_items_show_read_more"),
+			"readMoreText" = setting("feed_items_read_more_text"),
 			"linkBehavior" = setting("feed_items_link_behavior"),
-			"openNewWindow" = setting("feed_items_open_new_window")
+			"openNewWindow" = setting("feed_items_open_new_window"),
+			"showImage" = setting("feed_items_show_featured_image")
 		};
 	}
 

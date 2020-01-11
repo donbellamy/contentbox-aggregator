@@ -5,7 +5,7 @@
 <cfparam name="args.showAuthor" default="false" />
 <cfparam name="args.showCategories" default="false" />
 <cfparam name="args.showExcerpt" default="true" />
-<cfparam name="args.characterLimit" default="255" />
+<cfparam name="args.excerptLimit" default="255" />
 <cfparam name="args.excerptEnding" default="..." />
 <cfparam name="args.showReadMore" default="true" />
 <cfparam name="args.readMoreText" default="Read more..." />
@@ -111,7 +111,7 @@
 					#args.feedItem.renderExcerpt()#
 				<cfelse>
 					<cfif contentType EQ "FeedItem" >
-						#args.feedItem.getContentExcerpt( val( args.characterLimit ), args.excerptEnding )#
+						#args.feedItem.getContentExcerpt( val( args.excerptLimit ), args.excerptEnding )#
 					<cfelse>
 						#args.feedItem.renderContent()#
 					</cfif>

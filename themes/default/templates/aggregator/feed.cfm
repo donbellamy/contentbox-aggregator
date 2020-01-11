@@ -2,7 +2,7 @@
 <cfparam name="args.includeFeedItems" default="false" />
 <cfparam name="args.showFeedImage" default="true" />
 <cfparam name="args.showWebsite" default="true" />
-<cfparam name="args.showFeedRSS" default="true" />
+<cfparam name="args.showRSS" default="true" />
 <cfset imageUrl = args.feed.getFeaturedImageUrl() />
 <cfset showFeaturedImage = args.showFeedImage && len( imageUrl ) />
 <cfoutput>
@@ -15,15 +15,15 @@
 		</cfif>
 		<div class="post-title <cfif showFeaturedImage >col-md-9<cfelse>col-md-12</cfif>">
 			<h2><a href="#ag.linkFeed( args.feed )#" title="#encodeForHtmlAttribute( args.feed.getTitle() )#">#args.feed.getTitle()#</a></h2>
-			<cfif args.showFeedWebsite || args.showFeedRSS >
+			<cfif args.showWebsite || args.showFeedRSS >
 				<div class="row">
-					<cfif args.showFeedWebsite >
+					<cfif args.showWebsite >
 						<div class="col-sm-7 pull-left">
 							<i class="fa fa-external-link"></i>
 							<a href="#args.feed.getWebsiteUrl()#" target="_blank" title="#encodeForHtmlAttribute( args.feed.getTitle() )#">#listFirst( reReplaceNoCase( args.feed.getWebsiteUrl(), "https?://" , "" ), "/" )#</a>
 						</div>
 					</cfif>
-					<cfif args.showFeedRSS >
+					<cfif args.showRSS >
 						<div class="col-sm-5 pull-right text-right">
 							<i class="fa fa-rss"></i>
 							<a href="#ag.linkFeedRSS( args.feed )#" title="RSS Feed">RSS Feed</a>

@@ -183,6 +183,8 @@ component persistent="true"
 		);
 	}
 
+	// Split thes into two?
+
 	/**
 	 * Gets the view args set on the feed
 	 * @return A struct of the view args set on the feed
@@ -192,23 +194,23 @@ component persistent="true"
 			// Feeds
 			"includeFeedItems" = getSetting( "feeds_include_feed_items", "" ),
 			"showFeedImage" = getSetting( "feeds_show_featured_image", "" ),
-			"showFeedWebsite" = getSetting( "feeds_show_website", "" ),
-			"showFeedRSS" = getSetting( "feeds_show_rss", "" ),
+			"showWebsite" = getSetting( "feeds_show_website", "" ),
+			"showRSS" = getSetting( "feeds_show_rss", "" ),
 			// Feed items
 			"groupByDate" = getSetting( "feed_items_group_by_date", "" ),
 			"showVideoPlayer" = getSetting( "feed_items_show_video_player", "" ),
 			"showAudioPlayer" = getSetting( "feed_items_show_audio_player", "" ),
 			"showSource" = getSetting( "feed_items_show_source", "" ),
-			"showAuthor" = getSetting( "feed_items_show_source", "" ),
-			"showCategories" = getSetting( "feed_items_show_source", "" ),
-			"showExcerpt" = getSetting( "feed_items_show_source", "" ),
-			"characterLimit" = getSetting( "feed_items_show_source", "" ),
-			"excerptEnding" = getSetting( "feed_items_show_source", "" ),
-			"showReadMore" = getSetting( "feed_items_show_source", "" ),
-			"readMoreText" = getSetting( "feed_items_show_source", "" ),
-			"linkBehavior" = getSetting( "feed_items_show_source", "" ),
-			"openNewWindow" = getSetting( "feed_items_show_source", "" ),
-			"showImage" = getSetting( "feed_items_show_source", "" )
+			"showAuthor" = getSetting( "feed_items_show_author", "" ),
+			"showCategories" = getSetting( "feed_items_show_categories", "" ),
+			"showExcerpt" = getSetting( "feed_items_show_excerpt", "" ),
+			"excerptLimit" = getSetting( "feed_items_excerpt_limit", "" ),
+			"excerptEnding" = getSetting( "feed_items_excerpt_ending", "" ),
+			"showReadMore" = getSetting( "feed_items_show_read_more", "" ),
+			"readMoreText" = getSetting( "feed_items_read_more_text", "" ),
+			"linkBehavior" = getSetting( "feed_items_link_behavior", "" ),
+			"openNewWindow" = getSetting( "feed_items_open_new_window", "" ),
+			"showImage" = getSetting( "feed_items_show_featured_image", "" )
 		};
 		var viewArgs = {};
 		for ( var arg IN args ) {
