@@ -49,6 +49,7 @@ component {
 			// Site options
 			"feeds_entrypoint" = "feeds",
 			"feeds_include_feed_items" = "false",
+			"feeds_group_by_date" = "false",
 			"feeds_show_featured_image" = "true",
 			"feeds_show_website" = "true",
 			"feeds_show_rss" = "true",

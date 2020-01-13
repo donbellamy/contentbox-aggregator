@@ -673,10 +673,12 @@ component accessors="true" singleton threadSafe {
 	string function quickFeedItems( string template="feeditem", struct args=structNew() ) {
 		var feedItems = getCurrentFeedItems();
 		var html = "";
+		var currentDate = "";
 		for ( var feedItem IN feedItems ) {
 			var viewArgs = duplicate( arguments.args );
 			viewArgs.feedItem = feedItem;
 			viewArgs.append( feedItem.getFeed().getViewArgs() );
+			if ( structKeyExists( viewArgs, "groupByDate" ) && viewArgs.groupByDate ) {}
 			html &= controller.getRenderer().renderView(
 				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 				args = viewArgs,
@@ -742,6 +744,7 @@ component accessors="true" singleton threadSafe {
 		return {
 			// Feeds
 			"includeFeedItems" = setting("feeds_include_feed_items"),
+			"feedGroupByDate" = setting("feeds_group_by_date"),
 			"showFeedImage" = setting("feeds_show_featured_image"),
 			"showFeedWebsite" = setting("feeds_show_website"),
 			"showFeedRSS" = setting("feeds_show_rss"),

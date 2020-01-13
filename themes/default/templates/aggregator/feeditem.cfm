@@ -21,13 +21,11 @@
 <cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
 <cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 <cfoutput>
-<!---
-<cfif args.showGroupByDate >
+<cfif args.groupByDate && structKeyExists( args, "groupDate" ) >
 	<div class="post-date">
 		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
 </cfif>
---->
 <div class="post feeditem" id="feeditem_#args.feedItem.getContentID()#">
 	<div class="row">
 		<cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >

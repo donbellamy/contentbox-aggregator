@@ -1,38 +1,46 @@
-<cfset linkBehavior =
-	len( args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) ) ?
-	args.feedItem.getFeed().getSetting( "feed_items_link_behavior", "" ) :
-	ag.setting("feed_items_link_behavior") />
-<cfset directLink = linkBehavior EQ "link" ? true : false />
-<cfparam name="args.openNewWindow" default="#linkBehavior EQ 'interstitial' ? true : false#" />
-<cfparam name="args.showGroupByDate" default="false" />
-<cfparam name="args.showImage" default="true" />
-<cfparam name="args.showPlayer" default="true" />
+<cfparam name="args.groupByDate" default="false" />
+<cfparam name="args.showVideoPlayer" default="true" />
+<cfparam name="args.showAudioPlayer" default="true" />
 <cfparam name="args.showSource" default="true" />
+<cfparam name="args.showAuthor" default="false" />
+<cfparam name="args.showCategories" default="false" />
+<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.excerptLimit" default="255" />
+<cfparam name="args.excerptEnding" default="..." />
+<cfparam name="args.showReadMore" default="true" />
+<cfparam name="args.readMoreText" default="Read more..." />
+<cfparam name="args.linkBehavior" default="forward" />
+<cfparam name="args.openNewWindow" default="false" />
+<cfparam name="args.showImage" default="true" />
 <cfoutput>
-<cfif args.showGroupByDate >
+<!---<cfif args.showGroupByDate >
 	<div class="post-date col-sm-12">
 		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
-</cfif>
+</cfif>--->
 <div class="col-md-6 col-sm-12 col-xs-12 post video" id="feeditem_#args.feedItem.getContentID()#">
-	<cfif args.showImage || args.showPlayer >
+	<cfif args.showImage || args.showVideoPlayer >
 		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
-		<cfif args.feedItem.isVideo() && args.showPlayer >
+		<cfif args.feedItem.isVideo() && args.showVideoPlayer >
 			<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#">
 				<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />
 			</div>
 		<cfelseif len( imageUrl ) && args.showImage >
 			<div class="video-image">
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
-					rel="bookmark"
-					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
+					<cfif args.openNewWindow >target="_blank"</cfif>
+					<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
+					rel="nofollow<cfif args.openNewWindow > noopener</cfif>">
+					<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />
+				</a>
 			</div>
 		</cfif>
 	</cfif>
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
-			<cfif directLink >class="direct-link"</cfif>
+			<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#args.feedItem.getTitle()#</a>
 	</h4>
