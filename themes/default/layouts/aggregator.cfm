@@ -1,5 +1,6 @@
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
+<cfdump var="#args#" />
 <cfoutput>
 <!DOCTYPE html>
 <html lang="en">

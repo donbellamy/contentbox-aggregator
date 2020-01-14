@@ -45,7 +45,7 @@
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preArchivesDisplay")#
 				<cfif prc.itemCount >
-					#ag.quickFeedItems()#
+					#ag.quickFeedItems( args=args )#
 					<cfif !args.print >
 						<div class="contentBar">
 							#ag.quickPaging()#

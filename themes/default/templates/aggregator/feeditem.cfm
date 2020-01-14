@@ -33,7 +33,7 @@
 				<cfif showVideoPlayer >
 					<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
 				<cfelseif showFeaturedImage >
-					<a href="#ag.linkFeedItem( feedItem=feedItem, linkBehavior=args.linkBehavior )#"
+					<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
 						<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
 						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"

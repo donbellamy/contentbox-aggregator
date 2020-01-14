@@ -1,7 +1,18 @@
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
+<cfparam name="args.showVideoPlayer" default="true" />
+<cfparam name="args.showAudioPlayer" default="true" />
 <cfparam name="args.showSource" default="true" />
-<cfparam name="args.showAuthor" default="true" />
+<cfparam name="args.showAuthor" default="false" />
+<cfparam name="args.showCategories" default="false" />
+<cfparam name="args.showExcerpt" default="true" />
+<cfparam name="args.excerptLimit" default="255" />
+<cfparam name="args.excerptEnding" default="..." />
+<cfparam name="args.showReadMore" default="true" />
+<cfparam name="args.readMoreText" default="Read more..." />
+<cfparam name="args.linkBehavior" default="forward" />
+<cfparam name="args.openNewWindow" default="false" />
+<cfparam name="args.showImage" default="true" />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -46,6 +57,7 @@
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preFeedItemDisplay", { feedItem=prc.feedItem })#
+				<!--- TODO: Featured image, players? --->
 				<div class="post" id="post_#prc.feedItem.getContentID()#">
 					<div class="post-title">
 						<h2><a href="#ag.linkFeedItem( prc.feedItem )#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
@@ -68,13 +80,13 @@
 						<div class="post-content">
 							#prc.feedItem.renderContent()#
 						</div>
-						<div class="row">
-							<cfif prc.feedItem.hasCategories() >
+						<cfif prc.feedItem.hasCategories() && args.showCategories >
+							<div class="row">
 								<div class="col-xs-12 pull-left">
 									<i class="fa fa-tag"></i> Tags: #ag.quickCategoryLinks( prc.feedItem )#
 								</div>
-							</cfif>
-						</div>
+							</div>
+						</cfif>
 					</div>
 				</div>
 				#cb.event("aggregator_postFeedItemDisplay", { feedItem=prc.feedItem })#
