@@ -551,24 +551,6 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="settings_feeds_group_by_date",
-								content="Group By Date:"
-							)#
-							<p><small>If enabled, feed items will be grouped by date on the feed detail page.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_group_by_date",
-									options=prc.groupByOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting( "feeds_group_by_date", "" ),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
 								field="settings_feeds_show_featured_image",
 								content="Show Featured Image:"
 							)#

@@ -533,25 +533,6 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="feeds_group_by_date",
-											content="Group By Date:"
-										)#
-										<p><small>If enabled, feed items will be grouped by date on the feed detail page.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="feeds_group_by_date_toggle",
-												data={ toggle: 'toggle', match: 'feeds_group_by_date' },
-												checked=prc.agSettings.feeds_group_by_date
-											)#
-											#html.hiddenField(
-												name="feeds_group_by_date",
-												value=prc.agSettings.feeds_group_by_date
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="feeds_show_featured_image",
 											content="Show Featured Image:"
 										)#
@@ -637,7 +618,7 @@
 											field="feed_items_group_by_date",
 											content="Group By Date:"
 										)#
-										<p><small>If enabled, feed items will be grouped by date on the feed items page.</small></p>
+										<p><small>If enabled, feed items will be grouped by date.</small></p>
 										<div class="controls">
 											#html.checkbox(
 												name="feed_items_group_by_date_toggle",

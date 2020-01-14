@@ -15,7 +15,7 @@
 		</cfif>
 		<div class="post-title <cfif showFeaturedImage >col-md-9<cfelse>col-md-12</cfif>">
 			<h2><a href="#ag.linkFeed( args.feed )#" title="#encodeForHtmlAttribute( args.feed.getTitle() )#">#args.feed.getTitle()#</a></h2>
-			<cfif args.showWebsite || args.showFeedRSS >
+			<cfif args.showWebsite || args.showRSS >
 				<div class="row">
 					<cfif args.showWebsite >
 						<div class="col-sm-7 pull-left">

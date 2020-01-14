@@ -1,4 +1,4 @@
-<cfparam name="args.groupByDate" default="false" />
+<cfparam name="args.showGroupedDate" default="false" />
 <cfparam name="args.showVideoPlayer" default="true" />
 <cfparam name="args.showAudioPlayer" default="true" />
 <cfparam name="args.showSource" default="true" />
@@ -21,7 +21,7 @@
 <cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
 <cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 <cfoutput>
-<cfif args.groupByDate && structKeyExists( args, "groupDate" ) >
+<cfif args.showGroupedDate >
 	<div class="post-date">
 		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
@@ -64,7 +64,7 @@
 							<cfif args.showSource ><span class="text-muted">-</span></cfif>
 							<i class="fa fa-user"></i>
 							<cfif contentType EQ "FeedItem">
-								<a href="#ag.linkFeedAuthor( feedItem )#" title="#encodeForHTMLAttribute( args.feedItem.getItemAuthor() )#">#args.feedItem.getItemAuthor()#</a>
+								<a href="#ag.linkFeedAuthor( args.feedItem )#" title="#encodeForHTMLAttribute( args.feedItem.getItemAuthor() )#">#args.feedItem.getItemAuthor()#</a>
 							<cfelse>
 								<a href="##">#args.feedItem.getAuthorName()#</a>
 							</cfif>
@@ -137,7 +137,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<i class="fa fa-tag"></i>
-				#ag.quickCategoryLinks( feeditem )#
+				#ag.quickCategoryLinks( args.feedItem )#
 			</div>
 		</div>
 	</cfif>

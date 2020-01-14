@@ -1,4 +1,4 @@
-<cfparam name="args.groupByDate" default="false" />
+<cfparam name="args.showGroupedDate" default="false" />
 <cfparam name="args.showVideoPlayer" default="true" />
 <cfparam name="args.showAudioPlayer" default="true" />
 <cfparam name="args.showSource" default="true" />
@@ -13,11 +13,11 @@
 <cfparam name="args.openNewWindow" default="false" />
 <cfparam name="args.showImage" default="true" />
 <cfoutput>
-<!---<cfif args.showGroupByDate >
+<cfif args.showGroupedDate >
 	<div class="post-date col-sm-12">
 		<h4>#dateFormat( args.feedItem.getPublishedDate(), "dddd, mmmm d, yyyy" )#</h4>
 	</div>
-</cfif>--->
+</cfif>
 <div class="col-md-4 col-sm-6 col-xs-12 post podcast" id="feeditem_#args.feedItem.getContentID()#">
 	<cfif args.showImage >
 		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />

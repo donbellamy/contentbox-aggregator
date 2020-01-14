@@ -141,14 +141,6 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.includeFeedItemOptions[ arrayFind( prc.includeFeedItemOptions, function( struct ) { return struct.value == prc.agSettings.feeds_include_feed_items; } ) ].name#",
 			value = ""
 		});
-		prc.groupByOptions = [
-			{ name = "Group feed items by date on the feed detail page.", value = "true" },
-			{ name = "Do not group feed items by date on the feed detail page.", value = "false" }
-		];
-		arrayPrepend( prc.groupByOptions, {
-			name = "Use the default setting - #prc.groupByOptions[ arrayFind( prc.groupByOptions, function( struct ) { return struct.value == prc.agSettings.feeds_group_by_date; } ) ].name#",
-			value = ""
-		});
 		prc.feedFeaturedImageOptions = [
 			{ name = "Display the featured image for this feed.", value = "true" },
 			{ name = "Do not display the featured image for this feed.", value = "false" }

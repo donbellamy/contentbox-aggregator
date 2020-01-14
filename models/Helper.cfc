@@ -672,13 +672,20 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function quickFeedItems( string template="feeditem", struct args=structNew() ) {
 		var feedItems = getCurrentFeedItems();
-		var html = "";
+		var groupByDate = setting("feed_items_group_by_date");
 		var currentDate = "";
+		var html = "";
 		for ( var feedItem IN feedItems ) {
 			var viewArgs = duplicate( arguments.args );
 			viewArgs.feedItem = feedItem;
 			viewArgs.append( feedItem.getFeed().getViewArgs() );
-			if ( structKeyExists( viewArgs, "groupByDate" ) && viewArgs.groupByDate ) {}
+			if ( groupByDate ) {
+				var publishedDate = feedItem.getPublishedDateNoTime();
+				if ( currentDate != publishedDate ) {
+					currentDate = publishedDate;
+					viewArgs.showGroupedDate = true;
+				}
+			}
 			html &= controller.getRenderer().renderView(
 				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
 				args = viewArgs,
@@ -686,37 +693,6 @@ component accessors="true" singleton threadSafe {
 			)
 		}
 		return html;
-		/*
-		if ( arguments.groupByDate ) {
-			var html = "";
-			var currentDate = "";
-			for ( var feedItem IN feedItems ) {
-				var publishedDate = feedItem.getPublishedDateNoTime();
-				if ( currentDate != publishedDate ) {
-					currentDate = publishedDate;
-					arguments.args.showGroupByDate = true;
-				} else {
-					arguments.args.showGroupByDate = false;
-				}
-				html &= controller.getRenderer().renderView(
-					view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
-					collection = [ feedItem ],
-					collectionAs = arguments.collectionAs,
-					args = arguments.args,
-					module = cb.themeRecord().module
-				);
-			}
-			return html;
-		} else {
-			return controller.getRenderer().renderView(
-				view = "#cb.themeName()#/templates/aggregator/#arguments.template#",
-				collection = feedItems,
-				collectionAs = arguments.collectionAs,
-				args = arguments.args,
-				module = cb.themeRecord().module
-			);
-		}
-		*/
 	}
 
 	/**
@@ -744,12 +720,10 @@ component accessors="true" singleton threadSafe {
 		return {
 			// Feeds
 			"includeFeedItems" = setting("feeds_include_feed_items"),
-			"feedGroupByDate" = setting("feeds_group_by_date"),
 			"showFeedImage" = setting("feeds_show_featured_image"),
-			"showFeedWebsite" = setting("feeds_show_website"),
-			"showFeedRSS" = setting("feeds_show_rss"),
+			"showWebsite" = setting("feeds_show_website"),
+			"showRSS" = setting("feeds_show_rss"),
 			// Feed items
-			"groupByDate" = setting("feed_items_group_by_date"),
 			"showVideoPlayer" = setting("feed_items_show_video_player"),
 			"showAudioPlayer" = setting("feed_items_show_audio_player"),
 			"showSource" = setting("feed_items_show_source"),

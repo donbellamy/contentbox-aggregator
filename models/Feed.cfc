@@ -197,7 +197,6 @@ component persistent="true"
 			"showWebsite" = getSetting( "feeds_show_website", "" ),
 			"showRSS" = getSetting( "feeds_show_rss", "" ),
 			// Feed items
-			"groupByDate" = getSetting( "feed_items_group_by_date", "" ),
 			"showVideoPlayer" = getSetting( "feed_items_show_video_player", "" ),
 			"showAudioPlayer" = getSetting( "feed_items_show_audio_player", "" ),
 			"showSource" = getSetting( "feed_items_show_source", "" ),
