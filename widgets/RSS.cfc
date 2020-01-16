@@ -42,7 +42,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		}
 
 		// RSS Link
-		html &= '<ul id="aggregator-rss"><li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li></ul>';
+		html &= '<ul><li><a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!"><i class="fa fa-rss"></i></a> <a href="#ag.linkRSS()#" title="Subscribe to our RSS Feed!">RSS Feed</a></li></ul>';
 
 		return html;
 

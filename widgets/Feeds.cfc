@@ -32,14 +32,14 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @category.optionsUDF getCategorySlugs
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the results, defaults to feed title.
-	 * @sortOrder.options Feed Title,Most Recent
+	 * @sortOrder.options Title,Most Recent
 	 * @return The feeds widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		string category="",
-		string sortOrder="Feed Title" ) {
+		string sortOrder="Title" ) {
 
 		// Grab the event
 		var event = getRequestContext();

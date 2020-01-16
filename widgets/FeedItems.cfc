@@ -40,7 +40,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @searchTerm.hint The search term to filter on.
 	 * @sortOrder.label Sort Order
 	 * @sortOrder.hint How to order the results, defaults to most recent.
-	 * @sortOrder.options Most Recent,Most Popular
+	 * @sortOrder.options Most Recent,Most Popular,Title
 	 * @return The feed items widget html
 	 */
 	string function renderIt(
@@ -95,6 +95,10 @@ component extends="aggregator.models.BaseWidget" singleton {
 			case "Most Popular": {
 				prc.pagingLink &= "&sb=hits";
 				arguments.sortOrder = "numberOfHits DESC";
+				break;
+			}
+			case "Title": {
+				arguments.sortOrder = "title ASC";
 				break;
 			}
 			default : {

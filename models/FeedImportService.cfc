@@ -385,7 +385,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 								// Log item exists
 								if ( log.canInfo() ) {
-									log.info("Feed item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
+									log.info("Feed item ('#uniqueId#') is blacklisted for feed '#arguments.feed.getTitle()#'.");
 								}
 
 							}
@@ -394,7 +394,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 							// Log item blacklisted
 							if ( log.canInfo() ) {
-								log.info("Feed item ('#uniqueId#') is blacklisted for feed '#arguments.feed.getTitle()#'.");
+								log.info("Feed item ('#uniqueId#') already exists for feed '#arguments.feed.getTitle()#'.");
 							}
 
 						}

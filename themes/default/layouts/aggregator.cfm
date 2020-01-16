@@ -1,6 +1,9 @@
 <cfparam name="args.print" default="false" />
 <cfparam name="args.sidebar" default="true" />
-<cfdump var="#args#" />
+<!--- Append prc.args since we can't pass them to the layout/view (bug?) --->
+<cfif structKeyExists( prc, "args" ) >
+	<cfset args.append( prc.args ) />
+</cfif>
 <cfoutput>
 <!DOCTYPE html>
 <html lang="en">

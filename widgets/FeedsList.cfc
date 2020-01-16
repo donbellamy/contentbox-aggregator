@@ -33,16 +33,32 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @category.label Category
 	 * @category.hint The category to filter on.
 	 * @category.optionsUDF getCategorySlugs
+	 * @sortOrder.label Sort Order
+	 * @sortOrder.hint How to order the results, defaults to feed title.
+	 * @sortOrder.options Title,Most Recent
 	 * @return The feeds list widget html
 	 */
 	string function renderIt(
 		string title="",
 		numeric titleLevel=2,
 		numeric max=5,
-		string category="" ) {
+		string category="",
+		string sortOrder="Title" ) {
+
+		// Sort order
+		switch ( arguments.sortOrder ) {
+			case "Most Recent": {
+				arguments.sortOrder = "lastPublishedDate DESC";
+				break;
+			}
+			default : {
+				arguments.sortOrder = "title ASC";
+			}
+		}
 
 		// Grab the results
 		var results = feedService.getPublishedFeeds(
+			sortOrder = arguments.sortOrder,
 			category = arguments.category,
 			max = arguments.max
 		);

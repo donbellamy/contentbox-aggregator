@@ -77,7 +77,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var html = "";
 
 		// Select start
-		html &= '<select name="archives" id="archives" onchange="window.location=this.value" )><option value="##">Select Archive</option>';
+		html &= '<select onchange="window.location=this.value" )><option value="##">Select Archive</option>';
 
 		// Select options
 		for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {
@@ -109,7 +109,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var html = "";
 
 		// List start
-		html &= '<ul id="archives">';
+		html &= '<ul>';
 
 		// List items
 		for ( var x=1; x LTE arrayLen( arguments.archives ); x++ ) {

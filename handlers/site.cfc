@@ -230,7 +230,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
-			var args = prc.agHelper.getViewArgs();
 			var sortOrder = "publishedDate DESC";
 
 			// Page check
@@ -285,9 +284,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			}
 
 			// Sort order
-			if ( len( rc.sb ) && rc.sb == "hits" ) {
-				prc.pagingLink &= "&sb=hits";
-				sortOrder = "numberOfHits DESC";
+			switch ( rc.sb ) {
+				case "hits": {
+					prc.pagingLink &= "&sb=hits";
+					sortOrder = "numberOfHits DESC";
+					break;
+				}
+				case "title": {
+					prc.pagingLink &= "&sb=title";
+					sortOrder = "title ASC";
+					break;
+				}
 			}
 
 			// Set template and paging label
@@ -328,30 +335,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set the page title
 			cbHelper.setMetaTitle( title );
-/*
-			// Set the view
-			event.setView(
-				view = "#prc.cbTheme#/views/aggregator/index",
-				module = prc.cbThemeRecord.module
-			)
 
-			// Render the layout
-			return renderLayout(
-				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module,
-				args = args
-			);
-*/
+			// Set args
+			prc.args = prc.agHelper.getViewArgs();
+
+			// Set layout and view
 			event.setLayout(
 				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
 				module = prc.cbThemeRecord.module
 			).setView(
 				view = "#prc.cbTheme#/views/aggregator/index",
-				module = prc.cbThemeRecord.module,
-				args = args
-			).setPrivateValue(
-				name = "currentViewArgs",
-				value = args
+				module = prc.cbThemeRecord.module
 			);
 
 		// Feed items page not published, throw a 404

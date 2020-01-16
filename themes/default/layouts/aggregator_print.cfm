@@ -1,3 +1,9 @@
+<cfparam name="args.print" default="true" />
+<cfparam name="args.sidebar" default="false" />
+<!--- Append prc.args since we can't pass them to the layout/view (bug?) --->
+<cfif structKeyExists( prc, "args" ) >
+	<cfset args.append( prc.args ) />
+</cfif>
 <cfoutput>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +22,7 @@
 			<!--- ContentBoxEvent --->
 			#cb.event("cbui_beforeContent")#
 			<!--- Main View --->
-			#ag.mainView( args={ sidebar=false, print=true } )# <!--- TODO: FIX THIS --->
+			#ag.mainView( args=args )#
 			<!--- ContentBoxEvent --->
 			#cb.event("cbui_afterContent")#
 		</div>
