@@ -683,6 +683,21 @@ Aggregator Helper</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="Helper.html#getViewArgs()">getViewArgs</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the default view args.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>boolean</code>
 		</td>
 		<td>
@@ -941,7 +956,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])
+			<strong><a href="Helper.html#linkFeedItem()">linkFeedItem</A></strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [string linkBehavior='forward'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the feed item link.
@@ -1151,7 +1166,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#quickFeedItems()">quickFeedItems</A></strong>([string template='feeditem'], [string collectionAs='feeditem'], [boolean groupByDate='false'], [struct args='[runtime expression]'])
+			<strong><a href="Helper.html#quickFeedItems()">quickFeedItems</A></strong>([string template='feeditem'], [struct args='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feed items list.
@@ -1166,7 +1181,7 @@ Aggregator Helper</p>
 			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="Helper.html#quickFeeds()">quickFeeds</A></strong>([string template='feed'], [string collectionAs='feed'], [struct args='[runtime expression]'])
+			<strong><a href="Helper.html#quickFeeds()">quickFeeds</A></strong>([string template='feed'], [struct args='[runtime expression]'])
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders the feeds list.
@@ -2052,6 +2067,45 @@ Aggregator Helper</p>
 	<hr>
 
 	
+	<a name="getViewArgs()"><!-- --></a>
+	<h3>
+		getViewArgs
+		
+	</h3>
+
+	<kbd>public struct <strong>getViewArgs</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the default view args</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The default view args struct</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="isArchivesView()"><!-- --></a>
 	<h3>
 		isArchivesView
@@ -2792,7 +2846,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>linkFeedItem</strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [boolean directLink='false'])</kbd>
+	<kbd>public string <strong>linkFeedItem</strong>(any feedItem, [boolean ssl='[runtime expression]'], [string format='html'], [string linkBehavior='forward'])</kbd>
 
 	<br><br>
 
@@ -2820,7 +2874,7 @@ Aggregator Helper</p>
 		
 		<dd><code>format</code> - The format to link to, defaults to html</dd>
 		
-		<dd><code>directLink</code> - Whether or not to return the actual item url</dd>
+		<dd><code>linkBehavior</code> - The link behavior to use when linking the feed item</dd>
 		
 		</dl>
 	
@@ -3460,7 +3514,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>quickFeedItems</strong>([string template='feeditem'], [string collectionAs='feeditem'], [boolean groupByDate='false'], [struct args='[runtime expression]'])</kbd>
+	<kbd>public string <strong>quickFeedItems</strong>([string template='feeditem'], [struct args='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -3483,10 +3537,6 @@ Aggregator Helper</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>template</code> - The theme template used to render the feed items, defaults to "feeditem"</dd>
-		
-		<dd><code>collectionAs</code> - The variable name used in the template for each feed item, defaults to "feeditem"</dd>
-		
-		<dd><code>groupByDate</code> - Whether or not to group the feed items by published date, defaults to false</dd>
 		
 		<dd><code>args</code> - A structure of arguments to pass to the template</dd>
 		
@@ -3512,7 +3562,7 @@ Aggregator Helper</p>
 		
 	</h3>
 
-	<kbd>public string <strong>quickFeeds</strong>([string template='feed'], [string collectionAs='feed'], [struct args='[runtime expression]'])</kbd>
+	<kbd>public string <strong>quickFeeds</strong>([string template='feed'], [struct args='[runtime expression]'])</kbd>
 
 	<br><br>
 
@@ -3535,8 +3585,6 @@ Aggregator Helper</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>template</code> - The theme template used to render the feeds, defaults to "feed"</dd>
-		
-		<dd><code>collectionAs</code> - The variable name used in the template for each feed, defaults to "feed"</dd>
 		
 		<dd><code>args</code> - A structure of arguments to pass to the template</dd>
 		

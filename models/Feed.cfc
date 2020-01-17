@@ -310,15 +310,6 @@ component persistent="true"
 	}
 
 	/**
-	 * Checks to see if feed items should be published when importing
-	 * @return True if feed items should be published, false if not
-	 */
-	boolean function autoPublishItems() {
-		// TODO: What about global setting?
-		return getSetting( "importing_feed_item_status", "" ) EQ "published";
-	}
-
-	/**
 	 * Checks to see if the feed import routine is currently failing
 	 * @return True if imports are failing, false if not
 	 */

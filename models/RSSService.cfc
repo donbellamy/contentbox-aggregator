@@ -207,7 +207,6 @@ component singleton {
 		for ( var item IN feeds ) {
 			queryAddRow( items, 1 );
 			querySetCell( items, "title", item.getTitle() );
-			// TODO: Description
 			querySetCell( items, "link", agHelper.linkContent( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
 			if ( item.hasCategories() ) {
@@ -220,7 +219,7 @@ component singleton {
 					var image = fileopen( item.getFeaturedImage() );
 					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
 					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
-					querySetCell( items, "enclosure_type", fileGetMimeType( image ) ); //TODO: bug here in feed generator, replacing the / with &#x2f; using encodeForXML, do pull request
+					querySetCell( items, "enclosure_type", fileGetMimeType( image ) );
 					fileClose( image );
 				} catch ( any e ) {
 					querySetCell( items, "enclosure_url", "" );
