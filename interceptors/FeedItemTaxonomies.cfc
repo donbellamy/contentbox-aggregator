@@ -24,14 +24,13 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after feed save
 	 */
 	function aggregator_postFeedSave( event, interceptData ) {
-		/* TODO: fix
 		var feed = arguments.interceptData.feed;
-		if ( !structIsEmpty( feed.getSettings() ) &&  )
+		var taxonomies = feed.getSetting( "taxonomies", [] );
 		var oldFeed = arguments.interceptData.oldFeed;
-		if ( !feed.getTaxonomies().equals( oldFeed.taxonomies ) ) {
-			applyTaxonomies( feed.getTaxonomies(), feed );
+		var oldTaxonomies = structKeyExists( oldFeed.settings, "taxonomies" ) ? oldFeed.settings.taxonomies : [];
+		if ( arrayLen( taxonomies ) && !taxonomies.equals( oldTaxonomies ) ) {
+			applyTaxonomies( taxonomies, feed );
 		}
-		*/
 	}
 
 	/**

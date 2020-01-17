@@ -40,27 +40,24 @@ component extends="coldbox.system.Interceptor" {
 	 * Fired after feed save
 	 */
 	function aggregator_postFeedSave( event, interceptData ) {
-		/*
-		TODO: fix
 		var feed = arguments.interceptData.feed;
 		var oldFeed = arguments.interceptData.oldFeed;
 		if (
-			feed.getMatchAnyFilter() != oldFeed.matchAnyFilter ||
-			feed.getMatchAllFilter() != oldFeed.matchAllFilter ||
-			feed.getMatchNoneFilter() != oldFeed.matchNoneFilter
+			feed.getSetting( "importing_match_any_filter", "" ) != ( structKeyExists( oldFeed.settings, "importing_match_any_filter" ) ? oldFeed.settings.importing_match_any_filter : "" ) ||
+			feed.getSetting( "importing_match_all_filter", "" ) != ( structKeyExists( oldFeed.settings, "importing_match_all_filter" ) ? oldFeed.settings.importing_match_all_filter : "" ) ||
+			feed.getSetting( "importing_match_none_filter", "" ) != ( structKeyExists( oldFeed.settings, "importing_match_none_filter" ) ? oldFeed.settings.importing_match_none_filter : "" )
 		) {
 			doKeywordCleanup( feed );
 		}
 		if (
-			val( feed.getMaxAge() ) != val( oldFeed.maxAge ) ||
-			feed.getMaxAgeUnit() != oldFeed.maxAgeUnit
+			val( feed.getSetting( "importing_max_feed_item_age", "" ) ) != val( structKeyExists( oldFeed.settings, "importing_max_feed_item_age" ) ? oldFeed.settings.importing_max_feed_item_age : "" ) ||
+			feed.getSetting( "importing_max_feed_item_age_unit", "" ) != ( structKeyExists( oldFeed.settings, "importing_max_feed_item_age_unit" ) ? oldFeed.settings.importing_max_feed_item_age_unit : "" )
 		) {
 			doAgeCleanup( feed );
 		}
-		if ( val( feed.getMaxItems() ) != val( oldFeed.maxItems ) ) {
+		if ( val( feed.getSetting( "importing_max_feed_items", "" ) ) != val( structKeyExists( oldFeed.settings, "importing_max_feed_items" ) ? oldFeed.settings.importing_max_feed_items : "" ) ) {
 			doMaxItemCleanup( feed );
 		}
-		*/
 	}
 
 	/**

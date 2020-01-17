@@ -32,7 +32,7 @@ component {
 			"importing_secret_key" = hash( getCurrentTemplatePath() ),
 			"importing_max_feed_imports" = "25",
 			"importing_feed_item_author" = "",
-			"importing_feed_item_status" = "draft",
+			"importing_feed_item_status" = "published",
 			"importing_feed_item_published_date" = "original",
 			"importing_max_feed_item_age" = "",
 			"importing_max_feed_item_age_unit" = "",

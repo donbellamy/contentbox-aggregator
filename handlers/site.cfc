@@ -395,7 +395,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
-			var args = prc.agHelper.getViewArgs();
 
 			// Page check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -439,17 +438,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Set the page title
 			cbHelper.setMetaTitle( title );
 
-			// Set the view
-			event.setView(
+			// Set args
+			prc.args = prc.agHelper.getViewArgs();
+
+			// Set layout and view
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
 				view = "#prc.cbTheme#/views/aggregator/archives",
 				module = prc.cbThemeRecord.module
-			)
-
-			// Render the layout
-			return renderLayout(
-				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module,
-				args = args
 			);
 
 		// Feed items page not published, throw a 404
@@ -534,7 +532,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
-			var args = prc.agHelper.getViewArgs();
 			var sortOrder = "title ASC";
 
 			// Page check
@@ -565,9 +562,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			prc.pagingLink &= "?page=@page@";
 
 			// Sort order
-			if ( len( rc.sb ) && rc.sb == "recent" ) {
-				prc.pagingLink &= "&sb=recent";
-				sortOrder = "lastPublishedDate DESC";
+			switch ( rc.sb ) {
+				case "hits": {
+					prc.pagingLink &= "&sb=recent";
+					sortOrder = "lastPublishedDate DESC";
+					break;
+				}
 			}
 
 			// Grab the results
@@ -590,19 +590,17 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			title = prc.page.getTitle() & title;
 			cbHelper.setMetaTitle( title );
 
-			// Set the view
-			event.setView(
+			// Set args
+			prc.args = prc.agHelper.getViewArgs();
+
+			// Set layout and view
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
 				view = "#prc.cbTheme#/views/aggregator/feeds",
 				module = prc.cbThemeRecord.module
-			)
-
-			// Render the layout
-			return renderLayout(
-				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module,
-				args = args
 			);
-
 
 		// Feeds page not published, throw a 404
 		} else {
@@ -690,7 +688,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set vars
 			var title = " | " & cbHelper.siteName();
-			var args = prc.agHelper.getViewArgs();
 
 			// Page numeric check
 			if ( !isNumeric( rc.page ) ) rc.page = 1;
@@ -758,17 +755,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 				cbHelper.setMetaKeywords( prc.feed.getHTMLKeywords() );
 			}
 
-			// Set the view
-			event.setView(
+			// Set args
+			prc.args = prc.agHelper.getViewArgs();
+
+			// Set layout and view
+			event.setLayout(
+				name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+				module = prc.cbThemeRecord.module
+			).setView(
 				view = "#prc.cbTheme#/views/aggregator/feed",
 				module = prc.cbThemeRecord.module
-			)
-
-			// Render the layout
-			return renderLayout(
-				layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-				module = prc.cbThemeRecord.module,
-				args = args
 			);
 
 		// Feeds page off, forward directly to the feed source
@@ -848,9 +844,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Record hit
 			feedItemService.updateHits( prc.feedItem.getContentID() );
 
-			// Set vars
-			var args = prc.agHelper.getViewArgs();
-
 			// Announce event
 			announceInterception(
 				"aggregator_onFeedItemView",
@@ -877,17 +870,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 					cbHelper.setMetaTitle( "Leaving #cbHelper.siteName()#..." );
 
-					// Set the view
-					event.setView(
+					// Set args
+					prc.args = prc.agHelper.getViewArgs();
+
+					// Set layout and view
+					event.setLayout(
+						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+						module = prc.cbThemeRecord.module
+					).setView(
 						view = "#prc.cbTheme#/views/aggregator/interstitial",
 						module = prc.cbThemeRecord.module
-					)
-
-					// Render the layout
-					return renderLayout(
-						layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-						module = prc.cbThemeRecord.module,
-						args = args
 					);
 
 					break;
@@ -909,17 +901,16 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 						cbHelper.setMetaKeywords( prc.feedItem.getHTMLKeywords() );
 					}
 
-					// Set the view
-					event.setView(
+					// Set args
+					prc.args = prc.agHelper.getViewArgs();
+
+					// Set layout and view
+					event.setLayout(
+						name = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
+						module = prc.cbThemeRecord.module
+					).setView(
 						view = "#prc.cbTheme#/views/aggregator/feeditem",
 						module = prc.cbThemeRecord.module
-					)
-
-					// Render the layout
-					return renderLayout(
-						layout = "#prc.cbTheme#/layouts/#prc.page.getLayout()#",
-						module = prc.cbThemeRecord.module,
-						args = args
 					);
 
 					break;
