@@ -79,5 +79,10 @@ function cancelDefaultImage() {
 	$( "##default_image_preview" ).attr( "src", "" );
 	$( "##default_image_controls" ).toggleClass( "hide" );
 }
+function reset() {
+	var $settingsForm = $("##settingsForm");
+	$settingsForm.attr( "action", "#event.buildlink( prc.xehAggregatorSettingsReset )#" );
+	$settingsForm.submit();
+}
 </script>
 </cfoutput>

@@ -344,7 +344,7 @@ component {
 		var authorService = controller.getWireBox().getInstance("authorService@cb");
 		var roleService = controller.getWireBox().getInstance("roleService@cb");
 		if ( len( agSettings.importing_feed_item_author ) ) {
-			var author = authorService.get( prc.agSettings.importing_feed_item_author );
+			var author = authorService.get( agSettings.importing_feed_item_author );
 		} else {
 			var adminRole = roleService.findWhere( { role="Administrator" } );
 			var author = authorService.findWhere( { role=adminRole } );
@@ -360,7 +360,7 @@ component {
 			feedsPage.setCreator( author );
 			feedsPage.setLayout( "aggregator" );
 			feedsPage.addNewContentVersion(
-				content = "<!--Feeds page placeholder content.-->",
+				content = "<!-- Feeds page placeholder content. -->",
 				changelog = "Page created by ContentBox Aggregator Module.",
 				author = author
 			);
@@ -377,7 +377,7 @@ component {
 			feedItemsPage.setCreator( author );
 			feedItemsPage.setLayout( "aggregator" );
 			feedItemsPage.addNewContentVersion(
-				content = "<!--Feed items page placeholder content.-->",
+				content = "<!-- Feed items page placeholder content. -->",
 				changelog = "Page created by ContentBox Aggregator Module.",
 				author = author
 			);

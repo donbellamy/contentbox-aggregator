@@ -1439,6 +1439,10 @@
 							</div>
 							<div class="form-actions">
 								#html.submitButton( value="Save Settings", class="btn btn-danger" )#
+								<a href="javascript:reset();"
+									class="btn btn-primary confirmIt"
+									data-title="Reset to Default Settings?"
+									data-message="This will override any custom settings you may have created, are you sure?">Reset Settings</a>
 							</div>
 						</div>
 					</div>

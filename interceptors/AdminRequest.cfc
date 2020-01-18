@@ -84,6 +84,7 @@ component extends="coldbox.system.Interceptor" {
 		// Settings
 		prc.xehAggregatorSettings = "#prc.agAdminEntryPoint#.settings";
 		prc.xehAggregatorSettingsSave = "#prc.agAdminEntryPoint#.settings.save";
+		prc.xehAggregatorSettingsReset = "#prc.agAdminEntryPoint#.settings.reset";
 
 	}
 

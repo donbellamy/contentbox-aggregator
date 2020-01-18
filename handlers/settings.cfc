@@ -7,11 +7,13 @@ component extends="baseHandler" {
 
 	// Dependencies
 	property name="authorService" inject="authorService@cb";
+	property name="roleService" inject="roleService@cb";
 	property name="categoryService" inject="categoryService@cb";
 	property name="pageService" inject="pageService@cb";
 	property name="themeService" inject="themeService@cb";
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
 	property name="routingService" inject="coldbox:routingService";
+	property name="moduleSettings" inject="coldbox:moduleSettings:contentbox-aggregator";
 
 	/**
 	 * Pre handler
@@ -172,6 +174,97 @@ component extends="baseHandler" {
 		);
 
 		cbMessagebox.info( "Settings Updated!" );
+		setNextEvent( prc.xehAggregatorSettings );
+
+	}
+
+	/**
+	 * Resets the settings to the default settings
+	 */
+	function reset( event, rc, prc ) {
+
+		// Set vars
+		var currentSettings = prc.agSettings;
+		var defaultSettings = moduleSettings;
+
+		// Check to see if entry points changed and create pages if needed
+		if ( ( currentSettings.feeds_entrypoint != defaultSettings.feeds_entrypoint ) || ( currentSettings.feed_items_entrypoint != defaultSettings.feed_items_entrypoint ) ) {
+
+			// Set author
+			if ( len( currentSettings.importing_feed_item_author ) ) {
+				var author = authorService.get( currentSettings.importing_feed_item_author );
+			} else {
+				var adminRole = roleService.findWhere( { role="Administrator" } );
+				var author = authorService.findWhere( { role=adminRole } );
+			}
+
+			// Check feeds entrypoint
+			if ( currentSettings.feeds_entrypoint != defaultSettings.feeds_entrypoint ) {
+				var feedsPage = pageService.findBySlug( defaultSettings.feeds_entrypoint );
+				if ( feedsPage.isLoaded() ) {
+					feedsPage.setLayout("aggregator");
+					pageService.savePage( feedsPage );
+				} else {
+					feedsPage.setTitle( "Feeds" );
+					feedsPage.setSlug( defaultSettings.feeds_entrypoint );
+					feedsPage.setPublishedDate( now() );
+					feedsPage.setCreator( author );
+					feedsPage.setLayout( "aggregator" );
+					feedsPage.addNewContentVersion(
+						content = "<!-- Feeds page placeholder content. -->",
+						changelog = "Page created by ContentBox Aggregator Module.",
+						author = author
+					);
+					pageService.savePage( feedsPage );
+				}
+			}
+
+			// Check feed items entrypoint
+			if ( currentSettings.feed_items_entrypoint != defaultSettings.feed_items_entrypoint ) {
+				var feedItemsPage = pageService.findBySlug( defaultSettings.feed_items_entrypoint );
+				if ( feedItemsPage.isLoaded() ) {
+					feedItemsPage.setLayout( "aggregator" );
+					pageService.savePage( feedItemsPage );
+				} else {
+					feedItemsPage.setTitle( "News" );
+					feedItemsPage.setSlug( defaultSettings.feed_items_entrypoint );
+					feedItemsPage.setPublishedDate( now() );
+					feedItemsPage.setCreator( author );
+					feedItemsPage.setLayout( "aggregator" );
+					feedItemsPage.addNewContentVersion(
+						content = "<!-- Feed items page placeholder content. -->",
+						changelog = "Page created by ContentBox Aggregator Module.",
+						author = author
+					);
+					pageService.savePage( feedItemsPage );
+				}
+			}
+
+			// Update the site routes
+			routingService.setRoutes(
+				routingService.getRoutes().map( function( item ) {
+					if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
+						item.pattern = item.regexpattern = replace( defaultSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
+					}
+					if ( item.namespaceRouting EQ "aggregator-feeds" ) {
+						item.pattern = item.regexpattern = replace( defaultSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
+					}
+					return item;
+				})
+			);
+
+		}
+
+		// Save settings
+		var setting = settingService.findWhere( { name = "aggregator" } );
+		setting.setValue( serializeJSON( defaultSettings ) );
+		settingService.save( setting );
+
+		// Clear cache
+		settingService.flushSettingsCache();
+
+		// Forward to form
+		cbMessagebox.info( "Settings Reset!" );
 		setNextEvent( prc.xehAggregatorSettings );
 
 	}
