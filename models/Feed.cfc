@@ -225,7 +225,7 @@ component persistent="true"
 	 * @return The latest feed import if exists, null if not
 	 */
 	any function getLatestFeedImport() {
-		if ( arrayLen( getFeedImports() ) ) {
+		if ( hasFeedImport() ) {
 			return getFeedImports()[1];
 		}
 		return javaCast( "null", "" );
@@ -236,7 +236,7 @@ component persistent="true"
 	 * @return The latest successful feed import if exists, null if not
 	 */
 	any function getLatestSuccessfulFeedImport() {
-		if ( arrayLen( getFeedImports() ) ) {
+		if ( hasFeedImport() ) {
 			for ( var feedImport IN getFeedImports() ) {
 				if ( !feedImport.failed() ) {
 					return feedImport;

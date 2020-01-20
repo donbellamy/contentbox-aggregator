@@ -63,6 +63,36 @@ component persistent="true"
 		inverse="true"
 		cascade="all-delete-orphan";
 
+	// Note: These should be one-to-one relationships but
+	// Hibernate 3.5 doesn't allow optional one-to-one relationships,
+	// change when Lucee upgrades to version 5
+
+	// O2M -> Podcast
+	property name="podcasts"
+		singularName="podcast"
+		fieldtype="one-to-many"
+		type="array"
+		lazy="extra"
+		batchsize="25"
+		orderby="feedItemPodcastID DESC"
+		cfc="FeedItemPodcast"
+		fkcolumn="FK_feedItemID"
+		inverse="true"
+		cascade="all-delete-orphan";
+
+	// O2M -> Video
+	property name="videos"
+		singularName="video"
+		fieldtype="one-to-many"
+		type="array"
+		lazy="extra"
+		batchsize="25"
+		orderby="feedItemVideoID DESC"
+		cfc="FeedItemVideo"
+		fkcolumn="FK_feedItemID"
+		inverse="true"
+		cascade="all-delete-orphan";
+
 	/* *********************************************************************
 	**                            DI INJECTIONS
 	********************************************************************* */
@@ -311,9 +341,9 @@ component persistent="true"
 	 * @return The feed item type
 	 */
 	string function getType() {
-		if ( len( getVideoUrl() ) ) {
+		if ( isVideo() ) {
 			return "video";
-		} else if ( len( getPodcastUrl() ) ) {
+		} else if ( isPodcast() ) {
 			return "podcast";
 		} else {
 			return "article";
@@ -325,7 +355,31 @@ component persistent="true"
 	 * @return Whether or not the feed item is a video
 	 */
 	boolean function isVideo() {
-		return len( getVideoUrl() );
+		return hasVideo();
+	}
+
+	/**
+	 * Gets the attached video if one exists
+	 * @return The attached video if one exists, null if not
+	 */
+	any function getVideo() {
+		if ( isVideo() ) {
+			return getVideos()[1];
+		}
+		return javaCast( "null", "" );
+	}
+
+	/**
+	 * Gets the video url if an attached video exists
+	 * @return The video url if an attached video exists
+	 */
+	string function getVideoUrl() {
+		var videoUrl = "";
+		var video = getVideo();
+		if ( !isNull( video ) ) {
+			videoUrl = video.getVideoUrl();
+		}
+		return videoUrl;
 	}
 
 	/**
@@ -357,7 +411,31 @@ component persistent="true"
 	 * @return Whether or not the feed item is a podcast or contains a podcast
 	 */
 	boolean function isPodcast() {
-		return len( getPodcastUrl() );
+		return hasPodcast();
+	}
+
+	/**
+	 * Gets the attached podcast if one exists
+	 * @return The attached podcast if one exists, null if not
+	 */
+	any function getPodcast() {
+		if ( isPodcast() ) {
+			return getPodcasts()[1];
+		}
+		return javaCast( "null", "" );
+	}
+
+	/**
+	 * Gets the podcast url if an attached podcast exists
+	 * @return The podcast url if an attached podcast exists
+	 */
+	string function getPodcastUrl() {
+		var podcastUrl = "";
+		var podcast = getPodcast();
+		if ( !isNull( podcast ) ) {
+			podcastUrl = podcast.getPodcastUrl();
+		}
+		return podcastUrl;
 	}
 
 	/**
