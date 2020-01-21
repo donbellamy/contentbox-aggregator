@@ -158,15 +158,15 @@ component extends="ContentService" singleton {
 		if ( len( arguments.type ) ) {
 			switch( arguments.type ) {
 				case "article": {
-					whereHql &= " AND ( cb.podcastUrl = '' OR cb.podcastUrl IS NULL ) AND ( cb.videoUrl = '' OR cb.videoUrl IS NULL )";
+					whereHql &= " AND NOT EXISTS ( FROM cb.videos AS vid WHERE vid.feedItem = cb ) AND NOT EXISTS ( FROM cb.podcasts AS pc WHERE pc.feedItem = cb )";
 					break;
 				}
 				case "podcast": {
-					whereHql &= " AND cb.podcastUrl > ''";
+					selectHql &= " JOIN cb.podcasts";
 					break;
 				}
 				case "video": {
-					whereHql &= " AND cb.videoUrl > ''";
+					selectHql &= " JOIN cb.videos";
 					break;
 				}
 			}

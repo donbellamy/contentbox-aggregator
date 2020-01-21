@@ -92,27 +92,51 @@ component persistent="true"
 		default="";
 
 	property name="isFailing"
-		formula="select fi.importFailed from cb_feedimport fi where fi.FK_feedID = contentID and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
+		formula="select fi.importFailed from cb_feedimport fi
+			where fi.FK_feedID = contentID
+			and fi.feedImportID = ( select max(fi.feedImportID) from cb_feedimport fi where fi.FK_feedID=contentID )"
 		default="false";
 
 	property name="numberOfArticles"
-		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and ( fi.podcastUrl = '' or fi.podcastUrl IS NULL ) and ( fi.videoUrl = '' or fi.videoUrl IS NULL )"
+		formula="select count(*) from cb_content c
+			inner join cb_feeditem fi on c.contentID = fi.contentID
+			where c.FK_parentID = contentID
+			and ( select count(*) from cb_feeditemvideo fiv where fiv.FK_feedItemID = fi.contentID ) = 0
+			and ( select count(*) from cb_feeditempodcast fip where fip.FK_feedItemID = fi.contentID ) = 0"
 		default="0";
 
 	property name="numberOfPodcasts"
-		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.podcastUrl > ''"
+		formula="select count(*)
+			from cb_content c
+			inner join cb_feeditem fi on c.contentID = fi.contentID
+			inner join cb_feeditempodcast fip on fi.contentID = fip.FK_feedItemID
+			where c.FK_parentID = contentID"
 		default="0";
 
 	property name="numberOfVideos"
-		formula="select count(*) from cb_content c inner join cb_feeditem fi on c.contentID = fi.contentID where c.FK_parentID = contentID and fi.videoUrl > ''"
+		formula="select count(*)
+			from cb_content c
+			inner join cb_feeditem fi on c.contentID = fi.contentID
+			inner join cb_feeditemvideo fiv on fi.contentID = fiv.FK_feedItemID
+			where c.FK_parentID = contentID"
 		default="0";
 
 	property name="numberOfPublishedChildren"
-		formula="select count(*) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
+		formula="select count(*)
+			from cb_content c
+			where c.FK_parentID = contentID
+			and c.isPublished = 1
+			and c.publishedDate < now()
+			and ( c.expireDate is null or c.expireDate > now() )"
 		default="0";
 
 	property name="lastPublishedDate"
-		formula="select max(c.publishedDate) from cb_content c where c.FK_parentID = contentID and c.isPublished = 1 and c.publishedDate < now() and ( c.expireDate is null or c.expireDate > now() )"
+		formula="select max(c.publishedDate)
+			from cb_content c
+			where c.FK_parentID = contentID
+			and c.isPublished = 1
+			and c.publishedDate < now()
+			and ( c.expireDate is null or c.expireDate > now() )"
 		default="";
 
 	/* *********************************************************************
