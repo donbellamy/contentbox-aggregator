@@ -21,7 +21,6 @@
 		</cfif>
 	</ul>
 </div>
-<cfdump var="#prc.feed.getSettings()#"/>
 #html.startForm(
 	action=prc.xehFeedSave,
 	name="feedForm",

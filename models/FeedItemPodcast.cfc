@@ -25,6 +25,9 @@ component persistent="true"
 		notnull="false"
 		length="510";
 
+	property name="mimeType"
+		notnull="false";
+
 	/* *********************************************************************
 	**                            RELATIONSHIPS
 	********************************************************************* */

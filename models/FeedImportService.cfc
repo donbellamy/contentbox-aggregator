@@ -10,6 +10,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
 	property name="feedItemAttachmentService" inject="entityService:cbFeedItemAttachment";
+	property name="feedItemVideoService" inject="entityService:cbFeedItemVideo";
+	property name="feedItemPodcastService" inject="entityService:cbFeedItemPodcast";
 	property name="blacklistedItemService" inject="blacklistedItemService@aggregator";
 	property name="settingService" inject="settingService@cb";
 	property name="moduleSettings" inject="coldbox:setting:modules";
@@ -116,22 +118,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 										try {
 
-											// Check video and podcast
-											var isVideo = checkIsVideo( item );
-											var isPodcast = checkIsPodcast( item );
-
 											// Create feed item
 											var feedItem = feedItemService.new();
 
 											// FeedItem properties
 											feedItem.setUniqueId( uniqueId );
 											feedItem.setItemUrl( item.url );
-											if ( isVideo ) {
-												feedItem.setVideoUrl( getVideoUrl( item ) );
-											}
-											if ( isPodcast ) {
-												feedItem.setPodcastUrl( getPodcastUrl( item ) );
-											}
 											if ( len( trim( item.author ) ) ) {
 												feedItem.setItemAuthor( item.author );
 											}
@@ -325,6 +317,29 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														feedItem.addAttachment( feedItemAttachment );
 													}
 												}
+											}
+
+											// Check for video
+											if ( checkIsVideo( item ) ) {
+												var feeditemVideo = feedItemVideoService.new(
+													properties = {
+														videoUrl = getVideoUrl( item )
+													}
+												);
+												feeditemVideo.setFeedItem( feedItem );
+												feedItem.addVideo( feeditemVideo );
+											}
+
+											// Check for podcast
+											if ( checkIsPodcast( item ) ) {
+												var feeditemPodcast = feedItemPodcastService.new(
+													properties = {
+														podcastUrl = getPodcastUrl( item ),
+														mimeType = getPodcastMimeType( item )
+													}
+												);
+												feeditemPodcast.setFeedItem( feedItem );
+												feedItem.addPodcast( feeditemPodcast );
 											}
 
 											// Save item
@@ -720,6 +735,35 @@ component extends="cborm.models.VirtualEntityService" singleton {
 
 		// Return url
 		return podcastUrl;
+
+	}
+
+	/**
+	 * Gets the mime type if the feed item is a podcast or contains a podcast
+	 * @return The podcast mime type if the feed item is a podcast or contains a podcast
+	 */
+	private string function getPodcastMimeType( required struct item ) {
+
+		// Set vars
+		var mimeType = "";
+		var podcastUrl = getPodcastUrl( arguments.item );
+		var results = reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", podcastUrl, 1, true );
+		var ext = mid( podcastUrl, results.pos[2], results.len[2] );
+		var mimeTypes = {
+			".mp3" = "audio/mpeg",
+			".m4a" = "audio/mp4",
+			".mp4" = "audio/mp4",
+			".aac" = "audio/mp4",
+			".oga" = "audio/ogg",
+			".ogg" = "audio/ogg",
+			".wav" = "audio/wav"
+		};
+
+		// Set mime type
+		mimeType = mimeTypes[ext];
+
+		// Return mime type
+		return mimeType;
 
 	}
 

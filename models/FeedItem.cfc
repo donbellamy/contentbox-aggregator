@@ -34,14 +34,6 @@ component persistent="true"
 		notnull="true"
 		length="510";
 
-	property name="videoUrl"
-		notnull="false"
-		length="510";
-
-	property name="podcastUrl"
-		notnull="false"
-		length="510";
-
 	property name="metaInfo"
 		notnull="false"
 		ormtype="text";
@@ -129,8 +121,8 @@ component persistent="true"
 		variables.createdDate = now();
 		variables.contentType = "FeedItem";
 		variables.attachments = [];
-		variables.videodUrl = "";
-		variables.podcastUrl = "";
+		variables.videos = [];
+		variables.podcasts = [];
 		setMetaInfo({});
 		return this;
 	}
@@ -374,12 +366,10 @@ component persistent="true"
 	 * @return The video url if an attached video exists
 	 */
 	string function getVideoUrl() {
-		var videoUrl = "";
-		var video = getVideo();
-		if ( !isNull( video ) ) {
-			videoUrl = video.getVideoUrl();
+		if ( isVideo() ) {
+			return getVideo().getVideoUrl();
 		}
-		return videoUrl;
+		return "";
 	}
 
 	/**
@@ -430,12 +420,10 @@ component persistent="true"
 	 * @return The podcast url if an attached podcast exists
 	 */
 	string function getPodcastUrl() {
-		var podcastUrl = "";
-		var podcast = getPodcast();
-		if ( !isNull( podcast ) ) {
-			podcastUrl = podcast.getPodcastUrl();
+		if ( isPodcast() ) {
+			return getPodcast().getPodcastUrl();
 		}
-		return podcastUrl;
+		return "";
 	}
 
 	/**
@@ -443,35 +431,10 @@ component persistent="true"
 	 * @return The podcast mime type if the feed item is a podcast or contains a podcast
 	 */
 	string function getPodcastMimeType() {
-
-		// Set var
-		var mimeType = "";
-
-		// Check if item contains a podcast
-		if ( isPodCast() ) {
-
-			// Set vars
-			var podcastUrl = getPodcastUrl();
-			var results = reFindNoCase( "(\.mp3|\.m4a|\.mp4|\.acc|\.oga|\.ogg|\.wav)(&|\?)?(.*)$", podcastUrl, 1, true );
-			var ext = mid( podcastUrl, results.pos[2], results.len[2] );
-			var mimeTypes = {
-				".mp3" = "audio/mpeg",
-				".m4a" = "audio/mp4",
-				".mp4" = "audio/mp4",
-				".aac" = "audio/mp4",
-				".oga" = "audio/ogg",
-				".ogg" = "audio/ogg",
-				".wav" = "audio/wav"
-			};
-
-			// Set mime type
-			mimeType = mimeTypes[ ext ];
-
+		if ( isPodcast() ) {
+			return getPodcast().getMimeType();
 		}
-
-		// Return mime type
-		return mimeType;
-
+		return "";
 	}
 
 	/**
