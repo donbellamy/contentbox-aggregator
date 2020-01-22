@@ -133,6 +133,12 @@
 										</td>
 									</tr>
 									<tr>
+										<th class="col-md-4">Type:</th>
+										<td class="col-md-8">
+											#prc.feedItem.getType()#
+										</td>
+									</tr>
+									<tr>
 										<th class="col-md-4">Date Published:</th>
 										<td class="col-md-8">
 											#prc.feedItem.getDisplayPublishedDate()#

@@ -83,6 +83,10 @@ component persistent="true"
 		inject="feedItemService@aggregator"
 		persistent="false";
 
+	property name="settingService"
+		inject="settingService@cb"
+		persistent="false";
+
 	/* *********************************************************************
 	**                            CALCULATED FIELDS
 	********************************************************************* */
@@ -206,8 +210,6 @@ component persistent="true"
 			type = "aggregator.Feed.InvalidSetting"
 		);
 	}
-
-	// Split thes into two?
 
 	/**
 	 * Gets the view args set on the feed
@@ -493,7 +495,15 @@ component persistent="true"
 
 		if ( len( super.getFeaturedImageUrl() ) ) {
 			return super.getFeaturedImageUrl();
-		else {
+		} else if ( arguments.getAltImageUrl ) {
+			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			var behavior = len( getSetting( "feed_featured_image_behavior", "" ) ) ? getSetting( "feed_featured_image_behavior", "" ) : settings.feed_featured_image_behavior;
+			if ( behavior == "default" ) {
+				return settings.feed_featured_image_default_url;
+			} else {
+				return "";
+			}
+		} else {
 			return "";
 		}
 

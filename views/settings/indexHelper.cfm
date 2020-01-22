@@ -66,7 +66,7 @@ function loadAssetChooser( callback, w, h ) {
 	);
 }
 function defaultFeedImageCallback( filePath, fileURL, fileType ) {
-	if ( $( "##feed_featured_image_default" ).val().length ) { cancelDefaultImage(); }
+	if ( $( "##feed_featured_image_default" ).val().length ) { cancelDefaultFeedImage(); }
 	$( "##default_feed_image_controls" ).toggleClass( "hide" );
 	$( "##feed_featured_image_default" ).val( filePath );
 	$( "##feed_featured_image_default_url" ).val( fileURL );
