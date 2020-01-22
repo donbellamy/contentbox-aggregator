@@ -533,25 +533,6 @@
 									<div class="form-group">
 										#html.label(
 											class="control-label",
-											field="feeds_show_featured_image",
-											content="Show Featured Image:"
-										)#
-										<p><small>If enabled, the feed's featured image will be displayed.</small></p>
-										<div class="controls">
-											#html.checkbox(
-												name="feeds_show_featured_image_toggle",
-												data={ toggle: 'toggle', match: 'feeds_show_featured_image' },
-												checked=prc.agSettings.feeds_show_featured_image
-											)#
-											#html.hiddenField(
-												name="feeds_show_featured_image",
-												value=prc.agSettings.feeds_show_featured_image
-											)#
-										</div>
-									</div>
-									<div class="form-group">
-										#html.label(
-											class="control-label",
 											field="feeds_show_website",
 											content="Show Website Link:"
 										)#
@@ -587,6 +568,73 @@
 											)#
 										</div>
 									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="feeds_show_featured_image",
+											content="Show Featured Image:"
+										)#
+										<p><small>If enabled, the feed's featured image will be displayed.</small></p>
+										<div class="controls">
+											#html.checkbox(
+												name="feeds_show_featured_image_toggle",
+												data={ toggle: 'toggle', match: 'feeds_show_featured_image' },
+												checked=prc.agSettings.feeds_show_featured_image
+											)#
+											#html.hiddenField(
+												name="feeds_show_featured_image",
+												value=prc.agSettings.feeds_show_featured_image
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="feed_items_featured_image_behavior",
+											content="Featured Image Behavior:"
+										)#
+										<p><small>The default behavior when a feed does not have a featured image.</small></p>
+										<div class="controls">
+											#html.select(
+												name="feed_featured_image_behavior",
+												options=prc.feedFeaturedImageOptions,
+												column="value",
+												nameColumn="name",
+												selectedValue=prc.agSettings.feed_featured_image_behavior,
+												class="form-control"
+											)#
+										</div>
+									</div>
+									<div class="form-group">
+										#html.label(
+											class="control-label",
+											field="feed_featured_image_default",
+											content="Default Featured Image:"
+										)#
+										<p><small>Use the tool below to select a default featured image.</small></p>
+										<div class="controls text-center">
+											<a class="btn btn-primary" href="javascript:loadAssetChooser( 'defaultFeedImageCallback' )">Select Image</a>
+											<div class="<cfif !len( prc.agSettings.feed_featured_image_default ) >hide</cfif> form-group" id="default_feed_image_controls">
+												<a class="btn btn-danger" href="javascript:cancelDefaultFeedImage()">Clear Image</a>
+												#html.hiddenField(
+													name="feed_featured_image_default",
+													value=prc.agSettings.feed_featured_image_default
+												)#
+												#html.hiddenField(
+													name="feed_featured_image_default_url",
+													value=prc.agSettings.feed_featured_image_default_url
+												)#
+												<div class="margin10">
+													<cfif len( prc.agSettings.feed_featured_image_default_url ) >
+														<img id="default_feed_image_preview" src="#prc.agSettings.feed_featured_image_default_url#" class="img-thumbnail" height="75" />
+													<cfelse>
+														<img id="default_feed_image_preview" class="img-thumbnail" height="75" />
+													</cfif>
+												</div>
+											</div>
+										</div>
+									</div>
+
 								</fieldset>
 								<fieldset>
 									<legend>

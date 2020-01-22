@@ -217,9 +217,9 @@ component persistent="true"
 		var args = {
 			// Feeds
 			"includeFeedItems" = getSetting( "feeds_include_feed_items", "" ),
-			"showFeedImage" = getSetting( "feeds_show_featured_image", "" ),
 			"showWebsite" = getSetting( "feeds_show_website", "" ),
 			"showRSS" = getSetting( "feeds_show_rss", "" ),
+			"showFeedImage" = getSetting( "feeds_show_featured_image", "" ),
 			// Feed items
 			"showVideoPlayer" = getSetting( "feed_items_show_video_player", "" ),
 			"showAudioPlayer" = getSetting( "feed_items_show_audio_player", "" ),
@@ -482,6 +482,21 @@ component persistent="true"
 		var importedDate = getImportedDate();
 		if ( isNull( importedDate ) ) importedDate = "";
 		return dateFormat( importedDate, arguments.dateFormat ) & " " & timeFormat( importedDate, arguments.timeFormat );
+	}
+
+	/**
+	 * Gets the url of the featured image
+	 * @getAltImageUrl Whether or not to check and return the alt featured image if one exists
+	 * @return The url of the featured image
+	 */
+	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
+
+		if ( len( super.getFeaturedImageUrl() ) ) {
+			return super.getFeaturedImageUrl();
+		else {
+			return "";
+		}
+
 	}
 
 	/**

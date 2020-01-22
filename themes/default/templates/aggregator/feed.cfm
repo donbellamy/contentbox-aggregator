@@ -1,8 +1,8 @@
 
 <cfparam name="args.includeFeedItems" default="false" />
-<cfparam name="args.showFeedImage" default="true" />
 <cfparam name="args.showWebsite" default="true" />
 <cfparam name="args.showRSS" default="true" />
+<cfparam name="args.showFeedImage" default="true" />
 <cfset imageUrl = args.feed.getFeaturedImageUrl() />
 <cfset showFeaturedImage = args.showFeedImage && len( imageUrl ) />
 <cfoutput>

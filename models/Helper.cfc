@@ -720,9 +720,9 @@ component accessors="true" singleton threadSafe {
 		return {
 			// Feeds
 			"includeFeedItems" = setting("feeds_include_feed_items"),
-			"showFeedImage" = setting("feeds_show_featured_image"),
 			"showWebsite" = setting("feeds_show_website"),
 			"showRSS" = setting("feeds_show_rss"),
+			"showFeedImage" = setting("feeds_show_featured_image"),
 			// Feed items
 			"showVideoPlayer" = setting("feed_items_show_video_player"),
 			"showAudioPlayer" = setting("feed_items_show_audio_player"),

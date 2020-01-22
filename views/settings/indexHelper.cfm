@@ -65,6 +65,20 @@ function loadAssetChooser( callback, w, h ) {
 		h
 	);
 }
+function defaultFeedImageCallback( filePath, fileURL, fileType ) {
+	if ( $( "##feed_featured_image_default" ).val().length ) { cancelDefaultImage(); }
+	$( "##default_feed_image_controls" ).toggleClass( "hide" );
+	$( "##feed_featured_image_default" ).val( filePath );
+	$( "##feed_featured_image_default_url" ).val( fileURL );
+	$( "##default_feed_image_preview" ).attr( "src", fileURL );
+	closeRemoteModal();
+}
+function cancelDefaultFeedImage() {
+	$( "##feed_featured_image_default" ).val( "" );
+	$( "##feed_featured_image_default_url" ).val( "" );
+	$( "##default_feed_image_preview" ).attr( "src", "" );
+	$( "##default_feed_image_controls" ).toggleClass( "hide" );
+}
 function defaultImageCallback( filePath, fileURL, fileType ) {
 	if ( $( "##feed_items_featured_image_default" ).val().length ) { cancelDefaultImage(); }
 	$( "##default_image_controls" ).toggleClass( "hide" );

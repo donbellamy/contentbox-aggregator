@@ -64,6 +64,10 @@ component extends="baseHandler" {
 			{ name = "Use an interstitial page before forwarding the user to the feed item.", value = "interstitial" },
 			{ name = "Display the entire feed item within the site.", value = "display" }
 		];
+		prc.feedFeaturedImageOptions = [
+			{ name = "Display the default featured image.", value = "default" },
+			{ name = "Do not display a featured image.", value = "none" }
+		];
 		prc.featuredImageOptions = [
 			{ name = "Display the parent feed's featured image.", value = "feed" },
 			{ name = "Display the default featured image.", value = "default" },

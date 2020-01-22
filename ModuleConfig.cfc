@@ -49,9 +49,12 @@ component {
 			// Site options
 			"feeds_entrypoint" = "feeds",
 			"feeds_include_feed_items" = "false",
-			"feeds_show_featured_image" = "true",
 			"feeds_show_website" = "true",
 			"feeds_show_rss" = "true",
+			"feeds_show_featured_image" = "true",
+			"feed_featured_image_behavior" = "default",
+			"feed_featured_image_default" = "",
+			"feed_featured_image_default_url" = "",
 			"feed_items_entrypoint" = "news",
 			"feed_items_include_entries" = "false",
 			"feed_items_group_by_date" = "false",
