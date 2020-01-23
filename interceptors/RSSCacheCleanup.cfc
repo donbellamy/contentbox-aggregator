@@ -65,7 +65,7 @@ component extends="coldbox.system.Interceptor" {
 		var cacheKey = "cb-feeds-aggregator";
 
 		// Clear cache
-		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
+		cache.clearByKeySnippet( keySnippet=cacheKey, async=true );
 
 		return this;
 

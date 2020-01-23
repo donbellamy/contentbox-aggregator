@@ -141,12 +141,20 @@ component extends="contentHandler" {
 			name = "Use the default setting - #prc.includeFeedItemOptions[ arrayFind( prc.includeFeedItemOptions, function( struct ) { return struct.value == prc.agSettings.feeds_include_feed_items; } ) ].name#",
 			value = ""
 		});
-		prc.feedFeaturedImageOptions = [
+		prc.showFeedFeaturedImageOptions = [
 			{ name = "Display the featured image for this feed.", value = "true" },
 			{ name = "Do not display the featured image for this feed.", value = "false" }
 		];
+		arrayPrepend( prc.showFeedFeaturedImageOptions, {
+			name = "Use the default setting - #prc.showFeedFeaturedImageOptions[ arrayFind( prc.showFeedFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_featured_image; } ) ].name#",
+			value = ""
+		});
+		prc.feedFeaturedImageOptions = [
+			{ name = "Display the default featured image.", value = "default" },
+			{ name = "Do not display a featured image for this feed.", value = "none" }
+		];
 		arrayPrepend( prc.feedFeaturedImageOptions, {
-			name = "Use the default setting - #prc.feedFeaturedImageOptions[ arrayFind( prc.feedFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feeds_show_featured_image; } ) ].name#",
+			name = "Use the default setting - #prc.feedFeaturedImageOptions[ arrayFind( prc.feedFeaturedImageOptions, function( struct ) { return struct.value == prc.agSettings.feed_featured_image_behavior; } ) ].name#",
 			value = ""
 		});
 		prc.showWebsiteOptions = [
@@ -341,9 +349,12 @@ component extends="contentHandler" {
 
 		// Site options
 		event.paramValue( "settings_feeds_include_feed_items", "" )
-			.paramValue( "settings_feeds_show_featured_image", "" )
 			.paramValue( "settings_feeds_show_website", "" )
 			.paramValue( "settings_feeds_show_rss", "" )
+			.paramValue( "settings_feeds_show_featured_image", "" )
+			.paramValue( "settings_feed_featured_image_behavior", "" )
+			//.paramValue( "settings_feed_featured_image_default", "" )
+			//.paramValue( "settings_feed_featured_image_default_url", "" )
 			.paramValue( "settings_feed_items_group_by_date", "" )
 			.paramValue( "settings_feed_items_show_video_player", "" )
 			.paramValue( "settings_feed_items_show_audio_player", "" )

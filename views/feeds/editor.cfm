@@ -551,24 +551,6 @@
 						<div class="form-group">
 							#html.label(
 								class="control-label",
-								field="settings_feeds_show_featured_image",
-								content="Show Featured Image:"
-							)#
-							<p><small>If enabled, the feed's featured image will be displayed if one exists for this feed.</small></p>
-							<div class="controls">
-								#html.select(
-									name="settings_feeds_show_featured_image",
-									options=prc.feedFeaturedImageOptions,
-									column="value",
-									nameColumn="name",
-									selectedValue=prc.feed.getSetting( "feeds_show_featured_image", "" ),
-									class="form-control"
-								)#
-							</div>
-						</div>
-						<div class="form-group">
-							#html.label(
-								class="control-label",
 								field="settings_feeds_show_website",
 								content="Show Website Link:"
 							)#
@@ -598,6 +580,42 @@
 									column="value",
 									nameColumn="name",
 									selectedValue=prc.feed.getSetting( "feeds_show_rss", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feeds_show_featured_image",
+								content="Show Featured Image:"
+							)#
+							<p><small>If enabled, the feed's featured image will be displayed if one exists for this feed.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feeds_show_featured_image",
+									options=prc.showFeedFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feeds_show_featured_image", "" ),
+									class="form-control"
+								)#
+							</div>
+						</div>
+						<div class="form-group">
+							#html.label(
+								class="control-label",
+								field="settings_feed_featured_image_behavior",
+								content="Featured Image Behavior:"
+							)#
+							<p><small>The default behavior when a feed does not have a featured image.</small></p>
+							<div class="controls">
+								#html.select(
+									name="settings_feed_featured_image_behavior",
+									options=prc.feedFeaturedImageOptions,
+									column="value",
+									nameColumn="name",
+									selectedValue=prc.feed.getSetting( "feed_featured_image_behavior", "" ),
 									class="form-control"
 								)#
 							</div>
@@ -841,7 +859,7 @@
 								field="settings_feed_items_featured_image_behavior",
 								content="Featured Image Behavior:"
 							)#
-							<p><small>The default behavior when a feed item has no featured image.</small></p>
+							<p><small>The default behavior when a feed item does not have a featured image.</small></p>
 							<div class="controls">
 								#html.select(
 									name="settings_feed_items_featured_image_behavior",

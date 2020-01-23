@@ -133,7 +133,7 @@ component extends="coldbox.system.Interceptor" {
 		var cacheKey = "cb-content-aggregator";
 
 		// Clear site cache
-		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
+		cache.clearByKeySnippet( keySnippet=cacheKey, async=true );
 
 		// Clear content caches
 		contentService.clearAllCaches();
