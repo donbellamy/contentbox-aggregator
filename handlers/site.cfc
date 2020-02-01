@@ -9,12 +9,11 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	property name="contentService" inject="contentService@aggregator";
 	property name="feedService" inject="feedService@aggregator";
 	property name="feedItemService" inject="feedItemService@aggregator";
-	property name="feedImportService" inject="feedImportService@aggregator";
 	property name="rssService" inject="rssService@aggregator";
 	property name="mobileDetector" inject="mobileDetector@cb";
 
 	// Around handler exeptions
-	this.aroundhandler_except = "rss,onError,notFound";
+	this.aroundhandler_except = "onError,notFound";
 
 	/**
 	 * Pre handler
@@ -838,7 +837,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Grab the feed items page
 		getPage( prc, prc.agSettings.feed_items_entrypoint );
 
-		// Make sure page and feed item exists
+		// Make sure page and feed item are loaded
 		if ( prc.page.isLoaded() && prc.feedItem.isLoaded() ) {
 
 			// Record hit
@@ -945,6 +944,49 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @event
+	 * @rc
+	 * @prc
+	 */
+	function hit( event, rc, prc ) {
+
+		// Set params
+		event.paramValue( "slug", "" );
+
+		// Grab the feed items page
+		getPage( prc, prc.agSettings.feed_items_entrypoint );
+
+		// Get the feed item
+		var feedItem = feedItemService.findBySlug( rc.slug );
+
+		// Make sure we are using ajax and the page and feed item are loaded
+		if ( event.isAjax() && prc.page.isLoaded() && feedItem.isLoaded() ) {
+
+			// Record hit
+			feedItemService.updateHits( feedItem.getContentID() );
+
+			// Set json response
+			var data = { "CONTENTID" = feedItem.getContentID() };
+			event.renderData(
+				type = "json",
+				data = data
+			);
+
+		// else if isAjax()
+		} else {
+
+			// Not found
+			notFound( argumentCollection=arguments );
+			return;
+
+		}
+
+	}
+
 
 	/**
 	 * Displays a friendly error message

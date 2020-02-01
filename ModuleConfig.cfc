@@ -137,6 +137,7 @@ component {
 			{ pattern="/archives/:year-numeric{4}?/:month-numeric{1,2}?/:day-numeric{1,2}?", handler="site", action="archives", namespace="aggregator-feed-items" },
 			{ pattern="/category/:category", handler="site", action="index", namespace="aggregator-feed-items" },
 			{ pattern="/rss/:category?", handler="site", action="rss", namespace="aggregator-feed-items" },
+			{ pattern="/hit/:slug", handler="site", action="hit", namespace="aggregator-feed-items" },
 			{ pattern="/:slug", handler="site", action="feeditem", namespace="aggregator-feed-items" },
 			{ pattern="/", handler="site", action="index", namespace="aggregator-feed-items" }
 		];
