@@ -946,11 +946,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 	}
 
 	/**
-	 * Undocumented function
-	 *
-	 * @event
-	 * @rc
-	 * @prc
+	 * Updates hits to a feed item via ajax
 	 */
 	function hit( event, rc, prc ) {
 
@@ -971,12 +967,12 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 
 			// Set json response
 			var data = { "CONTENTID" = feedItem.getContentID() };
+			rc.format = "json";
 			event.renderData(
 				type = "json",
 				data = data
 			);
 
-		// else if isAjax()
 		} else {
 
 			// Not found
@@ -986,7 +982,6 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		}
 
 	}
-
 
 	/**
 	 * Displays a friendly error message

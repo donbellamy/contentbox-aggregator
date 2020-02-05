@@ -49,12 +49,12 @@
 	margin-bottom: 21px;
 }
 
-.audio-player {
+.audio-player-wrapper {
 	margin-top: 10.5px;
 	margin-bottom: 10.5px;
 }
 
-.audio-player audio {
+.audio-player {
 	max-width: 95%;
 	height: 35px;
 }

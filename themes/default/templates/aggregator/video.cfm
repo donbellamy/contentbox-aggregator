@@ -22,14 +22,14 @@
 	<cfif args.showImage || args.showVideoPlayer >
 		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
 		<cfif args.feedItem.isVideo() && args.showVideoPlayer >
-			<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#">
+			<div class="video-player" data-id="#args.feedItem.getContentID()#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#">
 				<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />
 			</div>
 		<cfelseif len( imageUrl ) && args.showImage >
 			<div class="video-image">
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+					<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#" data-id="#args.feedItem.getContentID()#"</cfif>
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 					rel="nofollow<cfif args.openNewWindow > noopener</cfif>">
 					<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />
@@ -40,7 +40,7 @@
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
-			<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+			<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#args.feedItem.getTitle()#</a>
 	</h4>

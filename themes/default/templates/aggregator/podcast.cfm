@@ -25,7 +25,7 @@
 			<div class="text-center">
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+					<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 					rel="nofollow<cfif args.openNewWindow > noopener</cfif>">
 					<img src="#imageUrl#" class="img-thumbnail" alt="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" />
@@ -36,7 +36,7 @@
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
-			<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+			<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#args.feedItem.getTitle()#</a>
 	</h4>
@@ -53,8 +53,8 @@
 			</div>
 	</div>
 	<cfif args.feedItem.isPodcast() && args.showAudioPlayer >
-		<div class="audio-player">
-			<audio controls="controls">
+		<div class="audio-player-wrapper">
+			<audio controls="controls" class="audio-player" data-id="#args.feedItem.getContentID()#">
 				<source src="#args.feedItem.getPodcastUrl()#" type="#args.feedItem.getPodcastMimeType()#">
 			</audio>
 		</div>

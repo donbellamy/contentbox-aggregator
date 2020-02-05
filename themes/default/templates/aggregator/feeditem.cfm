@@ -31,11 +31,11 @@
 		<cfif !args.showExcerpt && ( showFeaturedImage || showVideoPlayer ) >
 			<div class="col-md-3">
 				<cfif showVideoPlayer >
-					<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+					<div class="video-player" data-id="#args.feedItem.getContentID()#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
 				<cfelseif showFeaturedImage >
 					<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+						<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 						title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 				</cfif>
@@ -45,7 +45,7 @@
 			<h2>
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+					<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 					rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#">#args.feedItem.getTitle()#</a>
 			</h2>
@@ -79,8 +79,8 @@
 			<cfif !args.showExcerpt && showAudioPlayer >
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="audio-player">
-							<audio controls="controls">
+						<div class="audio-player-wrapper">
+							<audio controls="controls" class="audio-player" data-id="#args.feedItem.getContentID()#">
 								<source src="#args.feedItem.getPodcastUrl()#" type="#args.feedItem.getPodcastMimeType()#">
 							</audio>
 						</div>
@@ -94,11 +94,11 @@
 			<cfif showFeaturedImage || showVideoPlayer >
 				<div class="col-md-3">
 					<cfif showVideoPlayer >
-						<div class="video-player" data-id="#listLast(args.feedItem.getVideoUrl(),"/")#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
+						<div class="video-player" data-id="#args.feedItem.getContentID()#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#"></div>
 					<cfelseif showFeaturedImage >
 						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+							<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</cfif>
@@ -115,8 +115,8 @@
 					</cfif>
 				</cfif>
 				<cfif showAudioPlayer >
-					<div class="audio-player">
-						<audio controls="controls">
+					<div class="audio-player-wrapper">
+						<audio controls="controls" class="audio-player" data-id="#args.feedItem.getContentID()#">
 							<source src="#args.feedItem.getPodcastUrl()#" type="#args.feedItem.getPodcastMimeType()#">
 						</audio>
 					</div>
@@ -125,7 +125,7 @@
 					<div class="post-more">
 						<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+							<cfif args.linkBehavior EQ "link" >class="direct-link" data-id="#args.feedItem.getContentID()#"</cfif>
 							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
 					</div>
