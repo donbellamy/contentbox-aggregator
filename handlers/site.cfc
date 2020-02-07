@@ -966,7 +966,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			feedItemService.updateHits( feedItem.getContentID() );
 
 			// Set json response
-			var data = { "CONTENTID" = feedItem.getContentID() };
+			var data = { "suceess" = true };
 			rc.format = "json";
 			event.renderData(
 				type = "json",

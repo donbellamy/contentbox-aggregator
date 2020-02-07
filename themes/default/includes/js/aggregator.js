@@ -16,9 +16,15 @@ $( document )
 			} );
 
 		$( ".direct-link,.video-player,.audio-player" )
-			.on( "click play", function () {
+			.on( "click play", function ( e ) {
 				var $this = $( this );
-				var feedItemId = $this.attr( "data-id" );
-				alert( feedItemId );
+				var slug = $this.attr( "data-slug" );
+				$.ajax( {
+					url: "/news/hit/" + slug,
+					type: "GET",
+					success: function ( data ) {
+						console.log( data );
+					}
+				} );
 			} );
 	} );
