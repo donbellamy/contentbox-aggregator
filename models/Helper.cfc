@@ -496,6 +496,15 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Gets teh feed items hit link
+	 * @ssl Whether or not to use ssl
+	 * @return The feed items hit link
+	 */
+	string function linkFeedItemsHit( boolean ssl=cb.getRequestContext().isSSL() ) {
+		return linkFeedItems( ssl=arguments.ssl ) & "/hit";
+	}
+
+	/**
 	 * Gets the feed item form link
 	 * @feed The feed item to link to
 	 * @ssl Whether or not to use ssl

@@ -20,7 +20,7 @@ $( document )
 				var $this = $( this );
 				var slug = $this.attr( "data-slug" );
 				$.ajax( {
-					url: "/news/hit/" + slug,
+					url: feedItemsHitUrl + "/" + slug,
 					type: "GET",
 					success: function ( data ) {
 						console.log( data );

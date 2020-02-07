@@ -66,6 +66,7 @@
 <script src="#cb.themeRoot()#/includes/js/ae19f5c3.theme.min.js"></script>
 
 <!--- Aggregator Javascript --->
+<script>var feedItemsHitUrl = "#ag.linkFeedItemsHit()#"</script>
 <script src="#cb.themeRoot()#/includes/js/aggregator.js"></script>
 
 </cfoutput>
