@@ -480,6 +480,61 @@ Settings handler</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="settings.html#moduleSettings()">moduleSettings</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = coldbox:moduleSettings:contentbox-aggregator</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="settings.html#pageService()">pageService</A></strong>
 			<br>
 			
@@ -502,6 +557,61 @@ Settings handler</p>
 			
 				
 				<li class="label label-default label-annotations">inject = pageService@cb</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="settings.html#roleService()">roleService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = roleService@cb</li>
 				
 			
 				
@@ -684,6 +794,21 @@ Settings handler</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre handler.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="settings.html#reset()">reset</A></strong>([any event], [any rc], [any prc])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resets the settings to the default settings.
 			
 		</td>
 	</tr>
@@ -1547,6 +1672,54 @@ Settings handler</p>
 		<hr>
 	
 		
+		<a name="moduleSettings()"><!-- --></a>
+		<h3>moduleSettings</h3>
+
+		<kbd>
+			property any
+			<strong>moduleSettings</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - coldbox:moduleSettings:contentbox-aggregator</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="pageService()"><!-- --></a>
 		<h3>pageService</h3>
 
@@ -1580,6 +1753,54 @@ Settings handler</p>
 		
 			
 			<dd><code>inject</code> - pageService@cb</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="roleService()"><!-- --></a>
+		<h3>roleService</h3>
+
+		<kbd>
+			property any
+			<strong>roleService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - roleService@cb</dd>
 			
 		
 			
@@ -1806,6 +2027,51 @@ Settings handler</p>
 		<dd><code>action</code></dd>
 		
 		<dd><code>eventArguments</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="reset()"><!-- --></a>
+	<h3>
+		reset
+		
+	</h3>
+
+	<kbd>public any <strong>reset</strong>([any event], [any rc], [any prc])</kbd>
+
+	<br><br>
+
+	
+		<p>Resets the settings to the default settings</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>event</code></dd>
+		
+		<dd><code>rc</code></dd>
+		
+		<dd><code>prc</code></dd>
 		
 		</dl>
 	

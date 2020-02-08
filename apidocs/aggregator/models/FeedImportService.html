@@ -416,6 +416,61 @@ FeedImport Service</p>
 			<code>any</code>
 		</td>
 		<td>
+			<strong><a href="FeedImportService.html#feedItemPodcastService()">feedItemPodcastService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = entityService:cbFeedItemPodcast</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
 			<strong><a href="FeedImportService.html#feedItemService()">feedItemService</A></strong>
 			<br>
 			
@@ -438,6 +493,61 @@ FeedImport Service</p>
 			
 				
 				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
+				
+			
+				
+			
+				
+			
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#feedItemVideoService()">feedItemVideoService</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">inject = entityService:cbFeedItemVideo</li>
 				
 			
 				
@@ -1073,6 +1183,21 @@ FeedImport Service</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the directory path only if it is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="FeedImportService.html#getPodcastMimeType()">getPodcastMimeType</A></strong>(struct item)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the mime type if the feed item is a podcast or contains a podcast.
 			
 		</td>
 	</tr>
@@ -2117,6 +2242,54 @@ FeedImport Service</p>
 		<hr>
 	
 		
+		<a name="feedItemPodcastService()"><!-- --></a>
+		<h3>feedItemPodcastService</h3>
+
+		<kbd>
+			property any
+			<strong>feedItemPodcastService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - entityService:cbFeedItemPodcast</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
 		<a name="feedItemService()"><!-- --></a>
 		<h3>feedItemService</h3>
 
@@ -2150,6 +2323,54 @@ FeedImport Service</p>
 		
 			
 			<dd><code>inject</code> - feedItemService@aggregator</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="feedItemVideoService()"><!-- --></a>
+		<h3>feedItemVideoService</h3>
+
+		<kbd>
+			property any
+			<strong>feedItemVideoService</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>inject</code> - entityService:cbFeedItemVideo</dd>
 			
 		
 			
@@ -2843,6 +3064,52 @@ FeedImport Service</p>
 		<dl>
 			<dt><strong>Returns:</strong></dt>
 			<dd>FeedImportService</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPodcastMimeType()"><!-- --></a>
+	<h3>
+		getPodcastMimeType
+		
+	</h3>
+
+	<kbd>private string <strong>getPodcastMimeType</strong>(struct item)</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the mime type if the feed item is a podcast or contains a podcast</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>item</code></dd>
+		
+		</dl>
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The podcast mime type if the feed item is a podcast or contains a podcast</dd>
 		</dl>
 	
 

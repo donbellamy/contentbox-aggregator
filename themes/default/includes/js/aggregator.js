@@ -14,17 +14,14 @@ $( document )
 					$this.html( '<iframe src="' + videoUrl + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' );
 				}
 			} );
-
 		$( ".direct-link,.video-player,.audio-player" )
 			.on( "click play", function ( e ) {
 				var $this = $( this );
 				var slug = $this.attr( "data-slug" );
-				$.ajax( {
-					url: feedItemsHitUrl + "/" + slug,
-					type: "GET",
-					success: function ( data ) {
-						console.log( data );
-					}
-				} );
+				if ( slug != "undefined" ) {
+					$.ajax( {
+						url: hitUrl + "/" + slug
+					} );
+				}
 			} );
 	} );

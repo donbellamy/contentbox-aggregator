@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>site</title>
-	<meta name="keywords" content="aggregator.handlers.concurrent.Callable interface">
+	<title>FeedItemVideo</title>
+	<meta name="keywords" content="aggregator.models.concurrent.Callable interface">
 	<!-- common assets -->
 	
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	      	</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../../index.html?aggregator/handlers/site.html" target="_top">
+				<li><a href="../../index.html?aggregator/models/FeedItemVideo.html" target="_top">
 					<i class="glyphicon glyphicon-fullscreen"></i> Frames
 					</a>
 				</li>
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
 <!-- Package -->
 <div class="pull-right">
-	<a href="package-summary.html" title="Package: aggregator.handlers"><span class="label label-success">aggregator.handlers</span></a>
+	<a href="package-summary.html" title="Package: aggregator.models"><span class="label label-success">aggregator.models</span></a>
 </div>
 
 <h2>
@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 Class
 
- site</h2>
+ FeedItemVideo</h2>
 
 
 
@@ -132,6 +132,14 @@ Class
 
 
 	
+		
+	
+	
+
+	
+		
+		
+			
 		
 	
 	
@@ -155,8 +163,9 @@ Class
 
 <!-- Inheritance Tree-->
 <pre style="background:white">lucee.Component
-    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.modules.contentbox-ui.handlers.content
-      <img src="../../resources/inherit.gif" alt="extended by ">aggregator.handlers.site
+    <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntityMethods
+      <img src="../../resources/inherit.gif" alt="extended by ">contentbox.models.BaseEntity
+        <img src="../../resources/inherit.gif" alt="extended by ">aggregator.models.FeedItemVideo
 </pre>
 
 
@@ -172,7 +181,7 @@ Class
 
 <div id="class-hint">
 	<p>ContentBox Aggregator
-Site handler</p>
+FeedItemVideo Model</p>
 </div>
 
 
@@ -183,9 +192,42 @@ Site handler</p>
 		
 		
 			
+			
+			<li class="label label-danger label-annotations">
+				entityname
+				
+				: cbFeedItemVideo
+				
+			</li>
+			&nbsp;
+			
 		
 			
 		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				cacheuse
+				
+				: read-write
+				
+			</li>
+			&nbsp;
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				table
+				
+				: cb_feeditemvideo
+				
+			</li>
+			&nbsp;
 			
 		
 			
@@ -201,6 +243,28 @@ Site handler</p>
 		
 			
 		
+			
+			
+			<li class="label label-danger label-annotations">
+				cachename
+				
+				: cbFeedItemVideo
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				batchsize
+				
+				: 25
+				
+			</li>
+			&nbsp;
 			
 		
 			
@@ -225,7 +289,7 @@ Site handler</p>
 			<li class="label label-danger label-annotations">
 				persistent
 				
-				: false
+				: true
 				
 			</li>
 			&nbsp;
@@ -285,10 +349,10 @@ Site handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>date</code>
 		</td>
 		<td>
-			<strong><a href="site.html#contentService()">contentService</A></strong>
+			<strong><a href="FeedItemVideo.html#createdDate()">createdDate</A></strong>
 			<br>
 			
 			<br><br>
@@ -309,7 +373,19 @@ Site handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = contentService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">update = false</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_createDate</li>
 				
 			
 				
@@ -343,7 +419,218 @@ Site handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="site.html#feedItemService()">feedItemService</A></strong>
+			<strong><a href="FeedItemVideo.html#feedItem()">feedItem</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = many-to-one</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedItemID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = FeedItem</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = true</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#feedItemVideoID()">feedItemVideoID</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = id</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">params = { allocationSize=1, sequence='feedItemVideoID_seq' }</li>
+				
+			
+				
+				<li class="label label-default label-annotations">generator = native</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">setter = no</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#isDeleted()">isDeleted</A></strong>
+			<br>
+			
+			<br><br>
+			<ul>
+			
+				
+			
+				
+				<li class="label label-default label-annotations">access = public</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">dbdefault = 0</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">returntype = any</li>
+				
+			
+				
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = boolean</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_deleted</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">sqltype = bit</li>
+				
+			
+			</ul>
+
+		</td>
+		<td align="right" valign="top" width="1%">
+			
+				<code>false</code>
+			
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				true
+			</code>
+		</td>
+		<td align="right" valign="top" width="1%">
+			<code>
+				false
+			</code>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>date</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#modifiedDate()">modifiedDate</A></strong>
 			<br>
 			
 			<br><br>
@@ -364,7 +651,15 @@ Site handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedItemService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">ormtype = timestamp</li>
+				
+			
+				
+				<li class="label label-default label-annotations">index = idx_modifiedDate</li>
 				
 			
 				
@@ -398,7 +693,7 @@ Site handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="site.html#feedService()">feedService</A></strong>
+			<strong><a href="FeedItemVideo.html#videoUrl()">videoUrl</A></strong>
 			<br>
 			
 			<br><br>
@@ -419,117 +714,11 @@ Site handler</p>
 				
 			
 				
-				<li class="label label-default label-annotations">inject = feedService@aggregator</li>
+				<li class="label label-default label-annotations">notnull = false</li>
 				
 			
 				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#mobileDetector()">mobileDetector</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = mobileDetector@cb</li>
-				
-			
-				
-			
-				
-			
-				
-			
-			</ul>
-
-		</td>
-		<td align="right" valign="top" width="1%">
-			
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				true
-			</code>
-		</td>
-		<td align="right" valign="top" width="1%">
-			<code>
-				false
-			</code>
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#rssService()">rssService</A></strong>
-			<br>
-			
-			<br><br>
-			<ul>
-			
-				
-			
-				
-				<li class="label label-default label-annotations">access = public</li>
-				
-			
-				
-			
-				
-			
-				
-				<li class="label label-default label-annotations">returntype = any</li>
-				
-			
-				
-				<li class="label label-default label-annotations">inject = rssService@aggregator</li>
+				<li class="label label-default label-annotations">length = 510</li>
 				
 			
 				
@@ -560,6 +749,29 @@ Site handler</p>
 </table>
 
 
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="FeedItemVideo.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Constructor.
+				
+			</td>
+		</tr>
+	</table>
 
 
 
@@ -580,13 +792,50 @@ Site handler</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>string</code>
 		</td>
 		<td>
-			<strong><a href="site.html#archives()">archives</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="FeedItemVideo.html#getFeedItem()">getFeedItem</A></strong>()
 			<br>
 			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed items archive.
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#getFeedItemVideoID()">getFeedItemVideoID</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#getVideoUrl()">getVideoUrl</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItemVideo.html#hasFeedItem()">hasFeedItem</A></strong>([any feedItem])
+			<br>
 			
 		</td>
 	</tr>
@@ -598,10 +847,8 @@ Site handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="site.html#aroundHandler()">aroundHandler</A></strong>([any event], [any rc], [any prc], [any targetAction], [any eventArguments])
+			<strong><a href="FeedItemVideo.html#setFeedItem()">setFeedItem</A></strong>(any feedItem)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Around handler.
 			
 		</td>
 	</tr>
@@ -613,175 +860,8 @@ Site handler</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="site.html#feed()">feed</A></strong>([any event], [any rc], [any prc])
+			<strong><a href="FeedItemVideo.html#setVideoUrl()">setVideoUrl</A></strong>(any videoUrl)
 			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#feeditem()">feeditem</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed item.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#feeds()">feeds</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the list of feeds.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#feedsRSS()">feedsRSS</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feeds rss.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#getPage()">getPage</A></strong>([any prc], [string slug])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the current page.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#hit()">hit</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates hits to a feed item via ajax.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#index()">index</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the feed items index.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>private&nbsp;any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#notFound()">notFound</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays page not found error.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#onError()">onError</A></strong>([any event], [any rc], [any prc], [any faultAction], [any exception], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays a friendly error message.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#preFeedItem()">preFeedItem</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre feed item.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#preHandler()">preHandler</A></strong>([any event], [any rc], [any prc], [any action], [any eventArguments])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pre handler.
-			
-		</td>
-	</tr>
-	
-	
-	
-	<tr>
-		<td align="right" valign="top" width="1%">
-			<code>any</code>
-		</td>
-		<td>
-			<strong><a href="site.html#rss()">rss</A></strong>([any event], [any rc], [any prc])
-			<br>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays the rss feed.
 			
 		</td>
 	</tr>
@@ -798,11 +878,11 @@ Site handler</p>
 	
 
 	&nbsp;
-	<a name="methods_inherited_from_class_contentbox.modules.contentbox-ui.handlers.content"><!-- --></a>
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntity"><!-- --></a>
 	<table class="table table-hover table-bordered">
 		<tr class="info">
 			<th align="left">
-				<strong>Methods inherited from class <kbd>contentbox.modules.contentbox-ui.handlers.content</kbd></strong>
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntity</kbd></strong>
 			</th>
 		</tr>
 		<tr>
@@ -828,21 +908,6 @@ Site handler</p>
 				
 					
 					
-				
-					
-					
-				
-					
-					
-					
-						
-					
-					
-					
-					
-				
-					
-					
 					
 						
 					
@@ -879,7 +944,87 @@ Site handler</p>
 				
 
 				
-					<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#changeLang()">changeLang</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#maintenance()">maintenance</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#preview()">preview</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#previewSite()">previewSite</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#saveComment()">saveComment</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#validateCommentPost()">validateCommentPost</a>, <a href="../../contentbox/modules/contentbox-ui/handlers/content.html#wrapContentAdvice()">wrapContentAdvice</a>
+					<a href="../../contentbox/models/BaseEntity.html#getCreatedDate()">getCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#getIsDeleted()">getIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#getModifiedDate()">getModifiedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setCreatedDate()">setCreatedDate</a>, <a href="../../contentbox/models/BaseEntity.html#setIsDeleted()">setIsDeleted</a>, <a href="../../contentbox/models/BaseEntity.html#setModifiedDate()">setModifiedDate</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_contentbox.models.BaseEntityMethods"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>contentbox.models.BaseEntityMethods</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+
+				
+					<a href="../../contentbox/models/BaseEntityMethods.html#getBaseMemento()">getBaseMemento</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayCreatedDate()">getDisplayCreatedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#getDisplayModifiedDate()">getDisplayModifiedDate</a>, <a href="../../contentbox/models/BaseEntityMethods.html#isLoaded()">isLoaded</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preInsert()">preInsert</a>, <a href="../../contentbox/models/BaseEntityMethods.html#preUpdate()">preUpdate</a>
 				
 			</td>
 		</tr>
@@ -915,6 +1060,28 @@ Site handler</p>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>Constructor</p>
+	
+
+	
+	<hr>
+
 
 <!-- ============ PROPERTY DETAIL ========== -->
 
@@ -929,12 +1096,12 @@ Site handler</p>
 
 	
 		
-		<a name="contentService()"><!-- --></a>
-		<h3>contentService</h3>
+		<a name="createdDate()"><!-- --></a>
+		<h3>createdDate</h3>
 
 		<kbd>
-			property any
-			<strong>contentService</strong>
+			property date
+			<strong>createdDate</strong>
 			
 		</kbd>
 
@@ -961,7 +1128,19 @@ Site handler</p>
 			
 		
 			
-			<dd><code>inject</code> - contentService@aggregator</dd>
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>update</code> - false</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_createDate</dd>
 			
 		
 			
@@ -977,12 +1156,202 @@ Site handler</p>
 		<hr>
 	
 		
-		<a name="feedItemService()"><!-- --></a>
-		<h3>feedItemService</h3>
+		<a name="feedItem()"><!-- --></a>
+		<h3>feedItem</h3>
 
 		<kbd>
 			property any
-			<strong>feedItemService</strong>
+			<strong>feedItem</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - many-to-one</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedItemID</dd>
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - FeedItem</dd>
+			
+		
+			
+			<dd><code>lazy</code> - true</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="feedItemVideoID()"><!-- --></a>
+		<h3>feedItemVideoID</h3>
+
+		<kbd>
+			property any
+			<strong>feedItemVideoID</strong>
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - id</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>params</code> - { allocationSize=1, sequence='feedItemVideoID_seq' }</dd>
+			
+		
+			
+			<dd><code>generator</code> - native</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>setter</code> - no</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="isDeleted()"><!-- --></a>
+		<h3>isDeleted</h3>
+
+		<kbd>
+			property any
+			<strong>isDeleted</strong>
+			
+			= [false]
+			
+		</kbd>
+
+		<br><br>
+		
+
+		<dl>
+		<dt><strong>Attributes:</strong></dt>
+		
+			
+		
+			
+			<dd><code>access</code> - public</dd>
+			
+		
+			
+			<dd><code>required</code> - false</dd>
+			
+		
+			
+			<dd><code>dbdefault</code> - 0</dd>
+			
+		
+			
+		
+			
+			<dd><code>returntype</code> - any</dd>
+			
+		
+			
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - boolean</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_deleted</dd>
+			
+		
+			
+		
+			
+		
+			
+			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>sqltype</code> - bit</dd>
+			
+		
+		</dl>
+
+		<hr>
+	
+		
+		<a name="modifiedDate()"><!-- --></a>
+		<h3>modifiedDate</h3>
+
+		<kbd>
+			property date
+			<strong>modifiedDate</strong>
 			
 		</kbd>
 
@@ -1009,7 +1378,15 @@ Site handler</p>
 			
 		
 			
-			<dd><code>inject</code> - feedItemService@aggregator</dd>
+			<dd><code>notnull</code> - true</dd>
+			
+		
+			
+			<dd><code>ormtype</code> - timestamp</dd>
+			
+		
+			
+			<dd><code>index</code> - idx_modifiedDate</dd>
 			
 		
 			
@@ -1025,12 +1402,12 @@ Site handler</p>
 		<hr>
 	
 		
-		<a name="feedService()"><!-- --></a>
-		<h3>feedService</h3>
+		<a name="videoUrl()"><!-- --></a>
+		<h3>videoUrl</h3>
 
 		<kbd>
 			property any
-			<strong>feedService</strong>
+			<strong>videoUrl</strong>
 			
 		</kbd>
 
@@ -1057,103 +1434,11 @@ Site handler</p>
 			
 		
 			
-			<dd><code>inject</code> - feedService@aggregator</dd>
+			<dd><code>notnull</code> - false</dd>
 			
 		
 			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="mobileDetector()"><!-- --></a>
-		<h3>mobileDetector</h3>
-
-		<kbd>
-			property any
-			<strong>mobileDetector</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - mobileDetector@cb</dd>
-			
-		
-			
-		
-			
-		
-			
-			<dd><code>serializable</code> - true</dd>
-			
-		
-		</dl>
-
-		<hr>
-	
-		
-		<a name="rssService()"><!-- --></a>
-		<h3>rssService</h3>
-
-		<kbd>
-			property any
-			<strong>rssService</strong>
-			
-		</kbd>
-
-		<br><br>
-		
-
-		<dl>
-		<dt><strong>Attributes:</strong></dt>
-		
-			
-		
-			
-			<dd><code>access</code> - public</dd>
-			
-		
-			
-			<dd><code>required</code> - false</dd>
-			
-		
-			
-		
-			
-			<dd><code>returntype</code> - any</dd>
-			
-		
-			
-			<dd><code>inject</code> - rssService@aggregator</dd>
+			<dd><code>length</code> - 510</dd>
 			
 		
 			
@@ -1190,18 +1475,112 @@ Site handler</p>
 
 
 	
-	<a name="archives()"><!-- --></a>
+	<a name="getFeedItem()"><!-- --></a>
 	<h3>
-		archives
+		getFeedItem
 		
 	</h3>
 
-	<kbd>public any <strong>archives</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public string <strong>getFeedItem</strong>()</kbd>
 
 	<br><br>
 
 	
-		<p>Displays the feed items archive</p>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getFeedItemVideoID()"><!-- --></a>
+	<h3>
+		getFeedItemVideoID
+		
+	</h3>
+
+	<kbd>public string <strong>getFeedItemVideoID</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getVideoUrl()"><!-- --></a>
+	<h3>
+		getVideoUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getVideoUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasFeedItem()"><!-- --></a>
+	<h3>
+		hasFeedItem
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasFeedItem</strong>([any feedItem])</kbd>
+
+	<br><br>
+
 	
 
 	
@@ -1218,11 +1597,7 @@ Site handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>feedItem</code></dd>
 		
 		</dl>
 	
@@ -1235,18 +1610,16 @@ Site handler</p>
 	<hr>
 
 	
-	<a name="aroundHandler()"><!-- --></a>
+	<a name="setFeedItem()"><!-- --></a>
 	<h3>
-		aroundHandler
+		setFeedItem
 		
 	</h3>
 
-	<kbd>public any <strong>aroundHandler</strong>([any event], [any rc], [any prc], [any targetAction], [any eventArguments])</kbd>
+	<kbd>public any <strong>setFeedItem</strong>(any feedItem)</kbd>
 
 	<br><br>
 
-	
-		<p>Around handler</p>
 	
 
 	
@@ -1263,15 +1636,7 @@ Site handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>targetAction</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
+		<dd><code>feedItem</code></dd>
 		
 		</dl>
 	
@@ -1284,18 +1649,16 @@ Site handler</p>
 	<hr>
 
 	
-	<a name="feed()"><!-- --></a>
+	<a name="setVideoUrl()"><!-- --></a>
 	<h3>
-		feed
+		setVideoUrl
 		
 	</h3>
 
-	<kbd>public any <strong>feed</strong>([any event], [any rc], [any prc])</kbd>
+	<kbd>public any <strong>setVideoUrl</strong>(any videoUrl)</kbd>
 
 	<br><br>
 
-	
-		<p>Displays the feed</p>
 	
 
 	
@@ -1312,542 +1675,7 @@ Site handler</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="feeditem()"><!-- --></a>
-	<h3>
-		feeditem
-		
-	</h3>
-
-	<kbd>public any <strong>feeditem</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the feed item</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="feeds()"><!-- --></a>
-	<h3>
-		feeds
-		
-	</h3>
-
-	<kbd>public any <strong>feeds</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the list of feeds</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="feedsRSS()"><!-- --></a>
-	<h3>
-		feedsRSS
-		
-	</h3>
-
-	<kbd>public any <strong>feedsRSS</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the feeds rss</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="getPage()"><!-- --></a>
-	<h3>
-		getPage
-		
-	</h3>
-
-	<kbd>private any <strong>getPage</strong>([any prc], [string slug])</kbd>
-
-	<br><br>
-
-	
-		<p>Gets the current page</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>slug</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="hit()"><!-- --></a>
-	<h3>
-		hit
-		
-	</h3>
-
-	<kbd>public any <strong>hit</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Updates hits to a feed item via ajax</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="index()"><!-- --></a>
-	<h3>
-		index
-		
-	</h3>
-
-	<kbd>public any <strong>index</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the feed items index</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="notFound()"><!-- --></a>
-	<h3>
-		notFound
-		
-	</h3>
-
-	<kbd>private any <strong>notFound</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays page not found error</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="onError()"><!-- --></a>
-	<h3>
-		onError
-		
-	</h3>
-
-	<kbd>public any <strong>onError</strong>([any event], [any rc], [any prc], [any faultAction], [any exception], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays a friendly error message</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#onError()">onError</a></code>
-			in class
-			<code>
-				contentbox.modules.contentbox-ui.handlers.content
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>faultAction</code></dd>
-		
-		<dd><code>exception</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="preFeedItem()"><!-- --></a>
-	<h3>
-		preFeedItem
-		
-	</h3>
-
-	<kbd>public any <strong>preFeedItem</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Pre feed item</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>action</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="preHandler()"><!-- --></a>
-	<h3>
-		preHandler
-		
-	</h3>
-
-	<kbd>public any <strong>preHandler</strong>([any event], [any rc], [any prc], [any action], [any eventArguments])</kbd>
-
-	<br><br>
-
-	
-		<p>Pre handler</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-		<dl>
-			<dt><strong>Overrides:</strong></dt>
-			<dd>
-			<code>
-			<a href="../../contentbox/modules/contentbox-ui/handlers/content.html#preHandler()">preHandler</a></code>
-			in class
-			<code>
-				contentbox.modules.contentbox-ui.handlers.content
-			</code>
-			</dd>
-		</dl>
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
-		
-		<dd><code>action</code></dd>
-		
-		<dd><code>eventArguments</code></dd>
-		
-		</dl>
-	
-
-	
-
-	
-
-	</dl>
-	<hr>
-
-	
-	<a name="rss()"><!-- --></a>
-	<h3>
-		rss
-		
-	</h3>
-
-	<kbd>public any <strong>rss</strong>([any event], [any rc], [any prc])</kbd>
-
-	<br><br>
-
-	
-		<p>Displays the rss feed</p>
-	
-
-	
-
-	
-		
-		
-	
-
-	
-	
-
-	
-		<dl>
-		<dt><strong>Parameters:</strong></dt>
-		
-		<dd><code>event</code></dd>
-		
-		<dd><code>rc</code></dd>
-		
-		<dd><code>prc</code></dd>
+		<dd><code>videoUrl</code></dd>
 		
 		</dl>
 	

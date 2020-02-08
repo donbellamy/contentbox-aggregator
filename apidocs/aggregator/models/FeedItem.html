@@ -694,10 +694,10 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>array</code>
 		</td>
 		<td>
-			<strong><a href="FeedItem.html#podcastUrl()">podcastUrl</A></strong>
+			<strong><a href="FeedItem.html#podcasts()">podcasts</A></strong>
 			<br>
 			
 			<br><br>
@@ -712,23 +712,51 @@ FeedItem Model</p>
 				
 			
 				
+				<li class="label label-default label-annotations">inverse = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = one-to-many</li>
+				
+			
+				
 			
 				
 				<li class="label label-default label-annotations">returntype = any</li>
 				
 			
 				
-				<li class="label label-default label-annotations">notnull = false</li>
+				<li class="label label-default label-annotations">cascade = all-delete-orphan</li>
 				
 			
 				
-				<li class="label label-default label-annotations">length = 510</li>
+				<li class="label label-default label-annotations">orderby = feedItemPodcastID DESC</li>
+				
+			
+				
+				<li class="label label-default label-annotations">batchsize = 25</li>
+				
+			
+				
+				<li class="label label-default label-annotations">singularname = podcast</li>
 				
 			
 				
 			
 				
 			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedItemID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = FeedItemPodcast</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = extra</li>
 				
 			
 			</ul>
@@ -930,10 +958,10 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
-			<code>any</code>
+			<code>array</code>
 		</td>
 		<td>
-			<strong><a href="FeedItem.html#videoUrl()">videoUrl</A></strong>
+			<strong><a href="FeedItem.html#videos()">videos</A></strong>
 			<br>
 			
 			<br><br>
@@ -948,23 +976,51 @@ FeedItem Model</p>
 				
 			
 				
+				<li class="label label-default label-annotations">inverse = true</li>
+				
+			
+				
+				<li class="label label-default label-annotations">fieldtype = one-to-many</li>
+				
+			
+				
 			
 				
 				<li class="label label-default label-annotations">returntype = any</li>
 				
 			
 				
-				<li class="label label-default label-annotations">notnull = false</li>
+				<li class="label label-default label-annotations">cascade = all-delete-orphan</li>
 				
 			
 				
-				<li class="label label-default label-annotations">length = 510</li>
+				<li class="label label-default label-annotations">orderby = feedItemVideoID DESC</li>
+				
+			
+				
+				<li class="label label-default label-annotations">batchsize = 25</li>
+				
+			
+				
+				<li class="label label-default label-annotations">singularname = video</li>
 				
 			
 				
 			
 				
 			
+				
+				<li class="label label-default label-annotations">fkcolumn = FK_feedItemID</li>
+				
+			
+				
+			
+				
+				<li class="label label-default label-annotations">cfc = FeedItemVideo</li>
+				
+			
+				
+				<li class="label label-default label-annotations">lazy = extra</li>
 				
 			
 			</ul>
@@ -1036,6 +1092,32 @@ FeedItem Model</p>
 		</td>
 		<td>
 			<strong><a href="FeedItem.html#addAttachment()">addAttachment</A></strong>(any Attachment)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#addPodcast()">addPodcast</A></strong>(any podcast)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#addVideo()">addVideo</A></strong>(any video)
 			<br>
 			
 		</td>
@@ -1172,6 +1254,21 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getPodcast()">getPodcast</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the attached podcast if one exists.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
@@ -1190,8 +1287,23 @@ FeedItem Model</p>
 			<code>string</code>
 		</td>
 		<td>
+			<strong><a href="FeedItem.html#getPodcasts()">getPodcasts</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
 			<strong><a href="FeedItem.html#getPodcastUrl()">getPodcastUrl</A></strong>()
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the podcast url if an attached podcast exists.
 			
 		</td>
 	</tr>
@@ -1271,11 +1383,41 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getVideo()">getVideo</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the attached video if one exists.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#getVideos()">getVideos</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
 			<strong><a href="FeedItem.html#getVideoUrl()">getVideoUrl</A></strong>()
 			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the video url if an attached video exists.
 			
 		</td>
 	</tr>
@@ -1304,6 +1446,32 @@ FeedItem Model</p>
 			<br>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see if the feed item has an excerpt.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#hasPodcast()">hasPodcast</A></strong>([any podcast])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#hasVideo()">hasVideo</A></strong>([any video])
+			<br>
 			
 		</td>
 	</tr>
@@ -1400,6 +1568,32 @@ FeedItem Model</p>
 	
 	<tr>
 		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#removePodcast()">removePodcast</A></strong>(any podcast)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="FeedItem.html#removeVideo()">removeVideo</A></strong>(any video)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
 			<code>string</code>
 		</td>
 		<td>
@@ -1485,7 +1679,7 @@ FeedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedItem.html#setPodcastUrl()">setPodcastUrl</A></strong>(any podcastUrl)
+			<strong><a href="FeedItem.html#setPodcasts()">setPodcasts</A></strong>(array podcasts)
 			<br>
 			
 		</td>
@@ -1524,7 +1718,7 @@ FeedItem Model</p>
 			<code>any</code>
 		</td>
 		<td>
-			<strong><a href="FeedItem.html#setVideoUrl()">setVideoUrl</A></strong>(any videoUrl)
+			<strong><a href="FeedItem.html#setVideos()">setVideos</A></strong>(array videos)
 			<br>
 			
 		</td>
@@ -3500,12 +3694,12 @@ FeedItem Model</p>
 		<hr>
 	
 		
-		<a name="podcastUrl()"><!-- --></a>
-		<h3>podcastUrl</h3>
+		<a name="podcasts()"><!-- --></a>
+		<h3>podcasts</h3>
 
 		<kbd>
-			property any
-			<strong>podcastUrl</strong>
+			property array
+			<strong>podcasts</strong>
 			
 		</kbd>
 
@@ -3526,25 +3720,53 @@ FeedItem Model</p>
 			
 		
 			
+			<dd><code>inverse</code> - true</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - one-to-many</dd>
+			
+		
+			
 		
 			
 			<dd><code>returntype</code> - any</dd>
 			
 		
 			
-			<dd><code>notnull</code> - false</dd>
+			<dd><code>cascade</code> - all-delete-orphan</dd>
 			
 		
 			
-			<dd><code>length</code> - 510</dd>
+			<dd><code>orderby</code> - feedItemPodcastID DESC</dd>
+			
+		
+			
+			<dd><code>batchsize</code> - 25</dd>
+			
+		
+			
+			<dd><code>singularname</code> - podcast</dd>
 			
 		
 			
 		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedItemID</dd>
 			
 		
 			
 			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - FeedItemPodcast</dd>
+			
+		
+			
+			<dd><code>lazy</code> - extra</dd>
 			
 		
 		</dl>
@@ -3708,12 +3930,12 @@ FeedItem Model</p>
 		<hr>
 	
 		
-		<a name="videoUrl()"><!-- --></a>
-		<h3>videoUrl</h3>
+		<a name="videos()"><!-- --></a>
+		<h3>videos</h3>
 
 		<kbd>
-			property any
-			<strong>videoUrl</strong>
+			property array
+			<strong>videos</strong>
 			
 		</kbd>
 
@@ -3734,25 +3956,53 @@ FeedItem Model</p>
 			
 		
 			
+			<dd><code>inverse</code> - true</dd>
+			
+		
+			
+			<dd><code>fieldtype</code> - one-to-many</dd>
+			
+		
+			
 		
 			
 			<dd><code>returntype</code> - any</dd>
 			
 		
 			
-			<dd><code>notnull</code> - false</dd>
+			<dd><code>cascade</code> - all-delete-orphan</dd>
 			
 		
 			
-			<dd><code>length</code> - 510</dd>
+			<dd><code>orderby</code> - feedItemVideoID DESC</dd>
+			
+		
+			
+			<dd><code>batchsize</code> - 25</dd>
+			
+		
+			
+			<dd><code>singularname</code> - video</dd>
 			
 		
 			
 		
+			
+		
+			
+			<dd><code>fkcolumn</code> - FK_feedItemID</dd>
 			
 		
 			
 			<dd><code>serializable</code> - true</dd>
+			
+		
+			
+			<dd><code>cfc</code> - FeedItemVideo</dd>
+			
+		
+			
+			<dd><code>lazy</code> - extra</dd>
 			
 		
 		</dl>
@@ -3808,6 +4058,84 @@ FeedItem Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>Attachment</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addPodcast()"><!-- --></a>
+	<h3>
+		addPodcast
+		
+	</h3>
+
+	<kbd>public any <strong>addPodcast</strong>(any podcast)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>podcast</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="addVideo()"><!-- --></a>
+	<h3>
+		addVideo
+		
+	</h3>
+
+	<kbd>public any <strong>addVideo</strong>(any video)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>video</code></dd>
 		
 		</dl>
 	
@@ -4208,6 +4536,45 @@ FeedItem Model</p>
 	<hr>
 
 	
+	<a name="getPodcast()"><!-- --></a>
+	<h3>
+		getPodcast
+		
+	</h3>
+
+	<kbd>public any <strong>getPodcast</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the attached podcast if one exists</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The attached podcast if one exists, null if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
 	<a name="getPodcastMimeType()"><!-- --></a>
 	<h3>
 		getPodcastMimeType
@@ -4247,13 +4614,13 @@ FeedItem Model</p>
 	<hr>
 
 	
-	<a name="getPodcastUrl()"><!-- --></a>
+	<a name="getPodcasts()"><!-- --></a>
 	<h3>
-		getPodcastUrl
+		getPodcasts
 		
 	</h3>
 
-	<kbd>public string <strong>getPodcastUrl</strong>()</kbd>
+	<kbd>public string <strong>getPodcasts</strong>()</kbd>
 
 	<br><br>
 
@@ -4271,6 +4638,45 @@ FeedItem Model</p>
 
 	
 
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getPodcastUrl()"><!-- --></a>
+	<h3>
+		getPodcastUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getPodcastUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the podcast url if an attached podcast exists</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The podcast url if an attached podcast exists</dd>
+		</dl>
 	
 
 	
@@ -4493,13 +4899,52 @@ FeedItem Model</p>
 	<hr>
 
 	
-	<a name="getVideoUrl()"><!-- --></a>
+	<a name="getVideo()"><!-- --></a>
 	<h3>
-		getVideoUrl
+		getVideo
 		
 	</h3>
 
-	<kbd>public string <strong>getVideoUrl</strong>()</kbd>
+	<kbd>public any <strong>getVideo</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the attached video if one exists</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The attached video if one exists, null if not</dd>
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getVideos()"><!-- --></a>
+	<h3>
+		getVideos
+		
+	</h3>
+
+	<kbd>public string <strong>getVideos</strong>()</kbd>
 
 	<br><br>
 
@@ -4517,6 +4962,45 @@ FeedItem Model</p>
 
 	
 
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getVideoUrl()"><!-- --></a>
+	<h3>
+		getVideoUrl
+		
+	</h3>
+
+	<kbd>public string <strong>getVideoUrl</strong>()</kbd>
+
+	<br><br>
+
+	
+		<p>Gets the video url if an attached video exists</p>
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+		<dl>
+			<dt><strong>Returns:</strong></dt>
+			<dd>The video url if an attached video exists</dd>
+		</dl>
 	
 
 	
@@ -4595,6 +5079,84 @@ FeedItem Model</p>
 			<dt><strong>Returns:</strong></dt>
 			<dd>True if an excerpt exists, false if not</dd>
 		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasPodcast()"><!-- --></a>
+	<h3>
+		hasPodcast
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasPodcast</strong>([any podcast])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>podcast</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="hasVideo()"><!-- --></a>
+	<h3>
+		hasVideo
+		
+	</h3>
+
+	<kbd>public boolean <strong>hasVideo</strong>([any video])</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>video</code></dd>
+		
+		</dl>
+	
+
 	
 
 	
@@ -4825,6 +5387,84 @@ FeedItem Model</p>
 		<dt><strong>Parameters:</strong></dt>
 		
 		<dd><code>Attachment</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="removePodcast()"><!-- --></a>
+	<h3>
+		removePodcast
+		
+	</h3>
+
+	<kbd>public boolean <strong>removePodcast</strong>(any podcast)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>podcast</code></dd>
+		
+		</dl>
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="removeVideo()"><!-- --></a>
+	<h3>
+		removeVideo
+		
+	</h3>
+
+	<kbd>public boolean <strong>removeVideo</strong>(any video)</kbd>
+
+	<br><br>
+
+	
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>video</code></dd>
 		
 		</dl>
 	
@@ -5078,13 +5718,13 @@ FeedItem Model</p>
 	<hr>
 
 	
-	<a name="setPodcastUrl()"><!-- --></a>
+	<a name="setPodcasts()"><!-- --></a>
 	<h3>
-		setPodcastUrl
+		setPodcasts
 		
 	</h3>
 
-	<kbd>public any <strong>setPodcastUrl</strong>(any podcastUrl)</kbd>
+	<kbd>public any <strong>setPodcasts</strong>(array podcasts)</kbd>
 
 	<br><br>
 
@@ -5104,7 +5744,7 @@ FeedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>podcastUrl</code></dd>
+		<dd><code>podcasts</code></dd>
 		
 		</dl>
 	
@@ -5195,13 +5835,13 @@ FeedItem Model</p>
 	<hr>
 
 	
-	<a name="setVideoUrl()"><!-- --></a>
+	<a name="setVideos()"><!-- --></a>
 	<h3>
-		setVideoUrl
+		setVideos
 		
 	</h3>
 
-	<kbd>public any <strong>setVideoUrl</strong>(any videoUrl)</kbd>
+	<kbd>public any <strong>setVideos</strong>(array videos)</kbd>
 
 	<br><br>
 
@@ -5221,7 +5861,7 @@ FeedItem Model</p>
 		<dl>
 		<dt><strong>Parameters:</strong></dt>
 		
-		<dd><code>videoUrl</code></dd>
+		<dd><code>videos</code></dd>
 		
 		</dl>
 	
