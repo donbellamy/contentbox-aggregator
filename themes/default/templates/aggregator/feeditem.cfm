@@ -15,11 +15,14 @@
 <cfset contentType = args.feedItem.getContentType() />
 <cfif contentType EQ "Entry" >
 	<cfset args.openNewWindow = false />
+	<cfset showVideoPlayer = false />
+	<cfset showAudioPlayer = false />
+<cfelse>
+	<cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
+	<cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 </cfif>
 <cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
 <cfset showFeaturedImage = args.showImage && len( imageUrl ) />
-<cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
-<cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 <cfoutput>
 <cfif args.showGroupedDate >
 	<div class="post-date">
@@ -142,4 +145,5 @@
 		</div>
 	</cfif>
 </div>
+
 </cfoutput>

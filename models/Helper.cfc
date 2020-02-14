@@ -687,7 +687,11 @@ component accessors="true" singleton threadSafe {
 		for ( var feedItem IN feedItems ) {
 			var viewArgs = duplicate( arguments.args );
 			viewArgs.feedItem = feedItem;
-			viewArgs.append( feedItem.getFeed().getViewArgs() );
+			if ( feeditem.getContentType() == "FeedItem" ) {
+				viewArgs.append( feedItem.getFeed().getViewArgs() );
+			} else if ( feeditem.getContentType() == "Entry" && feedItem.hasRelatedContent() && feedItem.getRelatedContent()[1].getContentType() == "FeedItem" ) {
+				viewArgs.append( feedItem.getRelatedContent()[1].getFeed().getViewArgs() );
+			}
 			if ( groupByDate ) {
 				var publishedDate = feedItem.getPublishedDateNoTime();
 				if ( currentDate != publishedDate ) {
@@ -758,7 +762,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	string function breadCrumbs( string separator=">" ) {
 		var bc = "";
-		if ( isFeedItemsView() || isArchivesView() ) {
+		if ( isFeedItemsView() || isArchivesView() || isFeedItemView() ) {
 			var page = getCurrentPage();
 			bc &= '#arguments.separator# <a href="#linkFeedItems()#">#page.getTitle()#</a></a> ';
 		}

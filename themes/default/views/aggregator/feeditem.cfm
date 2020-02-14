@@ -5,14 +5,8 @@
 <cfparam name="args.showSource" default="true" />
 <cfparam name="args.showAuthor" default="false" />
 <cfparam name="args.showCategories" default="false" />
-<cfparam name="args.showExcerpt" default="true" />
-<cfparam name="args.excerptLimit" default="255" />
-<cfparam name="args.excerptEnding" default="..." />
-<cfparam name="args.showReadMore" default="true" />
-<cfparam name="args.readMoreText" default="Read more..." />
-<cfparam name="args.linkBehavior" default="forward" />
-<cfparam name="args.openNewWindow" default="false" />
-<cfparam name="args.showImage" default="true" />
+<cfset showVideoPlayer = args.showVideoPlayer && prc.feedItem.isVideo() />
+<cfset showAudioPlayer = args.showAudioPlayer && prc.feedItem.isPodcast() />
 <cfoutput>
 <cfset bodyHeaderStyle = "" />
 <cfset bodyHeaderH1Style = "" />
@@ -57,32 +51,50 @@
 		<div class="row">
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preFeedItemDisplay", { feedItem=prc.feedItem })#
-				<div class="post" id="post_#prc.feedItem.getContentID()#">
+				<div class="post feeditem" id="feeditem_#prc.feedItem.getContentID()#">
+					<cfif showVideoPlayer >
+						<div class="video-player" data-slug="#prc.feedItem.getSlug()#" data-url="#prc.feedItem.getVideoUrl()#" data-image="#prc.feedItem.getFeaturedImageUrl()#"></div>
+					</cfif>
 					<div class="post-title">
-						<h2><a href="#ag.linkFeedItem( prc.feedItem )#" rel="bookmark" title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a></h2>
+						<h2>
+							<a href="#ag.linkFeedItem( prc.feedItem )#"
+								rel="bookmark"
+								title="#encodeForHTMLAttribute( prc.feedItem.getTitle() )#">#prc.feedItem.getTitle()#</a>
+						</h2>
 						<div class="row">
-							<div class="col-sm-7 pull-left">
-								<cfif args.showSource >
-									<i class="fa fa-rss"></i>
-									<a href="#ag.linkFeed( prc.feedItem.getFeed() )#" title="#encodeForHTMLAttribute( prc.feeditem.getFeed().getTitle() )#">#prc.feeditem.getFeed().getTitle()#</a>
-								</cfif>
-								<cfif len( prc.feedItem.getItemAuthor() ) && args.showAuthor >
-									<cfif args.showSource ><span class="text-muted">-</span></cfif>
-									<i class="icon-user"></i>
-									<a href="#ag.linkFeedAuthor( prc.feedItem )#">#prc.feedItem.getItemAuthor()#</a>
-								</cfif>
-							</div>
+							<cfif args.showSource OR args.showAuthor >
+								<div class="col-sm-7 pull-left">
+									<cfif args.showSource >
+										<i class="fa fa-rss"></i>
+										<a href="#ag.linkFeed( prc.feedItem.getFeed() )#" title="#encodeForHTMLAttribute( prc.feeditem.getFeed().getTitle() )#">#prc.feeditem.getFeed().getTitle()#</a>
+									</cfif>
+									<cfif args.showAuthor && len( prc.feedItem.getItemAuthor() ) >
+										<cfif args.showSource ><span class="text-muted">-</span></cfif>
+										<i class="fa fa-user"></i>
+										<a href="#ag.linkFeedAuthor( prc.feedItem )#">#prc.feedItem.getItemAuthor()#</a>
+									</cfif>
+								</div>
+							</cfif>
 							<div class="col-sm-5 pull-right text-right">
-								<i class="fa fa-calendar"></i> #prc.feedItem.getDisplayPublishedDate()#
+								<i class="fa fa-calendar"></i>
+								<time datetime="#prc.feedItem.getDisplayPublishedDate()#" title="#prc.feedItem.getDisplayPublishedDate()#">#prc.feedItem.getDisplayPublishedDate()#</time>
 							</div>
 						</div>
+						<cfif showAudioPlayer >
+							<div class="audio-player-wrapper">
+								<audio controls="controls" class="audio-player" data-slug="#prc.feedItem.getSlug()#">
+									<source src="#prc.feedItem.getPodcastUrl()#" type="#prc.feedItem.getPodcastMimeType()#">
+								</audio>
+							</div>
+						</cfif>
 						<div class="post-content">
 							#prc.feedItem.renderContent()#
 						</div>
-						<cfif prc.feedItem.hasCategories() && args.showCategories >
+						<cfif args.showCategories && prc.feedItem.hasCategories() >
 							<div class="row">
 								<div class="col-xs-12 pull-left">
-									<i class="fa fa-tag"></i> Tags: #ag.quickCategoryLinks( prc.feedItem )#
+									<i class="fa fa-tag"></i>
+									Tags: #ag.quickCategoryLinks( prc.feedItem )#
 								</div>
 							</div>
 						</cfif>

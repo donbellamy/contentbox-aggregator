@@ -34,26 +34,26 @@
 	<meta http-equiv="Refresh" content="1; URL=#prc.feedItem.getItemUrl()#" />
 </noscript>
 <script>
-	var conf = {
+	var config = {
 		url: "#prc.feedItem.getItemUrl()#",
 		delay: 1000,
 		timeout: 5000
 	};
 	(function() {
 		function redirect() {
-			setTimeout( doRedirect, conf.delay );
-			setTimeout( displayMessage, conf.timeout );
+			setTimeout( doRedirect, config.delay );
+			setTimeout( displayMessage, config.timeout );
 		}
 		function doRedirect() {
 			if ( typeof( window.location.replace ) == "function" ) {
-				window.location.replace( conf.url );
+				window.location.replace( config.url );
 				return;
 			}
 			if ( typeof( window.location.assign ) == "function" ) {
-				window.location.assign( conf.url );
+				window.location.assign( config.url );
 				return;
 			}
-			window.location.href = conf.url;
+			window.location.href = config.url;
 		}
 		function displayMessage() {
 			var element = document.getElementById("message");
