@@ -60,7 +60,9 @@
 									</ul>
 								</div>
 								<button class="btn btn-primary btn-sm" onclick="return to( '#event.buildLink( linkTo=prc.xehFeedEditor )#' );">Create Feed</button>
-								<button class="btn btn-success btn-sm" onclick="importAll();">Import All</button>
+								<cfif prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) >
+									<button class="btn btn-success btn-sm" onclick="importAll();">Import All</button>
+								</cfif>
 							</div>
 						</div>
 					</div>

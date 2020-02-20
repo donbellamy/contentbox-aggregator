@@ -30,7 +30,7 @@
 				</cfif>
 			>
 				<td class="text-center">
-					<input type="checkbox" name="contentID" id="contentID" value="#feed.getContentID()#" />
+					<input type="checkbox" name="contentID" id="contentID-#feed.getContentID()#" value="#feed.getContentID()#" />
 				</td>
 				<td>
 					<a href="#event.buildLink( prc.xehFeedEditor )#/contentID/#feed.getContentID()#" title="Edit Feed">#feed.getTitle()#</a>

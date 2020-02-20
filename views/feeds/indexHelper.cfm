@@ -1,5 +1,5 @@
 <cfoutput>
-<script type="text/javascript" src="#prc.agRoot#/includes/js/loadingoverlay.min.js"></script>
+#html.addAsset( "#prc.agRoot#/includes/js/loadingoverlay.min.js" )#
 <script>
 function setupFeedView( settings ) {
 	$contentForm = $("##feedForm");

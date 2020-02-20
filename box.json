@@ -1,7 +1,7 @@
 {
 	"name": "ContentBox Aggregator",
-	"version": "1.0.0",
-	"author": "Perfect Code, LLC <info@perfectcode.com>",
+	"version": "0.1.0",
+	"author": "Don Bellamy <don@perfectcode.com>",
 	"slug": "contentbox-aggregator",
 	"type": "contentbox-modules",
 	"homepage": "https://github.com/donbellamy/contentbox-aggregator",
@@ -11,7 +11,7 @@
 		"url": "https://github.com/donbellamy/contentbox-aggregator"
 	},
 	"shortDescription": "",
-	"contributors": ["Don Bellamy <don@perfectcode.com>"],
+	"contributors": [ "Don Bellamy <don@perfectcode.com>" ],
 	"dependencies": {
 		"cbjsoup": "^1.0.0"
 	},

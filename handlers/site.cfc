@@ -852,8 +852,9 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Disply feed item based on setting
 			switch( prc.linkBehavior ) {
 
-				// Forward user to feed item
-				case "forward": {
+				// Forward/link user to feed item
+				case "forward":
+				case "link": {
 
 					relocate(
 						url = prc.feedItem.getItemUrl(),

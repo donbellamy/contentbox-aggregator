@@ -101,6 +101,11 @@ component extends="coldbox.system.Interceptor" {
 			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_EDITOR" ) ) {
 				html.addJSContent("$(function(){$('div.user-nav ul.dropdown-menu:first').append('<li><a data-keybinding=""ctrl+shift+f"" href=""#agHelper.linkFeedForm()#"" title=""ctrl+shift+f""><i class=""fa fa-rss""></i> New Feed</a></li>');});",true);
 			}
+			if ( prc.oCurrentAuthor.checkPermission( "FEEDS_ADMIN,FEEDS_IMPORT" ) ) {
+				html.addAsset( "#prc.agRoot#/includes/js/loadingoverlay.min.js" );
+				html.addJSContent("$(function(){$.LoadingOverlaySetup({image:'',fontawesome:'fa fa-spinner fa-spin',fontawesomeResizeFactor:'.5',fontawesomeColor:'##999'});});",true);
+				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""importfeeds""><a href=""javascript:$.LoadingOverlay(\'show\');window.location.href=\'#event.buildlink( prc.xehFeedImportAll )#\';"">Import All Feeds</a></li>');});",true);
+			}
 			if ( prc.oCurrentAuthor.checkPermission( "RELOAD_MODULES" ) ) {
 				html.addJSContent("$(function(){$('li[data-name=""utils""] ul.dropdown-menu').append('<li data-name=""aggregatorpurge""><a href=""javascript:adminAction( \'aggregator-purge\', \'#event.buildLink( prc.xehClearSiteCache )#\' );"" class="""">Clear Aggregator Caches</a></li>');});",true);
 			}
