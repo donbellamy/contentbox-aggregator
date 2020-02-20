@@ -1,6 +1,6 @@
 {
 	"name": "ContentBox Aggregator",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"author": "Don Bellamy <don@perfectcode.com>",
 	"slug": "contentbox-aggregator",
 	"type": "contentbox-modules",
@@ -10,12 +10,10 @@
 		"type": "git",
 		"url": "https://github.com/donbellamy/contentbox-aggregator"
 	},
-	"shortDescription": "",
+	"shortDescription": "An RSS aggregator for ContentBox.",
 	"contributors": [ "Don Bellamy <don@perfectcode.com>" ],
 	"dependencies": {
 		"cbjsoup": "^1.0.0"
 	},
-	"installPaths": {
-		"cbjsoup": "modules/cbjsoup"
-	}
+	"location": "forgeboxStorage"
 }
