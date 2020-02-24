@@ -982,11 +982,11 @@ component extends="contentHandler" {
 				blacklistedItem.setItemUrl( left( feedItem.itemUrl, 510 ) );
 				blacklistedItem.setFeed( feedImport.getFeed() );
 				blacklistedItem.setCreator( prc.oCurrentAuthor );
+
 				announceInterception(
 					"aggregator_preBlacklistedItemSave",
 					{ blacklistedItem = blacklistedItem }
 				);
-
 				blacklistedItemService.save( blacklistedItem );
 				announceInterception(
 					"aggregator_postBlacklistedItemSave",
