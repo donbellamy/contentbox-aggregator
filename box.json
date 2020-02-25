@@ -1,22 +1,21 @@
 {
-    "name":"ContentBox Aggregator",
-    "version":"0.9.1",
-    "author":"Don Bellamy <don@perfectcode.com>",
-    "slug":"contentbox-aggregator@donbellamy",
-    "type":"contentbox-modules",
-    "homepage":"https://github.com/donbellamy/contentbox-aggregator",
-    "documentation":"https://github.com/donbellamy/contentbox-aggregator",
-    "repository":{
-        "type":"git",
-        "url":"https://github.com/donbellamy/contentbox-aggregator"
-    },
-    "shortDescription":"An RSS aggregator for ContentBox.",
-    "contributors":[
+	"name": "ContentBox Aggregator",
+	"version": "0.9.1",
+	"author": "Don Bellamy <don@perfectcode.com>",
+	"slug": "contentbox-aggregator",
+	"type": "contentbox-modules",
+	"homepage": "https://github.com/donbellamy/contentbox-aggregator",
+	"documentation": "https://github.com/donbellamy/contentbox-aggregator",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/donbellamy/contentbox-aggregator"
+	},
+	"shortDescription": "An RSS aggregator for ContentBox.",
+	"contributors": [
         "Don Bellamy <don@perfectcode.com>"
     ],
-    "dependencies":{
-        "cbjsoup":"^1.0.0"
-    },
-    "location":"forgeboxStorage",
-    "private":true
+	"dependencies": {
+		"cbjsoup": "^1.0.0"
+	},
+	"location": "forgeboxStorage"
 }
