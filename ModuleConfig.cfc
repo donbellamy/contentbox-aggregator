@@ -6,10 +6,10 @@
 component {
 
 	// Module properties
-	this.title = "ContentBox Aggregator Module";
-	this.author = "Perfect Code, LLC";
-	this.webURL = "https://perfectcode.com";
-	this.description = "RSS aggregator module for ContentBox";
+	this.title = "ContentBox Aggregator";
+	this.author = "Don Bellamy <don@perfectcode.com>";
+	this.webURL = "https://github.com/donbellamy/contentbox-aggregator";
+	this.description = "An RSS aggregator for ContentBox.";
 	this.version = "0.9.1";
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;

@@ -4,7 +4,7 @@ This module allows you to automatically import RSS feeds as content items and di
 
 ## System Requirements
 
--   ContentBox 4.2.1+ ( may work with older versions, give it a try! )
+- ContentBox 4.2.1+
 
 ## License
 
