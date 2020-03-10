@@ -211,38 +211,33 @@ component {
 
 		// Add menus
 		var menuService = controller.getWireBox().getInstance("adminMenuService@cb");
-		menuService.addTopMenu(
-			name = "aggregator",
-			label = "<i class='fa fa-rss'></i> RSS Aggregator"
-		);
-		menuService.addSubMenu(
-			topMenu = "aggregator",
-			name = "feeds",
-			label = "Feeds",
-			href = "#menuService.buildModuleLink('aggregator','feeds')#",
-			permissions = "FEEDS_ADMIN,FEEDS_EDITOR"
-		);
-		menuService.addSubMenu(
-			topMenu = "aggregator",
-			name = "feeditems",
-			label = "Feed Items",
-			href = "#menuService.buildModuleLink('aggregator','feeditems')#",
-			permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
-		);
-		menuService.addSubMenu(
-			topMenu = "aggregator",
-			name = "blacklisteditems",
-			label = "Blacklisted Items",
-			href = "#menuService.buildModuleLink('aggregator','blacklisteditems')#",
-			permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR"
-		);
-		menuService.addSubMenu(
-			topMenu = "aggregator",
-			name = "settings",
-			label = "Settings",
-			href = "#menuService.buildModuleLink('aggregator','settings')#",
-			permissions = "AGGREGATOR_SETTINGS"
-		);
+		var isSSL = isBoolean( CGI.SERVER_PORT_SECURE ) && CGI.SERVER_PORT_SECURE;
+		menuService.addTopMenu( name = "aggregator", label = "<i class='fa fa-rss'></i> RSS Aggregator" )
+			.addSubMenu(
+				topMenu = "aggregator",
+				name = "feeds",
+				label = "Feeds",
+				href = "#menuService.buildModuleLink( module = 'aggregator', linkTo = 'feeds', ssl = isSSL )#",
+				permissions = "FEEDS_ADMIN,FEEDS_EDITOR")
+			.addSubMenu(
+				topMenu = "aggregator",
+				name = "feeditems",
+				label = "Feed Items",
+				href = "#menuService.buildModuleLink( module = 'aggregator', linkTo = 'feeditems', ssl = isSSL )#",
+				permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" )
+			.addSubMenu(
+				topMenu = "aggregator",
+				name = "blacklisteditems",
+				label = "Blacklisted Items",
+				href = "#menuService.buildModuleLink( module = 'aggregator', linkTo = 'blacklisteditems', ssl = isSSL )#",
+				permissions = "FEED_ITEMS_ADMIN,FEED_ITEMS_EDITOR" )
+			.addSubMenu(
+				topMenu = "aggregator",
+				name = "settings",
+				label = "Settings",
+				href = "#menuService.buildModuleLink( module = 'aggregator', linkTo = 'settings', ssl = isSSL )#",
+				permissions = "AGGREGATOR_SETTINGS"
+			);
 
 		// Get settings
 		var settingService = controller.getWireBox().getInstance( "settingService@cb" );

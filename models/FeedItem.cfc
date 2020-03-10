@@ -215,7 +215,7 @@ component persistent="true"
 	 */
 	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
 
-		if ( len( super.getFeaturedImageUrl() ) ) {
+		if ( len( super.getFeaturedImageUrl() ) && fileExists( getFeaturedImage() ) ) {
 			return super.getFeaturedImageUrl();
 		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -223,7 +223,7 @@ component persistent="true"
 			var behavior = len( feed.getSetting( "feed_items_featured_image_behavior", "" ) ) ? feed.getSetting( "feed_items_featured_image_behavior", "" ) : settings.feed_items_featured_image_behavior;
 			if ( behavior == "feed" ) {
 				return feed.getFeaturedImageUrl();
-			} else if ( behavior == "default" ) {
+			} else if ( behavior == "default" && len( settings.feed_items_featured_image_default_url ) && fileExists( settings.feed_items_featured_image_default ) ) {
 				return settings.feed_items_featured_image_default_url;
 			} else {
 				return "";

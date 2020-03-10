@@ -493,12 +493,12 @@ component persistent="true"
 	 */
 	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
 
-		if ( len( super.getFeaturedImageUrl() ) ) {
+		if ( len( super.getFeaturedImageUrl() ) && fileExists( getFeaturedImage() ) ) {
 			return super.getFeaturedImageUrl();
 		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var behavior = len( getSetting( "feed_featured_image_behavior", "" ) ) ? getSetting( "feed_featured_image_behavior", "" ) : settings.feed_featured_image_behavior;
-			if ( behavior == "default" ) {
+			if ( behavior == "default" && len( settings.feed_featured_image_default_url ) && fileExists( settings.feed_featured_image_default ) ) {
 				return settings.feed_featured_image_default_url;
 			} else {
 				return "";
