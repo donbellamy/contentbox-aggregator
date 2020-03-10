@@ -22,6 +22,14 @@ Additional database and cfml platforms will be supported in a future release.
 5. Start up your server running [ContentBox](https://www.ortussolutions.com/products/contentbox).
 6. Activate the module in the admin and begin using.
 
+## Instructions
+
+- Coming Soon!
+
+## Sites using ContentBox Aggregator
+
+1) [Prepping.com](https://prepping.com)
+
 ## License
 
 Apache License, Version 2.0.
