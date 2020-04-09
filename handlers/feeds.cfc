@@ -833,7 +833,7 @@ component extends="contentHandler" {
 			} else {
 				cbMessagebox.info( messageArray=data.messages );
 			}
-			setNextEvent( prc.xehFeeds );
+			//setNextEvent( prc.xehFeeds );
 		}
 
 	}

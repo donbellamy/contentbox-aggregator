@@ -151,6 +151,21 @@ component accessors="true" singleton threadSafe {
 	}
 
 	/**
+	 * Checks to see if the current event is a page view
+	 * @page An optional page slug to look for
+	 * @return True if the current event is a page view, false if not
+	 */
+	boolean function isPageView( string page="" ) {
+		var event = cb.getRequestContext();
+		if ( cb.isPageView( argumentCollection=arguments ) ||
+			( findNoCase( "contentbox-aggregator:site", event.getCurrentEvent() ) &&
+				event.valueExists( "page", true ) ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Gets the search term if present in the current request
 	 * @return The search term if it exists, an empty string if not
 	 */
@@ -714,7 +729,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The main view html
 	 */
 	string function mainView( struct args=structNew() ) {
-		if ( cb.isPageView() ) {
+		if ( isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/aggregator/page",
 				args = arguments.args,
