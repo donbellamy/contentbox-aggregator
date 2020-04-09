@@ -729,7 +729,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The main view html
 	 */
 	string function mainView( struct args=structNew() ) {
-		if ( isPageView() ) {
+		if ( cb.isPageView() ) {
 			return controller.getRenderer().renderView(
 				view = "#cb.themeName()#/views/aggregator/page",
 				args = arguments.args,
