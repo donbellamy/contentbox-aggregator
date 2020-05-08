@@ -1,6 +1,6 @@
 {
 	"name": "ContentBox Aggregator",
-	"version": "0.9.5",
+	"version": "0.9.6",
 	"author": "Don Bellamy <don@perfectcode.com>",
 	"slug": "contentbox-aggregator",
 	"type": "contentbox-modules",
@@ -17,5 +17,5 @@
 	"dependencies": {
 		"cbjsoup": "^1.0.0"
 	},
-	"location": "donbellamy/contentbox-aggregator#v0.9.5"
+	"location": "donbellamy/contentbox-aggregator#v0.9.6"
 }
