@@ -272,13 +272,13 @@
 										<a class="btn btn-danger" href="javascript:cancelFeaturedImage()">Clear Image</a>
 										#html.textField(
 											name="featuredImage",
-											bind=prc.feedItem,
+											value="#prc.feedItem.getFeaturedImage( getAltImage=false )#",
 											class="form-control",
 											readonly=true
 										)#
 										#html.hiddenField(
 											name="featuredImageURL",
-											bind=prc.feedItem
+											value="#prc.feedItem.getFeaturedImageURL( getAltImageUrl=false )#"
 										)#
 										<div class="margin10">
 											<cfif len( prc.feedItem.getFeaturedImageURL( getAltImageUrl=false ) ) >

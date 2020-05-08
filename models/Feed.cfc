@@ -493,7 +493,7 @@ component persistent="true"
 	 */
 	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
 
-		if ( len( super.getFeaturedImageUrl() ) && fileExists( getFeaturedImage() ) ) {
+		if ( len( super.getFeaturedImageUrl() ) && fileExists( super.getFeaturedImage() ) ) {
 			return super.getFeaturedImageUrl();
 		} else if ( arguments.getAltImageUrl ) {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
@@ -507,6 +507,27 @@ component persistent="true"
 			return "";
 		}
 
+	}
+
+	/**
+	 * Gets the path of the featured image
+	 * @getAltImage Whether or not to check and return the alt featured image path if one exists
+	 * @return The path of the featured image
+	 */
+	string function getFeaturedImage( boolean getAltImage=true ) {
+		if ( len( super.getFeaturedImage() ) && fileExists( super.getFeaturedImage() ) ) {
+			return super.getFeaturedImage();
+		} else if ( arguments.getAltImage ) {
+			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
+			var behavior = len( getSetting( "feed_featured_image_behavior", "" ) ) ? getSetting( "feed_featured_image_behavior", "" ) : settings.feed_featured_image_behavior;
+			if ( behavior == "default" && len( settings.feed_featured_image_default ) && fileExists( settings.feed_featured_image_default ) ) {
+				return settings.feed_featured_image_default;
+			} else {
+				return "";
+			}
+		} else {
+			return "";
+		}
 	}
 
 	/**
