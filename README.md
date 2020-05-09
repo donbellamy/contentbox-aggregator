@@ -28,7 +28,7 @@ Additional database and cfml platforms will be supported in a future release.
 
 ## Sites using ContentBox Aggregator
 
-1) [Prepping.com](https://prepping.com) - Proof of concept site pulling prepping and survival articles, videos and podcasts from over 100 rss feeds.
+- [Prepping.com](https://prepping.com) - Proof of concept site pulling prepping and survival articles from over 100 different rss feeds.
 
 ## License
 
