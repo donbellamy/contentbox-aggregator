@@ -209,53 +209,49 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets the url of the featured image
-	 * @getAltImageUrl Whether or not to check and return the alt featured image url if one exists
-	 * @return The url of the featured image
+	 * Gets the url of the featured or alternative image if one exists
+	 * @return The url of the featured or alternative image
 	 */
-	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
+	string function getFeaturedOrAltImageUrl() {
 
-		if ( len( super.getFeaturedImageUrl() ) && fileExists( super.getFeaturedImage() ) ) {
-			return super.getFeaturedImageUrl();
-		} else if ( arguments.getAltImageUrl ) {
+		if ( len( getFeaturedImageUrl() ) && fileExists( getFeaturedImage() ) ) {
+			return getFeaturedImageUrl();
+		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
 			var behavior = len( feed.getSetting( "feed_items_featured_image_behavior", "" ) ) ? feed.getSetting( "feed_items_featured_image_behavior", "" ) : settings.feed_items_featured_image_behavior;
 			if ( behavior == "feed" ) {
-				return feed.getFeaturedImageUrl();
+				return feed.getFeaturedOrAltImageUrl();
 			} else if ( behavior == "default" && len( settings.feed_items_featured_image_default_url ) && fileExists( settings.feed_items_featured_image_default ) ) {
 				return settings.feed_items_featured_image_default_url;
 			} else {
 				return "";
 			}
-		} else {
-			return "";
 		}
 
 	}
 
 	/**
-	 * Gets the path of the featured image
-	 * @getAltImage Whether or not to check and return the alt featured image path if one exists
-	 * @return The path of the featured image
+	 * Gets the path of the featured or alternative image if one exists
+	 * @return The path of the featured or alternative image
 	 */
-	string function getFeaturedImage( boolean getAltImage=true ) {
-		if ( len( super.getFeaturedImage() ) && fileExists( super.getFeaturedImage() ) ) {
-			return super.getFeaturedImage();
-		} else if ( arguments.getAltImage ) {
+	string function getFeaturedOrAltImage() {
+
+		if ( len( getFeaturedImage() ) && fileExists( getFeaturedImage() ) ) {
+			return getFeaturedImage();
+		} else  {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var feed = getFeed();
 			var behavior = len( feed.getSetting( "feed_items_featured_image_behavior", "" ) ) ? feed.getSetting( "feed_items_featured_image_behavior", "" ) : settings.feed_items_featured_image_behavior;
 			if ( behavior == "feed" ) {
-				return feed.getFeaturedImage();
+				return feed.getFeaturedOrAltImage();
 			} else if ( behavior == "default" && len( settings.feed_items_featured_image_default ) && fileExists( settings.feed_items_featured_image_default ) ) {
 				return settings.feed_items_featured_image_default;
 			} else {
 				return "";
 			}
-		} else {
-			return "";
 		}
+
 	}
 
 	/**

@@ -21,7 +21,7 @@
 	<cfset showVideoPlayer = args.showVideoPlayer && args.feedItem.isVideo() />
 	<cfset showAudioPlayer = args.showAudioPlayer && args.feedItem.isPodcast() />
 </cfif>
-<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
+<cfset imageUrl = args.feedItem.getFeaturedOrAltImageUrl() />
 <cfset showFeaturedImage = args.showImage && len( imageUrl ) />
 <cfoutput>
 <cfif args.showGroupedDate >

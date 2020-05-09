@@ -20,7 +20,7 @@
 </cfif>
 <div class="col-md-4 col-sm-6 col-xs-12 post podcast" id="feeditem_#args.feedItem.getContentID()#">
 	<cfif args.showImage >
-		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
+		<cfset imageUrl = args.feedItem.getFeaturedOrAltImageUrl() />
 		<cfif len( imageUrl ) >
 			<div class="text-center">
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"

@@ -3,7 +3,7 @@
 <cfparam name="args.showWebsite" default="true" />
 <cfparam name="args.showRSS" default="true" />
 <cfparam name="args.showFeedImage" default="true" />
-<cfset imageUrl = args.feed.getFeaturedImageUrl() />
+<cfset imageUrl = args.feed.getFeaturedOrAltImageUrl() />
 <cfset showFeaturedImage = args.showFeedImage && len( imageUrl ) />
 <cfoutput>
 <div class="post feed" id="feed_#args.feed.getContentID()#">

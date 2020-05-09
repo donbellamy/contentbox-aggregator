@@ -120,11 +120,13 @@ component singleton {
 			var enclosure_url = "";
 			var enclosure_length = "";
 			var enclosure_type = "";
-			// Check featured image
-			if ( len( item.getFeaturedImageURL() ) && fileExists( item.getFeaturedImage() ) ) {
+			// Featured image
+			var imagePath = item.getFeaturedOrAltImage();
+			var imageUrl = item.getFeaturedOrAltImageURL();
+			if ( len( imageUrl ) ) {
 				try {
-					var image = fileopen( item.getFeaturedImage() );
-					enclosure_url = cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" );
+					var image = fileopen( imagePath );
+					enclosure_url = cbHelper.siteBaseURL() & replace( imageUrl, "/", "" );
 					enclosure_length = listFirst( image.size, " " );
 					enclosure_type = fileGetMimeType( image );
 					fileClose( image );
@@ -158,9 +160,11 @@ component singleton {
 			feedStruct.title = feed.getTitle();
 			feedStruct.description = feed.getTagLine();
 			feedStruct.link = agHelper.linkFeed( feed );
-			if ( len( feed.getFeaturedImageURL() ) && fileExists( feed.getFeaturedImage() ) ) {
+			// Featured image
+			var imageUrl = feed.getFeaturedOrAltImageURL();
+			if ( len( imageUrl ) ) {
 				feedStruct.image = {
-					"url" = cbHelper.siteBaseURL() & replace( feed.getFeaturedImageURL(), "/", "" ),
+					"url" = cbHelper.siteBaseURL() & replace( imageUrl, "/", "" ),
 					"title" = feed.getTitle(),
 					"link" = agHelper.linkFeed( feed )
 				};
@@ -214,10 +218,13 @@ component singleton {
 			}
 			querySetCell( items, "guid_permalink", false );
 			querySetCell( items, "guid_string", agHelper.linkFeed( item ) );
-			if ( len( item.getFeaturedImageURL() ) && fileExists( item.getFeaturedImage() ) ) {
+			// Featured image
+			var imagePath = item.getFeaturedOrAltImage();
+			var imageUrl = item.getFeaturedOrAltImageURL();
+			if ( len( imageUrl ) ) {
 				try {
-					var image = fileopen( item.getFeaturedImage() );
-					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( item.getFeaturedImageURL(), "/", "" ) );
+					var image = fileopen( imagePath );
+					querySetCell( items, "enclosure_url", cbHelper.siteBaseURL() & replace( imageUrl, "/", "" ) );
 					querySetCell( items, "enclosure_length", listFirst( image.size, " " ) );
 					querySetCell( items, "enclosure_type", fileGetMimeType( image ) );
 					fileClose( image );

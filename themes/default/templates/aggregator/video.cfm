@@ -20,7 +20,7 @@
 </cfif>
 <div class="col-md-6 col-sm-12 col-xs-12 post video" id="feeditem_#args.feedItem.getContentID()#">
 	<cfif args.showImage || args.showVideoPlayer >
-		<cfset imageUrl = args.feedItem.getFeaturedImageUrl() />
+		<cfset imageUrl = args.feedItem.getFeaturedOrAltImageUrl() />
 		<cfif args.feedItem.isVideo() && args.showVideoPlayer >
 			<div class="video-player" data-slug="#args.feedItem.getSlug()#" data-url="#args.feedItem.getVideoUrl()#" data-image="#imageUrl#">
 				<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />

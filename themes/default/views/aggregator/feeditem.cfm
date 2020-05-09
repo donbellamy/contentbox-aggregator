@@ -53,7 +53,7 @@
 				#cb.event("aggregator_preFeedItemDisplay", { feedItem=prc.feedItem })#
 				<div class="post feeditem" id="feeditem_#prc.feedItem.getContentID()#">
 					<cfif showVideoPlayer >
-						<div class="video-player" data-slug="#prc.feedItem.getSlug()#" data-url="#prc.feedItem.getVideoUrl()#" data-image="#prc.feedItem.getFeaturedImageUrl()#"></div>
+						<div class="video-player" data-slug="#prc.feedItem.getSlug()#" data-url="#prc.feedItem.getVideoUrl()#" data-image="#prc.feedItem.getFeaturedOrAltImageUrl()#"></div>
 					</cfif>
 					<div class="post-title">
 						<h2>

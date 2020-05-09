@@ -487,15 +487,14 @@ component persistent="true"
 	}
 
 	/**
-	 * Gets the url of the featured image
-	 * @getAltImageUrl Whether or not to check and return the alt featured image if one exists
-	 * @return The url of the featured image
+	 * Gets the url of the featured or alternative image if one exists
+	 * @return The url of the featured or alternative image
 	 */
-	string function getFeaturedImageUrl( boolean getAltImageUrl=true ) {
+	string function getFeaturedOrAltImageUrl() {
 
-		if ( len( super.getFeaturedImageUrl() ) && fileExists( super.getFeaturedImage() ) ) {
-			return super.getFeaturedImageUrl();
-		} else if ( arguments.getAltImageUrl ) {
+		if ( len( getFeaturedImageUrl() ) && fileExists( getFeaturedImage() ) ) {
+			return getFeaturedImageUrl();
+		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var behavior = len( getSetting( "feed_featured_image_behavior", "" ) ) ? getSetting( "feed_featured_image_behavior", "" ) : settings.feed_featured_image_behavior;
 			if ( behavior == "default" && len( settings.feed_featured_image_default_url ) && fileExists( settings.feed_featured_image_default ) ) {
@@ -503,21 +502,19 @@ component persistent="true"
 			} else {
 				return "";
 			}
-		} else {
-			return "";
 		}
 
 	}
 
 	/**
-	 * Gets the path of the featured image
-	 * @getAltImage Whether or not to check and return the alt featured image path if one exists
-	 * @return The path of the featured image
+	 * Gets the path of the featured or alternative image if one exists
+	 * @return The path of the featured or alternative image
 	 */
-	string function getFeaturedImage( boolean getAltImage=true ) {
-		if ( len( super.getFeaturedImage() ) && fileExists( super.getFeaturedImage() ) ) {
-			return super.getFeaturedImage();
-		} else if ( arguments.getAltImage ) {
+	string function getFeaturedOrAltImage() {
+
+		if ( len( getFeaturedImage() ) && fileExists( getFeaturedImage() ) ) {
+			return getFeaturedImage();
+		} else {
 			var settings = deserializeJSON( settingService.getSetting( "aggregator" ) );
 			var behavior = len( getSetting( "feed_featured_image_behavior", "" ) ) ? getSetting( "feed_featured_image_behavior", "" ) : settings.feed_featured_image_behavior;
 			if ( behavior == "default" && len( settings.feed_featured_image_default ) && fileExists( settings.feed_featured_image_default ) ) {
@@ -525,9 +522,8 @@ component persistent="true"
 			} else {
 				return "";
 			}
-		} else {
-			return "";
 		}
+
 	}
 
 	/**
