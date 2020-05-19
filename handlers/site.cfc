@@ -1032,6 +1032,14 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 		// Make sure page exists
 		if ( prc.page.isLoaded() ) {
 
+			// Set meta tags
+			if ( len( trim( prc.page.getHTMLDescription() ) ) ) {
+				cbHelper.setMetaDescription( prc.page.getHTMLDescription() );
+			}
+			if ( len( trim( prc.page.getHTMLKeywords() ) ) ) {
+				cbHelper.setMetaKeywords( prc.page.getHTMLKeywords() );
+			}
+
 			// Update hits
 			contentService.updateHits( prc.page.getContentID() );
 

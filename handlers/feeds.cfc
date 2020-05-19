@@ -500,6 +500,8 @@ component extends="contentHandler" {
 
 		// Import feed if needed
 		if ( isNew && prc.feed.canImport() || wasPaused && prc.feed.canImport() ) {
+			// Set timeout
+			setting requestTimeout = "999999";
 			announceInterception(
 				"aggregator_preFeedImports",
 				{ feeds = [ prc.feed ] }
