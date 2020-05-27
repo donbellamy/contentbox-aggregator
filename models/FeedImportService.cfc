@@ -157,6 +157,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											if ( importFeaturedImages || importAllImages ) {
 
 												// Set vars
+												// TODO: svg?
 												var images = [];
 												var imagePaths = [];
 												var mimeTypes = {
@@ -185,12 +186,27 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													}
 												}
 
-												// Parse the feed body and grab the images, dont add if it was an attachment too
+												// No featured image attached, so check for an open graph image
+												if ( !arraylen( images ) ) {
+													try {
+														var elements = jsoup.connect( feedItem.getItemUrl() ).select("meta[property=og:image]");
+														if ( elements.size() && isValid( "url", elements.first().attr("content") ) ) {
+															arrayAppend( images, elements.first().attr("content") );
+														}
+													} catch ( any e ) {
+														if ( log.canError() ) {
+															log.error( "Error retrieving og:image using jsoup for feed item ('#uniqueId#').", e );
+														}
+													}
+												}
+
+												// Parse the feed body and grab the images, dont add if it was also an attachment
+												// Using the image object rather than just the url to change the src in the feed item body
 												var doc = jsoup.parseBodyFragment( feedBody );
-												var docImages = doc.getElementsByTag("img");
-												for ( var docImage IN docImages ) {
-													if ( isValid( "url", docImage.attr("src") ) && !arrayContains( images, docImage.attr("src") ) ) {
-														arrayAppend( images, docImage );
+												var elements = doc.getElementsByTag("img");
+												for ( var element IN elements ) {
+													if ( isValid( "url", element.attr("src") ) && !arrayContains( images, element.attr("src") ) ) {
+														arrayAppend( images, element );
 													}
 												}
 
