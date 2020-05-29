@@ -13,7 +13,7 @@
 <cfparam name="args.openNewWindow" default="false" />
 <cfparam name="args.showImage" default="true" />
 <cfset contentType = args.feedItem.getContentType() />
-<cfif contentType EQ "Entry" >
+<cfif contentType IS "Entry" >
 	<cfset args.openNewWindow = false />
 	<cfset showVideoPlayer = false />
 	<cfset showAudioPlayer = false />
@@ -38,8 +38,8 @@
 				<cfelseif showFeaturedImage >
 					<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 						<cfif args.openNewWindow >target="_blank"</cfif>
-						<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
-						rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+						<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+						rel="<cfif contentType IS "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 						title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 				</cfif>
 			</div>
@@ -48,8 +48,8 @@
 			<h2>
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
-					rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+					<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+					rel="<cfif contentType IS "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#">#args.feedItem.getTitle()#</a>
 			</h2>
 			<div class="row">
@@ -57,16 +57,16 @@
 					<div class="col-sm-7 pull-left">
 						<cfif args.showSource >
 							<i class="fa fa-rss"></i>
-							<cfif contentType EQ "FeedItem">
+							<cfif contentType IS "FeedItem">
 								<a href="#ag.linkFeed( args.feedItem.getFeed() )#" title="#encodeForHTMLAttribute( args.feedItem.getFeed().getTitle() )#">#args.feedItem.getFeed().getTitle()#</a>
 							<cfelse>
 								<a href="#cb.linkBlog()#" title="#encodeForHTMLAttribute( cb.siteName() )#">#cb.siteName()#</a>
 							</cfif>
 						</cfif>
-						<cfif args.showAuthor && ( ( contentType EQ "FeedItem" && len( args.feedItem.getItemAuthor() ) ) || contentType EQ "Entry" ) >
+						<cfif args.showAuthor && ( ( contentType IS "FeedItem" && len( args.feedItem.getItemAuthor() ) ) || contentType IS "Entry" ) >
 							<cfif args.showSource ><span class="text-muted">-</span></cfif>
 							<i class="fa fa-user"></i>
-							<cfif contentType EQ "FeedItem">
+							<cfif contentType IS "FeedItem">
 								<a href="#ag.linkFeedAuthor( args.feedItem )#" title="#encodeForHTMLAttribute( args.feedItem.getItemAuthor() )#">#args.feedItem.getItemAuthor()#</a>
 							<cfelse>
 								<a href="##">#args.feedItem.getAuthorName()#</a>
@@ -101,8 +101,8 @@
 					<cfelseif showFeaturedImage >
 						<a class="thumbnail" href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
-							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+							<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+							rel="<cfif contentType IS "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><img title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" /></a>
 					</cfif>
 				</div>
@@ -111,7 +111,7 @@
 				<cfif args.feedItem.hasExcerpt() >
 					#args.feedItem.renderExcerpt()#
 				<cfelse>
-					<cfif contentType EQ "FeedItem" >
+					<cfif contentType IS "FeedItem" >
 						#args.feedItem.getContentExcerpt( val( args.excerptLimit ), args.excerptEnding )#
 					<cfelse>
 						#args.feedItem.renderContent()#
@@ -128,8 +128,8 @@
 					<div class="post-more">
 						<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 							<cfif args.openNewWindow >target="_blank"</cfif>
-							<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
-							rel="<cfif contentType EQ "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
+							<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+							rel="<cfif contentType IS "FeedItem" >nofollow<cfif args.openNewWindow > noopener</cfif><cfelse>bookmark</cfif>"
 							title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"><button class="btn btn-success">#args.readMoreText#</button></a>
 					</div>
 				</cfif>

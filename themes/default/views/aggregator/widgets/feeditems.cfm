@@ -7,7 +7,7 @@
 </cfif>
 #cb.event("aggregator_preFeedItemsDisplay")#
 <cfif prc.itemCount >
-	<cfif prc.template EQ "feeditem" >
+	<cfif prc.template IS "feeditem" >
 		#ag.quickFeedItems( template=prc.template, args=args )#
 	<cfelse>
 		<div class="row display-flex">

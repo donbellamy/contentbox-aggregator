@@ -112,7 +112,7 @@ component extends="contentbox.models.content.ContentService" singleton {
 	}
 
 	/**
-	 * Returns the relative image url from the absolute iamge path
+	 * Returns the relative image url from the absolute image path
 	 * @imagePath The image path to convert
 	 * @return The relative image url
 	 */

@@ -66,7 +66,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isFeedsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeds" );
+		return ( event.getCurrentEvent() IS "contentbox-aggregator:site.feeds" );
 	}
 
 	/**
@@ -84,7 +84,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isFeedView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feed" );
+		return ( event.getCurrentEvent() IS "contentbox-aggregator:site.feed" );
 	}
 
 	/**
@@ -93,7 +93,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isFeedItemsView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.index" );
+		return ( event.getCurrentEvent() IS "contentbox-aggregator:site.index" );
 	}
 
 	/**
@@ -138,7 +138,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isArchivesView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.archives" );
+		return ( event.getCurrentEvent() IS "contentbox-aggregator:site.archives" );
 	}
 
 	/**
@@ -147,7 +147,7 @@ component accessors="true" singleton threadSafe {
 	 */
 	boolean function isFeedItemView() {
 		var event = cb.getRequestContext();
-		return ( event.getCurrentEvent() EQ "contentbox-aggregator:site.feeditem" );
+		return ( event.getCurrentEvent() IS "contentbox-aggregator:site.feeditem" );
 	}
 
 	/**
@@ -411,7 +411,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed link
 	 */
 	string function linkFeed( required Feed feed, boolean ssl=cb.getRequestContext().isSSL(), string format="html" ) {
-		return linkFeeds( ssl=arguments.ssl ) & "/#arguments.feed.getSlug()#" & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+		return linkFeeds( ssl=arguments.ssl ) & "/#arguments.feed.getSlug()#" & ( arguments.format IS NOT "html" ? "." & arguments.format : "" );
 	}
 
 	/**
@@ -486,7 +486,7 @@ component accessors="true" singleton threadSafe {
 			if ( arguments.linkBehavior == "link" ) {
 				return arguments.feedItem.getItemUrl();
 			} else {
-				return linkFeedItems( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format NEQ "html" ? "." & arguments.format : "" );
+				return linkFeedItems( ssl=arguments.ssl ) & "/" & arguments.feedItem.getSlug() & ( arguments.format IS NOT "html" ? "." & arguments.format : "" );
 			}
 		} else {
 			return cb.linkEntry( arguments.feedItem );
@@ -551,7 +551,7 @@ component accessors="true" singleton threadSafe {
 	string function linkExport( required string format, boolean ssl=cb.getRequestContext().isSSL() ) {
 		var event = cb.getRequestContext();
 		var link = event.buildLink( linkTo=event.getCurrentRoutedURL(), ssl=arguments.ssl );
-		if ( right( link, 1 ) EQ "/" ) {
+		if ( right( link, 1 ) IS "/" ) {
 			link = left( link, len( link ) - 1 );
 		}
 		link &= "." & arguments.format;

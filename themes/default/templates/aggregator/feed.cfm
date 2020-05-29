@@ -40,7 +40,7 @@
 							<h4>
 								<a href="#ag.linkFeedItem( feedItem=feedItem, linkBehavior=args.linkBehavior )#"
 									<cfif args.openNewWindow >target="_blank"</cfif>
-									<cfif args.linkBehavior EQ "link" >class="direct-link"</cfif>
+									<cfif args.linkBehavior IS "link" >class="direct-link"</cfif>
 									title="#encodeForHtmlAttribute( feedItem.getTitle() )#"
 									rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#feedItem.getTitle()#</a>
 							</h4>

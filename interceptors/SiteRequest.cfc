@@ -79,7 +79,7 @@ component extends="coldbox.system.Interceptor" {
 
 		// Check for cache
 		if ( structKeyExists( prc, "contentCacheData" ) && val( prc.contentCacheData.contentID ) ) {
-			if ( prc.contentCacheData.contentType NEQ "text/html" ) {
+			if ( prc.contentCacheData.contentType IS NOT "text/html" ) {
 				return;
 			}
 			args.oContent = contentService.get( prc.contentCacheData.contentID, false );

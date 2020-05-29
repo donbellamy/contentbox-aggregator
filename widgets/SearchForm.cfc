@@ -40,7 +40,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 		var args = {
 			title = arguments.title,
 			titleLevel = arguments.titleLevel,
-			q = htmlEditFormat( event.getValue( "q", "" ) )
+			q = encodeForHTML( event.getValue( "q", "" ) )
 		};
 
 		// Render the search form

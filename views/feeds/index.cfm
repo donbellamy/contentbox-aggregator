@@ -88,9 +88,9 @@
 							<div class="controls">
 								<select name="state" id="state" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.state ) > selected="selected"</cfif>>Any State</option>
-									<option value="true"<cfif rc.state EQ "true" > selected="selected"</cfif>>Active</option>
-									<option value="false"<cfif rc.state EQ "false" > selected="selected"</cfif>>Paused</option>
-									<option value="failing"<cfif rc.state EQ "failing" > selected="selected"</cfif>>Failing</option>
+									<option value="true"<cfif rc.state IS "true" > selected="selected"</cfif>>Active</option>
+									<option value="false"<cfif rc.state IS "false" > selected="selected"</cfif>>Paused</option>
+									<option value="failing"<cfif rc.state IS "failing" > selected="selected"</cfif>>Failing</option>
 								</select>
 							</div>
 						</div>
@@ -99,7 +99,7 @@
 							<div class="controls">
 								<select name="category" id="category" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.category ) > selected="selected"</cfif>>All Categories</option>
-									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
+									<option value="none"<cfif rc.category IS "none" > selected="selected"</cfif>>Uncategorized</option>
 									<cfloop array="#prc.feedCategories#" index="category">
 										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
 									</cfloop>
@@ -111,9 +111,9 @@
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.status ) > selected="selected"</cfif>>Any Status</option>
-									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
-									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
-									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
+									<option value="published"<cfif rc.status IS "published" > selected="selected"</cfif>>Published</option>
+									<option value="expired"<cfif rc.status IS "expired" > selected="selected"</cfif>>Expired</option>
+									<option value="draft"<cfif rc.status IS "draft" > selected="selected"</cfif>>Draft</option>
 								</select>
 							</div>
 						</div>

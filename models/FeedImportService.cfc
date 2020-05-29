@@ -157,7 +157,6 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											if ( importFeaturedImages || importAllImages ) {
 
 												// Set vars
-												// TODO: svg?
 												var images = [];
 												var imagePaths = [];
 												var mimeTypes = {
@@ -167,7 +166,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 													"image/jpeg" = ".jpg",
 													"image/jpg" = ".jpg",
 													"image/png" = ".png",
-													"image/webp" = ".webp"
+													"image/webp" = ".webp",
+													"image/svg+xml" = ".svg"
 												};
 
 												// Check for image attachments
@@ -224,7 +224,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 														// Check for error and valid image
 														if ( result.status_code == "200" && structKeyExists( mimeTypes, result.mimeType ) ) {
 
-															// Set the folder path and create if needed
+															// Set the directory path and create if needed
 															var directoryPath = expandPath( settingService.getSetting( "cb_media_directoryRoot" ) ) & "\aggregator\feeditems\" & dateformat( item.datePublished, "yyyy\mm\" );
 															if ( !directoryExists( directoryPath ) ) {
 																directoryCreate( directoryPath );
@@ -376,15 +376,14 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												log.error( "Error saving feed item ('#uniqueId#') for feed '#arguments.feed.getTitle()#'.", e );
 											}
 
-											// Delete any images
+											// Delete images and directory if empty
 											if ( importFeaturedImages || importAllImages ) {
 												for ( var imagePath IN imagePaths  ) {
 													if ( fileExists( imagePath ) ) {
 														fileDelete( imagePath );
 													}
 												}
-												// Delete directory if empty and defined
-												if ( isDefined("directoryPath") ) {
+												if ( structKeyExists( local, "directoryPath" ) ) {
 													deleteDirectoryIfEmpty( directoryPath );
 												}
 											}
@@ -472,7 +471,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 			try {
 
 				var metaInfo = { "Error" = e };
-				if ( isDefined( "feedItem" ) ) {
+				if ( structKeyExists( local, "feedItem" ) ) {
 					metaInfo["FeedItem"] = feedItem.getMemento();
 				}
 

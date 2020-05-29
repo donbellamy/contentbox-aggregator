@@ -108,14 +108,14 @@ component singleton {
 			}
 			querySetCell( items, "link", agHelper.linkContent( item ) );
 			querySetCell( items, "pubDate", item.getPublishedDate() );
-			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & ( item.getContentType() EQ "FeedItem" ? item.getItemAuthor() : item.getAuthorName() ) & "]]>" );
+			querySetCell( items, "dcmiterm_creator", "<![CDATA[" & ( item.getContentType() IS "FeedItem" ? item.getItemAuthor() : item.getAuthorName() ) & "]]>" );
 			if ( item.hasCategories() ) {
 				querySetCell( items, "category_tag", item.getCategoriesList() );
 			}
 			querySetCell( items, "guid_permalink", false );
 			querySetCell( items, "guid_string", agHelper.linkContent( item ) );
-			querySetCell( items, "source_title", item.getContentType() EQ "FeedItem" ? item.getFeed().getTitle() : cbHelper.siteName() );
-			querySetCell( items, "source_url", item.getContentType() EQ "FeedItem" ? item.getFeed().getFeedUrl() : cbHelper.linkRSS() );
+			querySetCell( items, "source_title", item.getContentType() IS "FeedItem" ? item.getFeed().getTitle() : cbHelper.siteName() );
+			querySetCell( items, "source_url", item.getContentType() IS "FeedItem" ? item.getFeed().getFeedUrl() : cbHelper.linkRSS() );
 			// Enclosures
 			var enclosure_url = "";
 			var enclosure_length = "";
@@ -137,7 +137,7 @@ component singleton {
 				}
 			}
 			// Attachments
-			if ( item.getContentType() EQ "FeedItem" && item.hasAttachment() ) {
+			if ( item.getContentType() IS "FeedItem" && item.hasAttachment() ) {
 				for ( attachment IN item.getAttachments() ) {
 					if ( len( attachment.getSize() ) && len( attachment.getMimeType() ) &&
 						isValid( "url", attachment.getAttachmentUrl() ) &&

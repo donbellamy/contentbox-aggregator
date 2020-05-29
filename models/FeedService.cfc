@@ -70,7 +70,7 @@ component extends="ContentService" singleton {
 
 		// Check state
 		if ( len( trim( arguments.state ) ) ) {
-			if ( arguments.state EQ "failing" ) {
+			if ( arguments.state IS "failing" ) {
 				c.eq( "isFailing", "1" );
 			} else {
 				c.eq( "isActive", javaCast( "boolean", arguments.state ) );
@@ -91,7 +91,7 @@ component extends="ContentService" singleton {
 
 		// Check status
 		if ( len( trim( arguments.status ) ) ) {
-			if ( arguments.status EQ "published" ) {
+			if ( arguments.status IS "published" ) {
 				c.isTrue("isPublished")
 					.isLT( "publishedDate", now() )
 					.or( c.restrictions.isNull("expireDate"), c.restrictions.isGT( "expireDate", now() ) );
@@ -99,7 +99,7 @@ component extends="ContentService" singleton {
 					if ( arguments.hasPublishedFeedItems ) {
 						c.gt( "numberOfPublishedChildren", "0" );
 					}
-			} else if ( arguments.status EQ "expired" ) {
+			} else if ( arguments.status IS "expired" ) {
 				c.isTrue("isPublished").isLT( "expireDate", now() );
 			} else {
 				c.isFalse("isPublished");
@@ -167,7 +167,7 @@ component extends="ContentService" singleton {
 
 		// Set active state
 		var active = false;
-		if ( arguments.state EQ "active" ) {
+		if ( arguments.state IS "active" ) {
 			active = true;
 		}
 

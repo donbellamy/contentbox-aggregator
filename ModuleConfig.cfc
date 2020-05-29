@@ -399,7 +399,7 @@ component {
 				permission.setPermission( item["permission"] );
 				permission.setDescription( item["description"] );
 				permissionService.save( permission );
-				if ( !isNull( editorRole ) && item["level"] EQ "editor" ) {
+				if ( !isNull( editorRole ) && item["level"] IS "editor" ) {
 					editorRole.addPermission( permission );
 					roleService.save( editorRole );
 				}

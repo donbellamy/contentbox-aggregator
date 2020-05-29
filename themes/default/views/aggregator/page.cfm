@@ -3,23 +3,23 @@
 <cfoutput>
 <cfif cb.isHomePage() >
 	<cfset styleHTML = "" />
-	<cfif cb.themeSetting( 'hpHeaderImgBg' ) is not "" >
+	<cfif len( cb.themeSetting( 'hpHeaderImgBg' ) ) >
 		<cfset styleHTML = styleHTML & 'background-image: url(' & cb.themeSetting( 'hpHeaderImgBg' ) & ');'>
 	</cfif>
-	<cfif cb.themeSetting( 'hpHeaderBgPos' ) is not "" >
+	<cfif len( cb.themeSetting( 'hpHeaderBgPos' ) ) >
 		<cfset styleHTML = styleHTML & 'background-position: ' & cb.themeSetting( 'hpHeaderBgPos' ) & ';'>
 	</cfif>
-	<cfif cb.themeSetting( 'hpHeaderBgPaddingTop' ) is not "" >
+	<cfif len( cb.themeSetting( 'hpHeaderBgPaddingTop' ) ) >
 		<cfset styleHTML = styleHTML & 'padding-top: ' & cb.themeSetting( 'hpHeaderBgPaddingTop' ) & ';'>
 	</cfif>
-	<cfif cb.themeSetting( 'hpHeaderBgPaddingBottom' ) is not "" >
+	<cfif len( cb.themeSetting( 'hpHeaderBgPaddingBottom' ) ) >
 		<cfset styleHTML = styleHTML & 'padding-bottom: ' & cb.themeSetting( 'hpHeaderBgPaddingBottom' ) & ';'>
 	</cfif>
 	<div class="body-header-jumbotron jumbotron #cb.themeSetting( 'hpHeaderBg' )#-bg" style="#styleHTML#">
 		<div class="container">
 			<h1>#cb.themeSetting( 'hpHeaderTitle' )#</h1>
 			<p>#cb.themeSetting( 'hpHeaderText' )#</p>
-			<cfif cb.themeSetting( 'hpHeaderBtnText' ) neq "">
+			<cfif len( cb.themeSetting( 'hpHeaderBtnText' ) ) >
 				<p>
 					<a class="btn btn-#cb.themeSetting( 'hpHeaderBtnStyle' )# btn-lg" href="#cb.themeSetting( 'hpHeaderLink' )#" role="button">
 						#cb.themeSetting( 'hpHeaderBtnText' )#
@@ -50,7 +50,7 @@
 #cb.event( "cbui_prePageDisplay" )#
 <section id="body-main">
 	<div class="container">
-		<cfif !args.print AND !isNull( "prc.page" ) AND prc.page.getSlug() neq cb.getHomePage() >
+		<cfif !args.print AND !isNull( "prc.page" ) AND prc.page.getSlug() IS NOT cb.getHomePage() >
 			<div class="row">
 				<div id="body-breadcrumbs" class="col-xs-12 col-sm-9">
 					<i class="fa fa-home"></i>

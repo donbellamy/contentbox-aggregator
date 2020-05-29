@@ -28,9 +28,9 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
 	 * @useDropdown.label Use Dropdown?
-	 * @useDropdown.hint Display as a dropdown or a list, default is list.
+	 * @useDropdown.hint Display as a dropdown or a list, defaults to list.
 	 * @showItemCount.label Show Item Count?
-	 * @showItemCount.hint Show item counts or not, default is true.
+	 * @showItemCount.hint Show item counts or not, defaults to true.
 	 * @monthLimit.label Number of months displayed
 	 * @monthLimit.hint The number of months to display in the widget, defaults to 12, enter 0 for unlimited.
 	 * @return The feed item archives widget html

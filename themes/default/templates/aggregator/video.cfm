@@ -29,7 +29,7 @@
 			<div class="video-image">
 				<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 					<cfif args.openNewWindow >target="_blank"</cfif>
-					<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+					<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
 					title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 					rel="nofollow<cfif args.openNewWindow > noopener</cfif>">
 					<img class="img-thumbnail" title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#" src="#imageUrl#" />
@@ -40,7 +40,7 @@
 	<h4>
 		<a href="#ag.linkFeedItem( feedItem=args.feedItem, linkBehavior=args.linkBehavior )#"
 			<cfif args.openNewWindow >target="_blank"</cfif>
-			<cfif args.linkBehavior EQ "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
+			<cfif args.linkBehavior IS "link" >class="direct-link" data-slug="#args.feedItem.getSlug()#"</cfif>
 			title="#encodeForHtmlAttribute( args.feedItem.getTitle() )#"
 			rel="nofollow<cfif args.openNewWindow > noopener</cfif>">#args.feedItem.getTitle()#</a>
 	</h4>

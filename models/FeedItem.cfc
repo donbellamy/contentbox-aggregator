@@ -201,7 +201,7 @@ component persistent="true"
 		content = trim( left( content, arguments.count ) );
 
 		// Add the content ending
-		content = content & ( right( content, 1 ) NEQ "." ? arguments.excerptEnding : "" );
+		content = content & ( right( content, 1 ) IS NOT "." ? arguments.excerptEnding : "" );
 
 		// Add paragraph tags and return
 		return "<p>" & content & "</p>";

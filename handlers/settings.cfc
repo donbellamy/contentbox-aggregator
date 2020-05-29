@@ -140,10 +140,10 @@ component extends="baseHandler" {
 		// Update the site routes
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
-				if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
+				if ( item.namespaceRouting IS "aggregator-feed-items" ) {
 					item.pattern = item.regexpattern = replace( prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 				}
-				if ( item.namespaceRouting EQ "aggregator-feeds" ) {
+				if ( item.namespaceRouting IS "aggregator-feeds" ) {
 					item.pattern = item.regexpattern = replace( prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
@@ -247,10 +247,10 @@ component extends="baseHandler" {
 			// Update the site routes
 			routingService.setRoutes(
 				routingService.getRoutes().map( function( item ) {
-					if ( item.namespaceRouting EQ "aggregator-feed-items" ) {
+					if ( item.namespaceRouting IS "aggregator-feed-items" ) {
 						item.pattern = item.regexpattern = replace( defaultSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 					}
-					if ( item.namespaceRouting EQ "aggregator-feeds" ) {
+					if ( item.namespaceRouting IS "aggregator-feeds" ) {
 						item.pattern = item.regexpattern = replace( defaultSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 					}
 					return item;

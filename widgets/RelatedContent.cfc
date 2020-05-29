@@ -28,7 +28,7 @@ component extends="aggregator.models.BaseWidget" singleton {
 	 * @titleLevel.hint The H{level} to use.
 	 * @titleLevel.options 1,2,3,4,5
 	 * @useDropdown.label Use Dropdown?
-	 * @useDropdown.hint Display as a dropdown or a list, default is list.
+	 * @useDropdown.hint Display as a dropdown or a list, defaults to list.
 	 * @emptyMessage.label Empty Message
 	 * @emptyMessage.hint Message to show when no related content is found.
 	 * @return The related content widget html

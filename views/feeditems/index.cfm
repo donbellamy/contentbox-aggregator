@@ -97,7 +97,7 @@
 							<div class="controls">
 								<select name="category" id="category" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.category ) > selected="selected"</cfif>>All Categories</option>
-									<option value="none"<cfif rc.category EQ "none" > selected="selected"</cfif>>Uncategorized</option>
+									<option value="none"<cfif rc.category IS "none" > selected="selected"</cfif>>Uncategorized</option>
 									<cfloop array="#prc.feedItemCategories#" index="category">
 										<option value="#category.getCategoryID()#"<cfif rc.category EQ category.getCategoryID() > selected="selected"</cfif>>#category.getCategory()#</option>
 									</cfloop>
@@ -109,9 +109,9 @@
 							<div class="controls">
 								<select name="status" id="status" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.status ) > selected="selected"</cfif>>Any Status</option>
-									<option value="published"<cfif rc.status EQ "published" > selected="selected"</cfif>>Published</option>
-									<option value="expired"<cfif rc.status EQ "expired" > selected="selected"</cfif>>Expired</option>
-									<option value="draft"<cfif rc.status EQ "draft" > selected="selected"</cfif>>Draft</option>
+									<option value="published"<cfif rc.status IS "published" > selected="selected"</cfif>>Published</option>
+									<option value="expired"<cfif rc.status IS "expired" > selected="selected"</cfif>>Expired</option>
+									<option value="draft"<cfif rc.status IS "draft" > selected="selected"</cfif>>Draft</option>
 								</select>
 							</div>
 						</div>
@@ -120,9 +120,9 @@
 							<div class="controls">
 								<select name="type" id="type" class="form-control input-sm valid">
 									<option value=""<cfif !len( rc.type ) > selected="selected"</cfif>>Any Type</option>
-									<option value="article"<cfif rc.type EQ "article" > selected="selected"</cfif>>Article</option>
-									<option value="podcast"<cfif rc.type EQ "podcast" > selected="selected"</cfif>>Podcast</option>
-									<option value="video"<cfif rc.type EQ "video" > selected="selected"</cfif>>Video</option>
+									<option value="article"<cfif rc.type IS "article" > selected="selected"</cfif>>Article</option>
+									<option value="podcast"<cfif rc.type IS "podcast" > selected="selected"</cfif>>Podcast</option>
+									<option value="video"<cfif rc.type IS "video" > selected="selected"</cfif>>Video</option>
 								</select>
 							</div>
 						</div>

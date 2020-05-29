@@ -96,9 +96,7 @@ function setupFeedForm() {
 			// Update Editor Content
 			try{
 				updateEditorContent();
-			} catch( err ) {
-				console.log( err );
-			};
+			} catch( err ) {};
 			// Enable slug for saving.
 			$slug.prop( "disabled", false );
 			// Disable Publish Buttons

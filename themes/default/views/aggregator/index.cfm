@@ -45,7 +45,7 @@
 			<div class="<cfif args.sidebar >col-sm-9<cfelse>col-sm-12</cfif>">
 				#cb.event("aggregator_preFeedItemsDisplay")#
 				<cfif prc.itemCount >
-					<cfif prc.template EQ "podcast" || prc.template EQ "video" >
+					<cfif prc.template IS "podcast" || prc.template IS "video" >
 						<div class="row display-flex">
 							#ag.quickFeedItems( template=prc.template, args=args )#
 						</div>
