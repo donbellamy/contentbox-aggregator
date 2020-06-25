@@ -208,7 +208,7 @@ component extends="contentHandler" {
 		}
 
 		// Add new content version if needed
-		if ( compare( prc.feedItem.getContent(), rc.content ) != 0 ) {
+		if ( compareNoCase( prc.feedItem.getContent(), rc.content ) != 0 ) {
 			prc.feedItem.addNewContentVersion(
 				content = rc.content,
 				changelog = rc.changelog,

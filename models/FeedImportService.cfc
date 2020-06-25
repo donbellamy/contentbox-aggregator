@@ -179,7 +179,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 																( structKeyExists( attachment, "type" ) && attachment.type == "thumbnail" ) ||
 																( structKeyExists( attachment, "mimetype" ) && structKeyExists( mimeTypes, attachment.mimetype ) )
 															) && ( structKeyExists( attachment, "url" ) && isValid( "url", attachment.url ) )
-															&& !arrayContains( images, attachment.url )
+															&& !arrayContainsNoCase( images, attachment.url )
 														) {
 															arrayAppend( images, attachment.url );
 														}
@@ -205,7 +205,7 @@ component extends="cborm.models.VirtualEntityService" singleton {
 												var doc = jsoup.parseBodyFragment( feedBody );
 												var elements = doc.getElementsByTag("img");
 												for ( var element IN elements ) {
-													if ( isValid( "url", element.attr("src") ) && !arrayContains( images, element.attr("src") ) ) {
+													if ( isValid( "url", element.attr("src") ) && !arrayContainsNoCase( images, element.attr("src") ) ) {
 														arrayAppend( images, element );
 													}
 												}
