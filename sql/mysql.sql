@@ -98,7 +98,7 @@ CREATE TABLE `cb_feedimport`
   CONSTRAINT `FKA2F552A3AA6AC0EA` FOREIGN KEY
 (`FK_authorID`) REFERENCES `cb_author`
 (`authorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50475 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `cb_feeditemattachment`
   CONSTRAINT `FKCB805974E7194996` FOREIGN KEY
 (`FK_feedItemID`) REFERENCES `cb_content`
 (`contentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7059 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,7 +210,7 @@ CREATE TABLE `cb_feeditempodcast`
   CONSTRAINT `FK45DCC53E7194996` FOREIGN KEY
 (`FK_feedItemID`) REFERENCES `cb_content`
 (`contentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=857 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `cb_feeditemvideo`
   CONSTRAINT `FK308A658AE7194996` FOREIGN KEY
 (`FK_feedItemID`) REFERENCES `cb_content`
 (`contentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2293 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
