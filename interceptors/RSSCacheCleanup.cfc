@@ -67,6 +67,9 @@ component extends="coldbox.system.Interceptor" {
 		// Clear cache
 		cache.clearByKeySnippet( keySnippet=cacheKey, async=true );
 
+		// Announce event
+		announceInterception("aggregator_onRSSCacheCleanup");
+
 		return this;
 
 	}

@@ -174,7 +174,7 @@ component {
 				"aggregator_preArchivesDisplay","aggregator_postArchivesDisplay",
 				"aggregator_preSideBarDisplay","aggregator_postSideBarDisplay",
 				"aggregator_onRSSView",
-				"aggregator_onClearCache"
+				"aggregator_onClearCache","aggregator_onSiteCacheCleanup","aggregator_onRSSCacheCleanup"
 			])
 		};
 

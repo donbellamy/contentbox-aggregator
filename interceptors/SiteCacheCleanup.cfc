@@ -138,6 +138,9 @@ component extends="coldbox.system.Interceptor" {
 		// Clear content caches
 		contentService.clearAllCaches();
 
+		// Announce event
+		announceInterception("aggregator_onSiteCacheCleanup");
+
 		return this;
 
 	}
