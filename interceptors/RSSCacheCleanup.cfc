@@ -65,10 +65,10 @@ component extends="coldbox.system.Interceptor" {
 		var cacheKey = "cb-feeds-aggregator";
 
 		// Clear cache
-		cache.clearByKeySnippet( keySnippet=cacheKey, async=true );
+		cache.clearByKeySnippet( keySnippet=cacheKey, async=false );
 
 		// Announce event
-		announceInterception("aggregator_onRSSCacheCleanup");
+		announceInterception( state="aggregator_onRSSCacheCleanup", async=true );
 
 		return this;
 
