@@ -28,19 +28,14 @@
 								#buildSubMenu( menuData=menuItem.subPageMenu, parentLink=menuItem.link, parentTitle=menuItem.title )#
 							</li>
 						<cfelse>
-							<cfif ag.isPageView() AND event.buildLink( cb.getCurrentPage().getSlug() ) eq menuItem.link>
-								<li class="active">
-							<cfelse>
-								<li>
-							</cfif>
+							<li<cfif ag.isPageView() AND event.buildLink( cb.getCurrentPage().getSlug() ) eq menuItem.link> class="active"</cfif>>
 								<a href="#menuItem.link#">#menuItem.title#</a>
 							</li>
 						</cfif>
 					</cfloop>
-
 					<!--- Blog Link, verify active --->
 					<cfif ( !prc.cbSettings.cb_site_disable_blog )>
-						<cfif cb.isBlogView()><li class="active"><cfelse><li></cfif>
+						<li<cfif cb.isBlogView()> class="active"</cfif>>
 							<a href="#cb.linkBlog()#">Blog</a>
 						</li>
 					</cfif>

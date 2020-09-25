@@ -8,7 +8,7 @@
 			<strong>Perfect Code, LLC</strong> is the company behind this module.
 			<a href="mailto:support@perfectcode.com">Contact us</a> if you have any questions and/or issues.
 		</p>
-		<h4>Links</h3>
+		<h4>Links</h4>
 		<ul>
 			<li><a href="https://github.com/donbellamy/contentbox-aggregator" target="_blank">Source Code</a></li>
 			<li><a href="https://github.com/donbellamy/contentbox-aggregator/issues" target="_blank">Support/Issues</a></li>

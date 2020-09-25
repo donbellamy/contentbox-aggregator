@@ -110,7 +110,7 @@
 								<li><a href="javascript:importFeed('#feed.getContentID()#')"><i class="fa fa-rss fa-lg"></i> Import</a></li>
 							</cfif>
 							<cfif feed.hasFeedImport() >
-								<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getLatestFeedImport().getFeedImportID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a>
+								<li><a href="javascript:openRemoteModal('#event.buildLink(prc.xehFeedImportView)#/feedImportID/#feed.getLatestFeedImport().getFeedImportID()#');"><i class="fa fa-eye fa-lg"></i> View Import</a></li>
 							</cfif>
 							<li><a href="#prc.agHelper.linkFeed( feed )#" target="_blank"><i class="fa fa-link fa-lg"></i> Open In Site</a></li>
 							<li><a href="#feed.getWebsiteUrl()#" target="_blank"><i class="fa fa-external-link fa-lg"></i> Visit Website</a></li>

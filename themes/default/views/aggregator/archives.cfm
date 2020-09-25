@@ -63,5 +63,5 @@
 			</cfif>
 		</div>
 	</div>
-</div>
+</section>
 </cfoutput>
