@@ -33,6 +33,7 @@ component extends="coldbox.system.Interceptor" {
 	 */
 	function aggregator_postFeedImport( event, interceptData ) {
 		var feed = arguments.interceptData.feed;
+		doAgeCleanup( feed );
 		doMaxItemCleanup( feed );
 	}
 
