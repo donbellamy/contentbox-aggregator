@@ -93,7 +93,7 @@ component singleton {
 		// Build the items query
 		for ( var item IN feedItems ) {
 			queryAddRow( items, 1 );
-			querySetCell( items, "title", item.getTitle() );
+			querySetCell( items, "title", "<![CDATA[" & item.getTitle() & "]]>" );
 			var description = "";
 			if ( item.hasExcerpt() ) {
 				description = item.renderExcerpt();
