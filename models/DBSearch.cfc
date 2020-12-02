@@ -45,6 +45,8 @@ component accessors="true" implements="contentbox.models.search.ISearchAdapter" 
 				contentTypes = "Page,Entry,Feed,FeedItem"
 			);
 
+			// TODO: Draft feeds should not return published feed items.
+
 			var args = {
 				results	= results.content,
 				total = results.count,
