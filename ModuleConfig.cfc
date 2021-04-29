@@ -10,7 +10,7 @@ component {
 	this.author = "Don Bellamy <don@perfectcode.com>";
 	this.webURL = "https://github.com/donbellamy/contentbox-aggregator";
 	this.description = "An RSS aggregator for ContentBox.";
-	this.version = "0.9.7";
+	this.version = "1.0.1";
 	this.viewParentLookup = true;
 	this.layoutParentLookup = true;
 	this.entryPoint	= "aggregator";

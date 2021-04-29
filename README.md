@@ -11,7 +11,8 @@ Built and tested with:
 - Lucee 5.2.3.35+
 - MySQL 8.0+
 
-Additional database and cfml platforms will be supported in a future release.
+## Future release
+- Support for ContenBox 5 and ColdBox 6
 
 ## Installation
 
@@ -21,10 +22,6 @@ Additional database and cfml platforms will be supported in a future release.
 4. Copy the files located in /themes/default into your current theme folder.  If you are not using the default theme, you will need to modify these files to match your current theme.
 5. Start up your server running [ContentBox](https://www.ortussolutions.com/products/contentbox).
 6. Activate the module in the admin and begin using.
-
-## Instructions
-
-- Coming Soon!
 
 ## Sites using ContentBox Aggregator
 
