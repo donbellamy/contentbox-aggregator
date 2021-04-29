@@ -14,6 +14,7 @@ component extends="baseHandler" {
 	property name="markdownEditor" inject="markdownEditor@contentbox-markdowneditor";
 	property name="routingService" inject="coldbox:routingService";
 	property name="moduleSettings" inject="coldbox:moduleSettings:contentbox-aggregator";
+	property name="cbModuleConfig" inject="coldbox:moduleConfig:contentbox-ui";
 
 	/**
 	 * Pre handler
@@ -141,17 +142,14 @@ component extends="baseHandler" {
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
 				if ( item.namespaceRouting IS "aggregator-feed-items" ) {
-					item.pattern = item.regexpattern = replace( "site/" & prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 				}
 				if ( item.namespaceRouting IS "aggregator-feeds" ) {
-					item.pattern = item.regexpattern = replace( "site/" & prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
 			})
 		);
-
-		writedump( routingService.getRoutes() );
-		abort;
 
 		// Save settings
 		var setting = settingService.findWhere( { name = "aggregator" } );
@@ -251,10 +249,10 @@ component extends="baseHandler" {
 			routingService.setRoutes(
 				routingService.getRoutes().map( function( item ) {
 					if ( item.namespaceRouting IS "aggregator-feed-items" ) {
-						item.pattern = item.regexpattern = replace( defaultSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
+						item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( defaultSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 					}
 					if ( item.namespaceRouting IS "aggregator-feeds" ) {
-						item.pattern = item.regexpattern = replace( defaultSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
+						item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( defaultSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 					}
 					return item;
 				})
