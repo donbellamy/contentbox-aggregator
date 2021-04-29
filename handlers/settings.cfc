@@ -141,10 +141,10 @@ component extends="baseHandler" {
 		// Update the site routes
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
-				if ( item.namespaceRouting IS "aggregator-feed-items" ) {
+				if ( item.namespaceRouting == "aggregator-feed-items" ) {
 					item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 				}
-				if ( item.namespaceRouting IS "aggregator-feeds" ) {
+				if ( item.namespaceRouting == "aggregator-feeds" ) {
 					item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
@@ -248,10 +248,10 @@ component extends="baseHandler" {
 			// Update the site routes
 			routingService.setRoutes(
 				routingService.getRoutes().map( function( item ) {
-					if ( item.namespaceRouting IS "aggregator-feed-items" ) {
+					if ( item.namespaceRouting == "aggregator-feed-items" ) {
 						item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( defaultSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 					}
-					if ( item.namespaceRouting IS "aggregator-feeds" ) {
+					if ( item.namespaceRouting == "aggregator-feeds" ) {
 						item.pattern = item.regexpattern = ( len( cbModuleConfig.entryPoint ) ? cbModuleConfig.entryPoint & "/" : "" ) & replace( defaultSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 					}
 					return item;

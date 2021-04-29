@@ -12,6 +12,32 @@ component extends="coldbox.system.Interceptor" {
 	property name="html" inject="HTMLHelper@coldbox";
 	property name="agHelper" inject="helper@aggregator";
 	property name="moduleService" inject="coldbox:moduleService";
+	property name="routingService" inject="coldbox:routingService";
+
+	/**
+	 * Fired after all modules load.
+	 * Used to bump up the priority of the aggregator routes that can conflict with ContentBox routes when running in a subdirectory.
+	 */
+	function afterAspectsLoad() {
+
+		// Grab the routes
+		var routes = routingService.getRoutes();
+
+		// Set aggregator routes
+		var agroutes = routes.filter( function( item ) {
+			return item.namespaceRouting == "aggregator-feeds" || item.namespaceRouting == "aggregator-feed-items";
+		});
+
+		// Remove prior aggregator routes
+		agroutes.each( function( item ) {
+			routes.delete( item );
+		});
+
+		// Prepend aggregator routes and save
+		routes.prepend( agroutes, true );
+		routingService.setRoutes(routes);
+
+	}
 
 	/**
 	 * Fired on pre process during contentbox public requests only
@@ -26,8 +52,8 @@ component extends="coldbox.system.Interceptor" {
 		// Prepare UI if we are in the aggregator module
 		if ( reFindNoCase( "^contentbox-aggregator", event.getCurrentEvent() ) ) {
 			cbHelper.prepareUIRequest();
-		// Return if in admin module
-		} else if ( reFindNoCase( "^contentbox-admin", event.getCurrentEvent() ) ) {
+		// Return if in admin module or not in the ui module
+		} else if ( reFindNoCase( "^contentbox-admin", event.getCurrentEvent() ) || !reFindNoCase( "^contentbox-ui", event.getCurrentEvent() ) ) {
 			return;
 		}
 
@@ -94,6 +120,7 @@ component extends="coldbox.system.Interceptor" {
 		// Check for page
 		} else if ( structKeyExists( prc, "page" ) ) {
 			args.oContent = prc.page;
+
 		}
 
 		// Set edit link
