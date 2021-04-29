@@ -141,14 +141,17 @@ component extends="baseHandler" {
 		routingService.setRoutes(
 			routingService.getRoutes().map( function( item ) {
 				if ( item.namespaceRouting IS "aggregator-feed-items" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = replace( "site/" & prc.agSettings.feed_items_entrypoint, "/", "-", "all" ) & "/";
 				}
 				if ( item.namespaceRouting IS "aggregator-feeds" ) {
-					item.pattern = item.regexpattern = replace( prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
+					item.pattern = item.regexpattern = replace( "site/" & prc.agSettings.feeds_entrypoint, "/", "-", "all" ) & "/";
 				}
 				return item;
 			})
 		);
+
+		writedump( routingService.getRoutes() );
+		abort;
 
 		// Save settings
 		var setting = settingService.findWhere( { name = "aggregator" } );

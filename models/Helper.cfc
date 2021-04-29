@@ -345,12 +345,25 @@ component accessors="true" singleton threadSafe {
 	/************************************** Link Methods *********************************************/
 
 	/**
+	 * Gets the home link to the contentbox site
+	 * @ssl Whether or not to use ssl
+	 * @return The home link
+	 */
+	string function linkHome( boolean ssl=cb.getRequestContext().isSSL() ) {
+		var homeLink = cb.linkHome( ssl=arguments.ssl );
+		if ( right( homeLink, 1 ) != "/" ) {
+			homeLink &= "/";
+		}
+		return homeLink;
+	}
+
+	/**
 	 * Gets the feeds link
 	 * @ssl Whether or not to use ssl
 	 * @return The feeds link
 	 */
 	string function linkFeeds( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & getFeedsEntryPoint();
+		return linkHome( ssl=arguments.ssl ) & getFeedsEntryPoint();
 	}
 
 	/**
@@ -368,7 +381,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The feed items link
 	 */
 	string function linkFeedItems( boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & getFeedItemsEntryPoint();
+		return linkHome( ssl=arguments.ssl ) & getFeedItemsEntryPoint();
 	}
 
 	/**
@@ -591,7 +604,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport link
 	 */
 	string function linkImport( boolean ssl=cb.getRequestContext().isSSL(), boolean importAll=false, boolean importActive=false ) {
-		var link = cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("importing_secret_key");
+		var link = linkHome( ssl=arguments.ssl ) & "aggregator/feeds/import?key=" & setting("importing_secret_key");
 		if ( arguments.importAll ) link &= "&importAll=true";
 		else if ( arguments.importActive ) link &= "&importActive=true";
 		return link;
@@ -605,7 +618,7 @@ component accessors="true" singleton threadSafe {
 	 * @return The immport feed link
 	 */
 	string function linkImportFeed( required Feed feed, required Author author, boolean ssl=cb.getRequestContext().isSSL() ) {
-		return cb.linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
+		return linkHome( ssl=arguments.ssl ) & "aggregator/feeds/importFeed?key=" & setting("importing_secret_key") & "&contentID=" & arguments.feed.getContentID() & "&authorID=" & arguments.author.getAuthorID();
 	}
 
 	/************************************** Quick HTML *********************************************/

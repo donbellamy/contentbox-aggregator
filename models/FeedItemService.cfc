@@ -27,8 +27,7 @@ component extends="ContentService" singleton {
 	 * @year The year to filter on
 	 * @month The month to filter on
 	 * @day The day to filter on
-	 * @isVideo Whether or not to filter on video items only
-	 * @isPodcast Whether or not to filter on podcast items only
+	 * @type The type of feed item to filter on
 	 * @sortOrder The field to sort the results on, defaults to "publishedDate"
 	 * @searchActiveContent Whether or not to search active content
 	 * @countOnly Whether or not to return the count only

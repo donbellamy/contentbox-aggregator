@@ -94,7 +94,6 @@ component extends="coldbox.system.Interceptor" {
 		// Check for page
 		} else if ( structKeyExists( prc, "page" ) ) {
 			args.oContent = prc.page;
-
 		}
 
 		// Set edit link
