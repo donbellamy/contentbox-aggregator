@@ -12,7 +12,7 @@ Built and tested with:
 - MySQL 8.0+
 
 ## Future release
-- Support for ContenBox 5 and ColdBox 6
+- Support for ContentBox 5 and ColdBox 6
 
 ## Installation
 
