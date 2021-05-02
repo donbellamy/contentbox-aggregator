@@ -798,6 +798,9 @@ component extends="contentHandler" {
 							arrayAppend( data.messages, returnData.message );
 							if ( returnData.error ) data.error = true;
 						} else {
+							writedump(result);
+							writedump(prc.agHelper.linkImportFeed( feed, author ) );
+							abort;
 							data.error = true;
 							arrayAppend( data.messages, "Error importing feed items for '#feed.getTitle()#'." );
 						}
