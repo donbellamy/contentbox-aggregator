@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2
+* Fixed issue importing feed items for a subdirectory installation of ContentBox
+
 ## 1.0.1
 * Added support for a subdirectory installation of ContentBox
 
