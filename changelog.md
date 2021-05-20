@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3
+* Removed writedump/abort
+
 ## 1.0.2
 * Fixed issue importing feed items for a subdirectory installation of ContentBox
 
