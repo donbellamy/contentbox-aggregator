@@ -846,7 +846,7 @@ component extends="contentbox.modules.contentbox-ui.handlers.content" {
 			// Announce event
 			announceInterception(
 				"aggregator_onFeedItemView",
-				{ feedItem = feedItem }
+				{ feedItem = prc.feedItem }
 			);
 
 			// Disply feed item based on setting
