@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4
+* Added code to resize imported images to max width of 400px
+
 ## 1.0.3
 * Removed writedump/abort
 
