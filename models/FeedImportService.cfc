@@ -254,6 +254,12 @@ component extends="cborm.models.VirtualEntityService" singleton {
 															if ( image.getWidth() GTE val( settings.importing_image_minimum_width ) &&
 																image.getHeight() GTE val( settings.importing_image_minimum_height ) ) {
 
+																// Resize image if needed
+																if ( image.getWidth() GT 400 ) {
+																	image.resize( 400 ); // TODO: make a setting?
+																	image.write( imagePath );
+																}
+
 																// Set the image url
 																var entryPoint = moduleSettings["contentbox-ui"].entryPoint;
 																var folderUrl = ( len( entryPoint ) ? "/" & entryPoint : "" ) & "/__media/aggregator/feeditems/" & dateformat( item.datePublished, "yyyy/mm/" );
