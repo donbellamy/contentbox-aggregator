@@ -134,8 +134,8 @@ component extends="cborm.models.VirtualEntityService" singleton {
 											feedItem.setTitle( left( item.title, 200 ) );
 											feedItem.setSlug( left( htmlHelper.slugify( item.title ), 200 ) );
 											feedItem.setCreator( arguments.author );
-											feedItem.setPublishedDate( item.datePublished );
-											feedItem.setModifiedDate( item.dateUpdated );
+											feedItem.setPublishedDate( dateConvert( "utc2Local", item.datePublished ) );
+											feedItem.setModifiedDate( dateConvert( "utc2Local", item.dateUpdated ) );
 											if ( itemStatus == "published" ) {
 												feedItem.setIsPublished( true );
 											} else {
