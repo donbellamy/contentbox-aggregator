@@ -81,6 +81,11 @@ component extends="cborm.models.VirtualEntityService" singleton {
 						uniqueId = item.url;
 					}
 
+					// Check feed item url, default to feed website url if empty
+					if ( !len( item.url ) ) {
+						item.url = arguments.feed.getWebsiteUrl();
+					}
+
 					// Validate url, title and body
 					if ( len( item.url ) && len( item.title ) && len( item.body ) ) {
 
